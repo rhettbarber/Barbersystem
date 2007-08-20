@@ -5,20 +5,26 @@ class CatalogsController < ApplicationController
 
 
   def show_catalog
-    @per_page = params[:per_page] ||= 30
-    @catalog = Catalog.find(params[:id])
-    @original_items = Item.joins(:department, :category, :category_class).order("departments.Name ASC,  categories.Name ASC, items.ItemLookupCode").where( "items.category_id in (?)", @catalog.category_ids.split(",")  ).all
+        @per_page = params[:per_page] ||= 30
+        @catalog = Catalog.find(params[:id])
+        # @original_items = Item.joins(:department, :category, :category_class).order("departments.Name ASC,  categories.Name ASC, items.ItemLookupCode").where( "items.category_id in (?)", @catalog.category_ids.split(",")  ).all
+        ids = @catalog.category_ids.split(",").map(&:to_i)
+        @original_items = Item.joins(:department, :category, :category_class).where( "items.category_id in (?)", ids ).all
 
-    @items = Set.new
-    already_seen_item_picturenames = Set.new
-    @original_items.each do |item|
-            if already_seen_item_picturenames.include?( item.PictureName.to_s  )
-                      logger.debug "skipped already included picturename"
-            else
-                      @items.add( item) if item.department and item.category  and item.category_class
-                      already_seen_item_picturenames .add  item.PictureName.to_s
-            end
-    end
+        @items = Set.new
+        already_seen_item_picturenames = Set.new
+
+        @original_items.each do |item|
+                if already_seen_item_picturenames.include?( item.PictureName.to_s  )
+                          logger.debug "skipped already included picturename"
+                else
+                          @items.add( item) if item.department and item.category  and item.category_class
+                          already_seen_item_picturenames .add  item.PictureName.to_s
+                end
+        end
+        s = "s"
+        # @items = @items.sort_by { |u| ids.index(u.category_id)    }
+        @items = @items.sort_by { | a,b |  [ ids.index(a.category_id) , a.ItemLookupCode ]   }
   end
 
 

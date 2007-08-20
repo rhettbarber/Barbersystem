@@ -1,5 +1,4 @@
 <style type="text/css">
-
     .gallery {
         /*border: #0000ff 1px solid;*/
         display:table;
@@ -13,24 +12,6 @@
     .items_category_container {
         border: #0000ff 1px solid;
     }
-    /*.category_container_title {*/
-    /*font-family:"Arial Black";*/
-    /*page-break-after:avoid;*/
-    /*font-size:x-large;*/
-    /*width:100%;*/
-    /*height:50px;*/
-    /*background-color:orange;*/
-    /*}*/
-
-    /*.item_reports_department_header{*/
-    /*float:left;*/
-    /*font-size:x-large;*/
-    /*font-family:"Arial Black";*/
-    /*background-color:orange;*/
-    /*text-align:center;*/
-    /*color:white;*/
-    /*width:100%;*/
-    /*}*/
     .item_reports_categories_footer{
         display:inline-block;
         background-color:#add8e6;
@@ -57,6 +38,16 @@
         text-align: center;
         font-size:50px;;
         overflow: hidden;
+    }
+
+    .category_header_box {
+        width:100%;
+        /*height:100px;*/
+        background-color: black;
+        color:white;
+        text-align: center;
+        font-size:60px;
+        height: 800px;
     }
 
     .item_specsheet_box img {
@@ -92,18 +83,33 @@
   <div class="gallery">  <%=  image_tag( "/images/automated-catalog/" +   Slug.generate( @catalog.name )   + "-front-cover.jpg") %> </div>
   <div class="gallery">  <%=  image_tag( "/images/automated-catalog/front-cover-inside.jpg") %> </div>
   <% page_number  = 0 %>
+  <%# already_seen_category_ids  = Set.new %>
   <%   @items.each_slice(12) do |slice|  %>
       <% @categories_this_page = Set.new   %>
       <% page_number  += 1  %>
       <div class="gallery">
+
+
+
         <div class="items_container">
           <% slice.each do |item|   %>
+                              <%# if  !already_seen_category_ids.include?(  item.category_id.to_s  ) and @catalog.category_ids_with_header.include? item.category_id.to_s   %>
+                                             <!--<div class="category_header_box">-->
+                                                            <!--<%#= image_tag(  "/images/automated-catalog/headers/" +   Slug.generate( item.category.Name ) + ".jpg" ) %>-->
+                                                           <!--Barber and Company designs and manufactures a collection of shirts printed All Over for Key West <br>-->
+                                                           <!--<br>-->
+                                                           <!--Shirts are available in 50/50 (cotton/polyester)  or 100%  polyester and are printed all over using sublimation inks.-->
+                                                           <!--These inks become part of the shirt fibers when printed and the shirt has no ink feel. Air can circulate freely-->
+                                                           <!--through all areas of the shirt. There is a 6 pc. minimum per design.  Specify sizes. Price is $10.00 each, S-XL-->
+                                             <!--</div>-->
+                              <%# end %>
+                             <%#  already_seen_category_ids.add(  item.category_id.to_s  )  %>
               <div class="item_specsheet_box">
-                <% cat_array = [] %>
-                <% @categories_this_page.add(  cat_array << [ item.department.Name.capitalize,  item.category.Name.capitalize ]  )    %>
-                <%=  image_tag( item.image_url( item.department, 'item_thumbnails/','x'  ) ) %><br />
-                <%=  item.ItemLookupCode   %> <%=  item.minimum_quantity_message   %>
-              </div>
+                                            <% cat_array = [] %>
+                                            <% @categories_this_page.add(  cat_array << [ item.department.Name.capitalize,  item.category.Name.capitalize ]  )    %>
+                                            <%=  image_tag( item.image_url( item.department, 'item_thumbnails/','x'  ) ) %><br />
+                                            <%=  item.ItemLookupCode   %> <%=  item.minimum_quantity_message   %>
+                              </div>
           <% end %>
         </div>
         <div class="item_reports_categories_footer">
