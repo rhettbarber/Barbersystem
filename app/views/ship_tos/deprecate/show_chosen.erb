@@ -1,0 +1,60 @@
+
+<%= image_tag "/images/headers/shipping_address.gif" %>
+
+<p>
+  <b>Company:</b>
+  <%=h @ship_to.Company %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @ship_to.Name %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%=h @ship_to.Address %>
+</p>
+
+<p>
+  <b>Address2:</b>
+  <%=h @ship_to.Address2 %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%=h @ship_to.City %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%=h @ship_to.State %>
+</p>
+
+<p>
+  <b>Zip:</b>
+  <%=h @ship_to.Zip %>
+</p>
+
+<p>
+  <b>Country:</b>
+  <%=h @ship_to.Country %>
+</p>
+
+
+<p>
+  <b>Phonenumber:</b>
+  <%=h @ship_to.PhoneNumber %>
+</p>
+
+<p>
+  <b>Faxnumber:</b>
+  <%=h @ship_to.FaxNumber %>
+</p>
+
+<%= link_to 'Edit', edit_ship_to_path(@ship_to) %> <br />
+
+Your chosen shipping address is above, if it is correct, <br />
+
+<div align="center"><%=link_to( image_tag( "/images/buttons/continue_button_gold.gif",:border => 0) ,:controller =>  "cart" , :action => 'next_checkout_step')    %></div>
+<div align="center"><%= link_to( image_tag( '/images/buttons/show_all_my_ship_to_choices.jpg',:border => 0)   , ship_tos_path)	 %></div>

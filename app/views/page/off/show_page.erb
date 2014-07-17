@@ -1,0 +1,60 @@
+
+
+<% logger.warn "------------------------------------FIX USER_CAN?"	  %>
+<% logger.warn "------------------------------------FIX USER_CAN?"	  %>
+<% logger.warn "------------------------------------FIX USER_CAN?"	  %>
+<% logger.warn "------------------------------------FIX USER_CAN?"	  %>
+<% logger.warn "------------------------------------FIX USER_CAN?"	  %>
+<% logger.warn "------------------------------------FIX USER_CAN?"	  %>
+<% logger.warn "------------------------------------FIX USER_CAN?"	  %>
+
+<% logger.warn "-------------------------------------begin page show"	  %>
+
+
+<% params_id = params[:id] || '0' %>
+<% logger.warn "----------------------------------params[:id]: #{params[:id]}" if params[:id]	  %>
+<% logger.warn "----------------------------------@user_array_user_type_id: #{@user_array_user_type_id}"	  %>
+		<% if @revision %>
+					<% cache( @website.name + "/user_type_id/" + @user_array_user_type_id + "/page/show_page/" + params_id ) do %>
+                                                                 <div class="show">
+									<% @page_title = @revision.page.name -%>
+									<% unless @page_title == 'Home'  -%>
+									<h3 style="display:inline;"><%= @revision.page.name unless params[:id] == 'home' or params[:id] == nil  %></h3>
+									<% end -%>
+									<span class="actions">
+										<% if user_can?('publish') && !@revision.published? -%>
+											<span class="publish"><%= link_to("publish", :action => "publish", :id => @revision.page.slug) %></span>
+										<% elsif user_can?('publish') -%>
+											<span class="delete"><%= link_to("un-publish", :action => "un_publish", :id => @revision.id) %></span>
+										<% end -%>
+										<% if user_can?('modify') -%>
+											<span class="edit"><%= link_to("edit", :action => "edit", :id => @revision.page.slug) %></span>
+											<span class="revisions"><%= link_to("show revisions", :action => "revisions", :id => @revision.page.slug) %></span>
+										<% end -%>
+										<% if user_can?('remove') -%>
+											<span class="delete"><%= link_to("remove revision", :action => "remove", :id => @revision.page.slug) %></span>
+										<% end -%>
+									</span>
+									<%= render :partial => 'content' %>
+                                                                        <%= render :partial => "affiliates/page_banner"   %>
+                                                                </div>
+					<% end %>
+
+			<% else %>
+
+					<% if @content_fragment %>
+						<%= @content_fragment  %>
+					<% else %>
+									<br />
+										Error, page with no revision. <br />
+									<% if admin? %>
+										If this error is only occasional, <br />
+											<%= form_tag(:controller => "page", :action => "remove_orphaned_page",:id => params[:id]) do  %>
+											<%= submit_tag('Delete this Error page') %>
+											<% end %>
+										<br />
+										If this error is happening many times, contact the webmaster. <br />
+									<% end %>
+					<% end %>
+			<% end %>
+<% logger.warn "-------------------------------------end page show"	  %>

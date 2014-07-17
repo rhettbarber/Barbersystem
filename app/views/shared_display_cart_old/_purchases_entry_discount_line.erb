@@ -1,0 +1,44 @@
+
+					      <tr id="discount_line">
+					                <td class="purchases_entry_delete" id="delete">
+					        		</td>    		
+					                <td  class="purchases_entry_image" id="image">		
+					                 	</td>
+					       
+					                <td  class="purchases_entry_quantity" id="quantity">        
+
+					                </td>
+					              
+					                <td  class="purchases_entry_itemlookupcode" id="itemlookupcode"></td>
+					             
+					                <td  class="purchases_entry_description" id="description">
+												<h3> 
+													You qualify for a <%= @discount_name %> discount.
+												</h3>
+												  Discountable Items Total: <%= @discountable_items_total %> <br />
+												  Discount Percentage: <%= @discount_percentage %>
+						 				</td>
+					           
+					                 <td  class="purchases_entry_full_unit_price" id="full_unit_price">
+
+					                </td>
+					
+					                 <td  class="purchases_entry_unit_quantity_tier_discount_price" id="unit_quantity_tier_discount_price">
+
+					                  </td> 
+					                
+					                 <td  class="purchases_entry_full_extended_price" id="full_extended_price">
+
+					                  </td>
+					
+									  <td  class="purchases_entry_your_extended_price_savings" id="your_extended_price_savings">  
+ 
+					                 </td>  
+					                                
+					                 <td  class="purchases_entry_your_extended_price" id="your_extended_price">
+											- <%=   number_to_currency(@purchase_discount_savings)    %>   
+					                  </td>
+					     
+					      </tr>
+
+

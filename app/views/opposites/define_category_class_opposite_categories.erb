@@ -1,0 +1,168 @@
+<%= render :partial => "administration_category_class/menu_opposites"%>
+
+<div align="center"><h4> Find category class by ItemLookupCode</h4>
+	<%  form_tag( {:controller =>  'opposites' ,  :action => 'define_category_class_opposite_categories'   } ) do  %>
+		<%= text_field_tag  'item_keywords' %>
+		<%= submit_tag "Search" %>
+	<%  end  %> 
+</div>
+
+
+<br>
+@selected_category_class.opposite_category_ids.inspect:<br>
+<%= @selected_category_class.opposite_category_ids.inspect %> <br>
+<br>
+ @selected_category_class.id:<br>
+<%= @selected_category_class.id %>
+<br>
+@selected_category_class.name:<br>
+<%= @selected_category_class.name %>
+
+<h2>Category Class Opposites Editor Page</h2>
+
+<%= link_to "See all categories in this class", :controller => 'opposites', :action => 'all_categories_in_this_class' ,:id => @selected_category_class.id  %>
+<div align="center">
+
+<% logger.debug "-------------------------------------@incomplete_symbiont: #{@incomplete_symbiont}" %>
+<% logger.debug "-------------------------------------@selected_category_class.id: #{@selected_category_class.id}" %>
+<% logger.debug "-------------------------------------@purchase_symbiote_item_category_category_class_id: #{@purchase_symbiote_item_category_category_class_id}" %>
+<% logger.debug "-------------------------------------@purchase_symbiote_item: #{@purchase_symbiote_item}" %>
+<% logger.debug "-------------------------------------@selected_category_class.categories.first.items.first: #{@selected_category_class.categories.first.items.first}" %>
+<% logger.debug "-------------------------------------@incomplete_symbiont == true && @selected_category_class.id.to_s == @purchase_symbiote_item_category_category_class_id.to_s: #{@incomplete_symbiont == true && @selected_category_class.id.to_s == @purchase_symbiote_item_category_category_class_id.to_s}" %>
+
+<% if @incomplete_symbiont == true && @selected_category_class.id.to_s == @purchase_symbiote_item_category_category_class_id.to_s  %>	
+	<% first_selected_item = @purchase_symbiote_item  %>
+<% else %>
+	<% first_selected_item = @selected_category_class.categories.first.items.first %>
+<% end %>
+
+
+
+	
+<% if @selected_category_class.item_type == 'master' %>
+	<% selected_department = first_selected_item.masters_department_decides_default_department_id %>
+<% else %>
+	<% selected_department = first_selected_item.design_decides_opposites_department %>
+<% end %>
+
+ <%= image_tag( first_selected_item.image_url( selected_department  ,'item_thumbnails/','x') ,:size => "100x100")    %> 
+
+
+<%  form_tag( '/opposites/define_category_class_opposite_categories' , :method => :put )  do %>
+	<%=  select("category_class", "category_class_id", CategoryClass.find(:all).collect {|p| [ p.item_type + ' ' + p.name , p.id ] } ,{:selected =>  @selected_category_class.id  } )   %>
+	<%= submit_tag('Go to this category class') %>
+<%  end  %>
+</div>
+
+<h2>Listing Categories for you to choose as opposites:</h2>
+<h3>Define Combinations and Alignment</h3>
+<h3> To see what icons do, put mouse on icon and look at status bar. </h3>
+<table>
+  <tr>
+    <th>Status</th>  	
+    <th>Image</th>
+    <th>Prefix</th>
+    <th>Category class Name</th>
+    <th>Category Code</th>
+    <th>Category Name</th>
+    <th>Category Id</th>
+  </tr>
+
+<% for category in @categories %>
+<% if category.category_class.item_type == 'master' or category.category_class.item_type == 'slave'or category.category_class.item_type == 'unknown' %>
+<% first_item = category.items.first %>
+<% if first_item != nil %>
+
+
+<% if category.category_class.item_type == 'master' %>
+	<% department = first_item.masters_department_decides_default_department_id %>
+<% else %>
+	<% department = first_item.design_decides_opposites_department %>
+<% end %>
+
+  <tr>
+    <td>
+    <% if @selected_category_class.opposite_category_ids.split(',',77777).to_a.include?(category.id.to_s)   %>
+    	<%=  image_tag("/images/buttons/checkmark-green.jpg",:border => 0,:size => "10x10") %>
+    <% else %>	
+    	<%=  image_tag("/images/buttons/cancel-x-mark-red.jpg",:border => 0,:size => "10x10")%>
+    <% end %>	
+	</td>
+	
+	<td> <%= image_tag( first_item.image_url( department  ,'item_thumbnails/','x') ,:size => "30x30")    %> </td>
+	
+    <td><%=h category.prefix %></td>
+    <td><%=h category.category_class.name if category.category_class %></td>
+    <td><%=h category.Code %></td>
+    <td><%=h category.Name %></td>
+    <td><%=h category.id %></td>
+    <td>
+    <% if @selected_category_class.opposite_category_ids.split(',',77777).to_a.include?(category.id.to_s)   %>
+    	<%= link_to image_tag("/images/buttons/delete.gif",:border => 0), :controller => 'opposites', :action => 'remove_category_from_opposites',:id => category.id,:selected_category_id => @selected_category_class.categories.first.id  %>
+    <% else %>	
+    	<%= link_to image_tag("/images/buttons/add.gif",:border => 0), :controller => 'opposites', :action => 'add_category_into_opposites',:id => category.id ,:selected_category_id => @selected_category_class.categories.first.id  %>
+    <% end %>	
+	</td>
+    <td>
+    
+
+<% if @incomplete_symbiont && @selected_category_class.id == @purchase_symbiote_item_category_category_class_id  %>
+	<% first_selected_item = @purchase_symbiote_item  %>
+	<%= link_to image_tag("/images/buttons/align.gif",:border => 0,:size => "20x20"), :controller => 'opposites', :action => 'align_category_to_selected_category',:id => category.id,:selected_category_id => @purchase_symbiote_item.category_id %> 
+<% else %>
+	<%= link_to image_tag("/images/buttons/align.gif",:border => 0,:size => "20x20"), :controller => 'opposites', :action => 'align_category_to_selected_category',:id => category.id,:selected_category_id => @selected_category_class_categories_first_id  %> 
+<% end %>
+
+
+
+    
+
+	</td>
+	<td>
+    	<%= link_to image_tag("/images/buttons/images.png",:border => 0,:size => "20x20"), :controller => 'opposites', :action => 'list_all_items_in_this_category',:id => category.id  %> 
+	</td>
+	<td>
+		<% if category.category_class_id == 31 %>    	
+    		<%= link_to image_tag("/images/buttons/alert.gif",:border => 0,:size => "20x20"), :controller => 'opposites', :action => 'list_all_items_in_this_category',:id => category.id  %> 
+		<% end %>
+	</td>
+
+
+	<td>
+	   
+	   		<% if first_selected_item.category.category_class.item_type == 'master' %>
+			 	<% item_prefix = first_selected_item.category.prefix %>
+			 	<% design_prefix = category.prefix %>
+			 	
+			<% else %>
+			 		<% this_combination = Combination.find_combo_by_prefixes( category.prefix, first_selected_item.category.prefix )   %>
+			 		<% design_prefix = first_selected_item.category.prefix %>
+			 		<% item_prefix = category.prefix %>
+			<% end %>
+		   	
+		   	<% this_combination = Combination.find_combo_by_prefixes( item_prefix, design_prefix )   %>
+		   	
+		   	<% if this_combination %>
+			   	<% if this_combination.verified_correct == 1 %>
+                    Verified Correct.
+			    	<%=  image_tag("/images/buttons/checkmark-green.jpg",:border => 0,:size => "10x10") %>
+			    <% else %>	
+			    	<%=  image_tag("/images/buttons/cancel-x-mark-red.jpg",:border => 0,:size => "10x10")%>
+			    <% end %>	
+			<% else %>
+                No Combination Exists
+			    <%=  image_tag("/images/buttons/cancel-x-mark-red.jpg",:border => 0,:size => "30x10")%>
+			<% end %>	
+			ip:<%= item_prefix %>  - dp:<%= design_prefix %> - vc: <%= this_combination.verified_correct if this_combination  %>
+	</td>
+
+
+  </tr>
+ 
+<% end %> 
+<% end %>
+<% end %>
+</table>
+
+<br />
+

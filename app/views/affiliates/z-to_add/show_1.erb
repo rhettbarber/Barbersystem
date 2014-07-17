@@ -1,0 +1,34 @@
+<p>
+  <b>User:</b>
+  <%=h @affiliate.user_id %>
+</p>
+
+<p>
+  <b>Helper:</b>
+  <%=h @affiliate.helper_id %>
+</p>
+
+<p>
+  <b>Recompense:</b>
+  <%=h @affiliate.recompense_id %>
+</p>
+
+<p>
+  <b>Affiliate Key:</b>
+  <%=h @affiliate.affiliate_key %>
+</p>
+
+<br />
+<br />
+<br />
+<br />
+<%= link_to 'You visited', :action => 'you_visited',:id => @affiliate  %>
+<%= link_to 'Users have visited', @affiliate %>
+<%= link_to 'Users visited and purchased', @affiliate %>
+<%= link_to 'Edit', edit_affiliate_path(@affiliate) %> |
+<%= link_to 'Back', affiliates_path %>
+
+<br />
+<br />
+<br />
+<br />

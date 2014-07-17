@@ -1,0 +1,82 @@
+<h1>Listing Commisisons for <%=h @commissioned_artist.FirstName + ' '  +  @commissioned_artist.LastName  %> - <%= link_to 'Back to Commissions list', :controller => "reports", :action => "commissions"  %></h1>
+<h3>Be VERY careful the Dates are correct when you Print! - They will change if you are not careful! <h3>
+<%= link_to image_tag("/images/buttons/view-printable-format.jpg",:border => '0'), :controller => "reports", :action => "show_commissions_printable" , :quarter => params[:quarter] , :customer_id => @commissioned_artist.id  unless controller.action_name == 'show_commissions_printable' %>
+
+
+<% originating_action = controller.action_name %>
+
+<h3>Please choose the Year:</h3>
+Current Year: <%= @begin_date.year %><br />
+Change Year: 
+<%= link_to "Add a year", :controller => "reports", :action => originating_action , :quarter => params[:quarter] ,:year_difference => 1  ,:customer_id => @commissioned_artist.id   %> | 
+<%= link_to "Subtract a year", :controller => "reports", :action =>  originating_action , :quarter => params[:quarter] ,:year_difference => -1   ,:customer_id => @commissioned_artist.id %>
+
+<br />Year difference :<%= @year_difference  %><br />
+
+
+<h3>Please choose the Quarter:</h3>
+<%= link_to "January-March", :controller => "reports", :action => originating_action, :quarter => "1",:customer_id => @commissioned_artist.id   %> | 
+<%= link_to "April-June", :controller => "reports", :action => originating_action , :quarter => "2" ,:customer_id => @commissioned_artist.id  %> | 
+<%= link_to "July-September", :controller => "reports", :action => originating_action , :quarter => "3",:customer_id => @commissioned_artist.id   %> | 
+<%= link_to "October-December", :controller => "reports", :action => originating_action , :quarter => "4" ,:customer_id => @commissioned_artist.id  %>
+<br /><br />
+
+<% params[:quarter]  ||= 1 %> 
+	
+Quarter Chosen: <%=  params[:quarter]  %> <br />
+Begin Date:<%= @begin_date.utc %><br />
+End Date:<%= @end_date.utc %><br /> 
+
+<h3>Items in this Artists Commissions:</h3>
+
+
+
+<table>
+	  <tr>
+	    <th>Item</th>
+	    <th>Description</th>
+	     <th>Fixed Amount</th>
+	      <th>Percent of Sale </th>
+	      <th>Quantity Sold </th>
+	      <th>Quantity Returned </th>
+	       <th>Commissionable Qty </th>
+	       <th>Total Sales (Commissionable Dollars Sold) </th>
+	       <th>Commission </th>
+	      
+	  </tr>
+	  <% if @commissioned_items %>
+				  <% @commissioned_items.each do |item| %>
+							  <tr>
+							    <td><%=h item.ItemLookupCode %></td>
+							    <td><%=h item.Description %></td>
+							    <td><%=h item.CommissionAmount %></td>  
+							    <td><%=h item.CommissionPercentSale %></td>  
+							    <td><%= item.quantity_sold(@begin_date,@end_date)  %></td>  
+							    <td><%= item.quantity_returned(@begin_date,@end_date)  %></td>  
+							     <td><%= item.commissionable_quantity(@begin_date,@end_date)  %></td>  
+							     
+							     <td><%= item.commissionable_dollars_sold(@begin_date,@end_date)  %></td>  
+							     
+							     <td><%= item.commission_in_dollars(@begin_date,@end_date)  %></td>   
+							     <td><%= link_to "Delete" ,{ :controller => "reports", :action => "delete_commissioned_item" , :item_id => item.id } , :confirm => 'Are you sure?' unless controller.action_name == 'show_commissions_printable'   %></td>     
+							      <td><%= link_to "Details", :controller => "reports", :action => "item_commission_details" , :item_id => item.id , :begin_date => @begin_date,  :end_date => @end_date    unless controller.action_name == 'show_commissions_printable'  %></td>     
+							  </tr>
+					<% end %>
+		<% else %>	  
+			 		<tr><td>No Items Assigned to this Artist</td></tr>
+	 	<% end %>
+</table>
+
+<br /><br />
+
+<h3>Totals for Quarter <%= params[:quarter] %> </h3>
+<%= @total_commission %>
+
+<br /><br /><br /><br />
+
+<%   unless action_name == 'show_commissions_printable' %>
+		<h3> Add items to this Artists Commisions </h3>
+		<%= render :partial => "reports/find_items" %>
+<% end %> 	
+	 	
+

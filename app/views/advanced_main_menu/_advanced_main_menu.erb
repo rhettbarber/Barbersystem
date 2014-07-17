@@ -1,0 +1,43 @@
+<div class="advanced_main_menu">
+  <ul id="tabs_advanced_main_menu" class="subsection_tabs">
+    <% if admin?  %>
+        <li class="tab"><a  id="ajax_administration_tab_a" href="/browse?department_type=designs"  title="ajax_administration">Administration</a></li>
+    <% end  %>
+
+
+    <li class="tab"><a  id="ajax_designs_tab_a" href="/browse?department_type=designs" title="ajax_designs"> Designs </a></li>
+    <li class="tab"><a  id="ajax_products_tab_a" href="/browse?department_type=items"  title="ajax_products">Products</a></li>
+    <li class="tab"><a  id="ajax_pages_tab_a" href="/page/articles" title="ajax_pages">Articles & Info</a></li>
+    <li class="tab"><a  id="ajax_account_tab_a" href="/account"  title="ajax_account">Account</a></li>
+  </ul>
+</div>
+
+<div style=" background:url(/images/backgrounds_repeating/belt-floral-black.jpg);padding-bottom:15px;">
+  <% if admin? and @category or admin? and @item  %>
+      <div id="ajax_administration" style="width:850px;text-align:left;display:none;"><%= render :partial => "advanced_main_menu/administration_menu" %>  </div>
+  <% end  %>
+
+
+
+  <% if params[:department_type]  and params[:department_type] == 'designs' %>
+            <%= hidden_field_tag :default_tab, "ajax_designs"  %>
+  <% elsif params[:department_type] and params[:department_type] == 'items' %>
+          <%= hidden_field_tag :default_tab, "ajax_products"  %>
+  <% elsif  controller_name == 'page' and params[:id] == 'articles' %>
+      <%= hidden_field_tag :default_tab, "ajax_pages"  %>
+  <% else %>
+            <%= hidden_field_tag :default_tab, "none"  %>
+  <% end %>
+
+
+
+
+  <div id="ajax_designs" style="width:850px;text-align:left;float:left;display:none;"><%= render :partial => "advanced_main_menu/shopping_designs" %>  </div>
+
+  <div id="ajax_products" style="width:850px;text-align:left;display:none;float:left;"><%= render :partial => "advanced_main_menu/shopping_products" %>  </div>
+
+  <div id="ajax_pages" style="width:850px;text-align:left;display:none;float:left;"><%= render :partial => "advanced_main_menu/pages_menus" %> </div>
+
+  <div id="ajax_account" style="width:850px;text-align:left;display:none;float:left;"><%= render :partial => "advanced_main_menu/account_menus" %></div>
+
+</div>

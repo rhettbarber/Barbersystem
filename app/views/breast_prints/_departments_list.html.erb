@@ -1,0 +1,16 @@
+<div id="breast_print_departments">
+  Current Departments this Breast Print is shown in:<br />
+  <table>
+            <% @departments.each do |dpt| %>
+
+
+    <% if dpt.class == Department  %>
+                      <tr><td><%= image_tag('/images/departments/' +  dpt.Name + '.png', :size => "80x80"  ) %> </td><td><%= dpt.Name %></td></tr>
+    <% else  %>
+                      <tr><td><%= image_tag('/images/departments/' +  dpt.department.Name + '.png', :size => "80x80"  ) %> </td><td><%= dpt.department.Name %></td></tr>
+    <% end  %>
+
+
+            <% end if @departments %>
+  </table>
+</div>

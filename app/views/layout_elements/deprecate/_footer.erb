@@ -1,0 +1,132 @@
+<style type="text/css">
+    .foot{
+        height:90px;
+        margin:0;
+        padding:0;}
+
+    #custom-collapsible h3 a.ui-btn { width: 100%; height:85px;}
+    .center-button{margin: 0 auto;padding:0 20px 0 20px;}
+
+    #custom-collapsible h3 a span span.ui-icon {
+        margin: 0 auto !important;
+        margin-top: 2px !important;
+        float: none !important;
+    }
+
+    #custom-collapsible h3  {
+        margin: -10px -20px 0 !important;
+        /*height:85px;*/
+    }
+
+    #custom-list >.ui-collapsible-heading {
+        margin: -10px -20px 0 !important;
+        height:110px;
+    }
+
+    #custom-list > .ui-collapsible-heading-collapsed  {
+        margin: -10px -20px 0 !important;
+        height:85px;
+    }
+    #custom-list li {
+        padding:10px;
+    }
+
+    #custom-list li:first-child {
+        margin-top: 6px!important;
+    }
+
+    #custom-list {
+        margin: -10px -19px !important;
+    }
+
+    .symbiote_container {
+        width:100%;
+    }
+    .symbiote_thumbnail_container {
+        width:85px;
+        height:85px;
+        float:left;
+    }
+    .symbiote_details_container {
+        width:100%;
+        height:85px;
+        /*float: left;*/
+    }
+    .symbiote_message_row {;
+        height:25px;
+        display:table-row;
+    }
+    .symbiote_message_container {
+        width:100%;
+        overflow:hidden;
+        color:white;
+        text-shadow: none;
+        white-space: normal;
+        font-size:15px;
+    }
+    .symbiote_description_row {
+        height:60px;
+        display:table-row;
+    }
+    .symbiote_description_container {
+        width:210px;
+        white-space: normal;
+    }
+
+
+
+</style>
+
+
+
+
+<div data-role="footer" data-theme="a" data-content-theme="a" data-inset="false"   data-type="horizontal"  data-iconpos="notext" data-position="fixed" class="foot">
+
+
+<%   if @incomplete_symbiont  %>
+
+  <!--<div data-role="collapsible"data-theme="b" data-content-theme="a" data-inset="false"   class="center-button" id="custom-collapsible" class="symbiote_container_collapsible">-->
+    <!--<h3>-->
+
+      <div id="symbiote_container" class="symbiote_container">
+        <div class="symbiote_thumbnail_container"  id="symbiote_thumbnail_container">
+          <%# item =   @purchase.symbiote.item  %>
+          <%#=   image_tag( item.image_url( @purchase.symbiote.master_department_id  ,'item_thumbnails/','x') ,:style => "height:85px;" )    %>
+        </div>
+        <div class="symbiote_details_container">
+          <div class="symbiote_message_row">
+            <div class="symbiote_message_container" id="symbiote_message_container">
+              Please find a design for your chosen item.
+            </div>
+          </div>
+          <div class="symbiote_description_row">
+            <div class="symbiote_description_container"  id="symbiote_description_container">
+              <%#= item.ItemLookupCode %>
+              <%#= item.description_before_color_and_size %>
+              <%#= item.dimensions  %>
+            </div>
+            .</div>
+        </div>
+      </div>
+
+    <!--</h3>-->
+    <!--<ul data-role="listview" id="symbiote_menu" class="symbiote_menu">-->
+      <!--<li id="open_choice" class="open_choice"><a href='#items_panel'>..Open items..</a></li>-->
+      <!--<li><a href="/cart/place_incomplete_symbiont_on_hold">Place on hold</a></li>-->
+      <!--<li><a href="/cart/delete_incomplete_symbiote">Delete from cart</a></li>-->
+    <!--</ul>-->
+  <!--</div>&lt;!&ndash; /collapsible &ndash;&gt;-->
+
+  <% end %>
+
+
+
+
+</div>
+
+
+
+
+
+
+

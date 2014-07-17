@@ -1,0 +1,14 @@
+<span  class="category_class" style="display:none;">
+<div id="administer_category_class_<%= :item_type %>" style="display:table;width:425px;text-align:center;background-color: white;margin-left: auto;margin-right: auto;">
+    <% if @works %>
+    <div style="width:212px;display:table-cell;"># Sides: <%= select_tag( :front_design_number_of_sides,  options_for_select([['One', '1'], ['Two', '2']], '2')  ) %></div>
+    <div style="width:212px;display:table-cell;">Default: <%= select_tag( :front_design_default_side,  options_for_select([['Back', 'back'], ['Front', 'front']])  ) %></div>
+    <%= hidden_field_tag 'front_advanced_combination_id', @front_advanced_combination.id  if @front_advanced_combination %>
+    <div style="width:425px;display:table-cell;"><input id="front_slider" type="text" class="span2" value="" data-slider-min="-50" data-slider-max="50" data-slider-step="1" data-slider-value="0" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="hide">
+    <a href="#"  id="submit_size_and_position_front" class="btn btn-warning">Submit</a>
+    </div>
+  <% else %>
+                              Category Class Editor coming soon
+    <% end %>
+</div>
+</span>

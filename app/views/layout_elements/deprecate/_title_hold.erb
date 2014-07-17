@@ -1,0 +1,11 @@
+<!-- Begin Shared Title -->
+<title><% if @page.nil and @website.nil?  -%>
+<% if @page.name.nil? -%>
+<%= @website.domain   -%>
+<% else -%>
+<%= @website.domain + ' - ' + @page.name  -%>
+<% end -%>
+<% else -%>
+<%= @website.domain + ' /' + controller.controller_name + ' /'  +  controller.action_name.humanize -%>
+<% end -%></title>
+<!-- End Shared Title -->

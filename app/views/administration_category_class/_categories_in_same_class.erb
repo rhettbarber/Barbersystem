@@ -1,0 +1,9 @@
+
+	<div  id="categories_in_same_class" style="background-color:LightBlue;text-align:left;width:640px;display:none;"> 
+      <h3>categories in same category class: -(Will have same opposites)</h3> 
+          <%  @category.category_class.categories.each do |category| %>
+              Category.id:<%= category.id %> - 
+               <%= category.department.Name  %> - 
+               <%= category.Name %><br />	
+          <% end	%>
+	</div

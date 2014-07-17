@@ -1,0 +1,12 @@
+
+
+		<br />
+		<br />
+		<% @items.each do |item| %>
+		 					<div class="item_specsheet_box">
+                <%  if params[:type] == 'specsheet'  or params[:type].nil? %>
+                    <%= render(:partial => "item_reports/item_specsheet_box", :locals => {:item => item} )   %>
+                <% end %>
+								<%= render(:partial => "item_reports/item_thumbnail_box" , :locals => {:item => item}  )    if params[:type] == 'thumbnail'   %>
+							</div>
+		<% end %>

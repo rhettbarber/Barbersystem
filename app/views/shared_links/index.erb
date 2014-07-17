@@ -1,0 +1,39 @@
+inline edit example:<br />
+<%= link_to 'http://192.168.0.155:1001/links/index_inline_edit/1'  %>
+
+<h1>Listing links</h1>
+
+<table>
+  <tr>
+    <th>Url</th>
+    <th>Category</th>
+    <th>description</th>
+    <th>controller_name</th>
+    <th>action_name</th>
+  </tr>
+  
+<% for link in @links %>
+  <tr>
+
+    <td>
+    
+    
+    <div id="b-sales" class="question center">
+			<div class="answer">
+                         <%= render(:partial => "shared/standard_link",:locals => { :link => link } ) %>
+                     </div>
+     </div> 
+    
+    
+    
+    </td>
+    <td><%= link_to 'Show', link_path(link) %></td>
+    <td><%= link_to 'Edit', edit_link_path(link) %></td>
+    <td><%= link_to 'Destroy', link_path(link), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New link', new_link_path %>

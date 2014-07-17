@@ -1,0 +1,22 @@
+<div  id="preference_fields" style="width: 850px; min-height: 50px;" class="development_label">
+
+@customer_array_theme_name: <%= @customer_array_theme_name  %><br />
+
+Initial Impressions:-<br />
+Item.all_over_shirt_design_department_ids<br/>
+<%= RecordGroup.all_over_shirt_design_department_ids  %>
+
+@item.department_id:  <%= @item.department_id %><br />
+@item.image_url(@item.department_id, directory='/images/item_specsheets/',design='x',item_prefix_override="0" ):  <%= @item.image_url(@item.department_id, directory='/images/item_specsheets/',design='x',item_prefix_override="0" ) %><br />
+
+-------------------------------------<br />
+Javascript maintained:-<br />
+front_design: <%= text_field_tag  'front_design' , 0 %><br />
+back_design: <%= text_field_tag  'back_design' , 0 %><br />
+production_filenames:  <%= text_field_tag  'production_filenames:' , 0 %>
+front_print_string  <%= text_field_tag  'front_print_string' , 'composite -gravity center 6727_o_rp.png -geometry 5000x5000 11085-REBEL_front.jpg  purchase_entry_id.png', :size => 300 %>
+@categories.size: <%= @categories.size if @categories %><br />
+@items_shirt_style: <%= @items_shirt_style.size if @items_shirt_style %><br />
+front_print_size: <span id="front_print_size"></span><br />
+back_print_size: <span id="back_print_size"></span><br />
+</div>

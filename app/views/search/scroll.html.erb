@@ -1,0 +1,134 @@
+
+<% logger.debug "@scroll_cache_name: " + @scroll_cache_name       %>
+
+                <% if @department %>
+                    <h3 id="design_choices_title">Scroll <%= @department.Name %></h3>
+                <% end %>
+
+                <div role="main" class="ui-content responsive_listview_grid" style="display:table;">
+
+                          <ul data-role="listview" data-inset="true" id="revisions" class="revisions" style="width: 100%;">
+
+                                        <%  if @paginated_results %>
+                                                            <%= render :partial => "search/category_items" %>
+                                        <% end %>
+                          </ul>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @old %>
+
+
+    <% logger.debug "@scroll_cache_name: " + @scroll_cache_name       %>
+
+    <% cache( @scroll_cache_name )   do   %>
+
+        <div class="ui-corner-all custom-corners scroll_options">
+          <div class="ui-bar ui-bar-a">
+            <h3 id="item_choices_title">Before scrolling  for a design, please finish your current design. Here are your options</h3>
+
+
+          </div>
+          <ul data-role="listview" class="scroll_options design_departments">
+            <li data-icon="search"><a href="/search/scroll/all_designs"  class=" ui-btn ui-btn-b">Scroll All Designs</a></li>
+            <% @design_departments.each do |department| %>
+                <li data-icon="search"><a href="/search/scroll/<%= department.id %>"    data-department_id="<%= department.id %>" class="items_scroll_button ui-btn ui-btn-b">Scroll <%= department.Name %></a></li>
+            <% end %>
+            <li data-icon="search"><a href="/search" class="items_scroll_button ui-btn">Go to search</a></li>
+          </ul>
+
+          <div class="ui-body ui-body-a item_choices">
+            <ul data-role="listview">
+              <li><a href="/cart/place_incomplete_symbiont_on_hold">Place design on hold</a></li>
+              <li><a href="/cart/delete_incomplete_symbiote">Delete design  from cart</a></li>
+              <li><a href='#items_panel'>Complete design by opening items</a></li>
+            </ul>
+          </div>
+        </div>
+
+
+
+
+        <% if @singular_item_customer == true %>
+            <% @departments_to_show = @website.default_non_blank_item_departments %>
+        <% else %>
+            <% @departments_to_show = @website.default_item_departments %>
+        <% end %>
+
+
+
+        <div class="ui-corner-all custom-corners scroll_options">
+          <div class="ui-bar ui-bar-a">
+            <h3 id="design_choices_title">Before scrolling  for a item, please finish your current item. Here are your options</h3>
+
+
+          </div>
+          <ul data-role="listview" class="scroll_options item_departments">
+            <li data-icon="search"><a href="/search/scroll/all_items"  class=" ui-btn ui-btn-b">Scroll All Items</a></li>
+            <% @departments_to_show.each do |department| %>
+                <li data-icon="search"><a href="/search/scroll/<%= department.id %>" data-department_id="<%= department.id %>" class="items_scroll_button ui-btn ui-btn-b">Scroll <%= department.Name %></a></li>
+            <% end %>
+            <li data-icon="search"><a href="/search" class="items_scroll_button ui-btn">Go to search</a></li>
+          </ul>
+
+          <div class="ui-body ui-body-a design_choices">
+            <ul data-role="listview">
+              <li><a href="/cart/place_incomplete_symbiont_on_hold">Place item on hold</a></li>
+              <li><a href="/cart/delete_incomplete_symbiote">Delete item  from cart</a></li>
+              <li><a href='#designs_panel'>Complete item by opening designs</a></li>
+            </ul>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+        <% if @department %>
+            <h3 id="design_choices_title"><%= @department.Name %></h3>
+        <% end %>
+
+        <div role="main" class="ui-content responsive_listview_grid" style="display:table;">
+
+          <ul data-role="listview" data-inset="true" id="revisions" class="revisions" style="width: 100%;">
+
+            <%  if @paginated_results %>
+                <%= render :partial => "search/category_items" %>
+            <% end %>
+          </ul>
+        </div>
+
+    <% end %>
+
+
+
+
+
+<% end %>

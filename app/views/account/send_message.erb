@@ -1,0 +1,39 @@
+
+<br>
+<h2>  If you would like to send us an email or attachments, please send it to:<a href="mailto:support@<%=@website.domain %>">support@<%=@website.domain %></a></h2>
+
+
+<% if @messages_on %>
+
+<div class="" >
+<%= ezm_message_menu -%>
+ 			<span style="color:red;"> <%= error_messages_for 'message' %>
+  			<%= flash[:notice] %> 
+  		</span>
+  <fieldset>
+    <legend>Send Message</legend>
+
+    <%= form_for :message, :url => {:action => :send_message} do |form| %>
+      <p>
+        <label for="message_recepient" >Recipient:</label>
+        <%= form.text_field :recipient, :size => 40 %>
+      </p>
+    
+      <p>
+        <label for="message_subject" >Subject:</label>  
+        <%= form.text_field :subject, :size => 40 %>
+      </p>
+      
+      <p>
+        <label for="message_body" >Message:</label>  
+        <%= form.text_area :body ,:cols => 60, :rows => 4 %>
+      </p>
+
+      <%= submit_tag "Send Message" %>
+
+    <% end %>
+  </fieldset>
+  
+</div>
+
+<% end %>

@@ -1,0 +1,24 @@
+                                                                                    <% if  @back_design %>
+                                                                                                            <% if @front_design and @back_advanced_combination.number_of_sides == '2' %>
+                                                                                                                         <% @min_width = '425px'  %>
+                                                                                                            <% else %>
+                                                                                                                        <% @min_width = '850px'  %>
+                                                                                                            <%  end  %>
+                                                                                                            <div style="margin:0px; padding: 0px;;text-align:center;"  id="back_design_td"  class="design_span">
+                                                                                                              <span>  </span>
+
+                                                                                                                                          <img src="<%= @back_design_image_name  %>"
+                                                                                                                                               data-back_advanced_combination_id="<%= @back_advanced_combination.id   if @back_advanced_combination %>"
+                                                                                                                                               id="back_design_image"
+                                                                                                                                               class="back_design_image drag"
+                                                                                                                                               alt=""
+                                                                                                                                               <% if @back_advanced_combination %>
+                                                                                                                                               style="
+                                                                                                                                                       left:<%=  @back_advanced_combination ? @back_advanced_combination.back_left  : "0px" %>;
+                                                                                                                                                       top:<%=  @back_advanced_combination ?  @back_advanced_combination.back_top  : "0px" %>;
+                                                                                                                                                       width:<%= @back_advanced_combination ? @back_advanced_combination.back_width : "300px" %>;
+                                                                                                                                                       position:relative;
+                                                                                                                                                <% end %>
+                                                                                                                                               " />
+                                                                                                            </div>
+                                                                                    <% end  %>

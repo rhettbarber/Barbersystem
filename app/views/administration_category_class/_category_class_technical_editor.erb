@@ -1,0 +1,13 @@
+<div  id="category_class_technical_editor" class="administration_yellow" style="float:left;display:none;">
+    <% if @category %>
+                  <%  form_for @category.category_class , @category.category_class , :url => { :controller => "category_classes", :action => "update" } do |f|  %>
+                                      <%= f.text_field :name %> Name<br />
+                                      <%= f.text_field :item_type %>Item type<br />
+                                      <%= f.text_field :opposite_category_ids, :size => 150 %> Opposite category ids<br />
+                                      <%= f.text_field :appearing_sections %>Appearing sections<br />
+                                      <%= f.text_field :slaves_opposite_master_default_department_id %>Slaves opposite master default department<br />
+                                      <%= f.text_area :notes, :rows => 2, :cols => 75 %> Notes<br />
+                                  <%= submit_tag 'Update Category Class' %>
+                  <%  end  %>
+    <%  end  %>
+</div>

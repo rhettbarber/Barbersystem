@@ -1,0 +1,89 @@
+
+
+<div style="width:100%;text-align:center;font-size:23px;">Customer Billing information</div>
+
+<%= errors_for(@customer, "Opps, unable to create customer").html_safe if @customer %>
+
+
+<div class="box-form">
+
+<%= form_for @customer,  :url => customers_path ,  :html => { :id  => 'customer_form', :name  => 'customer_form_name' }   do |f| %>
+
+      <p>
+        <label for="Company">Company (optional)</label>
+        <input data-clear-btn="true" name="customer[Company]" id="Company_Req" value="">
+      </p>
+
+      <p>
+        <label for="FirstName">FirstName</label>
+        <input data-clear-btn="true" name="customer[FirstName]" id="FirstName_Req" value="">
+      </p>
+
+      <p>
+        <label for="LastName">LastName</label>
+        <input data-clear-btn="true" name="customer[LastName]" id="LastName_Req" value="">
+      </p>
+
+      <p>
+        <label for="Address">Address</label>
+        <input data-clear-btn="true" name="customer[Address]" id="Address_Req" value="">
+      </p>
+
+      <p>
+        <label for="Address2">Address2 (optional)</label>
+        <input data-clear-btn="true" name="customer[Address2]" id="Address2" value="">
+      </p>
+
+      <p>
+        <label for="City">City </label>
+        <input data-clear-btn="true" name="customer[City]" id="City_Req" value="">
+      </p>
+
+      <p>
+        <label for="State">State </label>
+        <input data-clear-btn="true" name="customer[State]" id="State_Req" value="">
+      </p>
+
+
+      <p>
+      <label for="Zip">Zip</label>
+      <input type="number" data-clear-btn="true" name="customer[Zip]" id="Zip_Req" value="">
+      </p>
+
+
+      <p>
+        <label for="TaxNumber">TaxNumber (optional)</label>
+        <input type="number" data-clear-btn="true" name="customer[TaxNumber]" id="TaxNumber_Req" value="">
+      </p>
+
+        <%= hidden_field_tag("Country", "United States" )  %>
+
+
+      <p>
+        <b>Emailaddress</b><br />
+        <%= f.hidden_field :EmailAddress, :value => @user.email %>
+        <%= h @user.email %>
+      </p>
+
+      <p>
+        <label for="FaxNumber">FaxNumber (optional)</label>
+        <input type="tel" data-clear-btn="true" name="customer[FaxNumber]" id="FaxNumber_Req" value="">
+      </p>
+
+      <p>
+        <label for="PhoneNumber">PhoneNumber</label>
+        <input type="tel" data-clear-btn="true" name="customer[PhoneNumber]" id="PhoneNumber_Req" value="">
+      </p>
+
+
+      <p>
+        <b>Use Same address for shipping</b> <br> <br>
+                        <%= check_box_tag "use_billing_for_shipping", value = "1", checked = true  %>
+      </p>
+      <br>
+      <p>
+        <%= submit_tag "Create" %>
+      </p>
+<% end %>
+
+</div>

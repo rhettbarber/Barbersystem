@@ -1,0 +1,111 @@
+
+  <ul data-role="listview">
+    <% @show_icc_colors = Set.new %>
+    <% for item in   @items        %>
+        <% if item.category %>
+                <% if item.item_class_component %>
+                                        <% unless @show_icc_colors.include?( item.color )%>
+                                                    <% @show_icc_colors.add( item.color )%>
+                                                    <li>
+                                                      <a href="#">
+                                                      <div>
+                                                                <%= image_tag "/images/item_specsheets/" + item.PictureName + ".jpg"  ,:style => "height:200px;" %>
+                                                                 <p><%= item.ItemLookupCode  %></p>
+                                                                 <p><%=  "/images/item_specsheets/" + item.PictureName + ".jpg"   %></p>
+                                                      </div>
+                                                      </a>
+                                                    </li>
+                                         <% end %>
+                <% else %>
+                                        <li>
+                                          <a href="#">
+                                            <div>
+                                              <%= image_tag "/images/item_specsheets/" + item.PictureName + ".jpg"  ,:style => "height:200px;" %>
+                                              <p><%= item.ItemLookupCode  %></p>
+                                            </div>
+                                          </a>
+                                        </li>
+                 <% end %>
+
+        <% end %>
+    <% end %>
+   </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <% if @old %>
+
+
+
+
+
+
+
+
+
+    <li><a href="#">
+      <img src="../_assets/img/album-bb.jpg">
+      <h2>Broken Bells</h2>
+      <p>Broken Bells</p></a>
+    </li>
+    <li><a href="#">
+      <img src="../_assets/img/album-hc.jpg">
+      <h2>Warning</h2>
+      <p>Hot Chip</p></a>
+    </li>
+    <li><a href="#">
+      <img src="../_assets/img/album-p.jpg">
+      <h2>Wolfgang Amadeus Phoenix</h2>
+      <p>Phoenix</p></a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+<table class="price_sheet" width="1000" border="0" cellspacing="0" cellpadding="0">
+	  <tr>
+	    <th colspan="20" class="yellow" scope="col">Product Listing for Image Check</th>
+	  </tr>
+  <tr>
+	    <th class="lightblue" scope="col">Info</th>
+	    <th class="wheat" scope="col">thumbnail image</th>
+		<th class="lightgreen" scope="col">specsheet image</th>
+  </tr>
+
+
+	                            <% for item in   @items        %>
+                                            <% if item.category %>
+									   		<tr>
+											    <td class="lightblue">
+													ItemLookupCode::<%= item.ItemLookupCode  %><br />
+													Color::<%= item.color  %><br />
+													category_id:: <%= item.category_id     %><br />
+													cat class id ::<%= item.category.category_class_id    %><br />
+													cat class  item_type:: <%= item.category.category_class.item_type    %>
+												</td> 
+											    <td class="wheat"><%= image_tag "/images/item_thumbnails/" + item.PictureName   %></td>
+											    <td class="lightgreen"><%= image_tag "/images/item_specsheets/" + item.PictureName   %></td>
+										 	</tr>
+	                                        <% end %>
+	                             <% end %>
+
+
+ </table>
+<% end %>

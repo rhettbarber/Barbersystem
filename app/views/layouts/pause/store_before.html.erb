@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+          <!-- Meta, title, CSS, favicons, etc. -->
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta name="description" content="">
+          <meta name="author" content="">
+
+          <title> Dixie Outfitters</title>
+
+          <%#= include_gon %>
+
+          <%= stylesheet_link_tag '/assets/store/application_store' %>
+          <!-- Documentation extras -->
+          <link href="/assets/docs.css" rel="stylesheet">
+          <link href="/assets/pygments-manni.css" rel="stylesheet">
+          <%= stylesheet_link_tag '/assets/bootstrap_customized' %>
+
+          <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+          <!--[if lt IE 9]>
+          <script src="/assets/html5shiv.js"></script>
+          <script src="/assets/respond.min.js"></script>
+          <![endif]-->
+
+          <!-- Bootstrap core JavaScript
+          ================================================== -->
+          <!-- NORMALLY Placed at the end of the document so the pages load faster -->
+          <script src="/assets/jquery/jquery.js"></script>
+          <script src="/assets/jquery/jquery_ujs.js"></script>
+          <script src="/assets/jquery/array_utilities.js"></script>
+          <script src="/assets/bootstrap.js"></script>
+          <script src="/assets/jquery/bootstrap-slider.js"></script>
+          <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+          <script src="/assets/holder.js"></script>
+    </head>
+    <body>
+
+        <%= render :partial => "application/menu" %>
+        <%= render :partial => "application/modal" %>
+
+        <div id="the_yield">
+                <%= yield %>
+        </div>
+
+        <script src="/assets/store/store.js"></script>
+        <% if admin? %>
+        <script src="/assets/store/store_administration.js"></script>
+        <% end %>
+
+
+    </body>
+</html>
+
+
+
+

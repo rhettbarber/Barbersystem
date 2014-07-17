@@ -1,0 +1,71 @@
+
+  <div class="container text-primary text-center">Editing Customer Shipping Address </div><br>
+
+
+
+        <%= errors_for(@ship_to, "Opps, unable to edit customer").html_safe if @ship_to %>
+
+
+
+        <%= form_for(:ship_to, :url => ship_to_path(@ship_to), :html => { :method => :put }) do |f| %>
+          <p>
+            <b>Company</b><br />
+            <%= f.text_field :Company %>
+          </p>
+
+          <p>
+            <b>Name</b><br />
+            <%= f.text_field :Name %>
+          </p>
+
+          <p>
+            <b>Address</b><br />
+            <%= f.text_field :Address %>
+          </p>
+
+          <p>
+            <b>Address2</b><br />
+            <%= f.text_field :Address2 %>
+          </p>
+
+          <p>
+            <b>City</b><br />
+            <%= f.text_field :City %>
+          </p>
+
+          <p>
+            <b>State</b><br />
+            <%= f.text_field :State %>
+          </p>
+
+          <p>
+            <b>Zip</b><br />
+            <%= f.text_field :Zip %>
+          </p>
+
+            <%= hidden_field_tag("Country", "United States" )  %>
+
+          <p>
+            <b>Phonenumber</b><br />
+            <%= f.text_field :PhoneNumber %>
+          </p>
+
+          <p>
+            <b>Faxnumber</b><br />
+            <%= f.text_field :FaxNumber %>
+          </p>
+
+          <p>
+            <%#= submit_tag "Update" %>
+
+            <%= button_tag(type: "submit", class: "ui-btn ui-btn-b" ) do %>
+                Update shipping address <i class="icon-repeat"></i>
+            <% end %>
+
+
+          </p>
+        <% end %>
+
+
+
+        <%=link_to(  "Cancel editing ship to" ,  ship_tos_path , :class => "ui-btn")    %>

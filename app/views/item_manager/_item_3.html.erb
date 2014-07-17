@@ -1,0 +1,79 @@
+<tr>
+      <td  class="standard_info">
+          <% if  @missing_thumbnail.include?(  item.ItemLookupCode )  %>
+                              <span style="color:red">NO THUMB</span>
+          <% else %>
+                     <%= image_tag( '/images/designer_item_thumbnails/' + item.ItemLookupCode + '.png')  %>
+          <% end %>
+      </td>
+
+
+
+        <td  class="standard_info"><%= item.ItemLookupCode  %></td>
+
+        <td  class="standard_info"><%= item.Description  %></td>
+        <td  class="standard_info">
+                <% if  @missing_original_psd.include?(  item.ItemLookupCode )  %>
+                                    <span style="color:red">ORIG</span>
+                <% else %>
+                                     <span style="color:green">ORIG</span>
+                <% end %>
+          </td>
+        <td  class="standard_info">
+                <% if  @missing_original_png.include?(  item.ItemLookupCode )  %>
+                                    <span style="color:red">HI-PNG</span>
+                <% else %>
+                                     <span style="color:green">HI-PNG</span>
+                <% end %>
+          </td>
+        <td  class="standard_info">
+                <% if  @missing_separation.include?(  item.ItemLookupCode )  %>
+                                    <span style="color:red">SEP</span>
+                <% else %>
+                                     <span style="color:green">SEP</span>
+                <% end %>
+          </td>
+        <td  class="standard_info">
+                <% if  @missing_specsheet.include?(  item.ItemLookupCode )  %>
+                                    <span style="color:red">SPEC</span>
+                <% else %>
+                                     <span style="color:green">SPEC</span>
+                <% end %>
+          </td>
+       <td  class="standard_info">
+                <% if  @missing_thumbnail.include?(  item.ItemLookupCode )  %>
+                                    <span style="color:red">THUMB</span>
+                <% else %>
+                                     <span style="color:green">THUMB</span>
+                <% end %>
+          </td>
+
+
+</tr>
+<tr>
+      <td  colspan="20">
+         <% CloneItemType.all.each do |clone_item_type| %>
+                                                <div style="float: left;margin-left:10px;">
+                                                          <%= clone_item_type.name %> <br/>
+                                                         <%  if Item.exists?([ "ItemLookupCode = ?", clone_item_type.prefix_code + '-'  +  item.ItemLookupCode.gsub('L', '')  ] ) %>
+                                                                  <span style="color:green">RMS</span>
+                                                          <% else  %>
+                                                                  <span style="color:red">RMS</span>
+                                                          <% end %>
+                                                            <% file_status =   File.file?( 'W:\\AUTOMATION_DATABASE\\PRODUCTION_JPG\\' + clone_item_type.name + '\\' + clone_item_type.prefix_code +    item.ItemLookupCode + '.jpg' ) %>
+                                                            <% if file_status == true %>
+                                                                                <span style="color:green">FILE</span>
+                                                             <% else  %>
+                                                                                 <span style="color:red">FILE</span>
+                                                             <% end  %>
+                                                 </div>
+              <% end %>
+      </td>
+</tr>
+
+<tr>
+  <td style="background-color: lightgrey;height:40px;" colspan="20"> &nbsp;</td>
+</tr>
+
+
+

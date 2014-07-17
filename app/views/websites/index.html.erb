@@ -1,0 +1,32 @@
+
+<%= stylesheet_link_tag 'websites.css'  %>
+
+<div class="table_title">Listing websites</div>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Domain</th>
+    <th>Phone</th>
+    <th>Store website</th>
+  </tr>
+
+<% @websites.each do |website| %>
+  <tr>
+    <td><%=h website.id %></td>
+    <td><%=h website.title %></td>
+    <td><%=link_to( website.domain,   'http://' + website.domain  ) if website.domain %></td>
+    <td><%=h website.phone %></td>
+    <td><%=h website.store_website %></td>
+    <td><%= link_to 'Show', website %></td>
+    <td><%= link_to 'Edit', edit_website_path(website) %></td>
+    <td><% link_to 'Destroy', website, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New website', new_website_path %>
+

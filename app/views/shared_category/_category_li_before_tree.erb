@@ -1,0 +1,50 @@
+
+<% @contains_opaque_designs = 'true' %> 
+
+<% if @purchase_symbiote_item_type == "master" %>
+		<% opaque_designs = [] %>
+		<%  category.items.each do |item| %>
+			<% opaque_designs << item if item.shade == "opaque" %>
+		<% end %>
+		<% if opaque_designs %>
+			<% item = opaque_designs.first %>
+			<% logger.debug "------------------------------------- blocked transparent designs for menu" %>
+				<% unless item %>
+		  	 		<% logger.debug "------------------------------------- @contains_opaque_designs " %>
+           				<% @contains_opaque_designs = 'false' %>   
+				<% end  %>
+		<% else %>
+				  	 	<% logger.debug "------------------------------------- @contains_opaque_designs " %>
+           				<% @contains_opaque_designs = 'false' %>  
+		<% end %>
+<% end %>
+
+<% logger.debug "-------------------------------------@contains_opaque_designs : #{@contains_opaque_designs} " %>
+
+<%  if category.department_id != 1 and category.department_id != 5 and @contains_opaque_designs == 'true'  %>	
+
+<% if category.additive_category_ids != 0 && category.additive_category_ids != nil %>
+	<% style_class = 'main_category' %>	
+<% else %>
+	<% style_class = 'sub_category' %>		
+<% end %>
+	
+	<% if admin? %>
+			<li class="<%= style_class %>" id="category_<%= category.id.to_s  %>">
+				<%= category.additive_category_ids %> <%= ' ..' if category.visible == 0 %><%= link_to  category.Name , {:controller => 'browse' ,  :department_id =>   category.department_id  , :category_id => category.id } %>
+			</li>
+				<%= draggable_element("category_" + category.id.to_s, :revert => true ) %>
+	<% else %>
+
+		<% if category.visible == 1 %>
+		
+			<li id="category_<%= category.id.to_s  %>">				
+			<%= link_to  category.Name , {:controller => @website.name, :action => 'browse' ,  :department_id =>   category.department_id  , :category_id => category.id } %>		
+			</li>
+			
+		<% end %>
+		
+		
+	<% end %>
+	
+<% end %>

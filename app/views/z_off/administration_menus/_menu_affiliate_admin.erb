@@ -1,0 +1,33 @@
+
+<div class="menu_affiliate"> 
+    <ul>		
+    
+            <li>				
+            		 <%= link_to "Affiliate Reserved Ips", :controller => "reserved_ips",:action => "index" %>	
+            </li>
+            <li>				
+            		<%= link_to 'Dawn of Time Affiliate Report', :controller => 'affiliates_admin' ,:action => 'list_affiliate_sales'%>		
+            </li>
+            <li>				
+            		<%= link_to 'Todays Affiliate Report', :controller => 'affiliates_admin' ,:action => 'list_affiliate_sales'%>	
+            </li>
+            <li>				
+            		<%= link_to 'Monthly Affiliate Report', :controller => 'affiliates_admin' ,:action => 'list_affiliate_sales'%>		
+            </li>
+            <li>				
+            		<%= link_to 'Unpaid Non-Cleared Affiliate Sales', :controller => 'customers', :action => 'edit', :id => @customer %>		
+            </li>
+            <li>				
+            		<%= link_to 'Unpaid Cleared Affiliate Sales', :controller => 'customers', :action => 'edit', :id => @customer %>		
+            </li>
+            <li>				
+            		<%= link_to 'Unpaid Denied Affiliate Sales', :controller => 'customers', :action => 'edit', :id => @customer %>		
+            </li>
+            <li>				
+            		<%= link_to 'Paid Affiliate Report', :controller => 'customers', :action => 'edit', :id => @customer %>		
+            </li>
+            <li>				
+            		<%= link_to 'Find an Affiliate', :controller => 'customers', :action => 'edit', :id => @customer %>		
+            </li>
+    </ul>
+</div>

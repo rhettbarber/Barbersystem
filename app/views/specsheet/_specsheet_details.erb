@@ -1,0 +1,74 @@
+
+<style type="text/css">
+
+
+    .ui-table-reflow td .ui-table-cell-label, .ui-table-reflow th .ui-table-cell-label {
+        min-width:15%;
+    }
+
+
+    .specsheet-details-table {
+        margin-left:auto;
+        margin-right:auto;
+        width:300px;
+    }
+
+    @media ( min-width: 40em ) {
+        /* Show the table header rows and set all cells to display: table-cell */
+
+        .specsheet-details-table {
+            width:720px;
+        }
+
+
+        .specsheet-details-table td,
+        .specsheet-details-table th,
+        .specsheet-details-table tbody th,
+        .specsheet-details-table tbody td,
+        .specsheet-details-table thead td,
+        .specsheet-details-table thead th {
+            display: table-cell;
+            margin: 0;
+        }
+        /* Hide the labels in each cell */
+        .specsheet-details-table td .ui-table-cell-label,
+        .specsheet-details-table th .ui-table-cell-label {
+            display: none;
+        }
+    }
+</style>
+
+
+
+
+
+
+<table data-role="table" class="specsheet-details-table">
+  <thead>
+  <tr>
+    <th><%= 'Item Code' if @item %></th>
+    <th><%= 'Item Description' if @item %></th>
+    <th><%= 'Design Code' if @design  %></th>
+    <th><%= 'Design Description' if @design  %></th>
+    <th><%= 'Your Price'  if @your_unit_price  unless  @your_unit_price == 0.01  %></th>
+    <th><%= 'Ext. Desc.'  if @item  %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td id="item_itemlookupcode"><%=   @item.ItemLookupCode.to_s  if @item   %></td>
+    <td id="item_description"><%=   @item.description_before_color_and_size  if @item   %></td>
+    <td id="design_itemlookupcode"><%=    @design.ItemLookupCode.to_s  if @design   %></td>
+    <td id="design_description"><%=     @design.Description.downcase.camelize.to_s  if @design %></td>
+    <td id="your_unit_price" >
+      <%=    number_with_precision(@your_unit_price, :precision => 2) unless  @your_unit_price == 0.01  %>
+    </td>
+
+    <td id="item_extendeddescription"><%=  raw strip_tags @item.ExtendedDescription.to_s.gsub("yellow", "blue").gsub("Yellow", "Blue")   if @item %></td>
+
+  </tr>
+  </tbody>
+</table>
+
+
+

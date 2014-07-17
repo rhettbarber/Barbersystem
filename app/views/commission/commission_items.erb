@@ -1,0 +1,36 @@
+
+
+
+   <h1> Listing <%= @commissioned_items.size %> Commissioned Items </h1>
+   <h2> This does not include the garments and items your designs are applied to. </h2>
+   <h1> <%= link_to "Back to Commission Report" , :controller => "commission", :action =>  "report" %> </h1>
+
+<table>
+	  <tr>
+	    <th>Image</th>
+         <th>Item</th>
+	    <th>Description</th>
+	     <th>SubDescription1</th>
+	      <th>SubDescription3 </th>
+	      <th>Category </th>
+	  </tr>
+	  <% if @commissioned_items %>
+				  <% @commissioned_items.each do |customer_item| %>
+                                     <% item = customer_item.item %>
+                                      <% if item.WebItem and !item.Inactive     %>
+                                                          <tr>
+                                                            <td><%= image_tag "/images/item_thumbnails/" +  item.PictureName, :size => '140x140' %></td>
+                                                            <td><%=h item.ItemLookupCode %></td>
+                                                            <td><%=h item.Description %></td>
+                                                             <td><%=h item.SubDescription1 %></td>
+                                                             <td><%=h item.SubDescription3 %></td>
+                                                            <td>  <%=h item.category.Name %> </td>
+                                                          </tr>
+                                       <% end  %>
+					<% end %>
+		<% else %>
+			 		<tr><td>No Items Assigned to this Artist</td></tr>
+	 	<% end %>
+</table>
+
+

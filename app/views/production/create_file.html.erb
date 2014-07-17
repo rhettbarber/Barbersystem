@@ -1,0 +1,38 @@
+<h1>Production#create_file</h1>
+<p>Find me in app/views/production/create_file.html.erb</p>
+
+<%= params.inspect %>
+
+<br/><br/><br/>
+FRONT:<br/>
+@front_original_width   <%= @front_original_width    %><br/>
+@front_original_height <%=  @front_original_height  %><br/>
+@front_low_res_width <%=  @front_low_res_width   %><br/>
+@front_height_multiplier: <%=  number_with_precision( @front_height_multiplier , :precision => 2)        %><br/>
+@front_low_res_height: <%=  @front_low_res_height  %><br/>
+
+@PRODUCTION_WIDTH: <%= @PRODUCTION_FRONT_WIDTH  %><br/>
+@PRODUCTION_HEIGHT <%= @PRODUCTION_FRONT_HEIGHT  %><br/>
+@PRODUCTION_FRONT_MULIPLIER: <%= @PRODUCTION_FRONT_MULIPLIER  %><br/>
+
+
+
+<br/><br/><br/>
+BACK: <br/>
+@back_original_width   <%= @back_original_width    %><br/>
+@back_original_height <%=  @back_original_height  %><br/>
+@back_low_res_width <%=  @back_low_res_width   %><br/>
+@back_height_multiplier: <%=  number_with_precision( @back_height_multiplier , :precision => 2)        %><br/>
+@back_low_res_height: <%=  @back_low_res_height  %><br/>
+
+@PRODUCTION_WIDTH: <%= @PRODUCTION_BACK_WIDTH  %><br/>
+@PRODUCTION_HEIGHT <%= @PRODUCTION_BACK_HEIGHT  %><br/>
+@PRODUCTION_BACK_MULIPLIER: <%= @PRODUCTION_BACK_MULIPLIER  %><br/>
+
+<br/>
+<br/>
+composite -gravity center  <%= @front_item_filename %>   -size <%= @PRODUCTION_FRONT_HEIGHT %>x<%= @PRODUCTION_FRONT_WIDTH %>   W:\AUTOMATED_WEB_CUSTOM_IMAGES\backgrounds\BG0001.jpg    W:\AUTOMATED_WEB_CUSTOM_IMAGES\AAAA_front.jpg
+<br/>
+
+<br />
+composite -gravity center  <%= @back_item_filename %>   -size <%= @PRODUCTION_BACK_HEIGHT %>x<%= @PRODUCTION_BACK_WIDTH %>   W:\AUTOMATED_WEB_CUSTOM_IMAGES\backgrounds\BG0001.jpg    W:\AUTOMATED_WEB_CUSTOM_IMAGES\AAAA_back.jpg

@@ -1,0 +1,17 @@
+
+<div class="items_filter">
+
+      <div class="item_departments">
+                Item Departments:<br/>
+                <% @website.default_item_departments.each do |the_department| %>
+                      <%= the_department.Name %><br/>
+                <% end  %>
+      </div>
+      <div class="design_departments">
+                Design Departments:<br/>
+                <% @website.default_design_departments.each do |the_department| %>
+                      <%= the_department.Name %><br/>
+                <% end  %>
+      </div>
+
+</div>

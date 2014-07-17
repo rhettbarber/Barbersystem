@@ -1,0 +1,29 @@
+<p>
+  <b>Url:</b>
+  <%=h @link.url %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @link.description %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%=h @link.category %>
+</p>
+
+<p>
+  <b>controller_name:</b>
+  <%=h @link.controller_name %>
+</p>
+
+<p>
+  <b>action_name:</b>
+  <%=h @link.action_name %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_link_path(@link) %> |
+<%= link_to 'Back', links_path %>

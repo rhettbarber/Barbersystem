@@ -1,0 +1,37 @@
+<h1>Franchise Order Generator </h1>
+<p>This tool will help you build a franchise order.This includes the following steps:</p>
+
+
+<table class="franchise_order_table">
+
+<%  @franchise_items.each do |the_item| %>
+<tr>
+    <td class="thumb">
+
+    <%   if    rio( RIO.cwd +  "/public/images/item_thumbnails/" +  the_item.png_image_name ).exist?   %>
+           <%=    image_tag("/images/item_thumbnails/" +  the_item.png_image_name  ) %>
+    <%   elsif    rio( RIO.cwd +  "/public/images/item_thumbnails/" +  the_item.jpg_image_name ).exist?   %>
+          <%= image_tag( '/images/item_thumbnails/' + the_item.jpg_image_name  ) %>
+    <% else  %>
+          <%= image_tag( '/images/item_thumbnails/missing-thumbnail.jpg' ) %>
+    <% end  %>
+    </td>
+    <td><%= the_item.ItemLookupCode %></td>
+    <td><%= the_item.Description %></td>
+    <td>
+
+          <%  if the_item.category %>
+                <%= the_item.category.Name %>
+          <% else  %>
+                <%= image_tag('/images/indicators/missing-category.jpg') %>
+          <% end  %>
+    </td>
+    <td><%= the_item.DateCreated %></td>
+    <td><%= the_item.sum_of_quantity %></td>
+    <td><%= the_item.date_difference %></td>
+    <td> &nbsp; </td>
+     <td style="background-color: yellow;"><%= the_item.rank %></td>
+</tr>
+<% end  %>
+</table>
+

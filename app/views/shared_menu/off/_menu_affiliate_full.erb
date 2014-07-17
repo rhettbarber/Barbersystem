@@ -1,0 +1,36 @@
+
+<div class="menu_affiliate"> 
+    <ul>		
+            <li>				
+            		<%= link_to 'Affiliate Home', :controller => 'affiliates' %>		
+            </li>
+            <li>				
+            		<%= link_to 'Links and Banners', :controller => 'affiliates',:action => 'links_and_banners' %>		
+            </li>
+            <li>				
+            		<%= link_to 'Update your information', :controller => 'customers', :action => 'edit', :id => @customer %>		
+            </li>
+            <li>				
+            		<%= link_to 'Your Payment History', :controller => 'affiliates' %>		
+            </li>
+            <li>				
+            		<%= link_to 'Affiliate Hits Report', :controller => 'affiliates', :action => "all_hits_report"  %>		
+            </li>
+            <li>				
+            		<%= link_to 'Affiliate Compensation Report', :controller => 'affiliates', :action => "compensation_report"  %>			
+            </li>
+            <li>				
+            		<%= link_to 'Recruiter Home', :controller => 'affiliates', :action => 'affiliate_recruiter_information'  %>			
+            </li>
+            <li>				
+            		<%= link_to 'Recruited Websites', :controller => 'recruited_websites' %>			
+            </li>
+            <li>				
+            		<%= link_to 'Recruiter Compensation Report', :controller => 'recruited_websites', :action => "compensation_report" %>			
+            </li>
+            <li>				
+            		<%= link_to 'Ethical Criteria', :controller => 'affiliates', :action => "website_ethical_criteria" %>			
+            </li>
+
+    </ul>
+</div>

@@ -1,0 +1,23 @@
+
+<% if @item  && @design  %>
+                        table_at_item_and_design<br>
+						 <span id='combo_image'><%= render(:partial => 'specsheet/table_at_item_and_design')     %></span>
+<%  else  %>
+                         <% @show_wide_specsheet = false  %>
+						<% if @item.item_class_component %>
+                                                        <% logger.debug "@item.item_class_component.item_class.id.to_s: " + @item.item_class_component.item_class.id.to_s  %>
+                                                          <% if @item.item_class_component.item_class.wide_specsheet == 1 %>
+                                                                    <% @show_wide_specsheet = true %>
+                                                         <% end %>
+                         <% end %>
+                        <% if @show_wide_specsheet == true  %>
+                                                    table show_wide_specsheet<br>
+                                                    <%= render :partial => "specsheet/table_show_wide_specsheet" %>
+                        <% else %>
+                                                 table_with_model<br>
+                                                <%= render :partial => "specsheet/table_with_model" %>
+                         <% end  %>
+<%  end  %>
+
+
+

@@ -1,0 +1,12 @@
+<% cache (@head_fragment_name  ) do %>
+<head>
+<%= render :partial => "layout_elements/shared_javascripts" %>
+<%= render(:partial => "layout_elements/favicon") %>
+<%= render(:partial => "layout_elements/title") %>
+<%= render :partial => "layout_elements/css" %>
+<%= render(:partial => "layout_elements/shared_meta") %>
+</head>
+<% end  %>
+<!-- Begin CSRF -->
+<%= csrf_meta_tag %>
+<!-- End CSRF -->

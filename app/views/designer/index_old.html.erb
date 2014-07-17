@@ -1,0 +1,64 @@
+<% content_for :head_additions do -%>
+    <%= stylesheet_link_tag 'designer.css'  %>
+<% end  -%>
+
+<h1> Image Driver - Incomplete Designer Series Resources  </h1>
+
+<div class="system_description">
+      This system  processes .png images located in  AUTOMATION_DATABASE\ORIGINAL_PNG<br/>
+      It outputs files to:<br/>
+      AUTOMATION_DATABASE\FINISHED_PRODUCTION_PNGS<br/>
+      AUTOMATION_DATABASE\FINISHED_WEBSITE_ITEM_SPECSHEETS<br/>
+      <%= link_to "View a List of All Relevant Orders" %>
+</div>
+
+<div class="system_commands">
+      Commands:<br/>
+        <% if @incomplete_item_specsheets.size > 0 %>
+                <%= link_to "Complete All Incomplete, Creating the Item SpecSheets, Production Images and Item Thumbnails","designer/complete_selected_incomplete" %>
+         <% else %>
+               All files are completed, Add some files into AUTOMATION_DATABASE\ORIGINAL_PSD and once the separator computer converts them to PNG and  are found in
+               AUTOMATION_DATABASE\ORIGINAL_PNG they will become available to convert for production.
+               If either item specsheet or production image is missing it will be created by clicking the link below..
+          <% end %>
+             <br/><br/>
+             <% if @unfinished_original_pngs.size > 0 %>
+
+                             <%= link_to "Request that the Separator update Source Pngs", "designer/request_separator_update_pngs" %>  <span style="color:red;">  Some original source Pngs are missing.</span>
+             <% else %>
+                        <span style="color:green;"> All Original Source Pngs are Completed. The ORIGINAL_PSD folder matches the ORIGINAL_PNG folder.</span>
+             <% end %>
+              <br/><br/>
+</div>
+
+<div class="content">
+               <% if @incomplete_designs.size > 0 %>
+                     <table class="managed_image">
+                       <tbody>
+                            <% @incomplete_designs.each do |the_filename_no_extension|     %>
+                                        <tr>
+                                            <td><%= the_filename_no_extension %></td>
+                                            <td>
+                                              <% if the_filename_no_extension.to_s.split(' ').size > 1 %>
+                                                      <span style="color:red"> Remember that files with spaces will not be processed !! </span>
+                                              <% end  %>
+                                            <% if @unfinished_original_pngs.include?( the_filename_no_extension ) %>
+                                                    <span style="color:red;">  The Original Png has not been made by the Separator.</span>
+                                              <% end  %>
+
+                                              <% if @unavailable_production_pngs.include?( the_filename_no_extension ) %>
+                                                    <span style="color:red;">  Production files not available.</span>
+                                              <% end  %>
+
+                                             <% if @incomplete_item_specsheets.include?( the_filename_no_extension ) %>
+                                                    <span style="color:red;">  Item SpecSheet files not available.</span>
+                                              <% end  %>
+                                            </td>
+                                        </tr>
+                            <% end  %>
+                       </tbody>
+                        </table>
+              <% else %>
+                    <br/><br/> <span style="color:green">All Item SpecSheets and Production Images are complete. 0 images to process. </span><br/><br/><br/>
+            <% end %>
+</div>

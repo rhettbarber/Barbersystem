@@ -1,0 +1,7 @@
+<li>
+  <%  if params[:department_id].to_i == department.id  %>
+          <%= link_to  department.Name , { :controller => 'browse' , :action => 'index',  :department_id =>   department.id } ,:class => "current"  %>
+    <% else %>
+          <%= link_to  department.Name ,  :controller => 'browse', :action => 'index',  :department_id =>   department.id  %>
+   <% end  %>
+</li>

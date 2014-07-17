@@ -1,0 +1,24 @@
+
+<div id="product_container_div"> 
+            	<table class="purchase_table" id="purchase_table">
+                  <tr>
+                                            <th  class="purchases_entry_delete_printable">.</th>
+                                            <th  class="purchases_entry_image_printable" >.</th>
+                                            <th  class="purchases_entry_quantity_printable">quantity</th>
+                                            <th  class="purchases_entry_itemlookupcode_printable">item lookup code</th>
+                                            <th  class="purchases_entry_description_printable">description</th>
+                                            <th  class="purchases_entry_full_unit_price_printable" >full unit price:</th>
+                                            <th  class="purchases_entry_unit_quantity_tier_discount_price_printable">unit quantity tier price:</th>
+                                            <th  class="purchases_entry_unit_quantity_and_permanent_savings_printable">unit quantity and permanent savings </th>
+                                            <th  class="purchases_entry_unit_your_price_printable">your unit price</th>
+                                            <th  class="purchases_entry_full_extended_price_printable"> full extended price</th>
+											<th  class="purchases_entry_your_extended_price_savings_printable"> your extended price savings</th>
+                                            <th  class="purchases_entry_your_extended_price_printable"> your extended price </th>
+                  </tr>
+
+                                            <% @your_purchases_entries.each do |purchases_entry| %>
+                                                            <%= render(:partial => "purchases/purchases_entry_wholesale",:locals => { :purchases_entry => purchases_entry } ) %>
+                                            <% end %>
+
+                        </table>
+</div>

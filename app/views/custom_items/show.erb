@@ -1,0 +1,92 @@
+
+
+
+
+<% link_to image_tag(@custom_item.public_filename, :size => "100x100")  %><br />
+<br />
+
+<div class="custom_item_relational_perspective">
+          <div id="front_design_td">
+                     <span>  </span>
+                     <img src=" <%= @custom_item.public_filename('relational') %>"
+                         id="front_design_image"
+                         class="front_design_image"
+                         alt=""
+                         style=" position: relative; " />
+          </div>
+          <div id="mask_td">
+                     <span>  </span>
+                    <%= image_tag( '/custom_items/thumbnail/template_small.png' )  %>
+          </div>
+</div>
+
+
+<div class="specsheet_resize">
+          <div style="text-align:center;width:850px;">
+                    <div class="resize_handle_container">
+                                <div style="float: left; margin-left:100px; width: 200px; background-image: url(/images/controls/slide_track.gif); background-repeat: repeat-x; background-position: left center; height: 18px;" id="main_print_track">
+                                                            <div style="width: 18px; height: 18px; left: 200px; position: relative;" id="main_print_handle" class="selected"><img src="/images/controls/slide_control.gif"  alt="slide_control" /></div>
+                                 </div>
+                      </div>
+
+
+            </div>
+</div>
+
+
+<%= render :partial => 'custom_items/custom_items_menu' %>
+
+<div class="custom_item_file_status">
+          <div style="float:left;height:80px;width:200px;">
+                      Full Size Production Image Specs:<br />
+                      Width:8600 px<br />
+                      Height:6800 px<br />
+          </div>
+          <div style="float:left;height:80px;width:200px;">    
+                      Your file's size::<br />
+                       width: <%= @custom_item.width %> px <br />
+                       height <%= @custom_item.height %> px <br />
+          </div>
+          <div style="float:left;height:80px;width:200px;">
+                      Your file's size::<br />
+                       width: <%= @custom_item.width %> px <br />
+                       height <%= @custom_item.height %> px <br />
+          </div>
+          <div style="float:left;height:80px;width:200px;">
+                    something else
+
+          </div>
+ </div>
+
+<%= render :partial => 'designer_specsheet/color_choices_pallete' %>
+
+
+
+
+
+
+
+
+
+
+
+
+ <br />
+ <br />
+ Since your file did not match our template size, we sized your image to the maximum usable size. <br />
+ You may scale down your image using the slider provided. <br />
+ <br />
+ If you would like to precisely place a design on the shirt, download our designer template.
+ Do not resize it, Design on it using Adobe photoshop and when you are finished, hide the shirt layer,
+ then save and upload the file.
+ <%= link_to "custom-design-user-template.png"  , '/custom_items_templates/custom-design-user-template.png' %>
+ <br />
+
+ <% if admin? and params[:show_development] == 1 %>
+        @custom_item.methods.inspect <% @custom_item.methods.inspect %><br />
+        @custom_item.filename: <%=@custom_item.filename %><br />
+        @custom_item.public_filename:  <%=@custom_item.public_filename %><br />
+        @custom_item.full_filename:  <%=@custom_item.full_filename %><br />
+        @custom_item.full_filename('thumbnail'):  <%=@custom_item.full_filename('thumbnail') %><br />
+
+<% end %>

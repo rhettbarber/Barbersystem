@@ -1,0 +1,81 @@
+<tr>
+      <td  class="standard_info">
+          <% if  @missing_thumbnail.include?(  item.ItemLookupCode )  %>
+                              <span style="color:red">NO THUMB</span>
+          <% else %>
+                     <%= image_tag( '/images/designer_item_thumbnails/' + item.ItemLookupCode + '.png' , :alt => item.id )  %>
+          <% end %>
+      </td>
+
+      <td  class="standard_info">
+
+        <table>
+          <tbody>
+                <tr>
+                        <td><%= item.ItemLookupCode  %></td>
+
+                        <td style="width:500px;"><%= item.Description  %></td>
+                        <td>
+                                <% if  @missing_original_psd.include?(  item.ItemLookupCode )  %>
+                                                    <span style="color:#A00000">ORIG</span>
+                                <% else %>
+                                                     <span style="color:green">ORIG</span>
+                                <% end %>
+                          </td>
+                        <td>
+                                <% if  @missing_original_png.include?(  item.ItemLookupCode )  %>
+                                                    <span style="color:#A00000">HI-PNG</span>
+                                <% else %>
+                                                     <span style="color:green">HI-PNG</span>
+                                <% end %>
+                          </td>
+                        <td>
+                                <% if  @missing_separation.include?(  item.ItemLookupCode )  %>
+                                                    <span style="color:#A00000">SEP</span>
+                                <% else %>
+                                                     <span style="color:green">SEP</span>
+                                <% end %>
+                          </td>
+                        <td>
+                                <% if  @missing_specsheet.include?(  item.ItemLookupCode )  %>
+                                                    <span style="color:#A00000">SPEC</span>
+                                <% else %>
+                                                     <span style="color:green">SPEC</span>
+                                <% end %>
+                          </td>
+                          <td>
+                                <% if  @missing_thumbnail.include?(  item.ItemLookupCode )  %>
+                                                    <span style="color:#A00000">THUMB</span>
+                                <% else %>
+                                                     <span style="color:green">THUMB</span>
+                                <% end %>
+                          </td>
+                  </tr>
+                  <tr>
+
+                      <% if  item.ytdn > 400  or item.lytdn > 400  %>
+                            <% @item_text_color = "color:blue" %>
+                       <% elsif  item.ytdn > 250 or item.lytdn > 250  %>
+                            <% @item_text_color = "color:#005CB8" %>
+                       <% else %>
+                            <% @item_text_color = "color:gray" %>
+                       <% end  %>
+                       <% if item.DateCreated > 60.days.ago %>
+                            <% @date_text_color = "color:red" %>
+                      <% else %>
+                            <% @date_text_color = "color:gray" %>
+                      <% end  %>
+
+                        <td colspan="5"> <span style="<%= @item_text_color %>"> YTDN: <%= item.ytdn %>  - LYTDN: <%= item.lytdn %> </span>
+                                                    <span style="<%= @date_text_color %>"> - Created: <%=  item.DateCreated.to_s[0..9]  %>   </span>
+                        </td>
+
+
+                          <td colspan="2">  <%= link_to( "EDIT", edit_item_path( item.id   ) ) %>   <%= link_to( "DETAILS", :controller => 'item_manager', :action => 'item_details', :item_id => item.id  ) %>    </td>
+                  </tr>
+          </tbody>
+        </table>
+
+        </td>
+</tr>
+

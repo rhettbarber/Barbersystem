@@ -1,0 +1,47 @@
+Purchase symbiote category class name:<br />
+<%= @purchase.symbiote.item.category.category_class.name %><br />
+<br />
+<%= link_to_unless_current "See all categories in this class", :controller => 'opposites', :action => 'all_categories_in_this_class' %>
+<br />
+Purchase symbiote category prefix:<br />
+<%= @purchase.symbiote.item.category.prefix %><br />
+<br />
+ Purchase symbiote opposite category ids<br />
+ <%= @purchase_symbiote_item_category_category_class.opposite_category_ids  %><br />
+<h1>Listing First Item from each category in the same Category Class as the current Symbiote.</h1>
+<table>
+  <tr>	
+    <th>Image</th>
+    <th>Prefix</th>
+    <th>Category class Name</th>
+    <th>Category Code</th>
+    <th>Category Name</th>
+    <th>Category Id</th>
+  </tr>
+
+<% for category in @categories %>
+<% first_item = category.items.first %>
+<% if first_item != nil %>
+
+
+<% if category.category_class.item_type == 'master' %>
+	<% department = first_item.masters_department_decides_default_department_id %>
+<% else %>
+	<% department = first_item.design_decides_opposites_department %>
+<% end %>
+
+  <tr>
+	<td> <%= image_tag( first_item.image_url( department  ,'item_thumbnails/','x') ,:size => "30x30")    %> </td>	
+    <td><%=h category.prefix %></td>
+    <td><%=h category.category_class.name if category.category_class %></td>
+    <td><%=h category.Code %></td>
+    <td><%=h category.Name %></td>
+    <td><%=h category.id %></td>
+    <td><%= link_to "List all items in this category", :controller => 'opposites', :action => 'list_all_items_in_this_category',:id => category.id  %></td>
+  </tr>
+<% end %>
+<% end %>
+</table>
+
+<br />
+

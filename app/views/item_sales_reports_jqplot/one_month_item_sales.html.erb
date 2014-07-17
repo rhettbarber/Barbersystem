@@ -1,0 +1,51 @@
+<h1>MonthlyItemSalesReport</h1>
+
+<%= stylesheet_link_tag 'jqplot/main'  %>
+<%= javascript_include_tag 'jqplot/jquery-1.4.2.min.js'  %>
+<%= javascript_include_tag 'jqplot/jquery.jqplot.js'  %>
+<%= javascript_include_tag 'jqplot/plugins/jqplot.canvasTextRenderer.min.js'  %>
+<%= javascript_include_tag 'jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js'  %>
+<%= javascript_include_tag 'jqplot/plugins/jqplot.dateAxisRenderer.min.js'  %>
+<%= javascript_include_tag 'jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js'  %>
+<%= javascript_include_tag 'jqplot/plugins/jqplot.categoryAxisRenderer.min.js'  %>
+<%= javascript_include_tag 'jqplot/plugins/jqplot.highlighter.js'  %>
+<%= javascript_include_tag 'jqplot/plugins/jqplot.cursor.min.js'  %>
+
+
+
+<div  id="chart3" class="jqPlot jqplot-target" style="height: 320px; width: 480px; position: relative;">
+
+</div>
+
+<script type="text/javascript">
+line1=[[ 4 , '11001' ], [ 32 , '11002' ], [ 22, '11003' ], [ 3 ,  '11004' ], [11 , '11005'], [ 17, '11006' ], [ 15 , '11007' ]];
+plot3 = $.jqplot('chart3', [line1], {
+    title:'Customized Category X Axis by Series Data Specificaiton',
+    axes:{
+         xaxis:{ },
+         yaxis:{
+           renderer:$.jqplot.CategoryAxisRenderer, rendererOptions:{sortMergedLabels:true}
+         }
+    },
+      series:[{lineWidth:4, markerOptions:{style:'square'}}],
+        highlighter: {
+          show: true,
+//          tooltipFormatString: '%.5P'
+//          tooltipAxes:'x'
+//           yvalues: 3,
+//            formatString:'<table class="jqplot-highlighter"> <tr><td>one:</td><td>%s</td></tr><tr><td>two:</td><td>%s</td></tr><tr><td>three:</td><td>%s</td></tr></table>'
+        },
+        cursor: {show:false}
+});
+</script>
+
+
+
+
+<% @this_year  = ItemClassSalesByYearAndMonth.find(:all, :conditions => ['sale_time_year = ? and sale_time_month = ?', 2010, 9  ] ) %>
+<% @this_year.sort_by{|a| a.sum_of_quantity}.reverse.each do |sale_data| %>
+  <%= sale_data.ItemLookupCode %>..<%= sale_data.sale_time_month %>.. <%= sale_data.sum_of_quantity %><br />
+
+<% end  %>
+
+

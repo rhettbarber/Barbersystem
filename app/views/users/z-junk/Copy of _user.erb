@@ -1,0 +1,60 @@
+  <tr>
+   
+    <td><%=h user.email %></td>
+
+    <td> 
+    <% if user.customer %>
+    	<%= user.customer.AccountNumber %>
+    <% else %>
+    	-
+    <% end %>
+	 </td>
+
+    <td> 
+    <% if user.customer %>
+    	<%= user.customer.Company %>
+    <% else %>
+    	-
+    <% end %>
+	 </td>
+
+	 
+    <td> 
+    <% if user.customer %>
+    	<%= user.customer.FirstName %>
+    <% else %>
+    	-
+    <% end %>
+	 </td>
+
+    <td> 
+    <% if user.customer %>
+    	<%= user.customer.LastName %>
+    <% else %>
+    	-
+    <% end %>
+	 </td>
+	 
+    <td> 
+    <% if user.customer %>
+    	<%= user.customer.customer_type %>
+    <% else %>
+    	-
+    <% end %>
+	 </td>
+ 
+    <td> 
+    <% if user.customer %>
+    	<%= link_to_function "Load Customer", "SetSpecificCustomer('#{user.customer.id}')" %>
+    <% else %>
+    	<%= link_to 'Create Customer', edit_user_path(user) %>
+    <% end %>
+	 </td>
+
+
+    <td><%= link_to 'Show', user %></td>
+    <td><%= link_to 'Edit', edit_user_path(user) %></td>
+    <td><%= link_to 'Destroy', user, :confirm => 'This will delete the user,customer and all ship to addresses, Are you sure?', :method => :delete if admin? %></td>
+
+
+  </tr>

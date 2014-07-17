@@ -1,0 +1,26 @@
+<!-- Begin Category Browser Index -->
+<% content_for :head_additions do -%>
+<!-- Begin Category Browser Index Head Additions -->
+<%= stylesheet_link_tag 'browse.css' %>
+<%= javascript_include_tag 'browse.js' %>
+<%= stylesheet_link_tag 'protoFlow.css' %>
+<%= javascript_include_tag 'protoFlow.js' %>
+<!-- End Category Browser Index Head Additions -->
+<% end  -%>
+
+
+<h1>Category Browser index</h1>
+
+<%= link_to 'Department Browser' , '/department_browser'  %><br/>
+
+<!-- Begin ProtoFlow -->
+<div class="categories_container">
+<%= @categories.each do |cat| %>
+      <% cat.items.each do |the_item| %>
+             <%= render :partial =>  'item_browser/item' ,:locals => {:item => the_item } %>
+      <% end  %>
+<% end  %>
+</div>
+<!-- Begin ProtoFlow -->
+
+<!-- End Category Browser Index -->

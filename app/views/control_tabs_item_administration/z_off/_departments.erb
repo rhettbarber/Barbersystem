@@ -1,0 +1,46 @@
+
+
+<div id="department_side" style="padding-left:15px;float:left;width:200px;height:500px;">
+	Departments:<br />
+		<div id="department_list" style="font-size:11px;font-family:Arial,Helvetica;overflow:scroll;float:left;width:200px;height:500px;border:1px black solid;">
+					<table style="font-size:10px;">
+						<th> Code </th><th> Name</th>
+						<% @departments.each do |department| %>
+								<tr><td><%= department.code %></td>
+								
+								<td id="department_<%= department.id %>"> 
+								
+							
+	       
+	       
+								         <%=  link_to_function(department.Name, nil, :id => "more_link") do |page|
+								         																																		page.show 'department_buttons'
+								         																																		page.hide 'category_buttons'
+								         																																		page.hide 'category_properties'
+								         																																		page.hide 'hide_category'
+								         																																		page.show 'department_properties'
+								         																																		page.replace_html 'department_properties', "#{ link_to 'Dept Properties', :controller => 'categories', :action => 'department_properties', :department_id => department.id }<br /><br />"
+								    																																				page.show 'department_categories_' + department.id.to_s
+								    																																				@departments.each do |department_page|
+								    																																										page.hide 'department_categories_' + department_page.id.to_s if department_page.id != department.id
+								    																																										#page.replace_html 'test_area', department_page.id.to_s 
+								    																																				end
+								 						 end  %>
+	 
+	
+	       
+	       
+	       
+	       
+				       </td>
+				       </tr>
+						<% end %>
+					</table>
+		</div>
+	<div id="department_buttons" style="float:right;">
+		<% link_to 'New', :controller => 'categories', :action => 'new_department' %>
+	</div>
+</div>
+
+
+<div id="new_category_link"> </div>

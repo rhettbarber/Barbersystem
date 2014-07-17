@@ -1,0 +1,21 @@
+<h1>Listing advanced_combinations</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @advanced_combinations.each do |advanced_combination| %>
+  <tr>
+    <td><%= link_to 'Show', advanced_combination %></td>
+    <td><%= link_to 'Edit', edit_advanced_combination_path(advanced_combination) %></td>
+    <td><%= link_to 'Destroy', advanced_combination, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Advanced combination', new_advanced_combination_path %>

@@ -1,0 +1,59 @@
+<div data-role="collapsible" data-theme="b" data-content-theme="b">
+  <h2>Instance Variables</h2>
+
+
+
+    <div id="instance_variable_container" style="">
+                  <ul data-role="listview"  id="instance_variables">
+                              <% count = 0 %>
+                              <% instance_variables.sort.each do |iv| %>
+                                          <% count += 1 %>
+                                          <li><%= iv %>..:
+                                            <% @the_variable =  instance_variable_get(iv)  %>
+                                            <%= @the_variable.class  %> <br>
+                                            <%= @the_variable.inspect  %>
+                                          </li>
+                              <% end  %>
+                  </ul>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+   <% if @oldd %>
+<div id="instance_variable_container" style="">
+      <% count = 0 %>
+      <% instance_variables.sort.each do |iv| %>
+            <% count += 1 %>
+            <div class="instance_variable">
+                  <span style="color:red"><%= iv %>: </span>
+                  <% @the_variable =  instance_variable_get(iv)  %>
+                  <%= @the_variable.class  %> -
+                  <%  show_expander = false  %>
+                   <div id="instance_variable_inspect_container" class="instance_variable_inspect_container"  style="" title="<%= count %>">
+                                <% if Array( @the_variable).size > 0  %>
+                                           <%=   show_expander = true  %>
+                                <% end  %>
+                                <%= @the_variable.inspect  if show_expander == true %>
+                  </div>
+                  <% if show_expander == true %>
+                             <img src="/images/buttons/expand.png" id="toggle_instance_variable_inspect" class="toggle_instance_variable_inspect" alt="<%= count %>" class="toggle_instance_variable_inspect"/>
+                   <% end  %>
+            </div>
+      <% end  %>
+</div>
+<img src="/images/buttons/instance-variables.png" id="toggle_instance_variables" class="toggle_instance_variables" />
+
+<% end %>

@@ -1,0 +1,58 @@
+<% item = @item %>
+<%  @category = item.category %>
+
+
+			<table border="1" width="280">
+				<tr>
+					<td><strong>ITEM CATEGORY TABLE</strong></td>
+				</tr>	
+				<tr>
+					<td>item.category.id:<%=  item.category.id   %></td>
+				</tr>
+				<tr>
+					<td width="280">department:<%=  item.department.Name   %></td>
+				</tr>
+				<tr>
+					<td width="280">item.ItemLookupCode:<%=  item.ItemLookupCode   %></td>
+				</tr>	
+				<tr>
+					<td width="280">item.Description:<%=  item.Description   %></td>
+				</tr>
+<%=  form_for @category  do |f|  %>
+				<%= hidden_field_tag "id", item.category.id %>
+				<tr>
+					<td><%= f.text_field( :Name ,:size => 31 ) %>--category name</td>
+				</tr>
+				<tr>
+					<td><%= f.text_field( :breast_print ,:size => 1 ) %>--breast_print</td>
+				</tr>
+				<tr>
+					<td><%= f.text_field( :category_specific_breast_print ,:size => 1 ) %>--category_specific_breast_print</td>
+				</tr>
+				<tr>
+					<td><%= f.text_field( :prefix ,:size => 2 ) %>--prefix</td>
+				</tr>
+				<tr>
+					<td><%=   select("category", "category_class_id", CategoryClass.find(:all,:order => "name ASC").collect {|p| [ p.name, p.id ] } ,{:selected =>  item.category.category_class_id  } ) %>--category_class</td>
+				</tr>
+				<tr>
+					<td><%= f.text_field( :use_generic_department ,:size => 1 ) %>--use_generic_department</td>
+				</tr>
+				<tr>
+					<td><%= f.text_field( :web_category ,:size => 1 ) %>--web_category</td>
+				</tr>
+				<tr>
+					<td><%= f.text_field( :additive_category_ids ,:size => 20 ) %>--additive_category_ids</td>
+				</tr>
+				<tr>
+					<td><%= f.text_field( :use_picturename ,:size => 1 ) %>--use_picturename</td>
+				</tr>
+				<tr>
+					<td><%= submit_tag('Update Category') %></td>
+				</tr>
+<%  end  %> 			
+			</table>
+			
+			
+			
+	

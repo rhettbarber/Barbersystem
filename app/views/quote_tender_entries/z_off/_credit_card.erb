@@ -1,0 +1,61 @@
+
+<%= render :partial => 'quote_tender_entries/edit' , :locals => {:quote_tender_entry => quote_tender_entry } %>
+
+
+<span class="hlt">We accept Visa, MasterCard, Discover and American Express</span><br />
+
+<span class="hlt">For security reasons, no credit information is recalled on this website.</span><br />
+
+<%= render :partial => "shared/flash" %><br />
+
+<%= error_messages_for :quote_tender_entry %>
+
+<%= form_for(:quote_tender_entry  , :remote => true, :url => {:controller => 'quote_tender_entries', :action => 'credit_card'} ) do |f| %>
+ 
+	<%= hidden_field "quote_tender_entry", "tender_id", :value => 2 %>
+
+<%= render :partial => 'categories/edit' , :locals => {:category => category } %>
+
+	<p>
+	<table>
+			<tr>
+			<td>
+				   <b>Expiration</b>
+		   	</td>
+		  	</tr>
+		<tr>
+		<td>
+				   <b>Month</b>
+				    <select name="CreditCardExpirationMonth">
+				 		<%=  options_for_select(QuoteTenderEntry.months , @selected_month   )  %>
+				   </select>
+				   	
+				 	<b>Year</b>
+				    <select name="CreditCardExpirationYear">
+				 		<%=  options_for_select(QuoteTenderEntry.years , @selected_year  )  %>
+				   </select>
+		   	</td>
+		  	</tr>
+		</table>
+  </p>  
+
+
+
+
+  <p>
+    <b>Credit Card Number</b><br />
+    <%= f.text_field :CreditCardNumber %>
+  </p>
+
+  <p>
+    <b>Credit Card Approval Code</b><br />
+    <%= f.text_field :CreditCardApprovalCode %>What's this?:<%= link_to image_tag("/images/buttons/question-mark-orange-tiny.jpg",:border => 0),{:controller => 'cart', :action => 'show_cc_code_info'} , :popup => ['new_window_name', 'height=400,width=800']    %>
+  </p>
+
+  <p>
+					<div align="center"><%=  image_submit_tag( '/images/buttons/continue_button_gold.gif',:border => 0)  %></div>
+  </p>
+<% end %>
+
+
+<%= render :partial => 'categories/edit' , :locals => {:category => category } %>

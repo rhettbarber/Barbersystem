@@ -1,0 +1,24 @@
+<div style="font-size:20px;"> Items listing for printout and PDF.</div>
+
+
+	<%=  link_to "List Items for Keywording", :controller => 'item_reports', :action => 'items_keyworder'  %>
+	<br />
+	<br />
+	<%=  link_to "List Designs Numerically for Extended Description", :controller => 'item_reports', :action => 'designs_numerically',:type => 'thumbnail',:edit_descriptions => true %>
+	<br />
+	<br />
+	<%=  link_to "List Design Thumbnails Numerically", :controller => 'item_reports', :action => 'designs_numerically',:type => 'thumbnail' %>
+	<br />
+	<br />
+	<%=  link_to "List Design Specsheets Numerically", :controller => 'item_reports', :action => 'designs_numerically', :type => 'specsheet' %>
+	<br />
+	<br />
+	<%=  link_to "List Designs by Department/Category/Numerically", :controller => 'item_reports', :action => 'designs_by_department' %>
+	<br />
+	<br />
+	<%=  link_to "List Designs by Department/Category/Numerically excluding Not for ReOrder", :controller => 'item_reports', :action => 'designs_by_department' , :not_for_reorder => true    %>
+	<br />
+	<br />
+
+
+<br />

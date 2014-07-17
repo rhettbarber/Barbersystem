@@ -1,0 +1,30 @@
+
+<table class="franchise_order_category_table">
+
+<%  department.categories.each do |the_category| %>
+  <% if  the_category.items_with_yearly_sales.sales_in_year(@chosen_year ).first  %>
+<tr>
+      <td class="category_thumb"><%= image_tag(  the_category.items_with_yearly_sales.sales_in_year( @chosen_year ).first.available_image_name ) %><br/>
+      <%=   the_category.Name %><br/>
+      <span style="color:red;">Category Avg Qty:</span>
+       <%=   the_category.category_average_item_quantity_sold_by_year.average_in_year(@chosen_year).first.category_average_sum_of_quantity if the_category.category_average_item_quantity_sold_by_year.average_in_year(@chosen_year).first %>
+      </td>
+      <td class="category_contents">
+              <%= render :partial => "franchise_order_generator/item_table", :locals => { :category => the_category } %>
+      </td>
+</tr>
+<% else %>
+<tr>
+      <td><%= the_category.Name %> had no sales in <%= @chosen_year  %>    </td>
+</tr>
+<% end %>
+
+
+
+
+
+<% end  %>
+</table>
+
+
+

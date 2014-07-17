@@ -1,0 +1,134 @@
+<% logger.debug "not @item and @design... not at wide specsheet" %>
+
+
+
+
+   <style type="text/css">
+
+   .model {
+       width: 300px;
+       overflow: hidden;
+   }
+
+ .garment_front {
+     width: 300px;
+     overflow: hidden;
+     background-color: lightyellow;
+ }
+
+   .garment_front img {
+       float: right;
+       left:40px;
+   }
+
+
+ .garment_rear {
+     width: 300px;
+     overflow: hidden;
+     background-color: lightyellow;
+ }
+
+ .garment_rear img {
+     float: right;
+ }
+
+
+
+   </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="model">
+                                                  <span id='specsheet_image'>
+                                                             <%=  image_tag @item.image_url( @department  , 'item_specsheets/', @design,'0' )  %>
+                                                  </span>
+</div>
+
+<div class="garment_front">
+
+
+                                                          <span id='specsheet_image'>
+                                                                     <%=  image_tag @item.image_url( @department  , 'item_specsheets/', @design,'0' )  %>
+                                                          </span>
+
+
+</div>
+
+
+<div class="garment_rear">
+
+
+                                                          <span id='specsheet_image'>
+                                                                     <%=  image_tag @item.image_url( @department  , 'item_specsheets/', @design,'0' )  %>
+                                                          </span>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @beefforw %>
+
+    <% logger.debug "not @item and @design... not at wide specsheet" %>
+    <div align="center">
+                                                  <span id='specsheet_image'>
+                                                             <%=  image_tag @item.image_url( @department  , 'item_specsheets/', @design,'0' )  %>
+                                                  </span>
+    </div>
+
+<% end %>

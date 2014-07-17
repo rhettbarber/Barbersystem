@@ -1,0 +1,8 @@
+RUBY_VERSION: <%= RUBY_VERSION %><br>
+RUBY_PATCHLEVEL: <%= RUBY_PATCHLEVEL %><br>
+RUBY_PLATFORM: <%= RUBY_PLATFORM %><br>
+RUBY_RELEASE_DATE: <%= RUBY_RELEASE_DATE %><br>
+GEMS:<br>
+<% @gems.sort.each do |gem| %>
+<%= gem  %><br>
+<% end %>

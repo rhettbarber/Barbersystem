@@ -1,0 +1,12 @@
+<%  if @design_departments.intersection(@departments)  %>
+    <% if @design_departments.intersection(@departments).size > 0 %>
+    <div class='menu_design'>
+          <ul>
+          <li>DESIGNS:</li>
+                <%  @design_departments.each do |department|   %>
+                                                <%=   render(:partial => "shared_department/department_li", :locals => {:department => department }  )  unless department.item_department   %>
+                 <% end %>
+          </ul>
+    </div>
+    <% end  %>
+<% end %>

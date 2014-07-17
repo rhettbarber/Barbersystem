@@ -1,0 +1,33 @@
+<% @purchase_shipping_service_price = @purchase.ship_to.shipping_service_price(service.web_carrier_name, service.web_name) %>
+
+<tr>
+          <td valign="top">
+                 <% if  @purchase_shipping_service_price.class  == String %>
+                 	
+                 <% else %>	
+                 	
+                 	<%=  radio_button( 'purchase',  'shipping_service_id' ,  service.id   )     %>
+                  	<%= hidden_field_tag('service_type', service.Name )  %>
+                 <% end %> 
+          </td>
+          <td>
+          	<% if service.web_carrier_name == 'ups' %>
+          		<%= image_tag '/images/company_logos/ups_logo_small.jpg',:size => "20x20"  %>
+          	<% elsif service.web_carrier_name == 'usps' %>
+          		<%= image_tag '/images/company_logos/usps_logo_small.jpg',:size => "20x20"  %>
+          	<% end %>
+          </td>
+          <td width="100%" valign="top"> 
+                        <%= service.Name%><br/>
+ <br/>
+            </td>
+  <td valign="top" align="right">
+      <% service_price =  @purchase_shipping_service_price   %>
+      <% if service_price.class == String %>
+      	<%= service_price  %>
+      <% else %>
+      	<% service_price = service_price.to_f %>
+      	$<%= sprintf("%.2f", service_price)  %>
+      <% end %>
+   </td>
+</tr>

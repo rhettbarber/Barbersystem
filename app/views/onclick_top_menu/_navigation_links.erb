@@ -1,0 +1,11 @@
+<div class='onclick_menu shopping_options'>
+						<div class='onclick_menu_links'>
+									<% for page in visible_root_pages -%>
+										<% if @customer_array_viewable_page_types.include?( page.page_type_id ) %>
+											<li><%=  link_to page.name.camelize   , :controller => "page", :action => "show", :id => page.slug  %> </li>
+										<% end %>
+									<% end -%>
+						 </div>
+  
+                                                <div class="onclick_menu_label"> <%= link_to image_tag('/images/menu_icons_and_labels/navigation-links.png',:width => '400'  , :class => 'no_border'), :controller => 'order_tracking' %></div>
+</div>

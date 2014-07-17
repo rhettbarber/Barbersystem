@@ -1,0 +1,164 @@
+<h4>New User & Customer-Confirm person has Email Address before filling this out, if they do not, go to "Set Customer"</h4>
+
+
+<%= form_tag :action => 'create' do %>
+
+<div style="border:solid black 1px;width:220px;height:375px;float:left;padding:5px;margin:5px;">   
+
+  <p>
+    <b>Email</b><br />
+    <%= text_field :user, :email %>
+  </p>
+
+			 <p>
+			    <b>Company-(optional)</b><br />
+			    <% if  params[:customer] %>
+			    	<%= text_field :customer, :Company, :value => params[:customer][:Company] || '' %>
+			    <% else %>	
+			    	<%= text_field :customer, :Company %>
+			    <% end %>	
+			  </p>
+			
+			  <p>
+			    <b>Firstname</b><br />
+			     <% if  params[:customer] %>
+			    		<%= text_field :customer, :FirstName, :value => params[:customer][:FirstName] || '' %>
+			    <% else %>
+			    		<%= text_field :customer, :FirstName %>
+			    	<% end %>
+			  </p>
+			
+			  <p>
+			    <b>Lastname</b><br />
+			    <% if  params[:customer] %>
+			    			<%= text_field :customer, :LastName, :value => params[:customer][:LastName] || '' %>
+			     <% else %>	
+			     			<%= text_field :customer, :LastName %>
+			     <% end %>
+			  </p>
+			
+			
+			  <p>
+			    <b>Address</b><br />
+			    <% if  params[:customer] %>
+			    			<%= text_field :customer, :Address, :value => params[:customer][:Address] || '' %>
+			     <% else %>
+			     		<%= text_field :customer, :Address %>	
+			     <% end %>
+			  </p>
+			
+
+			  <p>
+			    <b>Address2 (optional)</b><br />
+			    <% if  params[:customer] %>
+			    			<%= text_field :customer, :Address2, :value => params[:customer][:Address2] || '' %>
+			     <% else %>	
+			     			<%= text_field :customer, :Address2 %>
+			     <% end %>
+			  </p>
+
+</div>
+<div style="border:solid black 1px;width:220px;height:375px;float:left;padding:5px;margin:5px;">  
+			
+			  <p>
+			    <b>City</b><br />
+			    <% if  params[:customer] %>
+			    			<%= text_field :customer, :City , :value => params[:customer][:City] || '' %>
+			     <% else %>	
+			     			<%= text_field :customer, :City  %>
+			     <% end %>
+			  </p>
+
+			  <p>
+			    <b>State</b><br />
+			    <% if  params[:customer] %>
+			    			<%= text_field :customer, :State, :value => params[:customer][:State] || '' %>
+			     <% else %>	
+			     		<%= text_field :customer, :State %>
+			     <% end %>
+			  </p>
+
+			  <p>
+			    <b>Zip</b><br />
+			    <% if  params[:customer] %>
+			    		<%= text_field :customer, :Zip, :value => params[:customer][:Zip] || '' %>
+			     <% else %>	
+			     		<%= text_field :customer, :Zip %>
+			     <% end %>
+			  </p>
+			  
+   <%= hidden_field_tag("Country", "United States" )  %>
+			
+			 <p>
+			    <b>Taxnumber-(optional)</b><br />
+			    <% if  params[:customer] %>
+			    		<%= text_field :customer, :TaxNumber, :value => params[:customer][:TaxNumber] || '' %>
+			    <% else %>	
+			    		<%= text_field :customer, :TaxNumber %>
+			     <% end %>
+			  </p>
+			
+			
+		  
+
+</div>
+<div style="border:solid black 1px;width:220px;height:375px;float:left;padding:5px;margin:5px;">  			
+
+			  <p>
+			    <b>Faxnumber (optional)</b><br />
+			    <% if  params[:customer] %>
+			    <%= text_field :customer, :FaxNumber, :value => params[:customer][:FaxNumber] || '' %>
+			    <% else %>
+			    <%= text_field :customer, :FaxNumber %>	
+			     <% end %>
+			  </p>
+
+			  <p>
+			    <b>Phonenumber</b><br />
+			    <% if  params[:customer] %>
+			    			<%= text_field :customer, :PhoneNumber, :value => params[:customer][:PhoneNumber] || '' %>
+			     <% else %>	
+			     			<%= text_field :customer, :PhoneNumber %>
+			     <% end %>
+			  </p>
+
+	 
+	 	  <b>PriceLevel</b><br />
+	    <select name="customer[PriceLevel]">
+	    
+	 		<%=  options_for_select([ ["Retail", "0"], ["Preprint", "1"], ["Blank/Transfer", "2"], ["Franchise", "3"] ], @selected_customer.PriceLevel.to_s   )  %>
+	 		
+	   </select>
+	   
+	   
+	   
+	  <p>
+	    <b>Current Discount Percentage</b><br />
+	    <% if  params[:customer] %>
+	    		<%= text_field  :customer,  :CurrentDiscount, :value => params[:customer][:CurrentDiscount] || '' %>
+			<% else %>	
+					<%= text_field  :customer,  :CurrentDiscount %>
+			<% end %>
+	  </p>
+	  
+	  <p>
+	    <b>Membership</b><br />
+	    <% if  params[:customer] %>
+	    			<%= text_field  :customer,  :CustomText4, :value => params[:customer][:CustomText4] || '' %>
+			<% else %>	
+			     <%= text_field  :customer,  :CustomText4 %>
+			<% end %>
+	  </p>
+
+			  <p>
+			    <b>Use Same address for shipping</b><br />
+			     <%= check_box_tag "use_billing_for_shipping", value = "1", checked = true  %>
+			  </p>
+
+  <p>
+    <%= submit_tag "Create" %>
+  </p>
+<% end %>
+</div>
+
+<%= link_to 'Back', users_path if admin? %>

@@ -1,0 +1,23 @@
+<% logger.debug "-------------------------------------start category_box" %>
+
+<div class="category_box">				
+           <li>
+                <%=    link_to(  item.category.Name.camelize,  :controller => "browse", :action => 'index', :department_id =>  department.id  ,  :category_id => category.id  )  %> <br/>
+                <span class="category_box_more" style="color:red;">
+                             <%=    link_to(  "Click for More",  :controller => "browse", :action => 'index' , :department_id =>  department.id  ,  :category_id => category.id  )  %>
+                 </span>
+                  <% if admin? and @on_the_spot_editor %>
+                            <br /> <%= render :partial => 'categories/edit' , :locals => {:category => category }  %>
+                  <% end  %>
+           </li>
+           <% logger.debug "---------------item.category----------------------#{item.category}" %>
+            <% logger.debug "-----------------item.category.category_class.item_type--------------------#{item.category.category_class.item_type}"  %>
+
+           <% if  item.category.category_class.item_type == 'designer' %>
+                       <%= link_to( image_tag(  '/images/item_thumbnails/' + item.item_class.ItemLookupCode + '.png'   ) ,  :controller => "browse", :action => 'index' , :department_id =>  department.id  ,  :category_id => category.id  )  %>
+          <% else  %>
+                      <%= link_to( image_tag( item.image_url( department, '/images/item_thumbnails/','x' )  , :class => 'category_box_thumbnail'  )  ,  :controller => "browse", :action => 'index' , :department_id =>  department.id  ,  :category_id => category.id  )  %>
+           <% end  %>
+</div>
+
+<% logger.debug "------------------------------------- end category_box" %>

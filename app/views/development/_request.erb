@@ -1,0 +1,49 @@
+<% unless  ["production"].include?(ENV["RAILS_ENV"]) %>
+
+<style type="text/css">
+  .toggle_request_inspect {
+    width:15px;
+    height:15px;
+}
+
+
+.toggle_requests  {
+    position: absolute;
+    bottom: 0;
+    width:25px;
+    height:25px;
+     left:70px;
+}
+
+
+#request_container {
+      overflow:scroll;
+    width:1500px;
+    position: absolute;
+    bottom: 0;
+    border:1px black dotted;
+    background-color:white;
+    opacity: .9
+}
+.request {
+    border-bottom:2px black dotted;
+    display: table-cell;
+}
+
+</style>
+
+
+
+
+<div id="request_container" style="display:none;">
+      <% count = 0 %>
+      <% request.inspect.split(',').sort.each do |iv| %>
+            <% count += 1 %>
+            <div class="request">
+                  <span style="color:red"><%= iv %>: </span><br />
+            </div>
+      <% end  %>
+</div>
+<img src="/images/buttons/request.png" id="toggle_requests" class="toggle_requests" alt="toggle_requests" />
+
+<% end %>

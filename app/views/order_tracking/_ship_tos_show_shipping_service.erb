@@ -1,0 +1,29 @@
+
+<div class="shipping_service_review">
+
+				<p>
+				<% if @viewable_purchase.shipping_service.web_carrier_name == 'ups' %>
+	          		<%= image_tag '/images/company_logos/ups_logo_small.jpg',:size => "30x30"  %>
+	          	<% elsif @viewable_purchase.shipping_service.web_carrier_name == 'usps' %>
+	          		<%= image_tag '/images/company_logos/usps_logo_small.jpg',:size => "30x30"  %>
+	          	<% end %>
+          		<br />
+				</p>
+
+				<p>
+				  <b>Shipping Service:</b>  
+				   <%= @viewable_purchase.shipping_service.Name%><br />
+				</p>
+	   
+				<p>
+				  <b>Shipping Cost:</b>
+					<%=  @viewable_purchase_shipping  %>
+				</p>
+                                <% if @viewable_purchase.tracking_number  %>
+                                      Order Tracking:
+                                      <%= @viewable_purchase.tracking_number  %> <br />
+                                      <%= link_to "Track Order",  'http://wwwapps.ups.com/WebTracking/processInputRequest?TypeOfInquiryNumber=T&InquiryNumber1='  +  @viewable_purchase.tracking_number  %>
+                                <% end  %>
+</div>
+
+

@@ -1,0 +1,19 @@
+<h1>New cloneship</h1>
+
+<%= form_for(@cloneship) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :item_id %><br />
+    <%= f.text_field :item_id %>
+  </p>
+  <p>
+    <%= f.label :clone_id %><br />
+    <%= f.text_field :clone_id %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', cloneships_path %>

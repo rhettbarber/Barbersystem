@@ -1,0 +1,41 @@
+
+
+<ul data-role="listview">
+  <% if controller_name   == "customers"  %>
+                <li data-theme="b"> <a href="#">1. Billing Address</a> </li>
+  <% else %>
+                 <li><a href="/customers/show">1. Billing Address</a>  </li>
+  <% end %>
+
+
+
+  <% if request.path  == '/ship_tos' %>
+                <li data-theme="b"> <a href="#">2. Shipping Address</a>  </li>
+   <% else %>
+                <li><a href="/ship_tos">2. Shipping Address</a>  </li>
+   <% end %>
+
+
+
+  <% if request.path  == '/ship_tos/shipping_services' %>
+                    <li data-theme="b"><a href="#" class="list-group-item">3. Shipping Method</a>  </li>
+  <% else %>
+                    <li> <a href="/ship_tos/shipping_services">3. Shipping Method</a> </li>
+  <% end %>
+
+
+
+  <% if controller_name == "quote_tender_entries" %>
+                        <li data-theme="b"><a href="#"> 4. Payment Type </a>  </li>
+   <% else %>
+                         <li><a href="/quote_tender_entries"> 4. Payment Type </a>  </li>
+   <% end %>
+
+
+          <li>
+          <a href="#">5. Checkout Review</a>
+          </li>
+</ul>
+
+
+

@@ -1,0 +1,22 @@
+<p>
+  <b>Name:</b>
+  <%=h @clone_item_type.name %>
+</p>
+
+<p>
+  <b>Original item:</b>
+  <%=h @clone_item_type.original_item_id %>
+</p>
+<p>
+  <b>Production Extension:</b>
+  <%=h @clone_item_type.production_extension %>
+</p>
+
+<p>
+  <b>Core Number:</b>
+  <%=h @clone_item_type.core_number %>
+</p>
+
+
+<%= link_to 'Edit', edit_clone_item_type_path(@clone_item_type) %> |
+<%= link_to 'Back', clone_item_types_path %>

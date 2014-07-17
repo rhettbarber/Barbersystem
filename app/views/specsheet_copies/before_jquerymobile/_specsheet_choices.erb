@@ -1,0 +1,66 @@
+<script type="text/javascript">
+
+
+    jQuery(document).ready(function() {
+        jQuery("#item_class_component_item_id").change(function(){
+            //alert(this.id);
+            change_specsheet();
+        });
+    });
+
+
+  function change_specsheet() {
+                    jQuery.ajax({
+                        type: "GET",
+                        url: "/specsheet/update_specsheet",
+                        data: { item_id:  jQuery('#item_class_component_item_id').val()  , design_id:  '<%= @design.id if @design  %>' , department_id:  jQuery('#department_id').val() , purchases_entry_id:  jQuery('#purchases_entry_id').val()  }
+                    });
+  }
+</script>
+
+
+
+
+
+
+
+<% @department_id = @department.id if @department %>
+
+<table class="specsheet_choices" >
+  <tr>
+                <td>
+                        <%= button_to "Back one page" , :back  %>
+                </td>
+  		<td>
+				<%=  form_tag( '/add_to_cart' , :method => :put )  do %>
+					<%=  select("item_class_component", "item_id", @item_class_components.collect {|p| [ p.dimensions , p.item_id ] } ,{:selected =>  @selected_item_id  } )      if  @required_form_elements.include?('icc_collection_select' )   %>
+					<%#=  observe_field :item_class_component_item_id, :frequency => 2, :update => 'specsheet',  :url => {:controller => "specsheet", :action => 'update_specsheet',:design_id => @design , :department_id => @department_id ,:purchases_entry_id => @purchases_entry } ,  :with => 'item_id'      if  @required_form_elements.include?('icc_collection_select' )        %>
+					<%=  hidden_field_tag "department_id", @department_id     if  @required_form_elements.include?('hidden_department_id_field' )  if @department   %>  
+					<%=  hidden_field_tag "item_id", @item.id     if  @required_form_elements.include?('hidden_item_id_field' )     %>
+                    <%#=  hidden_field_tag "design_id", @design.id     if  @design      %>
+                    <%=  hidden_field_tag "add_combo",'1'     if  @required_form_elements.include?('hidden_add_combo_field' )     %>
+					<%=  hidden_field_tag "design_id", @design.id     if  @required_form_elements.include?('hidden_design_id_field' )     %>
+                    <% if @incomplete_symbiont %>
+                            <%=  hidden_field_tag "purchases_entry_id", 'symbiote'   if  @required_form_elements.include?('hidden_purchases_entry_id_field' )      %>
+                    <% else %>
+					        <%=  hidden_field_tag "purchases_entry_id", @purchases_entry.id    if  @required_form_elements.include?('hidden_purchases_entry_id_field' )      %>
+                    <% end %>
+		
+					<%= submit_tag('Choose')   if  @required_form_elements.include?('button_choose')     %>			
+					<%= submit_tag('Choose this Item')   if  @required_form_elements.include?('button_choose_this_item')     %>
+					<%= submit_tag('Choose this Decoration')  if  @required_form_elements.include?('button_choose_this_design')  %>
+					<%= submit_tag('Submit')   if  @required_form_elements.include?('button_change_size_or_color')  %>
+	
+
+			<%  end  %>
+		</td>
+		<td>			
+					<%= link_to('Choose a different Decoration', "#designs_panel", :class => "ui-btn")  if  @required_form_elements.include?('button_choose_this_design')  %>
+		</td>
+</tr>
+</table>
+
+
+
+
+<% logger.debug "-----------------------------END specsheet_choices" %>

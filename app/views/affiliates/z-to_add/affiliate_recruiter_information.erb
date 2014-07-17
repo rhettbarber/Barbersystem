@@ -1,0 +1,19 @@
+
+<div align="center"><%= image_tag "/uploads/Image/shared_affiliate/affiliate_recruiter.jpg" %></div>
+
+
+<table>
+	<td>	<h3> Become a <%= @website.title %> Affiliate Recruiter Today! </h3>
+			Your job will be to actively seek websites to link to <%= @website.domain  %>. <br />
+			Once the website has been registered and verified as linking to our site, you will
+			get a percentage of every sale that is made which came in from a link on that site! You can register as many sites* **
+			as you wish, so the earning potential is limitless!
+			<br />
+			After a site has been recruited and the banner(s) or link(s) have been verified on the website, add it to your list of recruited websites and begin making your percentage!
+			<%= link_to "Register a website! " , recruited_websites_path %><br />
+			<br />
+			<br />
+			(*sites must meet some ethical criteria, <%= link_to "Click here to find out more",:controller => 'affiliates', :action => 'website_ethical_criteria'  %> )<br />
+	</td>
+</table>
+<br />

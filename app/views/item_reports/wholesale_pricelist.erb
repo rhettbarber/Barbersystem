@@ -1,0 +1,64 @@
+
+
+
+	
+			<%  conditions = ["departments.id = ?", 22  ] %>
+			
+			<% @all_departments = Department.find(:all, :conditions => conditions,  :include  => ["categories", "items" ]  ) %>
+			
+			
+			<table class="price_list">
+						<tbody>
+						
+			
+						<tr>
+							<th>show</th><th>ItemLookupCode</th><th>Description</th><th>Detail1</th><th>Detail2</th><th>Retail</th><th>Retail Margin</th><th>Preprint 1-5</th><th>Preprint 1-5 Margin</th<th>Preprint 6-11</th><th>Preprint 12+</th><th>Blank 1-5</th><th>Blank 1-5 Margin</th><th>Blank 6-11</th><th>Blank 12+</th><th>Franchise 1-5</th><th>Franchise 6-11</th><th>Franchise 12+</th><th>Cost</th><th>Sum</th>
+						</tr>
+			
+					
+					
+			<%   #@items_to_show = Caching::MemoryCache.instance.read 'items_to_show'  %>
+					
+			<% unless @items_to_show %> 
+						<% @items_to_show = Set.new %>
+						<% @all_departments.each do |department| %>
+										<% department.categories.each do |category|  %>
+															<% category.items.each do |it| %>
+																		
+																		<% begin %>
+																			<% @items_to_show << it  unless it.category.category_class.item_type == "slave"  %>
+																		<% rescue %>
+																				<% logger.warn ":: #{it} rescued from error" %>
+																		<% end %>	
+																	
+															<% end %>		
+										<% end %>
+						<% end %>	
+						<% @items_to_show = @items_to_show.sort_by{|a| a.ItemLookupCode}  %>			
+						<% @items_to_show = @items_to_show[0..25] if  @show_sample == true  %>		
+			<% end %>			
+						
+							
+			<% # Caching::MemoryCache.instance.write 'items_to_show', @items_to_show %>
+												
+												
+															
+			<% @items_to_show.each do |it| %>
+			
+			
+											<% if it.item_class_component %> 
+																			<%= render :partial => "item_reports/item_class_component_price" , :locals => {:it => it }  %>
+											<% else %>										
+																			<%= render :partial => "item_reports/category_item_price" , :locals => {:it => it }  %>
+											<% end %>
+
+			
+			
+			
+			<% end %>
+			
+							
+				
+						</tbody>
+			</table>
+

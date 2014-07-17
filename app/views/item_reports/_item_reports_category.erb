@@ -1,0 +1,16 @@
+
+<div class="items_category_container">
+	<div class="category_container_title">
+		<%= category.Name.humanize %>
+	</div>
+
+  <% if params[:not_for_reorder] == 'true' %>
+		<% items = Item.find(:all, :conditions => ["category_id = ? and DoNotOrder = ?", category.id , '0'      ],:order => "ItemLookupCode ASC" ) %>
+<% else  %>
+                <% items = Item.find(:all, :conditions => ["category_id = ?", category.id],:order => "ItemLookupCode ASC" ) %>
+  <% end  %>
+		<% items.each do |item| %>
+					<%= render(:partial => "item_reports/item_thumbnail_box" , :locals => {:item => item } ) %>
+		<% end %>
+		
+</div>

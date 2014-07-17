@@ -1,0 +1,77 @@
+<%= form_for(@purchase) do |f| %>
+  <% if @purchase.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@purchase.errors.count, "error") %> prohibited this purchase from being saved:</h2>
+
+      <ul>
+      <% @purchase.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Closed %><br />
+    <%= f.text_field :Closed %>
+  </div>
+  <div class="field">
+    <%= f.label :Comment %><br />
+    <%= f.text_area :Comment %>
+  </div>
+  <div class="field">
+    <%= f.label :customer_id %><br />
+    <%= f.text_field :customer_id %>
+  </div>
+  <div class="field">
+    <%= f.label :ship_to_id %><br />
+    <%= f.text_field :ship_to_id %>
+  </div>
+  <div class="field">
+    <%= f.label :DepositOverride %><br />
+    <%= f.text_field :DepositOverride %>
+  </div>
+  <div class="field">
+    <%= f.label :Deposit %><br />
+    <%= f.text_field :Deposit %>
+  </div>
+  <div class="field">
+    <%= f.label :Tax %><br />
+    <%= f.text_field :Tax %>
+  </div>
+  <div class="field">
+    <%= f.label :Total %><br />
+    <%= f.text_field :Total %>
+  </div>
+  <div class="field">
+    <%= f.label :sales_rep_id %><br />
+    <%= f.text_field :SalesRepID %>
+  </div>
+  <div class="field">
+    <%= f.label :ReferenceNumber %><br />
+    <%= f.text_area :ReferenceNumber %>
+  </div>
+  <div class="field">
+    <%= f.label :ShippingChargeOnOrder %><br />
+    <%= f.text_field :ShippingChargeOnOrder %>
+  </div>
+  <div class="field">
+    <%= f.label :ShippingChargeOverride %><br />
+    <%= f.text_field :ShippingChargeOverride %>
+  </div>
+  <div class="field">
+    <%= f.label :shipping_service_id %><br />
+    <%= f.text_field :shipping_service_id %>
+  </div>
+  <div class="field">
+    <%= f.label :ShippingTrackingNumber %><br />
+    <%= f.text_area :ShippingTrackingNumber %>
+  </div>
+  <div class="field">
+    <%= f.label :ShippingNotes %><br />
+    <%= f.text_area :ShippingNotes %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

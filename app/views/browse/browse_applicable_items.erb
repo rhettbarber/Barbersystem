@@ -1,0 +1,79 @@
+<% logger.debug "-------------------------------------begin _shared_item/browse_applicable_items " -%>
+<% logger.warn "@content_fragment_name: #{@content_fragment_name}" -%>
+
+
+
+
+
+
+
+
+<div class="item_list_thumbnails_container">
+                <% @items.each do |item| -%>
+                                        <%  if  @acceptable_item_ids.flatten.include?(item.id.to_i) or @acceptable_item_ids.flatten.include?(item.id.to_s) -%>
+                                                            <%= render(:partial => "shared_item/item_list_thumbnail",:locals => { :item => item } ) -%>
+                                       <% end -%>
+                <% end -%>
+</div>
+
+
+
+
+
+
+
+
+
+
+<% logger.debug "-------------------------------------end _shared_item/browse_applicable_items " -%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @old %>
+
+
+
+<% if @items -%>
+	<% cache (@content_fragment_name) do -%>
+					<div class="item_list_thumbnails_container">
+				            <% @items.each do |item| -%>
+					             		<%  if  @acceptable_item_ids.flatten.include?(item.id.to_i) or @acceptable_item_ids.flatten.include?(item.id.to_s) -%>
+												<%= render(:partial => "shared_item/item_list_thumbnail",:locals => { :item => item } ) -%>
+									   <% end -%>
+							<% end -%>
+					</div>
+	<% end -%>
+<% else -%>
+					<% if @items_content_fragment -%>
+							<%= @items_content_fragment  -%>
+					<% else -%>
+							No Items found. <br />
+					<% end -%>
+<% end -%>
+
+
+<% end %>

@@ -1,0 +1,45 @@
+
+<div style="display:table;width:850px;margin-left:auto;margin-right:auto;padding-bottom:30px;">
+
+
+
+
+
+
+<div style="float:left;width:100%;height:30px;background-color:darkblue;color:white;font-size:14px;font-family:Arial,Helvetica;">
+Department and Category List
+</div><br />
+
+
+<h3><%= link_to "Create a new Department", "/departments#new" %></h3>
+
+
+<div style="float:left;width:100%;height:20px;color:red;font-size:14px;font-family:Arial,Helvetica;">
+	<% if  flash[:notice] %>
+		<span style="font-size:14px;color:red;"><%= flash[:notice] %></span>
+	<% end %>
+</div>
+
+
+<%= render :partial => 'administration_category/departments' %>
+
+<%= render :partial => 'administration_category/categories' %>
+
+
+	<div id="choice_buttons" style="padding-left:15px;float:left;"><br />
+
+			<span id="category_name" style="display:none;"></span>
+
+			<span id="department_properties" style="display:none;"></span>
+
+			<span id="category_properties" style="display:none;"></span>
+
+			<span id="duplicate_category" style="display:none;"></span>
+			
+			<span id="unhide_category" style="display:none;"></span>
+			
+			<span id="hide_category" style="display:none;"></span>
+			
+
+	</div>
+</div>

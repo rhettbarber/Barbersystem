@@ -1,0 +1,7 @@
+<div class="item_list_thumbnail_container">
+<%=   link_to( image_tag( item.image_url( @department, 'item_thumbnails/','x' ),:border => 0, :size =>"120x120"   )  ,:controller => "specsheet",		:item_id => item.id , :department_id => item.default_master_department_id )  -%>
+<%=  item.description_before_color_and_size -%>
+<div class="item_list_thumbnail_buttons">
+	
+</div>	
+</div>

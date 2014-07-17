@@ -1,0 +1,29 @@
+<table id="header_table" width="850" height="119" border="0" cellpadding="0" cellspacing="0" bgcolor="white">
+  <td width="436" height="119">
+    <% if @website.name == "dixie_store" -%>
+        <%=   link_to(image_tag( "/uploads/Image/shared_affiliate/" + @website.name + "_" + numeric_day_of_the_week + ".png",  :border => 0 ,:size => '436x119' ), :controller => "page",  :action => "show_page", :id => "home" )  -%>
+    <% else -%>
+        <%=   link_to(image_tag( "/uploads/Image/company_logos/" + @website.name + ".jpg",  :border => 0 ,:size => '436x119' ), :controller => "page",  :action => "show_page", :id => "home" )  -%>
+    <% end -%>
+  </td>
+  <td width="414" height="119">
+    <table width="414" height="119" border="0" cellpadding="0" cellspacing="0" bgcolor="white">
+      <tr>
+        <td width="414"  height="29" style="text-align: right; color: grey;">
+          <%=  render(:partial => "layout_elements/user" )  %>
+          <%  render(:partial => "layout_elements/messages_notice" )  %>
+        </td>
+      </tr>
+      <tr>
+        <td width="414" height="50">
+          <%= render(:partial => "shared/flash") %>
+        </td>
+      </tr>
+      <tr>
+        <td width="414" height="20" style="padding-right:5px; text-align:right;">
+          <%=  render(:partial => "shared_search/search_form") %>
+        </td>
+      </tr>
+    </table>
+  </td>
+</table>

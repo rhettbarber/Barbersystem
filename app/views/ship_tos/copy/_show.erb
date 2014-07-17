@@ -1,0 +1,57 @@
+<div class="checkout_ship_tos_show">
+
+  <span style="font-size: 20px;color:blue;">
+        Shipping Address
+  </span>
+
+<p>
+  <b>Company:</b>
+  <span id="ShipToCompany"><%=h @ship_to.Company %></span>
+</p>
+
+<p>
+  <b>Name:</b>
+  <span id="ShipToName"><%=h @ship_to.Name %></span>
+</p>
+
+<p>
+  <b>Address:</b>
+   <span id="ShipToAddress"><%=h @ship_to.Address %></span>
+</p>
+
+<p>
+  <b>Address2:</b>
+   <span id="ShipToAddress2"><%=h @ship_to.Address2 %></span>
+</p>
+
+<p>
+  <b>City:</b>
+   <span id="ShipToCity"><%=h @ship_to.City %></span>
+</p>
+
+<p>
+  <b>State:</b>
+   <span id="ShipToState"><%=h @ship_to.State %></span>
+</p>
+
+<p>
+  <b>Zip:</b>
+   <span id="ShipToZip"><%=h @ship_to.Zip %></span>
+</p>
+
+<p>
+  <b>Country:</b>
+   <span id="ShipToCountry"><%=h @ship_to.Country %></span>
+</p>
+
+<p>
+  <b>Phonenumber:</b>
+   <span id="ShipToPhoneNumber"><%=h @ship_to.PhoneNumber %></span>
+</p>
+
+<%   unless controller.action_name == 'checkout_receipt'   %>
+<%= link_to 'Edit Ship To Address', edit_ship_to_path(@ship_to), :class => "btn btn-default"    ,:data => {:theme => "e",  :role => "button" ,:ajax=> "false"} %> <br>
+<%= link_to 'Ship To Choices', ship_tos_path, :class => "btn btn-default"    ,:data => {:theme => "e",  :role => "button" ,:ajax=> "false"} %>
+<% end  %>
+
+</div>

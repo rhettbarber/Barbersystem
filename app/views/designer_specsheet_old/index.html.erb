@@ -1,0 +1,36 @@
+<!-- Begin Designer Specsheet Index -->
+<% content_for :head_additions do -%>
+<!-- BeginDesigner Specsheet Index Head Additions -->
+<%= javascript_include_tag 'dynamic_categories' %>
+<%= javascript_include_tag 'custom_items.js' %>
+<%= stylesheet_link_tag 'custom_items.css'  %>
+<%= stylesheet_link_tag 'designer_specsheet.css' %>
+<!-- End Designer Specsheet Index Head Additions -->
+<% end  -%>
+
+<div class="specsheet_container" >
+
+  <%= hidden_field_tag 'current_design_target', 'front_design' %>
+
+      <%= render(:partial => "designer_specsheet/specsheet_table") -%>
+
+      <%= render(:partial => "designer_specsheet/specsheet_resize") -%>
+
+      <%= render(:partial => "designer_specsheet/advanced_choices_menu") -%>
+
+       <%= render(:partial => "designer_specsheet/advanced_choices_items") -%>
+
+
+  
+
+
+
+      <% if @working %>
+              <%= render :partial => "designer_specsheet/specsheet_choices_menu" -%>
+              <%= render(:partial => "designer_specsheet/specsheet_details") -%>
+              <%= render(:partial => "designer_specsheet/preference_fields") -%>
+      <% end  %>
+
+</div>
+
+<!-- End Designer Specsheet Index -->

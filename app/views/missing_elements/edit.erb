@@ -1,0 +1,48 @@
+<h1>Editing missing_element</h1>
+
+<%= form_for(@missing_element) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :path %><br />
+    <%= f.text_field :path %>
+  </p>
+  <p>
+    <%= f.label :request_referer %><br />
+    <%= f.text_field :request_referer %>
+  </p>
+  <p>
+    <%= f.label :fixed %><br />
+    <%= f.text_field :fixed %>
+  </p>
+  <p>
+    <%= f.label :notes %><br />
+    <%= f.text_field :notes %>
+  </p>
+  <p>
+    <%= f.label :request_host %><br />
+    <%= f.text_field :request_host %>
+  </p>
+  <p>
+    <%= f.label :request_remote_ip %><br />
+    <%= f.text_field :request_remote_ip %>
+  </p>
+  <p>
+    <%= f.label :created_at %><br />
+    <%= f.datetime_select :created_at %>
+  </p>
+  <p>
+    <%= f.label :updated_at %><br />
+    <%= f.datetime_select :updated_at %>
+  </p>
+  <p>
+    <%= f.label :times_missed %><br />
+    <%= f.text_field :times_missed %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @missing_element %> |
+<%= link_to 'Back', missing_elements_path %>

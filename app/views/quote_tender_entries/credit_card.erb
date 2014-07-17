@@ -1,0 +1,159 @@
+
+     <%= render :partial => "application/checkout_links" %>
+
+
+  <p style="text-align: center;">  For security reasons, no credit information is recalled on this website.</p>
+
+  <p style="text-align: center;">We accept Visa, MasterCard, Discover and American Express </p>
+
+
+<%= errors_for(@quote_tender_entry, "Opps, validation failed:").html_safe if @quote_tender_entry %>
+
+<%= form_for(:quote_tender_entry, :url => {:controller => 'quote_tender_entries', :action => 'credit_card'} ) do |f| %>
+
+<%= hidden_field "quote_tender_entry", "tender_id", :value => 2 %>
+
+
+<div data-role="fieldcontain">
+  <label for="CreditCardExpirationMonth" class="select">Month:</label>
+                  <select name="CreditCardExpirationMonth" id="CreditCardExpirationMonth" data-native-menu="false" >
+                              <%=  options_for_select(QuoteTenderEntry.months , @selected_month   )  %>
+                 </select>
+   </div>
+
+
+
+<div data-role="fieldcontain">
+  <label for="CreditCardExpirationYear" class="select">Year:</label>
+                  <select name="CreditCardExpirationYear" id="CreditCardExpirationYear" data-native-menu="false">
+                              <%=  options_for_select(QuoteTenderEntry.years , @selected_year  )  %>
+                 </select>
+</div>
+
+
+<label for="CreditCardNumber">Credit Card Number</label>
+ <input type="number" data-clear-btn="true" name="CreditCardNumber" id="CreditCardNumber" value="">
+
+
+<label for="CreditCardApprovalCode">Credit Card Approval Code</label>
+ <input type="number" data-clear-btn="true" name="CreditCardApprovalCode" id="CreditCardApprovalCode" value="">
+
+<%= button_tag(type: "submit", class: "ui-btn ui-btn-b" ) do %>
+    Submit and Continue <i class="icon-repeat"></i>
+<% end    %>
+
+
+
+
+  <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     <% if @old %>
+
+
+         <div class="enlarge_cart_image_container">
+           Credit Card Approval Codes are shown in one of the areas circled below.
+           <%= image_tag "/images/company_logos/credit-card-security-codes.gif"%>
+
+         </div>
+
+
+
+
+         <%= render :partial => "application/checkout_links" %>
+
+
+         <p style="text-align: center;">  For security reasons, no credit information is recalled on this website.</p>
+
+         <p style="text-align: center;">We accept Visa, MasterCard, Discover and American Express </p>
+
+
+
+
+
+         <%= errors_for(@quote_tender_entry, "Opps, unable to add new user").html_safe if @quote_tender_entry %>
+
+         <%= form_for(:quote_tender_entry, :url => {:controller => 'quote_tender_entries', :action => 'credit_card'} ) do |f| %>
+
+             <%= hidden_field "quote_tender_entry", "tender_id", :value => 2 %>
+
+
+             <table>
+               <tr>
+                 <td><b>Expiration</b></td>
+               </tr>
+               <tr>
+                 <td>
+
+
+
+
+                   <div data-role="fieldcontain">
+                     <label for="CreditCardExpirationMonth" class="select">Month:</label>
+                     <select name="CreditCardExpirationMonth" id="CreditCardExpirationMonth">
+                       <%=  options_for_select(QuoteTenderEntry.months , @selected_month   )  %>
+                     </select>
+                   </div>
+
+
+
+                   <div data-role="fieldcontain">
+                     <label for="CreditCardExpirationYear" class="select">Year:</label>
+                     <select name="CreditCardExpirationYear" id="CreditCardExpirationYear">
+                       <%=  options_for_select(QuoteTenderEntry.years , @selected_year  )  %>
+                     </select>
+                   </div>
+
+
+                   <br><br>
+                 </td>
+               </tr>
+               <tr><td><b>Credit Card Number</b></td></tr>
+               <tr><td><%= f.text_field :CreditCardNumber %><br><br></td></tr>
+
+               <tr><td><b>Credit Card Approval Code</b></td></tr>
+               <tr><td><%= f.text_field :CreditCardApprovalCode %>What's this?:
+                 <%#= link_to image_tag("/images/buttons/question-mark-orange-tiny.jpg",:border => 0),{:controller => 'cart', :action => 'show_cc_code_info'} , :popup => ['new_window_name', 'height=400,width=800']    %>
+                 <%= link_to(image_tag("/images/buttons/question-mark-orange-tiny.jpg",:border => 0), "/cart/show_cc_code_info" ,:title=> "Credit Card Approval Code explanation." , :onclick=> "Modalbox.show(this.href, {title: this.title,  width:850  }); return false;"  ) %>
+                 <br><br>
+               </td></tr>
+
+               <tr><td><div>
+                 <%#=  image_submit_tag( '/images/buttons/continue_button_gold.gif',:border => 0)  %>
+
+               </div> </td></tr>
+             </table>
+
+
+             <%= button_tag(type: "submit", class: "ui-btn ui-btn-b" ) do %>
+                 Submit and Continue <i class="icon-repeat"></i>
+             <% end    %>
+
+
+
+
+         <% end %>
+
+
+
+
+
+     <% end %>

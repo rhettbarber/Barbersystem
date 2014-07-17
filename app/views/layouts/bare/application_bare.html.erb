@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<% if admin? %>
+  <!--  show admin information -->
+  <!--  current_layout: <%= current_layout  %>  -->
+  <!--  request.fullpath: <%=  request.fullpath  %>  -->
+<% end %>
+
+
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+
+
+  <title> Dixie Outfitters</title>
+
+
+</head>
+<body>
+
+                        <%= yield %>
+
+</body>
+
+
+<!-- JavaScript
+================================================== -->
+<!-- NORMALLY Placed at the end of the document so the pages load faster -->
+<script src="/assets/jquery/jquery.js"></script>
+<script src="/assets/jquery/jquery_ujs.js"></script>
+<script src="/assets/jquery/array_utilities.js"></script>
+<script src="/assets/bootstrap.js"></script>
+<script src="/assets/responsive-tables.js"></script>
+<script src="/assets/jquery/bootstrap-slider.js"></script>
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+<script src="/assets/holder.js"></script>
+<script src="/assets/application/application_application.js"></script>
+
+</html>
+
+
+
+
+
+
+
+

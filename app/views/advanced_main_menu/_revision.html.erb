@@ -1,0 +1,11 @@
+<% @revision = revision %>
+
+<div class="page_content_capsule" style="display:table-row;">
+            <div class="page_name">
+                    <strong>
+                           Keywords Hit: <%= revision.total_column  %> ---<%= revision.name  %> --- Released:  <%#= time_ago_in_words(  revision.created_at,  include_seconds = false ) %>  Ago.  ----  <%#=  revision.created_at  %><br />
+                            <%= link_to "See related pages and categories" ,:controller => 'page', :action => 'show',:id => revision.slug       %>
+                    </strong>
+             </div>
+            <%= highlight( revision.content , @tokens , '<strong class="highlight">\1</strong>' ) %>
+</div>

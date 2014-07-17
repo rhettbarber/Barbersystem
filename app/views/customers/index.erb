@@ -1,0 +1,83 @@
+
+ <%= render :partial => "application/checkout_links"  %>
+
+ <p style="text-align:center;">Review  your  billing information </p>
+
+<p>
+  <b>Firstname:</b>
+  <%=h @customer.FirstName %>
+</p>
+
+<p>
+  <b>Lastname:</b>
+  <%=h @customer.LastName %>
+</p>
+
+<p>
+  <b>Company:</b>
+  <%=h @customer.Company %>
+</p>
+
+<p>
+  <b>Accountnumber:</b>
+  <%=h @customer.AccountNumber %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%=h @customer.Address %>
+</p>
+
+<p>
+  <b>Address2:</b>
+  <%=h @customer.Address2 %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%=h @customer.City %>
+</p>
+
+<p>
+  <b>State:</b>
+  <%=h @customer.State %>
+</p>
+
+<p>
+  <b>Zip:</b>
+  <%=h @customer.Zip %>
+</p>
+
+<p>
+  <b>Emailaddress:</b>
+  <%=h @customer.EmailAddress %>
+</p>
+
+<p>
+  <b>Faxnumber:</b>
+  <%=h @customer.FaxNumber %>
+</p>
+
+<p>
+  <b>Phonenumber:</b>
+  <%=h @customer.PhoneNumber %>
+</p>
+
+<p>
+  <b>Taxnumber:</b>
+  <%=h @customer.TaxNumber %>
+</p>
+
+ <%= link_to 'Edit', edit_customer_path(@customer) , :class => "ui-btn" %>
+
+
+  <%=link_to(  "Next Checkout Step" ,{:controller => 'cart' , :action => 'next_checkout_step'}, :class => "ui-btn ui-btn-b")    %>
+
+ <br>
+
+
+
+
+
+
+

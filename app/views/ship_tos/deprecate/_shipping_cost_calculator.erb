@@ -1,0 +1,53 @@
+
+                         <div id="shipping_cost_calculator">
+                                 <%=  form_tag( :controller => "barber_store",  :action => "shipping_services" ) %>	
+                                			<td  valign="top" width="100%">
+                                				<table border="0" cellpadding="0" cellspacing="0" width="600">
+                                					<tbody><tr>
+                                						<td  colspan="2">
+                                						</td>
+                                					</tr>
+                                					<tr>
+                                						
+                                						<td class="bts" valign="top" width="205">
+                                							
+                                							<br>
+                                							<table bgcolor="#cccccc" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                							         <tbody>
+                                							                 <tr>
+                                							                     <td>
+                                							                     <table bgcolor="#cccccc" border="0" cellpadding="4" cellspacing="1" width="100%"><tbody>
+                                							                             <tr bgcolor="#efefef">
+                                							                                <td>
+                                							                                     <table bgcolor="#efefef" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                							                                         <tbody>
+                                							                                             <tr>
+                                							                                                 <td nowrap="nowrap">Calculate Shipping &nbsp;</td>
+                                        							                                                 <tr>
+                                                    							                                                 <td><%= text_field_tag "zipcode"  %>&nbsp;</td>
+                                                    							                                     </tr>
+                                                    							                                     <tr>
+                                                    							                                                          <td>      
+                                                    							                                                                             <%= image_submit_tag('/images/buttons/calculate.gif') %>
+                                                    							                                                         </td>
+                                                    							                                     </tr>
+                                							                                              </tr>
+                                							                                            </tbody>
+                                							                                        </table>
+                                							                                 </td>
+                                							                              </tr>
+                                							                              <tr bgcolor="#ffffff">
+                                							                                 <td  bgcolor="#ffffff" nowrap="nowrap">Enter your zipcode to<br> calculate shipping<br></td></tr></tbody></table></td></tr></tbody></table>
+                                						</td>
+                                						<td  valign="top" width="100%">
+                                							<td border="0" height="1" width="400"></td>
+                                						</td>
+                                
+                                					</tr>
+                                					<tr>
+                                					</tr>
+                                				</tbody></table>
+                                			</td>
+                                <%=  end_form_tag  %> 		
+                            </div>
+

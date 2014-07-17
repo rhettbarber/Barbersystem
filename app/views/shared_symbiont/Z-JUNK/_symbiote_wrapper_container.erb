@@ -1,0 +1,30 @@
+<%# cache(@symbiote_wrapper_container_fragment_name, :unless => ssl_or_admin? ) do  %>
+
+
+<% logger.debug "-------------------------------------begin symbiote_wrapper_container"	  %>
+<% logger.debug "@purchase_symbiote_item_type: " + @purchase_symbiote_item_type  %>
+	<% if @purchase %>
+        <% vv = "v" %>
+	     <% if @incomplete_symbiont  %>
+                    <% logger.debug "symbiote_wrapper_container says @incomplete_symbiont" %>
+                    <% unless @purchase.symbiote.on_hold == 1 %>
+				                 <%  if @purchase_symbiote_item_type == 'slave'  %>
+                                                     <% logger.debug " @purchase_symbiote_item_type == 'slave'" %>
+										  			 <%= render(:partial => "shared_symbiont/slave_wrapper") %>
+				                 <% elsif  @purchase_symbiote_item_type == 'master' %>
+                                                     <% logger.debug " @purchase_symbiote_item_type == 'master'" %>
+                                                     <%= render(:partial => "shared_symbiont/master_wrapper") %>
+				                <%  end  %>
+				                 <%= render(:partial => "shared_symbiont/completion_status_bar") %>
+					<%  end  %>
+	    <%  else  %>
+                <% logger.debug "symbiote_wrapper_container says not @incomplete_symbiont" %>
+
+        <% end %>
+	<%  end  %>
+
+
+
+<%# logger.debug "-------------------------------------end symbiote_wrapper_container"	  %>
+
+<%# end  %>

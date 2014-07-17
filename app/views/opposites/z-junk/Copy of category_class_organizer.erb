@@ -1,0 +1,72 @@
+
+<div style="float:left;">
+	<table style="background-color:white; width:150px;">
+	<% for category_class in @category_classes %>
+	<% if category_class.categories.first %>
+	<% first_selected_item = category_class.categories.first.items.first %>
+	<% if first_selected_item %>
+	<tr>
+		<td>
+	 		<div align="center"><%= category_class.item_type.humanize %></div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+	 		<div align="center"><%= category_class.name.humanize %></div>
+		</td>
+	</tr>		
+	 <tr>
+	    <td>
+			<div id="category_class_<%= category_class.id.to_s %>" align="center">
+			
+			  <%= drop_receiving_element("category_class_" + category_class.id.to_s , :url => { :controller => "opposites", :action => "add_category_to_category_class" }) %>	
+				
+			<% if category_class.item_type == 'master' %>
+				<% selected_department = first_selected_item.masters_department_decides_default_department_id %>
+			<% else %>
+				<% selected_department = first_selected_item.design_decides_opposites_department %>
+			<% end %>
+			 <%= image_tag( first_selected_item.image_url( selected_department  ,'item_thumbnails/','x') ,:size => "100x100")    %> 
+	    	</div>
+		</td>
+	  </tr>
+	 <tr>
+		<td><img width="100%" height="4" src="/images/pixels/grey.gif" alt="_____"/></td>
+	  </tr>
+	  
+	  
+	<% end %>
+	<% end %>
+	<% end %>
+	</table>
+</div>
+
+
+
+<div style="float:left;">
+		<table style="background-color:white; width:700px;">
+		<% for category in @categories %>
+		<% if category.category_class.item_type == 'master' or category.category_class.item_type == 'slave'or category.category_class.item_type == 'unknown' %>
+		<% first_item = category.items.first %>
+		<% if first_item != nil %>
+		<% if category.category_class.item_type == 'master' %>
+			<% department = first_item.masters_department_decides_default_department_id %>
+		<% else %>
+			<% department = first_item.design_decides_opposites_department %>
+		<% end %>
+		  <tr id="category_<%= category.id.to_s %>">
+		  	<%= draggable_element("category_<% category.id.to_s %>", :revert => true) %>
+			<td>  </td>
+			<td>  </td>
+			<td> <%= image_tag( first_item.image_url( department  ,'item_thumbnails/','x') ,:size => "30x30")    %> </td>
+		    <td><%=h category.prefix %></td>
+		    <td><%=h category.Code %></td>
+		    <td><%=h category.Name %></td>
+		  </tr>
+ 
+<% end %> 
+<% end %>
+<% end %>
+</table>
+	
+</div>	

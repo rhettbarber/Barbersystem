@@ -1,0 +1,32 @@
+
+
+
+
+<h3> Affiliate Link </h3> <br />
+
+<%= text_field_tag("website_url", 'http://' + @website.domain + '/' + @website.name + '?a_id=' + @user.a_id   ,:size => "60" ) %>
+
+<br />
+<h3> Banner Selection </h3> <br />
+<% banner_string = "<a href=\"http://" + @website.domain + "/" + @website.name  + "?a_id=" + @user.a_id + "\" target=\"_blank\"><img src=\"http://" + @website.domain + "/uploads/Image/shared_affiliate/" + @website.name + "_banner.jpg\" width=\"246\" height=\"80\" alt=\"http://" + @website.domain + "\" border=\"0\" /></a>"  %>
+
+Banner1:<br />
+
+<%= banner_string.to_s %> <br />
+
+
+Banner2 Code: <br />
+<%= text_area_tag("website_url", banner_string  ,:rows => "3", :cols => "100" ) %> <br />
+<br />
+
+<% banner_string2 = "<a href=\"http://" + @website.domain + "/" + @website.name  + "?a_id=" + @user.a_id + "\" target=\"_blank\"><img src=\"http://" + @website.domain + "/uploads/Image/shared_affiliate/" + @website.name + "_banner.jpg\" width=\"246\" height=\"80\" alt=\"http://" + @website.domain + "\" border=\"0\" /></a>"  %>
+
+Banner2:<br />
+
+<%= banner_string2.to_s %> <br />
+
+
+Banner2 Code: <br />
+<%= text_area_tag("website_url", banner_string2  ,:rows => "3", :cols => "100" ) %> <br />
+<br />
+

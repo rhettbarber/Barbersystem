@@ -1,0 +1,137 @@
+<% if  action_name.to_s == 'experiment' %>
+    <%= yield %>
+<% else %>
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <!-- Meta, title, CSS, favicons, etc. -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <title>
+
+        Getting started &middot; Bootstrap
+
+      </title>
+
+      <!-- Bootstrap core CSS -->
+      <link href="/assets/bootstrap.css" rel="stylesheet">
+      <link href="/assets/bootstrap_customized.css" rel="stylesheet">
+
+      <!-- Documentation extras -->
+      <link href="/assets/docs.css" rel="stylesheet">
+      <link href="/assets/pygments-manni.css" rel="stylesheet">
+
+      <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!--[if lt IE 9]>
+      <script src="/assets/html5shiv.js"></script>
+      <script src="/assets/respond.min.js"></script>
+      <![endif]-->
+
+      <!-- Favicons -->
+      <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+      <link rel="shortcut icon" href="../assets/ico/favicon.png">
+
+      <script type="text/javascript">
+          //      var _gaq = _gaq || [];
+          //      _gaq.push(['_setAccount', 'UA-146052-10']);
+          //      _gaq.push(['_trackPageview']);
+          //      (function() {
+          //          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          //          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          //          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          //      })();
+      </script>
+
+      <!-- Place anything custom after this. -->
+    </head>
+    <body>
+
+    <!-- Docs master nav -->
+    <div class="navbar navbar-inverse navbar-fixed-top bs-docs-nav">
+      <div class="container">
+        <a href="/app/assets/stylesheets/bootstrap" class="navbar-brand"> <%= image_tag "dixieoutfitters-logo.png" %> D.O. Mobile</a>
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="nav-collapse collapse bs-navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <a href="/bootstrap/getting_started">Getting started</a>
+            </li>
+            <li>
+              <a href="/bootstrap/css">CSS</a>
+            </li>
+            <li>
+              <a href="/bootstrap/components">Components</a>
+            </li>
+            <li>
+              <a href="/bootstrap/javascript">JavaScript</a>
+            </li>
+            <li>
+              <a href="/bootstrap/experiment">Customize</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+    <%= yield %>
+
+    <!-- Footer
+    ================================================== -->
+    <footer class="bs-footer">
+      <p>Designed and built with all the love in the world by <a href="http://twitter.com/mdo" target="_blank">@mdo</a> and <a href="http://twitter.com/fat" target="_blank">@fat</a>.</p>
+      <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+      <ul class="footer-links">
+        <li><a href="http://blog.getbootstrap.com">Blog</a></li>
+        <li class="muted">&middot;</li>
+        <li><a href="https://github.com/twbs/bootstrap/issues?state=open">Issues</a></li>
+        <li class="muted">&middot;</li>
+        <li><a href="https://github.com/twbs/bootstrap/releases">Releases</a></li>
+      </ul>
+    </footer>
+
+    <!-- JS and analytics only. -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/assets/jquery.js"></script>
+    <script src="/assets/bootstrap.js"></script>
+
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <script src="/assets/holder.js"></script>
+
+    <script src="/assets/bootstrap_application.js"></script>
+
+    <!-- Analytics
+    ================================================== -->
+    <script>
+        //        var _gauges = _gauges || [];
+        //        (function() {
+        //            var t   = document.createElement('script');
+        //            t.type  = 'text/javascript';
+        //            t.async = true;
+        //            t.id    = 'gauges-tracker';
+        //            t.setAttribute('data-site-id', '4f0dc9fef5a1f55508000013');
+        //            t.src = '//secure.gaug.es/track.js';
+        //            var s = document.getElementsByTagName('script')[0];
+        //            s.parentNode.insertBefore(t, s);
+        //        })();
+    </script>
+
+
+    </body>
+    </html>
+<% end %>
+
+

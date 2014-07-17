@@ -1,0 +1,68 @@
+<table id="designer_items_listing">
+          <tr style="min-height:50px;">
+          <th>Itemlookupcode</th>
+          <th>Description</th>
+          <th>Original<br/>Psd</th>
+           <th>Original<br/>Png</th>
+          <th>Production<br/>Jpg</th>
+          <th>Specsheet<br/>Png</th>
+           <th>Thumbnail<br/>Png</th>
+           <th>Details</th>
+        </tr>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= item.ItemLookupCode %></td>
+          <td><%= item.Description %></td>
+
+          <td>
+                  <% if  @missing_original_psds.include?(  item.ItemLookupCode )  %>
+                          <%= image_tag('/images/buttons/false.jpg' , :size => '20x20' ) %>
+                  <% else %>
+                          <%= image_tag('/images/buttons/true.jpg', :size => '20x20' ) %>
+                  <% end %>
+          </td>
+
+          <td>
+                  <% if  @missing_original_pngs.include?(  item.ItemLookupCode )  %>
+                          <%= image_tag('/images/buttons/false.jpg' , :size => '20x20' ) %>
+                  <% else %>
+                          <%= image_tag('/images/buttons/true.jpg', :size => '20x20' ) %>
+                  <% end %>
+          </td>
+
+          <td>
+            <% if @items_requiring_production.include?(  item.ItemLookupCode )    %>
+                        <% if  @missing_production_jpgs.include?(  item.ItemLookupCode )  %>
+                                <%= image_tag('/images/buttons/false.jpg' , :size => '20x20' ) %>
+                        <% else %>
+                                <%= image_tag('/images/buttons/true.jpg', :size => '20x20' ) %>
+                        <% end %>
+            <% else %>
+                  N/A
+            <% end  %>
+          </td>
+
+          <td>
+                  <% if  @missing_specsheet_pngs.include?(  item.ItemLookupCode )  %>
+                          <%= image_tag('/images/buttons/false.jpg' , :size => '20x20' ) %>
+                  <% else %>
+                          <%= image_tag('/images/buttons/true.jpg', :size => '20x20' ) %>
+                  <% end %>
+          </td>
+
+          <td>
+                  <% if  @missing_thumbnail_pngs.include?(  item.ItemLookupCode )  %>
+                          <%= image_tag('/images/buttons/false.jpg' , :size => '20x20' ) %>
+                  <% else %>
+                          <%= image_tag('/images/buttons/true.jpg', :size => '20x20' ) %>
+                  <% end %>
+          </td>
+
+          <td>
+                    <%= image_tag('/images/buttons/details.gif' , :size => '20x20' ) %>
+
+          </td>
+
+        </tr>
+      <% end %>
+      </table>

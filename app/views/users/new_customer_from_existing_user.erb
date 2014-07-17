@@ -1,0 +1,102 @@
+<h4>New  Customer from Existing User (This user has no Customer Info)</h4>
+
+
+<%= form_tag '/users/create_new_customer_record_only/' + params[:id]  do  %>
+
+
+<div style="border:solid black 1px;width:220px;height:355px;float:left;padding:5px;margin:5px;">   
+
+		<p>
+		  <b>Email:</b>
+		  <%=h @selected_user.email %>
+		</p>
+
+			 <p>
+			    <b>Company-(optional)</b><br />
+			    <%= text_field :customer, :Company %>
+			  </p>
+			
+			  <p>
+			    <b>Firstname</b><br />
+			    <%= text_field :customer, :FirstName %>
+			  </p>
+			
+			  <p>
+			    <b>Lastname</b><br />
+			    <%= text_field :customer, :LastName %>
+			  </p>
+			
+			
+			  <p>
+			    <b>Address</b><br />
+			    <%= text_field :customer, :Address %>
+			  </p>
+			
+			  <p>
+			    <b>Address2 (optional)</b><br />
+			    <%= text_field :customer, :Address2 %>
+			  </p>
+</div>
+<div style="border:solid black 1px;width:220px;height:355px;float:left;padding:5px;margin:5px;">  
+			
+			  <p>
+			    <b>City</b><br />
+			    <%= text_field :customer, :City %>
+			  </p>
+
+			  <p>
+			    <b>State</b><br />
+			    <%= text_field :customer, :State %>
+			  </p>
+
+			  <p>
+			    <b>Zip</b><br />
+			    <%= text_field :customer, :Zip %>
+			  </p>
+
+			
+			 <p>
+			    <b>Taxnumber-(optional)</b><br />
+			    <%= text_field :customer, :TaxNumber %>
+			  </p>
+			
+ <%= hidden_field_tag("Country", "United States" )  %>
+		  
+
+</div>
+<div style="border:solid black 1px;width:220px;height:355px;float:left;padding:5px;margin:5px;">  			
+
+			  <p>
+			    <b>Faxnumber (optional)</b><br />
+			    <%= text_field :customer, :FaxNumber %>
+			  </p>
+
+			  <p>
+			    <b>Phonenumber</b><br />
+			    <%= text_field :customer, :PhoneNumber %>
+			  </p>
+			  
+			  <p>
+			  <b>PriceLevel</b><br />
+	    		<select name="customer[PriceLevel]">
+	 				<%=  options_for_select([ ["Retail", "0"], ["Preprint", "1"], ["Blank/Transfer", "2"], ["Franchise", "3"] ], @selected_customer.PriceLevel.to_s   )  %>
+	   			</select>
+				</p>
+	   
+			  <p>
+			    <b>Current Discount Percentage</b><br />
+			    <%= text_field  :customer,  :CurrentDiscount %>
+			  </p>
+			  
+			  <p>
+			    <b>Use Same address for shipping</b><br />
+			     <%= check_box_tag "use_billing_for_shipping", value = "1", checked = true  %>
+			  </p>
+
+  <p>
+    <%= submit_tag "Create" %>
+  </p>
+<% end %>
+</div>
+
+<%= link_to 'Back', users_path if admin? %>

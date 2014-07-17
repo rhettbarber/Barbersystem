@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+
+  <title> Dixie Outfitters</title>
+
+  <!-- Bootstrap core CSS -->
+  <%= stylesheet_link_tag '/assets/bootstrap' %>
+  <%= stylesheet_link_tag '/assets/bootstrap/slider' %>
+  <%= stylesheet_link_tag '/assets/bootstrap_customized' %>
+  <%= stylesheet_link_tag '/assets/store/specsheet' %>
+  <!-- Custom styles for this template -->
+
+<style type="text/css">
+        /* Sticky footer styles
+      -------------------------------------------------- */
+
+    html,
+    body {
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+    }
+
+        /* Wrapper for page content to push down footer */
+    #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by its height */
+        margin: 0 auto -60px;
+        /* Pad bottom by footer height */
+        padding: 0 0 60px;
+    }
+
+        /* Set the fixed height of the footer here */
+    #footer {
+        height: 60px;
+        background-color: #f5f5f5;
+    }
+
+
+        /* Custom page CSS
+        -------------------------------------------------- */
+        /* Not required for template or sticky footer method. */
+
+    #wrap > .container {
+        padding: 60px 15px 0;
+    }
+    .container .credit {
+        margin: 20px 0;
+    }
+
+    #footer > .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    code {
+        font-size: 80%;
+    }
+    </style>
+
+
+
+
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="/assets/html5shiv.js"></script>
+  <script src="/assets/respond.min.js"></script>
+  <![endif]-->
+
+
+
+<!-- NORMALLY Placed at the end of the document so the pages load faster -->
+<script src="/assets/jquery/jquery.js"></script>
+<script src="/assets/jquery/jquery_ujs.js"></script>
+<script src="/assets/jquery/array_utilities.js"></script>
+<script src="/assets/bootstrap.js"></script>
+<script src="/assets/jquery/bootstrap-slider.js"></script>
+<script src="/assets/jquery/jquery.cookie.js"></script>
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+<script src="/assets/holder.js"></script>
+
+<body style="">
+
+<!-- Wrap all page content here -->
+<div id="wrap">
+
+              <%= render :partial => "application/menu" %>
+              <%= render :partial => "application/modal" %>
+
+              <!-- Begin page content -->
+              <div class="container">
+                            <div id="the_yield">
+                                         <%= yield %>
+                            </div>
+                </div>
+</div>
+
+<div id="footer">
+  <div class="container">
+    <p class="text-muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>
+  </div>
+</div>
+
+
+
+
+</body>
+
+<script src="/assets/application/application_application.js"></script>
+<script src="/assets/store/store.js"></script>
+<% if admin? %>
+    <script src="/assets/store/store_administration.js"></script>
+<% end %>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @real %>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+          <!-- Meta, title, CSS, favicons, etc. -->
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta name="description" content="">
+          <meta name="author" content="">
+
+          <title> Dixie Outfitters</title>
+
+          <%#= include_gon %>
+
+      <%= stylesheet_link_tag '/assets/bootstrap' %>
+      <%= stylesheet_link_tag '/assets/bootstrap/slider' %>
+      <%= stylesheet_link_tag '/assets/bootstrap_customized' %>
+      <%= stylesheet_link_tag '/assets/store/specsheet' %>
+
+          <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+          <!--[if lt IE 9]>
+          <script src="/assets/html5shiv.js"></script>
+          <script src="/assets/respond.min.js"></script>
+          <![endif]-->
+
+          <!-- Bootstrap core JavaScript
+          ================================================== -->
+          <!-- NORMALLY Placed at the end of the document so the pages load faster -->
+          <script src="/assets/jquery/jquery.js"></script>
+          <script src="/assets/jquery/jquery_ujs.js"></script>
+          <script src="/assets/jquery/array_utilities.js"></script>
+          <script src="/assets/bootstrap.js"></script>
+          <script src="/assets/jquery/bootstrap-slider.js"></script>
+          <script src="/assets/jquery/jquery.cookie.js"></script>
+          <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+          <script src="/assets/holder.js"></script>
+
+    </head>
+    <body>
+
+        <%= render :partial => "application/menu" %>
+        <%= render :partial => "application/modal" %>
+
+
+        <div id="the_yield">
+                <%= yield %>
+        </div>
+
+        <script src="/assets/application/application_application.js"></script>
+        <script src="/assets/store/store.js"></script>
+        <% if admin? %>
+        <script src="/assets/store/store_administration.js"></script>
+        <% end %>
+
+        <%#= render :partial => "application/share_link" %>
+
+    </body>
+</html>
+<% end %>
+
+
+

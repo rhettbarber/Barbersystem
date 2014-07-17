@@ -1,0 +1,31 @@
+<div id="item_status_bar">
+        <div id="item_price" style="float:left;">
+                      Price: $15.99
+        </div>
+        <div id="item_save_status" style="float:right;color:red;">
+                    <% if @from_ajax %>
+                              <%= image_tag("/images/buttons/item-saved-in-cart.png", :class => "cart_button") %>
+                    <% else  %>
+                             
+                    <% end  %>
+        </div>
+        <div id="item_save_button" style="float:right;">
+
+                    <% if @from_ajax %>
+
+                    <% else  %>
+                             <%= image_tag("/images/buttons/add-to-cart-orange.png", :class => "add_to_cart_button") %>
+                    <% end  %>
+               <div style="display:none;"  id="item_save_progress">    </div>
+        </div>
+</div>
+
+
+ <script type="text/javascript">
+//        $$('.add_to_cart_button').invoke('observe', 'click', ajaxAddToCart );
+
+
+         <% if @from_ajax %>
+                    $('item_save_progress').hide();
+        <% end  %>
+ </script>

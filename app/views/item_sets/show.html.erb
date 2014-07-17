@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Item:</b>
+  <%= @item_set.item_id %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @item_set.category_id %>
+</p>
+
+<p>
+  <b>Department:</b>
+  <%= @item_set.department_id %>
+</p>
+
+<p>
+  <b>Opposite category ids:</b>
+  <%= @item_set.opposite_category_ids %>
+</p>
+
+<p>
+  <b>Opposite department ids:</b>
+  <%= @item_set.opposite_department_ids %>
+</p>
+
+<p>
+  <b>Opposite item ids:</b>
+  <%= @item_set.opposite_item_ids %>
+</p>
+
+
+<%= link_to 'Edit', edit_item_set_path(@item_set) %> |
+<%= link_to 'Back', item_sets_path %>

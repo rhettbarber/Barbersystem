@@ -1,0 +1,26 @@
+ <% if   item.show_derivative_locations?  %>
+            <% clone_item_types =  CloneItemType.all  %>
+<% else %>
+            <% clone_item_types =  CloneItemType.where("id = ?",  item.category.clone_item_type_id ).all  %>
+
+<% end  %>
+
+<tr>
+      <td  colspan="20">
+         <% clone_item_types.each do |clone_item_type| %>
+
+
+                                     <div id="clone_item_to_update_<%= item.id.to_s + '_' +  clone_item_type.id.to_s %>"  style="float: left;margin-left:10px;margin-bottom: 5px; border-bottom: 1px dashed silver;"  onclick="submit_clone_item_creation_request( <%= item.id %> ,   <%=  clone_item_type.id  %>)">
+                                               <%= render :partial => 'item_manager/item_clone', :locals => { :item => item, :clone_item_type => clone_item_type } %>
+                                     </div>
+                                       <div style="text-align:center;">
+                                      <% if clone_item_types.size == 1 %>
+                                                  This item has improper "core_number" and cannot be used to spawn derivatives.  <%= link_to( "DETAILS", :controller => 'item_manager', :action => 'item_details', :item_id => item.id  ) %>
+                                        <% end %>
+                                       </div>
+
+              <% end %>
+      </td>
+</tr>
+
+

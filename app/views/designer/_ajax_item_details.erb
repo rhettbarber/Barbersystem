@@ -1,0 +1,33 @@
+<script type="text/javascript">
+
+Modalbox.resizeToContent();
+
+  </script>
+
+
+<div id='item_details_container'>
+
+            <div id="item_detail_thumbnail">
+
+
+
+ <img alt="'<%=@item.designer_front_file_image_name %>" src=" /designer/show_preview/<%= @item.id %>" class="designer-series-image"  style="width:825px;" />
+
+
+
+
+            </div>
+
+            ItemLookupCode: <%= @item.ItemLookupCode  %> <br />
+             Description: <%= @item.description_before_color_and_size  %> <br />
+
+           <br />
+           <br />
+
+           <div id="item_detail_buttons" style="text-align:center">
+                    <%= image_tag(  '/images/buttons/cancel.png'  , :alt => 'Cancel' , :onclick => "Modalbox.hide();" ) %>
+                    <% image_tag(  '/images/buttons/confirm.png'  , :alt =>  'Confirm' , :onclick => "chooseSelected();" ) %>
+           </div>
+</div>
+
+

@@ -1,0 +1,109 @@
+
+
+
+<% logger.debug " @item.category.category_class.item_type: " +  @item.category.category_class.item_type  %>
+<% logger.debug "@back_design.ItemLookupCode: " +  @back_design.ItemLookupCode if @back_design%>
+<% logger.debug "@front_design.ItemLookupCode: " +  @front_design.ItemLookupCode if @front_design %>
+<% logger.debug "@back_advanced_combination.number_of_sides: " +  @back_advanced_combination.number_of_sides  if  @back_advanced_combination %>
+<% logger.debug "@front_advanced_combination.number_of_sides: "  +  @front_advanced_combination.number_of_sides  if  @front_advanced_combination  %>
+
+
+<script type="text/javascript">
+
+console.log('begin _ajax_change_product_choice.html.erb');
+
+
+<% if @product_mask_image_name %>
+          if  ($('mask_image')  != undefined) { $('mask_image').src =  "<%= @product_mask_image_name %>" ; };
+<% end  %>
+
+
+$('specsheet_table').setStyle( { backgroundImage:  'url(<%= @product_background_image_name %>)'  } ) ;
+
+
+<% if @back_design and @front_design %>
+$('swap_image').show();
+<% end %>
+
+$('details_form').item_id.value   =    <%=   @item.id  %>  ;
+$('details_form').category_id.value   =    <%=   @item.category_id  %>  ;
+$('details_form').category_item_type.value   =    '<%=   @item.category.category_class.item_type  %>'  ;
+
+
+
+<% if @back_design %>
+$("back_design_image").src =   "/images/item_specsheets/<%= @back_design.PictureName %>"     ;
+<% else  %>
+$("back_design_image").src =   "/images/pixels/transparent.png"     ;
+<% end  %>
+
+
+<% if @front_design %>
+$("front_design_image").src =   "/images/item_specsheets/<%= @front_design.PictureName %>"     ;
+<% else  %>
+$("front_design_image").src =   "/images/pixels/transparent.png"     ;
+<% end  %>
+
+
+console.log('##################################################################');
+console.log('##################################################################');
+
+console.log('begin @back_advanced_combination.number_of_sides.to_s: ' +  <%=  @back_advanced_combination.number_of_sides.to_s %>);
+
+
+<% if  @front_design %>
+          $('details_form_front').design_id.value   =      <%=  @front_design.id  %>
+          $('details_form_front').category_id.value =   <%=  @front_design.category_id  %>;
+          $('front_design_image').style.width =   '<%=  @front_advanced_combination.front_width %>';
+          $('front_design_image').style.left =         '<%=  @front_advanced_combination.front_left  %>';
+          $('front_design_image').style.top  =        '<%=  @front_advanced_combination.front_top  %>';
+<% end %>
+
+<% if @back_design  %>
+          $('details_form_back').design_id.value   =      <%=  @back_design.id  %>
+          $('details_form_back').category_id.value =   <%=  @back_design.category_id  %>;
+          $('back_design_image').style.width =   '<%=  @back_advanced_combination.back_width %>';
+          $('back_design_image').style.left =         '<%=  @back_advanced_combination.back_left  %>';
+          $('back_design_image').style.top  =        '<%=  @back_advanced_combination.back_top  %>';
+<% end %>
+
+
+console.log('##################################################################');
+console.log('##################################################################');
+
+<% if  @back_advanced_combination.number_of_sides.to_s == '2' or @back_design.is_breast_print?  %>
+                                setupTwoSides();
+<% else %>
+                                setupOneSide();
+<% end %>
+
+
+console.log('working here 10');
+
+console.log('end _ajax_change_product_choice.html.erb');
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @testt %>
+
+
+
+
+
+
+
+  <% end %>

@@ -1,0 +1,33 @@
+<div id="crest_prints_list">
+  <%     @items = Item.unscoped.order("ItemLookupCode ASC").includes(:category).where("categories.Name like ? and Inactive = ?",  'pocket prints' , false )   %>
+        <div style="font-size:17px;font-weight:bolder;">  Listing crest Prints for <%=  @main_design.department.Name %>  <%=  @main_design.category.Name %> </div>
+         <%= link_to "Toggle admin crest prints", "#",  :onclick => "$('.admin_crest_print').toggle();" %>
+                <div id="items_list" class="container">
+                      <div class="row-fluid">
+                            <ul class="thumbnails">
+                                  <% if @items %>
+                                        <% @items.each do |item| %>
+                                                <% if @main_design_applicable_front_designs_ids.split(',').include?( item.id.to_s  )    %>
+                                                            <li class="col-12 col-lg-6 item_choice" style="list-style-type: none;">
+                                                                    <%= image_tag( '/images/item_thumbnails/' +  item.ItemLookupCode + '.png', :size => "100x100" , :class => "crest_print"  )%>
+                                                                    <%= image_tag( '/images/icons/true.jpg', :size => "25x25"  ,:border => 0, :class => "crest_department", :id => item.id  , :data => { :department_id => @main_design.department_id, :category_id => @main_design.category.id } ) if admin? and session[:show_admin] %>
+                                                            </li>
+                                                <%  else  %>
+                                                            <% if admin? and session[:show_admin] %>
+                                                                    <li class="col-12 col-lg-6 item_choice admin_crest_print" style="list-style-type: none;display:none;">
+                                                                          <%= image_tag( '/images/item_thumbnails/' +  item.ItemLookupCode + '.png', :size => "100x100" , :class => "crest_print"  )%>
+                                                                          <%= image_tag( '/images/icons/false.jpg', :size => "25x25"  ,:border => 0 , :class => "crest_department", :id => item.id  , :data => { :department_id => @main_design.department_id, :category_id => @main_design.category.id } ) %>
+                                                                    </li>
+                                                            <% else %>
+
+                                                            <% end %>
+                                                <% end %>
+                                        <% end %>
+                                  <% else  %>
+                                            No Results Found!
+                                  <% end  %>
+                             </ul>
+                    </div>
+                </div>
+        </div>
+</div>

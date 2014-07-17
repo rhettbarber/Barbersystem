@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>listview demo</title>
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0-rc.1/jquery.mobile-1.4.0-rc.1.min.css">
+  <%= stylesheet_link_tag '/assets/development/guides' %>
+  <%= stylesheet_link_tag '/assets/jquery_mobile/jquery_mobile_customized' %>
+  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.0-rc.1/jquery.mobile-1.4.0-rc.1.min.js"></script>
+</head>
+
+
+<div data-role="page">
+               <%#= render :partial => "panels/account"  %>
+               <%= render :partial => "panels/articles"  %>
+               <%= render :partial => "panels/designs"  %>
+               <%= render :partial => "panels/items"  %>
+
+
+
+
+
+
+
+
+
+
+              <!-- header -->
+              <div data-role="header" data-id="barbersystem_header" data-position="fixed"  data-theme="b">
+
+                <div data-role="navbar">
+                  <ul>
+                    <li><a href="/vendor/assets/stylesheets"> <%= image_tag "dixieoutfitters-logo.png" ,:id => "dixie_logo", :style => "height:35px;" %> </a></li>
+                    <li><a href="#items_panel">Items</a></li>
+                    <li><a href="#designs_panel">Designs</a></li>
+                    <li><a href="#pages_panel">Articles</a></li>
+
+                  </ul>
+                </div><!-- /navbar -->
+              </div><!-- /header -->
+
+
+
+              <!-- content -->
+              <div data-role="content">
+              <%= yield %>
+            </div>
+
+
+            <!--   #######################  BEGIN  FOOTER  ####################### -->
+            <!--   #######################  BEGIN  FOOTER  ####################### -->
+            <!--   #######################  BEGIN  FOOTER  ####################### -->
+            <!--   #######################  BEGIN  FOOTER  ####################### -->
+            <!--   #######################  BEGIN  FOOTER  ####################### -->
+              <!-- footer -->
+
+
+                      <%= render "shared_symbiont/symbiote_wrapper_container" if @incomplete_symbiont %>
+
+             <!-- /footer -->
+
+            <!--   #######################  END  FOOTER  ####################### -->
+
+
+
+
+
+</div><!-- page -->
+
+
+
+
+
+
+
+
+</html>
+
+
+
+
+
+
+
+<% if @real %>
+
+
+
+
+
+    <!-- footer -->
+    <div data-role="footer" data-id="barbersystem_footer" data-position="fixed"  data-theme="b" style="font-size:15px;font-weight: normal;">
+      <div data-role="navbar">
+
+        <%= render "shared_symbiont/symbiote_wrapper_container" if @incomplete_symbiont %>
+
+      </div><!-- /navbar -->
+    </div><!-- /footer -->
+
+
+
+
+
+    <a href="/vendor/assets/stylesheets" class="navbar-brand"> <%= image_tag "dixieoutfitters-logo.png" ,:id => "dixie_logo" %> D.O. Mobile</a>
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>listview demo</title>
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+</head>
+<body>
+
+
+
+
+
+<div data-role="page" id="page1" data-add-back-btn="true">
+
+
+  <div data-role="header" data-id="barbersystem_header" data-position="fixed"  data-theme="a">
+    <div data-role="navbar">
+      <ul>
+        <li><a href="a.html">Shop</a></li>
+        <li><a href="b.html">Articles</a></li>
+        <li><a href="b.html">Cart</a></li>
+      </ul>
+    </div><!-- /navbar -->
+  </div><!-- /footer -->
+
+
+
+  <div data-role="content">
+
+    <%= yield %>
+
+
+  </div>
+
+
+  <div data-role="footer" data-id="barbersystem_footer" data-position="fixed">
+    <div data-role="navbar">
+      <ul>
+        <li><a href="a.html">Shop</a></li>
+        <li><a href="/p/resources">Articles</a></li>
+        <li><a href="/cart">Cart</a></li>
+      </ul>
+    </div><!-- /navbar -->
+  </div><!-- /footer -->
+
+
+</div>
+
+
+</body>
+
+
+</html>
+
+<% end  %>

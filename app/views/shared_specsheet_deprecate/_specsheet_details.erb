@@ -1,0 +1,53 @@
+<div id="breast_print_choices" style="display:none;float:left;">
+
+<div id="breast_print_message" style="width:825px;font-size:17px;float:left;">Choose a breast print for the front of your shirt.</div><div style="width:25px;font-size:17px;float:right;"><%= image_tag( "/images/buttons/48x48-no.png", :border => 0 ,:size => "25x25" , :onclick => "$('breast_print_choices').hide();") %></div>
+
+  <% if @breast_prints %>
+          <%  @breast_prints.each do |bp| %>
+                  <div id="breast_print_choice" style="float:left;"><%=   image_tag("http://dixieoutfitters.com/images/item_specsheets/" + bp.ItemLookupCode + '.png', :size => "100x100", :border => 0 , :data_itemlookupcode => bp.ItemLookupCode, :class => "breast_print" ) %></div>
+
+
+
+            <% end %>
+  <% end  %>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="specsheet_details">
+	
+	<table  border="0" cellspacing="0" cellpadding="0" height="60" width="850" style="color:white;font-size:12px;">
+			  <tr height="30">
+				    <th  scope="col"><%= 'Item Code' if @item %></th>
+				    <th  scope="col"><%= 'Item Description' if @item %></th>
+				    <th  scope="col"><%= 'Design Code' if @design  %></th>
+				    <th  scope="col"><%= 'Design Description' if @design  %></th>
+				   <th  scope="col"><%= 'Your Price'  if @your_unit_price  unless  @your_unit_price == 0.01  %></th>
+			  </tr>
+			  <tr height="30">
+					<td id="item_itemlookupcode"><%=   @item.ItemLookupCode.to_s  if @item   %></td> 
+					<td id="item_description"><%=   @item.description_before_color_and_size  if @item   %></td> 
+					<td id="design_itemlookupcode"><%=    @design.ItemLookupCode.to_s  if @design   %></td> 
+					<td id="design_description"><%=     @design.Description.downcase.camelize.to_s  if @design %></td> 
+					<td id="your_unit_price" >
+						<%=    number_with_precision(@your_unit_price,2) unless  @your_unit_price == 0.01  %>
+					</td> 
+			</tr>
+	</table>
+		
+	<table  border="0" cellspacing="0" cellpadding="0" height="123" width="850" style="color:white;font-size:12px;">
+			<tr>
+					<td id="item_extended_description">
+									<%= @item.opacity_description  %><%= @item.ExtendedDescription  %>
+					 </td> 
+			</tr>
+	</table>
+</div>
+		
+		

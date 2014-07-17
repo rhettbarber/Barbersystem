@@ -1,0 +1,10 @@
+<%  if  current_user != :false  %>
+    <%   if  current_user.new_messages != []  %>
+        <div class="messages_notice">
+          <li>
+            <%=link_to "You have " +  current_user.new_messages.count.to_s +     " unread message(s)" ,:controller => 'account', :action => 'inbox'     %>
+          </li>
+        </div>
+        <br />
+    <% end %>
+<%  end %>

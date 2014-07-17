@@ -1,0 +1,29 @@
+
+var categories = new Array();
+<% for category in @dynamic_categories -%>
+  categories.push(new Array(<%= category.department_id %>, '<%=h Util::Slug.generate(category.Name.to_s) %>', <%= category.id %>));
+<% end -%>
+
+function departmentSelected() {
+alert('232');
+              console.log('departmentSelected'   );
+              department_id = $('javascript_department_id').getValue();
+              options = $('javascript_category_id').options;
+              options.length = 1;
+              categories.each(function(category) {
+                if (category[0] == department_id) {
+                  options[options.length] = new Option(category[1], category[2]);
+                }
+        });
+        if (options.length == 1) {
+          $('category_field').hide();
+        } else {
+          $('category_field').show();
+        }
+      }
+
+      document.observe('dom:loaded', function() {
+        departmentSelected();
+        $('javascript_department_id').observe('change', departmentSelected);
+        $('javascript_category_id').observe('change', departmentSelected);
+});

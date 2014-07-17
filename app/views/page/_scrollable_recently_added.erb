@@ -1,0 +1,82 @@
+<style type="text/css">
+
+.white_letters {
+        color:white;
+    }
+
+
+</style>
+
+
+
+
+
+<% @page_ids = Set.new %>
+<%  @paginated_results.each do |page_container| %>
+    <% if page_container.page %>
+        <% if   @customer_array_viewable_page_types.include?(page_container.page.page_type_id)  or  @customer_array_viewable_page_types.include?(page_container.page.page_type_id.to_s)   %>
+            <%# if @latest_revision_ids.include?(page_container.id) or  @latest_revision_ids.include?(page_container.id.to_s) %>
+
+                                <div class="page_name">
+                                                  <% unless @page_ids.include?(  page_container.id )  %>
+                                                                                    <% @page_ids.add?(  page_container.id )  %>
+                                                                                    <%= page_container.id  %> ---<%= page_container.page.name  %> --- Released:  <%= time_ago_in_words(  page_container.created_at,  include_seconds = false ) %>  Ago.  ----  <%=  page_container.page.created_at  %><br />
+                                                                                    <%= link_to "See related pages and categories" , {:controller => 'page', :action => 'show',:id => page_container.page.slug } , {:style => "color:white;"  }    %>
+                                                  <% end %>
+                                </div>
+
+
+                                <div class="page_content_capsule">
+                                  <%= highlight( page_container.content , @tokens , '<strong class="highlight">\1</strong>' ) %>
+                                </div>
+            <%# end %>
+        <% end %>
+    <%  end  %>
+<%  end  %>
+<div class="last_item" style="width: 100%;height: 20px;"><%= link_to 'Load More', url_for( :controller => "page", :action => "recently_added_pages", :page => @paginated_results.next_page ), :id => "page-link", :class => 'ui-btn load-more-revisions', :remote => true   if @paginated_results and @paginated_results.next_page -%></div>
+
+
+
+
+
+
+
+
+
+<% if @junkk %>
+
+
+
+    <% @page_ids = Set.new %>
+    <%  @paginated_results.each do |page_container| %>
+        <% if page_container.page %>
+            <% if   @customer_array_viewable_page_types.include?(page_container.page.page_type_id)  or  @customer_array_viewable_page_types.include?(page_container.page.page_type_id.to_s)   %>
+                <%# if @latest_revision_ids.include?(page_container.id) or  @latest_revision_ids.include?(page_container.id.to_s) %>
+
+                <div class="page_name">
+                  <% unless @page_ids.include?(  page_container.id )  %>
+                      <strong>
+                        <% @page_ids.add?(  page_container.id )  %>
+                        <%= page_container.id  %> ---<%= page_container.page.name  %> --- Released:  <%= time_ago_in_words(  page_container.created_at,  include_seconds = false ) %>  Ago.  ----  <%=  page_container.page.created_at  %><br />
+                        <%= link_to "See related pages and categories" ,:controller => 'page', :action => 'show',:id => page_container.page.slug       %>
+                      </strong>
+                  <% end %>
+                </div>
+
+
+                <div class="page_content_capsule">
+                  <%= highlight( page_container.content , @tokens , '<strong class="highlight">\1</strong>' ) %>
+                </div>
+                <%# end %>
+            <% end %>
+        <%  end  %>
+    <%  end  %>
+    <div class="last_item" style="width: 100%;height: 20px;"><%= link_to 'Load More', url_for( :controller => "page", :action => "recently_added_pages", :page => @paginated_results.next_page ), :id => "page-link", :class => 'ui-btn load-more-revisions', :remote => true   if @paginated_results and @paginated_results.next_page -%></div>
+
+
+
+
+
+
+
+<% end %>

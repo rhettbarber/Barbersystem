@@ -1,0 +1,63 @@
+<%=  link_to "Back to layout manager", :controller => "purchases_entries", :action => "layout_manager"  unless action_name == "layout_manager" %>
+
+<h1>Editing purchases_entry</h1>
+
+<% form_for(@purchases_entry) do |f| %>
+  <%= f.error_messages %>
+
+
+
+   <% if @purchases_entry.item  %>
+                    <p>
+                      <b>Itemlookupcode:</b>
+                      <%=h @purchases_entry.item.ItemLookupCode %>
+                    </p>
+    <% else %>
+                    <p>
+                      <%= f.label :ItemLookupCode %><br />
+                      <%= f.text_field :ItemLookupCode %>
+                    </p>
+
+    <% end %>
+
+
+  <p>
+    <%= f.label :Description %><br />
+    <%=  @purchases_entry.item.Description   %>    <%= link_to 'Edit', edit_item_path(@purchases_entry.item) %>
+  </p>
+
+    <p>
+    ExtendedDescription<br />
+      <%=  @purchases_entry.item.ExtendedDescription   %>    <%= link_to 'Edit', edit_item_path(@purchases_entry.item) %>
+    </p>
+
+  <p>
+    <%= f.label :QuantityRTD %><br />
+    <%= f.text_field :QuantityRTD %>
+  </p>
+  <p>
+    <%= f.label :QuantityOnOrder %><br />
+    <%= f.text_field :QuantityOnOrder %>
+  </p>
+
+
+
+<%
+   @fulfillment_statuses  = [
+                          ["False", 0  ],
+                          ["True", 1  ]
+                ]
+ %>
+
+    <p>
+     <%= f.label :fulfilled %> ( .This is ignored if the QuantityRTD is greater than the QuantityOnOrder )<br />
+      <%= f.select  "fulfilled",   options_for_select(  @fulfillment_statuses,   @purchases_entry.fulfilled   )  %>
+    </p>
+
+
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+

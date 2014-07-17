@@ -1,0 +1,46 @@
+
+<h2> Item Manager - Linked Items Review</h2>
+<%= link_to( "Item Manager", :controller => "item_manager"   ) %><br/>
+
+<table>
+  <tbody>
+
+    <% @items.each do |the_item| %>
+
+                          <tr><td><%= the_item.ItemLookupCode %></td></tr>
+                          <tr>
+
+                            <td colspan="77">
+                              <div style="float:left;width:160px;height:200px;"><%= image_tag( '/images/item_thumbnails/' + the_item.PictureName    ) %></div>
+                          <% CloneItemType.all.each do | the_clone_item_type|  %>
+                                  
+                                            <%   if   ['.gif', '.jpg', '.png'].include?( the_clone_item_type.production_extension ) %>
+                                                        <% the_filename =   'W:\\AUTOMATION_DATABASE\\PRODUCTION_FILES\\' + the_clone_item_type.name + '\\' + the_clone_item_type.prefix_code +    the_item.ItemLookupCode.gsub('L', '')  + the_clone_item_type.production_extension   %>
+                                                        <% if    File.file?( the_filename ) %>
+                                                                      <% unless ['poster'].include?(  the_clone_item_type.name.downcase  )  %>
+                                                                                     <div style="float:left;width:160px;height:200px;">
+                                                                                            <%= the_clone_item_type.name  %><br/>
+                                                                                            <img alt="Image" src="/item_manager/show_thumbnail/<%=   the_clone_item_type.name + '\\' +   the_clone_item_type.prefix_code +    the_item.ItemLookupCode.gsub('L', '')  + the_clone_item_type.production_extension  %>" class="designer-series-image" />
+                                                                                     </div>
+                                                                        <% end  %>
+                                                          <% end  %>
+                                             <% end  %>
+
+                            <% end %>
+              </td></tr>
+              <tr>
+                      <td style="background-color: lightgrey;height:40px;" colspan="20"> &nbsp;</td>
+              </tr>
+    <% end %>
+
+  </tbody>
+</table>
+
+<style type="text/css">
+  
+  img {
+    max-height: 160px;
+    max-width: 160px;
+}
+
+</style>

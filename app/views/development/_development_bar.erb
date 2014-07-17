@@ -1,0 +1,24 @@
+
+
+
+
+
+
+
+
+
+
+
+
+<% unless  ["production"].include?(ENV["RAILS_ENV"]) %>
+          <%#= render :partial => 'development/invasion_test'  %>
+          <%#= render :partial => 'development/cookie' , :locals => { :instance_variables => instance_variables } %>
+          <%= render :partial => 'development/instance_variables' , :locals => { :instance_variables => instance_variables } %>
+          <%= render :partial => 'development/parameters' , :locals => { :params => params } %>
+          <%#= render :partial => 'development/request' , :locals => { :request => request } %>
+          <%# render :partial => 'development/response' , :locals => { :request => response } %>
+          <%= render :partial => 'development/session' , :locals => { :session => session } %>
+
+
+
+<% end %>

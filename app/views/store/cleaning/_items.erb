@@ -1,0 +1,167 @@
+<% logger.debug "------------------------------------- store/_items.erb begin" -%>
+
+
+<% category_class_item_type = @category.category_class.item_type %>
+<% @already_rendered_item_class = [] %>
+
+@items.size: <%= @items.size %><br>
+
+<div class="container" id="items_container">
+    <div class="row-fluid">
+      <ul class="thumbnails">
+          <% if @category.additives and @category.additives != []  and  ![ 'master', 'slave'].include?(  @category.category_class.item_type  )  %>
+                          <%= render :partial => 'additives' %>
+          <% else   %>
+                              <% @items.sort_by{|a| a.item_class_sales_this_years_with_item_id.to_s   }.reverse.each do |item| -%>
+                                            <% if item %>
+                                                                <% if item.category %>
+                                                                                    <%  if item.item_class_component  -%>
+                                                                                                                    <% unless @already_rendered_item_class.include?( item.item_class.id.to_s ) %>
+                                                                                                                                                <%  @already_rendered_item_class  <<  item.item_class.id.to_s   %>
+                                                                                                                                                <li class="col-12 col-lg-6 item_choice" style="list-style-type: none;">
+                                                                                                                                                              <% if category_class_item_type == 'slave' %>
+                                                                                                                                                                                    <img src="<%=  item.image_url( @department, '/item_thumbnails/','x' )  %>" alt="260x180" class="selector_item" data-item_class_sales="<%= item.item_class_sales_this_years_with_item_id %>" data-item_id="<%= item.id %>" data-department_id="<%= @department.id %>"  data-category_id="<%= item.category_id %> data-applicable='<%= params[:applicable] || 0 %>'">
+                                                                                                                                                              <% else %>
+                                                                                                                                                                                    <%#= item.description_before_color_and_size %>
+                                                                                                                                                                                    <img src="<%=  item.image_url( @department, '/item_thumbnails/','x' )  %>" alt="260x180" class="selector_item"  data-item_class_sales="<%= item.item_class_sales_this_years_with_item_id %>" data-item_id="<%= item.id %>" data-department_id="<%= @department.id %>"  data-category_id="<%= item.category_id %> data-applicable='<%= params[:applicable] || 0 %>'">
+                                                                                                                                                              <% end %>
+                                                                                                                                                </li>
+                                                                                                                    <% end %>
+                                                                                    <% else %>
+                                                                                                                    <li class="col-12 col-lg-6 item_choice" style="list-style-type: none;">
+                                                                                                                          <% if category_class_item_type == 'slave' %>
+                                                                                                                                    <img src="<%=  item.image_url( @department, '/item_thumbnails/','x' )  %>" alt="260x180" class="selector_item" data-item_class_sales="<%= item.item_class_sales_this_years_with_item_id %>" data-item_id="<%= item.id %>" data-department_id="<%= @department.id %>"  data-category_id="<%= item.category_id %> data-applicable='<%= params[:applicable] || 0 %>'">
+                                                                                                                          <% else %>
+                                                                                                                                    <%#= item.description_before_color_and_size %>
+                                                                                                                                    <img src="<%=  item.image_url( @department, '/item_thumbnails/','x' )  %>" alt="260x180" class="selector_item"  data-item_class_sales="<%= item.item_class_sales_this_years_with_item_id %>" data-item_id="<%= item.id %>" data-department_id="<%= @department.id %>"  data-category_id="<%= item.category_id %> data-applicable='<%= params[:applicable] || 0 %>'">
+                                                                                                                          <% end %>
+                                                                                                                    </li>
+                                                                                     <% end %>
+                                                            <% end %>
+                                            <% end %>
+                              <% end -%>
+          <% end %>
+      </ul>
+    </div>
+</div>
+
+<% logger.debug "------------------------------------- store/_items.erb end" -%>
+
+
+
+<script type="text/javascript">
+    $('#item_crumb').addClass('disabled');
+    $('#item_crumb').addClass('current');
+    $('#category_crumb').removeClass('current');
+    $('#category_crumb').removeClass('disabled');
+</script>
+
+
+
+
+
+
+
+
+
+
+<% if @old %>
+
+    //              alert ( $( this).data('department_id') )
+    //              console.log( "You clicked department: " + 'department_' + department_to_show  );
+    //                $('.grid_department').hide()
+    //        var department_to_show = $( this).data('department_id');
+    //        $('.department_' + department_to_show + '_category').toggle();
+    //        $('#myModal').modal('hide');
+    //        $(".selector_item:first")
+
+
+<% s = "s" %>
+<% logger.debug "##########VIEW LOGGER BEGIN - VIEW LOGGER BEGIN - VIEW LOGGER BEGIN - VIEW LOGGER BEGIN -  " %>
+<% logger.debug "VIEW LOGGER BEGIN - VIEW LOGGER BEGIN - VIEW LOGGER BEGIN - VIEW LOGGER BEGIN -  " %>
+<% logger.debug "VIEW LOGGER BEGIN - VIEW LOGGER BEGIN - VIEW LOGGER BEGIN - VIEW LOGGER BEGIN -  " %>
+<% logger.debug "-------------------------------------begin _store/items " %>
+<% logger.warn "@fragment_name: #{@fragment_name} " %>
+<% logger.warn "_store/items is TRUE LOCATION " %>
+<% logger.debug "@category.additives.inspect: " + @category.additives.inspect %>
+<% logger.debug "VIEW LOGGER END - VIEW LOGGER END - VIEW LOGGER END - VIEW LOGGER END -  " %>
+<% logger.debug "VIEW LOGGER END - VIEW LOGGER END - VIEW LOGGER END - VIEW LOGGER END -  " %>
+<% logger.debug "###########VIEW LOGGER END - VIEW LOGGER END - VIEW LOGGER END - VIEW LOGGER END -  " %>
+
+<%  if @items  %>
+<div class="items_container">
+            <div class="items_page" style="width:720px;float:left;">
+
+
+
+                                            <% if @purchase_symbiote_item_type == "master" && @purchase_symbiote_item_shade == "colored" %>
+                                                                    <% @opaque_design_ids = [] %>
+                                                                    <%  @items.sort_by{|a| a.item_class_sales_this_years_with_item_id.to_s}.reverse.each do |item| %>
+                                                                            <% @opaque_design_ids << item.id if item.shade == "opaque" %>
+                                                                    <% end %>
+                                            <% end %>
+
+                                            <% if @department && @category %>
+                                                    <%= render(:partial => "store/category_description" ) if @category.category_header_image == 1  -%>
+                                            <% end %>
+                                            <div class="item_row_surround">
+                                                    <% unless @category.category_header_image == 1%>
+                                                            <div class="department_header" style="font-size:15px;">
+                                                                    <strong> Department: <%=  @department.Name.capitalize  %> -
+                                                                      Category: <%=  @category.Name.capitalize  %> </strong>
+                                                            </div>
+                                                    <% end %>
+
+                                                    <% if @category.additives and @category.additives != []  and  ![ 'master', 'slave'].include?(  @category.category_class.item_type  )  %>
+                                                                         <%  if @category.additives.size == 1 %>
+                                                                                      <% logger.debug "------------------------------------- @category.additives.size == 1  " -%>
+                                                                                      <% logger.debug "-------------------------------------  LIST ALL ITEMS IN THE SINGLE ADDITIVE CATEGORY" -%>
+
+                                                                                      <% @category.additives.first.items.sort_by{|a| a.item_class_sales_this_years_with_item_id.to_s}.reverse.each do |item| -%>
+                                                                                              <%= render(:partial => "store/item",:locals => { :item => item } )   -%>
+                                                                                      <% end -%>
+
+                                                                         <%  else  %>
+                                                                                            <%  @category.additives.each do |additive| %>
+                                                                                                              <% if additive.items.first  %>
+                                                                                                                         <div class="item_container">
+
+                                                                                                                               <%=  link_to(  image_tag( additive.items.first.image_url( @department, '/images/item_thumbnails/','x' )  ) , :controller => 'browse', :action => 'index', :department_id => @department.id, :category_id => additive.id  )  %><br />
+                                                                                                                              <% image_tag( '/images/breast_prints/' + Util::Slug.generate(additive.department.Name) + '.png' , :size => '80' ) %>
+                                                                                                                              <%= link_to additive.Name, :controller => 'browse', :action => 'index', :department_id => @department.id, :category_id => additive.id %><br />
+                                                                                                                                 <span class="category_box_more">
+                                                                                                                                           <%= link_to  "Click for More", :controller => 'browse', :action => 'index', :department_id => @department.id, :category_id => additive.id %>
+                                                                                                                                </span>
+
+                                                                                                                         </div>
+
+                                                                                                           <% end %>
+                                                                                              <% end  %>
+                                                                          <%  end   %>
+                                                   <% else   %>
+                                                                      <% if @opaque_design_ids %>
+                                                                                      <% logger.debug "-------------------------------------@opaque_design_ids " -%>
+                                                                                       <% logger.debug "WAS @items.sort_by{|a| a.ItemLookupCode}.reverse.each do |item| " %>
+                                                                                      <% @items.sort_by{|a| a.item_class_sales_this_years_with_item_id.to_s}.reverse.each do |item| -%>
+                                                                                                      <% if @opaque_design_ids.include?(item.id)  %>
+                                                                                                              <%= render(:partial => "store/item",:locals => { :item => item } )  -%>
+                                                                                                      <% else %>
+                                                                                                              <%= render(:partial => "store/item_color_not_compatible",:locals => { :item => item } )  -%>
+                                                                                                      <% end %>
+                                                                                      <% end -%>
+                                                                      <% else %>
+                                                                                      <% s = "s" %>
+                                                                                      <% logger.debug "------------------------------------- NOT @opaque_design_ids " -%>
+                                                                                      <% @items.sort_by{|a| a.item_class_sales_this_years_with_item_id.to_s   }.reverse.each do |item| -%>
+                                                                                              <%= render(:partial => "store/item",:locals => { :item => item } )   -%>
+                                                                                      <% end -%>
+                                                                      <% end %>
+                                                 <% end %>
+                                            </div>
+                </div>
+                <%  else  -%>
+                                       no items found
+                <% end -%>
+        </div>
+<% logger.debug "-------------------------------------end _store/items " -%>
+ <% end %>

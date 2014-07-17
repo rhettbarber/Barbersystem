@@ -1,0 +1,27 @@
+<div style="font-size:18px;">Requested Items Summary </div><br />
+
+<%= link_to( "Item Manager" ,  :controller => 'item_manager'  ) %><br/><br/>
+
+<table>
+  <tr>
+    <th>Clone item type</th>
+    <th>Unfinished Files</th>
+    <th>Unfinished RMS</th>
+  </tr>
+
+<% CloneItemType.all.each do |clone_item_type| %>
+  <tr>
+    <td><%= clone_item_type.name %></td>
+    <td><%= link_to( clone_item_type.unfinished_file_requests_count , :controller => 'clone_item_requests', :action => 'show_unfinished_files_by_type', :clone_item_type_id => clone_item_type.id )        %></td>
+    <td><%= link_to( clone_item_type.unfinished_rms_requests_count  , :controller => 'clone_item_requests', :action => 'show_unfinished_rms_by_type', :clone_item_type_id => clone_item_type.id ) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+
+
+
+
+<% link_to 'New Clone item request', new_clone_item_request_path %>

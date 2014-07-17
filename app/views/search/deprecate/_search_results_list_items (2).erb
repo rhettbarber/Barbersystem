@@ -1,0 +1,27 @@
+
+<div id="search_results_container" style="text-align:center;font-size:17px;height:200px;background-color:white;display:table;">
+
+Search found <%= @items.size %>   results.<br />
+
+
+          <div>
+
+                  <table>
+                          <tbody>
+                          <tr>
+                                  <td>
+                                  <div id="item_rows">
+                                  <%= render :partial => "/advanced_main_menu/item", :collection => @items %>
+                                  </div>
+                                  </td>
+                          </tr>
+                          </tbody>
+                          </table>
+
+
+          </div>
+            
+
+</div>
+
+

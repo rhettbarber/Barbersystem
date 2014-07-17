@@ -1,0 +1,17 @@
+<% if params[:date] %>
+         <% @chosen_year =   params[:date][:year].to_i %>
+<% else  %>
+    <% @chosen_year = Date.today.year  %>
+<% end  %>
+
+
+<%    form_tag  '/franchise_order_generator/by_department'  do %>
+    <%= select_year(  @chosen_year , :start_year => 2008, :end_year => Date.today.year )  %>
+    <%= submit_tag 'Change Year' %>
+<% end  %>
+
+<h2>Chosen Year:<%= @chosen_year %></h2>
+
+<div class="item_sales_report_departments">
+      <%= render :partial => 'department', :collection => @deparments  -%>
+</div>

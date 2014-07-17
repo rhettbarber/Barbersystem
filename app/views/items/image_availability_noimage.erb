@@ -1,0 +1,79 @@
+
+
+
+<ul data-role="listview">
+  <% @show_icc_colors = Set.new %>
+  <% for item in   @items        %>
+      <% if item.category %>
+          <% if item.item_class_component %>
+              <% unless @show_icc_colors.include?( item.color )%>
+                  <% @show_icc_colors.add( item.color )%>
+                  <li>
+                    <a href="#">
+                      <div>
+                        <%#= image_tag "/images/item_specsheets/" + item.PictureName + ".jpg"  ,:style => "height:200px;" %>
+                        <p><%= item.ItemLookupCode  %></p>
+                        <p><%= the_filename =  item.PictureName  + ".jpg" %></p>
+                        <p><%= the_path = "#{Rails.root}/public/images/item_specsheets/#{the_filename}"%></p>
+                        <p>
+                          <%=   FileTest.exist?( the_path ) %>
+                        </p>
+                      </div>
+                    </a>
+                  </li>
+              <% end %>
+          <% else %>
+              <li>
+                <a href="#">
+                  <div>
+                    <%= image_tag "/images/item_specsheets/" + item.PictureName + ".jpg"  ,:style => "height:200px;" %>
+                    <p><%= item.ItemLookupCode  %></p>
+                  </div>
+                </a>
+              </li>
+          <% end %>
+
+      <% end %>
+  <% end %>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<% if @before %>
+    <% @item_classes = ItemClass.find(:all, :conditions => ["department_id in (?) ",  @departments  ]  )       %>
+
+    <table>
+
+      <% for item_class in @item_classes %>
+
+          <% for item in   item_class.items        %>
+              <tr>
+                <td><%= item.ItemLookupCode  %></td>
+                <td><%= item.color  %></td>
+                <td><%=  p = Pathname.new( item.image_url(@local_department)  )
+                         image_to_check =  p.basename    %></td>
+                <td>
+                  <% image_conditions = ["filename = ?",  image_to_check.to_s   ]%>
+                  <%= AvailableImage.exists?(image_conditions)  %>
+                </td>
+                <td> <%= item.category_id %>  </td>
+                <td> <%= item.item_type %>  - - - -</td>
+                <td> <%= item.image_url_explaination(@local_department) %>  </td>
+              </tr>
+          <% end %>
+
+      <% end %>
+
+    </table>
+
+
+
+<% end %>
+

@@ -1,0 +1,19 @@
+<%  if @website.store_website == true %>
+	<p>
+      <%= link_to image_tag("/images/buttons/tracking.png", :border => 0 ), :controller => "order_tracking" , :action => "index"  %> |
+		<% if ['dixie_store', 'christian_store'].include?(@website.name) %>
+				<%#= link_to image_tag("/images/buttons/flash-catalog.png", :border => 0 ), :controller => 'page', :action => 'show_page', :id => 'flash-catalog-viewer'   %> |
+		<% end %>	
+		<% unless ['fuzzard_store','commander'].include?(@website.name) %>
+				<%= link_to image_tag("/images/icons/new.png", :border => 0 ), :controller => 'browse' , :action => "new_designs"  %> |
+				<%= link_to "Short Sleeve T", "/specsheet?department_id=2&item_id=58" %> |
+				<%= link_to "Pigment Tee", "/specsheet?department_id=2&item_id=310" %>  |
+				<%= link_to "Long Sleeve Tee", "/specsheet?department_id=2&item_id=89 " %>  |
+				<%= link_to "Pigment Long Sleeve Tee", "/specsheet?department_id=2&item_id=374" %>  |
+				<%= link_to "Camo S.S. Tee", "/specsheet?department_id=2&item_id=14255" %> 
+		    		<% if @singular_item_customer == true  %>
+								 | <%= link_to image_tag("/images/icons/clearance.png", :border => 0 ), :controller =>  'browse' , :action => "sale_designs"   unless controller.controller_name == "page"  %>
+				 <% end %>	
+		<% end %>	
+	</p>
+<% end %>

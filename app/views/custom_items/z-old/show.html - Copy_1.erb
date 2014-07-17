@@ -1,0 +1,88 @@
+
+
+<% @on = false %>
+<% if @on == true  %>
+
+				
+				<div  id="specsheet_design_div"   style="width:850px;height:353px;position:relative; top:<%= @current_zero_top  %>; z-index:3;">
+						<span  id="specsheet_design_area">
+								<img src="/images/item_specsheets/<%= @design.PictureName %>" 
+								 style="position: relative; 
+								 height:<%=   @combination_height  %>px;
+								 left:<%=  @combination_left  %>px;
+								 top:<%=  @combination_top  %>px;
+								 " />
+							</span>
+							<% @current_zero_top = @current_zero_top - 353  %>
+				</div>
+				
+				
+				
+				
+				
+					<div id="specsheet" style="float:left;height:0px;position: relative;z-index: 2;">
+							<img src="/images/item_specsheets/11001_lmrp_ash.png">
+					</div>
+					<div id="main_print" style="width:850px;height:353px;position:relative; top:<%= @current_zero_top  %>; z-index:3;">
+							<img src='<%= @mugshot.public_filename  %>' style="left:200px;top:50px;">
+					</div>
+				
+				
+				
+				
+						<div id="mask" style="float:left;height:0px;position: relative;z-index: 6;" class="otherstuff">
+								<img src= "/images/item_masks/11012_orange_mask.png"
+						</div>
+						<div id="main_print" style="height:353px;width:850px;position: relative;z-index: 4;" class='moveable'>
+								<img src='<%= @mugshot.public_filename  %>' style="left:200px;">
+						</div>
+						<div id="reverse_print" style="height:0px;position: relative;z-index: 5;"  class='moveable'>
+								<img src='http://localhost:1000/mugshots/0000/0011/6334l_o_rp.png' style="left:500px;">
+						</div>
+				
+				
+				
+				<br />
+				
+				
+				
+				
+				
+				
+				
+				<script language="JavaScript" type="text/javascript">
+				<!--
+				   var orgCursor=null;   // The original Cursor (mouse) Style so we can restore it
+				   var dragOK=false;     // True if were allowed to move the element under mouse
+				   var dragXoffset=0;    // How much weve moved the element on the horozontal
+				   var dragYoffset=0;    // How much weve moved the element on the vertical
+				   document.getElementById('main_print').style.left='0px';
+				   document.getElementById('main_print').style.top='0px';
+				   document.getElementById('reverse_print').style.left='0px';
+				   document.getElementById('reverse_print').style.top='0px';
+				//-->
+				</script>
+
+<% else %>
+						<div id="mask" style="float:left;height:0px;position: relative;z-index: 6;" class="otherstuff">
+								<img src= "/images/item_masks/11012_orange_mask.png"
+						</div>
+						<div id="main_print" style="height:353px;width:850px;position: relative;z-index: 4;" class='moveable'>
+								<img src='<%= @mugshot.public_filename  %>' style="left:200px;">
+						</div>
+						<div id="reverse_print" style="height:0px;position: relative;z-index: 5;"  class='moveable'>
+								<img src='http://localhost:1000/mugshots/0000/0011/6334l_o_rp.png' style="left:500px;">
+						</div>
+				
+
+
+
+
+
+
+<% end %>
+
+
+
+				lefts place:<div id="lpos" style="float:left;"></div>
+				rights place:<div id="rpos" style="float:left;"></div>

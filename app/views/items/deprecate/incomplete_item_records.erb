@@ -1,0 +1,39 @@
+<table class="price_sheet" width="1000" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th colspan="20" class="yellow" scope="col">Products with missing information </th>
+  </tr>
+  <tr>
+    <th class="lightgreen" scope="col">ItemLookupCode</th>
+    <th class="lightblue" scope="col">Description</th>
+    <th class="lightblue" scope="col">category.id</th>
+	 <th class="lightblue" scope="col">item.PictureName</th>
+    <th class="lightblue" scope="col">category.name</th>
+    <th class="lightblue" scope="col">category_class_id</th>
+    <th class="lightgreen" scope="col">category.prefix</th>
+	<th class="mistyrose" scope="col">error cause</th>
+  </tr>
+  
+<% for item in @items %>
+  <tr>
+    <td class="lightgreen"><%= item.ItemLookupCode  %></td> 
+    <td class="lightblue"><%=  item.Description %></td>
+    <td class="lightblue"><%=  item.category.id %></td>
+    <td class="lightblue"><%=  item.PictureName %></td>
+    <td class="lightblue"><%=  item.category.Name %></td>
+	 <td class="lightblue"><%=  item.category.category_class_id %></td>
+	 <td class="lightgreen"><%=  item.category.prefix %></td>
+	 <td class="mistyrose">
+
+
+
+
+<%=  item.in_error    %>		
+		
+		
+		
+		</td>
+  </tr>
+
+<% end if @items %>
+
+</table>

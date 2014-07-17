@@ -1,0 +1,25 @@
+Affiliate Sale Notification ADMIN:
+
+A purchase was made on  <%= @website.domain %>.
+
+Purchase id: <%= @purchase.id %>
+
+Purchase Total:<%= @purchase.Total %>
+
+Purchase Customer Id:<%= @purchase.customer.id %>
+
+Affiliate Id:<%= @affiliate_user.id  %>
+
+Affiliate Email:<%= @affiliate_user.email  %>
+
+User who purchased: <%= @user_who_purchased.email %>
+
+<% if @user_who_purchased.recruiter  %>
+Affiliate Recruiter id: <%= @user_who_purchased.recruiter.id   %>
+
+Affiliate Recruiter email: <%= @user_who_purchased.recruiter.email   %>
+<% else %>
+
+This affiliate had no recruiter
+
+<% end %>

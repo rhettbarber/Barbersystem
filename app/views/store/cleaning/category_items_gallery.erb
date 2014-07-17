@@ -1,0 +1,189 @@
+<script src="/assets/store/jquerymobile_store.js"></script>
+
+<!--<a href="#extra_footer" data-role="button" data-theme="c">Show page "two"></a>-->
+
+
+
+
+
+    <% category_class_item_type = @category.category_class.item_type     %>
+<% @already_rendered_item_class = [] %>
+
+
+<ul id="Gallery" class="gallery">
+  <% if @category.additives and @category.additives != []  and  ![ 'master', 'slave'].include?(  @category.category_class.item_type  )  %>
+      <%= render :partial => 'additives' %>
+  <% else   %>
+      <% @items.sort_by{|a| a.item_class_sales_this_years_with_item_id.to_s   }.reverse.each do |item| -%>
+          <% if item %>
+              <% if item.category %>
+                  <%  if item.item_class_component  -%>
+                      <% unless @already_rendered_item_class.include?( item.item_class.id.to_s ) %>
+                          <%  @already_rendered_item_class  <<  item.item_class.id.to_s   %>
+                          <li data-theme="c">
+                            <% if category_class_item_type == 'slave' %>
+                                <a href="<%=  item.image_url( @department, '/item_thumbnails/','x' )  %>">
+                                  <img src="<%=  item.image_url( @department, '/item_thumbnails/','x' )  %>" alt="260x180" class="selector_item" data-item_class_sales="<%= item.item_class_sales_this_years_with_item_id %>" data-item_id="<%= item.id %>" data-department_id="<%= @department.id %>"  data-category_id="<%= item.category_id %> data-applicable='<%= params[:applicable] || 0 %>'">
+                                </a>
+                            <% else %>
+                                <%#= item.description_before_color_and_size %>
+                                <a href="<%=  item.image_url( @department, '/item_thumbnails/','x' )  %>">
+                                  <img src="<%=  item.image_url( @department, '/item_thumbnails/','x' )  %>" alt="260x180" class="selector_item"  data-item_class_sales="<%= item.item_class_sales_this_years_with_item_id %>" data-item_id="<%= item.id %>" data-department_id="<%= @department.id %>"  data-category_id="<%= item.category_id %> data-applicable='<%= params[:applicable] || 0 %>'">
+                                </a>
+                            <% end %>
+                          </li>
+                      <% end %>
+                  <% else %>
+                      <li data-theme="c">
+                        <% if category_class_item_type == 'slave' %>
+                            <a href="<%=  item.image_url( @department, '/item_thumbnails/','x' )  %>">
+                              <img src="<%=  item.image_url( @department, '/item_thumbnails/','x' )  %>" alt="260x180" class="selector_item" data-item_class_sales="<%#= item.item_class_sales_this_years_with_item_id if item.category %>" data-item_id="<%= item.id %>" data-department_id="<%= @department.id %>"  data-category_id="<%= item.category_id %> data-applicable='<%= params[:applicable] || 0 %>'">
+                            </a>
+                        <% else %>
+                            <%#= item.description_before_color_and_size %>
+                            <a href="<%=  item.image_url( @department, '/item_thumbnails/','x' )  %>">
+                              <img src="<%=  item.image_url( @department, '/item_thumbnails/','x' )  %>" alt="260x180" class="selector_item"  data-item_class_sales="<%= item.item_class_sales_this_years_with_item_id %>" data-item_id="<%= item.id %>" data-department_id="<%= @department.id %>"  data-category_id="<%= item.category_id %> data-applicable='<%= params[:applicable] || 0 %>'">
+                            </a>
+                        <% end %>
+                      </li>
+                  <% end %>
+              <% end %>
+          <% end %>
+      <% end -%>
+  <% end %>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @testing %>
+    <script type="text/javascript">
+
+        $("#index").on('pageinit', function(){
+            $.get("/footers/footer.html",
+                    //            $.get("/footers/footer.html", { name: "John", time: "2pm" },  EXAMPLE PARAMETERS IN URL
+                    function(footer_content){
+                        alert("Data Loaded: " + footer_content);
+                        $('#extra_footer').append( footer_content ).trigger( "create" );
+                    });
+        });
+
+        //    $("#index").on('pageinit', function(){
+        //        var footer_content = $('#extra_footer').load('/footers/Footer.html' );//.trigger('pagecreate');
+        //        $('#extra_footer').trigger('pagecreate');
+        //
+        //    });
+
+
+        //$('#index').trigger('pagecreate');
+
+
+        //
+        //
+        //    $("#set div:jqmData(role='collapsible')").each(function () {
+        //        $(this).bind('expand', function() {
+        //            if($(this).find('li').length < 1) {
+        //                // do ajax call here to get data
+        ////                items = $('#extra_footer').load('/footers/Footer.html' )
+        //
+        //
+        //                $.get("/footers/footer.html", { name: "John", time: "2pm" },
+        //                        function(items){
+        //                            alert("Data Loaded: " + items);
+        //                        });
+        //
+        //
+        //                $(this).find('ul').append(items); //.listview('refresh');
+        //            }
+        //        });
+        //    });
+        //    $('#page #set li').on('click',function () {
+        //        alert('Go to item');
+        //    });
+
+
+        //    $("#index").on('pageinit', function(){
+        //        alert( "pageinit" );
+        //        $('[data-role="content"]').append('<a href="#" data-role="button" data-icon="star" data-theme="a">Button</a>');
+        //        $('[type="button"]').button();
+
+        //        $.mobile.loadPage( "/footers/footer.html" );
+
+        //    });
+
+
+
+        //        THIS WORKS FOR ALL PAGES
+        //    $(document).on('pageinit', function(){
+        ////            alert( "pageinit" );
+        //        $('[data-role="content"]').append('<a href="#" data-role="button" data-icon="star" data-theme="a">Button</a>');
+        //        $('[type="button"]').button();
+        //    });
+
+
+
+        //    $(document).delegate('.ui-page', 'pageshow', function () {
+        //                alert( "delegate pageshow" );
+        //    });
+
+        //    $( "#index" ).on( "pagecreate", function( event ) {
+        ////        alert( "pagecreate" );
+        //        $('[data-role="content"]').append('<a href="#" data-role="button" data-icon="star" data-theme="a">Button</a>');
+        //        $('[type="button"]').button();
+        //    });
+
+
+
+        //    $( "#homePage" ).on( "pagebeforecreate", function( event ) {
+        //        alert( "pagebeforecreate" );
+        //    });
+
+
+        //    $( document ).on( "pageinit", "#homePage", function( event ) {
+        //        alert( "pageinit called" );
+        //    });
+        //
+        //
+        //    $( "#homePage" ).on( "pagechange", function( event ) {
+        //        alert("pagechange completed");
+        //
+        //    });
+
+        //    $( "#homePage" ).on( "pagechange", function( event ) {
+        //         alert("great");
+        ////        var myPhotoSwipe = Code.PhotoSwipe.attach( window.document.querySelectorAll('#Gallery a'), { enableMouseWheel: false , enableKeyboard: false ,imageScaleMethod: 'fitNoUpscale',captionAndToolbarAutoHideDelay: 0  } ); //} //, false);
+        ////        $('#footerDiv').load('/footers/Footer.html' );
+        //
+        //    });
+
+        // $('#footerDiv').load('/footers/Footer.html' );
+        //    $('#homePage').append( footer ).trigger( "pagecreate" );
+    </script>
+
+
+
+<% end %>

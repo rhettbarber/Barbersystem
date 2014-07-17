@@ -1,0 +1,47 @@
+
+
+
+
+<% rms_item_lookup_code_string =   clone_item_type.prefix_code +    item.core_number_only  %>
+<% production_item_lookup_code_string =   clone_item_type.prefix_code +    item.core_number_only   + clone_item_type.production_extension %>
+
+
+
+
+    <%= clone_item_type.name %> <br/>
+   <%  if Item.unscoped.exists?([ "ItemLookupCode = ?", rms_item_lookup_code_string  ] ) or ItemClass.exists?([ "ItemLookupCode = ?", rms_item_lookup_code_string  ] ) %>
+            <span style="color:darkgreen">RMS</span>
+    <% else  %>
+            <% if @rms_status_color %>
+                     <span style="color:<%= @rms_status_color %>">RMS</span>
+            <% else %>
+                     <% if CloneItemRequest.exists?([ "clone_item_type_id = ? and item_id = ?", clone_item_type.id ,  item.id  ] ) %>
+                              <span style="color:orange">RMS</span>
+                     <% else  %>
+                              <span style="color:#A00000">RMS</span>
+                     <% end  %>
+            <% end %>
+    <% end %>
+
+
+
+
+
+<% file_status =   File.file?( 'W:\\AUTOMATION_DATABASE\\PRODUCTION_FILES\\' + clone_item_type.name + '\\' + production_item_lookup_code_string  ) %>
+
+      <% if file_status == true %>
+                          <span style="color:darkgreen">FILE</span>
+       <% else  %>
+                          <% if @file_status_color %>
+                                <span style="color:<%= @file_status_color %>">FILE</span>
+                           <% else %>
+                                          <% if CloneItemRequest.exists?([ "clone_item_type_id = ? and item_id = ?", clone_item_type.id ,  item.id  ] ) %>
+                                                  <span style="color:orange">FILE</span>
+                                          <% else %>
+                                                  <span style="color:#A00000">FILE</span>
+                                         <% end %>
+                           <% end %>
+       <% end  %>
+
+
+

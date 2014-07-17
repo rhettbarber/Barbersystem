@@ -1,0 +1,7 @@
+<div class="item_sales_report_department">
+    <% @categories = department.categories -%>
+    <%= department.Name -%>
+      <div class="item_sales_report_categories">
+               <%= render :partial => 'category', :collection => @categories  -%>
+      </div>
+</div>

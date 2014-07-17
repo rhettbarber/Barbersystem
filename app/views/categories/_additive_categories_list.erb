@@ -1,0 +1,27 @@
+<% if @category %>
+        <% @this_category = @category    %>
+<% else %>
+      <% @this_category = @item.category %>
+<% end  %>
+
+
+
+<style type="text/css">
+  .remove_additive_button {
+    float:left;
+}
+
+  </style>
+
+
+
+
+  <div id="additive_categories_list" style="padding:10px;">
+<%= @this_category.additives.size %> Additive Categories for <%=  @this_category.department.Name %> - <%=  @this_category.Name %>:<br />
+<%   @this_category.additives.each do |cad| %>
+         <%= button_to(  cad.department.Name + " : "  +  cad.Name +  " - Remove", {:controller => "categories", :action => "ajax_remove_from_additives",  :selected_category_id => @this_category.id, :additive_category_id  =>  cad.id }, :class => "remove_additive_button" , :method => :put,  :remote => true)     %>
+<% end  %>
+<br />
+  </div>
+
+

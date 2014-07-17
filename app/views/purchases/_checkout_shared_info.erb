@@ -1,0 +1,262 @@
+<% if controller.action_name == 'checkout_receipt' %>
+             <%= link_to "Back to Website",{ :controller => 'store'}, :data => {:theme => "c",  :role => "button" ,:ajax=> "false"}  %>
+<% else %>
+            <%= link_to( "Back to Cart" , {:controller => 'cart' }, :data => {:theme => "c",  :role => "button" ,:ajax=> "false"}  )    %>
+<% end %>
+
+
+<%= render(:partial => "purchases/checkout_important_message") %>
+
+<div class="purchases_checkout_review_information">
+  <%=    render(:partial => "customers/show" )  -%>
+  <%=    render(:partial => "ship_tos/show"  ) -%>
+  <%=    render(:partial => "quote_tender_entries/show"  ) -%>
+  <%=    render(:partial => "ship_tos/show_shipping_service"  ) -%>
+</div>
+<br>
+
+<table data-role="table" id="purchase-table" data-mode="reflow" class="phone-breakpoint  table-stroke">
+  <% if @customer && @customer.PriceLevel > 0 %>
+                     <%= render :partial => 'singular_wholesale_thead' %>
+  <% else %>
+                    <%= render :partial => 'symbiont_thead' %>
+  <% end %>
+  <tbody>
+
+  <% if  @purchases_entries %>
+                            <% if @customer && @customer.PriceLevel > 0 %>
+                                                <% @purchases_entries.each do |purchases_entry|   %>
+                                                                                <%= render(:partial => "purchases/purchases_entry_singular_wholesale",:locals => { :purchases_entry => purchases_entry } )  if purchases_entry.item and !purchases_entry.item.nil?  %>
+                                                <% end %>
+                            <% else %>
+                                                  <% @purchases_entries.each do |purchases_entry|   %>
+                                                                      <%  if purchases_entry.opposite_entry == false  %>
+                                                                                            <%= render(:partial => "purchases/purchases_entry_singular_retail",:locals => { :purchases_entry => purchases_entry } )  if purchases_entry.item and !purchases_entry.item.nil?  %>
+                                                                      <%  else  %>
+                                                                                              <%   purchases_entry_complete_symbiont =   purchases_entry.complete_symbiont %>
+                                                                                              <%   if purchases_entry_complete_symbiont  %>
+                                                                                                                          <% if purchases_entry.master_entry == true %>
+                                                                                                                                             <%= render(:partial => "purchases/purchases_entry_symbiont_master_complete",:locals => { :purchases_entry => purchases_entry } ) unless  purchases_entry.item_id  == 0 or  purchases_entry.item_id  == '0'    %>
+                                                                                                                          <%  else  %>
+                                                                                                                                              <%# DON'T RENDER SYMBIONT SLAVE IF IT IS COMPLETE %>
+                                                                                                                                              <%#= render(:partial => "purchases/purchases_entry_symbiont_slave_complete",:locals => { :purchases_entry => purchases_entry } ) unless  purchases_entry.item_id  == 0 or  purchases_entry.item_id  == '0'    %>
+                                                                                                                          <%  end  %>
+                                                                                              <% else %>
+                                                                                                                          <% if purchases_entry.master_entry == true %>
+                                                                                                                                                <%= render(:partial => "purchases/purchases_entry_symbiont_master_incomplete",:locals => { :purchases_entry => purchases_entry } ) unless  purchases_entry.item_id  == 0 or  purchases_entry.item_id  == '0'    %>
+                                                                                                                          <%  else  %>
+                                                                                                                                              <%= render(:partial => "purchases/purchases_entry_symbiont_slave_incomplete",:locals => { :purchases_entry => purchases_entry } ) unless  purchases_entry.item_id  == 0 or  purchases_entry.item_id  == '0'    %>
+                                                                                                                          <%  end  %>
+                                                                                              <% end %>
+                                                                      <% end %>
+                                                  <% end %>
+                             <% end %>
+  <% end %>
+
+
+  </tbody>
+</table>
+
+
+
+
+
+<div style="width:100%;display: inline-table;">
+  <% if @customer and @customer.PriceLevel > 0 %>
+      <%= render :partial => 'cart/purchase_totals_wholesale' %>
+  <% else %>
+      <%= render :partial => 'cart/purchase_totals' %>
+  <% end %>
+</div>
+
+
+
+
+<% if controller.action_name == 'checkout_receipt' %>
+                <%= link_to "Back to Website",{ :controller => 'browse'}, :data => {:theme => "c",  :role => "button" ,:ajax=> "false"}  %>
+<% else %>
+                <%= render :partial => 'checkout_review_options' %>
+<% end %>
+
+
+
+<%=  render :partial => "tracking/page_analytics_tracking" %>
+<%#=  render :partial => "tracking/receipt_analytics_tracking" %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @real %>
+
+
+
+
+
+    <table data-role="table">
+
+      <tbody><tr>
+        <th  class="purchases_entry_master_image">Item</th>
+        <th  class="purchases_entry_slave_image">Design</th>
+        <th  class="purchases_entry_quantity">Quantity</th>
+        <th  class="purchases_entry_itemlookupcode">Item lookup code</th>
+        <th  class="purchases_entry_symbiont_description">Description</th>
+        <th  class="purchases_entry_full_unit_price">Unit price:</th>
+        <th  class="purchases_entry_full_extended_price">Extended price</th>
+      </tr>
+      <% if  @purchases_entries %>
+          <% @purchases_entries.each do |purchases_entry|   %>
+              <%  if purchases_entry.opposite_entry == false  %>
+                  <%= render(:partial => "purchases_entries/purchases_entry",:locals => { :purchases_entry => purchases_entry } ) %>
+              <%  else  %>
+                  <% if purchases_entry.master_entry == true %>
+                      <%= render(:partial => "purchases_entries/purchases_entry_symbiont",:locals => { :purchases_entry => purchases_entry } ) %>
+                  <%  end  %>
+              <% end %>
+          <% end %>
+      <% end %>
+
+      </tbody></table>
+
+
+
+
+
+
+
+
+
+    <div class="checkout_review_header"><%= render(:partial => "purchases/checkout_important_message") %></div>
+
+
+    <div class="purchases_checkout_review_information">
+      <%=    render(:partial => "customers/show" )  -%>
+      <%=    render(:partial => "ship_tos/show"  ) -%>
+      <%=    render(:partial => "quote_tender_entries/show"  ) -%>
+      <%=    render(:partial => "ship_tos/show_shipping_service"  ) -%>
+    </div>
+    <br>
+
+
+    <div class="swipe_instructions">Swipe on table below to see details <%= image_tag "/images/icons/swipe-left.gif", :size => '50x50' %> <br></div>
+
+<%# if @sss %>
+    <table data-role="table">
+
+      <tbody><tr>
+        <th  class="purchases_entry_master_image">Item</th>
+        <th  class="purchases_entry_slave_image">Design</th>
+        <th  class="purchases_entry_quantity">Quantity</th>
+        <th  class="purchases_entry_itemlookupcode">Item lookup code</th>
+        <th  class="purchases_entry_symbiont_description">Description</th>
+        <th  class="purchases_entry_full_unit_price">Unit price:</th>
+        <th  class="purchases_entry_full_extended_price">Extended price</th>
+      </tr>
+      <% if  @purchases_entries %>
+          <% @purchases_entries.each do |purchases_entry|   %>
+              <%  if purchases_entry.opposite_entry == false  %>
+                  <%= render(:partial => "purchases_entries/purchases_entry",:locals => { :purchases_entry => purchases_entry } ) %>
+              <%  else  %>
+                  <% if purchases_entry.master_entry == true %>
+                      <%= render(:partial => "purchases_entries/purchases_entry_symbiont",:locals => { :purchases_entry => purchases_entry } ) %>
+                  <%  end  %>
+              <% end %>
+          <% end %>
+      <% end %>
+
+      </tbody></table>
+    <%# end %>
+
+
+    <br>
+
+    <%= render :partial => 'cart/purchase_totals' %>
+
+
+
+
+    <br>
+
+    <div class="checkout_review_options">
+      <script type="text/javascript">
+          function waitButton() {
+              console.log("waitButton Pressed");
+              $('complete_order').hide();
+              $('please_wait_message').show();
+          }
+      </script>
+      <%= link_to( "Complete Order" , {:controller => 'purchases', :action => 'complete_order'}, :class => "btn btn-success btn-show",:onclick => 'waitButton()'  )   %><br /><br />
+      <img style="display:none;" id="please_wait_message" src="/images/buttons/please_wait.gif" alt="" />
+      <%= link_to( "Back to Cart" , {:controller => 'cart' }, :class => "btn btn-default btn-show" )    %><br /><br />
+      <%= link_to( "Cancel Order" , {:controller => 'purchases', :action => 'cancel_order'}, :class => "btn btn-default btn-show" )   %><br />
+    </div>
+
+
+<% end %>
+
+
+
+
+
+
+
+
+<% if @using_divs %>
+
+
+    <div class="container">
+      <% if  @purchases_entries %>
+          <% @purchases_entries.each do |purchases_entry|   %>
+              <%  if purchases_entry.opposite_entry == false  %>
+                  <%= render(:partial => "purchases/purchases_entry",:locals => { :purchases_entry => purchases_entry } ) %>
+              <%  else  %>
+                  <% if purchases_entry.master_entry == true %>
+                      <%= render(:partial => "purchases/purchases_entry_symbiont",:locals => { :purchases_entry => purchases_entry } ) %>
+                  <%  end  %>
+              <% end %>
+          <% end %>
+      <% end %>
+    </div>
+
+
+<% end %>
+
+
+
+
+

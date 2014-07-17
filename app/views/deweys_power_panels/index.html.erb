@@ -1,0 +1,25 @@
+<h1>Listing deweys_power_panels</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @deweys_power_panels.each do |deweys_power_panel| %>
+  <tr>
+    <td><%= deweys_power_panel.name %></td>
+    <td><%= deweys_power_panel.description %></td>
+    <td><%= link_to 'Show', deweys_power_panel %></td>
+    <td><%= link_to 'Edit', edit_deweys_power_panel_path(deweys_power_panel) %></td>
+    <td><%= link_to 'Destroy', deweys_power_panel, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Deweys power panel', new_deweys_power_panel_path %>

@@ -1,0 +1,12 @@
+
+<!DOCTYPE html>
+<html>
+<%= render :partial => 'layout_elements/head' %>
+<%= stylesheet_link_tag 'item_management.css'  %>
+<body>
+<%= render :partial => 'onclick_top_menu/onclick_top_menu' %>
+<%= yield %>
+  <%= render :partial => 'development/instance_variables' , :locals => { :instance_variables => instance_variables } %>
+<%= yield :footer -%>
+</body>
+</html>

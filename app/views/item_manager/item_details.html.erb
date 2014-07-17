@@ -1,0 +1,205 @@
+
+<% content_for :head_additions do -%>
+        <%= stylesheet_link_tag 'item_manager.css' %>
+<% end  -%>
+
+<div style="font-weight:bolder;font-size:15px;">ItemManager - Item Details  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  <%= link_to( "Back to Items List", :controller => 'item_manager', :action => 'index'  ) %></div>
+
+<table>
+<tr>
+      <td>
+          <% if  @missing_thumbnail.include?(  @item.ItemLookupCode )  %>
+                              <span style="color:red">NO THUMB</span>
+          <% else %>
+                     <%= image_tag( '/images/designer_item_thumbnails/' + @item.ItemLookupCode + '.png' , :alt => @item.id )  %>
+          <% end %>
+      </td>
+
+      <td  class="standard_info">
+
+        <table>
+          <tbody>
+                <tr>
+                        <td><%= @item.ItemLookupCode  %></td>
+
+                        <td style="width:300px;"><%= @item.Description  %></td>
+                        <td>
+                                <% if  @missing_original_psd.include?(  @item.ItemLookupCode )  %>
+                                                    <span style="color:red">ORIG</span>
+                                <% else %>
+                                                     <span style="color:green">ORIG</span>
+                                <% end %>
+                          </td>
+                        <td>
+                                <% if  @missing_original_png.include?(  @item.ItemLookupCode )  %>
+                                                    <span style="color:red">HI-PNG</span>
+                                <% else %>
+                                                     <span style="color:green">HI-PNG</span>
+                                <% end %>
+                          </td>
+                        <td>
+                                <% if  @missing_separation.include?(  @item.ItemLookupCode )  %>
+                                                    <span style="color:red">SEP</span>
+                                <% else %>
+                                                     <span style="color:green">SEP</span>
+                                <% end %>
+                          </td>
+                        <td>
+                                <% if  @missing_specsheet.include?(  @item.ItemLookupCode )  %>
+                                                    <span style="color:red">SPEC</span>
+                                <% else %>
+                                                     <span style="color:green">SPEC</span>
+                                <% end %>
+                          </td>
+                          <td>
+                                <% if  @missing_thumbnail.include?(  @item.ItemLookupCode )  %>
+                                                    <span style="color:red">THUMB</span>
+                                <% else %>
+                                                     <span style="color:green">THUMB</span>
+                                <% end %>
+                          </td>
+                  </tr>
+                  <tr>
+                    
+                      <% if  @item.ytdn > 400  or @item.lytdn > 400  %>
+                            <% @item_text_color = "color:blue" %>
+                       <% elsif  @item.ytdn > 250 or @item.lytdn > 250  %>
+                            <% @item_text_color = "color:#005CB8" %>
+                       <% else %>
+                            <% @item_text_color = "color:gray" %>
+                       <% end  %>
+                       <% if @item.DateCreated > 60.days.ago %>
+                            <% @date_text_color = "color:red" %>
+                      <% else %>
+                            <% @date_text_color = "color:gray" %>
+                      <% end  %>
+
+                        <td colspan="6"> <span style="<%= @item_text_color %>"> YTDN: <%= @item.ytdn %>  - LYTDN: <%= @item.lytdn %> </span>
+                                                    <span style="<%= @date_text_color %>"> - Created: <%=  @item.DateCreated.to_s[0..9]  %>   </span>
+                        </td>
+
+                          <td colspan="1"> &nbsp;    </td>
+                  </tr>
+                  <tr>
+                          <td colspan="7"> <span style="color:gray"> Extended Description: <%= @item.ExtendedDescription %>  </span> </td>
+                  </tr>
+                  <tr>
+                          <td colspan="7"> <span style="color:gray"> Notes/Keywords: <%= @item.Notes %>  </span>  </td>
+                  </tr>
+                  <tr>
+                          <td colspan="7"> <span style="color:gray"> <%= link_to( "Edit Item", edit_item_path( @item.id   ) ) %><br/><br/> </span>  </td>
+                  </tr>
+
+          </tbody>
+        </table>
+
+        </td>
+</tr>
+<tr>
+      <td  colspan="20">
+        <div style="float: left;margin-left:10px;width:850px;"> W:\AUTOMATION_DATABASE is the correct location for the ORIG, HI-PNG, SEP..  public\images\designer_item_specsheets and public\images\designer_item_thumbnails for the SPEC & THUMB <br/>  <br/> </div>
+
+
+ <% if   @item.show_derivative_locations?  %>
+
+         <% CloneItemType.all.each do |clone_item_type| %>
+
+                                              <% rms_item_lookup_code_string =   clone_item_type.prefix_code +    @item.core_number_only  %>
+                                              <% production_item_lookup_code_string =   clone_item_type.prefix_code +     @item.core_number_only   + clone_item_type.production_extension %>
+
+
+                                                <div style="float: left;margin-left:10px;width:850px;">
+                                                          <%= clone_item_type.name %> <br/>
+
+
+                                                         <%  if Item.unscoped.exists?([ "ItemLookupCode = ?", rms_item_lookup_code_string  ] ) or ItemClass.exists?([ "ItemLookupCode = ?", rms_item_lookup_code_string  ] )   %>
+                                                                  <span style="color:green">RMS: This rms record is named: <%=  rms_item_lookup_code_string  %></span>
+                                                          <% else  %>
+                                                                          <% if CloneItemRequest.exists?([ "clone_item_type_id = ? and item_id = ?", clone_item_type.id ,  @item.id  ] ) %>
+                                                                                    <span style="color:#E0771C">RMS: This rms record should be named: <%= rms_item_lookup_code_string  %>  </span>
+                                                                           <% else %>
+                                                                                    <span style="color:darkred">RMS: This rms record should be named: <%= rms_item_lookup_code_string %>  </span>
+                                                                            <% end  %>
+                                                          <% end %>
+
+                                                           <br/>
+                                                           
+                                                            <% file_status =   File.file?( 'W:\\AUTOMATION_DATABASE\\PRODUCTION_FILES\\' + clone_item_type.name + '\\' + production_item_lookup_code_string ) %>
+                                                            <% if file_status == true %>
+                                                                                <span style="color:green">FILE:  This file can be found: <%= 'W:\\AUTOMATION_DATABASE\\PRODUCTION_FILES\\' + clone_item_type.name + '\\' + production_item_lookup_code_string %></span>
+                                                             <% else  %>
+                                                                                <% if CloneItemRequest.exists?([ "clone_item_type_id = ? and item_id = ?", clone_item_type.id ,  @item.id  ] ) %>
+                                                                                        <span style="color:darkred">FILE: This file should be found: <%= 'W:\\AUTOMATION_DATABASE\\PRODUCTION_FILES\\' + clone_item_type.name + '\\' + production_item_lookup_code_string %> </span>
+                                                                                 <% else  %>
+                                                                                        <span style="color:#E0771C">FILE: This file should be found: <%= 'W:\\AUTOMATION_DATABASE\\PRODUCTION_FILES\\' + clone_item_type.name + '\\' +  production_item_lookup_code_string %> </span>
+                                                                                 <% end %>
+                                                              <% end  %>
+                                                 </div>
+              <% end %>
+      </td>
+</tr>
+
+<% else  %>
+
+<tr>
+        <td style="background-color: lightgrey;height:40px;" colspan="20">
+                  This item cannot be used as a item type originator because it's <%= link_to " item type",  :controller => "clone_item_types"   %>  is not defined of type "core_number". If you believe this design is unique and you want to request other item types to be created from it, you may request a master number be created.<br /><br />
+                  This process will cause the following changes:<br />
+                  1. Creation of  a "RP-TRANS" item with the next available number.<br />
+                  2. Rename this item to match the "RP-TRANS" core number but keep this item's prefix code.<br />
+                  3. Create an alias to this item's old number which was :  <%=    @item.ItemLookupCode   %><br />
+                  <br />
+
+                  The new ItemLookupCode will be    <%=  @item.prefix_from_full_item_lookup_code  %><%=Item.last_core_value  %> or  close to this one.<br /><br />
+
+
+                  <%= @item.new_number_made_from_last_core_value     %>
+
+
+
+                  <%= button_to "Create core number,  rename this item and alias the old item" , :controller => "item_manager", :action => "rename_using_next_core_and_alias_the_old_item", :item_id => @item.id  %>
+
+                  
+                  <br />
+
+        </td>
+</tr>
+
+<% end  %>
+
+
+<tr>
+  <td style="background-color: lightgrey;height:40px;" colspan="20"> &nbsp;</td>
+</tr>
+ </table>
+
+
+
+
+
+
+
+
+
+
+
+<% if @show_junk %>
+            @item.id: <%= @item.id  %><br/>
+            @item.core_number_only: <%= @item.core_number_only  %>  <br/>
+
+
+
+             <% if   @item.usable_core_number?  %>
+                            <%   @show_derivative_locations  = true %>
+            a
+            <% else  %>
+                              <% if Item.exists?([ "ItemLookupCode = ? or ItemLookupCode = ?",  @item.core_number_only,  @item.core_number_only + 'L' ]) %>
+            b
+                                                                   <%   @show_derivative_locations  = true %>
+                               <% else  %>
+            c
+                                                                    <%   @show_derivative_locations  = false %>
+                               <% end  %>
+            <% end  %>
+<% end  %>
+

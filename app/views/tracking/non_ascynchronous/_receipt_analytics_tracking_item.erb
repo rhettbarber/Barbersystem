@@ -1,0 +1,16 @@
+
+  pageTracker._addItem(
+
+    "<%=  h @purchase.id %>",                                     // Order ID
+
+    "<%= h  purchases_entry.item.ItemLookupCode  %>",                                     // SKU
+
+    "<%=  h purchases_entry.item.Description %>",                                  // Product Name 
+
+    "<%=  h  purchases_entry.item.category.Name %>",                             // Category
+
+    "<%=  h purchases_entry.item.your_unit_price(@customer,purchases_entry.QuantityOnOrder) %>",                                    // Price
+
+    "<%= h purchases_entry.QuantityOnOrder %>"                                         // Quantity
+
+  );

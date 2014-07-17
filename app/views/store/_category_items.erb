@@ -1,0 +1,63 @@
+
+
+<% @already_rendered_item_class = [] %>
+
+<ul data-role="listview" data-inset="true">
+                          <% if @category and @category.additives and @category.additives.size > 1  and  ![ 'master', 'slave'].include?(  @category.category_class.item_type  )  %>
+                                                        <%= render :partial => 'additives' %>
+                          <% else   %>
+                                                          <% @items.sort_by{|a| a.ItemLookupCode   }.each do |item| -%>
+                                                                                          <% if item %>
+                                                                                                                      <% if item.category %>
+                                                                                                                                              <%  if item.item_class_component  -%>
+                                                                                                                                                                              <% unless @already_rendered_item_class.include?( item.item_class.id.to_s ) %>
+                                                                                                                                                                              <%  @already_rendered_item_class  <<  item.item_class.id.to_s   %>
+                                                                                                                                                                                                                  <li>
+                                                                                                                                                                                                                    <a href="/specsheet/<%= item.id %>/<%= @department.id %>">
+                                                                                                                                                                                                                      <div style="width: 240px;height:240px;overflow: hidden;">
+                                                                                                                                                                                                                                            <%#  @back_advanced_combination = AdvancedCombination.find_or_create_combo( item, '0' )  %>
+                                                                                                                                                                                                                                            <img src="<%=  item.image_url( @department, 'item_thumbnails/','x'  ).gsub(".png", ".jpg") %>" class="ui-li-thumb"  style="height:200px;position:relative;">
+                                                                                                                                                                                                                                            <!--<%#  if @back_advanced_combination.specsheet_type_id == 1 or  @back_advanced_combination.specsheet_type_id == nil  %>-->
+                                                                                                                                                                                                                                            <!--<img src="<%#=   "/images/item_thumbnails/" + item.PictureName.gsub(".png","").gsub(".jpg","") + ".jpg"   %>" class="ui-li-thumb"  style="height:200px;position:relative;left:-112px;">-->
+                                                                                                                                                                                                                                            <!--<%# else %>-->
+                                                                                                                                                                                                                                            <!--<img src="<%#=   "/images/item_specsheets/" + item.PictureName.gsub(".png","").gsub(".jpg","") + ".jpg"   %>" class="ui-li-thumb"  style="height:200px;position:relative;left:-32px;">-->
+                                                                                                                                                                                                                                            <!--<%# end %>-->
+                                                                                                                                                                                                                      </div>
+                                                                                                                                                                                                                    </a>
+                                                                                                                                                                                                                    <div style="font-weight:bold;text-align:center;position: absolute;bottom:0;width:100%;">
+                                                                                                                                                                                                                                          <%= item.number_only %>
+                                                                                                                                                                                                                                          <%#=  item.item_class_sales_this_years_with_item_id.sum_of_quantity %>
+                                                                                                                                                                                                                                          <%= item.description_before_color_and_size  %>
+                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                  </li>
+                                                                                                                                                                              <% end %>
+                                                                                                                                              <% else %>
+                                                                                                                                                                                  <li class="sale_type_<%= item.SaleType %>">
+                                                                                                                                                                                                         <% if @department %>
+                                                                                                                                                                                                                                            <a href="/specsheet/<%= item.id %>/<%= @department.id %>">
+                                                                                                                                                                                                                                                                  <div>
+                                                                                                                                                                                                                                                                                        <img src="<%=   item.image_url( @department, 'item_thumbnails/','x'  ).gsub(".png", ".jpg")  %>" class="ui-li-thumb" style="display:inline;max-height: 200px;"><br>
+                                                                                                                                                                                                                                                                                        <%= item.ItemLookupCode %>
+                                                                                                                                                                                                                                                                  </div>
+                                                                                                                                                                                                                                            </a>
+                                                                                                                                                                                                                                             <span  style="display:none;" class="sale_label_<%= item.SaleType %>">Sale item!</span>
+                                                                                                                                                                                                       <% else %>
+                                                                                                                                                                                                                                             <a href="/specsheet/<%= item.id %>">
+                                                                                                                                                                                                                                                                    <div class="sale_type_<%= item.SaleType %>">
+                                                                                                                                                                                                                                                                                        <img src="<%=   item.image_url( @department, 'item_thumbnails/','x'  ).gsub(".png", ".jpg")  %>" class="ui-li-thumb" style="display:inline;max-height: 200px;"><br>
+                                                                                                                                                                                                                                                                                        <%= item.ItemLookupCode %>
+                                                                                                                                                                                                                                                                   </div>
+                                                                                                                                                                                                                                             </a>
+
+                                                                                                                                                                                                        <% end %>
+
+                                                                                                                                                                                  </li>
+                                                                                                                                              <% end %>
+                                                                                                                      <% end %>
+                                                                                          <% end -%>
+                                                          <% end %>
+                          <% end %>
+</ul>
+
+
+<%= render :partial => "specsheet/available_crest_prints" if admin? %>

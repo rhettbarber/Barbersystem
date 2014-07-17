@@ -1,0 +1,284 @@
+<style type="text/css">
+    #specsheet_table {
+        position: relative;
+        margin: 0;
+        background: url(<%=  @product_background_image_name  -%>) no-repeat;
+        left: 50%;
+        margin-left: -212px;
+    }
+</style>
+
+
+<div id="specsheet_table">
+
+<style type="text/css">
+
+    #details {
+        text-align: left;
+    }
+
+    #minify_bar {
+        width:850px;
+        height:36px;
+        background-color:black;
+        margin-left:auto;
+        margin-right:auto;
+
+    }
+    #swap_image {
+        display:inline-block;
+        left: 354px;
+        margin:0px;
+        opacity:1;
+        padding:0px;
+        position:relative;
+        top: -327px;
+    }
+
+    #specsheet_table {
+        height:328px;
+        width: 425px;
+        overflow:hidden;
+    }
+
+    .help {
+        display:none;
+        background: none;
+        margin-left: auto;
+        margin-right:auto;
+        width:850px;
+    }
+
+    .pagination_links {
+        float:left;
+        text-align: center;
+        width:850px;
+        font-size: 22px;
+    }
+
+    .hide {
+        display:none;
+    }
+
+    .designs_table {
+        float: left;
+    }
+
+    .designs_table td {
+        float: left;
+    }
+
+    .x_choices {
+        width:850px;
+        background:url(/images/backgrounds_repeating/light_grey_paper.jpg);
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .x_choices img {
+
+    }
+
+    body {
+        color:gray;
+        font-family: Arial,Helvetica,sans-serif;
+        font-size: 16px;
+        background:url(/images/backgrounds_repeating/dark_blue_paper.jpg);
+    }
+
+    #mask_td {
+        width: 850px;
+        height:328px;
+    }
+
+
+    #back_design_td {
+        width: 425px;
+        height:328px;
+        overflow:hidden;
+    }
+
+    #front_design_td {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+        width: 425px;
+        height:328px;
+        overflow:hidden;
+    }
+
+    .specsheet_table {
+        width: 850px;
+        height:328px;
+        text-align: center;
+    }
+
+    .specsheet_container {
+        background:url(/images/backgrounds_repeating/light_grey_paper.jpg);
+        width:850px;
+        /*    margin-left:auto;
+            margin-right:auto;*/
+    }
+    .specsheet_resize {
+        width:850px;
+    }
+
+    .resize_handle_container {
+        float:left;
+        width:414px;
+    }
+
+    .specsheet_images {
+        background-color: blue;
+        height: 328px;
+        width:850px;
+    }
+
+    .mask_span {
+
+        display: table-cell;
+        text-align: center;
+        vertical-align: top;
+        width: 500px;
+        height: 500px;
+    }
+    .mask_span * {
+        vertical-align: top;
+    }
+        /*\*//*/
+        .mask_span {
+            display: block;
+        }
+        .wraptocenter span {
+            display: inline-block;
+            height: 100%;
+            width: 1px;
+        }
+        /**/
+</style>
+<!--[if lt IE 8]><style>
+    .mask_span span {
+        display: inline-block;
+        height: 100%;
+    }
+</style><![endif]-->
+
+
+<style type="text/css">
+    .design_span {
+
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+        width: 500px;
+        height: 500px;
+    }
+    .design_span * {
+        vertical-align: middle;
+    }
+        /*\*//*/
+        .design_span {
+            display: block;
+        }
+        .wraptocenter span {
+            display: inline-block;
+            height: 100%;
+            width: 1px;
+        }
+        /**/
+</style>
+<!--[if lt IE 8]><style>
+    .design_span span {
+        display: inline-block;
+        height: 100%;
+    }
+</style><![endif]-->
+
+<% if  @front_design and @back_advanced_combination.number_of_sides == '2' %>
+    <% @front_display = 'visible' %>
+<% else %>
+    <% @front_display = 'none' %>
+<% end %>
+<div style="margin:0px; padding: 0px;min-width:425px;text-align:center;display: <%= @front_display %>"   id="front_design_td">
+  <span>  </span>
+  <img src="<%= @front_design_image_name %>"
+       id="front_design_image"
+       class="front_design_image"
+       alt="<%= @front_design_image_name %>"
+       style=" position: relative;
+               margin:0px;
+               padding:0px;
+               left:<%=   @front_advanced_combination ? @front_advanced_combination.front_left : "0"   %>;
+               top:<%=   @front_advanced_combination ? @front_advanced_combination.front_top  : "0" %>;
+               width:<%= @front_advanced_combination ? @front_advanced_combination.front_width : "100"  %>;
+               display:inline-block;
+       " />
+</div>
+
+
+<% if  @back_design %>
+    <% if @front_design and @back_advanced_combination.number_of_sides == '2' %>
+        <% @min_width = '425px'  %>
+    <% else %>
+        <% @min_width = '850px'  %>
+    <%  end  %>
+    <div style="margin:0px; padding: 0px;min-width:<%= @min_width   %>;text-align:center;"  id="back_design_td"  class="design_span">
+      <span>  </span>
+
+
+      <img src=" <%= @back_design_image_name  %>"
+           id="back_design_image"
+           class="back_design_image"
+           alt=""
+           style=" position: relative;
+                   margin:0px;
+                   padding:0px;
+                   left:<%=  @back_advanced_combination ? @back_advanced_combination.back_left  : "0" %>;
+                   top:<%=  @back_advanced_combination ?  @back_advanced_combination.back_top  : "0" %>;
+                   width:<%= @back_advanced_combination ? @back_advanced_combination.back_width : "100" %>;
+                   display:inline-block;
+           " />
+
+    </div>
+<% end  %>
+
+<% @mask_visibility = 'none' %>
+<% if @all_over_design  %>
+    <% @mask_visibility = 'inline-block' %>
+<% end  %>
+
+<div style="margin:0px; padding: 0px;"  id="mask_td"  class="mask_span" style="display:<%= @mask_visibility %>">
+  <img src="<%=  @product_mask_image_name  -%>"
+       alt=''
+       style="
+       left: -850px;
+               position: relative;
+               height:328px;
+               top:0px;
+               margin:0px;
+               opacity: 1;
+               display:inline-block;
+               padding:0px; "
+       id="mask_image"
+  />
+</div>
+
+
+<% if  @back_design and @front_design and @back_advanced_combination.number_of_sides == '2' %>
+    <% @swap_visiblilty = 'inline-block' %>
+<% else %>
+    <% @swap_visiblilty = 'none' %>
+<% end %>
+<img src="/images/buttons/swap.png"
+     alt=''
+     style="
+     left: 354px;
+             position: relative;
+             top:-330px;
+             margin:0px;
+             opacity: 1;
+             display:<%= @swap_visiblilty %>;
+             padding:0px; "
+     id="swap_image"
+/>
+</div>

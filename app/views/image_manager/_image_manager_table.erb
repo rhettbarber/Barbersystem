@@ -1,0 +1,125 @@
+@types_to_view = 'green_severity', 'orange_severity', 'no_images_available'  ,'pink_severity'<br/>
+<br/>
+Show only ImageMagick commands to select and execute.
+
+
+
+<%   if params[:types_to_view]  %>
+         <% @types_to_view = params[:types_to_view]   %>
+  <% else  %>
+         <% @types_to_view = 'green_severity', 'orange_severity', 'no_images_available' ,'pink_severity' %>
+<% end  %>
+
+<table class="image_manager_table">
+ 
+
+  <tr>
+    <th>Item ID</th>
+    <th>RMS Entry Date</th>
+    <th>ItemLookupCode</th>
+    <th>png image</th>
+    <th>jpg image</th>
+    
+    <th>Description</th>
+    <th>png_image_name</th>
+    <th>..</th>
+  </tr>
+
+<% @items.each do |the_item| %>
+
+  <% if   @types_to_view.include?(the_item.severity_class_name) %>
+
+          <tr  title="<%=  "/public/images/item_thumbnails/" +  the_item.png_image_name   %>">
+            <td  class="<%=  the_item.severity_class_name   %> view_details_td"  title="Click for Image Details"><%= image_tag( '/images/buttons/image-manager-view-details.png',:class => 'image_detail_button'  ,:id => the_item.id ) %></td>
+           
+                   <%   if    rio( RIO.cwd +  "/public/images/item_thumbnails/" +  the_item.png_image_name ).exist?   %>
+                              <td class="anatips png_thumbnail_td" title="<%= "/images/item_thumbnails/" +  the_item.png_image_name  %>"><%=    image_tag("/images/item_thumbnails/" +  the_item.png_image_name  ) %></td>
+                  <%  else   %>
+                               <td class="anatips"  title="A-<%   "/public/images/item_thumbnails/" +  the_item.png_image_name    %>B- does not exist."><%=  image_tag( "/images/icons/no-png-image.png" )  %></td>
+                  <%  end   %>
+
+                  <%   if    rio( RIO.cwd +  "/public/images/item_thumbnails/" +  the_item.jpg_image_name ).exist?   %>
+                              <td><%=    image_tag("/images/item_thumbnails/" +  the_item.jpg_image_name  ) %></td>
+                  <%  else   %>
+                                 <td class="anatips"  title="C<%   "/public/images/item_thumbnails/" +  the_item.jpg_image_name    %> D does not exist"><%=  image_tag( "/images/icons/no-jpg-image.png" )  %></td>
+                  <%  end   %>
+
+            <td> <%=  the_item.item_id   %> </td>
+            <td> <%=  the_item.DateCreated   %> </td>
+             <td><%=  the_item.ItemLookupCode   %></td>
+
+
+                    <td><%=  the_item.png_image_name   %> </td>
+                    <td></td>
+
+          </tr>
+
+          <% if the_item.severity_class_name == 'pink_severity' %>
+          <tr>
+            <td style="background-color:yellow;" colspan="7">convert <%=  "/public/images/item_thumbnails/" +  the_item.jpg_image_name   %>  to png and then do this and that</td>
+          </tr>
+          <% end %>
+
+
+
+          <tr class="<%=  the_item.severity_class_name   %> dropdown"
+                    title="<%=  "/images/item_thumbnails/" +  the_item.png_image_name   %>"
+                    style="display:none;"
+                    id="image_detail_<%= the_item.id %>">
+
+                    <td colspan="7">
+
+
+                      <div class="image_manager_image_details">
+                          ItemClass:  <%=     %>
+
+
+
+
+
+                                 <table>
+                                      <tr>
+                                               <%  if   rio( RIO.cwd +  "/public/images/item_thumbnails" +  the_item.png_image_name ).exist?   %>
+                                                        <td><%= image_tag(  "/images/item_thumbnails/" +  the_item.png_image_name )  %></td>
+                                                <% else  %>
+                                                        <td><%= the_item.severity_class_name %> : <%=   "/images/item_thumbnails/" +  the_item.png_image_name   %> IS MISSINGK! </td>
+                                                <% end  %>
+
+                                                <td title="<%=  "/images/item_thumbnails/" +  the_item.png_image_name   %>"><%=h the_item.png_image_name %></td>
+                                                <td><%=h the_item.ItemLookupCode %></td>
+                                                <td><%=h the_item.Description %></td>
+
+                                                <%     if rio( RIO.cwd +  "/public/images/item_thumbnails/" +  the_item.jpg_image_name ).exist?   %>
+                                                                  <td><%=    image_tag("/images/item_thumbnails/" +  the_item.jpg_image_name  ) %></td>
+                                                <% else %>
+                                                                  <td><%=   "/images/item_thumbnails/" +  the_item.jpg_image_name   %> IS MISSINGA! </td>
+
+                                                <% end  %>
+                                      </tr>
+                                    </table>
+                      </div>
+
+
+
+
+
+
+
+
+
+
+                    </td>
+          </tr>
+
+
+
+
+
+
+
+<% end %>
+<% end %>
+
+
+
+</table>

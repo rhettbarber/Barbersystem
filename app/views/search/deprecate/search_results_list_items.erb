@@ -1,0 +1,27 @@
+
+<div id="search_results_container" style="text-align:center;font-size:17px;height:200px;background-color:white;display:table;">
+
+
+      <% if @sizae %>
+        <div style="width: 850px;">
+                Search found
+                <% if @items  %>
+                        <%= @items.size   %>
+                <% else %>
+                      0
+                <% end  %>
+                results.<br />
+        </div>
+      <% end %>
+
+
+        <div id="item_rows">
+            <%= render :partial => "/advanced_main_menu/item", :collection => @items %>
+        </div>
+
+
+
+
+</div>
+
+

@@ -1,0 +1,71 @@
+<% logger.debug " @item.category.category_class.item_type: " +  @item.category.category_class.item_type  %>
+<% logger.debug "@back_design.ItemLookupCode: " +  @back_design.ItemLookupCode %>
+<% logger.debug "@front_design.ItemLookupCode: " +  @front_design.ItemLookupCode %>
+<% logger.debug "@back_advanced_combination.number_of_sides: " +  @back_advanced_combination.number_of_sides %>
+<% logger.debug "@front_advanced_combination.number_of_sides: " +  @front_advanced_combination.number_of_sides %>
+
+
+
+
+console.log('begin ajax_change_product_choice.js.erb');
+
+if  ($('mask_image')  != undefined) {
+           $('mask_image').src =  "<%= @product_mask_image_name %>" ;
+};
+
+
+$('specsheet_table').setStyle( { backgroundImage:  'url(<%= @product_background_image_name %>)'  } ) ;
+
+
+<% if @back_design and @front_design %>
+$('swap_image').show();
+<% end %>
+
+$('details_form').item_id.value   =    <%=   @item.id  %>  ;
+$('details_form').category_id.value   =    <%=   @item.category_id  %>  ;
+$('details_form').category_item_type.value   =    '<%=   @item.category.category_class.item_type  %>'  ;
+
+
+$("back_design_image").src =   "/images/item_specsheets/<%= @back_design.ItemLookupCode %>.png"     ;
+
+ new Ajax.Updater('category_items_back', '/designer_specsheet/select_list_update_category_back', {
+         parameters: { category_id: <%= @back_design.category_id %>  , item_id: <%= @item.id %>  , swap: $('swap').value   }, evalScripts:true
+  });
+
+console.log('working here 9');
+
+
+
+
+
+<% if @testt %>
+
+
+
+
+
+
+
+
+
+
+            console.log('begin dddd');
+
+$("back_design_image").src =   <%= "/images/item_specsheets/" +   @back_design.ItemLookupCode + '.png'  %>    ;
+
+
+
+
+
+<% if  @back_advanced_combination.number_of_sides == '2' or @back_design.is_breast_print?  %>
+                                setupTwoSides();
+<% else %>
+                                setupOneSide();
+<% end %>
+
+
+
+
+  <% end %>
+
+console.log('end ajax_change_product_choice.js.erb');

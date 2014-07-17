@@ -1,0 +1,158 @@
+<%= render :partial => 'breadcrumb' , :locals => {:crumb => 'items'} %>
+
+
+
+
+
+
+<% if @examples %>
+
+
+    <!-- Button trigger modal -->
+    <a data-toggle="modal" href="/store/design_department_select" data-target="#myModal" class="btn btn-primary btn-large">Modal Search</a><br><br><br>
+
+
+
+
+    <br><br>
+
+  <ul id="myTab" class="nav nav-tabs">
+    <li class="active"><a href="#designs" data-toggle="tab">Designs</a></li>
+    <li><a href="#garments" data-toggle="tab">Garments</a></li>
+    <li><a href="#merchandise" data-toggle="tab">Merchandise</a></li>
+  </ul>
+  <div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade in active" id="designs">
+
+          <div class="btn-group">
+            <div class="btn-group">
+              <button type="button" class="btn btn-primary dropdown-toggle btn-large" data-toggle="dropdown">Department <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </div><!-- /btn-group -->
+            <div class="btn-group">
+              <button type="button" class="btn btn-primary dropdown-toggle btn-large" data-toggle="dropdown">Category <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
+            </div><!-- /btn-group -->
+          </div><!-- /btn-group -->
+
+
+    </div>
+    <div class="tab-pane fade" id="garments">
+
+              <div class="btn-group">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-primary dropdown-toggle btn-large" data-toggle="dropdown">Department <span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </div><!-- /btn-group -->
+                <div class="btn-group">
+                  <button type="button" class="btn btn-primary dropdown-toggle btn-large" data-toggle="dropdown">Category <span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </div><!-- /btn-group -->
+              </div><!-- /btn-group -->
+
+    </div>
+    <div class="tab-pane fade" id="merchandise">
+
+              <div class="btn-group">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-primary dropdown-toggle btn-large" data-toggle="dropdown">Department <span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </div><!-- /btn-group -->
+                <div class="btn-group">
+                  <button type="button" class="btn btn-primary dropdown-toggle btn-large" data-toggle="dropdown">Category <span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </div><!-- /btn-group -->
+              </div><!-- /btn-group -->
+
+    </div>
+  </div>
+
+<br><br>
+
+
+
+
+<form class="navbar-form">
+  <button type="submit" class="btn btn-large">Submit</button>
+</form>
+
+
+
+
+    <div class="radio">
+      <label>
+        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+        Garments
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+        Designs
+      </label>
+    </div>
+
+
+    <!-- Button trigger modal -->
+    <a data-toggle="modal" href="/store/modal" data-target="#myModal" class="btn btn-primary btn-large">Modal Search</a><br><br><br>
+<% end %>

@@ -1,0 +1,9 @@
+<div class="bs-docs-grid">
+  <div class="row show-grid">
+    <% @design_departments.each do |department| %>
+        <div class="col-lg-12"><a href="/store/browse?department_id=<%= department.id %>" class="thumbnail" data-remote="true"><%= department.Name %></div>
+    <% end %>
+  </div>
+</div>
+
+

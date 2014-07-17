@@ -1,0 +1,19 @@
+
+
+		
+<% if item %>
+
+						<div class="item_container">
+								<div id="<%= 'item_' + item.id.to_s %>">	
+										<%= link_to( image_tag( item.image_url( @department, 'item_thumbnails/','x' )  ), { :controller => 'specsheet', :item_id => item.id    })  %>
+									<br />
+
+										<%=  item.ItemLookupCode  %><%=  item.Description  %>-<%= item.DateCreated %><br />
+
+							        	
+							        	<%=   link_to('details', :controller => 'specsheet' ,:item_id => item.id   )  %>
+							        	<br />     
+								</div>
+						</div>
+
+<% end %>

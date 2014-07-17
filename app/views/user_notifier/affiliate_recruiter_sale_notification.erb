@@ -1,0 +1,24 @@
+Affiliate Sale Notification:
+
+A purchase was made on  <%= @website.domain %> originating from one of your RECRUITED AFFILIATES links or banners.
+
+Affiliate recruiters earn 1% of each sale made through the affiliates they recruited.
+
+After this purchase has shipped, it will become a sale and will appear in your compensation report.
+
+The purchase total is <%= @purchase.Total %>. 
+
+Do not hesitate to call us with any questions at:
+<% if @website.phone %> 
+	<%= @website.phone %>
+<% else %>
+	1-800-448-3061
+<% end %>
+
+Thank you and God Bless!
+<%= @website.domain %> 
+
+
+
+
+*All terms and conditions apply to this email. 

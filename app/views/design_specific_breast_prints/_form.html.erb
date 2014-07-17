@@ -1,0 +1,21 @@
+<%= form_for(@design_specific_breast_print) do |f| %>
+  <% if @design_specific_breast_print.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@design_specific_breast_print.errors.count, "error") %> prohibited this design_specific_breast_print from being saved:</h2>
+
+      <ul>
+      <% @design_specific_breast_print.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

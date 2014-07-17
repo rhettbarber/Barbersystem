@@ -1,0 +1,35 @@
+<h1>New purchases_entry_design</h1>
+
+<%= form_for(@purchases_entry_design) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :purchase_id %><br />
+    <%= f.text_field :purchase_id %>
+  </p>
+  <p>
+    <%= f.label :background_color %><br />
+    <%= f.text_field :background_color %>
+  </p>
+  <p>
+    <%= f.label :background_filename %><br />
+    <%= f.text_field :background_filename %>
+  </p>
+  <p>
+    <%= f.label :front_design_filename %><br />
+    <%= f.text_field :front_design_filename %>
+  </p>
+  <p>
+    <%= f.label :back_design_filename %><br />
+    <%= f.text_field :back_design_filename %>
+  </p>
+  <p>
+    <%= f.label :resize_info %><br />
+    <%= f.text_field :resize_info %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', purchases_entry_designs_path %>

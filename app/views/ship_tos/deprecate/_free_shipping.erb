@@ -1,0 +1,10 @@
+<%= image_tag "/images/headers/shipping_method.gif" %>
+
+<% light_gold_box do -%>   
+		<strong>	Your catalog will be shipped free of charge. <strong />
+<% end %>
+<br /><br />
+<div align="center">
+	<%=link_to( image_tag( "/images/buttons/continue_button_gold.gif",:border => 0) ,:controller => "cart" , :action => 'next_checkout_step')  %>
+</div>
+

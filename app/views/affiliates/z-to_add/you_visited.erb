@@ -1,0 +1,15 @@
+
+<br />
+<br />
+<h3>These are the pages you have visited on our websites: </h3>
+<br />
+
+<% @affiliate.user.user_sessions.each do |us|  %>
+		<% us.rail_stats.each do |rs| %>
+		<%= link_to "view", :controller => 'page', :action => rs.doc_name %> | <%= rs.doc_name %><br />
+		<% end %>
+<% end %>	
+<br />
+<br />
+<br />
+<br />

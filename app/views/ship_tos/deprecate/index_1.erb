@@ -1,0 +1,66 @@
+
+<h3>Please choose from your saved Ship To addresses or create a new one:</h3>
+
+<%= form_tag :action => "choose_ship_to" do %>
+
+				
+				<div  style="min-height: 200px;">
+					<table class="ship_tos" width="850">
+					  <tr>
+					    <th>choose</th>
+					    <th>Company</th>
+					    <th>Name</th>
+					    <th>Address</th>
+					    <th>Address2</th>
+					    <th>City</th>
+					    <th>State</th>
+					    <th>Zip</th>
+					  </tr>
+					 
+					 
+					 
+					 <tr height='15'></tr>
+					  
+					<% for ship_to in @ship_tos %>
+					  <tr>
+						    <td>				    	
+						    	<% if @ship_tos.count == 1 %>
+						    	 		<input type="radio" name="ship_to_id" value="<%= ship_to.id %>" checked="checked" /> 
+						    	<% elsif  @purchase.ship_to  %>
+						    			<% if @purchase.ship_to.id.to_s == ship_to.id.to_s %>
+						    			 	<input type="radio" name="ship_to_id" value="<%= @purchase.ship_to_id %>" checked="checked" /> 
+						    			 <% else %>
+						    			 	<input type="radio" name="ship_to_id" value="<%= ship_to.id %>" /> 
+						    			 <% end %>
+						    	<% else %>
+						    			 <input type="radio" name="ship_to_id" value="<%= ship_to.id %>" /> 
+						    	 <% end %> 
+					    	  </td>
+
+					    <td><%=h ship_to.Company %></td>
+					    <td><%=h ship_to.Name %></td>
+					    <td><%=h ship_to.Address %></td>
+					    <td><%=h ship_to.Address2 %></td>
+					    <td><%=h ship_to.City %></td>
+					    <td><%=h ship_to.State %></td>
+					    <td><%=h ship_to.Zip %></td>
+						<td><%= link_to 'Choose', :controller => 'ship_tos', :action => 'choose_ship_to' , :ship_to_id => ship_to.id %></td>
+					    <td><%= link_to 'Show', ship_to_path(ship_to) %></td>
+					    <td><%= link_to 'Edit', edit_ship_to_path(ship_to) %></td>
+					    <td><%= link_to 'Destroy', ship_to_path(ship_to), :confirm => 'Are you sure?', :method => :delete %></td>
+					  </tr>
+					<% end %>
+					</table>
+				</div>
+				
+				<br />
+				
+				<div align="center">
+						<%= image_submit_tag('/images/buttons/continue_button_gold.gif')   %>	
+				</div>	
+					
+					
+					<div align="center"><%= link_to( image_tag( '/images/buttons/create_a_new_shipping_address.jpg',:border => 0)   , new_ship_to_path)	 %></div>
+				
+			
+<%  end  %>

@@ -1,0 +1,48 @@
+<br>
+<h2>  If you would like to send us an email or attachments, please send it to:<a href="mailto:support@<%=@website.domain %>">support@<%=@website.domain %></a></h2>
+
+
+
+
+<% if @messages_on %>
+
+<h1>Messages</h1>
+
+
+	<%= link_to "CLICK HERE",:controller => 'account', :action => 'send_message_to_selected'  -%> to send us a message.<br />
+	<br />
+	 If you would like to send us an email, please send it to:<br />
+ <a href="mailto:support@<%=@website.domain %>">support@<%=@website.domain %></a><br />
+	<br />
+
+<% if @message %>
+			
+			<div><%= flash[:notice] %></div>
+			<%= ezm_message_menu -%>
+			
+			<%= form_for :message, :url => {:action => :delete_message} do |form| %>
+			    <table border="1">
+			      <tr>
+			        <th></th>
+			        <th>Subject</th>
+			        <th><%=h ezm_sender_or_receiver_label %></th>
+			        <th>Sent</th>
+			      </tr>
+			    <% @messages.each do |m|  %>
+			      <tr>
+			        <td><%= ezm_delete_check_box(m) %></td>
+			        <td><%= ezm_link_to_message(m) %></td>
+			        <td><%=h ezm_sender_or_receiver(m) %></td>
+			        <td><%=h ezm_sent_at(m) %></td>  
+			      </tr>
+			    <% end %>
+			    <tr>
+			      <td colspan="4"><%= submit_tag "Delete" %></td>
+			    </tr>
+			    </table>
+			<% end %>
+
+
+<% end %>
+
+<% end %>

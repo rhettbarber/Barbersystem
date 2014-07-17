@@ -1,0 +1,60 @@
+<% @content_fragment_name ||= 'unknown_fragment' %>
+<!-- Begin Category Browser Index -->
+<% content_for :head_additions do -%>
+      <!-- Begin Category Browser Index Head Additions -->
+      <%= stylesheet_link_tag 'browse.css' %>
+      <%= javascript_include_tag 'browse.js' %>
+      <!-- End Category Browser Index Head Additions -->
+<% end  -%>
+
+
+<%# cache (@content_fragment_name  ) do %>
+
+
+
+        <% logger.debug "-------------------------------------begin browse/index " %>
+        <% logger.debug "-------------------------------------begin browse/index " %>
+        <% logger.debug "-------------------------------------begin browse/index " %>
+        <% logger.debug "--------! ---------! ------------! -------------- BEGIN EXAMINE CACHING --! - --! - " %>
+        <% logger.debug "--------! ---------! ------------! -------------- BEGIN EXAMINE CACHING --! - --! - " %>
+
+        <%
+        if params[:department_type]
+                department_type = params[:department_type]
+        else
+                department_type = '0'
+        end
+        %>
+
+
+
+        <div class="categories_container">
+
+                <% if @department %>
+
+                                        <%=   render(:partial => "browse/at_department",:locals => {:department => @department } )  %>
+                <% else %>
+                                        <% if  @department_introduction == true  %>
+                                                        <%=  render(:partial => "browse/departments_introduction",:locals => {:department_type => department_type } )  %>
+                                        <%  else  %>
+                                                         <% if @incomplete_symbiont %>
+                                                                            <%# great %>
+                                                                            <%=  render(:partial => "browse/categories_by_department",:locals => {:department_type => department_type } ) if @departments %>
+                                                          <% else %>
+                                                                               <% bad %>
+                                                                                 <%=  render(:partial => "browse/departments_no_introduction",:locals => {:department_type => department_type } )  %>
+                                                           <% end %>
+                                        <% end %>
+                <% end %>
+
+        </div>
+
+
+        <% logger.debug "--------! ---------! ------------! -------------- END EXAMINE CACHING --! - --! - " %>
+        <% logger.debug "--------! ---------! ------------! -------------- END EXAMINE CACHING --! - --! - " %>
+        <% logger.debug "-------------------------------------end browse/index " %>
+        <% logger.debug "-------------------------------------end browse/index " %>
+        <% logger.debug "-------------------------------------end browse/index" %>
+
+<%# end %>
+<!-- End Category Browser Index -->

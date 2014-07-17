@@ -1,0 +1,22 @@
+<%= render :partial => 'image_manager/items_filter'  %>
+
+
+<h1>Image Manager </h1>
+<p>This tool works with ImageMagick:</p>
+
+
+<h2><%=   link_to "Find No Images Available", "/image_manager?types_to_view=no_images_available" %> |
+<%=   link_to "Find Green Severity", "/image_manager?types_to_view=green_severity" %> |
+<%=   link_to "Find Orange Severity", "/image_manager?types_to_view=orange_severity" %> |
+</h2>
+
+<% if @divide %>
+<h2><%=   link_to "Designs", "/image_manager?types_to_view=no_images_available" %> |
+<%=   link_to "Items", "/image_manager?types_to_view=green_severity" %> |
+<%=   link_to "All Over Shirts", "/image_manager?types_to_view=orange_severity" %> |
+</h2>
+<% end  %>
+
+
+<%= render :partial => 'image_manager/image_manager_table'  %>
+

@@ -1,0 +1,8 @@
+
+
+
+
+ <%=  form_remote_tag( :url => {  :action => "search"}, :update => 'yield_container', :html =>{ }) %>
+<%= text_field_tag  'item_keywords' %>
+<%= image_submit_tag('/images/buttons/plus.gif') %>
+<%=  end_form_tag  %> 		

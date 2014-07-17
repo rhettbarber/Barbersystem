@@ -1,0 +1,25 @@
+<% @page_title = @revision.page.name + " - Revisions" -%>
+<% @show_nav = true %>
+<h3 style="display:inline;">Revisions for <%= @revision.page.name %></h3>
+<span class="actions">
+	<span class="edit"><%= link_to("see current", :action => "show", :id => @revision.page.slug) %></span>
+	<ul>
+	<% for revision in @revision.revisions -%>
+		<li>
+			<% if Revision.most_recent?(revision) -%>
+				<%= link_to(revision.created_at.strftime("%b %d, %y - %I:%M %p"), :action => "show", :id => revision.page.slug) %> 
+				by <%= revision.author.email %> (<%= revision.author.email %>)
+			<% else -%>
+				<%= link_to(revision.created_at.strftime("%b %d, %y - %I:%M %p"), :action => "revision", :id => revision.id) %> 
+				by <%= revision.author.email %> (<%= revision.author.email %>)
+			<% end -%>
+		<% if revision.published? -%>
+			<span style="font-weight:bold;font-style:italic;">Published</span>
+			<% if Revision.most_recent_published?(revision) -%>
+				<span class="delete"><%= link_to("un-publish", :action => "un_publish", :id => revision.id) %>
+			<% end -%>
+		<% end -%>
+		</li>
+	<% end -%>
+	</ul>
+</span>

@@ -1,0 +1,19 @@
+
+<% if @item  && @design  %>
+   <%= render(:partial => 'specsheet/specsheet_table')     %>
+<%  else  %>
+    <% @show_wide_specsheet = false  %>
+    <% if @item.item_class_component %>
+        <% logger.debug "@item.item_class_component.item_class.id.to_s: " + @item.item_class_component.item_class.id.to_s  %>
+        <% if @item.item_class_component.item_class.wide_specsheet == 1 %>
+            <% @show_wide_specsheet = true %>
+        <% end %>
+    <% end %>
+    <% if @show_wide_specsheet == true  %>
+        <div align="center"><span id='specsheet_image'><%=  image_tag @item.image_url( @department  , '/item_specsheets/', @design,'0' ).gsub('.png', '_wide.png' )  %></span></div>
+    <% else %>
+        <div align="center"><span id='specsheet_image'><%=  image_tag @item.image_url( @department  , '/item_specsheets/', @design,'0' )  %></span></div>
+    <% end  %>
+<%  end  %>
+
+

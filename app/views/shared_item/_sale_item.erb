@@ -1,0 +1,25 @@
+<% if item %>
+
+	<%   unless @customer_array.CustomText4  != 'DO'   and     item.department.license_required == true    and     @customer_array.PriceLevel == 2  %>
+	
+							<div class="item_container">
+									<div id="<%= 'item_' + item.id.to_s %>">	
+											<%= link_to( image_tag( item.image_url( @department, 'item_thumbnails/','x' )  ), { :controller => 'specsheet', :item_id => item.id    })  %>
+										<br />
+										
+										
+					
+					
+											<%=  item.number  %>-<%= item.color  unless item.color == "no_color" %><br> 
+											<%=  item.description_before_color_and_size  %><br>
+											Sale Price: <%=  item.your_unit_price(@customer,1)  %> <br>
+	
+								        	
+								        	<%=   link_to('details', :controller =>  'specsheet',:item_id => item.id   )  %>
+								        	<br />     
+									</div>
+							</div>
+	
+	<% end %>
+
+<% end %>

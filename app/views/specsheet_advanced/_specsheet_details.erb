@@ -1,0 +1,32 @@
+
+<div class="specsheet_details">
+	
+	<table  border="0" cellspacing="0" cellpadding="0"  style="color:white;">
+			  <tr>
+				    <th  scope="col"><%= 'Item Code' if @item %></th>
+				    <th  scope="col"><%= 'Item Description' if @item %></th>
+				    <th  scope="col"><%= 'Design Code' if @design  %></th>
+				    <th  scope="col"><%= 'Design Description' if @design  %></th>
+				   <th  scope="col"><%= 'Your Price'  if @your_unit_price  unless  @your_unit_price == 0.01  %></th>
+			  </tr>
+			  <tr>
+					<td id="item_itemlookupcode"><%=   @item.ItemLookupCode.to_s  if @item   %></td> 
+					<td id="item_description"><%=   @item.description_before_color_and_size  if @item   %></td> 
+					<td id="design_itemlookupcode"><%=    @design.ItemLookupCode.to_s  if @design   %></td> 
+					<td id="design_description"><%=     @design.Description.downcase.camelize.to_s  if @design %></td> 
+					<td id="your_unit_price" >
+						<%=    number_with_precision(@your_unit_price,2) unless  @your_unit_price == 0.01  %>
+					</td> 
+			</tr>
+	</table>
+		
+	<table  border="0" cellspacing="0" cellpadding="0" style="color:white;font-size:12px;">
+			<tr>
+					<td id="item_extended_description">
+									<%= @item.opacity_description  %><%= @item.ExtendedDescription  %>
+					 </td> 
+			</tr>
+	</table>
+</div>
+		
+		

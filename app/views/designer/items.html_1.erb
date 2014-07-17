@@ -1,0 +1,31 @@
+<h1>Listing <%= @items.size %>  items</h1>
+
+<table>
+  <tr>
+    <th>BaseItemlookupcode</th>
+    <th>Itemlookupcode</th>
+    <th>Description</th>
+    <th>Picturename</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @items.each do |item| %>
+  <tr>
+    <td>
+    <%  if item.item_class   %>
+        <%= item.item_class.ItemLookupCode%>
+    <% else  %>
+          No ItemClass
+    <% end  %>
+    </td>
+    <td><%= item.ItemLookupCode %></td>
+    <td><%= item.Description %></td>
+    <td><%= item.PictureName %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+

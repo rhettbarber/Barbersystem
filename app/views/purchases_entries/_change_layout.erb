@@ -1,0 +1,40 @@
+
+
+
+
+
+<script type="text/javascript">
+
+      chooseSelected  = function() {
+
+                 new Ajax.Updater('colors', '/purchases_entries/post_layout_changes' ,  {
+                         parameters: { purchases_entry_ids: $('purchases_entry_ids').value,  number: $('number').value  }
+                  });
+          Modalbox.hide();
+   }
+
+  </script>
+
+
+<div id='item_details_container'>
+       <% if @purchases_entry_ids != ""  %>
+
+                          <%=  hidden_field_tag "purchases_entry_ids",   @purchases_entry_ids      %>
+                         <%=  text_field_tag "number" %>
+
+                 <% ss = "ss" %>
+
+           <br />
+           <br />
+    <% else %>
+                       <div style="color:red;width: 476px;height: 200px;;"><br > You must check the boxes of designs you want to add to a layout.  </div>
+      <% end %>
+           <div id="item_detail_buttons" style="text-align:center">
+                    <%= image_tag(  '/images/buttons/cancel.png'  , :alt => 'Cancel' , :onclick => "Modalbox.hide();" ) %>
+                    <%= image_tag(  '/images/buttons/confirm.png'  , :alt =>  'Confirm' , :onclick => "chooseSelected();" ) unless @purchases_entry_ids == ""  %>
+           </div>
+
+
+
+</div>
+

@@ -1,0 +1,11 @@
+<div class="pagination_links">
+      <% if params[:item_keywords] %>
+          <% @pagination_action = 'specsheet_item_search' -%>
+      <% else -%>
+          <% @pagination_action = 'update_specsheet_category_items' -%>
+      <% end  -%>
+
+          <%= will_paginate instance_variable_get( @items_to_get ) , :class => 'pagination ajax' ,
+               :with => "Form.serializeElements( 'aaaa=' + $('cc_id' )   )",
+            :params=>{ :controller => 'javascripts', :action => @pagination_action, :item_keywords => params[:item_keywords], :choice_type => choice_type }  -%>
+</div>

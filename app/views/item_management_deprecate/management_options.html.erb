@@ -1,0 +1,74 @@
+<div class="large_gray_header">
+      <%= image_tag('/images/icons/options.png' ,:size => "50x50" )%> Clone Management<%= image_tag('/images/icons/options.png' ,:size => "50x50" )%>
+</div>
+<br/>
+
+<div class="management_options">
+      <div class="main_item">
+              <%= @item.ItemLookupCode %> -
+              <%= @item.id %> -
+              <%= @item.Description %><br/>
+              <%= image_tag "http://" + @asset_server + "/images/item_specsheets/" + @item.PictureName %><br/>
+      </div>
+      <span style="font-size:2em;">Clone Item linking and creation options</span>
+      <table style="margin-left:auto;margin-right: auto;margin-bottom:10px;margin-top:10px;">
+        <tr>
+        <th>Allow</th>
+        <th><%= link_to 'Clone Item Type', :controller => 'clone_item_types'  %> </th>
+        <th>&nbsp;</th>
+        <th>Link Status</th>
+        <th>Web Status</th>
+        <th>Production Status</th>
+        </tr>
+                <%= form_tag(:controller => "item_management", :action => "create_clones_for_checked") do  %>
+                 <% CloneItemType.all.each do |clone_item_type| %>
+                            <tr class="<%=  cycle('odd', 'even')  %>">
+                                            <% if @item.clone_item_of_type(clone_item_type.id) %>
+                                                    <td style="width:60px;">
+                                                       <span class="anatips" title="<%=  
+                                                          if  @item.clone_item_status(clone_item_type.id ) == true
+                                                                  "The main item already has this clone type. You can unlink it or view it's status"
+                                                          end
+                                                           %>">
+                                                                       <%= image_tag( '/images/icons/' + @item.clone_item_status(clone_item_type.id ).to_s + '.jpg' , :size => "35x35" ) %>
+                                                        </span>
+                                                    </td>
+                                                    <td><%= clone_item_type.name %></td>
+                                                    <td>&nbsp;</td>
+                                                    <td> <span class="anatips" title="This Item is linked to a clone, Click to Unlink the Main item from the Clone."> <%= link_to image_tag('/images/icons/linked.jpg' , :size => "35x35" ,:border => 0 ) ,:controller => 'clone_items', :action => 'destroy' ,:clone_item_id => @item.clone_item_of_type(clone_item_type.id).id ,:item_id => @item.id   %></span>  </td>
+
+                                                     <% @clone_item_of_type = @item.clone_item_of_type(clone_item_type.id) %>
+                                                    <td> <%= image_tag( @clone_item_of_type.web_ready_status_image_name  , :size => "35x35" ,:class => 'anatips',   :title =>  @clone_item_of_type.web_ready_status_image_name ) %></td>
+                                                    <td> <%= image_tag(  @clone_item_of_type.production_ready_status_image_name  , :size => "35x35"  ,:class => 'anatips',   :title =>  @clone_item_of_type.production_ready_status_image_name   ) %></td>
+
+
+                                          <% else %>
+                                                   <td style="width:60px;"><%= check_box_tag( "clone_item_type[clone_item_type_ids][]" ,   clone_item_type.id , false) %></td>
+                                                   <%= hidden_field_tag 'original_item_id', @item.id  %>
+                                                   <td><%= clone_item_type.name %></td>
+                                                   <td>&nbsp;</td>
+                                                   <td><span class="anatips" title="If this <%= clone_item_type.name %> already exists, click here to find and link it."><%= link_to image_tag('/images/icons/not_linked.jpg', :size => "35x35",:border => 0 ),:controller => "clone_items",:action => "link_clone_to_original", :clone_item_type_id => clone_item_type.id , :item_id => @item.id %></span></td>
+                                                    <td><%= image_tag( '/images/icons/web_incomplete.jpg'  , :size => "35x35" ,:class => 'anatips',   :title =>  'This item is not available on the web'  ) %>  </td>
+                                                    <td><%= image_tag( '/images/icons/production_incomplete.jpg'  , :size => "35x35" ,:class => 'anatips',   :title =>  'This items production files are not available.'  ) %></td>
+                     <% end  %>
+                             </tr>
+
+
+                    <% end  %>
+
+      </table>
+<br/>
+
+<%= submit_tag "Create clones for checked"    %>
+<% end  %>
+
+<br/>
+<br/>
+<br/>
+
+<%=link_to  image_tag('/images/buttons/create-clone-item-types.png', :width => 400 ,:border => 0 ), :controller => "clone_item_types"   %>
+
+
+</div>
+
+

@@ -1,0 +1,10 @@
+<h1>Crawl#index</h1>
+<p>Showing @page</p>
+
+
+
+<%= @doc.css('h3.r a').each do |link| %>
+
+<%=  link.content   %> <br>
+
+<% end %>

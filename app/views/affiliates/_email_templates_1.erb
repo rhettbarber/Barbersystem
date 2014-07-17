@@ -1,0 +1,30 @@
+<h1> Affiliate Email Templates</h1>
+<h3>These templates will get you started writing affiliate emails. Feel free to customize them as long as the content does not violate our <%= link_to "terms and conditions", :controller => "affiliates", :action => "terms_and_conditions" %>.
+ Do not spam email. Email only to those who would be willing to receive your emails. No mass mailings (20 or more emails) without prior written consent from <%= @website.title %>. </h3>
+
+<h3>Sample standard affiliate email</h3>
+Here is a sample template to help you sell products.(You will earn 5% of each sale.)<br />
+<br />
+
+
+Hey! <br /><br />
+
+How have you been? I found a website you would be interested in that has many unique products.
+I became an affiliate so I earn 5% of any sales made through my link or banner.
+If you become an affiliate I make 1% of each sale made through your link or banner and you make 5%.
+
+The link to their website is below.<br />
+<br />
+<%=  'http://' + @website.domain + '/?a_id=' + @user.a_id    %>
+<br /><br />
+Talk to you later,<br />
+<% if @user.customer %>
+	<%= @user.customer.FirstName %>
+<% else %>
+	<%= @user.email %>
+<% end %>
+
+
+<br />
+<br />
+

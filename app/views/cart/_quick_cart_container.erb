@@ -1,0 +1,64 @@
+
+<style type="text/css">
+    .quick_cart_container .ui-slider-switch { width: 100%; }
+
+
+    /*.quick_cart_container *{font-family:arial !important;color:red !important;font-size:0.8em !important}*/
+
+</style>
+
+<%# logger.debug "flash.inspect: " + flash.inspect  %>
+
+<%  if  referring_action  == "cart" %>
+                                 <% logger.debug "referring_action == cart" %>
+                                 <% @collapsed = " data-collapsed=false "         %>
+<% else %>
+                                 <% logger.debug "referring_action != cart" %>
+  <% end %>
+
+<%# @collapsed = " data-collapsed=false "         %>
+
+
+<div data-role="collapsible"<%= @collapsed %>>
+
+  <h3>Quick Cart</h3>
+
+  <div class="quick_cart_container">
+
+    <%=  form_tag(  "/cart/add_to_cart" , :method => :put, :data => {:ajax => "false"}) do -%>
+
+                      <% unless @singular_item_customer == true  %>
+
+
+                                                            <select name="on_hold" id="on_hold" data-role="slider" style="width:100%;">
+                                                                         <% if  session[:on_hold]  and  session[:on_hold] == "true" %>
+                                                                                          <option value="false">Add an item to complete</option>
+                                                                                          <option value="true" selected="true">Add items as on hold</option>
+                                                                         <% else %>
+                                                                                          <option value="false">Add an item to complete</option>
+                                                                                          <option value="true">Add items as on hold</option>
+                                                                          <% end %>
+                                                            </select>
+
+
+                      <% end %>
+
+                    <%= hidden_field_tag "submitted_from_cart", 'true' %>
+
+                    <label for="purchases_entries_ItemLookupCode"  style="display:none;">Part Code:</label>
+                    <input type="text" name="purchases_entries[ItemLookupCode]" id="purchases_entries_ItemLookupCode" placeholder="Part Code" value="">
+
+                    <label for="purchases_entries_QuantityOnOrder"  style="display:none;">Quantity:</label>
+                    <input type="text" name="purchases_entries[QuantityOnOrder]" id="purchases_entries_QuantityOnOrder" placeholder="Quantity: (Optional)" value="">
+
+                    <label for="quick_add_submit" style="display:none;">Send:</label>
+                    <button class="ui-shadow ui-btn ui-corner-all" type="submit" id="quick_add_submit">Submit</button>
+    <%  end  -%>
+  </div>
+
+
+
+</div>
+
+
+

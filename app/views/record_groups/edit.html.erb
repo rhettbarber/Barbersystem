@@ -1,0 +1,24 @@
+<h1>Editing record_group</h1>
+
+<%= form_for(@record_group) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :ids %><br />
+    <%= f.text_field :ids %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @record_group %> |
+<%= link_to 'Back', record_groups_path %>

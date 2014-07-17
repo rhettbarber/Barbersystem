@@ -1,0 +1,56 @@
+
+
+<div class='admin_yellow'> 
+				<%= link_to_function('Info | ', "Element.toggle('specsheet_info_admin')") %>
+				<%= link_to_function('Design | ', "Element.toggle('specsheet_design_admin')") if @design %>
+				<%= link_to_function('Edit Item Category | ', "Element.toggle('specsheet_edit_item_category')") %>
+				<%= link_to_function('Item Technical Editor | ', "Element.toggle('specsheet_item_admin')") %>
+				<%= link_to_function('Item Description | ', "Element.toggle('specsheet_item_description_admin')") %>
+				<%= link_to_function('Item Keywords | ', "Element.toggle('specsheet_item_notes_admin')") %>
+				<%= link_to_function('Item Activation | ', "Element.toggle('specsheet_activate_admin')") %>
+				<%= link_to_function('Combination | ', "Element.toggle('specsheet_combo_admin')") if @combination %> 
+
+				<div id='specsheet_info_admin'  style="display:none;">	
+									 @preload_images_array::<%= @preload_images_array %><br />
+									 @department.id<%= @department.id   if @department%><br />
+									 @item_prefix_override: <%= @item_prefix_override %><br />
+					
+				</div>
+<% if @item %>	
+				<div id='specsheet_edit_item_category' style="display:none;"> 				
+									<%= render(:partial => "administration_specsheet/specsheet_edit_item_category") %>
+				</div>
+<% end %>
+
+<% if @item %>	
+				<div id='specsheet_item_admin'   style="display:none;"> 				
+									<%= render(:partial => "administration_specsheet/specsheet_item_admin") %>
+				</div>
+				<div id='specsheet_item_notes_admin'   style="display:none;"> 				
+									<%= render(:partial => "administration_specsheet/specsheet_item_notes_admin") %>
+				</div>
+				
+<% end %>				
+				
+		<% if @item  && @design   %>
+		
+				<div id='specsheet_design_admin'  style="display:none;">
+									<%= render(:partial => "administration_specsheet/specsheet_design_admin") %>
+				</div>	
+	
+				<div id='specsheet_combo_admin'   style="display:none;">					
+									<%= render(:partial => "administration_specsheet/specsheet_combo_admin") %>
+				</div>						
+		
+		
+		<% elsif @item && !@design %>
+						<div id='specsheet_activate_admin'"  style="display:none;"> 				
+													<%= render(:partial => "administration_specsheet/specsheet_activate_admin") %>
+						</div>
+
+				<div id='specsheet_item_description_admin'   style="display:none;"> 
+						<%= render(:partial => "administration_specsheet/specsheet_item_description_admin") %>
+				</div>
+		
+		<% end %>			
+ </div>

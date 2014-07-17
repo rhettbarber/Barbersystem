@@ -1,0 +1,50 @@
+
+	<div id="symbiote_wrapper">
+	<table width="850" border="0" cellspacing="0" cellpadding="0" background="/images/headers/symbiont_ribbon.jpg" style="background-repeat: no-repeat;">
+	  <tr>
+	    <th width="80" height="80" rowspan="2" scope="col">
+	      <%=   image_tag(@purchase_symbiote_item.image_url(   @purchase_symbiote_item.department ,'item_thumbnails/','x' ),:size => "80x80")    %>
+		 </th>
+	    <td width="312" height="31" scope="col">
+	      <strong> <%= @purchase_symbiote_item.ItemLookupCode %> </strong>
+	      </td>
+	    <th width="608" scope="col">
+		    <% unless ['view_details'].include?(controller.action_name)   %>
+                        <div style="height:45px;width:608px;">
+                                <% if ['browse'].include?(controller_name)  %>
+                                                <%=  image_tag('/images/buttons/choose-an-item-below-for-your-selected-design.jpg',:border => '0') %>
+                                <% else %>
+                                                <%= link_to image_tag('/images/buttons/choose-an-item-for-your-selected-design.jpg',:border => '0') ,:controller => 'browse'  %>
+                                 <% end  %>
+                          </div>
+				<% end %>	 
+	    </th>
+	  </tr>
+	  <tr>
+	    <td height="30"><%= @purchase_symbiote_item.Description %>		<%=  image_tag @purchase_symbiote_item.opacity_football %>  		</td>
+	    <td height="30">
+	    
+				<ul>
+								<li style="color:white;">Options: </li>
+							<% if ['view_details'].include?(controller.action_name) %>
+								<li><%= link_to 'Choose a Different Item' , :controller => 'browse'   %></li>
+							<% end %>
+						  	<li><%= link_to 'Place on hold', :controller => 'cart' , :action => 'place_symbiont_on_hold', :purchases_entry_id => @purchase.symbiote.id  %></li>
+						  	<li><%= link_to 'Forget this design' , :controller => 'cart'  ,:action =>  'delete_incomplete_symbiote' %></li>
+				 </ul>	  
+		 </td>
+	  </tr>
+	</table>
+	</div>
+
+
+
+<% if admin? %>
+	<div id="symbiote_admin_wrapper">
+		<li><%= link_to 'edit category classes categories', :controller => 'opposites', :action => 'category_class_organizer', :category_class_id  =>  @purchase_symbiote_item.category.category_class_id   %></li>
+		<li><%= link_to 'edit category classes opposites', :controller => 'opposites', :action => 'define_category_class_opposite_categories', :category_class  =>  @purchase_symbiote_item.category.category_class_id   %></li>
+		<li><%= link_to 'categories with same prefix', :controller => 'opposites', :action => 'all_categories_with_same_prefix', :id  =>  @purchase_symbiote_item.category.id   %></li>
+		<li><%= link_to 'edit symbiote category', edit_category_path(@purchase_symbiote_item.category) %></li>
+		<li><%= link_to 'delete opposites cache',  :controller => 'cache', :action => 'delete_opposites_cache_for_a_category', :category_id  =>  @purchase_symbiote_item.category.id   %></li>
+	</div>
+<% end %>

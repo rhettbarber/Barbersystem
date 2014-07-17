@@ -1,0 +1,49 @@
+ <% unless item.PictureName.nil? or  item.PictureName == '' or  item.PictureName == '0' %>
+
+                            <tr class="<%=  cycle('odd', 'even')  %>">
+                                  <td>
+                                         <% if item.PictureName %>
+                                              <%=   image_tag "http://" + @asset_server + "/images/item_specsheets/" + item.PictureName ,:size => "50x50" ,:border => 0 %>
+                                        <% else  %>
+                                                  'Missing Image'
+                                         <% end  %>
+
+                                  </td>
+                                  <td><%= item.ItemLookupCode %></td>
+                                  <td><%= item.Description %></td>
+                                   <td>
+                                      <%  unless  item.stock_design_file_exists?  %>
+                                                <span class="anatips" title="Stock Design Missing from Database! It should be located at: <%= item.stock_design_filename_with_path %> as .psd or .tif">
+                                                            <%= image_tag('/images/icons/stock.jpg',:size => "35x35") %>
+                                                 </span>
+                                        <% end  %>
+                                   </td>
+                                   <% CloneItemType.all.each do |clone_item_type| %>
+
+                                                  <td onclick="showOptions(<%= item.id   %>, <%= clone_item_type.id %> )">
+
+
+                                                                <% if item.clone_item_status(clone_item_type.id ) == 'hold_for_art' %>
+                                                                          <span class="anatips" title="File is missing from the Production Folder! It should be located at: <%= item.clone_filename(clone_item_type.id) %> ">
+                                                                                <%= image_tag( '/images/icons/hold_for_art.jpg' , :size => "35x35" ) %>
+                                                                          </span>
+                                                               <% elsif item.clone_item_status(clone_item_type.id ) ==  'online_image_missing'  %>
+                                                                          <span class="anatips" title="Art has been completed, but the thumbnail or specsheet image is missing, so it is not yet online.">
+                                                                                <%= image_tag( '/images/icons/art_completed.jpg' , :size => "35x35" ) %>
+                                                                          </span>
+                                                               <% elsif item.clone_item_status(clone_item_type.id ) ==  'not_yet_web_item'  %>
+                                                                          <span class="anatips" title="Item is not yet a WebItem in RMS, so it is not yet online.">
+                                                                                <%= image_tag( '/images/icons/art_completed.jpg' , :size => "35x35" ) %>
+                                                                          </span>
+                                                                 <% else  %>
+                                                                              <%= image_tag( '/images/icons/' + item.clone_item_status(clone_item_type.id ) + '.jpg' , :size => "35x35" ) %>
+                                                                 <% end  %>
+
+
+
+                                                  </td>
+
+                                      <% end %>
+                                 </tr>
+
+<% end  %>

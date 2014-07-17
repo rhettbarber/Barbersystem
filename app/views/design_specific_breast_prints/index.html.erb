@@ -1,0 +1,23 @@
+<h1>Listing design_specific_breast_prints</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @design_specific_breast_prints.each do |design_specific_breast_print| %>
+  <tr>
+    <td><%= design_specific_breast_print.name %></td>
+    <td><%= link_to 'Show', design_specific_breast_print %></td>
+    <td><%= link_to 'Edit', edit_design_specific_breast_print_path(design_specific_breast_print) %></td>
+    <td><%= link_to 'Destroy', design_specific_breast_print, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Design specific breast print', new_design_specific_breast_print_path %>

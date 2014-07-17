@@ -1,0 +1,101 @@
+<% if @category %>
+<div  id="advanced_menu_category" class="administration_menus">
+                <ul  id="tabs_advanced_menu_category" class="subsection_tabs">
+                        <li class="tab"><a  id="category_technical_editor_tab_a" href="#category_technical_editor">Category Editor</a></li>
+                         <li class="tab"><a  id="additive_categories_tab_a" href="#additive_categories">Additive Categories</a></li>
+                        <li class="tab"><a  id="class_options_header_tab_a" href="#category_class_technical_editor">Class Editor</a></li>
+                </ul>
+</div>
+
+
+
+  <%= render :partial => 'administration_category/additive_categories' %>
+  <%= render :partial => 'administration_category/category_technical_editor' %>
+  <%= render :partial => 'administration_category_class/category_class_technical_editor' if @category.category_class %>
+
+
+ <% end  %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @example %>
+
+<h3> <%= @category.department.Name %> -- <%= @category.Name %> </h3>
+<%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Lower this menu |', "Element.toggle('lower_this_menu')")   %>
+<%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Category Menu |', "Element.toggle('actual_categories')")   %>
+<%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Category Header |', "Element.toggle('categories_description')")   %>
+<%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Category Options |', "Element.toggle('category_options_header')")   %>
+<%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Class Options |', "Element.toggle('class_options_header')")   %>
+
+<div  id="category_options_header" style="text-align:left;width:640px;display:none;">
+  <h3> Category Options </h3>
+  <%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Technical Editor | ', "Element.toggle('category_technical_editor')")   %>
+  <%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Menu Organizer | ', "Element.toggle('category_menu_organizer')")   %>
+  <%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Other Options | ', "Element.toggle('other_category_options')")   %>
+  <%= link_to "Edit Departments/Categories | " ,{:controller => 'categories', :action => 'departments_categories'} , :popup => ['new_window_name', 'height=650,width=700']    %> <br /><br />
+</div>
+
+<div  id="class_options_header" style="text-align:left;width:640px;display:none;">
+  <h3> Category Class Options </h3>
+  <%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Technical Editor |', "Element.toggle('category_class_technical_editor')")   %>
+  <%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Opposites Organizer | ', "Element.toggle('opposites_organizer')")   %>
+  <%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Categories in same class', "Element.toggle('categories_in_same_class')")   %> <br />
+  <%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Select a different Class', "Element.toggle('select_class')")   %>
+  <%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Duplicate Class', "Element.toggle('duplicate_class')")   %>
+  <%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Create New Class from scratch', "Element.toggle('new_class')")   %>
+</div>
+
+  <%= render :partial => 'administration_category/category_technical_editor' %>
+  <%= render :partial => 'administration_category/category_menu_organizer' %>
+  <%= render :partial => 'administration_category/other_category_options' %>
+
+  <%= render :partial => 'administration_category_class/category_class_technical_editor' %>
+
+  <%= render :partial => 'administration_category_class/opposites_organizer' %>
+  <%= render :partial => 'administration_category_class/categories_in_same_class' %>
+
+
+
+
+
+
+<div class="advanced_choices_menu">
+        <ul id="tabs_advanced_choices_menu" class="subsection_tabs">
+
+          <%    if admin?  %>
+            <li class="tab"><a id="administration_choices_tab_a" href="#administration_choices">Administration</a></li>
+            <% end  %>
+
+
+          <%    if @designer_series == true  %>
+            <li class="tab"><a id="background_choices_tab_a" href="#background_choices">Background</a></li>
+            <% end  %>
+            <li class="tab"><a  id="front_choices_tab_a" href="#front_choices">Front Design</a></li>
+            <li class="tab"><a  id="back_choices_tab_a" href="#back_choices">Back Design</a></li>
+            <li class="tab"><a  id="product_choices_tab_a" href="#product_choices">Product Choice</a></li>
+            <li class="tab"><a  id="add_to_cart_tab_a" href="#add_to_cart">Save and Cart</a></li>
+            <li class="tab"><a  id="details_tab_a" href="#details">Details</a></li>
+            <li class="tab"><a  id="price_tab_a" href="#price">Price</a></li>
+        </ul>
+</div>
+
+
+<% end %>

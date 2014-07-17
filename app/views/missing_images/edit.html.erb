@@ -1,0 +1,16 @@
+<h1>Editing missing_image</h1>
+
+<%= form_for(@missing_image) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :item_id %><br />
+    <%= f.text_field :item_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @missing_image %> |
+<%= link_to 'Back', missing_images_path %>

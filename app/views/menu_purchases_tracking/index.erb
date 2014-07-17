@@ -1,0 +1,36 @@
+<h1>Listing purchases</h1>
+
+<table>
+  <tr>
+    <th>Comment</th>
+    <th>Deposit</th>
+    <th>Tax</th>
+    <th>Total</th>
+    <th>Taxable</th>
+    <th>Referencenumber</th>
+    <th>Shippingchargeonorder</th>
+    <th>Shippingtrackingnumber</th>
+    <th>Shippingnotes</th>
+  </tr>
+  
+<% for purchase in @purchases %>
+  <tr>
+    <td><%=h purchase.Comment %></td>
+    <td><%=h purchase.Deposit %></td>
+    <td><%=h purchase.Tax %></td>
+    <td><%=h purchase.Total %></td>
+    <td><%=h purchase.Taxable %></td>
+    <td><%=h purchase.ReferenceNumber %></td>
+    <td><%=h purchase.ShippingChargeOnOrder %></td>
+    <td><%=h purchase.ShippingTrackingNumber %></td>
+    <td><%=h purchase.ShippingNotes %></td>
+    <td><%= link_to 'Show', purchase_path(purchase) %></td>
+    <td><%= link_to 'Edit', edit_purchase_path(purchase) %></td>
+    <td><%= link_to 'Destroy', purchase_path(purchase), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New purchase', new_purchase_path %>

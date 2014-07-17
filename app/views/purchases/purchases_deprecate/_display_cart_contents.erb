@@ -1,0 +1,31 @@
+
+<div id="product_container_div">
+
+            	<table id="purchase_table" class="purchase_table">
+                  <tr>
+                                            <th  class="purchases_entry_delete">.</th>
+                                            <th  class="purchases_entry_master_image">Item</th>
+											<th  class="purchases_entry_slave_image">Design</th>
+                                            <th  class="purchases_entry_quantity">Quantity</th>
+                                            <th  class="purchases_entry_itemlookupcode">Item lookup code</th>
+                                            <th  class="purchases_entry_symbiont_description">Description</th>
+                                            <th  class="purchases_entry_full_unit_price">Unit price:</th>
+                                            <th  class="purchases_entry_full_extended_price">Extended price</th>
+                  </tr>
+
+                        <% if  @purchases_entries %>
+                                            <% @purchases_entries.each do |purchases_entry|   %>
+									
+															<%  if purchases_entry.opposite_entry == false  %>
+                                                                                                                                    <%= render(:partial => "purchases/purchases_entry",:locals => { :purchases_entry => purchases_entry } ) %>
+															<%  else  %>		
+																			<% if purchases_entry.master_entry == true %>
+																				<%= render(:partial => "purchases/purchases_entry_symbiont",:locals => { :purchases_entry => purchases_entry } ) %>
+																			<%  end  %>	
+																				
+															<% end %>		
+                                            <% end %>
+                       <% end %>
+
+                        </table>
+</div>

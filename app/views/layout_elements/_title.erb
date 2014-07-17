@@ -1,0 +1,9 @@
+<!-- Begin Shared Title -->
+<title>
+<% if @page and  @website  -%>
+          <%= @page.name  -%>
+<% else -%>
+<%=  controller.controller_name + ' /'  +  controller.action_name.humanize -%>
+<% end -%>
+</title>
+<!-- End Shared Title -->

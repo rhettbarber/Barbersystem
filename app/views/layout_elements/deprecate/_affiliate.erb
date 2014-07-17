@@ -1,0 +1,11 @@
+
+	<p> 
+		<%= link_to "Affiliate Information", :controller => 'affiliates', :action => 'index' if @website.store_website == true %>
+		<% if @website.name == 'dixie_store' %>
+					- <%= link_to "Franchise Store Locations", :controller => 'page', :action => 'show', :id => 'franchise-stores' %> - 
+					<%= link_to "Become a Dealer", :controller => 'page', :action => 'show', :id => 'dealer-information' %> -
+					<%= link_to "Advanced Search", :controller => 'dixieoutfitters_searches', :action => 'search_dixie' %>
+	</p>			  
+		<% else  %>
+	</p>
+		<% end %> 

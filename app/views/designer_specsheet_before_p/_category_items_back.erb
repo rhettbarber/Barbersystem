@@ -1,0 +1,67 @@
+<div  class="category_items">
+                <table id="back_designs_table" class="designs_table" >
+                  <tr>
+                          <% @items_back.each do |item| %>
+                                             <%  if item  %>
+                                                                                       <td>
+                                                                                                  <%= image_tag(  '/images/item_thumbnails/' + item.ItemLookupCode + '.png' , :border => 0  , :width => '280' ,:alt =>  item.ItemLookupCode   , :class =>  'back_design anatips', :title => item.Description,  :data_item_id => item.id,   :data_category_id => item.category_id ,  :data_department_id => item.department_id  ) %>
+                                                                                       </td>
+                                              <% end  %>
+                           <% end  if @items_back%>
+                  </tr>
+                </table>
+      </div>
+
+<% if @from_ajax  %>
+
+ <script type="text/javascript">
+            console.log("begin render :partial => category_items_back);");
+            console.log("This runs javascript which updates the selected_category_advanced_combination variables. ");
+            console.log("It does not set any live styles or variables, only cached potentials. ");
+            console.log("For the breast print/little print the most popular opposite is chosen. ");
+
+<% if @back_design %>
+            console.log("@back_design.id: <%= @back_design.id %>");
+            console.log("@back_advanced_combination.id: <%= @back_advanced_combination.id %>");
+            $('details_form_back').selected_category_id.value = "<%=  @back_design.category_id  %>";
+            $('details_form_back').selected_category_advanced_combination_back_left.value = "<%=  @back_advanced_combination.back_left  %>";
+            $('details_form_back').selected_category_advanced_combination_back_top.value =  "<%=  @back_advanced_combination.back_top %>";
+            $('details_form_back').selected_category_advanced_combination_back_width.value = "<%=  @back_advanced_combination.back_width  %>";
+            $('details_form_back').selected_category_advanced_combination_front_left.value = "<%=  @back_advanced_combination.front_left  %>";
+            $('details_form_back').selected_category_advanced_combination_front_top.value =  "<%=  @back_advanced_combination.front_top %>";
+            $('details_form_back').selected_category_advanced_combination_front_width.value = "<%=  @back_advanced_combination.front_width  %>";
+            $('details_form_back').selected_category_advanced_combination_number_of_sides.value = "<%=  @back_advanced_combination.number_of_sides  %>";
+            $('details_form_back').selected_category_advanced_combination_default_side.value = "<%=  @back_advanced_combination.default_side  %>";
+<% else %>
+            console.log("no @back_design");
+<% end %>
+
+<% if @front_design %>
+            console.log("@front_advanced_combination.id: <%= @front_advanced_combination.id %>");
+            console.log("@front_design.id: <%= @front_design.id %>");
+            $('details_form_front').selected_category_id.value = "<%=  @front_design.category_id  %>";
+            $('details_form_front').selected_category_advanced_combination_back_left.value = "<%=  @front_advanced_combination.back_left  %>";
+            $('details_form_front').selected_category_advanced_combination_back_top.value =  "<%=  @front_advanced_combination.back_top %>";
+            $('details_form_front').selected_category_advanced_combination_back_width.value = "<%=  @front_advanced_combination.back_width  %>";
+            $('details_form_front').selected_category_advanced_combination_front_left.value = "<%=  @front_advanced_combination.front_left  %>";
+            $('details_form_front').selected_category_advanced_combination_front_top.value =  "<%=  @front_advanced_combination.front_top %>";
+            $('details_form_front').selected_category_advanced_combination_front_width.value = "<%=  @front_advanced_combination.front_width  %>";
+            $('details_form_front').selected_category_advanced_combination_number_of_sides.value = "<%=  @front_advanced_combination.number_of_sides  %>";
+            $('details_form_front').selected_category_advanced_combination_default_side.value = "<%=  @front_advanced_combination.default_side  %>";
+<% else %>
+             console.log("no @front_design");
+  <% end %>
+
+
+            $$('.back_design').invoke('observe', 'click', changeBack);
+            $$('.front_design').invoke('observe', 'click', changeFront );
+
+
+
+//            ANAEMA.tips.setupTooltips();
+
+            console.log("end render :partial => category_items_back);");
+</script>
+<% end  %>
+
+

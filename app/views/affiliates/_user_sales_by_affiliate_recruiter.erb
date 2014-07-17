@@ -1,0 +1,38 @@
+
+<% sale = user_sales_by_affiliate_recruiter.sale %>
+
+<% if sale %>
+			<% @qualifies_for_payment = sale.payable_qualification_information  %>
+			<% if @qualifies_for_payment == true %>
+						<% style_class = "qualifying_sale" %>
+
+			<% else %>
+							<%  if user_sales_by_affiliate_recruiter.affiliate_paid   ==  1 or user_sales_by_affiliate_recruiter.affiliate_paid   ==  "1" %>
+										<% style_class = "qualifying_paid_sale"  %>
+							<% else %>
+										<% style_class = "non_qualifying_sale" %>
+							<% end %>
+			<% end %>
+			
+				<tr>
+							<td  class="<%= style_class %>"><%= sale.sale_time.utc  %>--
+								<%= sale.id  %>--
+								<%= sale.purchase.a_id  %>
+							</td>
+							
+							<td  class="<%= style_class %>"><%= sale.total_before_shipping  %></td>
+							<td  class="<%= style_class %>"><%= sale.shipping_charge  %></td>
+							<td  class="<%= style_class %>"><%= sale.total_returned  %></td>
+							<td  class="<%= style_class %>"><%= sale.total_payable  %></td>
+							<td  class="<%= style_class %>"><%= sale.recruited_affiliate_payable_sale_amount  %></td>
+							<td  class="<%= style_class %>"><%= @qualifies_for_payment  %></td>
+							<td  class="<%= style_class %>">
+							<% if user_sales_by_affiliate_recruiter.recruiter_paid == 1 %>
+											Already Paid
+							<% else %>
+											<%=    distance_of_time_in_words(  Sale.qualifying_time   ,sale.sale_time  )     %>
+							<% end %>
+							</td>
+							<td  class="<%= style_class %>"><%= user_sales_by_affiliate_recruiter.affiliate_paid.to_s.match(/(true|t|yes|y|1)$/i) != nil   %></td>
+				</tr>
+<% end %>

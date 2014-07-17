@@ -1,0 +1,19 @@
+<div style="width: 100%;text-align: center;">
+                  <!--<div class="ui-bar ui-bar-a">-->
+                  <!--Please choose a shirt or item below to complete your design:<br>-->
+
+                    <div data-role="controlgroup breadcrumb-control" data-type="horizontal"  data-mini="true">
+                                      <% if @department %>
+
+                                                 <!--<a class="ui-btn ui-corner-all ui-icon-home ui-btn-icon-left"  href="/"> Home</a>-->
+
+                                                 <a  class="ui-btn ui-corner-all ui-icon-carat-r ui-btn-icon-up"   href="#" onclick="expandCollapsibleDepartment( <%= @department.id %>)">  <%= @department.Name.camelize.possessive %> department</a>
+                                    <% end %>
+
+                                      <% if @category %>
+                                                <a  class="ui-btn ui-disabled"   href="#"> <%= @category.Name.camelize %></a>
+                                      <% end %>
+                    </div>
+
+                  <!--</div>-->
+</div>

@@ -1,0 +1,91 @@
+
+<div  class="category_items">
+                <table id="background_table" class="designs_table" >
+                  <tr>
+                          <% if @items_background.size > 0  %>
+                                        <%  @items_background.each do |item| %>
+                                                           <%  if item  %>
+                                                                             <td>
+                                                                                        <%= image_tag(  '/images/item_thumbnails/' + item.ItemLookupCode + '.png'   , :width => '280' ,:alt =>  item.ItemLookupCode , :border => '0'  , :class =>  'front_design',  :data_item_id => item.id ,   :data_category_id => item.category_id ,  :data_department_id => item.department_id ) %>
+                                                                                        <%=   item.ytdn  %>
+                                                                             </td>
+
+                                                            <% end  %>
+                                         <% end %>
+                               <% else %>
+                                                             <td style="text-align:center;width:850px;min-height:100px;">
+                                                                       No backgrounds found.<br />
+                                                                       <% if admin? %>
+                                                                                          <%= link_to "Please define some Backgrounds"  ,:onclick => "openBreastPrintAdministration();"  %>
+                                                                       <% end  %>
+                                                             </td>
+                               <% end %>
+                  </tr>
+                </table>
+      </div>
+
+
+<% if @from_ajax  %>
+<script type="text/javascript">
+
+      console.log("begin render :partial => category_items_front);");
+      console.log("This runs javascript which updates the ");
+      console.log(  $('swap').value );
+
+        if ( $('swap').value == '1' ) {
+                            console.log(' from ajax swap == 1 great');
+
+                              if ($$("#front_designs_table img").first()) {
+
+                                             new_back_design = $$("#front_designs_table img").first();
+                                              $("back_design_image").src =   new_back_design.src ;
+
+
+                                              $('details_form_back').design_id.value   =    new_back_design.getAttribute('data_item_id') ;
+                                              $('details_form_back').department_id.value = new_back_design.getAttribute('data_department_id') ;
+                                              $('details_form_back').category_id.value = new_back_design.getAttribute('data_category_id') ;
+                                               $('details_form_back').image_name.value = new_back_design.alt ;
+
+                                              $('back_design_image').style.width  =  $('details_form_back').selected_category_advanced_combination_back_width.value  ;
+                                              $('back_design_image').style.left       =  $('details_form_back').selected_category_advanced_combination_back_left.value  ;
+                                              $('back_design_image').style.top       =  $('details_form_back').selected_category_advanced_combination_back_top.value  ;
+                                    } else {
+                                              console.log("warning this design has no breast print defined");
+                                              $("back_design_image").src =  "/images/pixels/transparent.png";
+                                      }
+
+
+          } else {
+                               console.log(' from ajax swap != 1 bad');
+
+                                if ($$("#front_designs_table img").first()) {
+
+                                             new_front_design = $$("#front_designs_table img").first();
+                                              $("front_design_image").src =   new_front_design.src ;
+
+                                              new_category_id =   new_front_design.getAttribute('data_category_id') ;
+                                              $('details_form_front').design_id.value   =    new_front_design.getAttribute('data_item_id') ;
+                                              $('details_form_front').category_id.value = new_category_id;
+
+                                              $('front_design_image').style.width  =  $('details_form_front').selected_category_advanced_combination_front_width.value  ;
+                                              $('front_design_image').style.left       =  $('details_form_front').selected_category_advanced_combination_front_left.value  ;
+                                              $('front_design_image').style.top       =  $('details_form_front').selected_category_advanced_combination_front_top.value  ;
+
+
+                                      }else {
+                                                console.log("warning this design has no breast print defined");
+                                                $("front_design_image").src =  "/images/pixels/transparent.png";
+                                        }
+        }
+
+
+
+      $$('.back_design').invoke('observe', 'click', changeBack);
+      $$('.front_design').invoke('observe', 'click', changeFront );
+
+      console.log("end  render :partial => category_items_front);");
+
+</script>
+<% end  %>
+
+

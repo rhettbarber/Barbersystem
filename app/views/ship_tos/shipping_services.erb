@@ -1,0 +1,166 @@
+<%= render :partial => "application/checkout_links"  %>
+
+<p style="text-align: center;"> Select a shipping service:    </p>
+
+<%= link_to  "Edit Zip Code: " + @purchase.ship_to.Zip ,{:controller => "ship_tos",:action => "index"}, {:class => "ui-btn"}  %>
+<!--3 or less:<%#  @purchase.three_or_less_shipping_allowed? %> <br>-->
+
+<ul data-role="listview">
+          <li data-role="list-divider"><div style="width: 10%;float:left;">  <%= image_tag '/images/company_logos/ups_logo_small.jpg',:size => "20x20"  %></div><div style="width: 90%;float:left;">UPS Rates</div></li>
+            <% if @purchase.ship_to.ups_rates.class == String %>
+                                    <li>UPS reported  <%=@purchase.ship_to.ups_rates%> </li>
+
+            <% else %>
+
+                                  <% @purchase.ship_to.ups_rates.each do |the_rate|  %>
+                                                  <% if the_rate.service_name.match(/(Early A.M.)/)   %>
+                                                                          <!--<li>-->
+                                                                                        <!--<div style="width:100%;float:left;white-space: normal;"> <%= the_rate.service_name %> - Filtered out </div>-->
+                                                                          <!--</li>-->
+                                                  <% else %>
+                                                                          <li>
+                                                                                        <a href="/ship_tos/set_shipping_charge_on_order/<%=  the_rate.service_code %>">
+                                                                                                      <div style="width:100%;float:left;white-space: normal;">
+                                                                                                                    <div style="width:60%;float:left;white-space: normal;"><%#= the_rate.service_code %>   <%= the_rate.service_name %></div>
+                                                                                                                    <div style="text-align: right;width:40%;float:left;white-space: normal;"><%= number_to_currency the_rate.total_price.to_f / 100 + 2  %></div>
+                                                                                                      </div>
+                                                                                        </a>
+                                                                          </li>
+                                                     <% end %>
+                                <% end %>
+           <% end %>
+        <li data-role="list-divider"><div style="width: 10%;float:left;">  <%= image_tag '/images/company_logos/usps_logo_small.jpg',:size => "20x20"  %></div><div style="width: 90%;float:left;">USPS Rates</div> </li>
+          <% if @purchase.ship_to.usps_rates.class == String %>
+                                        <li>USPS reported  <%=@purchase.ship_to.usps_rates%> </li>
+          <% else %>
+                                    <% @purchase.ship_to.usps_rates.each do |the_rate|  %>
+                                                        <% if the_rate.service_name.match(/(Gift Card Flat|Small Flat|Window Flat|Medium Flat|Large Flat|Day Flat|Padded Flat|Library|Media|Hold)/)   %>
+                                                                              <!--<li>-->
+                                                                                                <!--<div style="width:100%;float:left;white-space: normal;"> <%#= the_rate.service_name %> - Filtered out</div>-->
+                                                                              <!--</li>-->
+                                                        <% else %>
+                                                                                                <% if @purchase.three_or_less_shipping_allowed? %>
+                                                                                                                            <li>
+                                                                                                                                            <a href="/ship_tos/set_shipping_charge_on_order/<%=  the_rate.service_code %>">
+                                                                                                                                                          <div style="width:100%;float:left;white-space: normal;">
+                                                                                                                                                                        <div style="width:60%;float:left;white-space: normal;"><%#= the_rate.service_code %>   <%= the_rate.service_name %></div>
+                                                                                                                                                                        <div style="text-align: right;width:40%;float:left;white-space: normal;"><%=  number_to_currency the_rate.total_price.to_f / 100 + 2 %></div>
+                                                                                                                                                          </div>
+                                                                                                                                            </a>
+                                                                                                                              </li>
+                                                                                                <% else %>
+                                                                                                                                <% if the_rate.service_name.match(/(Day Legal)/)   %>
+                                                                                                                                                              <% logger.debug "@purchase.three_or_less_shipping_allowed? FALSE and matches Day Legal" %>
+                                                                                                                                <% else %>
+                                                                                                                                                                  <li>
+                                                                                                                                                                    <a href="/ship_tos/set_shipping_charge_on_order/<%=  the_rate.service_code %>">
+                                                                                                                                                                      <div style="width:100%;float:left;white-space: normal;">
+                                                                                                                                                                        <div style="width:60%;float:left;white-space: normal;"><%= the_rate.service_code %> -  <%= the_rate.service_name %></div>
+                                                                                                                                                                        <div style="text-align: right;width:40%;float:left;white-space: normal;"><%= number_to_currency the_rate.total_price.to_f / 100 + 2 %></div>
+                                                                                                                                                                      </div>
+                                                                                                                                                                    </a>
+                                                                                                                                                                  </li>
+                                                                                                                                 <% end %>
+                                                                                                 <% end %>
+                                                         <% end %>
+                                      <% end %>
+            <% end %>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @old %>
+
+                <% if @customer and @nothing  %>
+                Set chosen as my default shipping method:
+                <%= check_box_tag( 'default_this_shipping_method' , value = "1" ,checked = false, options = {} )   %><br>
+                <% end %>
+
+                <% @shipping_service_unavailable_count = 0 %>
+                <ul data-role="listview">
+                  <% for service in @shipping_services  %>
+                            <% @shipping_price = @purchase.ship_to.shipping_service_price(service.web_carrier_name, service.web_name, @purchase) %>
+                            <li>
+                                       <% if @shipping_price %>
+                                      <a href="/ship_tos/set_shipping_charge_on_order/<%=  service.id %>">
+                                       <% end %>
+                                                   <div style="width:100%;float:left;white-space: normal;">
+                                                                    <div style="width:60%;float:left;white-space: normal;">
+                                                                                <% if service.web_carrier_name == 'ups' %>
+                                                                                    <%= image_tag '/images/company_logos/ups_logo_small.jpg',:size => "20x20"  %>
+                                                                                <% elsif service.web_carrier_name == 'usps' %>
+                                                                                    <%= image_tag '/images/company_logos/usps_logo_small.jpg',:size => "20x20"  %>
+                                                                                <% end %>
+                                                                                <%= service.Name%>
+                                                                     </div>
+
+                                                             <div style="text-align: right;width:40%;float:left;white-space: normal;">
+                                                                            <% if @shipping_price %>
+                                                                                    <%=   number_to_currency( @shipping_price   )   %>  &nbsp;
+                                                                            <% else %>
+                                                                                               Not available <%  @shipping_service_unavailable_count += 1  %>
+                                                                            <% end %>
+                                                             </div>
+
+                                                   </div>
+
+                                                    <div style="width:100%;float:left;color:grey;white-space: normal;font-size:14px;;">
+
+                                                        <% if @customer.PriceLevel > 1 %>
+                                                            <%= service.processing_time_transfers %>
+                                                        <% else %>
+                                                            <%= service.processing_time %>
+                                                        <% end %>
+                                                    </div>
+                                    <% if @shipping_price %>
+                                    </a>
+                                     <% end %>
+                            </li>
+                    <% end %>
+                </ul>
+                <br>
+
+
+                <%#=   @shipping_service_unavailable_count  %>
+                <%#=   @shipping_services.size  %>
+
+                <%  if @shipping_service_unavailable_count  == @shipping_services.size  %>
+                             <p style="color:red;text-align: center;">Shipping is not available for the Zip Code you entered ( <%= @purchase.ship_to.Zip %> ).  <%= link_to "Click Here to change shipping address",{:controller => "ship_tos",:action => "index"}, {:class => "ui-btn"}  %> </p>
+                 <% else %>
+                            * Please allow shipping time in addition to processing time.		<br />
+                            ** Processing time not guaranteed on all items.		<br />
+                            <% if [5,6].include?(@customer.account_type_id)   %>
+                                        <br /> Your account is approved for C.O.D. <br />
+                                        $8.50 C.O.D. charges will apply if you choose to pay using C.O.D. payment method. <br />
+                            <% end %>
+                <% end %>
+
+
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

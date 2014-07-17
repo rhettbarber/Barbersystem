@@ -1,0 +1,129 @@
+ <%# cache( "/items_menu/" + @website.name + "_" + Website.day_and_hour + "_customer_type_" + @singular_item_customer.to_s  )    do %>
+
+
+                     <% if @singular_item_customer == true %>
+                                             <%= hidden_field_tag "singular_item_customer", true %>
+                     <% else %>
+                                              <%= hidden_field_tag "singular_item_customer", false %>
+                     <% end %>
+
+
+
+                <div  class="symbiote_choices" style="text-align: center;font-size: 15px;">
+                                  <div class="symbiote_message_row">
+                                                    <div class="ui-bar ui-bar-a">
+                                                                      <h3 id="item_choices_title">
+                                                                                    <div class="symbiote_message_container" id="symbiote_message_container">
+
+                                                                                    </div>
+                                                                      </h3>
+                                                    </div>
+                                  </div>
+
+                                  <div id="symbiote_container" class="symbiote_container">
+                                                        <ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true"  class="symbiote_container_listview">
+                                                                              <li>
+                                                                                                <a data-rel="popup" data-position-to="window" data-transition="pop"  href="#designing_options"  class="symbiote_thumbnail_container_link toggle_item_buttons">
+                                                                                                  <span class="symbiote_description_container"  id="symbiote_description_container"> </span>
+                                                                                                </a>
+                                                                                                <a href="#designing_options" data-rel="popup" data-position-to="window" data-transition="pop" class="toggle_item_buttons">Design options   </a>
+                                                                              </li>
+                                                        </ul>
+                                                        <div data-role="popup" id="designing_options" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;background-color: #ffffff;">
+                                                                          <!--<h3>Design options</h3>-->
+                                                                          <p>Options:</p>
+                                                                          <a href="/cart/place_incomplete_symbiont_on_hold"  data-role="button" data-icon="arrow-l" data-iconpos="left" data-theme="b">Place  on hold</a>
+                                                                          <a href="/cart/delete_incomplete_symbiote" data-role="button" data-icon="arrow-l" data-iconpos="left" data-theme="b">Delete  from cart</a>
+                                                                          <a id="specsheet_link" class="item_only_option"  href="#" data-role="button" data-icon="arrow-l" data-iconpos="left" data-theme="b" style="display: none;">Change size or color</a>
+                                                                          <a href="index.html" data-rel="back"  data-role="button" data-icon="arrow-l" data-iconpos="left" data-theme="a"  class="no_loader">Cancel</a>
+                                                        </div>
+                                  </div>
+                </div>
+
+
+
+
+              <span  id="item_choices_title">
+                           <!--<div class="all_options" style="display: none;font-size: 18px;background-color: black !important;color:white !important;padding:0.4em 1em;text-align: center;">Choose an Item or Design to begin shopping. </div>-->
+
+                           <div class="design_options the_options" style="display: none;">Please complete your chosen item by finding a design.<br></div>
+
+                           <div class="item_options the_options" style="display: none;">Please choose a shirt or item to put this design on.<br></div>
+              </span>
+
+
+
+
+              <div data-role="collapsible"  class="main_menu_choices"   id="item_menu_choices" data-theme="b" data-icon="gear"  data-inset="true" >
+                                            <h3 style="width: 100%;">Items</h3>
+                                            <div id="items_departments_list">
+                                                                  <% if @singular_item_customer == true %>
+                                                                                        <% @departments_to_show = @website.default_non_blank_item_departments %>
+                                                                  <% else %>
+                                                                                        <% @departments_to_show = @website.default_item_departments %>
+                                                                  <% end %>
+                                                                  <% @departments_to_show.each do |department| %>
+                                                                                          <div data-role="collapsible"  class="department_collapsible  openMe"   id="department_collapsible_<%= department.id %>"   data-department_id="<%= department.id %>" >
+                                                                                                            <h3><%= department.Name  %></h3>
+                                                                                                            <ul data-role="listview">
+                                                                                                                                  <% item_department_categories = department.categories %>
+                                                                                                                                  <% if  item_department_categories.size > 1 %>
+                                                                                                                                                    <li   class="scroll_li"> <a href="/search/scroll/<%=  department.id  %>" data-transition="slide">scroll all</a></li>
+                                                                                                                                    <% end %>
+                                                                                                                                  <% item_department_categories.where("web_category = 1 and visible = 1").sort_by{|a| a.Name}.each do |category| %>
+                                                                                                                                                     <li  class="category_li"  data-category_id="<%= category.id %>"> <a href="/store/category_items/<%=  department.id  %>/<%= category.id %>" data-transition="slide"> <%= category.Name.downcase %></a></li>
+
+                                                                                                                                  <% end %>
+                                                                                                            </ul>
+
+                                                                                          </div>
+                                                                  <% end %>
+                                            </div>
+                </div>
+
+
+
+
+
+              <div data-role="collapsible"  class="main_menu_choices openMe"   id="design_menu_choices" data-theme="b" data-icon="gear"  data-inset="true" >
+                                      <h3  style="width: 100%;">Designs</h3>
+                                      <div id="designs_departments_list">
+
+
+                                                        <!--<div data-role="collapsible" >-->
+                                                          <!--<h3>New designs, Sales and Specials</h3>-->
+                                                        <ul data-role="listview">
+                                                                          <li data-icon="carat-r"><a href="/new_designs">New designs</a></li>
+                                                                        <% if @singular_item_customer == true %>
+                                                                                        <li data-icon="carat-r"><a href="/sale_designs">Sale designs</a></li>
+                                                                        <% end %>
+                                                        </ul>
+                                                        <!--</div>-->
+
+
+                                                        <% @website.default_design_departments.each do |department| %>
+                                                                                    <div data-role="collapsible"  class="department_collapsible"   id="department_collapsible_<%= department.id %>"   data-department_id="<%= department.id %>" >
+                                                                                                          <h3><%= department.Name  %></h3>
+                                                                                                          <ul data-role="listview">
+
+                                                                                                                                    <% design_department_categories = department.categories %>
+                                                                                                                                    <% if  design_department_categories.size > 1 %>
+                                                                                                                                                        <li   class="scroll_li"> <a href="/search/scroll/<%=  department.id  %>" data-transition="slide">scroll all</a></li>
+                                                                                                                                    <% end %>
+
+                                                                                                                                <% design_department_categories.where("web_category = 1 and visible = 1").sort_by{|a| a.Name}.each do |category| %>
+                                                                                                                                                         <li   class="category_li"   data-category_id="<%= category.id %>"> <a href="/store/category_items/<%=  department.id  %>/<%= category.id %>" data-transition="slide"> <%= category.Name.downcase %></a></li>
+                                                                                                                                <% end %>
+                                                                                                          </ul>
+                                                                                    </div>
+                                                        <% end %>
+                                      </div>
+                </div>
+
+
+<%# end %>
+
+
+
+
+

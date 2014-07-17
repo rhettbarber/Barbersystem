@@ -1,0 +1,63 @@
+
+<%   it = 'temporary_item' %>
+
+
+<% begin try %>
+
+
+                    <div style="height:38px;background: none;margin-left: auto;margin-right:auto;width:850px;">
+                          <%= image_tag('/images/company_logos/dixie_store_designer_specsheet.png') %>
+                          <span style="float:right;"> <%= link_to_function(  image_tag('/images/buttons/toggle-help.png' , :border => '0' ),  "toggleHelp()") %> </span>
+                          <span style="float:right;"> <%= link_to_function(  image_tag('/images/buttons/toggle-development.png' , :border => '0' ),  "toggleDevelopment()") %> </span>
+                    </div>
+
+
+
+                    <div class="help" style="background: none;margin-left: auto;margin-right:auto;width:850px;">
+                          Checklist:<br />
+                          Pick a Background.<br />
+                          Pick a Front Design.<br />
+                          Pick a Back Design.<br />
+                          Pick a Shirt Style.<br />
+
+                          <% @items_shirt_styles_all.each do |it| %>
+                                  <%= it.ItemLookupCode %> -<br />
+                          <% end  %>
+                    </div>
+
+
+                  <div class="specsheet_container" >
+
+                    <span class="development_label">administration_specsheet/specsheet_admin</span> <%= render(:partial => "administration_specsheet/specsheet_admin") if admin?  -%>
+
+                     <span class="development_label">specsheet_advanced/specsheet_table</span><%= render(:partial => "specsheet_advanced/specsheet_table") -%>
+
+                     <span class="development_label">specsheet_advanced/specsheet_resize</span><%= render(:partial => "specsheet_advanced/specsheet_resize") -%>
+
+                     <span class="development_label">specsheet_choices_menu</span><%= render :partial => "specsheet_advanced/specsheet_choices_menu" -%>
+
+                     <span class="development_label">advanced_choices_menu</span><%= render(:partial => "specsheet_advanced/advanced_choices_menu") -%>
+
+                      <span class="development_label">advanced_choices_items</span><%= render(:partial => "specsheet_advanced/advanced_choices_items") -%>
+
+                     <span class="development_label">specsheet_details</span><%= render(:partial => "specsheet_advanced/specsheet_details") -%>
+
+                      <span class="development_label"> preference_fields</span><%= render(:partial => "specsheet_advanced/preference_fields") -%>
+                  </div>
+
+
+<%
+rescue => e
+
+
+
+ "! There was an error in your view. \"#{it}\""
+ "#{$!.inspect}\n\n"
+ "#{e.backtrace.join("\n")}\n\n"
+
+
+
+
+ %>
+
+<% end  %>

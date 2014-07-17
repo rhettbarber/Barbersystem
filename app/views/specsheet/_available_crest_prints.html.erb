@@ -1,0 +1,40 @@
+
+
+<% if @category %>
+            <% if @category.is_design? %>
+
+                                     <% @main_design = @category.items.first %>
+
+
+
+
+                                  <% default_crest_print = CrestPrint.where("category_id = ? and default_crest = ?", @main_design.category_id, 1  ).first    %>
+                                  <% default_crest_item_id = default_crest_print.item_id if default_crest_print %>
+
+                                <div id="crest_prints_list" style="width: 100%;float: left;">
+                                              Available Crest Prints:
+                                              <% @already_show_cp_item_ids = Set.new %>
+                                              <% @available_size = 0 %>
+                                              <fieldset id="admin_crest_print_choices_to_remove" data-role="controlgroup">
+                                                <% @main_design.applicable_crest_prints.sort_by{ |x| x.ItemLookupCode }.each do |item| %>
+                                                    <%  @already_show_cp_item_ids.add?( item.id ) %>
+                                                    <% @available_size += 1 %>
+                                                    <% crest_image_url =  'http://cdn.dixieoutfitters.com/images/item_thumbnails/' +  item.ItemLookupCode + '.png'    %>
+                                                    <% if default_crest_item_id == item.id %>
+                                                        <input  type="checkbox" id="<%= item.id %>" value="<%= item.id %>" name="<%= item.id %>"/>
+                                                        <label style="background-color: skyblue;" for="<%= item.id %>"><%= image_tag( crest_image_url , :size => "70x70"   )%> <%= item.ItemLookupCode %> - <%= item.Description %></label>
+                                                    <% else %>
+                                                        <input  type="checkbox" id="<%= item.id %>" value="<%= item.id %>" name="<%= item.id %>"/>
+                                                        <label for="<%= item.id %>"><%= image_tag( crest_image_url , :size => "70x70"   )%> <%= item.ItemLookupCode %> - <%= item.Description %></label>
+                                                    <% end %>
+
+                                                <% end %>
+                                                <% if @available_size == 0 %>
+                                                    0 Crest prints available. Add them below.
+                                                <% end %>
+                                              </fieldset>
+                                                <a href="/specsheet/admin_crest_prints_list/<%= @main_design.id %>" data-rel="dialog" class="ui-btn">Administer crest  prints</a>
+                                </div>
+
+             <% end %>
+ <% end %>

@@ -1,0 +1,27 @@
+
+
+
+<p style="text-align: center;">	Please send Check or Money Order to :</p>
+
+<p style="text-align: center;">
+<b>
+<%= @website.title %> <br />
+
+Order #: <%= @purchase.id %>  <br />
+
+PO Box 220 <br />
+
+Odum GA 31555 <br />
+
+</b>
+</p>
+
+<p style="text-align: center;">	 Your order will begin processing once check is received.  </p>
+
+
+
+  <%=link_to(  "Next Checkout Step" ,{:controller => 'cart' , :action => 'next_checkout_step'}, :class => "ui-btn ui-btn-b")    %>
+
+
+  <a href="/quote_tender_entries" class="ui-btn"> Back to payment type choices </a>
+

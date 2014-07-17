@@ -1,0 +1,72 @@
+<%= form_for(@category) do |f| %>
+  <% if @category.errors.any? %>
+    <div id="error_explanation">
+
+
+      <div style="font-size:15px;font-weight: bolder;">   <%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:     </div
+
+
+      <ul>
+      <% @category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :id %><br />
+    <%= f.text_field :id,   'disabled' => 'true' %>
+  </div>
+  <div class="field">
+    <%= f.label :Name %><br />
+    <%= f.text_field :Name %>
+  </div>
+  <div class="field">
+    <%= f.label :Code %><br />
+    <%= f.text_field :Code %>
+  </div>
+  <div class="field">
+    <%= f.label :prefix %><br />
+    <%= f.text_field :prefix %>
+  </div>
+  <div class="field">
+    <%= f.label :use_generic_department %><br />
+    <%= f.text_field :use_generic_department %>
+  </div>
+  <div class="field">
+    <%= f.label :web_category %><br />
+    <%= f.text_field :web_category %>
+  </div>
+  <div class="field">
+    <%= f.label :additive_category_ids %><br />
+    <%= f.text_field :additive_category_ids %>
+  </div>
+  <div class="field">
+    <%= f.label :use_picturename %><br />
+    <%= f.text_field :use_picturename %>
+  </div>
+  <div class="field">
+    <%= f.label :breast_print %><br />
+    <%= f.text_field :breast_print %>
+  </div>
+  <div class="field">
+    <%= f.label :category_specific_breast_print %><br />
+    <%= f.text_field :category_specific_breast_print %>
+  </div>
+  <div class="field">
+    <%= f.label :category_header_image %><br />
+    <%= f.text_field :category_header_image %>
+  </div>
+  <div class="field">
+    <%= f.label :category_class_id %><br />
+    <%= f.text_field :category_class_id %>
+  </div>
+  <div class="field">
+    <%= f.label :visible %><br />
+    <%= f.text_field :visible %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

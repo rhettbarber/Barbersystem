@@ -1,0 +1,144 @@
+<style type="text/css">
+
+    .ui-content .ui-listview, .ui-panel-inner > .ui-listview {
+        margin:0px;
+    }
+
+
+ </style>
+
+
+
+
+<div class="specsheet_admin" style="background-color: yellow;display:none;float: left;">
+
+              <div id="administer_choices" data-role="listview" style="display:inline-block;width:100%;border-bottom:3px solid black;border-top:3px solid black;">
+                            <!--<%# if @back_design %>-->
+                           <!--<li> <a href="/specsheet/admin_crest_prints_list/<%= @back_design.id %>" data-rel="dialog" class="ui-btn">Crest  prints</a> </li>-->
+                           <!--<%# end %>-->
+                            <li><a href="#" class="ui-btn" onclick="$('#administer_size_and_position_item').toggle();">Item</a></li>
+                            <%  if @back_advanced_combination %>
+                            <li><a href="#" class="ui-btn" onclick="$('#administer_size_and_position_back').toggle();">Main Design</a></li>
+                            <% end %>
+                            <%  if @front_advanced_combination %>
+                                <li><a href="#" class="ui-btn" onclick="$('#administer_size_and_position_front').toggle();">Front  Design</a></li>
+                            <% end %>
+                </div>
+
+
+
+
+
+<div  id="size_and_position_container" style="width: 850px;display: inline-block;font-size:12px;">
+
+
+        <%  if @item_advanced_combination %>
+                    <div id="administer_size_and_position_item" style="border-bottom:1px solid black;border-top:1px solid black;display: none;">
+
+                                 <div style="height:50px;width:200px;float:left;">Item:
+                                   id:<%=  @item_advanced_combination.id    %><br>
+                                   specsheet_type_id:<%=  @item_advanced_combination.specsheet_type_id    %><br>
+                                   # sides:<%=  @item_advanced_combination.number_of_sides    %><br>
+                                   default_side:<%=  @item_advanced_combination.default_side    %><br>
+                                 </div>
+                                  <div style="float:left;"> <%= select_tag( :item_specsheet_type_id,  options_for_select([['Legacy specsheet', '1'], ['Latest specsheet', '2']],  @item_advanced_combination.specsheet_type_id )  ) %></div>
+                                  <div style="float:left;"> <%= select_tag( :item_number_of_sides,  options_for_select([['One side', 1 ], ['Two sides', 2 ]],  @item_advanced_combination.number_of_sides   )  ) %></div>
+                                  <div style="float:left;"> <%= select_tag( :item_default_side,  options_for_select([['Default on back', 'back'], ['Default on front', 'front']] ,@item_advanced_combination.default_side   )  ) %></div>
+                                  <%= hidden_field_tag 'item_advanced_combination_id', @item_advanced_combination.id   if @item_advanced_combination  %>
+                                  <a href="#"  id="submit_size_and_position_item" class="ui-btn">Submit</a>
+                    </div>
+         <% end %>
+
+
+
+  <%  if @back_advanced_combination %>
+      <div id="administer_size_and_position_back" style="border-bottom:1px solid black;border-top:1px solid black;display: none;">
+                        <% if @admin_this %>
+                        <div style="height:50px;width:200px;float:left;">back:
+                          id:<%=  @back_advanced_combination.id    %><br>
+                          specsheet_type_id:<%=  @back_advanced_combination.specsheet_type_id    %><br>
+                          # sides:<%=  @back_advanced_combination.number_of_sides    %><br>
+                        </div>
+                        <div style="float:left;"> <%= select_tag( :specsheet_type_id,  options_for_select([['Legacy specsheet', '1'], ['Latest specsheet', '2']],  @back_advanced_combination.specsheet_type_id )  ) %></div>
+                        <div style="float:left;"> <%= select_tag( :back_design_number_of_sides,  options_for_select([['One side', 1 ], ['Two sides', 2 ]],  @item_advanced_combination.number_of_sides   )  ) %></div>
+                        <% end %>
+                        <div style="float:left;"> <%= select_tag( :back_design_default_side,  options_for_select([['Default on back', 'back'], ['Default on front', 'front']] ,@back_advanced_combination.default_side   )  ) %></div>
+                          <%= hidden_field_tag 'back_advanced_combination_id', @back_advanced_combination.id   if @back_advanced_combination  %>
+                        <div style="width:300px;display: inline-block;">
+                          <label for="back_slider" style="display: none;">Input slider:</label>
+                          <div id="div-back_slider"> <input type="range" name="back_slider" id="back_slider" value="0" min="-40" max="40" /> </div>
+                        </div>
+
+                        <a href="#"  id="submit_size_and_position_back" class="ui-btn">Update back design</a>
+      </div>
+  <% end %>
+
+
+
+  <%  if @front_advanced_combination %>
+      <div id="administer_size_and_position_front" style="border-bottom:1px solid black;border-top:1px solid black;display: none;">
+        <% if @admin_this %>
+        <div style="height:50px;width:200px;float:left;">front:
+          id:<%=  @front_advanced_combination.id    %><br>
+          specsheet_type_id:<%=  @front_advanced_combination.specsheet_type_id    %><br>
+          # sides:<%=  @front_advanced_combination.number_of_sides    %><br>
+        </div>
+        <div style="float:left;"> <%= select_tag( :specsheet_type_id,  options_for_select([['Legacy specsheet', '1'], ['Latest specsheet', '2']],  @front_advanced_combination.specsheet_type_id )  ) %></div>
+        <div style="float:left;"> <%= select_tag( :front_design_number_of_sides,  options_for_select([['One side', 1 ], ['Two sides', 2 ]],  @item_advanced_combination.number_of_sides   )  ) %></div>
+        <div style="float:left;"> <%= select_tag( :front_design_default_side,  options_for_select([['Default on front', 'front'], ['Default on front', 'front']] ,@front_advanced_combination.default_side   )  ) %></div>
+        <% end %>
+        <%= hidden_field_tag 'front_advanced_combination_id', @front_advanced_combination.id   if @front_advanced_combination  %>
+        <div style="width:300px;display: inline-block;">
+          <label for="front_slider" style="display: none;">Input slider:</label>
+          <div id="div-front_slider"> <input type="range" name="front_slider" id="front_slider" value="0" min="-40" max="40" /> </div>
+        </div>
+
+        <a href="#"  id="submit_size_and_position_front" class="ui-btn">Update front design</a>
+      </div>
+  <% end %>
+  
+  
+  
+</div>
+
+  @breast_print<%= @breast_print %><br>
+  @front_advanced_combination: <%= @front_advanced_combination %><br>
+
+
+
+ <script type="text/javascript">
+     $('#div-back_slider').on( "change", function(){
+         var back_slider_value =   $("#back_slider").val() ;
+         scaleBack( back_slider_value );
+     })
+
+     $('#div-front_slider').on( "change", function(){
+         var front_slider_value =   $("#front_slider").val() ;
+         scaleFront( front_slider_value );
+     })
+
+//     watchForDragging() ;
+ </script>
+
+
+
+</div>
+<%= link_to "a", "#",:onclick => "$('.specsheet_admin').toggle();" %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

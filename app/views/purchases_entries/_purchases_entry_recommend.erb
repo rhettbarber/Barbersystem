@@ -1,0 +1,8 @@
+
+
+<%   unless controller.action_name == 'checkout_receipt'   %>
+	<%= link_to "Find Similar Products",{  :controller => 'search' ,  :action => 'search' , :search_type_name => 'products', :query => item.Description },    :class => "btn btn-primary"    %>
+<% end  %>
+	
+
+

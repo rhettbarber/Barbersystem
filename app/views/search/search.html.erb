@@ -1,0 +1,97 @@
+<% if @articles %>
+
+                    <style type="text/css">
+                        .page_name <  a {
+                            color: white;
+                        }
+                    </style>
+
+
+
+                    <div id="search_results_container" style="text-align:left;min-height:200px;background-color:white;padding:15px;">
+
+
+
+                              <div class="modal_search_form_container" style="text-align:center;">
+
+                                            <div class="container">
+                                                            Increasing relevant keywords will improve your search.
+                                            </div>
+
+
+                                            <div class="container">
+                                                                  <% if @revisions  %>
+                                                                      Search found <%= @revisions.size  %>   results.<br />
+                                                                  <% else %>
+                                                                      Search did not find any articles matching your keywords. Try different keywords.<br />
+                                                                  <% end  %>
+                                            </div>
+                              </div>
+
+
+
+                              <% @revision_ids = Set.new %>
+                              <%   @revisions.each do |revision| %>
+                                  <%# unless @revision_ids.include?(  revision.id )  %>
+                                  <% @revision = revision %>
+                                  <% @revision_ids.add?(  revision.id )  %>
+                                  <div class="page_content_capsule">
+                                    <div class="page_name">
+                                      <strong>
+                                        <!--Keywords Hit: <%#= revision.total_column  %> ----->
+                                        <%= revision.name  %>
+                                        <!----- Released:  -->
+                                        <%#= time_ago_in_words(  revision.created_at,  include_seconds = false ) %>  <%#=  revision.created_at  %><br />
+                                        <%#= link_to "See related pages and categories" ,:controller => 'page', :action => 'show',:id => revision.slug       %>
+                                      </strong>
+                                    </div>
+                                    <div class="page_yield">
+                                      <%= highlight( revision.content , params[:query].split(" ") , :highlighter => '<strong class="highlight">\1</strong>' ) %>
+                                    </div>
+                                  </div>
+                                  <%# end %>
+                              <% end %>
+
+
+
+
+                    </div>
+
+
+
+
+<% else %>
+
+                <% if admin? %>
+                    <div class='menu_admin'>
+                        <% if  @acceptable_item_ids %>
+                            @acceptable_item_ids.nil?: <%=  @acceptable_item_ids.nil? %><br />
+                            @acceptable_item_ids:<%=  @acceptable_item_ids.collect {|x| "," + x.to_s + "," } %><br />
+                      <% end %>
+                    </div>
+                <% end %>
+
+
+
+                <div role="main" class="ui-content responsive_listview_grid">
+                  <ul data-role="listview" data-inset="true">
+                    <% @already_rendered_item_class = [] %>
+                <% if @items %>
+                            <% @items.each do |item| %>
+                                        <% if item.category %>
+                                                <%  if item.item_class_component  -%>
+                                                                    <% unless @already_rendered_item_class.include?( item.item_class.id.to_s ) %>
+                                                                                         <%  @already_rendered_item_class  <<  item.item_class.id.to_s   %>
+                                                                                        <%= render(:partial => "search/item",:locals => { :item => item } ) %>
+                                                                    <% end %>
+                                            <% else %>
+                                                                     <%= render(:partial => "search/item",:locals => { :item => item } ) %>
+                                            <% end %>
+                                        <% end %>
+                            <% end %>
+                 <% end %>
+                  </ul>
+                </div>
+
+
+<% end %>

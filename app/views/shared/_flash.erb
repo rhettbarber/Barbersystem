@@ -1,0 +1,28 @@
+<div id="status_area">
+
+
+  <% @warn = true %>
+
+
+  <% if @warn  %>
+    <div id="flash_message" style="text-align:center;">
+            <%= display_standard_flashes -%>
+    </div
+<% end  %>
+
+
+
+  <table id="please_wait_to_load" style="width:850px;text-align:center;">
+            <tr>
+              <td>
+                         <%= image_tag  '/images/icons/spinner.gif'  %><br />
+                            Please wait while the page is loading.
+                </td>
+          </tr>
+  </table>
+
+
+
+</div>
+
+

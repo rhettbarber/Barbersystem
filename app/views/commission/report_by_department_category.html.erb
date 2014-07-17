@@ -1,0 +1,490 @@
+<script  type="text/javascript">
+
+ Event.observe(window, 'load', function() {
+                <% if params[:timeframe]  %>
+                                            //              $('timeframe').setValue('<%= params[:timeframe] %>');
+                                                                console.log(" params[:timeframe] : <%= params[:timeframe]  %>")
+                                                                console.log("WARN TIMEFRAME");
+                                                               <% if params[:timeframe]  == 'monthly' %>
+                                                                                      $('monthly').show();
+                                                                                      $('year').show();
+                                                                                      $('quarterly').hide();
+                                                               <% elsif params[:timeframe]  == 'quarterly' %>
+                                                                                       $('quarterly').show();
+                                                                                      $('year').show();
+                                                                                      $('monthly').hide();
+
+                                                                <% end %>
+                <% else %>
+                                             console.log("NO TIMEFRAME");
+                <% end %>
+});
+
+
+   function chronos( my_this  ) {
+                    console.log( my_this.value );
+                     if (  my_this.value ==   'quarterly') {
+                                 $('quarterly').show();
+                                  $('year').show();
+                                  $('monthly').hide();
+
+                     }
+                     else if ( my_this.value == 'monthly') {
+                                  $('monthly').show();
+                                  $('year').show();
+                                  $('quarterly').hide();
+                     }
+                     else if ( my_this.value == 'all') {
+                                  $('year').hide();
+                                 $('quarterly').hide();
+                                 $('monthly').hide();
+                     };
+
+     };
+   </script>
+
+<style type="text/css">
+  .wallet {
+      width: 110px;
+  }
+  .paid {
+      height: 75px;
+  }
+  .pending {
+      height: 75px;
+  }
+td {
+    padding:0px;
+}
+
+</style>
+
+<h1>Commission Index</h1>
+<h2>Your Commission percentage is <%= @commission_customer.CustomNumber1.to_i  %></h2>
+<h2><%=  link_to "Back to Homepage",  "/"   %></h2>
+
+
+
+
+<h2><%=  link_to "Your Commission Items",  :controller => "commission", :action => "commission_items"    %></h2>
+
+
+
+
+<% if admin? and @show  %>
+params: <%=  params.inspect  %> <br />
+
+<% end %>
+
+
+
+
+ <%  form_for:customer, id  , :url => { :controller => "commission", :action => "report_by_department_category" } do |f|  %>
+
+              <%
+               @timeframes  = [
+                          ["All", 'all' ],
+                          ["Monthly", 'monthly'],
+                          ["Quarterly", 'quarterly']
+                ]
+
+
+               @quarters  = [
+                          ["January - March", '1' ],
+                          ["April - June", '2'],
+                          ["July - September", '3'],
+                           ["October - December", '4 ']
+                ]
+
+               @paid_status  = [
+                          ["Unpaid", '0' ],
+                          ["Paid", '1'],
+                          ["Paid and Unpaid", '2']
+                ]
+
+
+               %>
+               <%=   select("customer", "id", @commission_customers.collect {|p| [ p.FirstName + ' ' +  p.LastName , p.id ] } ,{:selected =>   @commission_customer_id   } )   if admin?  %>
+
+               <%= select_tag "timeframe",   options_for_select(  @timeframes,  params[:timeframe]    )     , :onchange => 'chronos( this )'  %>
+
+
+               <span id="quarterly"  style="display:none;">   <%= select_tag "quarter",   options_for_select(  @quarters,  params[:quarter]    )     %></span>
+
+                <span id="monthly" style="display:none;"> <%= select_month(@begin_date ) %></span>
+
+                <span id="year" style="display:none;"><%= select_year(@begin_date ) %></span>
+
+
+                <span id="paid_only">  <%= select_tag "paid",   options_for_select(  @paid_status,  params[:paid]    )     %> </span>
+
+                <%= submit_tag('Generate Report') %>
+
+<%  end  %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table>
+  <tr>
+    <th>Permanent or Volume Discount</th>
+    <th>customer_id</th>
+    <th>PriceLevel</th>
+    <th>Department Category</th>
+    <th>Time</th>
+    <th>Quote  # / Transaction #</th>
+    <th>Image</th>
+    <th>Item Code</th>
+    <th>Description</th>
+    <th>Qty</th>
+    <th>Price</th>
+    <th>Ext Price</th>
+  </tr>
+
+
+<% @commissionable_order_total  = 0.0 %>
+<% @pending_commissionable_order_total = 0.0 %>
+<% @unpaid_commissionable_order_total = 0.0  %>
+<% @paid_commissionable_order_total = 0.0  %>
+<% @purchases_entries_to_pay     = Set.new   %>
+<% @purchases_entries_to_mark_unpaid     = Set.new   %>
+
+<%   @purchases_entries_for_commissions.sort_by {|x| [x.PriceLevel, x.department_id , x.category_id] }.each do | purchases_entry |  %>
+                <% if @commission_customer_id != purchases_entry.customer_id  %>
+                <% pe_sales =  purchases_entry.sales  %>
+                <%  pe_sales_first_id =  pe_sales.first.id if pe_sales.first  %>
+                <% if pe_sales %>
+                <% unless  @purchases_entries_returns_item_ids.include?(  purchases_entry.purchase_returned_item_id )  %>
+
+
+
+                <%  @rms_opposite = false  %>
+                <% @paid_total_price = 0.0 %>
+                <% @unpaid_total_price = 0.0 %>
+                <%  @actual_extended_price = 0.0  %>
+                <% @pending_total_price = 0.0  %>
+                <% @paid_extended_price = 0.0 %>
+                <% @unpaid_extended_price= 0.0 %>
+                <% @pending_extended_price=  0.0 %>
+
+                            <%  if pe_sales.first  %>
+                                        <%   purchases_entry.Time =  pe_sales.first.sale_time   %>
+                            <% end  %>
+
+
+                <% if @last_purchase_id  %>
+                                 <%  if  @last_purchase_id == purchases_entry.id %>
+                                            <% @new_purchase_id = false %>
+                                 <% else  %>
+                                                <% @new_purchase_id = true %>
+                                 <% end  %>
+                  <% else  %>
+                                <% @new_purchase_id = true %>
+                 <% end  %>
+                 <% @last_purchase_id = purchases_entry.id %>
+                 <%  @commission_customer_website_status  =   @commission_customer_website_ids.include?( purchases_entry.website_id.to_s )    %>
+
+                       <% if   purchases_entry.id.to_s   == '283517' %>
+                                       <% v = "v" %>
+                         <% end  %>
+
+                            <%# pe_string =  purchases_entry.purchases_entry_id.to_i  -  1  %>
+                            <%# pe_string = pe_string.to_s  %>
+                            <%# logger.debug "purchases_entry.id: " +  purchases_entry.id.to_s  %>
+                            <%# logger.debug   purchases_entry.website_id.to_s    %>
+                            <%# logger.debug "price: "  + purchases_entry.Price.to_s    %>
+                             <%# logger.debug "pe_string  -   1: " +  pe_string  %>
+
+
+
+                                        <% if  purchases_entry.symbiote_purchases_entry_id.to_i  > 0  %>
+                                                            <% if PurchasesEntry.exists?( purchases_entry.symbiote_purchases_entry_id   ) %>
+                                                                                 <% @opposite_item = PurchasesEntry.find( purchases_entry.symbiote_purchases_entry_id ) %>
+                                                             <% end %>
+                                       <% elsif  purchases_entry.Price == 0.01   %>
+                                                      <%  @rms_opposite = true %>
+                                                      <% if PurchasesEntry.exists?( purchases_entry.purchases_entry_id.to_i - 1  ) %>
+                                                                            <% @opposite_item = PurchasesEntry.find( purchases_entry.purchases_entry_id.to_i - 1  ) %>
+                                                    <% elsif PurchasesEntry.exists?( purchases_entry.purchases_entry_id.to_i  +  1  ) %>
+
+                                                                   <% @opposite_item = PurchasesEntry.find( purchases_entry.purchases_entry_id.to_i  +  1  ) %>
+                                                      <% end  %>
+                                     <%  end  %>
+
+                                       <% if purchases_entry.Time > 30.days.ago    %>
+                                                    <% @pending_transaction = true  %>
+                                      <% else  %>
+                                                    <% @pending_transaction = false  %>
+                                        <% end  %>
+
+
+
+
+
+                                      <tr>
+                                                                  <td style="text-align: center;">
+                                                                            <%=h purchases_entry.permanent_or_volume_discount  %>
+                                                                </td>
+                                                                 <td><%=h purchases_entry.FirstName + " - " +   purchases_entry.LastName + " - " +  purchases_entry.Company  %>  </td>
+                                                                <td><%=h purchases_entry.PriceLevel  %>  </td>
+                                                                <td><%=h purchases_entry.department_id  %> - <%=h purchases_entry.category_id  %>    </td>
+                                                                <td><%=h purchases_entry.Time  %>  </td>
+
+                                                                <td><%=h purchases_entry.id %><br /><%= pe_sales_first_id   if pe_sales.first  %></td>
+                                                                <td><%= image_tag "/images/item_thumbnails/" +  purchases_entry.PictureName, :size => '140x140' %></td>
+                                                                <td><%=h purchases_entry.ItemLookupCode %></td>
+                                                                <td><%=h purchases_entry.Description %>
+
+                                                                              <% if @opposite_item  %>
+                                                                                                    <%  @opposite_item.inspect  %>
+                                                                                                   <br /> Applied to:
+                                                                                                 <%=  @opposite_item.Description  %>
+                                                                               <% end  %>
+                                                                </td>
+                                                                <td><%=h purchases_entry.QuantityRTD.to_i %></td>
+
+                                                                <td>
+                                                                           <% if @opposite_item  %>
+                                                                                                      <% if @pending_transaction   %>
+                                                                                                                         <%  @pending_total_price =    purchases_entry.Price + @opposite_item.Price   %>
+                                                                                                                       $<%= number_with_precision(  @pending_total_price , 2 )      %>
+                                                                                                                        <% @pending_extended_price=   @pending_total_price * purchases_entry.QuantityRTD.to_i    %>
+                                                                                                      <% else %>
+                                                                                                                        <%  if  purchases_entry.commission_paid == 1 %>
+                                                                                                                                                     <%  @paid_total_price =    purchases_entry.Price + @opposite_item.Price   %>
+                                                                                                                                                   $<%= number_with_precision(  @paid_total_price , 2 )      %>
+                                                                                                                                                        <% @paid_extended_price=   @paid_total_price * purchases_entry.QuantityRTD.to_i    %>
+                                                                                                                                                         <% @purchases_entries_to_mark_unpaid.add?( purchases_entry.purchases_entry_id  )   %>
+                                                                                                                       <% else %>
+                                                                                                                                                     <%  @unpaid_total_price =    purchases_entry.Price + @opposite_item.Price   %>
+                                                                                                                                                   $<%= number_with_precision(  @unpaid_total_price , 2 )      %>
+                                                                                                                                                        <% @unpaid_extended_price=   @unpaid_total_price * purchases_entry.QuantityRTD.to_i    %>
+                                                                                                                                                         <% @purchases_entries_to_pay.add?( purchases_entry.purchases_entry_id  )   %>
+                                                                                                                                                         <% @purchases_entries_to_pay.add?( @opposite_item.id  )   %>
+
+                                                                                                                        <% end %>
+                                                                                                       <% end %>
+
+                                                                           <% else %>
+                                                                                                        <% if @pending_transaction  %>
+                                                                                                                        <%   @pending_total_price =    purchases_entry.Price    %>
+                                                                                                                        $<%= number_with_precision(  @pending_total_price , 2 )      %>
+                                                                                                                          <% @pending_extended_price=   @pending_total_price * purchases_entry.QuantityRTD.to_i    %>
+                                                                                                       <% else %>
+                                                                                                                        <%  if  purchases_entry.commission_paid == 1 %>
+                                                                                                                                    <%   @paid_total_price =    purchases_entry.Price    %>
+                                                                                                                                    $<%= number_with_precision(  @paid_total_price , 2 )      %>
+                                                                                                                                    <% @paid_extended_price=   @paid_total_price * purchases_entry.QuantityRTD.to_i    %>
+                                                                                                                                        <% @purchases_entries_to_mark_unpaid.add?( purchases_entry.purchases_entry_id  )   %>
+                                                                                                                       <% else  %>
+                                                                                                                                    <%   @unpaid_total_price =    purchases_entry.Price    %>
+                                                                                                                                    $<%= number_with_precision(  @unpaid_total_price , 2 )      %>
+                                                                                                                                    <% @unpaid_extended_price=   @unpaid_total_price * purchases_entry.QuantityRTD.to_i    %>
+                                                                                                                                     <% @purchases_entries_to_pay.add?( purchases_entry.purchases_entry_id  )   %>
+                                                                                                                        <% end %>
+                                                                                                       <% end %>
+                                                                          <% end  %>
+
+                                                                  </td>
+
+
+                                                                <td>
+                                                                  <% @actual_extended_price = @paid_extended_price + @pending_extended_price +  @unpaid_extended_price %>
+                                                                  $<%= number_with_precision(  @actual_extended_price    , 2 )      %>
+                                                                </td>
+                                      </tr>
+
+
+
+
+
+
+
+                                      <% if @admin %>
+                                       <tr>
+                                                    <td colspan="50" style="background-color: #fafad2;height:40px;text-align: center;color:#b0c4de;">
+                                                               purchases_entry.symbiote_purchases_entry_id:  <%=h purchases_entry.symbiote_purchases_entry_id %> --
+                                                                purchases_entry.customer_id:<%=h purchases_entry.customer_id.to_s  %> --
+                                                                is customer the customer?  <%=h purchases_entry.customer_id.to_s  == @commission_customer_id  %> --
+                                                                purchases_entry.customer_departments_customer_id: <%=h purchases_entry.customer_departments_customer_id %> --
+                                                                purchases_entry.customer_categories_customer_id: <%=h purchases_entry.customer_categories_customer_id %> --
+                                                                purchases_entry.customer_items_customer_id: <%=h purchases_entry.customer_items_customer_id %>
+                                                      </td>
+                                      </tr>
+                                      <% end  %>
+
+
+                                         <% if @pending_transaction  %>
+                                                              <% @pending_commissionable_order_total  +=  @pending_extended_price %>
+                                        <% else %>
+                                                               <%  if  purchases_entry.commission_paid == 1 %>
+                                                                            <% @paid_commissionable_order_total  +=  @paid_extended_price %>
+                                                                 <% else %>
+                                                                           <% @unpaid_commissionable_order_total  +=  @unpaid_extended_price %>
+                                                               <% end %>
+                                                               <% @commissionable_order_total = @unpaid_commissionable_order_total + @paid_commissionable_order_total    %>
+                                        <% end %>
+
+                                        <% @opposite_item = nil %>
+                <% end %>
+                <% end %>
+                <% end %>
+ <% end if @purchases_entries_for_commissions %>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br />
+
+
+<table style="width:850px;">
+    <tbody>
+            <tr>
+                              <td    style="color:  #ff8c00;">
+                                        Pending Commissionable Order Total:
+                                        <%= @pending_commissionable_order_total  %>
+                                        <br />
+
+
+                                        Pending Commission Amount:
+                                        <%= @pending_commission_amount  =  @pending_commissionable_order_total * @commissioned_customer_percentage %>
+                                </td>
+                                <td    style="color:  green;">
+                                    Unpaid Commissionable Order Total:
+                                    <%= @unpaid_commissionable_order_total  %>
+                                    <br />
+
+                                    Unpaid Commission Amount:
+                                    <%= @unpaid_commission_amount  =  @unpaid_commissionable_order_total * @commissioned_customer_percentage %>
+                                  </td>
+                </tr>
+                <tr>
+                              <td   style="color: darkred;">
+                                     Paid Commissionable Order Total:
+                                    <%= @paid_commissionable_order_total  %>
+                                     <br />
+
+                                    Paid Commission Amount:
+                                    <%= @paid_commission_amount  =   @paid_commissionable_order_total * @commissioned_customer_percentage %>
+                              </td>
+                              <td>
+                                             Total Paid and Unpaid Commissionable Order Total:
+                                                <%= @commissionable_order_total  %>
+                                                 <br />
+
+                                                Total Paid and Unpaid Commission Amount (Excluding Pending):
+                                                <%= @commission_amount  =  @commissionable_order_total * @commissioned_customer_percentage %>
+                              </td>
+                </tr>
+    </tbody>
+ </table>
+
+
+
+<% logger.warn "@purchases_entries_to_pay.to_a.inspect: " + @purchases_entries_to_pay.to_a.inspect  %>
+ <br /><br />
+
+
+<% if admin?  %>
+<table>
+<tbody>
+        <tr>
+                  <td style="width:425px;">
+                              <%  if @unpaid_commission_amount > 0         %>
+                                                 <%  form_tag( '/commission/pay_now') do  %>
+
+
+                                                               <%= hidden_field_tag("customer_id",      @commission_customer_id  )     if admin?  %>
+                                                               <%= hidden_field_tag("timeframe",       params[:timeframe]  )    %>
+                                                                <%= hidden_field_tag("quarter",      params[:quarter]  )    %>
+
+
+                                                                <% params[:date].each do |key,value| %>
+                                                                                <%= hidden_field_tag "date[#{key}]",value %>
+                                                                <% end if params[:date]%>
+
+
+                                                                <%= hidden_field_tag("purchases_entry_ids",     @purchases_entries_to_pay.to_a.join(',')  )     %>
+                                                                <%= submit_tag( 'Mark these entries Paid') %>
+                                                <%  end  %>
+                           <% end  %>
+                  </td>
+                  <td  style="width:425px;">
+                             <%  if @paid_commission_amount > 0         %>
+                                                     <%  form_tag( '/commission/mark_unpaid') do  %>
+
+
+                                                               <%= hidden_field_tag("customer_id",      @commission_customer_id  )     if admin?  %>
+                                                               <%= hidden_field_tag("timeframe",       params[:timeframe]  )    %>
+                                                                <%= hidden_field_tag("quarter",      params[:quarter]  )    %>
+
+
+                                                                <% params[:date].each do |key,value| %>
+                                                                                <%= hidden_field_tag "date[#{key}]",value %>
+                                                                <% end if params[:date]%>
+
+
+
+                                                                    <%= hidden_field_tag("purchases_entry_ids",     @purchases_entries_to_mark_unpaid.to_a.join(',')  )     %>
+                                                                    <%= submit_tag('Mark Unpaid') %>
+                                                    <%  end  %>
+                              <% end %>
+                  </td>
+        </tr>
+</tbody>
+</table>
+<%  end  %>
+
+
+
+
+

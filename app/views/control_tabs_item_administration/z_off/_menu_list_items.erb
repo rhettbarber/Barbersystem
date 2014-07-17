@@ -1,0 +1,19 @@
+					<li><%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Adult Categories', "Element.toggle('adult_categories')")   %> </li>
+					<span id="adult_categories" style="display:none;">
+							<li> &nbsp; </li>
+							<% @department_categories = Category.find(:all, :conditions => ["department_id = ? ", 1 ] ) %>
+							<% @department_categories.each do |cat| %>
+								<%= render :partial => "shared_category/category_li_root", :locals => {:category => cat} %>
+							<% end %>
+					</span>
+
+					<li><%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Youth Categories', "Element.toggle('youth_categories')")   %> </li>
+					<span id="youth_categories" style="display:none;">
+						<li> &nbsp; </li>
+							<% @department_categories = Category.find(:all, :conditions => ["department_id = ? ", 5 ] ) %>
+							<% @department_categories.each do |cat| %>
+								<%= render :partial => "shared_category/category_li_root", :locals => {:category => cat} %>
+							<% end %>	
+					</span>
+
+

@@ -1,0 +1,37 @@
+
+<table class="price_sheet" width="1000" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th colspan="18" class="yellow" scope="col">Barber and Company Price List  </th>
+  </tr>
+  <tr>
+    <th class="lightgreen" scope="col">ItemLookupCode</th>
+    <th class="lightblue" scope="col">retail</th>
+    <th class="mistyrose" colspan="5" scope="col">pre-print customer </th>
+    <th class="lightcyan" colspan="5" scope="col">blank customer </th>
+    <th class="wheat" colspan="5" scope="col">franchise customer </th>
+  </tr>
+  <tr>
+    <td class="lightgreen">ItemLookupCode</td>
+    <td class="lightblue" >retail</td>
+    <td class="mistyrose">full unit </td>
+    <td class="mistyrose">tier1</td>
+    <td class="mistyrose">tier2</td>
+    <td class="mistyrose">tier3</td>
+    <td class="mistyrose">tier4</td>
+    <td class="lightcyan">full unit </td>
+    <td class="lightcyan">tier1</td>
+    <td class="lightcyan">tier2</td>
+    <td class="lightcyan">tier3</td>
+    <td class="lightcyan">tier4</td>
+    <td class="wheat">full unit </td>
+    <td class="wheat">tier1</td>
+    <td class="wheat">tier2</td>
+    <td class="wheat">tier3</td>
+    <td class="wheat">tier4</td>
+  </tr>
+  
+  <%  for item in @items  %>
+  <%=        render :partial => "item"  , :locals => { :item => item }    %>
+  <%  end  %>
+</table>
+

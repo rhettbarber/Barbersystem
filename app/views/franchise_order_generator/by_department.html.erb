@@ -1,0 +1,26 @@
+<% if params[:date] %>
+         <% @chosen_year =   params[:date][:year].to_i %>
+<% else  %>
+    <% @chosen_year = Date.today.year  %>
+<% end  %>
+
+
+<%    form_tag  '/franchise_order_generator/by_department'  do %>
+    <%= select_year(  @chosen_year , :start_year => 2008, :end_year => Date.today.year )  %>
+    <%= submit_tag 'Change Year' %>
+<% end  %>
+
+<h2>Chosen Year:<%= @chosen_year %></h2>
+
+<table class="franchise_order_department_table">
+    <%  @departments_to_show.sort_by{|a| a.Name}.each do |the_department| %>
+    <tr>
+         <td class="department_thumb"><%= image_tag('/images/departments/' +  the_department.Name + '.png' ) %><%=  the_department.Name %> </td>
+    </tr>
+    <tr>
+      <td> <%= render :partial => "franchise_order_generator/category_table", :locals => { :department => the_department } %></td>
+    </tr>
+    <% end  %>
+</table>
+
+

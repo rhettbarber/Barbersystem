@@ -1,0 +1,28 @@
+
+
+<%   @paginated_results.each do |revision| %>
+                          <div class="page_content_capsule">
+                                            <div class="page_name">
+                                                            <%= revision.name  %>     Keywords Hit: <%= revision.total_column  %> -
+                                                            <%  link  = u(request.protocol << @website.domain + "/p/"  <<   revision.slug   ) %>
+                                                           <a href="http://www.facebook.com/sharer.php?u=<%= link %>">Share via Facebook</a>
+                                                            <!----- Released:  -->
+                                                            <%#= time_ago_in_words(  revision.created_at,  include_seconds = false ) %>  <%#=  revision.created_at  %><br />
+                                                            <%#= link_to "See related pages and categories" ,:controller => 'page', :action => 'show',:id => revision.slug       %>
+
+                                                               </div>
+
+
+                                            <div class="page_yield">
+                                              <%= highlight( revision.content , params[:query].split(" ") , :highlighter => '<strong class="highlight">\1</strong>' ) %>
+                                            </div>
+                          </div>
+ <% end %>
+<div class="last_item" style="width: 100%;height: 20px;"><%= link_to 'Load More', search_path(:query => params[:query], :search_type_name => params[:search_type_name] ,:page => @paginated_results.next_page), :id => "page-link", :class => 'ui-btn load-more-revisions', :remote => true   if @paginated_results and @paginated_results.next_page -%></div>
+
+
+
+
+
+
+

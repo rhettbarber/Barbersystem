@@ -1,0 +1,114 @@
+
+
+
+<span style="text-align:center">
+  <%= link_to "Back to Breast Prints listing", :action => 'index' %>
+  <div style="width:500px;margin-left:auto;margin-right:auto;">
+          <%=image_tag( '/images/item_thumbnails/' +  @item.ItemLookupCode + '.png', :size => "120x120"  )%><br />
+          <%=  @item.ItemLookupCode   %><br />
+          <%=  @item.Description   %><br />
+          <%=  @item.category.Name  if @item.category %><br />
+  </div>
+
+<br />
+
+
+<div id="select_two_container">
+    <select id="select_multiple_two" style="display:none;">
+
+
+      <% @website.default_design_departments.each do |dp| %>
+                      <option value="<%=dp.id %>"><%=dp.Name %></option>
+        <% end  %>
+
+    </select>
+
+
+    <a href="" id="select_multiple_two_open">Select all Departments that this Breast Print should be available to</a>
+    <div style="display:none;" id="select_multiple_two_options" class="select_multiple_container">
+        <div class="select_multiple_header">Departments:</div>
+        <table cellspacing="0" cellpadding="0" class="select_multiple_table" width="100%">
+
+
+
+          <% @website.default_design_departments.each do |dp| %>
+            <tr class="<%= cycle('odd', 'even' ) %>">
+                <td class="select_multiple_image"><%= image_tag('/images/departments/' +  dp.Name + '.png', :size => "80x80"  ) %></td>
+                <td class="select_multiple_name">               <%=dp.Name %></td>
+                <td class="select_multiple_checkbox"><input type="checkbox" value="<%=dp.id %>"/></td>
+            </tr>
+            <% end %>
+
+
+  
+        </table>
+        <div class="select_multiple_submit"><input type="button" value="Done" id="select_multiple_two_close"/></div>
+    </div>
+</div>
+
+<br />
+
+
+<%= render :partial => "breast_prints/departments_list"  %>
+
+
+
+
+</span>
+
+
+
+
+<script type="text/javascript">
+  //complex example, note how we need to pass in different CSS selectors because of the complex HTML structure
+var select_multiple_two = new Control.SelectMultiple('select_multiple_two','select_multiple_two_options',{
+    checkboxSelector: 'table.select_multiple_table tr td input[type=checkbox]',
+    nameSelector: 'table.select_multiple_table tr td.select_multiple_name',
+    afterChange: function(){
+        if(select_multiple_two && select_multiple_two.setSelectedRows)
+            select_multiple_two.setSelectedRows();
+    }
+});
+
+//adds and removes highlighting from table rows
+select_multiple_two.setSelectedRows = function(){
+    this.checkboxes.each(function(checkbox){
+        var tr = $(checkbox.parentNode.parentNode);
+        tr.removeClassName('selected');
+        if(checkbox.checked)
+            tr.addClassName('selected');
+    });
+}.bind(select_multiple_two);
+select_multiple_two.checkboxes.each(function(checkbox){
+    $(checkbox).observe('click',select_multiple_two.setSelectedRows);
+});
+select_multiple_two.setSelectedRows();
+
+//link open and closing
+$('select_multiple_two_open').observe('click',function(event){
+    $(this.select).style.visibility = 'hidden';
+    new Effect.BlindDown(this.container,{
+        duration: 0.3
+    });
+    Event.stop(event);
+    return false;
+}.bindAsEventListener(select_multiple_two));
+$('select_multiple_two_close').observe('click',function(event){
+    $(this.select).style.visibility = 'visible';
+    new Effect.BlindUp(this.container,{
+        duration: 0.3
+    });
+
+                 new Ajax.Updater('breast_print_departments', '/breast_prints/ajax_change_breast_print_departments' ,  {
+                         parameters: { department_ids: $('select_multiple_two').value , item_id: '<%= params[:item_id]  %>'  }
+                  });
+
+
+    Event.stop(event);
+    return false;
+}.bindAsEventListener(select_multiple_two));
+
+</script>
+
+
+

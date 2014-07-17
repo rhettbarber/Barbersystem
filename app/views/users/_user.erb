@@ -1,0 +1,44 @@
+  <tr>
+   
+    <td><%=h user.email %></td>
+
+    <td> 
+    	<%= user.AccountNumber %>
+	 </td>
+
+    <td> 
+    	<%= user.Company %>
+	 </td>
+
+	 
+    <td> 
+    	<%= user.FirstName %>
+	 </td>
+
+    <td> 
+    	<%= user.LastName %>
+	 </td>
+	 
+    <td> 
+    	<%= user.PriceLevel %>
+	 </td>
+ 
+    <td> 
+    	<%  if user.customer  %>
+    			<%= link_to_function "Load Customer", "SetSpecificCustomer('#{user.customer_id}')" %>
+    	<% else %>
+    			No customer info
+    	<% end %>		
+	 </td>
+
+<%  if user.id and  admin? %>
+
+    <td><%= link_to 'Show', user %></td>
+    <td><%= link_to 'Edit', edit_user_path(user) %></td>
+    <td><%= link_to 'Destroy', user, :confirm => 'This will delete the user,customer and all ship to addresses, Are you sure?', :method => :delete if admin? %></td>
+    <td><%= link_to 'Reset Password', :controller => 'users', :action => 'confirm_password_reset',:id => user if user.email %></td>
+    <td></td>
+			<td>Error making link, tell Webmaster</td>
+<% end %>
+
+  </tr>

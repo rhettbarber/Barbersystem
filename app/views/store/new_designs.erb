@@ -1,0 +1,25 @@
+
+
+<% logger.debug "-------------------------------------begin _shared_item/items " %>
+
+
+<% logger.warn "_shared_item/new_items is TRUE LOCATION " %>
+
+<% cache(@new_designs_cache_name ) do %>
+
+                    <%  if @items  %>
+
+                                                <% category_class_item_type = @category.category_class.item_type    if @category  %>
+                                                <% @already_rendered_item_class = [] %>
+                                                <div role="main" class="ui-content responsive_listview_grid revisions">
+                                                               <%= render :partial => "category_items" %>
+                                                </div>
+
+                    <%  else  -%>
+                                             no items found
+                    <% end -%>
+
+<% end -%>
+
+
+<% logger.debug "-------------------------------------end _shared_item/items " -%>

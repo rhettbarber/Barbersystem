@@ -1,0 +1,43 @@
+<%=  link_to "Back to layout manager", :controller => "purchases_entries", :action => "layout_manager"  unless action_name == "layout_manager" %>
+
+<p>
+  <b>Itemlookupcode:</b>
+  <%=h @purchases_entry.item.ItemLookupCode %>
+</p>
+
+<p>
+  <b>Colors:</b>
+  <%=h @purchases_entry.item.colors.inspect %>
+</p>
+
+<p>
+  <b>Due Date (Comment converted to date:</b>
+  <%=h @purchases_entry.due_date %>
+</p
+
+<p>
+  <b>Comment:</b>
+  <%=h @purchases_entry.Comment  %>
+</p>
+
+<p>
+  <b>ExtendedDescription:</b>
+  <%=h @purchases_entry.item.ExtendedDescription %>
+</p>
+
+<p>
+  <b>QuantityRTD:</b>
+  <%=h @purchases_entry.QuantityRTD %>
+</p>
+
+<p>
+  <b>QuantityOnOrder:</b>
+  <%=h @purchases_entry.QuantityOnOrder %>
+</p>
+
+<p>
+  <b>Fulfilled: (This is ignored if the QuantityRTD is greater than the QuantityOnOrder</b>
+  <%=h @purchases_entry.fulfilled %>
+</p>
+
+<%=  link_to  "Edit",  edit_purchases_entry_path(@purchases_entry)  %>

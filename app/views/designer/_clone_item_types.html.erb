@@ -1,0 +1,39 @@
+<% @total_colspan =  3  %>
+
+<table id="designer_items_listing">
+          <tr style="min-height:50px;">
+            <th colspan="<%= @total_colspan %>"><h1>Clone Item Types and their Templates</h1></th>
+          </tr>
+          <tr style="min-height:50px;">
+            <th colspan="<%= @total_colspan %>"><h2><%= link_to "Create new Clone Item Type", :controller => 'clone_item_types' , :action => 'new' %> </h2></th>
+          </tr>
+                 <% CloneItemType.all.each do |clone_item_type| %>
+                           <tr>
+                                     <td><%# image_tag(  '/images/designer_item_thumbnails/' + clone_item_type.original_itemlookupcode + '.png' ) %> Representative Item <%= clone_item_type.original_itemlookupcode %> </td>
+                                    <%  unless  clone_item_type.template_file_exists?  %>
+                                             
+                                          <td><%= clone_item_type.name %></td>
+                                          <td> <%= image_tag('/images/icons/template.gif',:size => "35x35") %></td>
+                                          
+                                          <td>
+                                            <span style="color:red;"> Template is missing from AUTOMATION_DATABASE: It should be located at: <%= clone_item_type.template_file_name_with_path   %></span>
+                                         </td>
+                                  <% else  %>
+                                       <td>
+                                                <%= clone_item_type.name %>
+                                       </td>
+                                       <td>
+                                                <%= image_tag('/images/buttons/true.jpg', :size => '20x20' ) %>
+                                       </td>
+                                       <td>
+                                                  <span> The template for this clone item type exists and is located here: <%= clone_item_type.template_file_name_with_path  %></span>
+                                        </td>
+                                   <% end  %>
+                                  <td><%= link_to 'Show', clone_item_type %> | <%= link_to 'Edit', edit_clone_item_type_path(clone_item_type) %> | <%= link_to 'Destroy', clone_item_type, :confirm => 'Are you sure?', :method => :delete %></td>
+
+                              </tr>
+                      <% end %>
+
+      </table>
+
+

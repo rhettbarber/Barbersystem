@@ -1,0 +1,56 @@
+ <% if admin? and @show  %>
+
+	<strong>  Click a link below to view the necessary images and if they are available </strong>
+
+	<li> <%= link_to("Slave's Available Images", :action => 'slave_images')  %> </li>
+
+	<li> <%= link_to("Men's Available Images", :action => 'men_images')  %> </li>
+
+	<li>   <%= link_to("Women's Available Images", :action => 'women_images')  %> </li>
+
+	<li>   <%= link_to("Junior Girl's Available Images", :action => 'junior_girl_images')  %> </li>
+
+	<li>   <%= link_to("Youth Boy's Available Images", :action => 'youth_boy_images')  %> </li>
+
+	<li>   <%= link_to("Youth Girl's Available Images", :action => 'youth_girl_images')  %> </li>
+
+	<li>   <%= link_to("Toddler's Available Images", :action => 'toddler_images')  %> </li>
+
+	<li>   <%= link_to("Infant's Available Images", :action => 'infant_images')  %> </li>
+
+	<li>   <%= link_to("Dixie Merchandise Available Images", :action => 'do_merchandise_images')  %> </li>
+
+	<li>   <%= link_to("Barber Merchandise Available Images", :action => 'bc_merchandise_images')  %> </li>
+
+	<strong>  The actions below will find items that will cause errors if left unchecked.</strong>
+	<br />
+	<li> <%= link_to("Incomplete Item Records", :action => 'incomplete_item_records')  %> </li>
+	<br /><br /><br />
+
+<br />
+<strong> Options for Wholesale customers </strong>
+
+<li> <%= link_to("List all Designs by Category", :controller => 'item_reports', :action => 'designs_by_department')  %> </li>
+
+<li> <%= link_to("List all Designs Numerically", :controller => 'item_reports', :action => 'designs_numerically')  %> </li>
+
+
+
+<li> <%= link_to("Export our prices to CSV for your website or Point of Sale system", :controller => 'items', :action => 'array_to_csv')  %> </li>
+<br />
+<br />
+<strong>  Price Lists below </strong><br />
+
+<li> <%= link_to("Barber and Company Price List Full", :action => 'barber_price_list_full')  %> </li>
+
+<li> <%= link_to("Barber and Company Price List Designs", :action => 'barber_price_list_designs')  %> </li>
+
+<li> <%= link_to("Barber and Company Price List Items", :action => 'barber_price_list_items')  %> </li>
+
+
+<% end %>
+
+
+
+
+>

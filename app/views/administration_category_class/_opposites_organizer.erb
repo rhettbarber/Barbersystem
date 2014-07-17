@@ -1,0 +1,32 @@
+
+
+<div  id="opposites_organizer" style="background-color:LightGreen;text-align:left;width:640px;display:none;"> 
+ 
+			<% if @category.potential_opposite_categories %>
+							<%= form_tag '/menus/unlink_opposites_using_hash' do -%>
+									<h3>Current Opposites: </h3> 
+									<% 	@category.opposite_categories.each do |cat| %>
+											  <%= check_box_tag "product[category_ids][]", cat.id %>
+											  <%= cat.Name %><br />
+									<% end if @category.opposite_categories	%>
+									<br />
+									<%= hidden_field_tag 'selected_category_id', @category.id  %>		
+									<%= submit_tag 'Remove checked from opposites' %>
+								<% end %>
+								<br /><br />
+								 <%= form_tag '/menus/link_opposites_using_hash' do -%>
+											<h3>Potential Opposites: </h3> 
+											<%  @category.potential_opposite_categories.each do |potential_opposite_category| %>
+												<%= check_box_tag "product[category_ids][]", potential_opposite_category.id %>
+												<%= potential_opposite_category.department.Name %>-<%= potential_opposite_category.Name %>
+												<br />
+											<% end %>
+											<%= hidden_field_tag 'selected_category_id', @category.id  %>		
+											<%= submit_tag 'Add checked to opposites' %>
+									<% end %>
+			<% else %>
+				<br /><br />
+				This category is not in a symbiont category class. It is in a non or unknown item type category class. <br /><br />
+				<br /><br />
+			<% end %>
+</div>

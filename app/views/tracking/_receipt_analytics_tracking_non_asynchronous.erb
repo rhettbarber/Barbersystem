@@ -1,0 +1,52 @@
+<script type="text/javascript">
+
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+
+</script>
+
+
+<script type="text/javascript">
+// EDITING INFORMATION IN THIS AREA WILL NOT HELP YOU.
+// IT WILL GET YOU BANNED OR PROSECUTED !!
+
+try {
+
+  var pageTracker = _gat._getTracker("<%= @website.tracking_number %>");
+
+  pageTracker._setVar("<%= @purchase.customer_id  %>");
+
+  pageTracker._addTrans(
+
+    "<%= "#{@purchase.id},#{@purchase.a_id || 0}" %>",                                     // Order ID
+
+    "<%= @purchase.a_id %>",                            // Affiliation
+
+    "<%= @purchase.subtotal_after_all_discounts  %>",                                    // Total
+
+    "<%= @purchase.tax_amount %>",                                     // Tax
+
+    "<%= @purchase_shipping  %>",                                        // Shipping
+
+    "<%= h @customer.City %>",                                 // City
+
+    "<%= h @customer.State %>",                               // State
+
+    "<%= h @customer.Zip %>"                                       // Country
+
+  );
+
+<%= render :partial => "purchases_tracking/receipt_analytics_tracking_items" %>
+
+
+<%   if  ['production'].include?( Rails.env )   %>
+
+ pageTracker._trackTrans();
+
+<% end %>
+
+
+} catch(err) {}</script>
+
+

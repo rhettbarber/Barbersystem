@@ -1,0 +1,78 @@
+ <%= error_messages_for :ship_to %>
+
+<% if @from_ajax == true  %>
+<div id="ajax_ship_to" style="width:425px;text-align:left;">
+  <% else  %>
+<div id="ajax_ship_to" style="width:425px;text-align:left;display:table;">
+  <% end  %>
+
+  <% if @purchase %>
+
+
+                                               <%= form_for( @ship_to, :method => :put,  :remote => true  , :url => {:controller => 'ajax', :action => 'ajax_ship_to'} ,  :html => { :id  => 'ship_to_form', :name  => 'ship_to_form_name' }   ) do |f| %>
+                                                            <div class="edit_item_row"><div class="edit_item_label">Company</div><div class="edit_item_field"> <%= f.text_field( :Company ,:size => 30 ) %> </div></div>
+                                                             <div class="edit_item_row"><div class="edit_item_label">Name</div><div class="edit_item_field"><%= f.text_field( :Name, :size => 30,  :id => "Name_Req", :title => "Required! Please enter your Name" ) %> </div></div>
+                                                             <div class="edit_item_row"><div class="edit_item_label">Address</div><div class="edit_item_field"><%= f.text_area( :Address ,:cols => 22 ,:rows => 3,  :id => "Address_Req", :title => "Required! Please enter your Address"  ) %> </div></div>
+                                                             <div class="edit_item_row"><div class="edit_item_label">Address2</div><div class="edit_item_field"> <%= f.text_field( :Address2 ,:size => 30  ) %> </div></div>
+                                                             <div class="edit_item_row"><div class="edit_item_label">City</div><div class="edit_item_field"><%= f.text_field( :City ,:size => 30 ,  :id => "City_Req", :title => "Required! Please enter your City" ) %> </div></div>
+                                                             <div class="edit_item_row"><div class="edit_item_label">FaxNumber</div><div class="edit_item_field"> <%= f.text_field( :FaxNumber,:size => 30  ) %> </div></div>
+                                                             <div class="edit_item_row"><div class="edit_item_label">PhoneNumber</div><div class="edit_item_field"> <%= f.text_field( :PhoneNumber ,:size => 30 ,  :id => "PhoneNumber_Req", :title => "Required! Please enter your PhoneNumber" ) %> </div></div>
+                                                            <div class="edit_item_row"> <div class="edit_item_label">State</div><div class="edit_item_field">  <%= f.text_field( :State ,:size => 30,  :id => "State_Req", :title => "Required! Please enter your State"  ) %> </div></div>
+                                                             <div class="edit_item_row"><div class="edit_item_label">Zip</div><div class="edit_item_field">  <%= f.text_field( :Zip ,:size => 30,  :id => "Zip_Req", :title => "Required! Please enter your Zip"  ) %> </div></div>
+                                                             <div class="edit_item_row"><div style="width:125px;float:left;"> <%=  submit_tag( 'Save Changes', :id => "save_changes_bill_to")   %>   </div></div>
+                                                             <div class="edit_item_row">
+                                                                                <div id="bill_to_saved" style="font-size:17px;text-align:center;">
+                                                                                                   <% if @from_ajax == true  %>
+                                                                                                              <% if @status == "Success" %>
+                                                                                                                            <div style="color:green;">Save Success!</div>
+                                                                                                              <% else  %>
+                                                                                                                            <div style="color:red;">Save Failed!</div>
+                                                                                                              <% end  %>
+                                                                                                   <% end  %>
+                                                                                 </div>
+                                                              </div>
+                                                <% end %>
+
+
+                                              <script type="text/javascript">
+
+                                                           new Protoform('ship_to_form' );
+
+                                                            $$('.edit_item_field').invoke('observe', 'change', saveBillToChangesButton );
+
+                                                            function saveBillToChangesButton( ) {
+                                                                                 console.log("begin saveBillToChangesButton");
+                                                                                 $('bill_to_saved').innerHTML = "";
+                                                                                 console.log("end saveBillToChangesButton");
+                                                            }
+
+
+                                                            <% if @from_ajax == true  %>
+                                                                          var tabs_advanced_main_menu = new Control.Tabs('tabs_advanced_main_menu',
+                                                                          {
+                                                                              afterChange: function(new_container){
+                                                                          //            $('background_color_choices').hide();
+                                                                          //            $('custom_items').hide();
+                                                                          //            clearDynamicAdministrationForms();
+                                                                          //            if ( tabs_advanced_choices_menu.activeContainer )
+                                                                          //            console.log( this.activeContainer );
+                                                                              }
+                                                                          });
+                                                            <% end  %>
+                                              </script>
+
+
+
+
+ <% else  %>
+
+          You do not have a purchase in progress.
+
+
+
+<% end  %>
+
+
+
+</div>
+

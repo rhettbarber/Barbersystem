@@ -1,0 +1,28 @@
+
+                    <div class='custom_items_container'   id="custom_items_container">
+                                <% for custom_item in @custom_items %>
+                                  <div class='custom_item_container'  id="custom_item_container_<%= custom_item.id %>">
+                                        <% if @show_admin %>
+                                              custom_item.inspect: <%= custom_item.inspect %><br />
+                                               width: <%= custom_item.width %><br />
+                                               height <%= custom_item.height %><br />
+                                              custom_item.methods.inspect <% custom_item.methods.inspect %><br />
+                                              custom_item.filename: <%=custom_item.filename %><br />
+                                              custom_item.public_filename:  <%=custom_item.public_filename %><br />
+                                              custom_item.full_filename:  <%=custom_item.full_filename %><br />
+                                              custom_item.full_filename('thumbnail'):  <%=custom_item.full_filename('thumbnail') %><br />
+                                        <% end  %>
+
+                                                    <div class='custom_item_image_container'> <%=    image_tag(custom_item.public_filename, :width => 100 , :class => 'custom_item_image' , :id => 'contextArea' , :title => custom_item.id  )     %></div>
+                                                    <% if @show_custom_item_links_container %>
+                                                      <div class='custom_item_links_container' id="custom_item_links_container_<%= custom_item.id %>">
+                                                              <%= link_to 'Show', custom_item %><br/>
+                                                              <%= link_to 'Edit', edit_custom_item_path(custom_item) %><br/>
+                                                              <%= link_to 'Destroy', custom_item, :confirm => 'Are you sure?', :method => :delete %><br/>
+                                                              <%= link_to 'Add to Front', :controller => 'designer_specsheet', :custom_item_id => custom_item.id, :current_design_selector => 'front_design' %><br/>
+                                                              <%= link_to 'Add to Back', :controller => 'designer_specsheet', :custom_item_id => custom_item.id, :current_design_selector => 'back_design'  %><br/>
+                                                   </div>
+                                                   <% end  %>
+                                  </div>
+                                <% end %>
+                  </div>

@@ -1,0 +1,89 @@
+ <div  id="item_technical_editor" class="administration_yellow" style="display:table;padding:5px;float:left;width:850px;">
+              <% choices_message_hash = Hash[  "Opaque"  => "Opaque", "Transparent"  => "Transparent"  ] %>
+          <div id="ajax_edit_item_<%= side %>" style="float:left;width:850px;text-align:left;">
+                        <%= form_for( @item, :method => :put,  :remote => true  , :url => {:controller => 'designer_specsheet', :action => 'ajax_item_update'}  ) do |f| %>
+                        <%= hidden_field_tag 'side', side %>
+                        <%= hidden_field_tag 'id_for_editing', @item.id  %>
+                     <div class="edit_item_label">ItemLookupCode</div><div class="edit_item_field"> <%= f.text_field( :ItemLookupCode ,:size => 30 ) %> </div>
+                       <div class="edit_item_label">Description</div><div class="edit_item_field"><%= f.text_field( :Description, :size => 35 ) %> </div>
+                        <div class="edit_item_label">ExtendedDescription</div><div class="edit_item_field"><%= f.text_field( :ExtendedDescription, :size => 97 ) %> </div>
+                        <div class="edit_item_label">Notes/Keywords</div><div class="edit_item_field"><%= f.text_area( :Notes ,:cols => 70 ,:rows => 3  ) %> </div>
+                        <div class="edit_item_label">Cost</div><div class="edit_item_field"> <%= f.text_field( :Cost ,:size => 30  ) %> </div>
+                       <div class="edit_item_label">SubDescription1</div><div class="edit_item_field"><%= f.text_field( :SubDescription1 ,:size => 30  ) %> </div>
+                        <div class="edit_item_label">SubDescription2</div><div class="edit_item_field">
+                        <%= f.select( :SubDescription2 , choices_message_hash ) %>
+                        </div>
+                        <div class="edit_item_label">SubDescription3</div><div class="edit_item_field"> <%= f.text_field( :SubDescription3,:size => 30  ) %> </div>
+                        <div class="edit_item_label">Weight</div><div class="edit_item_field"> <%= f.text_field( :Weight ,:size => 30  ) %> </div>
+                        <div class="edit_item_label">exclude_from_website_in_ids</div><div class="edit_item_field">  <%= f.text_field( :exclude_from_website_in_ids ,:size => 30  ) %> </div>
+
+                         <div class="edit_item_label">Department / Category</div>
+                        <div class="edit_item_field">
+                                        <%= f.collection_select :department_id,  @website.default_all_departments_with_generic , :id, :Name, :prompt => "Select a department" %>
+                                        <span id="item_edit_category_field">
+                                              <%= f.collection_select :category_id, Category.limit("2"), :id, :Name, :prompt => "Select a category" %>
+                                        </span>
+                            </div>
+
+                         <div style="width:125px;float:left;"> <%=  submit_tag( 'Save Changes',:disabled => true, :id => "save_changes_item_" + side)   %></div>
+                        <% end %>
+
+                        <div id="item_saved_<%= side %>"></div>
+              </div>
+
+              <script type="text/javascript">
+              $$('.edit_item_field').invoke('observe', 'change', saveChangesButton );
+
+              function saveChangesButton( ) {
+                                   console.log("begin saveChangesButton");
+                                   $('save_changes_item_<%= side %>').disabled = false;
+                                   $('item_saved_<%= side %>').innerHTML = "";
+                                   console.log("end saveChangesButton");
+              }
+
+              </script>
+ </div>
+
+
+
+ <script type="text/javascript">
+
+var edit_item_categories = new Array();
+<% for category in Category.all.sort_by{|a| a.Name}  -%>
+      edit_item_categories.push(new Array(<%= category.department_id %>, '<%=h Util::Slug.generate(category.Name.to_s) %>', <%= category.id %>));
+<% end -%>
+
+//------------------------------------------------------------------------------------------------------
+          function itemEditDepartmentSelected() {
+                              console.log("begin itemEditDepartmentSelected");
+                              department_id = $('item_department_id').getValue();
+                              options = $('item_category_id').options;
+                              options.length = 0;
+                              edit_item_categories.each(function(category) {
+                                            if (category[0] == department_id) {
+                                              options[options.length] = new Option(category[1], category[2]);
+                                            }
+                                   }
+                           );
+
+                          if (options.length == 1) {
+                                $('item_edit_category_field').hide();
+                          } else {
+                                $('item_edit_category_field').show();
+                          }
+                          console.log("end itemEditDepartmentSelected");
+            };
+
+            function createItemEditSelectLists( ) {
+                itemEditDepartmentSelected();
+                $('item_department_id').value = <%= @item.department_id.to_s %>
+                 $('item_category_id').value = <%= @item.category_id.to_s %>
+                $('item_department_id').observe('change', itemEditDepartmentSelected);
+
+
+            };
+
+
+        createItemEditSelectLists( );
+
+    </script>

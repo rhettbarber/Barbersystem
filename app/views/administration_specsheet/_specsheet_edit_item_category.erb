@@ -1,0 +1,12 @@
+<% item = @item %>
+<% @categories = Category.find_all_by_department_id item.department_id -%>
+
+<br />
+<h3>Select from the list below to change this items category.</h3> <br />
+<%= form_tag '/categories/change_category' do -%>
+	<%= hidden_field_tag "item_id", item.id -%>
+	<%=  select("category", "id", @categories.collect {|p| [  p.department.Name + ' - ' + p.Name, p.id ] }.uniq ,{:selected =>  item.category.id } ) %><br />	
+	<%= submit_tag 'Change Category' -%>
+<% end %>
+
+	

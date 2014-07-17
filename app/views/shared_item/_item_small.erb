@@ -1,0 +1,20 @@
+
+
+		
+<% if item %>	
+		<div class="item_container_small">
+				<div id="<%= "item_" + item.id.to_s %>">	
+						<%= link_to( image_tag( item.image_url( @department, 'item_thumbnails/','x' )  ), { :controller  => "specsheet", :item_id => item.id , :department_id => item.default_master_department_id   })  %>
+					<br />
+					<%=  item.category.Name  %><br />
+					
+					<% unless !@category %>
+						<%=  item.number  %><%=  item.description_before_color_and_size  %><br />
+					<% end %>
+			        	
+			        	<%=   link_to('details', :controller  => "specsheet",		:item_id => item.id , :department_id => item.default_master_department_id  )  %>
+
+			        	<br />     
+				</div>
+		</div>
+<% end %>

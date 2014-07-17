@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+<%= stylesheet_link_tag  "/stylesheets/legacy/main" ,"/stylesheets/legacy/other","/stylesheets/legacy/page","/stylesheets/legacy/item","/stylesheets/legacy/styles" , :media => "all" %>
+
+<%= javascript_include_tag '/javascripts/legacy/prototype/prototype'  %>
+
+
+
+<%= yield :head_additions %>
+
+<body class="films_body" style="background-image:url(/images/backgrounds_repeating/dark_blue_paper.jpg);">
+<div class="page">
+      <div class="main-wrapper">
+
+
+
+
+                      <div  id='progress' style="display:none;width: 850px;text-align: center;background-color:white;"><%= image_tag "/images/search/ajax-spinner.gif" %> </div>
+                      <div id="yield_container" class="yield_container">
+                                <div class="page_content"  id="page_content">
+                                        <%= yield  %>
+
+                                </div>
+                      </div>
+
+
+
+            <%= render :partial => 'advanced_main_menu/search_results_container' %>
+        </div>
+</div>
+</body>
+</html>

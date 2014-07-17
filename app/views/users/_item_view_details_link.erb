@@ -1,0 +1,26 @@
+
+ <% if admin? %>   
+ 
+	  <div class="item_list_thumbnail_container_admin" style="padding:15px;width:150px;height:500px;overflow:hidden;float:left;background-color:white;">
+	    Terms Found:<%= item.SubDescription1 %><br />
+			<%=   link_to( image_tag( item.image_url( @department, 'item_thumbnails/','x' ),:border => 0, :size =>"120x120"   )  ,:controller => "specsheet",		:item_id => item.id , :department_id => item.default_master_department_id )  -%><br />
+			<%=  item.ItemLookupCode -%><br />
+			<%=  item.Description -%><br />
+			<%=  item.category.Name -%><br />
+			<%= item.Notes %><br />
+			<%= link_to_function "Load Item", "SetSpecificItem('#{item.id}','#{item.ItemLookupCode}' )" %><br />
+		</div>
+ 
+ <% else %>
+ 
+ 
+    <div class="item_list_thumbnail_container">
+    Number Terms Found:<%= item.SubDescription1 %><br />
+		<%=   link_to( image_tag( item.image_url( @department, 'item_thumbnails/','x' ),:border => 0, :size =>"120x120"   )  ,:controller => "specsheet",		:item_id => item.id , :department_id => item.default_master_department_id )  -%><br />
+		<%=  item.ItemLookupCode -%><br />
+		<%=  item.Description -%><br />
+		<%=  item.category.Name -%><br />
+		<%= link_to_function "Load Item", "SetSpecificItem('#{item.id}','#{item.ItemLookupCode}' )" %><br />
+	</div>
+
+<% end %>

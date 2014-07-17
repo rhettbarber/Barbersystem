@@ -1,0 +1,80 @@
+
+
+
+
+        <% if @user %>
+
+                    <p style="text-align: center;">Welcome <%= h @user.email  %> </p>
+
+                       <% if admin? %>
+                                                     <p style="text-align: center;">You are an admin.</p>
+
+                                                    <%=  link_to "Customer item sales report", "/customer_item_sales_by_years" , :class =>  'ui-btn' %>
+                                                    <%=  link_to "item sales report-beta", "/item_sales" , :class =>  'ui-btn' %>
+
+                                                       <br><br><br>
+
+                      <% else %>
+                                                    <p style="text-align: center;"> If you need assistance give us a call at <%= @website.phone %>   </p>
+                      <% end %>
+
+
+
+
+
+                        <%=  link_to "Shop", "/store/category_items" , :class =>  'ui-btn ui-btn-b' %>
+
+                        <%=  link_to "Your Cart", "/cart" , :class =>  'ui-btn' %>
+
+                        <%=  link_to "Log out", "/account/logout" , :class =>  'ui-btn' %>
+
+                        <%=  link_to "Order Tracking", "/order_tracking" , :class =>  'ui-btn' %>
+
+                          <%=  link_to "Change your password", "/account/edit_password"  , :class =>  'ui-btn' %>
+
+                        <p style="text-align: center;"> If you would like to send us an email or attachments, please send it to:<a class="ui-btn"  href="mailto:support@<%=@website.domain %>">support@<%=@website.domain %></a></p>
+
+
+            <% if @user.newsletter_subscriber == 1 %>
+                                                      <%= form_tag url_for(:controller => "account", :action => "newsletter_subscriber") do %>
+                                                          <%= hidden_field_tag  'newsletter_subscriber', 0 %>
+                                                          <%= button_tag(type: "submit", class: "btn btn-default", data: { confirm:   "Are you sure you want to Unsubscribe from our emails?" } ) do %>
+                                                              Unsubscribe <i class="icon-repeat"></i>
+                                                          <% end    %>
+                                                            <%#= submit_tag "Unsubscribe"   , :class =>  'btn btn-primary' %>                                                                 <br> <br>
+                                                      <% end %>
+                          <% else %>
+                                                      <%= form_tag url_for(:controller => "account", :action => "newsletter_subscriber") do %>
+                                                          <%= hidden_field_tag  'newsletter_subscriber', 1 %>
+                                                          <%= button_tag(type: "submit", class: "btn btn-primary" ) do %>
+                                                              Subscribe <i class="icon-repeat"></i>
+                                                          <% end    %>
+                                                          <%#= submit_tag "Subscribe to our newsletter." , :class =>  'btn btn-primary'  %>                           <br> <br>
+                                                      <% end %>
+                          <% end %>
+        <% end %>
+
+
+
+            <% if @customer %>
+                    <%= image_tag @customer.introduction_image_url(@website)  %>
+            <%  else %>
+                    <%= image_tag '/images/introductions/' + @website.name + '_resources.jpg' %><br />
+                    Your Customer Billing information has not yet been entered. If you wish to create a Customer Billing address now, <%= link_to 'Click Here', :controller => 'customers', :action => 'new'   %> .<br />   <br />
+            <% end %>
+
+              <br><br>
+
+
+
+                <%  if @customer  %>
+                            <br />
+                               <%=    render(:partial => "customers/show" ) -%>
+                             <br />
+                 <%  end %>
+
+
+
+
+
+ 

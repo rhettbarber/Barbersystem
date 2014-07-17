@@ -1,0 +1,17 @@
+<div class="menu_custom_items">
+  <ul>
+                    <li>
+                         <%= link_to 'View on Designer Specsheet', :controller => 'designer_specsheet', :custom_item_id => @custom_item.id, :current_design_selector => params[:current_design_selector] %>
+                    </li>
+                     <li>
+                          <%= link_to "View all Custom Items", custom_items_path %>
+                    </li>
+                    <li>
+                         <%= link_to 'Edit the Description', edit_custom_item_path(@custom_item) %>
+                    </li>
+                    <li>
+                          <%= link_to 'Delete this Custom Item', @custom_item, :confirm => 'Are you sure you want to delete this Custom Item?', :method => :delete %>
+                    </li>
+  </ul>
+</div>
+

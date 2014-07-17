@@ -1,0 +1,42 @@
+<% logger.debug "-------------------------------------start category_box" %>
+
+
+
+
+<div class="category_box">				
+   <li> 
+   	<%=    link_to( "Create a new Category" ,  :controller => "categories", :action => 'new'  ) %> <br/>
+   	<span class="category_box_new" style="color:red;">
+   	<%=    link_to( image_tag(  '/images/buttons/add.png' ) ,  :controller => "categories", :action => 'new' )  %>
+   	</span>
+   </li>
+
+
+
+
+   <%= render :partial => 'categories/new' %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<% logger.debug "------------------------------------- end category_box" %>

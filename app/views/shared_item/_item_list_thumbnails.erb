@@ -1,0 +1,43 @@
+<% logger.debug "-------------------------------------begin _shared_item/item_list_thumbnails " %>
+
+<% 
+if @purchase_symbiote_item_category_category_class_id
+	local_purchase_symbiote_item_category_category_class_id = @purchase_symbiote_item_category_category_class_id.to_s
+else
+	local_purchase_symbiote_item_category_category_class_id = '0'
+end	
+
+if @purchase_symbiote_item
+	local_purchase_symbiote_item_shade = @purchase_symbiote_item.shade.to_s
+else
+	local_purchase_symbiote_item_shade = '0'
+end
+
+if @user_array_user_type_id
+	local_user_array_user_type_id = @user_array_user_type_id.to_s
+else
+	local_user_array_user_type_id = '0'
+end	
+%>
+
+
+<% if @items -%>
+	<% cache (@website.name + "/user_type_id/" + local_user_array_user_type_id + "/shared_item/item_list_thumbnails/purchase_symbiote_item_category_category_class_id/" + local_purchase_symbiote_item_category_category_class_id  + "/shade/" + local_purchase_symbiote_item_shade ) do %>
+				<%   @acceptable_item_ids.to_a.sort.collect {|x|  "," + x.to_s + "," }  -%>
+					<div class="item_list_thumbnails_container">
+				            <% @items.each do |item| %>
+					             		<%  if     @acceptable_item_ids.flatten.include?(item.id.to_i) -%>					             				
+												<%= render(:partial => "shared_item/item_list_thumbnail",:locals => { :item => item } ) -%>
+									   <% end -%>
+							<% end -%>
+					</div>
+	<% end -%>
+<% else -%>
+					<% if @items_content_fragment -%>
+							<%= @items_content_fragment  -%>
+					<% else -%>	
+							No Items found. <br />
+					<% end -%>
+<% end -%>
+
+<% logger.debug "-------------------------------------end _shared_item/item_list_thumbnails " %>

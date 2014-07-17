@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>listview demo</title>
+      <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0-rc.1/jquery.mobile-1.4.0-rc.1.min.css">
+      <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+      <script src="http://code.jquery.com/mobile/1.4.0-rc.1/jquery.mobile-1.4.0-rc.1.min.js"></script>
+      <script src="/assets/jquery_mobile/klass.min.js"></script>
+      <script src="/assets/jquery_mobile/code.photoswipe-3.0.5.js"></script>
+     <script src="/assets/jquery/jquery.cookie.js"></script>
+     <!-- https://github.com/carhartl/jquery-cookie  -->
+      <%#= stylesheet_link_tag '/assets/jquery_mobile/photoswipe.css' %>
+
+  <%#= stylesheet_link_tag '/assets/store/checkout'  if controller_name  == "cart"   %>
+  <%#= stylesheet_link_tag '/assets/store/cart'  if controller_name  == "cart"  %>
+
+  <%= stylesheet_link_tag '/assets/development/guides'    if Rails.env.development? %>
+  <%= stylesheet_link_tag '/assets/jquery_mobile/jquery_mobile_customized' %>
+
+  <%= stylesheet_link_tag '/assets/store_specsheet/specsheet' %>
+  <%= stylesheet_link_tag '/assets/store_specsheet/specsheet_phone' %>
+
+  <%= stylesheet_link_tag '/assets/application/application_jquery'  %>
+  <%= stylesheet_link_tag '/assets/store/jquery_cart' %>
+
+</head>
+
+
+<div data-role="page"   id="index" class="index"  data-dom-cache="false">
+
+  <!--   #######################  BEGIN  PANELS   ####################### -->
+  <!--   #######################  BEGIN  PANELS   ####################### -->
+  <!--   #######################  BEGIN  PANELS   ####################### -->
+  <!--   #######################  BEGIN  PANELS   ####################### -->
+  <!--   #######################  BEGIN  PANELS   ####################### -->
+  <%#= render :partial => "panels/articles"  %>
+  <%#= render :partial => "panels/designs"  %>
+  <%#= render :partial => "panels/items"  %>
+  <!--   #######################  END  PANELS   ####################### -->
+  <!--   #######################  END  PANELS   ####################### -->
+  <!--   #######################  END  PANELS   ####################### -->
+  <!--   #######################  END  PANELS   ####################### -->
+  <!--   #######################  END  PANELS   ####################### -->
+
+
+
+
+  <!--   #######################  BEGIN  HEADER  ####################### -->
+  <!--   #######################  BEGIN  HEADER  ####################### -->
+  <!--   #######################  BEGIN  HEADER  ####################### -->
+  <!--   #######################  BEGIN  HEADER  ####################### -->
+  <!--   #######################  BEGIN  HEADER  ####################### -->
+  <% if @header %>
+  <div data-role="header" data-id="barbersystem_header" data-position="fixed"  data-theme="b">
+
+    <div data-role="navbar">
+      <ul>
+        <li><a href="/vendor/assets/stylesheets"> <%= image_tag "dixieoutfitters-logo.png" ,:id => "dixie_logo", :style => "height:35px;" %> </a></li>
+        <li><a href="#items_panel">Items</a></li>
+        <li><a href="#designs_panel">Designs</a></li>
+        <li><a href="#pages_panel">Menu</a></li>
+
+      </ul>
+    </div><!-- /navbar -->
+  </div><!-- /header -->
+  <% end %>
+  <!--   #######################  END  HEADER  ####################### -->
+  <!--   #######################  END  HEADER  ####################### -->
+  <!--   #######################  END  HEADER  ####################### -->
+  <!--   #######################  END  HEADER  ####################### -->
+  <!--   #######################  END  HEADER  ####################### -->
+
+
+  <!--   #######################  BEGIN  CONTENT  ####################### -->
+  <!--   #######################  BEGIN  CONTENT  ####################### -->
+  <!--   #######################  BEGIN  CONTENT  ####################### -->
+  <!--   #######################  BEGIN  CONTENT  ####################### -->
+  <!--   #######################  BEGIN  CONTENT  ####################### -->
+  <div data-role="content">
+    <%= yield %>
+  </div>
+  <!--   #######################  END CONTENT    ####################### -->
+  <!--   #######################  END CONTENT    ####################### -->
+  <!--   #######################  END CONTENT    ####################### -->
+  <!--   #######################  END CONTENT    ####################### -->
+  <!--   #######################  END CONTENT    ####################### -->
+
+  <!--   #######################  BEGIN  FOOTER  ####################### -->
+  <!--   #######################  BEGIN  FOOTER  ####################### -->
+  <!--   #######################  BEGIN  FOOTER  ####################### -->
+  <!--   #######################  BEGIN  FOOTER  ####################### -->
+  <!--   #######################  BEGIN  FOOTER  ####################### -->
+  <%#= render "shared_symbiont/symbiote_wrapper_container" if @incomplete_symbiont and controller_name == "store" %>
+  <%= render "application/symbiote_wrapper" if controller_name == "store"%>
+
+  <% if @test %>
+  <div id="footer" data-theme="a" data-role="footer" data-position="fixed">test </div>
+  <% end %>
+  <!--   #######################  END  FOOTER  ####################### -->
+  <!--   #######################  END  FOOTER  ####################### -->
+  <!--   #######################  END  FOOTER  ####################### -->
+  <!--   #######################  END  FOOTER  ####################### -->
+  <!--   #######################  END  FOOTER  ####################### -->
+
+
+</div><!-- page -->
+
+<!--   #######################  BEGIN DIALOG PAGE  ####################### -->
+<!--   #######################  BEGIN DIALOG PAGE  ####################### -->
+<!--   #######################  BEGIN DIALOG PAGE  ####################### -->
+<!--   #######################  BEGIN DIALOG PAGE  ####################### -->
+<!--   #######################  BEGIN DIALOG PAGE  ####################### -->
+
+
+<div data-role="page" id="two" data-dialog="true"  data-theme="a" data-url="two" tabindex="0" class="ui-page ui-page-theme-a" style="min-height: 964px;">
+
+  <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
+    <h1 class="ui-title" role="heading" aria-level="1">Cart Details</h1>
+  </div><!-- /header -->
+
+  <div role="main" class="ui-content">
+
+
+
+        <div class="thumbnails_container">
+          <img src="/images/item_thumbnails/11001_lmrp_ash.png" alt="11001_lmrp_ash">
+          <img src="/images/item_thumbnails/5894L_o_rp.png" alt="5894l_o_rp">
+        </div>
+        <div class="purchases_entries_details">
+          2<b>11001LA  </b>- Ash Large:
+          Adult Short Sleeve T-Shirt<br>
+          Design:  <b>5894L</b> - do-motor-eagle
+        </div>
+       <br>
+      <div style="width:100%;">
+          Extended Price:$31.98
+      </div>
+
+
+
+    <a href="#index" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Back to Cart</a>
+
+  </div><!-- /content -->
+
+  <div data-role="footer" role="contentinfo" class="ui-footer ui-bar-inherit">
+    <h4 class="ui-title" role="heading" aria-level="1">Page Footer</h4>
+  </div><!-- /footer -->
+</div>
+
+<!--   #######################  END DIALOG PAGE  ####################### -->
+<!--   #######################  END DIALOG PAGE  ####################### -->
+<!--   #######################  END DIALOG PAGE  ####################### -->
+<!--   #######################  END DIALOG PAGE  ####################### -->
+<!--   #######################  END DIALOG PAGE  ####################### -->
+
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

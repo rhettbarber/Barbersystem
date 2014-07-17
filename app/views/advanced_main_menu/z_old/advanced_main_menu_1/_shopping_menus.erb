@@ -1,0 +1,26 @@
+<% cache ( @standard_topbar_menus_fragment_name ) do %>
+
+          
+          <% unless @website.store_website == false %>
+
+                  <% display_extras = false if params[:id] == 'home' or controller.controller_name == 'purchases'  or controller.controller_name == 'page'  %>
+
+                  <% unless display_extras == false   %>
+                                  <% if @purchase %>
+                                               <% if @purchase_symbiote_item_type == 'master' %>
+                                                                                       <%= render(:partial => "shared_menu/menu_design") %>
+                                                <% elsif @purchase_symbiote_item_type == 'slave'   %>
+                                                                                   <%= render(:partial => "shared_menu/menu_item") %>
+                                                    <% else %>
+                                                                               <%= render(:partial => "shared_menu/menu_design") %>
+                                                                               <%= render(:partial => "shared_menu/menu_item") %>
+                                                    <% end %>
+                                  <% else %>
+                                                                               <%= render(:partial => "shared_menu/menu_design") %>
+                                                                               <%= render(:partial => "shared_menu/menu_item") %>
+                                  <% end %>
+                  <% end %>
+
+          <% end %>
+
+<% end %>

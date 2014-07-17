@@ -1,0 +1,64 @@
+
+<% @simple_view_controllers = ['account', 'another'] %>
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+<%#= render :partial => "layout_elements/shared_javascripts" %>
+<%= javascript_include_tag 'designer_specsheet/application_designer_specsheet'  %>
+<%#= javascript_include_tag 'application'  %>
+<%= stylesheet_link_tag  'designer_specsheet/application_designer_specsheet'  %>
+
+
+
+      <%#= render(:partial => "layout_elements/shared_dynamic_head") %>
+
+
+
+
+              <body class="body">
+
+
+
+          <div class="header">
+                  <%#= render :partial => 'onclick_top_menu/onclick_top_menu' %>
+                 <%#= render(:partial => "layout_elements/header_table") unless @simple_view_controllers.include?( controller.controller_name)   %>
+                  <%#= render(:partial => "shared_menu/standard_topbar_menus") %>
+
+          </div>
+
+          <div class="page_content_wide">
+
+          <% if flash[:notice] != nil -%><div style="background-color:orange; color: blue; text-align: center;">&nbsp;<%= flash[:notice] %>&nbsp;</div><% end -%>
+
+          <%#= render :partial =>  'shared_symbiont/symbiote_wrapper_container' %>
+          <%= yield %>
+          </div>
+          <div class="footer">
+                             <%#= render :partial => 'onclick_bottom_menu/onclick_bottom_menu'  unless @simple_view_controllers.include?( controller.controller_name)    %>
+                             <%#= render  "layout_elements/ssl" %>
+          </div>
+
+          <% if admin?  or ["development","development_production_connection"].include?(Rails.env) and @off %>
+                <% begin  %>
+                       <br /><%= 'Verily_Adzzed' %>
+                      <%= render :partial => 'development/instance_variables' , :locals => { :instance_variables => instance_variables } %>
+                      <%= render :partial => 'development/parameters' , :locals => { :params => params } %>
+                      <%= render :partial => 'development/request' , :locals => { :request => request } %>
+                      <% render :partial => 'development/response' , :locals => { :request => response } %>
+                        <%= render :partial => 'development/session' , :locals => { :session => session } %>
+                    <% rescue %>
+                            <% logger.warn "###########################DEVLOPMENT BAR FAILED" %>
+                           <% logger.warn "###########################DEVLOPMENT BAR FAILED" %>
+                           <% logger.warn "###########################DEVLOPMENT BAR FAILED" %>
+                      <%  end  %>
+          <% end %>
+
+
+
+</body>
+</html>

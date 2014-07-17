@@ -1,0 +1,21 @@
+
+<%= stylesheet_link_tag 'sublimation_shirt.css'  %>
+
+<h1>SublimationShirt#index</h1>
+<p>Find me in app/views/sublimation_shirt/index.html.erb</p>
+
+<div class="sublimation_content">
+      <% @final_jpgs =  rio('W:\\AUTOMATION_DATABASE\ITEM_SPECSHEETS\\').files['*.jpg']  %>
+      <% @final_jpgs.each do |fj|     %>
+            <%  if   fj.filename.to_s["-0.jpg"]  or   fj.filename.to_s["-1.jpg"] %>
+            <% else  %>
+                    <div class="sublimation_item">
+                                <img alt="'<%= fj.filename %>" src="/sublimation_shirt/show/<%= fj.filename %>" />
+                    </div>
+            <% end  %>
+      <% end  %>
+</div>
+
+
+
+

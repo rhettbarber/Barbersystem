@@ -1,0 +1,58 @@
+<% logger.debug  "000000000000000000000000000000000000000000000000000000000000" %>
+<% logger.debug "@website.name: #{@website.name} -----@user_array_user_type_id: #{@user_array_user_type_id}" %>
+<% logger.debug "@customer_array_customer_type: #{@customer_array_customer_type}" %>
+<% logger.debug "@customer_array_viewable_page_types: #{@customer_array_viewable_page_types}" %>
+<% logger.debug "@user_array_user_type_id : #{@user_array_user_type_id}" %>
+<% logger.debug "@website.store_website: #{@website.store_website}" %>
+<% logger.debug "@website.id: #{@website.id}" %>
+<% logger.debug "000000000000000000000000000000000000000000000000000000000000" %>
+
+
+<% logger.debug "-------------------------------------begin prepare_page_navigation_bar"	  %>
+<% cache(@website.name + "/user_type_id/" + @user_array_user_type_id + "/page_navigation_bar/customer_type/" + @customer_array_customer_type + "/login_status/" + logged_in?.to_s  ) do %>
+		<div class="page_navigation_bar" >
+                      <% if params[:action] != 'reorder' -%>
+                              <ul>
+                                      <% for page in visible_root_pages -%>
+                                              <% if @customer_array_viewable_page_types.include?( page.page_type_id ) %>
+                                                      <li><%=  link_to page.name.camelize   , :controller => "page", :action => "show", :id => page.slug  %> </li>
+                                              <% end %>
+                                      <% end -%>
+                                      <% if user_can?('modify') -%>
+                                              <select onChange="javascript:go(this);" style="font-size:8pt;">
+                                                      <option>Actions...</option>
+                                                      <option value="add_action" ><%= link_to "Add a page", :controller => "page", :action => "add" %></option>
+                                      <% end -%>
+                                      <% if user_can?('publish') -%>
+                                                      <option value="reorder_action"><%= link_to "Reorder pages", :controller => "page", :action => "reorder" %></option>
+                                                      <option value="add_private_user"><%= link_to "Add Private User", :controller => "page", :action => "add_private_user" %></option>
+                                                      <option value="remove_private_user"><%= link_to "Remove Private User", :controller => "page", :action => "remove_private_user" %></option>
+                                      <% end -%>
+                                      <% if user_can?('modify') -%>
+                                                      <option value="sign-out_action"><%= link_to "Sign out", :controller => "account",:action => 'logout'  %></option>
+                                                      <script type="text/javascript" charset="utf-8">
+                                                              function go(actions) {
+                                                                      var action = actions.options[actions.selectedIndex].value;
+                                                                      if(action == 'add_action')
+                                                                              window.location = '/page/add';
+                                                                      else if(action == 'reorder_action')
+                                                                              window.location = '/page/reorder';
+                                                                      else if(action == 'add_private_user')
+                                                                              window.location = '/page/add_private_user';
+                                                                      else if(action == 'remove_private_user')
+                                                                              window.location = '/page/remove_private_user';
+                                                                      else if(action == 'manage_action')
+                                                                              window.location = '/users/';
+                                                                      else if(action == 'sign-out_action')
+                                                                              window.location = '/logout/';
+                                                              }
+                                                      </script>
+                                              </select>
+                                      <% else -%>
+                                              <li><%= link_to "Sign in", :controller => 'account' ,:action => 'login'  if @website.store_website == true   -%></li>
+                                      <% end -%>
+                              </ul>
+                      <% end -%>
+		</div>
+<% end %>
+<% logger.debug "-------------------------------------end prepare_page_navigation_bar"	  %>

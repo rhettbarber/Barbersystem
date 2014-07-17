@@ -1,0 +1,125 @@
+<%= render :partial => "shared_admin/menu_opposites"%>
+
+<div style="width:850px;border-bottom:5px solid black;">
+	<div align="center"><h2>Category Class Organizer </h2></div>
+	
+	<div align="center">
+		
+		<%= error_messages_for :category_class %>
+		
+		<% form_for(@selected_category_class) do |f| %>
+
+<table>
+	<tbody>
+		<tr>
+		  <td>
+				  <p>
+				    <b>Selected Category Class Name</b><br />
+				    <%= f.text_field :name %>
+				  </p>
+				  <p>
+				   
+				   <p>
+				    <b>Item Type</b><br />
+				    
+					<%=  select("category_class", "item_type", @category_classes.collect {|p| [ p.item_type ] }.uniq ,{:selected =>  @selected_category_class.item_type  } ) %>
+
+				  </p>
+			</td>
+			<td>	
+				  <p>
+				    <b>Notes</b><br />
+				    <%= f.text_area :notes ,:cols => 50, :rows => 5 %>
+				  </p>
+				
+				  <p>
+				    <%= f.submit "Update Category Class Name, Type and Notes" %>
+				  </p>
+				<% end %>
+			</td>
+		</tr>
+	</tbody>
+</table>	
+	
+		
+</div>
+	
+	<div align="center"><h3><%= link_to 'New category_class', new_category_class_path %></h3></div>
+</div>	
+
+<div style="float:left;">
+	<table style="background-color:white; width:150px;">
+	<% for category_class in @category_classes %>
+	<% if category_class.categories.first %>
+	<% first_selected_item = category_class.categories.first.items.first %>
+	<% if first_selected_item %>
+			<% if category_class.id.to_s == @selected_category_class_id.to_s %>
+				<% background_color = 'blue' %>
+			<% else %>
+				<% background_color = 'grey' %>
+			<% end%>
+<tr style="background-color:<%=background_color %>;">
+	    <td>
+			<div id="category_class_<%= category_class.id.to_s %>" align="center" style="background-color:<%=background_color %>;">
+			<div align="center"><%= category_class.item_type.humanize %></div>
+			<div align="center"><%= category_class.name.humanize %></div>
+			<div align="center"><%= link_to "Define Opposites", :controller => 'opposites', :action => 'define_category_class_opposite_categories', :category_class => category_class.id %></div>
+			<%= drop_receiving_element("category_class_" + category_class.id.to_s , 
+			:url => { :controller => "opposites", 
+			:category_class_id => category_class.id,
+			:action => "add_category_to_category_class" }) %>	
+			<div align="center">or</div>
+			<div align="center"><%= link_to 'Edit category class', edit_category_class_path(category_class) %></div>	
+			<% if category_class.item_type == 'master' %>
+				<% selected_department = first_selected_item.masters_department_decides_default_department_id %>
+			<% else %>
+				<% selected_department = first_selected_item.design_decides_opposites_department %>
+			<% end %>
+			 <%= link_to image_tag( first_selected_item.image_url( selected_department  ,'item_thumbnails/','x') ,:size => "100x100",:border => 0) ,:controller => 'opposites', :action => 'category_class_organizer',:category_class_id => category_class.id   %> 
+	    	</div>
+		</td>
+	  </tr>
+	 <tr>
+		<td><img width="100%" height="10" src="/images/pixels/grey.gif" alt="_____"/></td>
+	  </tr>
+<tr/>	  
+	  
+	<% end %>
+	<% end %>
+	<% end %>
+	</table>
+</div>
+
+
+
+<div style="float:left; position:fixed;right:300px;">
+		<table style="background-color:white; width:600px;">
+		<% for category in @categories %>
+		<% if category.category_class.item_type == 'master' or category.category_class.item_type == 'slave'or category.category_class.item_type == 'unknown' %>
+		<% first_item = category.items.first %>
+		<% if first_item != nil %>
+		<% if category.category_class.item_type == 'master' %>
+			<% department = first_item.masters_department_decides_default_department_id %>
+		<% else %>
+			<% department = first_item.design_decides_opposites_department %>
+		<% end %>
+		  <tr id="category_row_<%= category.id %>">
+		  	<td class="draggable_category" id="<%= category.id.to_s %>">
+		  		<%= image_tag "/images/buttons/drag.gif",:size => "20x20" %>
+		  	<%= draggable_element( category.id.to_s , :revert => true) %>
+		  	</td>
+			<td>  </td>
+			<td>  </td>
+			<td> <%= image_tag( first_item.image_url( department  ,'item_thumbnails/','x') ,:size => "30x30")    %> </td>
+		    <td><%=h category.prefix %></td>
+		    <td><%=h category.Code %></td>
+		    <td><%=h category.Name %></td>
+		    <td><%= link_to image_tag("/images/buttons/images.png",:border => 0,:size => "20x20"), :controller => 'opposites', :action => 'list_all_items_in_this_category',:id => category.id  %></td>
+		  </tr>
+ 
+<% end %> 
+<% end %>
+<% end %>
+</table>
+	
+</div>	

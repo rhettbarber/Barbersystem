@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<% if admin? %>
+  <!--  show admin information -->
+  <!--  current_layout: <%= current_layout  %>  -->
+  <!--  request.fullpath: <%=  request.fullpath  %>  -->
+<% end %>
+
+
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+
+
+  <title> Dixie Outfitters</title>
+
+  <!-- default stylesheets -->
+
+
+  <%#= stylesheet_link_tag '/assets/application/application_application' %>
+  <%= stylesheet_link_tag '/assets/development/guides'  if Rails.env.development?%>
+  <%= stylesheet_link_tag '/assets/bootstrap/bootstrap' %>
+  <%= stylesheet_link_tag '/assets/bootstrap/bootstrap-theme' %>
+  <%= stylesheet_link_tag '/assets/bootstrap/bootstrap_customized' %>
+
+
+  <%= stylesheet_link_tag '/assets/application/application' %>
+  <%= stylesheet_link_tag '/assets/articles/articles' %>
+  <%#= stylesheet_link_tag '/assets/store/cart' %>
+
+  <%= stylesheet_link_tag '/assets/store/checkout'  if controller_name  == "cart"   %>
+  <%= stylesheet_link_tag '/assets/store/cart'  if controller_name  == "cart"  %>
+  <%= stylesheet_link_tag '/assets/store_specsheet/specsheet' if action_name == "specsheet" %>
+  <%= stylesheet_link_tag '/assets/store_specsheet/specsheet_phone' if action_name == "specsheet" %>
+
+
+  <%#= stylesheet_link_tag '/assets/responsive-tables' %>
+
+
+  <% if ssl_required? %>
+  <style type="text/css">
+      body {
+          background:url(/images/backgrounds_repeating/secure_paper.jpg);
+      }
+  </style>
+<% end %>
+
+
+
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="/assets/html5shiv.js"></script>
+  <script src="/assets/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+
+<%= render :partial => "application/menu" %>
+<%= render :partial => "application/modal" %>
+
+
+<% if request.path  == '/purchases/checkout_review' %>
+                <%  @show_class = "show_printable" %>
+ <% else %>
+                <% @show_class = "show" %>
+<% end %>
+
+
+<div id="the_yield" style="margin-left:auto;margin-right:auto;">
+              <div class="show">
+                        <% if flash[:notice] != nil -%><div class="alert alert-danger text-center"><%= flash[:notice] %>&nbsp;</div><% end -%>
+                        <%= yield %>
+
+
+             </div>
+  </div>
+
+<%#= render :partial => "application/share_link" %>
+
+</body>
+
+
+<!-- JavaScript
+================================================== -->
+<!-- NORMALLY Placed at the end of the document so the pages load faster -->
+<script src="/assets/jquery/jquery.js"></script>
+<script src="/assets/jquery/jquery_ujs.js"></script>
+<script src="/assets/jquery/jquery.cookie.js"></script>
+<script src="/assets/jquery/array_utilities.js"></script>
+<script src="/assets/bootstrap.js"></script>
+<script src="/assets/responsive-tables.js"></script>
+<script src="/assets/jquery/bootstrap-slider.js"></script>
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+<script src="/assets/holder.js"></script>
+<script src="/assets/application/application_application.js"></script>
+ <%  if action_name == "specsheet" %>
+<script src="/assets/store/store.js"></script>
+<% end %>
+</html>
+
+
+
+
+
+
+
+
+
+
+<% if@old %>
+    <script src="http://malsup.github.com/jquery.form.js"></script>
+<% end %>
+
+
+
+
+
+

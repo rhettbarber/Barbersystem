@@ -1,0 +1,58 @@
+<h1>New Ship To: </h1>
+
+<%= error_messages_for :ship_to %>
+
+<%= form_for(:ship_to, :url => ship_tos_path) do |f| %>
+  <p>
+    <b>Company (optional)</b><br />
+    <%= f.text_field :Company %>
+  </p>
+
+  <p>
+    <b>Name</b><br />
+    <%= f.text_field :Name %>
+  </p>
+
+  <p>
+    <b>Address</b><br />
+    <%= f.text_field :Address %>
+  </p>
+
+  <p>
+    <b>Address2 (optional)</b><br />
+    <%= f.text_field :Address2 %>
+  </p>
+
+  <p>
+    <b>City</b><br />
+    <%= f.text_field :City %>
+  </p>
+
+  <p>
+    <b>State</b><br />
+    <%= f.text_field :State %>
+  </p>
+
+  <p>
+    <b>Zip</b><br />
+    <%= f.text_field :Zip %>
+  </p>
+  
+    <%= hidden_field_tag("Country", "United States" )  %>
+
+  <p>
+    <b>Phonenumber</b><br />
+    <%= f.text_field :PhoneNumber %>
+  </p>
+
+  <p>
+    <b>Faxnumber (optional)</b><br />
+    <%= f.text_field :FaxNumber %>
+  </p>
+
+  <p>
+    <%= submit_tag "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', ship_tos_path %>

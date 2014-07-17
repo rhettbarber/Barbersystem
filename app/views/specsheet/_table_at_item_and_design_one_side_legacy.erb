@@ -1,0 +1,170 @@
+<% if @show_admin %><div class="specsheet_admin"> table_at_item_and_design_one_side_legacy</div> <% end %>
+
+<div  id="specsheet_table_css">
+  <%     @purchases_entry_slave = @purchases_entry.slave_of_symbiont_pair  if @purchases_entry %>
+  <%     @purchases_entry_master = @purchases_entry.master_of_symbiont_pair  if @purchases_entry %>
+
+  <% if @purchases_entry_slave %>
+      <% logger.warn "%%%%%%%%% @purchases_entry_slave    @@@@@@@@@@@@@@@"   %>
+      <% logger.warn "%%%%%%%%% @purchases_entry_slave.Comment :     @@@@@@@@@@@@@@@"  + @purchases_entry_slave.Comment %>
+      <% if @purchases_entry_slave.Comment.size > 1 %>
+          <%  @breast_print_name = @purchases_entry_slave.Comment + '.png' %>
+      <% end  %>
+  <%  end %>
+  <% if @purchases_entry_master %>
+      <% logger.warn "%%%%%%%%% @purchases_entry_master    @@@@@@@@@@@@@@@"   %>
+      <% logger.warn "%%%%%%%%% @purchases_entry_master.Comment    @@@@@@@@@@@@@@@"  + @purchases_entry_master.Comment  %>
+      <% if  @purchases_entry_master.Comment.size > 1  %>
+          <%  @breast_print_name = @purchases_entry_master.Comment + '.png' %>
+      <% end %>
+  <% end %>
+
+  <% logger.debug "%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@"   %>
+  <% logger.debug "%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@"   %>
+  <% logger.debug "%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@"   %>
+
+  <% logger.debug "%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@"   %>
+  <% logger.debug "%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@"   %>
+
+
+
+  <style type="text/css">
+      @media ( min-width: 601px) {
+              #specsheet_table {
+                  background-repeat: no-repeat;
+                  background-image: url(<%=  @item.image_url( @department  , '/images/item_specsheets/', 'x' ,@item_prefix_override )   %>);
+                  width:720px;
+                  height:353px;
+                  margin-left: auto;
+                  margin-right: auto;;
+              }
+      }
+
+      @media ( max-width: 600px) {
+          .legacy_specsheet_container {
+                  width:300px;
+                  overflow:hidden;
+                  /*background-color: blue;*/
+          }
+
+          #specsheet_table {
+              background-repeat: no-repeat;
+              background-image: url(<%=  @item.image_url( @department  , '/images/item_specsheets/', 'x' ,@item_prefix_override )   %>);
+              width:720px;
+              height:353px;
+                  left:-196px;
+                  position:relative;
+          }
+      }
+
+  </style>
+
+</div>
+
+
+<div class="legacy_specsheet_container">
+
+  <table id="specsheet_table" cellpadding="0" border="0">
+    <td>
+      <img src="/images/item_specsheets/<%= @design.PictureName %>"
+           alt="<%= @design.PictureName %>"
+           style=" position: relative;
+                   height:<%=   @combination_height     %>px;
+                   left:<%=     @combination_left     %>px;
+                   top:<%=    @combination_top   %>px;
+           " />
+    </td>
+    <% if @breast_print == true %>
+        <td>
+          <img src="/images/breast_prints/<%=  @breast_print_name   %>"
+               alt="<%= @breast_print_name %>"
+               id ="front_design_image"
+               style=" position: relative;
+                       height:<%=   @combination_bp_height   %>px;
+                       left:<%=     @combination_bp_left    %>px;
+                       top:<%=    @combination_bp_top     %>px;
+               " />
+        </td>
+    <% end %>
+
+  </table>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @neweerrr %>
+
+
+
+    <% if @show_admin %> table_at_item_and_design_two_sides_legacy<br><% end %>
+
+    <%  @back_design = @design %>
+
+
+    <%
+       @items_front =         @back_design.find_applicable_crest_prints.sort_by{|a| a.ytdn}.reverse
+       @front_design =  @items_front.first
+       @front_design_name = @front_design.ItemLookupCode + '.png'
+       if @front_design
+         @front_advanced_combination = AdvancedCombination.find_or_create_combo( @item, @front_design)
+       else
+         @front_design_name = Util::Slug.generate(@back_design.department.Name) + '.png'
+       end
+       if @back_design
+         @back_advanced_combination = AdvancedCombination.find_or_create_combo( @item, @back_design)
+       end
+    %>
+
+
+
+    <% @product_background_image_name =  'http://cdn.dixieoutfitters.com/images/item_specsheets/' + @item.PictureName.gsub(".jpg", "")  + '.jpg' %>
+    <%  @front_design_image_name      =   '/images/item_specsheets/' + @front_design_name     %>
+    <%   @back_design_image_name     =    '/images/item_specsheets/' + @back_design.PictureName        %>
+
+
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

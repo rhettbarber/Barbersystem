@@ -1,0 +1,67 @@
+
+<% unless  @development %>
+      <style type="text/css">
+
+                      .ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper {
+                          background-color: black;
+                      }
+
+      </style>
+
+  <% end %>
+
+
+
+ <% category_class_item_type = @category.category_class.item_type     %>
+<% @already_rendered_item_class = [] %>
+
+
+<div role="main" class="ui-content responsive_listview_grid">
+  <ul data-role="listview" data-inset="true">
+  <%# if @category.additives and @category.additives != []  and  ![ 'master', 'slave'].include?(  @category.category_class.item_type  )  %>
+      <%#= render :partial => 'additives' %>
+  <%# else   %>
+                  <% @items.sort_by{|a| a.item_class_sales_this_years_with_item_id.to_s   }.reverse.each do |item| -%>
+                              <% if item %>
+                                              <% if item.category %>
+                                                              <%  if item.item_class_component  -%>
+                                                                                                  <% unless @already_rendered_item_class.include?( item.item_class.id.to_s ) %>
+                                                                                                                    <%  @already_rendered_item_class  <<  item.item_class.id.to_s   %>
+                                                                                                                    <li>
+
+                                                                                                                      <a href="/specsheet/<%= item.id %>">
+                                                                                                                        <img src="<%=  item.image_url( params[:department_id], 'item_thumbnails/','x' )  %>" class="ui-li-thumb" style="max-height: 90%;"></a>
+                                                                                                                      <div style="font-weight:bold;text-align:center;position: absolute;bottom:0;width:100%;height: 10%;"><%= item.ItemLookupCode %> </div>
+                                                                                                                    </li>
+                                                                                                     <% end %>
+                                                              <% else %>
+                                                                                <li>
+
+                                                                                            <a href="/specsheet/<%= item.id %>">
+                                                                                            <img src="<%=  item.image_url( params[:department_id], 'item_thumbnails/','x' )  %>" class="ui-li-thumb" style="max-height: 90%;"></a>
+                                                                                            <div style="font-weight:bold;text-align:center;position: absolute;bottom:0;width:100%;height: 10%;"><%= item.ItemLookupCode %> </div>
+                                                                                </li>
+                                                              <% end %>
+                                               <% end %>
+                               <% end -%>
+              <% end %>
+  <%# end %>
+</ul>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+<% if @details %>
+    <h2><%= item.ItemLookupCode %></h2>
+    <p><%= item.Description %></p>
+    <p class="ui-li-aside"><%= item.Price %></p>
+<% end %>

@@ -1,0 +1,8 @@
+<%= render :partial => "item_management/item_infinite", :collection => @items, :as => :item  %>
+<%= infinite_page @items,
+                      :update => "content",
+                      :position => :bottom,
+                      :complete => "$$('#infinite_page_spinner img')[0].hide();",
+                      :before => "$$('#infinite_page_spinner img')[0].show();",
+                      :first => "$$('#infinite_page_spinner img')[0].hide();",
+                      :last => "$('infinite_page_spinner').hide();" %>

@@ -1,0 +1,71 @@
+<% unless  ["production"].include?(ENV["RAILS_ENV"]) %>
+
+<style type="text/css">
+  .toggle_response_inspect {
+    width:15px;
+    height:15px;
+}
+
+
+.toggle_responses  {
+    position: absolute;
+    bottom: 0;
+    width:25px;
+    height:25px;
+     left:100px;
+}
+
+
+#response_container {
+    width:850px;
+    position: absolute;
+    bottom: 0;
+    border:1px black dotted;
+    background-color:white;
+    opacity: .9
+}
+.response {
+    border-bottom:2px black dotted;
+}
+
+</style>
+
+
+
+
+<div id="response_container" style="display:none;">
+  <% response  %>
+      <% count = 0 %>
+      <% response.to_a.sort.each do |iv| %>
+            <% count += 1 %>
+            <div class="response">
+                  <span style="color:red"><%= iv %>: </span>
+                  <% @the_variable =  iv  %>
+                  <%= @the_variable.class  %> -
+
+                  <%  show_expander = false  %>
+                   <div class="response_inspect" style="display:none" title="<%= count %>">
+                            <% if [ Set, Array ].include?( @the_variable.class )  %>
+                                    <%= @the_variable.to_a.inspect  %>
+                                    <% if @the_variable.to_a.size > 0  %>
+                                               <%  show_expander = true  %>
+                                    <% end  %>
+                            <% end  %>
+                            <% if [ String, Fixnum ].include?( @the_variable.class )  %>
+                                    <%= @the_variable  %>
+                                    <% if @the_variable.to_s.length  > 0  %>
+                                               <%  show_expander = true  %>
+                                    <% end  %>
+                            <% end  %>
+
+
+                  </div>
+                  <% if show_expander == true %>
+                             <img src="/images/buttons/expand.png" class="toggle_response_inspect" alt="<%= count %>" class="toggle_response_inspect"/>
+                   <% end  %>
+            </div>
+      <% end  %>
+</div>
+<img src="/images/buttons/response.png" id="toggle_responses"  class="toggle_responses" alt="toggle_responses" />
+
+<% end %>

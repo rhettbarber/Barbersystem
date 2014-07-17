@@ -1,0 +1,41 @@
+<h1>Editing Purchases Entry</h1>
+
+<% form_for(@purchases_entry_detail) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :detail_description %><br />
+    <%= f.text_area :detail_description, :rows => 5, :columns => 40 %>
+  </p>
+  <p>
+    <%= f.label :detail_type_id %><br />
+    <%= f.text_field :detail_type_id %>
+  </p>
+  <p>
+    <%= f.label :art_due_date %><br />
+    <%= f.datetime_select :art_due_date %>
+  </p>
+  <p>
+    <%= f.label :artist_customer_id %><br />
+    <%= f.text_field :artist_customer_id %>
+  </p>
+  <p>
+    <%= f.label :printer_id %><br />
+    <%= f.text_field :printer_id %>
+  </p>
+  <p>
+    <%= f.label :rush_status %><br />
+    <%= f.text_field :rush_status %>
+  </p>
+  <p>
+    <%= f.label :similar_artwork_done %><br />
+    <%= f.text_field :similar_artwork_done %>
+  </p>
+  <p>
+    <%= f.label :film_number %><br />
+    <%= f.text_field :film_number %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>

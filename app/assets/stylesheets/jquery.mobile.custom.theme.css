@@ -1,0 +1,92 @@
+.breadcrumb-control {
+    width:100%;
+}
+
+.ui-disabled {
+    opacity: 0.65;
+}
+
+.ui-body-a {
+    background-color: #FBFBFB;
+}
+
+.ui-header .ui-link {
+    background: #00008b !important;
+}
+
+
+.ui-mobile label {
+    font-weight: bold;
+}
+
+.ui-loader .ui-icon-loading {
+    height: 45px;
+    width: 45px;
+}
+
+.ui-content .ui-listview, .ui-panel-inner > .ui-listview {
+    margin:0px;
+}
+
+.ui-bar, .ui-bar-a {
+    background-color: lightyellow !important;
+    text-align: center;
+}
+
+.ui-btn:link {
+    font-size: 13px;
+}
+
+
+.ui-input-text input::-moz-placeholder, .ui-input-search input::-moz-placeholder, textarea.ui-input-text::-moz-placeholder {
+    color:black;
+}
+
+.ui-icon-loading{
+    background:url(/images/indicators/ajax-loader.gif);
+}
+
+.show > .ui-listview {
+    display:inline;
+}
+
+
+.ui-btn  {
+    padding-bottom:7px;
+    padding-top:7px;
+    font-size:16px;
+    white-space: normal;
+}
+
+.ui-collapsible-inset, .ui-collapsible-set {
+  /*THIS SETS THE COLLAPSIBLE NAVIGATION MARGIN ON THE LEFT PANEL   */
+}
+
+.ui-header .ui-navbar .ui-btn, .ui-footer .ui-navbar .ui-btn {
+    height:40px;
+    font-size: 16px;
+}
+
+.ui-input-text input, .ui-input-search input {
+    background-color:  #E9E9E9;
+    color:black;
+}
+
+
+@media ( min-width: 767px) {
+    /* Show the table header rows and set all cells to display: table-cell */
+    .phone-breakpoint td,
+    .phone-breakpoint th,
+    .phone-breakpoint tbody th,
+    .phone-breakpoint tbody td,
+    .phone-breakpoint thead td,
+    .phone-breakpoint thead th {
+        display: table-cell;
+        margin: 0;
+    }
+    /* Hide the labels in each cell */
+    .phone-breakpoint td .ui-table-cell-label,
+    .phone-breakpoint th .ui-table-cell-label {
+        display: none;
+    }
+}

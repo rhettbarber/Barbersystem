@@ -1,0 +1,60 @@
+<style type="text/css" media="screen">
+      .sort_info {
+        background-color: black;
+        width:640px;
+        color:white;
+        height:20px;
+      }
+    </style>
+
+
+
+ <%#= render :partial => "shared_item/recently_added_items" %>
+
+
+
+<div class="page_contents">
+
+
+
+
+    <%= image_tag "/images/headers/southern-heritage-news-from-the-frontlines.png" %>
+
+
+  <%= render :partial => 'application/search_pages' %>
+
+  <% @show_archived_menu =  ['/p/heritage-news', '/p/interesting-email', '/p/southern-history' ]   %>
+  <ul data-role="listview">
+    <% if  @show_archived_menu.include?(request.path)  %>
+        <li data-icon="gear"><a href="/recently_added_news">Recently added news</a></li>
+        <li data-icon="gear"><a href="/archived_news">Archived news</a></li>
+    <% end %>
+  </ul>
+
+
+    </div>
+
+
+
+
+
+<% if @show_top %>
+                <% for page_container in @page_containers %>
+                    <% if page_container.page %>
+                        <% if   @customer_array_viewable_page_types.include?(page_container.page.page_type_id)  or  @customer_array_viewable_page_types.include?(page_container.page.page_type_id.to_s)   %>
+                            <% if @latest_revision_ids.include?(page_container.id) or  @latest_revision_ids.include?(page_container.id.to_s) %>
+
+                                <div class="page_name">
+                                  <strong>
+                                    <%= page_container.id  %> ---<%= page_container.page.name  %> --- Released:  <%= time_ago_in_words(  page_container.created_at,  include_seconds = false ) %>  Ago.  ----  <%=  page_container.page.created_at  %><br />
+                                    <%= link_to "See related pages and categories" ,:controller => 'page', :action => 'show',:id => page_container.page.slug       %>
+                                  </strong>
+                                </div>
+                                <div class="page_content_capsule">
+                                  <%= highlight( page_container.content , @tokens , '<strong class="highlight">\1</strong>' ) %>
+                                </div>
+                            <% end %>
+                        <% end %>
+                    <%  end  %>
+                <%  end  %>
+<%  end  %>

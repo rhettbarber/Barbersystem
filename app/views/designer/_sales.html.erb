@@ -1,0 +1,30 @@
+<table id="designer_items_listing">
+          <tr style="min-height:50px;">
+          <th>Item Lookup Code</th>
+          <th>Description</th>
+           <th>YDTN</th>
+          <th>LYTDN</th>
+          <th>Link</th>
+        </tr>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= item.ItemLookupCode %></td>
+          <td><%= item.Description %></td>
+
+          <td>
+                  YTDN
+          </td>
+
+          <td>
+                  LYTDN
+          </td>
+
+
+          <td>
+                    <%= link_to( image_tag('/images/buttons/details.gif' , :size => '20x20', :border => 0 ) , 'designer/designer_item_details' )        %>
+
+          </td>
+
+        </tr>
+      <% end %>
+      </table>

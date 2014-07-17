@@ -1,0 +1,13 @@
+<table>
+    <% @user_themes.each do |user_theme| %>
+      <tr>
+        <td><%= image_tag( '/images/backgrounds_repeating/' +  user_theme.name + '.jpg' , :width => 150 ) %></td>
+    <% if admin?  %>
+         <td><%=h user_theme.name %></td>
+        <td><%= link_to 'Show', user_theme %></td>
+        <td><%= link_to 'Edit', edit_user_theme_path(user_theme) %></td>
+        <td><%= link_to 'Destroy', user_theme, :confirm => 'Are you sure?', :method => :delete %></td>
+     <% end  %>
+      </tr>
+    <% end %>
+</table>

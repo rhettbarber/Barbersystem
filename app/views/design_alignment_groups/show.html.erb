@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Id:</b>
+  <%= @design_alignment_group.id %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @design_alignment_group.category_id %>
+</p>
+
+<p>
+  <b>Item class:</b>
+  <%= @design_alignment_group.item_class_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @design_alignment_group.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_design_alignment_group_path(@design_alignment_group) %> |
+<%= link_to 'Back', design_alignment_groups_path %>

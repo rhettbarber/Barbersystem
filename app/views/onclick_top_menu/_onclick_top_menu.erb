@@ -1,0 +1,26 @@
+
+<div id="onclick_menu_container" class="onclick_menu_containers"  style="display: none;">
+            <%= render(:partial => "onclick_top_menu/title_bar" ) %>
+            <%= render(:partial => "onclick_top_menu/admin" ) if admin? and @show_admin %>
+            <%= render(:partial => "onclick_top_menu/deweys_power_panel"  )  if admin?   %>
+            <%= render(:partial => "onclick_top_menu/shopping_options" ) %>
+            <%= render(:partial => "onclick_top_menu/order_tracking" ) %>
+            <%= render(:partial => "onclick_top_menu/navigation_links" ) %>
+            <% render(:partial => "onclick_top_menu/my_account" ) %>
+</div>
+
+<div id="onclick_main_menu_buttons_container">
+            <div style="float:left;width:298px;">
+                    <%= image_tag('/images/company_logos/' + @website.name + '_top_bar_icon.png') %>
+            </div>
+
+
+            <div style="float: left;font-size: 17px;text-align: center;color:gray;width:254px;">
+                      <%=  controller.controller_name.humanize %> / <%=  controller.action_name.humanize %>
+            </div>
+
+
+            <div id="main_menu_div" style="float:left;width:298px;">
+                        <span style="float:right;"><%= image_tag('/images/menu_icons_and_labels/main-menu.png' , :border => '0' , :id => "main_menu_button")  %></span>
+            </div>
+</div>

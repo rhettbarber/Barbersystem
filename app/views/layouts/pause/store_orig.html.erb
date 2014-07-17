@@ -1,0 +1,64 @@
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <title>Dixie Outfitters Store</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <%= stylesheet_link_tag "store/application_store" %>
+        <!-- Le styles -->
+        <%#= stylesheet_link_tag "designer_specsheet" %>
+        <style type="text/css">
+            body {
+                /*padding-top: 60px;*/
+                /*padding-bottom: 40px;*/
+            }
+        </style>
+        <% if @direct %>
+        <link href="http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
+        <% end %>
+        <%#= stylesheet_link_tag "bootstrap_and_overrides" %>
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://twitter.github.io/bootstrap/assets/js/html5shiv.js"></script>
+        <![endif]-->
+
+        <!-- Fav and touch icons -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://twitter.github.io/bootstrap/assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://twitter.github.io/bootstrap/assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://twitter.github.io/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="http://twitter.github.io/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="shortcut icon" href="http://twitter.github.io/bootstrap/assets/ico/favicon.png">
+      </head>
+
+      <body>
+
+      <%= render "menu" %>
+
+      <div class="container">
+            <% flash.each do |name, msg| %>
+                <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+                  <a class="close" data-dismiss="alert">×</a>
+                  <%= msg %>
+                </div>
+            <% end %>
+
+
+            <div id="the_yield">
+            <%= yield %>
+            </div>
+
+
+
+      </div> <!-- /container -->
+
+      <!-- Le javascript
+      ================================================== -->
+      <!-- Placed at the end of the document so the pages load faster -->
+      <%= javascript_include_tag 'store/application_store'  %>
+
+      </body>
+      </html>
+

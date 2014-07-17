@@ -1,0 +1,35 @@
+<% cache ({:fragment_name => 'symbiote_wrapper', :sym_item_id => @purchase_symbiote_item.id }) do %>
+	<div id="symbiote_wrapper">
+	<table width="850" border="0" cellspacing="0" cellpadding="0" background="/images/headers/symbiont_ribbon.jpg" style="background-repeat: no-repeat;">
+	  <tr>
+	    <th width="80" height="80" rowspan="2" scope="col">
+	      <%=   image_tag(@purchase_symbiote_item.image_url(   @purchase_symbiote_item.department ,'item_thumbnails/','x' ),:size => "80x80")    %>
+		 </th>
+	    <td width="312" height="31" scope="col">
+	      <strong> <%= @purchase_symbiote_item.ItemLookupCode %> </strong>
+	      </th> 
+	    <th width="608" scope="col">
+	    		<ul>
+				 			<li class="choose"><%= link_to 'Choose an Item for your selected design' ,:controller => @website.name ,:action => 'browse_applicable_items'  unless controller.action_name == 'browse_applicable_items'%></li>
+				 </ul>	
+	    </th>
+	  </tr>
+	  <tr>
+	    <td height="30"><%= @purchase_symbiote_item.Description %>		<%=  image_tag @purchase_symbiote_item.opacity_football %>  		</td>
+	    <td height="30"><div align="right">Options:
+	    	
+	    	
+	    	
+    	 </div>
+				<ul>
+						  	<% if admin? %>
+						  		<li style="background-color:yellow;"><%=   link_to 'Opposites', :controller => 'opposites', :action => 'edit_symbiote_opposites'    %></li>
+						  	<% end %>
+						  	<li><%= link_to 'Place on hold', :controller => @website.name , :action => 'place_symbiont_on_hold', :purchases_entry_id => @purchase.symbiote.id  %></li>
+						  	<li><%= link_to 'Forget this design' , :controller => @website.name  ,:action =>  'delete_incomplete_symbiote' %></li>
+				 </ul>	  
+		 </td>
+	  </tr>
+	</table>
+	</div>
+<% end %>

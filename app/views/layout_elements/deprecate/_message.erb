@@ -1,0 +1,7 @@
+<%  if @website.store_website == true %>
+<p>			
+		<%= link_to "CLICK HERE",:controller => 'account', :action => 'send_message_to_selected'  -%> to send us a message concerning this website. 
+</p>
+<% else %>
+		<%= link_to "Contact Information", :controller => "page" , :action => "show", :id => "contact-info" %>
+<% end %>

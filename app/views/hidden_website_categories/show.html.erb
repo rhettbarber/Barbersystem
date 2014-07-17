@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Website:</b>
+  <%= @hidden_website_category.website_id %>
+</p>
+
+<p>
+  <b>Id:</b>
+  <%= @hidden_website_category.id %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @hidden_website_category.category_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_hidden_website_category_path(@hidden_website_category) %> |
+<%= link_to 'Back', hidden_website_categories_path %>

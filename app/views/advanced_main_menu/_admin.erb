@@ -1,0 +1,30 @@
+<div class='onclick_menu admin_menu'>
+
+
+  <%= link_to ' <li>View Details Page States</li>' , 'http://localhost:7000/specsheet_advanced/view_details_page_states?department_id=38&item_id=19765'  %>
+
+
+
+					<%= link_to ' <li> Affiliates Admin </li>' ,:controller => 'affiliates_admin',:action => 'index'  if @show_affiliates_admin  %>
+                  <li>
+					<%= link_to 'Item Managment' ,:controller => 'item_management'   %>
+		</li>
+                <li>
+					<%= link_to 'Items' ,:controller => 'items'   %>
+		</li>
+		<li>
+					<%= link_to 'Reports' ,:controller => 'reports',:action => 'index'   %>
+		</li>
+		<li>
+					<%= link_to "Combinations", :controller => 'opposites', :action => 'define_category_class_opposite_categories' %>
+		</li>
+		<li>
+					<%= link_to "Missing Elements", :controller => 'missing_elements', :action => 'index' %>
+		</li>
+		<li>
+                                         <%= link_to "Dept/Cats" ,{:controller => 'categories', :action => 'departments_categories'} , :popup => ['new_window_name', 'height=650,width=730']    %>
+		</li>
+                <%  unless controller.controller_name == 'admin_links'  %>
+                      <li  style="float:right;"><%= link_to image_tag('/images/headers/go-back-to-admin-home.png',:width => '400'  , :class => 'no_border'), :controller => 'admin_links' %></li>
+                <% end  %>
+</div>

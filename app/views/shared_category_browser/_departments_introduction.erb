@@ -1,0 +1,35 @@
+<% logger.debug "-------------------------------------begin shared_category_browser/departments_introduction " %>
+<% logger.debug "-------------------------------------not @department -- @department_introduction == true " %>
+<% logger.debug "-------------------------------------@item_departments: #{@item_departments.to_xml}" if @item_departments  %>
+<% logger.debug "-------------------------------------@design_departments: #{@design_departments.to_xml}" if @design_departments  %>
+<% logger.debug "--------category_browser CACHE AREA 2 , CACHE AREA 2 , CACHE AREA 2 , CACHE AREA 2 , CACHE AREA 2 , CACHE AREA 2 , CACHE AREA 2 , CACHE AREA 2 - " %>
+
+
+<%
+	@show_items = false
+	@show_designs = false
+if params[:department_type].nil?
+	@show_items = true
+	@show_designs = true
+elsif params[:department_type] == "items"
+	@show_items = true
+elsif params[:department_type] == "designs"
+	@show_designs = true
+end
+%>
+
+
+
+
+<% cache (@content_fragment_name  ) do %>
+		<%=  image_tag("/images/headers/shop_by_design.gif", :border => 0)  if @show_designs == true  %>
+		<%   @design_departments.each do |department|  %>
+				<%=  render(:partial => "shared_department/department_introduction", :locals => {:department => department } )  %>
+		<% end  if @show_designs == true %>
+		
+		<%=  image_tag("/images/headers/shop_by_product.gif", :border => 0) if @show_items == true    %>
+		<% @item_departments.each do |department| %>
+				<%=  render(:partial => "shared_department/department_introduction", :locals => {:department => department } )  %>
+		<% end if @show_items == true  %>
+<% end %>
+<% logger.debug "-------------------------------------end shared_category_browser/departments_introduction " %>

@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Id:</b>
+  <%= @category.id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @category.Name %>
+</p>
+
+<p>
+  <b>Code:</b>
+  <%= @category.Code %>
+</p>
+
+<p>
+  <b>Prefix:</b>
+  <%= @category.prefix %>
+</p>
+
+<p>
+  <b>Use generic department:</b>
+  <%= @category.use_generic_department %>
+</p>
+
+<p>
+  <b>Web category:</b>
+  <%= @category.web_category %>
+</p>
+
+<p>
+  <b>Additive category ids:</b>
+  <%= @category.additive_category_ids %>
+</p>
+
+<p>
+  <b>Use picturename:</b>
+  <%= @category.use_picturename %>
+</p>
+
+<p>
+  <b>Breast print:</b>
+  <%= @category.breast_print %>
+</p>
+
+<p>
+  <b>Category specific breast print:</b>
+  <%= @category.category_specific_breast_print %>
+</p>
+
+<p>
+  <b>Category header image:</b>
+  <%= @category.category_header_image %>
+</p>
+
+<p>
+  <b>Visible:</b>
+  <%= @category.visible %>
+</p>
+
+
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>

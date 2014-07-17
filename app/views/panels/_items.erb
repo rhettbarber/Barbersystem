@@ -1,0 +1,43 @@
+<!--   #######################  BEGIN itemS  PANEL   ####################### -->
+<!--   #######################  BEGIN itemS  PANEL   ####################### -->
+<!--   #######################  BEGIN itemS  PANEL   ####################### -->
+<!--   #######################  BEGIN itemS  PANEL   ####################### -->
+<!--   #######################  BEGIN itemS  PANEL   ####################### -->
+<div class="left-panel"  data-role="panel" id="items_panel" data-position="left" data-display="reveal" data-theme="a">
+  <div class="ui-panel-inner">
+    <ul data-role="listview"  id="items_listview">
+                  <li data-icon="back" class="ui-first-child"><a href="#" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-back">Close</a></li>
+                  <li data-icon="search"><a href="/cart">Quick Cart</a></li>
+                  <li data-icon="search"><a href="/search">Search</a></li>
+                  <li data-icon="gear"><a href="/search/scroll">Scroll</a></li>
+                  <li data-icon="gear"><a href="/order_tracking">Track Order </a></li>
+                  <% if @singular_item_customer == true %>
+                                        <% @departments_to_show = @website.default_non_blank_item_departments %>
+                  <% else %>
+                                        <% @departments_to_show = @website.default_item_departments %>
+                 <% end %>
+                  <div id="items_departments_list">
+                  <% @departments_to_show.each do |department| %>
+                                      <div data-role="collapsible"  class="department_collapsible"   id="department_collapsible_<%= department.id %>"   data-department_id="<%= department.id %>" >
+                                                                              <h3><%= department.Name  %></h3>
+                                                                              <ul data-role="listview">
+                                                                                            <% department.categories.where("web_category = 1 and visible = 1").sort_by{|a| a.Name}.each do |category| %>
+                                                                                                                                        <li  class="category_li"  data-category_id="<%= category.id %>"> <a href="/store/category_items/<%=  department.id  %>/<%= category.id %>" data-transition="slide"> <%= category.Name %></a></li>
+
+                                                                                            <% end %>
+                                                                              </ul>
+
+                                                  </div>
+                  <% end %>
+                  </div>
+                  <li class="symbiote_items_menu_options" style="display: none;"><a data-icon="arrow-r"  href='#designs_panel' data-role="button" style="white-space:normal;"> You have already chosen a item. Please choose a design  to complete it.</a></li>
+                  <li class="symbiote_items_menu_options" style="display: none;white-space:normal;"><a  data-icon="delete" href="/cart/delete_incomplete_symbiote" style="white-space:normal;">or Delete chosen item from cart</a></li>
+                  <%= @website.phone %>
+    </ul>
+  </div>
+</div>
+<!--   #######################  END itemS  PANEL   ####################### -->
+<!--   #######################  END itemS  PANEL   ####################### -->
+<!--   #######################  END itemS  PANEL   ####################### -->
+<!--   #######################  END itemS  PANEL   ####################### -->
+<!--   #######################  END itemS  PANEL   ####################### -->

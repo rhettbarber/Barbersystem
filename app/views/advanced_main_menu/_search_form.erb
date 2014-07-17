@@ -1,0 +1,57 @@
+
+
+
+<div id="search_form">
+
+ <div style="width:298px;display:table-cell;"  id="top_bar_icon">
+                    <%= link_to  image_tag('/images/company_logos/' + @website.name + '_top_bar_icon.png', :border => "0" ) , "/"  %>
+</div>
+
+<div style="width:400px;margin-left:auto;margin-right:auto;margin-top:15px;display:table-cell;">
+<% if @website.store_website == true %>
+
+
+
+
+   <%= form_remote_tag( :url => { :controller => "ajax",  :action => "ajax_search"},  :html =>{ }) do %>
+
+                  <% if session[:advanced_search] == true %>
+                                <select id="search_scope" name="search_scope" ><option value="Matches Any">Matches Any  - (Most Results)</option><option value="Matches All">Matches All -(Less Results)</option></select>
+                 <% end  %>
+                
+                  <select name="search_type_name">
+                    <option value="products" selected="selected"> Products </option>
+                    <option value="articles"> Articles </option>
+                  </select>
+                    <%= text_field_tag("query", params[:query], :autocomplete => "off", :size => 33 ) %>
+                    <%= submit_tag "Search" %>
+		<% end %>
+
+
+<% else %>
+
+		 <%=  form_tag( {:controller =>  'search' ,  :action => 'index'   } ) do  %>
+			<%= text_field_tag  'item_keywords' %>
+			<%= submit_tag "Search" %>
+		<%  end  %> 	
+
+<% end %>
+</div>
+
+
+  <div style="display:table-cell;text-align:right;">
+  <%= link_to image_tag("/images/icons/cart.png", :border => 0, :size => "20x20", :class => "anatips", :title => "Your Cart"  ), "/cart" %>
+
+    <% if @user %>
+             <%= link_to "Log Out", :controller => 'account' ,:action => 'logout'    -%>
+      <% else  %>
+              <%= link_to "Log In", :controller => 'account' ,:action => 'login'    -%>
+       <% end  %>
+
+</div>
+
+
+</div>
+
+
+

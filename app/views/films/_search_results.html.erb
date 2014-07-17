@@ -1,0 +1,17 @@
+<% if @films.length == 0 %>
+
+	<p>Sorry! No films found...</p>
+
+<% elsif params[:query] == "" %>
+
+    <p>You must enter a search term.</p>
+
+<% else %>
+
+	<ul>
+	<% for film in @films %>
+	    <li><%= link_to film.customer + ' - ' + film.description  , film_url(:id => film.id) %></li>
+	<% end %>
+	</ul>
+
+<% end %>

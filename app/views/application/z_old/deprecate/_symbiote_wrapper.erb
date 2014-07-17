@@ -1,0 +1,463 @@
+    <style type="text/css">
+        .foot{
+            margin:0;
+            padding:0;}
+
+        #custom-collapsible h3 a.ui-btn { width: 100%; height:85px;}
+        .center-button{margin: 0 auto;padding:0 20px 0 20px;}
+
+        #custom-collapsible h3 a span span.ui-icon {
+            margin: 0 auto !important;
+            margin-top: 2px !important;
+            float: none !important;
+        }
+
+        #custom-collapsible h3  {
+            margin: -10px -20px 0 !important;
+            /*height:85px;*/
+        }
+
+        #custom-list >.ui-collapsible-heading {
+            margin: -10px -20px 0 !important;
+            height:110px;
+        }
+
+        #custom-list > .ui-collapsible-heading-collapsed  {
+            margin: -10px -20px 0 !important;
+            height:85px;
+        }
+        #custom-list li {
+            padding:10px;
+        }
+
+        #custom-list li:first-child {
+            margin-top: 6px!important;
+        }
+
+        #custom-list {
+            margin: -10px -19px !important;
+            }
+
+       .symbiote_container {
+           width:100%;
+       }
+       .symbiote_thumbnail_container {
+         width:85px;
+         height:85px;
+           float:left;
+       }
+        .symbiote_details_container {
+         width:100%;
+         height:85px;
+             /*float: left;*/
+       }
+        .symbiote_message_row {;
+         height:25px;
+            display:table-row;
+       }
+        .symbiote_message_container {
+         width:100%;
+            overflow:hidden;
+            color:white;
+            text-shadow: none;
+            white-space: normal;
+            font-size:15px;
+       }
+        .symbiote_description_row {
+         height:60px;
+            display:table-row;
+       }
+        .symbiote_description_container {
+         width:210px;
+            white-space: normal;
+       }
+
+
+
+    </style>
+
+
+
+
+<div data-role="footer" data-theme="a" data-content-theme="a" data-inset="false"   data-type="horizontal"  data-iconpos="notext" data-position="fixed" class="foot">
+
+  <div style="width: 100%;text-align: center;">
+    <%#= link_to "Full website", @website.name + "/?mobile=false", :class => "ui-btn" %>
+    <div data-role="controlgroup" data-type="horizontal" data-inline="true">
+      <a href="<%= "http://" + "dixieoutfitters.net" + "/?mobile=false" %>" data-role="button" data-icon="gear" data-iconpos="left">Full site</a>
+      <a href="mailto:sales@<%= @website.domain %>" data-role="button" data-icon="info"  data-iconpos="left" target="_blank"> sales@<%= @website.domain %></a>
+      <a href="tel:<%= @website.phone %>" data-role="button" data-icon="info"  data-iconpos="left"><%= @website.phone %></a>
+    </div>
+  </div>
+
+
+
+  <div data-role="collapsible"data-theme="b" data-content-theme="a" data-inset="false"   class="center-button" id="custom-collapsible" class="symbiote_container_collapsible">
+    <h3>
+
+      <div id="symbiote_container" class="symbiote_container">
+                <div class="symbiote_thumbnail_container"  id="symbiote_thumbnail_container">
+                  <%# item =   @purchase.symbiote.item  %>
+                  <%#=   image_tag( item.image_url( @purchase.symbiote.master_department_id  ,'item_thumbnails/','x') ,:style => "height:85px;" )    %>
+                </div>
+                <div class="symbiote_details_container">
+                                    <div class="symbiote_message_row">
+                                                     <div class="symbiote_message_container" id="symbiote_message_container">
+                                                       Please find a design for your chosen item.
+                                                     </div>
+                                    </div>
+                                    <div class="symbiote_description_row">
+                                                    <div class="symbiote_description_container"  id="symbiote_description_container">
+                                                                  <%#= item.ItemLookupCode %>
+                                                                  <%#= item.description_before_color_and_size %>
+                                                                  <%#= item.dimensions  %>
+                                                    </div>
+                                      .</div>
+                </div>
+    </div>
+
+    </h3>
+    <ul data-role="listview" id="symbiote_menu">
+      <li id="open_choice"><a href='#items_panel'>..Open items..</a></li>
+      <li><a href="/cart/place_symbiont_on_hold">Place on hold</a></li>
+      <li><a href="/cart/delete_incomplete_symbiote">Delete from cart</a></li>
+    </ul>
+  </div><!-- /collapsible -->
+</div>
+
+
+
+
+
+
+
+
+
+            <% if admin? and @showss %>
+
+
+
+
+
+        <style type="text/css">
+            .foot{margin:0;padding:0;}
+            #custom-collapsible h3 a.ui-btn { width: 100%; height:85px;}
+            .center-button{margin: 0 auto;padding:0 20px 0 20px;}
+
+            #custom-collapsible h3 a span span.ui-icon {
+                margin: 0 auto !important;
+                margin-top: 2px !important;
+                float: none !important;
+            }
+
+            #custom-collapsible h3.ui-collapsible-heading {
+                margin: -10px -20px 0 !important;
+                height:85px;
+            }
+
+            #custom-list li:first-child {
+                margin-top: 6px!important;
+            }
+
+            #custom-list {
+                margin: -10px -19px !important;
+            }
+
+            .symbiote_container {
+                width:300px;
+            }
+            .symbiote_thumbnail_container {
+                width:85px;
+                height:85px;
+                float:left;
+            }
+            .symbiote_details_container {
+                width:210px;
+                height:85px;
+                background-color:blue;
+                float: left;
+                overflow:hidden;
+            }
+            .symbiote_message_row {;
+                height:25px;
+                display:table-row;
+            }
+            .symbiote_message_container {
+                width:210px;
+                background-color:black;
+                display:table-cell;
+                overflow:hidden;
+                color:white;
+                text-shadow: none;;
+            }
+            .symbiote_description_row {
+                height:60px;
+                display:table-row;
+            }
+            .symbiote_description_container {
+                width:210px;
+                background-color:black;
+                display:table-cell;
+            }
+
+
+
+        </style>
+
+
+
+
+        <div data-role="footer" data-theme="a" data-content-theme="a" data-inset="false"   data-type="horizontal"  data-iconpos="notext" data-position="fixed" class="foot">
+          <div data-role="collapsible"data-theme="b" data-content-theme="a" data-inset="false"   class="center-button" id="custom-collapsible">
+            <h3>
+
+              <div class="symbiote_container">
+                <div class="symbiote_thumbnail_container">
+                  <% item =   @purchase.symbiote.item  %>
+                  <%=   image_tag( item.image_url( @purchase.symbiote.master_department_id  ,'item_thumbnails/','x') ,:style => "height:60px;" )    %>
+                </div>
+                <div class="symbiote_details_container">
+                  <div class="symbiote_message_row">
+                    <div class="symbiote_message_container">
+                      Please find a design for your chosen item.   asdf asd fasdfa sda
+                    </div>
+                  </div>
+                  <div class="symbiote_description_row">
+                    <div class="symbiote_description_container">
+                      <%= item.ItemLookupCode %>
+                      <%= item.description_before_color_and_size %>
+                      <%= item.dimensions  %>
+                    </div>
+                    .</div>
+                </div>
+              </div>
+
+            </h3>
+            <ul data-role="listview" id="custom-list">
+              <li><a href="#">View details</a></li>
+              <li><a href="#">Place on hold</a></li>
+              <li><a href="#">Delete from cart</a></li>
+            </ul>
+          </div><!-- /collapsible -->
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <ul style="font-size: 15px;font-weight: normal;">
+        <li>
+          <% item =   @purchase.symbiote.item  %>
+          <%=   image_tag( item.image_url( @purchase.symbiote.master_department_id  ,'item_thumbnails/','x') ,:style => "height:60px;", :align => "left")    %>
+        </li>
+        <li>
+          <b>Your in-progress item:</b>
+          <%= item.ItemLookupCode %>
+          <%= item.description_before_color_and_size %>
+          <%= item.dimensions  %>
+        </li>
+        <li>
+          <%= link_to "Options" ,{  :controller => 'specsheet'}   %>
+        </li>
+      </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="symbiote_wrapper" style="display: inline-table;">
+
+      <table>
+        <tbody>
+        <td>
+          <% item =   @purchase.symbiote.item  %>
+          <%=   image_tag( item.image_url( @purchase.symbiote.master_department_id  ,'item_thumbnails/','x') ,:size => "80x80", :align => "left")    %>
+        </td>
+        <td>
+
+
+          <table>
+            <tbody>
+            <tr>
+              <td>
+                <b>Your in-progress item:</b>
+                <%= item.ItemLookupCode %>
+                <%= item.description_before_color_and_size %>
+                <%= item.dimensions  %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <li>Options </li>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+
+
+        </td>
+        </tbody>
+
+
+
+      </table>
+    </div>
+
+
+
+
+    <div id="symbiote_wrapper" style="display: inline-table;">
+
+      <div style="display:table-cell;">
+        <div style="height:100%;display:table-cell;">
+
+          <% item =   @purchase.symbiote.item  %>
+          <%=   image_tag( item.image_url( @purchase.symbiote.master_department_id  ,'item_thumbnails/','x') ,:size => "80x80", :align => "left")    %>
+        </div>
+      </div>
+
+
+
+      <div style="display:table-cell;">
+
+        <div style="display:table-row;">
+          <div style="display:table-cell;">
+            <b>Your in-progress item:</b>
+            <%= item.ItemLookupCode %>
+            <%= item.description_before_color_and_size %>
+            <%= item.dimensions  %>
+          </div>
+        </div>
+
+        <div style="display:table-row;">
+          <div style="display:table-cell;">
+            <%= link_to "Choose a Design" ,{  :controller => 'specsheet'}, :class => "btn btn-danger"  %>
+            <%= link_to 'Change color/size',{ :controller => 'specsheet', :action => 'index', :purchases_entry_id  => 'symbiote' ,:item_id => item.id } , :class => "btn btn-default" %>
+            <%= link_to 'Cancel this Garment' ,{ :controller => 'cart', :action => 'delete_incomplete_symbiote'} , :class => "btn btn-default" %>
+            <%= link_to 'Place on hold', { :controller => 'cart' , :action => 'place_symbiont_on_hold'} , :class => "btn btn-default" %>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div style="width:69%;float:left;">
+      <%= link_to "Choose a Design" ,{  :controller => 'specsheet'}, :class => "btn btn-danger"  %>
+      <%= link_to 'Change color/size',{ :controller => 'specsheet', :action => 'index', :purchases_entry_id  => 'symbiote' ,:item_id => item.id } , :class => "btn btn-default" %>
+      <%= link_to 'Cancel this Garment' ,{ :controller => 'cart', :action => 'delete_incomplete_symbiote'} , :class => "btn btn-default" %>
+      <%= link_to 'Place on hold', { :controller => 'cart' , :action => 'place_symbiont_on_hold'} , :class => "btn btn-default" %>
+    </div>
+
+
+
+
+    <div id="symbiote_wrapper">
+
+      <% item =   @purchase.symbiote.item  %>
+      <%=   image_tag( item.image_url( @purchase.symbiote.master_department_id  ,'item_thumbnails/','x') ,:size => "80x80", :align => "left")    %>
+
+
+
+      <b>In progress item:</b><br><br>
+      <%= item.ItemLookupCode %>
+      <%= item.description_before_color_and_size %>
+      <%= item.dimensions  %>
+
+
+
+      <%= link_to "Choose a Design" ,{  :controller => 'specsheet'}, :class => "btn btn-danger"  %> <br><br>
+      <%= link_to 'Change color/size',{ :controller => 'specsheet', :action => 'index', :purchases_entry_id  => 'symbiote' ,:item_id => item.id } , :class => "btn btn-default" %>   <br><br>
+      <%= link_to 'Cancel this Garment' ,{ :controller => 'cart', :action => 'delete_incomplete_symbiote'} , :class => "btn btn-default" %>  <br><br>
+      <%= link_to 'Place on hold', { :controller => 'cart' , :action => 'place_symbiont_on_hold'} , :class => "btn btn-default" %>  <br><br>
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <ul>
+      <li style="color:white;">Options:</li>
+      <% if ['view_details'].include?(controller.action_name) %>
+          <li><%= link_to 'Designs Main Menu' , :controller => 'browse' %></li>
+      <% end %>
+      <li><%= link_to 'Change color/size', :controller => 'specsheet', :action => 'index', :purchases_entry_id  => 'symbiote' ,:item_id => item.id unless controller.action_name == 'view_details' %></li>
+      <li><%= link_to 'Cancel this garment' , :controller => 'cart', :action => 'delete_incomplete_symbiote' %></li>
+      <li><%= link_to 'Place on hold', :controller => 'cart' , :action => 'place_symbiont_on_hold' %></li>
+    </ul>
+
+
+
+    <div id="symbiote_admin_wrapper">
+		<li><%= link_to 'edit category classes categories', :controller => 'opposites', :action => 'category_class_organizer', :category_class_id  =>  @purchase_symbiote_item.category.category_class_id   %></li>
+		<li><%= link_to 'edit category classes opposites', :controller => 'opposites', :action => 'define_category_class_opposite_categories', :category_class  =>  @purchase_symbiote_item.category.category_class_id   %></li>
+		<li><%= link_to 'categories with same prefix', :controller => 'opposites', :action => 'all_categories_with_same_prefix', :id  =>  @purchase_symbiote_item.category.id   %></li>
+		<li><%= link_to 'edit symbiote category', edit_category_path(@purchase_symbiote_item.category) %></li>
+		<li><%= link_to 'delete opposites cache',  :controller => 'cache', :action => 'delete_opposites_cache_for_a_category', :category_id  =>  @purchase_symbiote_item.category.id   %></li>
+		<li><%= link_to 'delete this categories cache',  :controller => 'cache', :action => 'delete_category_cache', :category_id  =>  @purchase_symbiote_item.category.id   %></li>
+
+	</div>
+<% end %>

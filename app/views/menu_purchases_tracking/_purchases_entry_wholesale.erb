@@ -1,0 +1,141 @@
+<% if purchases_entry.item_id  == 0  %>
+					      <tr id="<%= 'purchases_entry_' + purchases_entry.id.to_s %>">
+					                <td class="purchases_entry_delete_printable" id="delete">
+					        		</td>    		
+					                <td  class="purchases_entry_image_printable" id="image">		
+					                 	</td>
+					       
+					                <td  class="purchases_entry_quantity_printable" id="quantity">        
+
+					                </td>
+					              
+					                <td  class="purchases_entry_itemlookupcode_printable" id="itemlookupcode"></td>
+					             
+					                <td  class="purchases_entry_description_printable" id="description">
+												<h3>  Complete this item by choosing a  
+														<% if @purchase %>
+																	<% if @purchase.symbiote_type == 'master' %>
+																		<%= link_to "Design", :action => 'browse' %>
+																	<% else %>
+																		<%= link_to "Garment", :action => 'browse' %>
+																	<% end %>
+														<% else %>
+														
+														<% end %>
+												</h3>
+						 </td>
+					           
+					                 <td  class="purchases_entry_full_unit_price_printable" id="full_unit_price">
+					                                <div  id="full_unit_price_<%= purchases_entry.id %>"> 
+					                                                
+					                                </div>
+					                </td>
+					               
+					                 <td  class="purchases_entry_unit_quantity_tier_discount_price_printable" id="unit_quantity_tier_discount_price">
+					                             <div id="unit_quantity_tier_discount_price_<%= purchases_entry.id %>">
+					                                              
+					                             </div>
+					                  </td> 
+					               
+					                 <td  class="purchases_entry_unit_quantity_and_permanent_savings_printable" id="unit_quantity_and_permanent_savings">
+					                                  <div id="unit_quantity_and_permanent_savings_<%= purchases_entry.id %>">
+					                                                
+					                                  </div>
+					                  </td>
+					
+					                 <td  class="purchases_entry_unit_your_price_printable" id="your_unit_price">
+					                                  <div  id="your_unit_price_<%= purchases_entry.id %>">
+					                                               
+					                                  </div>
+					                  </td> 
+					
+					                 <td  class="purchases_entry_full_extended_price_printable" id="full_extended_price">
+					                                  <div  id="full_extended_price_<%= purchases_entry.id %>">
+					                                                
+					                                   </div>
+					                  </td>
+					
+									  <td  class="purchases_entry_your_extended_price_savings_printable" id="your_extended_price_savings">  
+					                                <div  id="your_extended_price_savings_<%= purchases_entry.id %>"> 
+					                                                
+					                                 </div>  
+					                 </td>  
+					                                
+					                 <td  class="purchases_entry_your_extended_price_printable" id="your_extended_price">
+					                                  <div  id="your_extended_price_<%= purchases_entry.id %>">
+					                                             
+					                                   </div>
+					                  </td>
+					     
+					      </tr>
+<% else %>
+ 					<% item =  Item.find(purchases_entry.item_id)  %>
+					<% quantity = purchases_entry.QuantityOnOrder %>
+					
+					
+					      <tr id="<%= "purchases_entry_" + purchases_entry.id.to_s %>">
+					                <td class="purchases_entry_delete_printable" id="delete">
+					                            	
+					        		</td>    		
+					                <td  class="purchases_entry_image_printable" id="image">		
+					        							<%=   image_tag purchases_entry.item.image_url( purchases_entry.item.default_master_department_id , 'item_thumbnails/','x'  ),:size => '80x80'  %>	
+					        		
+				        		</td>
+					       
+					                <td  class="purchases_entry_quantity_printable" id="quantity">        
+					                                    <% form_remote_tag( :url => { :controller => "barber_store",  :action => "update_QuantityOnOrder", :id =>purchases_entry.id},  :html =>{ }) do  %>		                                       
+					                                    <%= text_field "purchases_entries", "QuantityOnOrder", "size" => 2, :value=> 
+					                                    number_with_precision(purchases_entry.QuantityOnOrder,precision=0), :class => 'input_text_short', :onblur => remote_function(:url => { :controller => "barber_store", :action => "update_QuantityOnOrder", :id => purchases_entry.id}, :with => 'Form.serialize(this.form)') %>
+					                                    <% end %> 
+					                </td>
+					              
+					                <td  class="purchases_entry_itemlookupcode_printable" id="itemlookupcode"><%= item.ItemLookupCode %>  </td>
+					             
+					                <td  class="purchases_entry_description_printable" id="description"><%= item.Description %>	</td>
+					           
+					                 <td  class="purchases_entry_full_unit_price_printable" id="full_unit_price">
+					                                <div  id="full_unit_price_<%= purchases_entry.id %>"> 
+					                                                <%= item.full_unit_price(@customer)  %>
+					                                </div>
+					                </td>
+					               
+					                 <td  class="purchases_entry_unit_quantity_tier_discount_price_printable" id="unit_quantity_tier_discount_price">
+					                             <div id="unit_quantity_tier_discount_price_<%= purchases_entry.id %>">
+					                                              <%= number_with_precision(   item.unit_quantity_tier_discount_price(@customer, quantity) ,2)   %>  
+					                             </div>
+					                  </td> 
+					               
+					                 <td  class="purchases_entry_unit_quantity_and_permanent_savings_printable" id="unit_quantity_and_permanent_savings">
+					                                  <div id="unit_quantity_and_permanent_savings_<%= purchases_entry.id %>">
+					                                                <%= number_with_precision(   item.unit_quantity_and_permanent_savings(@customer,quantity) ,2)     %>
+					                                  </div>
+					                  </td>
+					
+					                 <td  class="purchases_entry_unit_your_price_printable" id="your_unit_price">
+					                                  <div  id="your_unit_price_<%= purchases_entry.id %>">
+					                                                <%=   number_with_precision(  item.your_unit_price(@customer,quantity),2)   %>
+					                                  </div>
+					                  </td> 
+					
+					                 <td  class="purchases_entry_full_extended_price_printable" id="full_extended_price">
+					                                  <div  id="full_extended_price_<%= purchases_entry.id %>">
+					                                                <%=   number_with_precision(  purchases_entry.full_extended_price(@customer,item) ,2)  %> 
+					                                   </div>
+					                  </td>
+
+					                <td  class="purchases_entry_your_extended_price_savings_printable" id="your_extended_price_savings">  
+					                                <div  id="your_extended_price_savings_<%= purchases_entry.id %>"> 
+					                                                <%= number_with_precision(   purchases_entry.your_extended_price_savings(@customer,quantity,item) ,2)   %>
+					                                 </div>  
+					                 </td>  
+					                                
+					                 <td  class="purchases_entry_your_extended_price_printable" id="your_extended_price">
+					                                  <div  id="your_extended_price_<%= purchases_entry.id %>">
+					                                             <strong>   <%= number_with_precision(   purchases_entry.your_extended_price(@customer,quantity,item) ,2)  %>  </strong>
+					                                   </div>
+					                  </td>
+					     
+					      </tr>   
+<%  end  %>
+
+

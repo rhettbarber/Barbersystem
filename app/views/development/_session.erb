@@ -1,0 +1,18 @@
+<% unless  ["production"].include?(ENV["RAILS_ENV"]) %>
+    <div data-role="collapsible" data-theme="b" data-content-theme="b">
+      <h2>Session</h2>
+
+                <div id="session_container" style="">
+                      <ul>
+                      <% count = 0 %>
+                      <% session.sort.each do |key, value| %>
+                            <% count += 1 %>
+                            <li><%= key %>:<%= Array(value).inspect  %></li>
+                      </ul>
+
+                      <% end  %>
+                </div>
+
+
+    </div>
+<% end  %>

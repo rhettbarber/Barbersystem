@@ -1,0 +1,44 @@
+
+<% if @combination %>
+		<table>
+		<%= form_for(:combination, :url => combination_path(@combination), :html => { :method => :put }) do |f| %>
+		<%= hidden_field_tag "id", @combination.id %>
+			<tr>
+				<td><%= f.text_field( :item_prefix_override ,:size => 2 ) %>--Item Prefix Override </td>
+			</tr>	
+			<tr>
+				<td><%= f.text_field( :left ,:size => 4 ) %>--Design Left Alignment</td>
+			</tr>	
+			<tr>
+				<td><%= f.text_field( :top ,:size => 4 ) %>--Design Top Alignment</td>
+			</tr>
+			<tr>
+				<td><%= f.text_field( :height ,:size => 4 ) %>--Design Height</td>
+			</tr>	
+			<tr>
+				<td><%= f.text_field( :bp_left ,:size => 4 ) %>--Breast Print Left Alignment</td>
+			</tr>
+			<tr>
+				<td><%= f.text_field( :bp_top ,:size => 4 ) %>--Breast Print Top Alignment</td>
+			</tr>	
+			<tr>
+				<td><%= f.text_field( :bp_height ,:size => 4 ) %>--Breast Print Height</td>
+			</tr>
+			<tr>
+				<td>
+					 <%= f.text_field( :verified_correct ,:size => 1 ) %>-- Verified Correct?
+					 <% if @combination.verified_correct == 1  %>
+					 	<%= image_tag("/images/buttons/checkmark-green.jpg",:size => "20x20") %>
+					<% else %>
+						<%= image_tag("/images/buttons/cancel-x-mark-red.jpg",:size => "20x20") %>
+					<% end %>
+				 </td>
+			</tr>
+			<tr>
+				<td><%= submit_tag('Update Combination') %></td>
+			</tr>	
+		<% end %>
+		</table>	
+<% else %>
+	"No Combination Exists for these item/design prefixes"
+<% end  %>

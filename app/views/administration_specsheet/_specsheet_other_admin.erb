@@ -1,0 +1,50 @@
+						ITEM:
+						@item.department.id::<%=    @item.department.id     %><br />
+						@item.category.id::<%=    @item.category.id     %><br />
+						@item.item_combination_slave_style_override:: <%=  @item.item_combination_slave_style_override  %>
+						@item.category.category_class.id::<%=    @item.category.category_class.id     %><br />
+						@item.category.category_class.name ::<%=    @item.category.category_class.name     %><br />
+						@item.category.category_class.item_type  ::<%=    @item.category.category_class.item_type     %><br />
+						@item.category.category_class.opposite_category_ids ::<%=    @item.category.category_class.opposite_category_ids     %><br />
+						@item.category.category_class.appearing_sections:: <%=    @item.category.category_class.appearing_sections     %><br />
+						@item.category.category_class.slaves_opposite_master_default_department_id :: <%    @item.category.category_class.slaves_opposite_master_default_department_id     %><br />
+						@item.category.category_class.notes::<%=    @item.category.category_class.notes     %><br />
+						@item.SubDescription1::<%=    @item.SubDescription1     %><br />
+						@item.SubDescription2::<%=    @item.SubDescription2     %><br />
+						<br />
+						DESIGN:<br />
+						@design.category.id:: <%=    @design.category.id   %><br />
+						@design.category.name:: <%=    @design.category.Name   %><br />
+						@design.category.category_class.id:: <%=    @design.category.category_class.id   %><br />
+						@design.category.category_class.name :: <%=    @design.category.category_class.name    %><br />
+						@design.category.category_class.item_type  :: <%=    @design.category.category_class.item_type    %><br />
+						@design.category.category_class.opposite_category_ids :: <%=    @design.category.category_class.opposite_category_ids    %><br />
+						@design.category.category_class.appearing_sections:: <%=    @design.category.category_class.appearing_sections    %><br />
+						@design.category.category_class.slaves_opposite_master_default_department_id :: <%=    @design.category.category_class.slaves_opposite_master_default_department_id    %><br />
+						@notes:: <%=    @notes    %><br />
+						@purchase.slave.design_decides_potential_masters_department(@department)::<%=  @purchase.slave.design_decides_potential_masters_department(@department).id   if @slaves_master_department_decision %><br />
+						@design.SubDescription1::<%=    @design.SubDescription1     %><br />
+						@design.SubDescription2::<%=    @design.SubDescription2     %><br />
+						@design.opacity_letter::<%=    @design.opacity_letter    %><br />
+						<br />
+						COMBINATION:
+						<br />
+						<%    @combination = Combination.find_combo(@item, @design)   unless @item.item_combination_slave_style_override != false   %><br />
+						@item.category.id::<%=    @item.category.id     %><br />
+						@design.category.id:: <%=    @design.category.id   %><br />
+						@item.category.prefix:  <%= @item.category.prefix  %> <br />
+						@design.category.prefix:  <%= @design.category.prefix  %> <br />
+						COMBINATION.height: <%=   @combination_height  =  @combination.height  if @combination   %> <br />
+						COMBINATION.left: <%=     @combination_left   =  @combination.left    if @combination  %> <br />
+						COMBINATION.top: <%=    @combination_top   =  @combination.top    if @combination  %> <br />
+						COMBINATION.item_prefix_override: <%=    @item_prefix_override   =  @combination.item_prefix_override    if @combination  %> <br />
+						COMBINATIONS IMAGE NAME: <%=  @item.image_url( @department  , '/images/item_specsheets/', 'x' ,@item_prefix_override )   %> <br />
+				<%  end  %>
+					 	<br />
+						FORM:
+						<%= 'Department:'   +  @department.id.to_s  if @department %>  <br />
+						<%= '@item.default_master_department_id'  + @item.default_master_department_id.to_s  %><br />
+						@selected_item_id: <%= @selected_item_id  %> <br />
+						@parameter_item_type :<%= @parameter_item_type  %> <br />
+						@required_form_elements :<%= @required_form_elements %> <br />
+						@item.category.use_generic_department:<%=  @item.category.use_generic_department   %><br />

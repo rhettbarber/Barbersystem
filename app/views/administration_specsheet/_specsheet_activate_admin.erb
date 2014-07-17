@@ -1,0 +1,33 @@
+<%= image_tag "/images/headers/item_options.jpg" ,:border => 0, :width => "700" %><br />
+
+<% inactive_and_non_web_components = @item.item_class_component.item_class.inactive_and_non_web_components if @item.item_class_component %>
+
+
+<% if @able_to_see_inactive %>
+		Inactive and Non Web Items:<br />
+		<%=  form_tag( '/items/activate_this_item' , :method => :put )  do %>
+			<%= image_submit_tag "/images/buttons/activate.jpg" ,:border => 0, :width => "170" %>
+						<% if @item.item_class_component  %>
+									<%=  select("item_class_component", "item_id", inactive_and_non_web_components.collect {|p| [ p.dimensions , p.item_id ] } ,{:selected =>  @selected_item_id  } )  if !inactive_and_non_web_components.nil?   %>
+						<% else %>
+									<%= hidden_field_tag "item_id", @item.id %>
+						<% end %>	
+							
+		<% end %>
+<% end %>
+
+<br />
+
+
+Active and Web Items:<br />
+<%=  form_tag( '/items/turn_off_web_item' , :method => :put )  do %>
+		<%= image_submit_tag "/images/buttons/turn_off_web_item.jpg" ,:border => 0, :width => "170" %>
+				<% if @item.item_class_component  %>	
+						<%=  select("item_class_component", "item_id", @item_class_components.collect {|p| [ p.dimensions , p.item_id ] } ,{:selected =>  @selected_item_id  } )      if  @required_form_elements.include?('icc_collection_select' )   %>
+				<% else %>
+						<%= hidden_field_tag "item_id", @item.id %>
+				<% end %>
+
+<% end %>
+	
+	

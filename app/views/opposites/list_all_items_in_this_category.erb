@@ -1,0 +1,9 @@
+<%= render :partial => "menu_opposites"%>
+
+<h1>All Items in category named: <%= @category.Name %></h1>
+	
+	
+
+<% @items.sort_by{|a| a.ItemLookupCode}.each do |item| %>
+		<%= render(:partial => "opposites/item",:locals => { :item => item } )   %>
+<% end %>

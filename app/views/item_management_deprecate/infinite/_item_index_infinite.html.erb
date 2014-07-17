@@ -1,0 +1,55 @@
+
+<script Language="JavaScript">
+  function popup(url, name, width, height) {
+        settings=
+        "toolbar=yes,location=yes,directories=yes,"+
+        "status=no,menubar=no,scrollbars=yes,"+
+        "resizable=yes,width="+width+",height="+height;
+        MyNewWindow=window.open("http://"+url,name,settings);
+  }
+
+  function showOptions( params, clone_item_id) {
+    popup('localhost:3000/item_management/management_options/?item_id=' + params + '&clone_item_type_id=' + clone_item_id , 'Options', 800, 800); return false
+  }
+</script>
+
+
+
+<div align="center">
+          <%= image_tag( '/images/icons/tools.png' ,:size => "50x50" ) %>
+          <span style="font-size:2em;vertical-align:top;">Item Management</span>
+          <%= image_tag( '/images/icons/tools.png' ,:size => "50x50" ) %>
+          <br>
+        <%= link_to "Clone Item Types", :controller => "clone_item_types",  :action => "index" %> |
+          <%= link_to "Clone Items", :controller => "clone_items",  :action => "index" %>
+
+    </div>
+<br>
+
+ <div id="infinite_page_spinner"><%=  image_tag("/images/search/ajax-progress-bar-blue.gif")%><div id="debug"></div></div>
+
+<br>
+<table id="content">
+      <th>Image</th>
+      <th>Item Lookup Code</th>
+      <th id="th_description">Description</th>
+       <th style="width:100px;">Warnings</th>
+      <% CloneItemType.all.each do |clone_item_type| %>
+      <th>
+            <%= clone_item_type.name %><br>
+              <%  unless  clone_item_type.template_file_exists?  %>
+                    <span class="anatips" title="Template is missing from Production Folder! It should be located at: <%= clone_item_type.template_file_name_with_path   %> ">
+                          <%= image_tag('/images/icons/registration.jpg',:size => "35x35") %>
+                     </span>
+             <% end  %>
+      </th>
+     <% end  %>
+
+
+          <%= render :partial => "item_management/items_infinite" %>
+
+
+    </table>
+
+ <%=   will_paginate @items %>
+

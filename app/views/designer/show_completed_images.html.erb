@@ -1,0 +1,64 @@
+
+<%= stylesheet_link_tag 'sublimation_shirt.css'  %>
+
+<h1>Image Driver - Show Completed Image - Click to Enlarge</h1>
+
+<div class="sublimation_content">
+      <% @final_jpgs =  rio('W:\\AUTOMATION_DATABASE\\FINISHED_WEBSITE_ITEM_SPECSHEETS\\').files['*.jpg']  %>
+      <% @final_jpgs.each do |fj|     %>
+            <%  if   fj.filename.to_s.include? ".exe"  %>
+                    <%= fj.filename %> filename contains .exe <br/>
+            <% else  %>
+
+
+                    
+                            <%  if   fj.filename.to_s.include? "."  %>
+                                <div class="item">
+                                            <img alt="'<%= fj.filename %>" src="/sublimation_shirt/show_thumbnail/<%= fj.filename %>" class="designer-series-image" />
+                                </div>
+                                <% end  %>
+
+
+
+            <% end  %>
+      <% end  %>
+</div>
+
+
+
+<script type="text/javascript">
+//  Event.observe(window, 'load', function() {
+//        Event.observe('designer-series-image', 'click', EnlargeOnClickHandler);
+//});
+document.onclick = EnlargeOnClickHandler;
+
+      function EnlargeOnClickHandlerOld(e) {
+//                  console.log('it was clicked');
+                  target =  findTarget(e);
+                  target.style.height = ''
+      }
+
+      function findTarget(e) {
+                   return Event.element(e) ;
+      }
+
+
+
+
+function EnlargeOnClickHandler(e){
+            //console.log('begin EnlargeOnClickHandler');
+            target =  findTarget(e);
+            if (  target.hasClassName("designer-series-image")   )  {
+                                 target.style.height = ''
+                                 target.className = "designer-series-image-expanded"
+            }
+            else if (  target.hasClassName("designer-series-image-expanded")   )  {
+                                 target.style.height = '75px'
+                                 target.className = "designer-series-image"
+            }
+           // console.log('end EnlargeOnClickHandler');
+}
+
+
+
+</script>

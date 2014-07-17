@@ -1,0 +1,16 @@
+<% if item %>
+    <% if @website_search_item_ids.include?(item.id) %>
+            <%# if @acceptable_item_ids.include?(item.id) %>
+            <div class="item_list_thumbnail_container" style="padding:15px;overflow:hidden;float:left;background-color:white;">
+                        <%=   image_tag( '/images/item_specsheets/' +  item.PictureName ,:border => 0   )  -%><br />
+                        <%=  item.ItemLookupCode -%><br />
+                                    Terms Found:<%= item.SubDescription3 %><br />
+                                    <% if  item.SubDescription1 != ""%>
+                        Size-Color:<%= item.SubDescription1 %><br />
+                                    <% end %>
+                        <%=  item.Description -%><br />
+                        <%=   link_to('details', :controller =>  'specsheet' , :action => "index", :item_id => item.id , :department_id => item.department_id  )  %>
+            </div>
+            <%# end %>
+    <% end %>
+<% end %>

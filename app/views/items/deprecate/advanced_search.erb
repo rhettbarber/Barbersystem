@@ -1,0 +1,27 @@
+<div style="border:solid black 1px;width:100%;height:70px;float:left;padding:5px;margin:5px;">
+
+	<div style="float:left;width:500px;">
+		Search:	
+		<%  form_remote_tag :url => 'advanced_search'  do %>
+		<%=    text_field_tag  "item_keywords"  %>
+		<%= observe_field :item_keywords, :frequency => 2, :update => 'item_rows',  :url => {:controller => 'items', :action => 'find_item' } ,  :with => 'item_keywords'  %>
+		<% end %>
+	</div>
+</div>
+
+<div style="border:solid black 1px;float:left;padding:5px;margin:5px;width:100%;">
+	
+	<table>
+		<tbody>
+		<tr>
+	  		<td> 
+	  		<div id="item_rows">
+	  		<%= render :partial => "items/found_item", :collection => @found_items %> 
+	  		</div>
+	  		</td>
+	  	</tr>	
+		</tbody>
+		</table>
+
+
+</div>

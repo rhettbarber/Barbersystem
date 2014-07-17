@@ -1,0 +1,149 @@
+
+
+ <% if Rails.env.development? and @ss   %>
+
+     <% if @purchase %>
+         @incomplete_symbiont: <%=   @incomplete_symbiont  %><br>
+         @purchase.has_on_hold_entries?: <%= @purchase.has_on_hold_entries?  %>
+     <% end %>
+
+ra<%= referring_action %><br>
+
+@added_to_cart:<%= flash[:added_to_cart] %> <br>
+
+
+session[:on_hold]:<%=  session[:on_hold]%><br>
+
+<%= link_to "testtt", "#",  :class => "navigate_without_url_change" %>
+
+
+PriceLevel:<%= @customer.PriceLevel if @customer %>  <br>
+
+@purchase:<%= @purchase.id  if @purchase %>
+
+<% end %>
+
+
+
+ <% if @purchase %>
+     <div style="width: 100%;display:table;text-align: center;padding-top:10px;padding-bottom:10px;">
+       Order #:<%= @purchase.id %>
+     </div>
+ <% end %>
+
+
+<%= render(:partial => "cart/quick_cart_container") %>  <br>
+
+     <% @show_pe_type = true %>
+
+
+ <% if @purchase  and @purchase.cart_count > 0  %>
+
+                                <%= form_for(:purchase, :url => purchase_path(@purchase), :html => { :method => :put }) do |f| %>
+                                                        <% Item.unscoped do %>
+                                                        <table data-role="table" id="purchase-table" data-mode="reflow" class="phone-breakpoint  table-stroke">
+                                                          <% if @customer_array.PriceLevel > 1 %>
+                                                              <%= render :partial => 'purchases/singular_wholesale_thead' %>
+                                                          <% else %>
+                                                              <%= render :partial => 'purchases/symbiont_thead' %>
+                                                          <% end %>
+                                                          <tbody>
+
+
+                                                        <% if @customer_array.PriceLevel > 1 # Blank / Transfer and Franchise  %>
+
+                                                                      <% if  @purchases_entries %>
+                                                                          <% @purchases_entries.each do |purchases_entry|   %>
+                                                                              <%  if purchases_entry.opposite_entry == false  %>
+                                                                                                <%= render(:partial => "purchases/purchases_entry_singular_wholesale",:locals => { :purchases_entry => purchases_entry } )   %>
+                                                                              <%  else  %>
+                                                                                                <%  transfer_customer_should_not_have_opposite_entry %>
+                                                                                              <%# if purchases_entry.master_entry == true %>
+                                                                                                  <%# wholesale_only_right_now %>
+                                                                                                  <%#= render(:partial => "purchases/purchases_entry_symbiont",:locals => { :purchases_entry => purchases_entry } ) %>
+                                                                                              <%#  end  %>
+                                                                              <% end %>
+                                                                          <% end %>
+                                                                      <% end %>
+
+
+                                                          <% else  # Retail or Preprint Order   %>
+
+                                                                      <% if  @purchases_entries %>
+                                                                                          <% @purchases_entries.each do |purchases_entry|   %>
+
+                                                                                                                          <%  if purchases_entry.opposite_entry == false  %>
+                                                                                                                                                <%= render(:partial => "purchases/purchases_entry_singular_retail",:locals => { :purchases_entry => purchases_entry } ) if purchases_entry.item and !purchases_entry.item.nil? %>
+                                                                                                                          <%  else  %>
+                                                                                                                                              <%   purchases_entry_complete_symbiont =   purchases_entry.complete_symbiont %>
+                                                                                                                                              <%   if purchases_entry_complete_symbiont  %>
+                                                                                                                                                                      <% if purchases_entry.master_entry == true %>
+                                                                                                                                                                                    <%= render(:partial => "purchases/purchases_entry_symbiont_master_complete",:locals => { :purchases_entry => purchases_entry } ) unless  purchases_entry.item_id  == 0 or  purchases_entry.item_id  == '0'    %>
+                                                                                                                                                                      <%  else  %>
+                                                                                                                                                                                  <%# DON'T RENDER SYMBIONT SLAVE IF IT IS COMPLETE %>
+                                                                                                                                                                                  <%#= render(:partial => "purchases/purchases_entry_symbiont_slave_complete",:locals => { :purchases_entry => purchases_entry } ) unless  purchases_entry.item_id  == 0 or  purchases_entry.item_id  == '0'    %>
+                                                                                                                                                                      <%  end  %>
+                                                                                                                                               <% else %>
+                                                                                                                                                                      <% if purchases_entry.master_entry == true %>
+                                                                                                                                                                          <%= render(:partial => "purchases/purchases_entry_symbiont_master_incomplete",:locals => { :purchases_entry => purchases_entry } ) unless  purchases_entry.item_id  == 0 or  purchases_entry.item_id  == '0'    %>
+                                                                                                                                                                      <%  else  %>
+                                                                                                                                                                          <%= render(:partial => "purchases/purchases_entry_symbiont_slave_incomplete",:locals => { :purchases_entry => purchases_entry } ) unless  purchases_entry.item_id  == 0 or  purchases_entry.item_id  == '0'    %>
+                                                                                                                                                                      <%  end  %>
+                                                                                                                                               <% end %>
+                                                                                                                          <% end %>
+
+                                                                                          <% end %>
+                                                                      <% end %>
+                                                          <% end %>
+                                                          </tbody>
+                                                        </table>
+                                                         <% end %>
+
+
+                                                       <div style="width:100%;display: inline-table;">
+                                                                 <% if @customer_array.PriceLevel > 0 %>
+                                                                     <%= render :partial => 'cart/purchase_totals_wholesale' %>
+                                                                 <% else %>
+                                                                     <%= render :partial => 'cart/purchase_totals' %>
+                                                                 <% end %>
+                                                       </div>
+
+                                                           <%  if controller.action_name == 'index'  and  @purchase %>
+                                                                 <span id="update_quantities">  <%= submit_tag "Update Quantities"  %> </span>
+                                                           <% end %>
+
+                                                            <%  unless @incomplete_symbiont or @purchase.has_on_hold_entries?  %>
+                                                                <%=  link_to "Proceed to checkout" ,{ :controller => 'cart', :action => 'next_checkout_step'}, :class => "ui-btn ui-btn-b" ,    :data => {:ajax=> "false"}   %>
+                                                            <% end  %>
+
+
+
+                                  <% end %>
+
+     <% else %>
+                             You have no items in your cart.
+     <% end %>
+
+
+ <%  if @purchase  and @purchase.cart_count > 0 %>
+
+                <%#= form_for(:purchase, :url => { :controller => "purchases",:action => "cancel_order"}, :html => { :method => :put }) do |f| %>
+                         <%#= submit_tag "Delete All Items" if controller.action_name == 'index' %>
+                <%# end %>
+
+                 <%  if @purchase.has_on_hold_entries?  %>
+                     <%=  link_to "Delete all on hold items",{  :controller => 'cart', :action =>"delete_all_on_hold_items"} , :class => "ui-btn "  ,:data => {:ajax=> "false"}  %>
+                 <% end %>
+ <% end %>
+
+ <%=  link_to "Continue shopping" ,{ :controller => 'store', :action => 'category_items'}, :class => "ui-btn ui-btn-b" ,    :data => {:ajax=> "false"}   %>
+
+
+ <%#=  link_to "Delete incomplete item" ,{ :controller => 'cart', :action => 'delete_incomplete_symbiote'}, :class => "ui-btn ui-btn" ,    :data => {:ajax=> "false"}   %>
+
+
+
+
+
+
+

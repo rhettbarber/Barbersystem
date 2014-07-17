@@ -1,0 +1,120 @@
+
+
+<%   receipt_page_only do   %>
+<h2> Thank you for your Order,  Print this page for your records.</h2>
+
+<%   receipt_page_only do   %>
+		<form>
+		              <input type="button" onclick="window.print();return false;" value=" Print this page"/>
+		</form>
+<% end %>
+
+ <br /><br />
+<%= link_to "Back to Website", :controller  => 'browse'  %>
+<%  end  %>
+ <br /><br />
+
+<div class="checkout_page">
+	<div class="checkout_website_name">
+		<%=  @website.title  + ' ' + controller.action_name.humanize + ' # ' +  @purchase.id.to_s    %> <br />
+	
+	<%   hide_from_receipt_page do   %>
+	Please ensure all information is correct before submitting your order.<br />
+	<%  end %>
+	</div>	
+			
+	<table class="checkout_printable_header"  border="0" cellspacing="0" cellpadding="0" >
+		<tr height="20">
+					<th width="283"><%=    render(:partial => "purchases/show" )  -%></th> 	
+		</tr> 
+	</table>
+			
+			
+			
+	<table class="checkout_printable_header"  border="0" cellspacing="0" cellpadding="0" >
+		<tr height="20">
+					
+					<th width="283">BILL TO:</th> 
+					<th width="283">SHIP TO:</th> 
+					<th   width="283">PAYMENT/SHIPPING_SERVICE:</th>  	
+		</tr> 
+	</table>
+	
+	
+	
+	<table class="checkout_printable"  border="0" cellspacing="0" cellpadding="0" >
+	<table width="850" cellspacing="1" cellpadding="1" border="1" align="" summary="">
+	    <tbody>
+	        <tr>
+	            <td width="283"><%=    render(:partial => "customers/show" )  -%></td>
+	            <td width="283"><%=    render(:partial => "ship_tos/show"  ) -%></td>
+	            <td>
+	            <table width="283" cellspacing="1" cellpadding="1" border="1" align="" summary="">
+	                <tbody>
+	                    <tr>
+	                        <td width="283"><%=    render(:partial => "quote_tender_entries/show"  ) -%></td>
+	                    </tr>
+	                    <tr>
+	                        <td width="283"><%=    render(:partial => "ship_tos/show_shipping_service"  ) -%></td>
+	                    </tr>
+	                </tbody>
+	            </table>
+	            </td>
+	        </tr>
+	    </tbody>
+	</table>
+	
+	<table class="checkout_printable"  border="0" cellspacing="0" cellpadding="0" >
+	<table width="850" cellspacing="1" cellpadding="1" border="1" align="" summary="">
+	    <tbody>
+	
+	            <% if @customer && @customer.PriceLevel > 0 %>
+                    <%= render(:partial => "purchases/display_cart_contents_wholesale")%>
+							<% if @purchase %>
+										<% if @purchase.incomplete_symbiont %>
+							                     <%= render(:partial => "cart/please_complete_order")  %>
+										<% else %>	
+												  <%= render(:partial => "cart/cart_bottom_totals_wholesale")  %>
+										<% end %>	 
+							<% end %>
+									
+            <% else %>        
+                     <%= render(:partial => "cart/display_cart_contents")%>
+					 <% if @purchase %>
+					 				<% if @purchase.incomplete_symbiont %>
+                    							 <%= render(:partial => "cart/please_complete_order") %>
+										<% else %>
+										 		<%= render(:partial => "cart/cart_bottom_totals")  %>
+										<% end %>	 
+					<% end %>		 
+            <% end %> 
+  
+																					
+	
+	    </tbody>
+	</table>
+
+<div class="checkout_printable">
+<%   hide_from_receipt_page do   %>
+
+<%= javascript_include_tag "prototype.js" %>
+				<script type="text/javascript">
+							function waitButton() {
+												console.log("waitButton Pressed");
+							          $('complete_order').hide();
+												$('please_wait_message').show();
+							}
+				</script>
+
+
+        <%= link_to( image_tag("/images/buttons/complete_order.gif",:border => 0, :id => "complete_order") , {:controller => 'purchases', :action => 'complete_order'},:onclick => 'waitButton()'  )   %><br /><br />
+         <IMG style="display:none;" id="please_wait_message" border="0" src="/images/buttons/please_wait.gif">
+        <%= link_to( image_tag("/images/buttons/back_to_cart.gif",:border => 0) , {:controller => 'cart' , :action => 'index'} )    %><br /><br />
+		<%= link_to( image_tag("/images/buttons/cancel_order.gif",:border => 0) , {:controller => 'purchases', :action => 'cancel_order'} )   %><br />
+
+       
+<%  end  %>
+</div>
+
+</div>
+

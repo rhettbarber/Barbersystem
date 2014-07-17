@@ -1,0 +1,29 @@
+<h1>Links</h1>
+
+<% unless @links.empty? %>
+<ul>
+  <% for link in @links %>
+  <li>
+    <%=h link.url %>--<%= editable_content(
+      :content => {
+        :element => 'span',
+        :text => link.description,
+        :options => {
+          :id => "link_edit_#{link.id}",
+          :class => 'editable-content'
+        }
+       },
+      :url => {
+        :controller => 'links',
+        :action => 'update_description',
+        :id => link.id
+       },
+      :ajax => {
+        :okText => "'finalize edit'",
+        :cancelText => "'Nevermind'"
+       }
+    ) %>
+  </li>
+  <% end %>
+</ul>
+<% end %>

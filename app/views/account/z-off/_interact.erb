@@ -1,0 +1,84 @@
+<html> 
+        <head> 
+                <meta http-equiv="Content-Language" content="en-us"> 
+                <link rel="stylesheet" type="text/css" href="style.css"> 
+                        <script type="text/javascript" language="javascript" src="global.js"></script> 
+                        <title>Taskpad</title> 
+                        <OBJECT classid="clsid:44C4C3AC-D0F1-11D2-919D-006008C88FC3" height="0" id="qsBridge" style="LEFT: 0px; TOP: 0px" width="0"> 
+                                <PARAM NAME="_ExtentX" VALUE="26"> 
+                                <PARAM NAME="_ExtentY" VALUE="26"> 
+                        </OBJECT> 
+                        <script language="VBScript"> 
+<!-- 
+
+Dim TimerID 
+
+Const customcaptionCustomerText1 = 1 
+Const customcaptionCustomerText2 = 2 
+Const customcaptionCustomerText3 = 3 
+Const customcaptionCustomerText4 = 4 
+Const customcaptionCustomerText5 = 5 
+
+
+' ------------------------------------ 
+' displayVariables 
+' ------------------------------------ 
+
+Function displayVariables 
+On Error Resume Next         
+
+Dim QSRules 
+Dim Entry 
+
+Set QSRules = qsBridge.RequestQSRules() 
+
+Set Entry = Nothing 
+
+If Not QSRules Is Nothing Then 
+
+
+        txtQ.innerText = QSRules.Transaction.TotalQuantity 
+         txtStoreName.innerText = QSRules.Configuration.StoreName 
+
+Else
+	txtStoreName.innerText = 111
+
+End If 
+
+End Function 
+
+
+Function doStartup 
+
+' use a timer to run displayVariables() periodically every second 
+
+displayVariables 
+TimerID = window.setInterval("displayVariables()", 1000) 
+
+End Function 
+
+//--> 
+                        </script> 
+        </head> 
+        <body onload="doStartup()" scroll="no" STYLE="position:absolute; top:0px; left:0px; width:100%; height:100%; padding:10px; font:bold 13pt verdana; color:white; filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=1, StartColorStr='#8eb6d9', EndColorStr='#000000')"> 
+                <table border="0" align="left" width="100%" STYLE="position:absolute; top:0px; left:0px"> 
+                        <tr> 
+                                <td width="50%"> 
+                                <td valign="top" STYLE="font-family:verdana; font-size:18px; position:absolute; left:10; width:300 "> 
+                                        <span id="txtStoreName"></span> 
+                                </td> 
+                                <td align="right" STYLE="font-family:verdana; font-size:35px;" rowspan="2"> 
+                                        Item Count: 
+                                        <span id="txtQ"></span> 
+                                </td> 
+                        </tr> 
+                        <tr> 
+                                <td valign="top" STYLE="height:1" rowspan="2" width="50%" > 
+                                        <img src="images/white_dot.gif" height="1px"> 
+                                </td> 
+                        </tr> 
+                </table> 
+                <DIV ID="Div1" STYLE="position:absolute; bottom:-20; right:10 ; height:141; width:140; z-index: 2; filter:progid:DXImageTransform.Microsoft.Alpha(opacity=15);"><img src="images/pos_symbol.gif" width="140px" height="141px"></DIV> 
+                <DIV ID="Div2" STYLE="position:absolute; bottom:5; right:40 ; height:38; width:215; z-index: 1; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/logotype.png');"></DIV> 
+        </body> 
+</html> 

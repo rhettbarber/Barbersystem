@@ -1,0 +1,30 @@
+<br />
+<div class="ship_tos_show_shipping_service">
+
+  <span style="font-size: 20px;color:blue;">Shipping Info </span>
+
+				<p>
+				<% if @purchase.shipping_service.web_carrier_name == 'ups' %>
+	          		<%= image_tag '/images/company_logos/ups_logo_small.jpg',:size => "30x30"  %>
+	          	<% elsif @purchase.shipping_service.web_carrier_name == 'usps' %>
+	          		<%= image_tag '/images/company_logos/usps_logo_small.jpg',:size => "30x30"  %>
+	          	<% end %>
+				</p>
+
+				<p>
+				  <b>Shipping Service:</b>  
+				   <%= @purchase.shipping_service.Name%><br />
+				</p>
+	   
+				<p>
+				  <b>Shipping Cost:</b>
+					<%=  @purchase_shipping  %>
+				</p>
+
+                  <%   unless controller.action_name == 'checkout_receipt'   %>
+                      <%= link_to 'Edit Shipping Service', { :controller => "ship_tos", :action => "shipping_services"} , :class => "btn btn-default"   ,:data => {:theme => "e",  :role => "button" ,:ajax=> "false"} %>
+
+                  <% end  %>
+</div>
+
+

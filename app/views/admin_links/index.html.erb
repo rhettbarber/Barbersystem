@@ -1,0 +1,27 @@
+<%= image_tag '/images/headers/admin-links.png' %>
+
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Url</th>
+  </tr>
+
+<% @admin_links.each do |admin_link| %>
+  <tr>
+    <td><strong><%=h admin_link.name %></strong></td>
+    <td><%=h admin_link.description %></td>
+
+    <td><%= link_to( image_tag('/images/buttons/go-green-arrow.png', :border => 0, :width => 150),  admin_link.url ) %></td>
+
+    <td><%= link_to 'Show', admin_link %></td>
+    <td><%= link_to 'Edit', edit_admin_link_path(admin_link) %></td>
+    <td><%= link_to 'Destroy', admin_link, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New admin_link', new_admin_link_path %>

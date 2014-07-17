@@ -1,0 +1,33 @@
+
+
+<h1>
+<%= render :partial => "shared/flash" %>
+</h1>
+
+
+
+<h3> <div id='boldStuff' align="center">Quote Id not found</div> </h3>
+
+
+
+
+
+
+  users/credit_card
+
+
+
+
+<% if @card_message %>
+
+Credit Card Entry
+
+@response.message: <%= @response.message  %><br />
+@response.params: <%= @response.params  %> <br />
+
+@response.authorization: <%= @response.authorization  %> <br />
+@response.avs_result: <%= @response.avs_result  %> <br />
+@response.cvv_result: <%= @response.cvv_result  %> <br />
+@response.test: <%= @response.test  %> <br />
+
+<% end  %>

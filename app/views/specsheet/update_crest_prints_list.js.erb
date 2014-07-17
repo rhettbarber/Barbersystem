@@ -1,0 +1,132 @@
+console.log("begin  specsheet/crest_prints_list.js.erb");
+
+
+$("#crest_prints_list").html(  '<%= escape_javascript( render :partial => "specsheet/admin_crest_prints_list"  , :layout => false ) %>' );
+$("#admin_crest_print_choices").controlgroup();
+$("#admin_crest_print_choices_to_remove").controlgroup();
+
+$("#submit_add_crest_prints").button();
+$("#submit_remove_crest_prints").button();
+$("#submit_default_crest_print").button();
+
+$('#submit_default_crest_print').click(function(e) {
+    console.log("submit_default_crest_print")
+    setDefaultCrestPrint();
+});
+
+$('#submit_add_crest_prints').click(function(e) {
+    console.log("submit_add_crest_prints")
+    addCrestPrints();
+});
+
+$('#submit_remove_crest_prints').click(function(e) {
+    console.log("submit_remove_crest_prints")
+    removeCrestPrints()
+});
+
+console.log("end  specsheet/crest_prints_list.js.erb");
+
+
+
+
+
+
+
+
+
+
+<% if @sss %>
+
+
+//$("#page").trigger("pagecreate");
+//$("#crest_prints_list").page();
+
+$("#specsheet").html(  '<%= escape_javascript( render :partial => "specsheet/specsheet_image" ) %>' );
+
+
+<% if @item %>
+$("#item_itemlookupcode").html("<%= @item.ItemLookupCode %>");
+$("#item_extended_description").html("<%= @item.ExtendedDescription %>");
+$("#item_description").html("<%= @item.description_before_color_and_size %>");
+<% end %>
+
+<%   if @design    && @design != 'x' %>
+$("#design_itemlookupcode").html("<%= @design.ItemLookupCode %>");
+$("#design_description").html("<%= @design.Description %>");
+<% end %>
+
+<%  if  @your_unit_price   %>
+$("#your_unit_price").html("<%= number_to_currency( @your_unit_price ) %>");
+<% end  unless  @your_unit_price == 0.01 %>
+
+
+
+console.log("end  specsheet/update_specsheet.js.erb");
+
+
+
+
+<%  if @specsheet_image  %>
+            var imageUrl     =    <%=@specsheet_image %>
+            $('#specsheet_table').css('background-image', 'url(' + imageUrl + ')');
+<% end   %>
+
+
+ <% if @item %>
+            $("#item_itemlookupcode").html("<%= @item.ItemLookupCode %>");
+            $("#item_extended_description").html("<%= @item.ExtendedDescription %>");
+            $("#item_description").html("<%= @item.description_before_color_and_size %>");
+<% end %>
+
+<%   if @design    && @design != 'x' %>
+            $("#design_itemlookupcode").html("<%= @design.ItemLookupCode %>");
+            $("#design_description").html("<%= @design.Description %>");
+<% end %>
+
+<%  if  @your_unit_price   %>
+            $("#your_unit_price").html("<%= number_to_currency( @your_unit_price ) %>");
+<% end  unless  @your_unit_price == 0.01 %>
+
+
+console.log("end partial specsheet/update_specsheet.js.erb");
+
+
+
+
+<%#= raw escape_javascript( render :partial => "tasks" ) %>
+
+    page.replace_html 'combo_image', render(:partial => "specsheet/specsheet_image")  if @item && @design
+    page.replace_html 'specsheet_image', image_tag(@specsheet_image) if @specsheet_image unless  @item && @design
+
+    page.replace_html 'item_itemlookupcode', @item.ItemLookupCode if @item
+    page.replace_html 'item_extended_description', @item.ExtendedDescription if @item
+    page.replace_html 'item_description', @item.description_before_color_and_size  if @item
+
+    page.replace_html 'design_itemlookupcode', @design.ItemLookupCode          if @design    && @design != 'x'
+    page.replace_html 'design_description', @design.Description       if @design    && @design != 'x'
+
+    page.replace_html 'your_unit_price',  @your_unit_price              if  @your_unit_price   unless  @your_unit_price == 0.01
+
+     <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

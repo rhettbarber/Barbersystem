@@ -1,0 +1,25 @@
+<h1>Listing clone_item_requests</h1>
+
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Clone item type</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @clone_item_requests.each do |clone_item_request| %>
+  <tr>
+    <td><%= clone_item_request.item.ItemLookupCode %></td>
+    <td><%= clone_item_request.clone_item_type.name %></td>
+    <td><%= link_to 'Show', clone_item_request %></td>
+    <td><%= link_to 'Edit', edit_clone_item_request_path(clone_item_request) %></td>
+    <td><%= link_to 'Destroy', clone_item_request, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Clone item request', new_clone_item_request_path %>

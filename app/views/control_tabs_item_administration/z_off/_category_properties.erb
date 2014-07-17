@@ -1,0 +1,54 @@
+<div style="float:left;width:100%;height:30px;background-color:darkblue;color:white;font-size:14px;font-family:Arial,Helvetica;">
+Category Properties
+</div><br />
+
+<div style="color:red;font-size:20px;"><%= flash[:notice] %></div>
+
+<% category ||= @category %>
+<div id='category_technical_editor' style="text-align:left;width:640px;height:400px;">
+					<table>
+		<%  form_for:category, category , :url => { :controller => "categories", :action => "update" } do |f|  %>	
+				<%= f.error_messages %>
+				
+				<%= hidden_field_tag "id", category.id %>
+
+				<p>
+					<b><%= f.text_field( :Name ,:size => 31 ) %>--Category name</b><br />
+				</p>
+				<p>
+					<b><%= f.text_field( :Code ,:size => 4 ) %>--Category Code</b><br />
+				</p>
+				<p>
+					<b><%= f.text_field( :breast_print ,:size => 1 ) %>--Breast Print</b><br />
+				</p>
+				<p>
+					<b><%= f.text_field( :category_specific_breast_print ,:size => 1 ) %>--Category Specific Breast Print</b><br />
+				</p>
+				<p>
+					<b><%= f.text_field( :prefix ,:size => 2 ) %>--Prefix</b><br />
+				</p>
+				<p>
+					<b><%=   select("category", "category_class_id", CategoryClass.find(:all,:order => "name ASC").collect {|p| [ p.name, p.id ] } ,{:selected =>  category.category_class_id  } ) %>--category_class</b><br />
+				</p>
+				<p>
+					<b><%= f.text_field( :use_generic_department ,:size => 1 ) %>--Use Generic Department</b><br />
+				</p>
+				<p>
+					<b><%= f.text_field( :web_category ,:size => 1 ) %>--Web Category</b><br />
+				</p>
+				<p>
+					<b><%= f.text_field( :use_picturename ,:size => 1 ) %>--Use Picture Name </b>(instead of auto-generated url-mostly for non-decoratable items only)<br />
+				</p>
+				<p>
+					<b><%= f.text_field( :visible ,:size => 1 ) %>--Visible</b><br />
+				</p>
+				<p>
+					<b><%= submit_tag('Update Category') %></b><br />
+				</p>
+				</table>
+		<%  end  %> 
+</div>
+
+
+<br />
+<%= link_to "Back to Departments/Categories", :controller => 'categories', :action => 'departments_categories' %>

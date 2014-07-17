@@ -1,0 +1,19 @@
+
+
+<%  if @results.totalhits > '0'  %>
+        <% @results.results.each do |result| %>
+        <div class="result-set">
+                              <% if result  %>
+                              <div class="title"> <%=  link_to result.title.html_safe, result.url  %></div>
+                              <div class="date"> <%=  result.date  %></div>
+                              <div class="abstract"> <%=  result.abstract.html_safe  %></div>
+                              <div class="clickurl"> <%=  result.clickurl  %></div>
+                              <div class="dispurl"> <%=  result.dispurl  %></div>
+                              <div class="size"> <%=  result.size  %></div>
+                              <div class="url"> <%=  link_to result.url , result.url  %></div>
+                              <% end  %>
+                      </div>
+        <% end  %>
+<% else  %>
+No Results
+<% end  %>

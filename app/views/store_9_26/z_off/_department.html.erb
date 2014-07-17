@@ -1,0 +1,28 @@
+<% @purchase_opposite_category_ids = @purchase.opposite_category_ids if @purchase %>
+<% if department.categories %>
+        <% department.categories.sort_by{|a| a.Name}.each do |category|  -%>
+                <% logger.debug "------------------------------------- for category  in  department.categories " -%>
+                <% if @purchase -%>
+                                <% if @incomplete_symbiont  -%>
+                                        <% if !@purchase_opposite_category_ids.nil? -%>
+                                            <% logger.debug "############################################################# BEGIN NOW " -%>
+                                            <% logger.debug "------------------------------------- @purchase_opposite_category_ids: #{@purchase_opposite_category_ids} " -%>
+                                            <% logger.debug "------------------------------------- category.id.to_s: #{category.id.to_s} " -%>
+                                            <% logger.debug "------------------------------------- @purchase_opposite_category_ids.include?(category.id.to_s): #{@purchase_opposite_category_ids.include?(category.id.to_s)} " -%>
+                                            <% if	@purchase_opposite_category_ids.include?(category.id.to_s) or @purchase_opposite_category_ids.include?(category.id)    -%>
+                                                <%= render(:partial => "store/category",:locals => { :category => category, :department => department } ) -%>
+                                            <% end -%>
+                                            <% logger.debug "############################################################# END NOW " -%>
+                                        <% end -%>
+                                <% elsif @incomplete_symbiont == false  -%>
+                                        <% logger.debug "------------------------------------- @incomplete_symbiont == false  " -%>
+                                        <%= render(:partial => "store/category",:locals => { :category => category, :department => department } ) -%>
+                                <% end -%>
+                    <% else -%>
+                                <% logger.debug "------------------------------------- !@purchase " -%>
+                                <%= render(:partial => "store/category",:locals => { :category => category, :department => department } ) -%>
+                    <% end -%>
+            <% end -%>
+<% else -%>
+    <% logger.debug "-------------------------------------ERROR -  no department.categories " -%>
+<% end -%>

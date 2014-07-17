@@ -1,0 +1,159 @@
+<h1>ItemSalesReports#test</h1>
+<p>Find me in app/views/item_sales_reports/test.html.erb</p>
+
+
+
+<%= stylesheet_link_tag 'jqplot/main'  %>
+<%= javascript_include_tag 'jqplot/jquery-1.4.2.min.js'  %>
+<%= javascript_include_tag 'jqplot/jquery.jqplot.js'  %>
+<%= javascript_include_tag 'jqplot/plugins/jqplot.canvasTextRenderer.min.js'  %>
+<%= javascript_include_tag 'jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js'  %>
+<%= javascript_include_tag 'jqplot/plugins/jqplot.dateAxisRenderer.min.js'  %>
+<%= javascript_include_tag 'jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js'  %>
+<%= javascript_include_tag 'jqplot/plugins/jqplot.highlighter.min.js'  %>
+<%= javascript_include_tag 'jqplot/plugins/jqplot.cursor.min.js'  %>
+
+
+<div  id="chart2" class="jqPlot jqplot-target" style="height: 320px; width: 480px; position: relative;">
+
+</div>
+
+<script type="text/javascript">
+line1=[['23-May-08', 578.55], ['20-Jun-08', 566.5], ['25-Jul-08', 480.88], ['22-Aug-08', 509.84],
+    ['26-Sep-08', 454.13], ['24-Oct-08', 379.75], ['21-Nov-08', 303], ['26-Dec-08', 308.56],
+    ['23-Jan-09', 299.14], ['20-Feb-09', 346.51], ['20-Mar-09', 325.99], ['24-Apr-09', 386.15]];
+
+
+plot2 = $.jqplot('chart2', [line1], {
+    title:'Mouse Cursor Tracking',
+    axes:{
+        xaxis:{
+            renderer:$.jqplot.DateAxisRenderer,
+            rendererOptions:{tickRenderer:$.jqplot.CanvasAxisTickRenderer},
+            tickOptions:{
+                formatString:'%b %#d, %Y',
+                fontSize:'10pt',
+                fontFamily:'Tahoma',
+                angle:-30
+            }
+        },
+        yaxis:{
+          tickOptions:{ formatString:'$%.2f'} }
+      },
+        highlighter: {show: true},
+        cursor: {show:false}
+});
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @example %>
+
+
+
+<div  id="chart2" class="jqPlot jqplot-target">
+
+</div>
+
+<script type="text/javascript">
+
+  var cosPoints = [  [ 0, 1 ]  , [ 1,  2 ]  , [ 3 , 4 ] ];
+
+
+
+
+plot1 = $.jqplot('chart2', [cosPoints ], {
+    title:'Monthly Item Sales',
+    series:[
+        {lineWidth:2, markerOptions:{style:'dimaond'}},
+        {showLine:false, markerOptions:{size: 7, style:'x'}},
+        {markerOptions:{style:'circle'}},
+        {lineWidth:5, markerOptions:{style:'filledSquare', size:14}},
+    ],
+
+    axes:{
+          xaxis:{
+            label:'Month',
+            autoscale: true,
+            labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+          },
+          yaxis:{
+            label:'Sale Total',
+            autoscale: true,
+            labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+          }
+    }
+});
+
+</script>
+
+
+
+
+
+
+
+
+
+<div  id="chart1" class="jqPlot jqplot-target">
+
+</div>
+
+<script type="text/javascript">
+
+  var cosPoints = [];
+for (var i=0; i<2*Math.PI; i+=0.4){
+  cosPoints.push([i, Math.cos(i)]);
+}
+var sinPoints = [];
+for (var i=0; i<2*Math.PI; i+=0.4){
+   sinPoints.push([i, 2*Math.sin(i-.8)]);
+}
+var powPoints1 = [];
+for (var i=0; i<2*Math.PI; i+=0.4) {
+    powPoints1.push([i, 2.5 + Math.pow(i/4, 2)]);
+}
+var powPoints2 = [];
+for (var i=0; i<2*Math.PI; i+=0.4) {
+    powPoints2.push([i, -2.5 - Math.pow(i/4, 2)]);
+}
+plot1 = $.jqplot('chart1', [cosPoints, sinPoints, powPoints1, powPoints2], {
+    title:'Line Style Options',
+    series:[
+        {lineWidth:2, markerOptions:{style:'dimaond'}},
+        {showLine:false, markerOptions:{size: 7, style:'x'}},
+        {markerOptions:{style:'circle'}},
+        {lineWidth:5, markerOptions:{style:'filledSquare', size:14}}
+    ]
+});
+
+</script>
+
+<% end  %>

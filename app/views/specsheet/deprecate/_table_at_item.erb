@@ -1,0 +1,9 @@
+<% if @show_admin %>
+   table_at_item
+<% end %>
+
+
+
+   <div  id="specsheet_table" style="max-width: 100%;">
+     <%= image_tag   '/images/item_specsheets/' + @item.PictureName.gsub(".jpg", "").gsub(".png", "")  + '.jpg'  , :style => "max-width:100%;" %>
+ </div>

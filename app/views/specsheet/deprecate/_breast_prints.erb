@@ -1,0 +1,25 @@
+
+ <style type="text/css">
+
+
+
+
+
+ </style>
+
+
+
+
+<% if @breast_prints %>
+        <div id="breast_print_choices" style="float:left;display: none;">
+
+                    <div id="breast_print_message" style="font-size:17px;float:left;width:100%;text-align: center;font-weight: bolder;">Choose a breast print for the front of your shirt.</div><div style="width:25px;font-size:17px;float:right;"><%= image_tag( "/images/buttons/48x48-no.png", :border => 0 ,:size => "25x25" , :onclick => "$('#breast_print_choices').hide();") %>
+                    </div>
+
+                     <%  @breast_prints.each do |bp| %>
+                                  <div id="breast_print_choice" style="float:left;">
+                                            <%=   image_tag("http://dixieoutfitters.com/images/item_specsheets/" + bp.ItemLookupCode + '.png', :size => "100x100", :border => 0 , :data_itemlookupcode => bp.ItemLookupCode, :class => "breast_print" ) %>
+                                  </div>
+                      <% end %>
+        </div>
+<% end %>

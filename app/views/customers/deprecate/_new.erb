@@ -1,0 +1,97 @@
+
+<%  @customer ||= Customer.new  %>
+
+
+
+<style type="text/css">
+  p {
+    margin-left:45px;
+}
+  </style>
+
+
+<div style="width:850px;text-align:center;font-size:23px;">Customer Billing information</div>
+
+<%= error_messages_for :customer %>
+
+<%= form_for(:customer, :url => customers_path, :remote => :true) do |f| %>
+  <p>
+    <b>Company-(optional)</b><br />
+    <%= f.text_field :Company ,:class => "jsrequired" %>
+  </p>
+
+  <p>
+    <b>Firstname</b><br />
+    <%= f.text_field :FirstName,:class => "jsrequired"  %>
+  </p>
+
+  <p>
+    <b>Lastname</b><br />
+    <%= f.text_field :LastName,:class => "jsrequired"  %>
+  </p>
+
+
+  <p>
+    <b>Address</b><br />
+    <%= f.text_field :Address ,:class => "jsrequired" %>
+  </p>
+
+  <p>
+    <b>Address2 (optional)</b><br />
+    <%= f.text_field :Address2 %>
+  </p>
+
+  <p>
+    <b>City</b><br />
+    <%= f.text_field :City ,:class => "jsrequired" %>
+  </p>
+
+  <p>
+    <b>State</b><br />
+    <%= f.text_field :State ,:class => "jsrequired" %>
+  </p>
+
+
+  <p>
+    <b>Zip</b><br />
+    <%= f.text_field :Zip ,:class => "jsrequired" %>
+  </p>
+
+ <p>
+    <b>Taxnumber-(optional)</b><br />
+    <%= f.text_field :TaxNumber %>
+  </p>
+
+
+    
+    <%= hidden_field_tag("Country", "United States" )  %>
+
+
+  <p>
+    <b>Emailaddress</b><br />
+    <%= f.hidden_field :EmailAddress, :value => @user.email %>
+	<%= h @user.email %>
+  </p>
+
+  <p>
+    <b>Faxnumber (optional)</b><br />
+    <%= f.text_field :FaxNumber %>
+  </p>
+
+  <p>
+    <b>Phonenumber</b><br />
+    <%= f.text_field :PhoneNumber,:class => "jsrequired"  %>
+  </p>
+  
+  <p>
+    <b>Use Same address for shipping</b><br />
+                    <%= check_box_tag "use_billing_for_shipping", value = "1", checked = true  %>
+  </p>
+
+
+  <p>
+    <%= submit_tag "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', customers_path unless action_name == 'new' %>

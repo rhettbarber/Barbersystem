@@ -1,0 +1,6 @@
+$('#items').append('<%= j render(@items) %>');
+<% if @products.next_page %>
+$('.pagination').replaceWith('<%= j will_paginate(@items) %>');
+<% else %>
+$('.pagination').remove();
+<% end %>

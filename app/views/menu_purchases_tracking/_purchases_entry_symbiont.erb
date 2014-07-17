@@ -1,0 +1,61 @@
+
+<% if purchases_entry.item_id  == 0 or  purchases_entry.item_id  == '0'  %>
+blank part of symbiont
+<% else %>
+			<% item =  Item.find(purchases_entry.item_id)  %>
+			<% quantity = purchases_entry.QuantityOnOrder %>
+					
+					
+					      <tr id="<%= 'purchases_entry_' + purchases_entry.id.to_s %>">
+					                <td  class="purchases_entry_delete_printable">
+					                        
+					        		</td>    		
+					                <td  class="purchases_entry_master_image_printable">	
+														<%=   image_tag( item.image_url( purchases_entry.master_department_id  ,'item_thumbnails/','x') ,:size => "80x80")    %>	
+					        		</td>
+					                <td  class="purchases_entry_slave_image_printable">	
+										   <%  if purchases_entry.opposite_entry != '0'  %>	
+										   				<%  if purchases_entry.opposite_entry.item %>
+					                                    <%=   link_to(image_tag( 'item_thumbnails/' + purchases_entry.opposite_entry.item.PictureName ,:size => "100x100",  :border => 0), { :action => "enlarge_cart_image",		:item => purchases_entry.item_id  }, :popup => ['new_window_name', 'height=400,width=400'])  %>
+								        				<% end %>
+											<%  end  %>
+					        		</td>					       
+					                <td  class="purchases_entry_quantity_printable">        
+					                                    <%= form_remote_tag( :url => { :controller => "barber_store",  :action => "update_QuantityOnOrder", :id =>purchases_entry.id},  :html =>{ }) %>		                                       
+					                                    <%= text_field "purchases_entries", "QuantityOnOrder", "size" => 2, :value=> 
+					                                    number_with_precision(purchases_entry.QuantityOnOrder,precision=0), :class => 'input_text_short', :onblur => remote_function(:url => {:action => "update_symbiont_QuantityOnOrder", :id => purchases_entry.id}, :with => 'Form.serialize(this.form)') %>
+					                                    <%= end_form_tag %> 
+					                </td>
+					              
+					                <td  class="purchases_entry_itemlookupcode_printable"><%= item.ItemLookupCode %></td>
+					              <td  class="purchases_entry_symbiont_description_printable">
+					              	<%  if purchases_entry.opposite_entry != '0'  %>
+					              					<%= purchases_entry.opposite_entry.ItemLookupCode  %>
+													<%= purchases_entry.opposite_entry.Description  %><br />
+													Printed on: <%= purchases_entry.ItemLookupCode  %>
+													<%= purchases_entry.Description  %>	
+													<%= link_to "View Combination", :controller => "specsheet", :purchases_entry_id => purchases_entry.id  if  purchases_entry.complete_symbiont %>
+													
+									<%  end  %>
+									
+								   </td>
+								<td  class="purchases_entry_full_unit_price_printable">   
+										<div  id="full_unit_price_<%= purchases_entry.id %>">
+											<%  if purchases_entry.complete_symbiont  %>
+									  				<%= purchases_entry.symbiont_full_unit_price   %>
+											<%  end  %> 
+									  </div> 
+								</td>
+							    <td  class="purchases_entry_full_extended_price_printable"> 
+									<div  id="full_extended_price_<%= purchases_entry.id %>">  
+											<%  if purchases_entry.complete_symbiont  %>
+													<%= purchases_entry.symbiont_full_extended_price  %> 
+											<%  end  %> 
+									</div>  
+								</td>
+					      </tr>
+<%  end  %>
+    
+
+
+

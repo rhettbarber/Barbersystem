@@ -1,0 +1,50 @@
+
+
+
+
+<h1>Listing <%= @missing_elements.size if @missing_elements %> missing_elements </h1>
+
+<table style="text-align:center;">
+  <tr>
+  	<th>./</th>
+    <th>./</th>
+    <th>Path/</th>
+    <th>Times missed/</th>
+    <th>Request referer/</th>
+  </tr>
+  <tr>	
+    <th>.</th>
+    <th>Request host</th>
+    <th>Request remote ip</th>
+    <th>Created at</th>
+    <th>Updated at</th>
+    <th>Notes</th>
+  </tr>
+
+<% for missing_element in @missing_elements %>
+				  <tr>
+				    <td></td>
+				    <td>.</td>
+				    <td style="color:red;"><%=h missing_element.path %></td>
+				    <td><%=h missing_element.times_missed %></td>
+				    <td><%=h missing_element.request_referer %></td>
+				  </tr>
+				  <tr>
+				  	
+				  	<td><%= link_to "Mark Not Valid", :action => 'mark_fixed',:id => missing_element.id %>	</td>
+				    <td><%=h missing_element.request_host %></td>
+				    <td><%=h missing_element.request_remote_ip %></td>
+				    <td><%=h missing_element.created_at %></td>
+				    <td><%=h missing_element.updated_at %></td>
+				    <td><%=h missing_element.notes %></td>
+				    <td><%= link_to 'Show', missing_element %></td>
+				    <td><%= link_to 'Edit', edit_missing_element_path(missing_element) %></td>
+				    <td><%= link_to 'Destroy', missing_element, :confirm => 'Are you sure?', :method => :delete %></td>
+				  </tr>
+				  <tr><td colspan="5" style="background-color:grey;"></td></tr> 
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New missing_element', new_missing_element_path %>

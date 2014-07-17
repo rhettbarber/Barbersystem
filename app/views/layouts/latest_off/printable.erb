@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% if admin? %>
+      <!--  show admin information -->
+      <!--  current_layout: <%= current_layout  %>  -->
+      <!--  request.fullpath: <%=  request.fullpath  %>  -->
+  <% end %>
+
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title> Dixie Outfitters</title>
+
+  <%= stylesheet_link_tag '/assets/jquery_mobile/jquery.mobile' %>
+  <%= stylesheet_link_tag '/assets/jquery_mobile/jquery.mobile.custom.structure' %>
+  <%= stylesheet_link_tag '/assets/jquery_mobile/jquery.mobile.custom.theme' %>
+  <%= stylesheet_link_tag '/assets/bootstrap/bootstrap_customized' %>
+  <%= stylesheet_link_tag '/assets/purchases_checkout/purchases_checkout' %>
+  <!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">-->
+
+
+  <%= stylesheet_link_tag '/assets/application/application' %>
+
+  <%= stylesheet_link_tag '/assets/bootstrap/bootstrap_customized_print' , :media => "print" %>
+  <%= stylesheet_link_tag '/assets/purchases_checkout/purchases_checkout_print' , :media => "print" %>
+
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="/assets/html5shiv.js"></script>
+  <script src="/assets/respond.min.js"></script>
+  <![endif]-->
+
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+  <!--<script src="/assets/jquery_mobile/jquery.mobile.custom.js"></script>-->
+  <script src="/assets/store/purchases.js"></script>
+
+</head>
+<body class="printable">
+
+
+            <% if request.path  == '/purchases/checkout_review' %>
+                            <%  @show_class = "show_printable" %>
+            <% else %>
+                            <% @show_class = "show" %>
+            <% end %>
+
+            <div id="the_yield" style="margin-left:auto;margin-right:auto;">
+              <div class="<%=  @show_class %>">
+                <% if flash[:notice] != nil -%><div class="alert alert-danger"><%= flash[:notice] %>&nbsp;</div><% end -%>
+                <%= yield %>
+              </div>
+            </div>
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @bootstrapped %>
+
+
+
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <% if admin? %>
+          <!--  show admin information -->
+          <!--  current_layout: <%= current_layout  %>  -->
+          <!--  request.fullpath: <%=  request.fullpath  %>  -->
+      <% end %>
+
+
+      <!-- Meta, title, CSS, favicons, etc. -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+
+
+      <title> Dixie Outfitters</title>
+
+      <%= stylesheet_link_tag '/assets/application/application_application' %>
+      <%= stylesheet_link_tag '/assets/articles/application_articles' %>
+      <%= stylesheet_link_tag '/assets/application/cart' %>
+      <%= stylesheet_link_tag '/assets/bootstrap_customized' %>
+      <%#= stylesheet_link_tag '/assets/responsive-tables' %>
+      <%= stylesheet_link_tag '/assets/store/purchases_checkout' %>
+      <%= stylesheet_link_tag '/assets/jquery_mobile/jquery.mobile.custom.structure' %>
+      <%= stylesheet_link_tag '/assets/jquery_mobile/jquery.mobile.custom.theme' %>
+
+      <%= stylesheet_link_tag '/assets/bootstrap_customized_print' , :media => "print" %>
+      <%= stylesheet_link_tag '/assets/store/purchases_checkout_print' , :media => "print" %>
+
+      <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!--[if lt IE 9]>
+      <script src="/assets/html5shiv.js"></script>
+      <script src="/assets/respond.min.js"></script>
+      <![endif]-->
+
+    </head>
+    <body class="printable">
+
+    <%= render :partial => "application/menu" %>
+    <%= render :partial => "application/modal" %>
+
+    <% v = "v" %>
+
+    <% if request.path  == '/purchases/checkout_review' %>
+        <%  @show_class = "show_printable" %>
+    <% else %>
+        <% @show_class = "show" %>
+    <% end %>
+
+
+    <div id="the_yield" style="margin-left:auto;margin-right:auto;">
+      <div class="<%=  @show_class %>">
+        <% if flash[:notice] != nil -%><div class="alert alert-danger"><%= flash[:notice] %>&nbsp;</div><% end -%>
+        <%= yield %>
+      </div>
+    </div>
+
+<%#= render :partial => "application/share_link" %>
+
+    </body>
+
+
+    <!-- JavaScript
+    ================================================== -->
+    <!-- NORMALLY Placed at the end of the document so the pages load faster -->
+    <script src="/assets/jquery/jquery.js"></script>
+    <script src="/assets/jquery/jquery_ujs.js"></script>
+    <script src="/assets/jquery/array_utilities.js"></script>
+    <script src="/assets/bootstrap.js"></script>
+    <!--<script src="/assets/responsive-tables.js"></script>-->
+    <script src="/assets/jquery/bootstrap-slider.js"></script>
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <script src="/assets/holder.js"></script>
+    <script src="http://malsup.github.com/jquery.form.js"></script>
+    <script src="/assets/application/application_application.js"></script>
+    <script src="/assets/jquery_mobile/jquery.mobile.custom.js"></script>
+
+    </html>
+
+
+
+
+
+
+
+
+<% end %>
+
+
+

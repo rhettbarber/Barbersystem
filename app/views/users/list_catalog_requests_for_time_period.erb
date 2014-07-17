@@ -1,0 +1,59 @@
+<h1>Listing <%= @selected_purchases_entries.size %> Free Catalog Requests for <%= @website_title %> </h1>
+
+<%=  form_tag( {:controller => 'users' ,  :action => 'list_catalog_requests_for_time_period'   } ) do  %>
+	<p> 
+		<%=select_date(@begin_date, :order => [ :month, :day, :year] ,:prefix => 'begin_date' ) %> Begin Date
+	</p>
+	
+	<p> 
+		<%=select_date(@end_date, :order => [ :month, :day, :year], :prefix => 'end_date' ) %> End Date
+	</p>
+		
+	<%=  select("website", "id", @websites.collect {|p| [ p.title , p.id ] } ,{:selected =>  @selected_website_id  } ) %>
+	
+	<%= submit_tag "Search" %>
+<% end %>
+
+<h2>Begin Date:<%= @begin_date %> End Date: <%= @end_date %> Searching For: <%= @catalog_name %> </h2>
+
+
+<div style="border:solid black 1px;float:left;padding:5px;margin:5px;width:100%;">
+<table>
+  <tr>
+    <th>Time</th>
+    <th>AccountNumber</th>
+    <th>Company</th>
+    <th>FirstName</th>
+    <th>LastName</th>
+    <th>Address</th>
+    <th>Address2</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Zip</th>
+  </tr>
+
+<% @selected_purchases_entries.each do |purchases_entry| %>
+<% if purchases_entry.purchase.customer %>
+  <tr>
+    <td><%=h purchases_entry.purchase.Time.to_s[0..9] %>,</td>
+    <td><%=h purchases_entry.purchase.customer.AccountNumber %>,</td>
+    <td><%=h purchases_entry.purchase.customer.Company %>,</td>
+    <td><%=h purchases_entry.purchase.customer.FirstName %>,</td>
+    <td><%=h purchases_entry.purchase.customer.LastName %>,</td>
+    <td><%=h purchases_entry.purchase.customer.Address %>,</td>
+    <td><%=h purchases_entry.purchase.customer.Address2 %>,</td>
+    <td><%=h purchases_entry.purchase.customer.City %>,</td>
+    <td><%=h purchases_entry.purchase.customer.State %>,</td>
+    <td><%=h purchases_entry.purchase.customer.Zip %></td>
+  </tr>
+<% end %>  
+<% end if @selected_purchases_entries %>
+</table>
+
+</div>
+
+<% link_to "Export these catalog requests to CSV", :controller => 'users', :action => 'export_catalog_requests_to_csv',:selected_purchases_entries => @selected_purchases_entries, :begin_date => @begin_date, :end_date => @end_date %>
+
+
+<br />
+

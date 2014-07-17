@@ -1,0 +1,86 @@
+Purchase symbiote category class id:<br />
+<%= @purchase.symbiote.item.category.category_class_id %><br />
+<br />
+Purchase symbiote category id:<br />
+<%= @purchase.symbiote.item.category.id %><br />
+<br />
+Purchase symbiote category class name:<br />
+<%= @purchase.symbiote.item.category.category_class.name %><br />
+<br />
+<%= link_to "See all categories in this class", :controller => 'opposites', :action => 'all_categories_in_this_class' %>
+<br />
+Purchase symbiote category prefix:<br />
+<%= @purchase.symbiote.item.category.prefix %><br />
+<br />
+ Purchase symbiote opposite category ids<br />
+ <%= @purchase_symbiote_item_category_category_class.opposite_category_ids  %><br />
+<h1>Listing Opposite Item Type Categories</h1>
+<h3> To see what icons do, put mouse on icon and look at status bar. </h3>
+<table>
+  <tr>
+    <th>Status</th>  	
+    <th>Image</th>
+    <th>Prefix</th>
+    <th>Category class Name</th>
+    <th>Category Code</th>
+    <th>Category Name</th>
+    <th>Category Id</th>
+  </tr>
+
+<% for category in @categories %>
+<% if category.category_class.item_type != @purchase.symbiote_type    %>
+<% if category.category_class.item_type == 'master' or category.category_class.item_type == 'slave'or category.category_class.item_type == 'unknown' %>
+<% first_item = category.items.first %>
+<% if first_item != nil %>
+
+
+<% if category.category_class.item_type == 'master' %>
+	<% department = first_item.masters_department_decides_default_department_id %>
+<% else %>
+	<% department = first_item.design_decides_opposites_department %>
+<% end %>
+
+  <tr>
+    <td>
+    <% if @purchase_symbiote_item_category_category_class.opposite_category_ids.split(',',77777).to_a.include?(category.id.to_s)   %>
+    	<%=  image_tag("/images/buttons/checkmark-green.jpg",:border => 0,:size => "10x10") %>
+    <% else %>	
+    	<%=  image_tag("/images/buttons/cancel-x-mark-red.jpg",:border => 0,:size => "10x10")%>
+    <% end %>	
+	</td>
+	
+	<td> <%= image_tag( first_item.image_url( department  ,'item_thumbnails/','x') ,:size => "30x30")    %> </td>
+	
+    <td><%=h category.prefix %></td>
+    <td><%=h category.category_class.name if category.category_class %></td>
+    <td><%=h category.Code %></td>
+    <td><%=h category.Name %></td>
+    <td><%=h category.id %></td>
+    <td>
+    <% if @purchase_symbiote_item_category_category_class.opposite_category_ids.split(',',77777).to_a.include?(category.id.to_s)   %>
+    	<%= link_to image_tag("/images/buttons/delete.gif",:border => 0), :controller => 'opposites', :action => 'remove_category_from_opposites',:id => category.id %>
+    <% else %>	
+    	<%= link_to image_tag("/images/buttons/add.gif",:border => 0), :controller => 'opposites', :action => 'add_category_into_opposites',:id => category.id %>
+    <% end %>	
+	</td>
+    <td>
+    	<%= link_to image_tag("/images/buttons/align.gif",:border => 0,:size => "20x20"), :controller => 'opposites', :action => 'align_category_to_symbiotes_category',:id => category.id %> 
+	</td>
+	<td>
+    	<%= link_to image_tag("/images/buttons/images.png",:border => 0,:size => "20x20"), :controller => 'opposites', :action => 'list_all_items_in_this_category',:id => category.id  %> 
+	</td>
+	<td>
+		<% if category.category_class_id == 31 %>    	
+    		<%= link_to image_tag("/images/buttons/alert.gif",:border => 0,:size => "20x20"), :controller => 'opposites', :action => 'list_all_items_in_this_category',:id => category.id  %> 
+		<% end %>
+	</td>
+  </tr>
+
+<% end %>  
+<% end %> 
+<% end %>
+<% end %>
+</table>
+
+<br />
+

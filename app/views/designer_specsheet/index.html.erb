@@ -1,0 +1,51 @@
+
+
+
+<div id="null_replace"></div>
+ <% @new = false %>
+
+ <% if params[:mobile] %>
+
+            <%= render(:partial => "designer_specsheet/specsheet_table_mobile") -%>
+              <%= render(:partial => "designer_specsheet/item_status_bar") -%>
+
+              <%= render(:partial => "designer_specsheet/specsheet_resize") if @designer   -%>
+
+              <%= render(:partial => "designer_specsheet/advanced_choices_menu") -%>
+              <%= render(:partial => "designer_specsheet/advanced_choices_administration") -%>
+              <% render :partial => 'designer_specsheet/custom_items' if @custom_items %>
+
+              <%= render :partial => "designer_specsheet/category_choices_background"    -%>
+              <%= render :partial => "designer_specsheet/category_choices_front"  -%>
+              <%= render :partial => "designer_specsheet/category_choices_back" -%>
+              <%= render :partial => "designer_specsheet/category_choices_product"   -%>
+              <%= render :partial => 'designer_specsheet/color_choices_pallete' %>
+              <%= render :partial => "designer_specsheet/details"  -%>
+
+ <% else %>
+
+
+        <div class="specsheet_container" >
+                  <%= render(:partial => "designer_specsheet/specsheet_table_double_before_with_spans") -%>
+                  <%= render(:partial => "designer_specsheet/item_status_bar") -%>
+
+                  <%= render(:partial => "designer_specsheet/specsheet_resize") if @designer   -%>
+
+                  <%= render(:partial => "designer_specsheet/advanced_choices_menu") -%>
+                  <%= render(:partial => "designer_specsheet/advanced_choices_administration") -%>
+                  <% render :partial => 'designer_specsheet/custom_items' if @custom_items %>
+
+                  <%= render :partial => "designer_specsheet/category_choices_background"    -%>
+                  <%= render :partial => "designer_specsheet/category_choices_front"  -%>
+                  <%= render :partial => "designer_specsheet/category_choices_back" -%>
+                  <%= render :partial => "designer_specsheet/category_choices_product"   -%>
+                  <%= render :partial => 'designer_specsheet/color_choices_pallete' %>
+                  <%= render :partial => "designer_specsheet/details"  -%>
+        </div>
+
+
+
+ <% end %>
+
+
+<%= render "designer_specsheet/select_lists" %>

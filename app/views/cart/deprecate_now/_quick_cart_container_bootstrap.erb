@@ -1,0 +1,55 @@
+
+
+
+ <div class="panel panel-default">
+   <div class="panel-heading">
+     <h4 class="panel-title">
+       <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#quick_cart_details">
+          <button class="btn btn-primary">Quick Cart</button>
+       </a>
+     </h4>
+   </div>
+   <div id="quick_cart_details" class="panel-collapse collapse">
+     <div class="panel-body"  style="text-align: left;">
+
+
+
+       <div id="quick_cart_container">
+         <%=  form_tag(  "add_to_cart" , :method => :put ) do -%>
+             <table style="border:solid black 1px; width:100%;">
+               <tr>
+                 <td style="background:lightgray;">
+                   Enter a part # to quickly add items to your cart
+                 </td>
+               </tr>
+               <% unless @singular_item_customer == true  %>
+                   <tr>
+                     <td>
+                       Place Item on hold:<%= check_box_tag "on_hold", "true", false -%>
+                       <%= link_to(  image_tag("/images/buttons/question-mark-orange-tiny.jpg",:border => 0), "/help/help_popup" ,:title=> "Place on Hold help." , :onclick=> "Modalbox.show(this.href, {title: this.title }); return false;"  ) %>
+                     </td>
+                   </tr>
+               <% end %>
+
+               <tr>
+                 <td>
+                   <%= text_field "purchases_entries", "ItemLookupCode",:value => "", :size => 12 -%><%= image_submit_tag('/images/buttons/plus.gif') -%>
+                 </td>
+               </tr>
+               <tr>
+                 <td>
+                   <%= text_field "purchases_entries", "QuantityOnOrder",:value => "", :size => 12 -%>Quantity (optional)
+                   <%= image_submit_tag('/images/buttons/plus.gif') -%>
+                 </td>
+               </tr>
+             </table>
+         <%  end  -%>
+       </div>
+
+
+
+
+     </div>
+   </div>
+ </div>
+

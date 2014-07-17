@@ -1,0 +1,34 @@
+<div  class="category_items">
+                <table id="product_designs_table" class="designs_table" >
+                  <tr>
+                          <%   @items_product.each do |item| %>
+                                             <%  if item  %>
+                                                                      <td>  <a href="/designer_specsheet/ajax_item_details"  title="Please choose product details." onclick="Modalbox.show(this.href, {title: this.title, evalScripts:true ,  params: {  item_id: <%= item.id %>  }  }); return false;">
+                                                                                   <%= image_tag(  '/images/item_thumbnails/' + item.PictureName + '.png' , :border => 0  , :width => '280' ,:alt =>  item.PictureName   , :class =>  'product_design anatips', :title => item.Description ,   :data_product_category_id => item.category_id ,   :data_product_id => item.id ) %>
+                                                                                  </a>
+                                                                      </td>
+                                              <% end  %>
+                           <% end %>
+                  </tr>
+                </table>
+      </div>
+
+<% if @from_ajax  %>
+
+ <script type="text/javascript">
+            console.log("begin render :partial => category_items_product);");
+            console.log("This runs javascript which updates the selected_category_advanced_combination variables. ");
+            console.log("It does not set any live styles or variables, only cached potentials. ");
+            console.log("For the breast print/little print the most popular opposite is chosen. ");
+
+
+
+            $('details_form').selected_category_id.value   =    <%=   @selected_category.id  %>  ;
+            $('details_form').selected_category_item_type.value   =    '<%=   @selected_category.category_class.item_type  %>'  ;
+
+
+//            ANAEMA.tips.setupTooltips();
+
+            console.log("end render :partial => category_items_product);");
+</script>
+<% end  %>

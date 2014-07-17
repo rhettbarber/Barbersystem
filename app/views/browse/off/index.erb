@@ -1,0 +1,8 @@
+
+<% @fragment_name ||= "unknown_items_cache_string" %>
+<% cache(@fragment_name ) do %>
+
+<%  image_tag("/images/headers/all-over-designer-series-available.jpg", :border => 0)  -%>
+<%=   render :partial => "shared_item/items" %>
+
+<% end  %>

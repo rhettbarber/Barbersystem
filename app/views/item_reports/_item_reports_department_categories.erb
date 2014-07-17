@@ -1,0 +1,10 @@
+		<div class="item_reports_department_header">     
+				<strong> Department: <%=  department.Name.capitalize  %></strong>
+		</div>
+		
+<%  @categories = Category.find( :all, :conditions => ["department_id = ?",department    ], :order => "Name ASC")   %>
+        <% for category  in  @categories  %>            
+											<%= render(:partial => "item_reports/item_reports_category",:locals => { :category => category, :department => department } ) %>
+			<% end %>
+			
+			

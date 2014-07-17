@@ -1,0 +1,19 @@
+
+<%= render :partial => "shared_admin/menu_opposites"%>
+				
+			
+			<% if @items %>
+				<%= render(:partial => "shared_admin/specsheet_combo_admin",:locals => {:item => @items_first_item }) %>
+				<% @items.each do |item| %>
+					<% if item.category.prefix == 'un' or @design.category.prefix == 'un' %>
+						<%= image_tag("/images/buttons/error.gif", :size => "200x200") %> Your design or item has prefix of Unknown. Please correct prefix!!!
+					<% end %>
+					<%= render(:partial => "opposites/specsheet_image",:locals => {:item => item}) %>
+				<% end %>
+			<% else %>	
+					<%= render(:partial => "shared_admin/specsheet_combo_admin",:locals => {:item => @item})  %>
+						<% if @item.category.prefix == 'un' or @design.category.prefix == 'un' %>
+							<%= image_tag("/images/buttons/error.gif", :size => "200x200") %> Your design or item has prefix of Unknown. Please correct prefix!!!
+						<% end %>
+					<%= render(:partial => "opposites/specsheet_image",:locals => {:item => @item}) %>
+			<% end %>

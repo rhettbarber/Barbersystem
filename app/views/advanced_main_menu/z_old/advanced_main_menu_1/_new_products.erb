@@ -1,0 +1,12 @@
+<div class='onclick_menu new_products_menu'>
+					<%= link_to ' <li> All Over Shirts </li>' ,:controller => 'affiliates_admin',:action => 'index'   %>
+		<li>
+					<%= link_to 'Rear Print Designs' ,:controller => 'reports',:action => 'index'   %>
+		</li>
+		<li>
+					<%= link_to 'Garments and Items' ,:controller => 'items'   %>
+		</li>
+                <%  unless controller.controller_name == 'admin_links'  %>
+                      <li style="float:right;"><%= link_to image_tag('/images/menu_icons_and_labels/new-products.png',:width => '400'  , :class => 'no_border'), :controller => 'admin_links' %></li>
+                <% end  %>
+</div>

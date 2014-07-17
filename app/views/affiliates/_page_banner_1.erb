@@ -1,0 +1,17 @@
+<% unless @non_profit_domain == true %>
+		<% begin %>
+				<% if @page %>
+						<% unless @page.slug == "home" %>
+								<br />	<br />
+									<%= image_tag "/uploads/Image/shared_affiliate/affiliate-page-banner.png", :border => '0' if @page %>
+										<span style="color:red;font-size:14px;"> YOUR LINK: </span> 
+											<% if @page  %>
+															 <%= link_to "Click here to see your custom link.", {:controller => "page", :action => "page_banner_popup", :id => @page.id} , :popup => ['affiliate link popup', 'height=200,width=700']    %>
+											<% end %>
+									<br />	<br />
+							
+						<% end %>
+					<% end %>		
+		<% rescue %>
+		<% end %>
+<% end %>

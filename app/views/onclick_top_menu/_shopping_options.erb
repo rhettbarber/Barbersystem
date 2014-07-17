@@ -1,0 +1,16 @@
+<div class='onclick_menu shopping_options'>
+    <div class='onclick_menu_links'>
+
+      <% if @user %>
+              <li><%= link_to "Log Out", :controller => 'account' ,:action => 'logout'    -%></li>
+      <% else  %>
+              <li><%= link_to "Log In", :controller => 'account' ,:action => 'login'    -%></li>
+       <% end  %>
+        <li><%= link_to 'Your Cart' ,:controller =>  'cart' , :action => 'index'  %></li>
+        <li> <%= link_to 'Category Browser' ,:controller => 'browse' , :action => 'index'  %></li>
+        <li><%= link_to 'All Over Shirts Designer Specsheet' , '/designer_specsheet'  %></li>
+        <li> <%= link_to 'Designs' ,:controller => '' ,:controller =>  'browse', :browse => 'designs'   %></li>
+        <li> <%= link_to 'Garments and Items' ,:controller => 'items' ,:controller =>  'browse', :department_type => 'items'   %></li>
+    </div>
+    <div class="onclick_menu_label"><%= link_to image_tag('/images/menu_icons_and_labels/shop-menu.png',:width => '400'  , :class => 'no_border'), :controller => 'admin_links' %></div>
+</div>

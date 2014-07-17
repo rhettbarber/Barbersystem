@@ -1,0 +1,19 @@
+Affiliate Sale Notification:
+
+A purchase was made on  <%= @website.domain %> originating from one of your affiliate links or banners.
+
+After this purchase has shipped, it will become a sale and will appear in your commisions report. If the total is zero this order was a free catalog request and will not receive commission.
+
+The purchase total is <%= @purchase.subtotal_after_all_discounts %>.
+
+Do not hesitate to call us with any questions at:
+<% if @website.phone %> 
+	<%= @website.phone %>
+<% else %>
+	1-800-448-3061
+<% end %>
+
+Email us at: affiliate@<%= @website.domain %>
+
+Thanks!
+Rhett Barber

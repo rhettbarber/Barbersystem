@@ -1,0 +1,13 @@
+
+
+<% if @website.name == "barber_store" %>
+		<% if @user %>
+					<% unless @customer %>
+						<%= link_to( image_tag("/images/headers/warning-billing.jpg", :border => 0), :controller => "account", :action => "index"  )  %>
+					<% end %>
+		<% else %>
+						<%= link_to( image_tag("/images/headers/warning-login.jpg", :border => 0), :controller => "account", :action => "login"  )  %>
+		<% end %>
+<% end %>
+
+

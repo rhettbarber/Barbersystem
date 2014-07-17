@@ -1,0 +1,41 @@
+<% if  @from_ajax  %>
+
+
+<% else  %>
+<div id="front_choices" style="float: left;display:none;" class="x_choices">
+<% end  %>
+
+              <div id="category_items_front">
+                                <div  class="category_items">
+                                                <table id="front_designs_table" class="designs_table" >
+                                                          <tr>
+                                                                  <%  @items_front.each do |item| %>
+                                                                             <td>
+                                                                                        <%= image_tag(  '/images/item_thumbnails/' + item.ItemLookupCode + '.png'   , :width => '280' ,:alt =>  item.ItemLookupCode , :border => '0'  , :class =>  'front_design',  :data_item_id => item.id ,   :data_front_category_id => item.category_id ) %>
+                                                                                        <%=   item.ytdn  %>
+                                                                             </td>
+                                                                   <% end %>
+                                                          </tr>
+                                                </table>
+                                      </div>
+              </div>
+
+  
+
+<% if @from_ajax  %>
+<script type="text/javascript">
+          $("front_design_image").src =   $$("#front_designs_table img").first().src ;
+
+          // find advanced_combination and resize back design
+
+
+
+
+
+
+
+</script>
+
+<% else %>
+</div>
+<% end  %>

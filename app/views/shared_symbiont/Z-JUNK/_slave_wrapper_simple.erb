@@ -1,0 +1,23 @@
+
+
+<div id="symbiote_wrapper">
+<table width="850" border="0" cellspacing="0" cellpadding="0" background="/images/headers/symbiont_ribbon.jpg" style="background-repeat: no-repeat;">
+  <tr>
+    <th width="80" height="80" rowspan="2" scope="col">
+
+      <%=   image_tag(@purchase.symbiote.item.image_url(   @purchase.symbiote.item.department ,'item_thumbnails/','x' ),:size => "80x80")    %> </th>
+    <td width="312" height="31" scope="col">
+      <strong> <%= @purchase.symbiote.item.ItemLookupCode %> </strong></th> 
+    <th width="608" scope="col"></th>
+  </tr>
+  <tr>
+    <td height="30"><%= @purchase.symbiote.item.Description %>		<%=  image_tag @purchase.symbiote.item.opacity_football %>  		</td>
+    <td height="30"><div align="right">Options: </div>
+			<ul>
+			 			<li><%= link_to 'Choose an Item for your selected design' ,:action => 'browse_applicable_items' %></li>
+					  	  <li><%= link_to 'Forget this design' , :controller => @website.name  ,:action =>  'delete_incomplete_symbiote' %></li>
+			 </ul>	  
+	 </td>
+  </tr>
+</table>
+</div>

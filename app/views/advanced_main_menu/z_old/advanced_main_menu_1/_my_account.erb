@@ -1,0 +1,18 @@
+<div class='onclick_menu shopping_options'>
+
+        <div class='onclick_menu_links'>
+            <%= link_to ' <li> Sales Report </li>' ,:controller => 'my_account' , :action => 'my_sales_report'  %>
+          <%= link_to ' <li> My Sale Items </li>' ,:controller => 'my_account'  , :action => 'what_is_this'  %>
+          <%= link_to ' <li> What Is This ? </li>' ,:controller => 'my_account'  , :action => 'what_is_this'  %>
+          <% if  @user -%>
+                          <li><%= link_to "Sign out " + @user.email , :controller => 'account' ,:action => 'logout'    -%></li>
+          <% else  %>
+                          <li><%= link_to "Sign In", :controller => 'account' ,:action => 'login'   -%></li>
+          <% end -%>
+      </div>
+
+      <div class="onclick_menu_label"><%= link_to image_tag('/images/menu_icons_and_labels/my-account.png'  , :class => 'no_border'), :controller => 'my_account', :action => 'affiliate_sales' %></div>
+
+
+
+</div>

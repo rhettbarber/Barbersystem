@@ -1,0 +1,73 @@
+
+
+  <%= render :partial => "application/checkout_links"  %>
+
+
+
+<%#= form_tag :action => "choose_ship_to" do %>
+
+					<table  data-role="table" >
+					<tbody>
+					            <tr height='15'></tr>
+                                <% for ship_to in @ship_tos %>
+                                              <tr  height='100'>
+                                                        <td style="text-align: center;">
+                                                                    <%=h ship_to.Company %> <br>
+                                                                    <%=h ship_to.Name %>         <br>
+                                                                    <%=h ship_to.Address %>
+                                                                    <%=h ship_to.Address2 %>  <br>
+                                                                    <%=h ship_to.City %>
+                                                                    <%=h ship_to.State %>
+                                                                    <%=h ship_to.Zip %><br>
+                                                                    <%= link_to 'Choose and Continue', { :controller => 'ship_tos', :action => 'choose_ship_to' , :ship_to_id => ship_to.id }  ,:data => {:theme => "b",  :role => "button" ,:ajax=> "false"} %>
+                                                                  <%#= link_to 'Show', ship_to_path(ship_to) , :class => 'btn btn-default' %>
+                                                                  <%= link_to 'Edit', edit_ship_to_path(ship_to),:data => {:theme => "c",  :role => "button" ,:ajax=> "false"} %>
+                                                                  <%= link_to 'Destroy', ship_to_path(ship_to), :confirm => 'Are you sure?', :method => :delete ,:data => {:theme => "c",  :role => "button" ,:ajax=> "false"} %>
+                                                        </td>
+                                              </tr>
+                                <% end %>
+                    </tbody>
+                    </table>
+<%#  end  %>
+
+
+  <%= link_to( "Create new shipping address"   , new_ship_to_path,:data => {:theme => "b",  :role => "button" ,:ajax=> "false"}  )	 %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @radio %>
+
+
+    <%= button_tag(type: "submit", class: "btn btn-success" ) do %>
+        Continue <i class="icon-repeat"></i>
+    <% end    %>
+
+    <%#= image_submit_tag('/images/buttons/continue_button_gold.gif')   %>
+
+
+
+    <td>
+      <% if @ship_tos.count == 1 %>
+          <input type="radio" name="ship_to_id" value="<%= ship_to.id %>" checked="checked" />
+      <% elsif  @purchase.ship_to  %>
+          <% if @purchase.ship_to.id.to_s == ship_to.id.to_s %>
+              <input type="radio" name="ship_to_id" value="<%= @purchase.ship_to_id %>" checked="checked" />
+          <% else %>
+              <input type="radio" name="ship_to_id" value="<%= ship_to.id %>" />
+          <% end %>
+      <% else %>
+          <input type="radio" name="ship_to_id" value="<%= ship_to.id %>" />
+      <% end %>
+    </td>
+<% end %>

@@ -1,0 +1,18 @@
+<% @qualifies_for_payment = recruited_rail_stat.user_session.purchase.sale.payable_qualification_information  %>
+<% if @qualifies_for_payment == true %>
+		<% style_class = "qualifying_sale" %>
+<% else %>
+		<% style_class = "non_qualifying_sale" %>
+<% end %>
+
+	<tr>
+				<td  class="<%= style_class + "_date" %>"><%= recruited_rail_stat.user_session.purchase.sale.sale_time.utc  %></td>
+				<td  class="<%= style_class %>"><%= recruited_rail_stat.user_session.purchase.sale.total_before_shipping  %></td>
+				<td  class="<%= style_class %>"><%= recruited_rail_stat.user_session.purchase.sale.shipping_charge  %></td>
+				<td  class="<%= style_class %>"><%= recruited_rail_stat.user_session.purchase.sale.total_returned  %></td>
+				<td  class="<%= style_class %>"><%= recruited_rail_stat.user_session.purchase.sale.total_payable  %></td>
+				<td  class="<%= style_class %>"><%= recruited_rail_stat.user_session.purchase.sale.recruited_affiliate_payable_sale_amount  %></td>
+				<td  class="<%= style_class %>"><%= @qualifies_for_payment  %></td>
+				<td  class="<%= style_class %>"><%=    distance_of_time_in_words(  Sale.qualifying_time   ,recruited_rail_stat.user_session.purchase.sale.sale_time  )    %></td>
+				<td  class="<%= style_class %>"><%=   recruited_rail_stat.user_session.link_affiliate_paid?    %></td>
+	</tr>

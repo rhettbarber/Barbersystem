@@ -1,0 +1,21 @@
+<head>
+                      <%= render(:partial => "layout_elements/favicon") %>
+                      <meta charset="utf-8">
+                      <meta name="viewport" content="width=device-width, initial-scale=1">
+                      <%= render(:partial => "layout_elements/shared_meta") %>
+                      <%= render(:partial => "layout_elements/title") %>
+
+                      <%= stylesheet_link_tag    "application", :media => "all" %>
+                      <%= javascript_include_tag    "application" %>
+
+                     <style type="text/css">
+                                     .ui-panel-wrapper {
+                                                background: url(http://dixieoutfitters.com/images/backgrounds_repeating/<%= @website.name %>_now.jpg) !important;
+                                     }
+                     </style>
+
+
+
+</head>
+
+

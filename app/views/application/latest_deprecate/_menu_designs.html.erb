@@ -1,0 +1,14 @@
+<li class="dropdown">
+                  <a  id="current_system" href="#" class="dropdown-toggle" data-toggle="dropdown">Designs<b class="caret"></b></a>
+                  <ul class="dropdown-menu" role="menu">
+                                    <% @website.default_design_departments.each do |department| %>
+                                                         <% department_child_category_ids = []  %>
+                                                         <% department.categories.each do |cat| %>
+                                                                        <% department_child_category_ids << cat.id  %>
+                                                        <% end %>
+                                                        <% department_child_category_ids = department_child_category_ids.join(',') %>
+                                                        <li class="designs_menu_item" style="display: none;"  data-department_id="<%= department.id %>" data-child_category_ids="<%= department_child_category_ids %>"><a data-toggle="modal" href="" data-href="/store/department_category_list/<%= department.id %>/item_type/design/show/show_designs_for_my_item" data-target="#myModal"><%= department.Name %></a></li>
+                                    <% end %>
+                                    <li><a data-toggle="modal" href="" data-href="/store/department_category_list/0/item_type/design/show/show_designs_for_any_item" data-target="#myModal">Show designs for <strong>any</strong> item</a></li>
+                  </ul>
+</li>

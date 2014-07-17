@@ -1,0 +1,38 @@
+<% cache(@menu_organized_category_fragment_name ) do %>
+<% logger.debug "-------------------------------------begin _shared_menu/menu_organized_category " %>
+<% if @categories %>
+	<% logger.debug "--------! ---------! ------------! -------------- @categories.size: #{@categories.size} --! - --! - " %>
+<% else %>
+	<% logger.debug "--------! ---------! ------------! -------------- NOT @categories--! - --! - " %>
+<% end %>
+<% logger.debug "--------! ---------! ------------! -------------- BEGIN EXAMINE CACHING --! - --! - " %>
+<% logger.debug "--------! ---------! ------------! -------------- BEGIN EXAMINE CACHING --! - --! - " %>
+
+
+<%  logger.debug "@category_names: " +  @category_names =  @categories.sort_by{|a| a.Name}.inspect  if @categories %>
+
+
+<% if  @categories  %>
+            <div class="menu_organized_category">
+                        <ul>
+                                        <span id="actual_categories">
+                                                                <%  @categories.sort_by{|a| a.Name.camelcase}.each do |category|   %>
+                                                                                    <% if category.visible == 1 %>
+                                                                                                            <% if !category.additives.nil? %>
+                                                                                                                                        <%= render :partial => "shared_category/category_li_root", :locals => {:category => category} %>
+                                                                                                          <% else %>
+                                                                                                                                          <%= render :partial => "shared_category/category_li_lone", :locals => {:category => category} %>
+                                                                                                          <% end %>
+                                                                                        <% end %>
+                                                                        <% end %>
+                                                </span>
+                        </ul>
+                </div>
+<% end %>
+
+
+
+<% logger.debug "--------! ---------! ------------! -------------- END EXAMINE CACHING --! - --! - " %>
+<% logger.debug "--------! ---------! ------------! -------------- END EXAMINE CACHING --! - --! - " %>
+<% logger.debug "-------------------------------------end _shared_menu/menu_organized_category " %>
+<% end  %>

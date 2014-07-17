@@ -1,0 +1,68 @@
+<h1>Editing website</h1>
+
+<%= form_for(@website) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :id %><br />
+    <%=  @website.id %>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :default_item_department_ids %> <br />
+    <%= f.text_field :default_item_department_ids %><%= link_to "  Edit:  categories/departments_categories", "/categories/departments_categories" %>
+  </p>
+  <p>
+    <%= f.label :default_design_department_ids %> <br />
+    <%= f.text_field :default_design_department_ids %><%= link_to "  Edit:  categories/departments_categories", "/categories/departments_categories" %>
+  </p>
+  <p>
+    <%= f.label :domain %><br />
+    <%= f.text_field :domain %>
+  </p>
+  <p>
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone %>
+  </p>
+  <p>
+    <%= f.label :meta_description %><br />
+    <%= f.text_field :meta_description %>
+  </p>
+  <p>
+    <%= f.label :meta_keywords %><br />
+    <%= f.text_field :meta_keywords %>
+  </p>
+  <p>
+    <%= f.label :allowed_admin_ips %><br />
+    <%= f.text_field :allowed_admin_ips %>
+  </p>
+  <p>
+    <%= f.label :allowed_cashiers %><br />
+    <%= f.text_field :allowed_cashiers %>
+  </p>
+  <p>
+    <%= f.label :store_website %><br />
+    <%= f.text_field :store_website %>
+  </p>
+  <p>
+    <%= f.label :catalog_item_id %><br />
+    <%= f.text_field :catalog_item_id %>
+  </p>
+  <p>
+    <%= f.label :tracking_number %><br />
+    <%= f.text_field :tracking_number %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @website %> |
+<%= link_to 'Back', websites_path %>

@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title><%= @website.name  %></title>
+	
+           <%= stylesheet_link_tag 'print', :media => 'all' %>
+			<%= render(:partial => "layout_elements/favicon") %>
+			 <%= render(:partial => "layout_elements/title") %>
+
+<!-- Begin Shared Stylesheets-->
+<% @cache_assets = false -%>
+<% if @cache_assets %>
+<%= stylesheet_link_tag   "application" ,"purchases","shop" , :media => "all" ,:cache => 'cache/all'%>
+<% else %>
+<%= stylesheet_link_tag   "application" ,"purchases","shop" , :media => "all" %>
+<% end  %>
+<!-- End Shared Stylesheets-->
+
+
+		      <%= render(:partial => "layout_elements/shared_javascripts") %>
+			<%= render(:partial => "layout_elements/shared_meta") %>
+
+
+
+</head>
+<body class="body_printable" style="margin-left:auto;margin-right:auto;width:850px;font-size: 12px; font-family: helvetica;">
+	
+		<%= yield %>
+	
+	
+</body>
+   <%= render :partial => 'development/development_bar'  %>
+</html>

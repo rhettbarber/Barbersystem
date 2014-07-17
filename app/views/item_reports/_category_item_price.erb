@@ -1,0 +1,60 @@
+
+								<% @it_is_first_item_in_category_with_same_sum_of_prices   = it.is_first_item_in_category_with_same_sum_of_prices   %>
+								<%   if @it_is_first_item_in_category_with_same_sum_of_prices == true %>
+												<%  td_class = "show"  %>
+								<% else %>
+												<%  td_class = "no_show"  %>
+								<% end %>
+																																							
+																																							
+												  <% if  td_class == "show" or @show_all == true  %>							
+																																							
+																																							<tr>
+																																								
+																																									<% if @headers %>
+																																										<td  class="<%= td_class %>"><%=  it.ItemLookupCode  %> </td> 
+																																										<td  class="<%= td_class %>"><%=  it.id  %> </td> 
+																																										<td  class="<%= td_class %>"><%=  it.item_ids_in_category_with_same_sum_of_prices.join(',') %> </td> 
+																																										<td  class="<%= td_class %>"><%=  it.first_item_in_category_with_same_sum_of_prices.id  %> </td> 
+																																										<td  class="<%= td_class %>"><%=  it.id ==  it.first_item_in_category_with_same_sum_of_prices.id  %> </td> 
+																																										<td  class="<%= td_class %>"><%=  it.item_ids_in_category_with_same_sum_of_prices.include?(it.id.to_s) %> </td> 
+																																										<td  class="<%= td_class %>"><%=  it.ItemLookupCode  %></td> 
+																																										<td  class="<%= td_class %>"><%= it.first_item_in_category_with_same_sum_of_prices.ItemLookupCode  %></td> 
+																																										<td  class="<%= td_class %>"><%=  @it_is_first_item_in_category_with_same_sum_of_prices  %></td>
+																																									<% end %>
+
+																																									
+
+																																										<td  class="<%= td_class %>"><%=   td_class   %></td> 
+																																										<td  class="<%= td_class %>"><b><%=  it.number_only   %></b></td> 
+																																										<td  class="<%= td_class %>"><b><%=  it.category.Name   %></b></td> 	
+																																										<% begin %>
+																																												
+																																												<td  class="<%= td_class %>">.</td>
+																																												<td  class="<%= td_class %>">.</td>
+																																												
+																																												<td  class="<%= td_class %>"><%=  it.quantity_discount.Price1 %>.</td>
+																																												<td  class="<%= td_class %>"><%=  number_with_precision( it.quantity_discount.Price1_profit_margin, 2 ) %>. </td>
+																																												
+																																												
+																																												<td  class="<%= td_class %>"><%=  it.quantity_discount.Price1A %>.</td>
+																																												<td  class="<%= td_class %>"><%=  number_with_precision( it.quantity_discount.Price1A_profit_margin ) %> . </td>
+																																												<td  class="<%= td_class %>"><%=  it.quantity_discount.Price2A %>. </td>
+																																												<td  class="<%= td_class %>"><%=  it.quantity_discount.Price3A %> . </td>
+																																												
+																																												<td  class="<%= td_class %>"><%=  it.quantity_discount.Price1B %>. </td>
+																																												<td  class="<%= td_class %>"><%=  number_with_precision( it.quantity_discount.Price1B_profit_margin ) %> . </td>
+																																												<td  class="<%= td_class %>"><%=  it.quantity_discount.Price2B %> . </td>
+																																												<td  class="<%= td_class %>"><%=  it.quantity_discount.Price3B %>. </td>
+																																												
+																																												<td  class="<%= td_class %>"><%=  it.quantity_discount.Price1C %> .  </td>
+																																												<td  class="<%= td_class %>"><%=  it.quantity_discount.Price2C %> . </td>
+																																												<td  class="<%= td_class %>"><%=  it.quantity_discount.Price3C %> . </td>
+																																												<td  class="<%= td_class %>"><%=  it.Cost %> . </td>
+																																												<td  class="<%= td_class %>"><%=  it.sum_of_prices %> . </td>
+																																										<% rescue %>
+																																													<td > This item is missing pricing information !</td>
+																																									<% end %>
+																																										
+																																							</tr>
+										<% end %>																																							

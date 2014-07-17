@@ -1,0 +1,17 @@
+<%= form_for(@advanced_combination) do |f| %>
+  <% if @advanced_combination.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@advanced_combination.errors.count, "error") %> prohibited this advanced_combination from being saved:</h2>
+
+      <ul>
+      <% @advanced_combination.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

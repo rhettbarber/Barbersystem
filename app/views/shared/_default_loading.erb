@@ -1,0 +1,10 @@
+
+
+
+<% if @department  %>
+                    <%  if  controller.action_name == 'browse' or  controller.action_name == 'category_browser'  or  controller.action_name == 'browse_and_complete'     %>
+                   	 	<%= render(:partial => "shared_menu/menu_category") %>
+                    <%  end  %>
+<% end %>
+
+ 

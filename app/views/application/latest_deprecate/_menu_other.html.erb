@@ -1,0 +1,12 @@
+<li class="dropdown">
+          <a  id="current_system" href="#" class="dropdown-toggle" data-toggle="dropdown">Articles<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+                        <% for page in visible_root_pages -%>
+                                        <li><%=  link_to page.name.camelize   , :controller => "page", :action => "show", :id => page.slug  %> </li>
+                        <% end -%>
+          </ul>
+</li>
+
+
+
+

@@ -1,0 +1,41 @@
+<div id="product_choices"  class="advanced_choices_product" style="display:none;">
+
+
+
+  <% @department_choices_shirt_style =  @website.default_item_departments   %>
+
+
+        <%= form_for( 'shirt_style_javascript', :url => {:action => 'update_categories'}) do |f| %>
+              <%= f.collection_select :department_id,  @department_choices_shirt_style   , :id, :Name, :prompt => "Select a department" %>
+              <span id="shirt_style_category_field">
+              <%= f.collection_select :category_id, Category.find(:all), :id, :Name, :prompt => "Select a category" %>
+              </span>
+              <span id="specsheet_item_search_shirt_style_field_container">
+              <%= text_field_tag "specsheet_item_search_shirt_style_field" %>
+              <%= image_tag '/images/icons/search-icon.png', :size => '40x40' %>
+               <span id="clear_graphic_all" style="color:red;font-weight: bold;">
+                  Start Over!
+                </span>
+                <%= image_tag '/images/icons/false.jpg', :size => '40x40' %>
+              </span>
+      <% end  %>
+
+
+      <div id="category_items_shirt_style">
+              <%= render :partial => "designer_specsheet/category_items" , :locals => {:choice_type => 'shirt_style'  } %>
+      </div>
+
+
+<%#    @back_design.find_first_of_each_type_of_applicable_opposite.sort_by{|a| a.ItemLookupCode}.each do |itm|  %>
+  
+  
+   <%#  itm.department.Name %>- <%# itm.category.Name %> - <%# itm.ItemLookupCode %> <br />
+
+
+
+
+
+<%# end %>
+
+
+</div>

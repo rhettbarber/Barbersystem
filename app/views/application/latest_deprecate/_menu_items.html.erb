@@ -1,0 +1,25 @@
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Items <b class="caret"></b></a>
+  <ul class="dropdown-menu" role="menu">
+                        <% @website.default_item_departments.sort_by{|a| a.position || 0}.each do |department| %>
+                                            <% if ['1','2','3','4','5','6','7','8','9'].include?(department.id.to_s) %>
+                                                                <% department_child_category_ids = []  %>
+                                                                <% department.categories.each do |cat| %>
+                                                                                    <% department_child_category_ids << cat.id  %>
+                                                                <% end %>
+                                                                <% department_child_category_ids = department_child_category_ids.join(',') %>
+                                                                <li data-department_id="<%= department.id %>" data-child_category_ids="<%= department_child_category_ids %>"><a data-toggle="modal" href="" data-href="/store/department_category_list/<%= department.id %>/item_type/item/show/show_designs_for_my_item" data-target="#myModal"><%= department.Name %></a></li>
+                                            <% end %>
+                        <% end %>
+                        <% @website.default_item_departments.sort_by{|a| a.position || 0}.each do |department| %>
+                                            <% if !['1','2','3','4','5','6','7','8','9'].include?(department.id.to_s) %>
+                                                                <% department_child_category_ids = []  %>
+                                                                <% department.categories.each do |cat| %>
+                                                                                    <% department_child_category_ids << cat.id  %>
+                                                                <% end %>
+                                                                <% department_child_category_ids = department_child_category_ids.join(',') %>
+                                                                <li data-department_id="<%= department.id %>" data-child_category_ids="<%= department_child_category_ids %>"><a data-toggle="modal" href="" data-href="/store/department_category_list/<%= department.id %>/item_type/item/show/show_designs_for_my_item" data-target="#myModal"><%= department.Name %></a></li>
+                                            <% end %>
+                         <% end %>
+  </ul>
+</li>

@@ -1,0 +1,18 @@
+ <div id="front_choices" style="float: left;display:none;" class="x_choices">
+                     <% if params[:item_type] == 'all_over_design' %>
+                                      <%= form_for( 'front_javascript',  :url => {  :action => 'update_categories'}, :html => { :id =>  "front_form" } ) do |f| %>
+                                                      <%= f.collection_select :department_id,  @department_choices_front , :id, :Name, :prompt => "Select a department" %>
+                                                      <span id="front_category_field">
+                                                            <%= f.collection_select :category_id, Category.limit("2"), :id, :Name, :prompt => "Select a category" %>
+                                                      </span>
+                                                      <span id="specsheet_item_search_front_field_container">
+                                                            <%= text_field_tag "specsheet_item_search_front_field" %>
+                                                            <%= image_tag '/images/icons/search-icon.png', :size => '40x40' %>
+                                                      </span>
+                                      <% end  %>
+                    <% end  %>
+
+                    <div id="category_items_front">
+                                 <%= render :partial => "designer_specsheet/category_items_front"  %>
+                    </div>
+ </div>

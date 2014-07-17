@@ -1,0 +1,59 @@
+
+<!--@paginated_results.size: <%#= @paginated_results.size%> <br>-->
+
+
+<% @paginated_results.each do |item| %>
+    <li>
+                  <a href="/specsheet/<%= item.id %>">
+                            <div>
+
+
+
+                                             <% if @search_type_name == "search_garments" %>
+                                                                                                     <img src="/images/item_thumbnails/<%=   item.PictureName.gsub(".jpg", "").gsub(".png", "") + '.jpg'  %>" class="ui-li-thumb" style="display:inline;max-height:200px;">  <br>
+
+                                              <% else %>
+
+                                                                                                     <img src="/images/item_thumbnails/<%=   item.PictureName.gsub(".png", ".jpg")  %>" class="ui-li-thumb" style="display:inline;max-height:200px;"> <br>
+                                             <% end %>
+
+                                              <%= item.department_name %> - <%= item.category_name %><br>
+                              <%= item.search_results_set %><br>
+                                              <%= item.ItemLookupCode %>
+
+                            </div>
+                  </a>
+    </li>
+<% end %>
+<div class="last_item" style="width: 100%;height: 20px;display:table;float:left;">
+
+    <%  if @paginated_results %>
+                                          <%  if  @paginated_results.next_page %>
+
+                                                             <%= link_to 'Load More', search_path(:query => params[:query], :search_type_name => params[:search_type_name] , :page => @paginated_results.next_page), :id => "page-link", :class => 'ui-btn load-more-revisions', :remote => true   -%>
+                                          <% else %>
+                                                                       <!--not @paginated_results.next_page-->
+                                          <% end %>
+     <% else %>
+
+     <% end %>
+</div>
+
+
+
+
+
+
+
+<% if @alternate %>
+    search_type_name: <%= @search_type_name  %>
+
+    <% if @products %>
+
+        <img src="/images/item_thumbnails/<%=   item.PictureName.gsub(".jpg", "").gsub(".png", "") + '.jpg'  %>" class="ui-li-thumb" style="display:inline;max-height:200px;">  <br>
+
+    <% else %>
+        <img src="/images/item_thumbnails/<%=   item.PictureName  %>" class="ui-li-thumb" style="display:inline;max-height:200px;"> <br>
+    <% end %>
+
+<% end %>

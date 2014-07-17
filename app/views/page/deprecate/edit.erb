@@ -1,0 +1,12 @@
+<div id="edit-content">
+
+<% @page_title = "Edit A Page" -%>
+<% @rounded_divs = ',div#revision_redirect_to,div#' + fckeditor_div_id('revision', 'content') %>
+<% @show_nav = false %>
+
+<%=form_for(:page, :url => page_path(@page), :html => { :method => :put }, :onsubmit => "javascript:if(document.getElementById('page_name').value == '') {alert('The page name can not be blank.'); document.getElementById('page_name').focus(); return false;}")  do  %>
+	<%= render :partial => 'form' %>
+	<p style="float:right;"><%= cancel_button(@revision.page) %> <%= submit_tag 'Save' %></p>
+<% end %>
+
+</div>

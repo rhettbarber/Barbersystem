@@ -1,0 +1,56 @@
+
+console.log("begin page\recently_added_pages.js.erb");
+
+$(".load-more-revisions").remove();
+
+
+ $('.revisions').append('<%= escape_javascript(   render partial: "page/scrollable_recently_added", :locals => { :paginated_results => @paginated_results }   ) %>');
+
+bindInfiniteScroll();
+
+
+
+console.log("end page\recently_added_pages.js.erb");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//$('.revisions').append('teasdf asdf asd asdf asdf asd fasdf asdf asdf asd fasdf asd fasdfas fasdf asdf asdf asd fasdfasdfasdfasdfasdfst');
+//alert("wonderous");
+//$('a.load-more-revisions').attr('href', '#{posts_path page: @posts.next_page}');

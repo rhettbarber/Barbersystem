@@ -1,0 +1,183 @@
+<% selected_node = @revision.page  %>
+<% ancestors = selected_node.ancestors %>
+<% root = selected_node.root %>
+
+
+<div data-role="collapsible" data-theme="b" data-content-theme="d">
+  <h3>Articles Menu</h3>
+
+  <ul data-role="listview">
+                <% root.children.each do |child| %>
+                <% node = child %>
+                <%  if node.children.count > 0
+                      opened_leaf = node.id
+                    else
+                      opened_leaf = 'no'
+                    end %>
+                                         <%  if node.children.count > 0  %>
+                                                            <div data-role="collapsible-set">
+                                                              <div data-role="collapsible">
+                                                                <h3><%= node.name  %></h3>
+
+
+                                                                <ul data-role="listview">
+                                                                  <li><a href="<%= url_for( :action => "show", :id => child.slug ,:pi => child.parent_id, :ri => child.root.id ,:ol => opened_leaf ) %>"><%= child.name  %> Index</a></li>
+                                                                  <% child.children.each do |the_child| %>
+                                                                      <li><a href="<%= url_for( :action => "show", :id => the_child.slug ,:pi => the_child.parent_id, :ri => the_child.root.id ,:ol => opened_leaf ) %>"><%= the_child.name  %> </a></li>
+                                                                  <% end %>
+
+
+                                                                </ul>
+                                                              </div>
+                                                            </div>
+                                         <% else %>
+                                                            <li><a href="<%= url_for( :action => "show", :id => child.slug ,:pi => child.parent_id, :ri => child.root.id ,:ol => opened_leaf ) %>"><%= child.name  %></a></li>
+                                         <% end %>
+                 <% end %>
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <% if @orig %>
+
+
+    <div data-role="collapsible">
+      <h3>Articles Menu</h3>
+
+      <ul data-role="listview">
+        <li><a href="acura.html">Mission</a></li>
+        <li><a href="bmw.html">Resources</a></li>
+
+        <div data-role="collapsible-set">
+          <div data-role="collapsible">
+            <h3>Page with Children</h3>
+            <ul data-role="listview">
+              <li><a href="acura.html">Child 1</a></li>
+              <li><a href="bmw.html">Child 2</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </ul>
+    </div>
+
+
+
+
+
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+
+    <ul class="nav navbar-inverse nav-pills">
+        <% selected_node = @revision.page  %>
+        <% ancestors = selected_node.ancestors %>
+        <% root = selected_node.root %>
+        <% root.children.each do |child| %>
+                                <% node = child %>
+                                <%  if node.children.count > 0
+                                      opened_leaf = node.id
+                                    else
+                                      opened_leaf = 'no'
+                                    end %>
+
+
+                                <li class="dropdown">
+                                  <%  if node.children.count > 0  %>
+                                      <a role="button" data-toggle="dropdown" href="<%= url_for( :action => "show", :id => child.slug ,:pi => child.parent_id, :ri => child.root.id ,:ol => opened_leaf ) %>"><%= child.name  %> <b class="caret"></b></a>
+                                      <ul class="dropdown-menu" role="menu" aria-labelledby="drop4">
+                                        <li role="presentation"><a role="menuitem"   href="<%= url_for( :action => "show", :id => child.slug ,:pi => child.parent_id, :ri => child.root.id ,:ol => opened_leaf ) %>"><%= node.name  %> Index</a> </li>
+                                        <% child.children.each do |the_child| %>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= url_for( :action => "show", :id => the_child.slug ,:pi => the_child.parent_id, :ri => the_child.root.id ,:ol => opened_leaf ) %>"><%= the_child.name  %> </a></li>
+                                        <% end %>
+                                      </ul>
+                                  <% else %>
+                                      <a role="button"   href="<%= url_for( :action => "show", :id => child.slug ,:pi => child.parent_id, :ri => child.root.id ,:ol => opened_leaf ) %>"><%= node.name  %></b></a>
+                                  <% end %>
+                                </li>
+        <% end %>
+      </ul>
+
+
+
+      <% if node.slug == selected_node.slug && user_can?('modify') %>
+          <li>
+            <%= actions(node) %>
+          </li>
+      <% end %>
+
+
+      <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Action</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Another action</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Something else here</a></li>
+        <li role="presentation" class="divider"></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Separated link</a></li>
+      </ul>
+
+
+
+
+      <div class="bs-example">
+        <ul class="nav nav-pills">
+          <li class="active"><a href="#">Regular link</a></li>
+          <li class="dropdown">
+            <a id="drop4" role="button" data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>
+            <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Action</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Another action</a></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Something else here</a></li>
+              <li role="presentation" class="divider"></li>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Separated link</a></li>
+            </ul>
+          </li>
+        </ul> <!-- /tabs -->
+      </div>
+
+
+      <div class="pages_tree_menu" class="inverse">
+        <% if @revision %>
+            <ul>
+              <% selected_node = @revision.page  %>
+              <% ancestors = selected_node.ancestors %>
+              <% root = selected_node.root %>
+              <% root.children.each do |child| %>
+                  <%# if child.has_published_revision? || user_can?('modify')  or user_can?('view_unpublished') %>
+                  <%= render :partial => "shared_menu/display_subtree", :locals => { :selected_node => selected_node, :child => child, :ancestors => ancestors, :customer_viewable_page_types => @customer_array_viewable_page_types } %>
+                  <%# end %>
+              <% end %>
+              <% if root.slug == selected_node.slug && user_can?('modify') %>
+                  <li><%= actions(root) %></li>
+              <% end %>
+            </ul>
+        <% else %>
+            No revision to build subarticles_menu
+        <% end %>
+      </div>
+
+
+
+  <% end %>
+

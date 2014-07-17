@@ -1,0 +1,8 @@
+<%  if category.department_id != 1 and category.department_id != 5 %>	
+                <li>				
+                		<%= link_to  category.Name , {:controller  => 'browse' ,  :department_id =>   category.department_id  , :category_id => category.id },
+                		if params[:category_id].to_i == category.id
+                		{ :class => "current" }
+                		end %>		
+                </li>
+<% end %>

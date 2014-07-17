@@ -1,0 +1,14 @@
+
+                                    <tr>
+                                                           <td><%= item.ItemLookupCode  %></td>
+                                                           <td><%=nontier =  item.quantity_discount.Quantity1    %> </td>
+                                                           <td><%= tier_range_1 = item.quantity_discount.Quantity2    %></td>
+                                                           <td><%= tier_range_2 = item.quantity_discount.Quantity3    %></td>
+                                                           <td><%= tier_range_3 =  item.quantity_discount.Quantity4    %></td>         
+                                                          <td><%= item.quantity_discount.use_pre_tier_price(@quantity) %></td>                                                         
+                                                          <td><%= item.quantity_discount.use_price_1(@quantity) %></td>    
+                                                          <td><%= item.quantity_discount.use_price_2(@quantity) %></td>    
+                                                          <td><%= item.quantity_discount.use_price_3(@quantity) %></td>    
+                                                          <td><%= item.quantity_discount.use_price_4(@quantity) %></td>
+                                                          <td>--<%=  item.unit_quantity_tier_discount_price(@preprint_customer,@quantity)  %>    
+                                     </tr>

@@ -1,0 +1,51 @@
+ <div id="additional_crest_prints">
+<%= hidden_field_tag "main_design_id", @main_design.id %>
+<%= hidden_field_tag "category_id", @main_design.category_id %>
+<%= hidden_field_tag "item_ids",  "" %>
+
+<%=  form_tag( 'add_crest_prints' , :id => "add_crest_prints", :method => :put )  do %>
+    <%     @other_crest_prints  = Item.includes(:category).where("categories.Name like ? and Inactive = ?",  'pocket prints' , false )   %>
+    <fieldset id="admin_crest_print_choices" data-role="controlgroup">
+      <% @other_crest_prints.each do |item| %>
+          <% unless @already_show_cp_item_ids.include?( item.id ) %>
+              <% crest_image_url =  'http://cdn.dixieoutfitters.com/images/item_thumbnails/' +  item.ItemLookupCode + '.png'    %>
+              <input  type="checkbox" id="<%= item.id %>" value="<%= item.id %>" name="<%= item.id %>"/>
+              <label for="<%= item.id %>"><%= image_tag( crest_image_url , :size => "70x70"   )%> <%= item.ItemLookupCode %> - <%= item.Description %></label>
+          <% end %>
+      <% end %>
+    </fieldset>
+
+    <a id="submit_add_crest_prints" data-role="button">Add crest prints to available</a>
+<% end %>
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+    function addCrestPrints() {
+                    var allVals = [];
+                    $('#admin_crest_print_choices :checked').each(function() {
+                                    allVals.push($(this).val());
+                    });
+                    $('#item_ids').val(allVals)
+
+                    jQuery.ajax({
+                                type: "GET",
+                                url: "/specsheet/add_crest_prints",
+                                data: { item_ids:  $('#item_ids').val()   , category_id:  $('#category_id').val()  , main_design_id:  $('#main_design_id').val() }
+                    });
+    }
+
+
+    $("#submit_add_crest_prints").on('click', function(event){
+                    console.log("adding crest print");
+                    addCrestPrints();
+    });
+
+</script>
+
+ </div>

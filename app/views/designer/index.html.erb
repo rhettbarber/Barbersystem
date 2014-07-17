@@ -1,0 +1,54 @@
+<div id="items_list">
+<% if @items %>
+
+<table>
+  <tr>
+        <th>ItemLookupCode</th>
+        <th>Description</th>
+        <th>Source PNG</th>
+        <th>Front Status</th>
+        <th>Back Status</th>
+  </tr>
+
+<% @items.each do |item| %>
+  <tr>
+        <td><%= item.ItemLookupCode %></td>
+        <td><%= item.Description %></td>
+
+       <td class="anatips"  title="<%= item.source_png_file_url   %>"><%= item.source_png_exists? %></td>
+
+
+        <td class="anatips"  title="<%= item.designer_front_file_url   %>">
+                      <% if  item.designer_front_exists?   %>
+                                                       <a href="/designer/ajax_item_details"  title="<%= item.ItemLookupCode %> Front Design Preview ." onclick="Modalbox.show(this.href, {title: this.title, width:850 , evalScripts:true ,  params: { side:'front',   item_id: <%= item.id %>  }  }); return false;">Available</a>
+                      <% else %>
+                              Unavailable
+                       <% end  %>
+        </td>
+
+        <td class="anatips"  title="<%= item.designer_back_file_url   %>">
+                      <% if  item.designer_back_exists?   %>
+                                                       <a href="/designer/ajax_item_details"  title="<%= item.ItemLookupCode %> Front Design Preview ." onclick="Modalbox.show(this.href, {title: this.title, width:850 , evalScripts:true ,  params: { side:'back',   item_id: <%= item.id %>  }  }); return false;">Available</a>
+                      <% else %>
+                              Unavailable
+                       <% end  %>
+        </td>
+
+
+
+
+        <td class="anatips"  title="<%= item.designer_back_file_url   %>"><%= item.designer_back_exists?   %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+
+<% else  %>
+
+No Results Found!
+
+<% end  %>
+</div>
+
+
+

@@ -1,0 +1,65 @@
+
+<% logger.debug "-------------------------------------begin _shared_menu/menu_category " %>
+<% logger.debug "--------! ---------! ------------! -------------- BEGIN EXAMINE CACHING --! - --! - " %>
+<% logger.debug "--------! ---------! ------------! -------------- BEGIN EXAMINE CACHING --! - --! - " %>
+<% 
+if @department
+	local_department_id = @department.id.to_s
+else
+	local_department_id = '0'
+end
+
+if @purchase_symbiote_item_category_category_class_id
+	local_purchase_symbiote_item_category_category_class_id = @purchase_symbiote_item_category_category_class_id.to_s
+else
+	local_purchase_symbiote_item_category_category_class_id = '0'
+end	
+
+if @purchase_symbiote_item
+	local_purchase_symbiote_item_shade = @purchase_symbiote_item.shade.to_s
+else
+	local_purchase_symbiote_item_shade = '0'
+end	
+
+
+%>
+
+<% cache (@website.name + "/user_type_id/" + @user_array_user_type_id.to_s + "/shared_menu/menu_category/sym_category_class_id/" + @purchase_symbiote_item_category_category_class_id.to_s  + "/purchase_symbiote_item_shade/" + local_purchase_symbiote_item_shade +   "/department_id/" + local_department_id   ) do %>
+	<% if  @categories  %>
+	                <div class='menu_category'> 
+	                	<ul>
+					        <% @categories.sort_by{|a| a.Name}.each do |category|  %>            
+								<%=   render(:partial => "shared_category/category_li", :locals => {:category => category }  )  %>
+							<% end %>
+							<% if admin? %>
+								<%  if @department %>
+									<li> &nbsp; </li>
+									<li id="menu_category_visible">make visible.</li>
+									
+  										<%= drop_receiving_element :menu_category_visible,
+  										:with   => "'category_id=' + (element.id.split('_').last())",
+  										:url => {:controller => 'menus', :action => 'menu_category_visible',
+  										} %>
+  										
+
+									  <li id="menu_category_invisible">make invisible.</li>
+									  
+  										<%= drop_receiving_element :menu_category_invisible,
+  										:with   => "'category_id=' + (element.id.split('_').last())",
+  										:url => {:controller => 'menus', :action => 'menu_category_invisible',
+  										} %>
+
+
+
+									<li><%= link_to  "duplicate this category", {:controller => @website.name, :action => 'duplicate_category_confirm' ,  :category_id => @category  } if @category %></li>
+									<li><%= link_to  "delete this menu cache", {:controller => @website.name, :action => 'menu_duplicate_category' ,  :department => @department  } %></li>
+
+								<% end %>
+				         	<% end %>
+						</ul>
+	                </div>
+	<% end %>
+<% end %>
+<% logger.debug "--------! ---------! ------------! -------------- END EXAMINE CACHING --! - --! - " %>
+<% logger.debug "--------! ---------! ------------! -------------- END EXAMINE CACHING --! - --! - " %>
+<% logger.debug "-------------------------------------end _shared_menu/menu_category " %>

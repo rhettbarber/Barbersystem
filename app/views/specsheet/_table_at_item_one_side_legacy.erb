@@ -1,0 +1,34 @@
+
+
+<% if @show_admin %><div class="specsheet_admin"> table_at_item_one_side_legacy </div> <% end %>
+
+
+
+<% if @show_wide_specsheet == true  %>
+                    <div align="center"><span id='specsheet_image'><%=  image_tag @item.image_url( @department  , 'item_specsheets/', @design,'0' ).gsub('.png', '_wide.png' )  %></span></div>
+<% else %>
+
+
+
+    <style type="text/css">
+
+
+      #specsheet_table {
+          text-align: center;
+          width: 100%;
+          background: white;
+      }
+      #specsheet_table img {
+          max-width: 100%;
+      }
+
+    </style>
+
+
+
+<div id='specsheet_table'><%=  image_tag @item.image_url( @department  , 'item_specsheets/', @design,'0' )  %></div>
+
+
+
+
+<% end  %>

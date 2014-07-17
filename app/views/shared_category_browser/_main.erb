@@ -1,0 +1,33 @@
+<% logger.debug "-------------------------------------begin _shared_category_browser/main " %>
+<% logger.debug "-------------------------------------begin _shared_category_browser/main " %>
+<% logger.debug "-------------------------------------begin _shared_category_browser/main " %>
+
+
+<% logger.debug "--------! ---------! ------------! -------------- BEGIN EXAMINE CACHING --! - --! - " %>
+<% logger.debug "--------! ---------! ------------! -------------- BEGIN EXAMINE CACHING --! - --! - " %>
+<% 
+if params[:department_type]
+	department_type = params[:department_type] 
+else
+	department_type = '0' 
+end 
+%>
+
+
+<div class="categories_container">
+	<% if @department %>
+				<%=   render(:partial => "shared_category_browser/at_department",:locals => {:department => @department } )  %>
+	<% else %>
+				<% if  @department_introduction == true  %>
+						<%=  render(:partial => "shared_category_browser/departments_introduction",:locals => {:department_type => department_type } )  %>
+				<%  else  %>
+						<%=  render(:partial => "shared_category_browser/departments_no_introduction",:locals => {:department_type => department_type } ) %>
+				<% end %>
+	<% end %>
+</div>
+
+<% logger.debug "--------! ---------! ------------! -------------- END EXAMINE CACHING --! - --! - " %>
+<% logger.debug "--------! ---------! ------------! -------------- END EXAMINE CACHING --! - --! - " %>
+<% logger.debug "-------------------------------------end _shared_category_browser/main " %>
+<% logger.debug "-------------------------------------end _shared_category_browser/main " %>
+<% logger.debug "-------------------------------------end _shared_category_browser/main " %>

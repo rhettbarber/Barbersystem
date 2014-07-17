@@ -1,0 +1,126 @@
+
+<div class="menu_item"> 
+
+<ul>
+
+
+  <% if @singular_item_customer == true  %>
+    <li class="menu_icon"> <%= link_to image_tag("/images/icons/clearance.png", :border => 0 , :size => "30x30"), {:controller => "browse" , :action => "sale_items" }   %></li>
+    <% end  %>
+
+
+  <% if @website.name == 'fuzzard_store'  %>
+                    <li><%= link_to 'Merchandise',{:controller => 'browse',:action => "index", :department_id => 45},
+                                                                            if params[:department_id].to_i ==  45
+                                                                            { :class => "current" }
+                                                                            end %>
+                    </li>
+  <% else %>
+
+                    <li>
+                                    <%= link_to 'Men',{:controller => 'browse',:action => "index", :department_id =>   2},
+                                    if params[:department_id].to_i == 2
+                                    { :class => "current" }
+                                    end %>
+                    </li>
+                    <li>
+                                    <%= link_to 'Women',{:controller => 'browse',:action => "index", :department_id =>  3},
+                                    if params[:department_id].to_i == 3
+                                    { :class => "current" }
+                                    end %>
+                    </li>
+                    <li>
+                                    <%= link_to 'Junior Girl',{:controller => 'browse',:action => "index", :department_id =>  4},
+                                    if params[:department_id].to_i == 4
+                                    { :class => "current" }
+                                    end %>
+                    </li>
+                    <li>
+                                    <%= link_to 'Youth Boy',{:controller => 'browse',:action => "index", :department_id => 9},
+                                    if params[:department_id].to_i == 9
+                                    { :class => "current" }
+                                    end %>
+                    </li>
+
+                    <li>
+                                    <%= link_to 'Youth Girl',{:controller => 'browse',:action => "index", :department_id => 6},
+                                    if params[:department_id].to_i ==  6
+                                    { :class => "current" }
+                                    end %>
+                    </li>
+                    <li>
+                                    <%= link_to 'Toddler',{:controller => 'browse',:action => "index", :department_id => 8},
+                                    if params[:department_id].to_i == 8
+                                    { :class => "current" }
+                                    end %>
+                    </li>
+                    <li>
+                                    <%= link_to 'Infant',{:controller => 'browse',:action => "index", :department_id => 7 },
+                                    if params[:department_id].to_i == 7
+                                    { :class => "current" }
+                                    end %>
+                    </li>
+                                    <% if @website.name == 'barber_store'  %>
+                                                                               <li><%= link_to '  All Over Shirts',{:controller => 'browse',:action => "index", :department_id => 35 },
+                                                                                        if params[:department_id].to_i ==  35
+                                                                                        { :class => "current" }
+                                                                                        end %>
+                                                                               </li>
+                                                                                    <li><%= link_to 'All Merchandise',{:controller => 'browse',:action => "index", :department_id => 21},
+                                                                                              if params[:department_id].to_i ==  21
+                                                                                              { :class => "current" }
+                                                                                              end %>
+                                                                            </li>
+                                                                            <li><%= link_to 'All American Merchandise',{:controller => 'browse',:action => "index", :department_id => 28},
+                                                                                                                                    if params[:department_id].to_i ==  28
+                                                                                                                                    { :class => "current" }
+                                                                                                                                    end %>
+                                                                            </li>
+                                                                            <li><%= link_to 'Christian Merchandise',{:controller => 'browse',:action => "index", :department_id => 26},
+                                                                                                                                    if params[:department_id].to_i ==  26
+                                                                                                                                    { :class => "current" }
+                                                                                                                                    end %>
+                                                                            </li>
+                                                                            <li><%= link_to 'Dixie Merchandise',{:controller => 'browse',:action => "index", :department_id => 22},
+                                                                                                                                    if params[:department_id].to_i ==  22
+                                                                                                                                    { :class => "current" }
+                                                                                                                                    end %>
+                                                                            </li>
+                    <%  elsif @website.name == 'christian_store' %>
+                                                                    <li><%= link_to 'Merchandise',{:controller => 'browse',:action => "index", :department_id => 26},
+                                                                    if params[:department_id].to_i ==  26
+                                                                    { :class => "current" }
+                                                                    end %>	</li>
+                    <%  elsif @website.name == 'all_american_store' %>
+                                                                    <li><%= link_to 'Merchandise',{:controller => 'browse',:action => "index", :department_id => 28},
+                                                                    if params[:department_id].to_i ==  28
+                                                                    { :class => "current" }
+                                                                    end %>
+                                                                    </li>
+                                                                      <li><%= link_to '  All Over Shirts',{:controller => 'browse',:action => "index", :department_id => 35 },
+                                                                                        if params[:department_id].to_i ==  35
+                                                                                        { :class => "current" }
+                                                                                        end %>
+                                                                       </li>
+                      <%  elsif @website.name == 'dixie_store' %>
+                                                                    <li><%= link_to 'Merchandise',{:controller => 'browse',:action => "index", :department_id => 22},
+                                                                    if params[:department_id].to_i ==  22
+                                                                    { :class => "current" }
+                                                                    end %>	</li>
+                                                                    <li><%= link_to '  All Over Shirts',{:controller => 'browse',:action => "index", :department_id => 35 },
+                                                                    if params[:department_id].to_i ==  35
+                                                                    { :class => "current" }
+                                                                    end %>	</li>
+                      <%  elsif @website.name == 'big_cocke' %>
+                                                                    <li><%= link_to 'Big Cocke Merchandise',{:controller => 'browse',:action => "index", :department_id => 44},
+                                                                    if params[:department_id].to_i ==  44
+                                                                    { :class => "current" }
+                                                                    end %>	</li>
+
+                    <%  else %>
+
+
+                    <%  end  %>
+      <%  end  %>
+</ul>		                
+</div>

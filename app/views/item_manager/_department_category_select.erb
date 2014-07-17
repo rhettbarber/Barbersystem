@@ -1,0 +1,38 @@
+<% choice_type = 'design' %>
+<% @the_department_variable = '@department_choices_' + choice_type  %>
+
+
+<div id="<%= choice_type %>_choices" class="x_choices">
+      <%= form_for( choice_type + '_javascript', :url => {:action => 'index'}) do |f| %>
+                             <div style="display:table-cell;">
+                                           <%= f.collection_select :department_id, @website.default_all_departments  , :id, :Name, :prompt => "Select a department" %>
+                             </div>
+                            <div style="display:table-cell;"><span id="<%= choice_type %>_category_field">
+                                                                     <%= f.collection_select :category_id, Category.find(:all).sort_by{ |a|  a.Name  }  , :id, :Name, :prompt => "Select a category" %>
+                                                        </span>
+                            </div>
+                              <div style="display:table-cell;">
+                                                        <span id="search-type-name" style="font-size: 12px;color:blue;">
+                                                                    <%= text_field_tag "designer_item_search_design_field" %>
+                                                                    <%= image_tag '/images/icons/search-icon.png', :size => '40x40' %>
+
+                                                                    <% if @buttons %>
+                                                                         <span class="search_type_links"  id="search_keywords">| Search Keywords (slow) |</span>
+                                                                         <span class="search_type_links"  id="show_all">Show All (very slow) </span>
+                                                                     <% end %>
+                                                        </span>
+
+                                                        <span id="spinner" style="display:none;"><%= image_tag "/images/search/ajax-spinner.gif" %> </span>
+
+                                                        <%= hidden_field_tag "search_type_name", "search_item_details" %>
+
+                                                        <% link_to( "Show All - (Very Slow)", :controller => "item_manager", :action => 'index', :search_type_name => 'show_all', :confirm => "Are you Sure? This is very slow."  ) %>
+
+                                                        <a href="#" onclick="$('item_type_editor').toggle();"> Derivative options</a>
+                              </div>
+
+      <% end  %>
+
+</div>
+
+

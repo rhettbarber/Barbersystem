@@ -1,0 +1,14 @@
+<h1>Design Standard Resources List </h1>
+<%   if flash[:notice]  %>
+<span style="color:red;">   FLASH NOTICE: <%= flash[:notice]  %>  </span>
+<% else  %>
+            <%= render :partial => "designer/department_category_select" %>
+            <%= render :partial => "designer/items"  if !params[:search_type_name]  %>
+            <%= render :partial => "designer/derivatives"  if params[:search_type_name] == 'search_derivative_details'  %>
+            <%= render :partial => "designer/clone_item_types"  if params[:search_type_name] == 'search_clone_item_types'  %>
+            <%= render :partial => "designer/sales"  if params[:search_type_name] == 'search_sales_details'  %>
+<% end %>
+
+
+<br />
+

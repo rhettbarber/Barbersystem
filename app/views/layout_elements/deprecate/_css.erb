@@ -1,0 +1,22 @@
+<!-- Begin Shared Stylesheets-->
+<% @cache_assets = false -%>
+<% if @cache_assets %>
+<%= stylesheet_link_tag  "administration" if admin? %>
+<%= stylesheet_link_tag   "admin", "main" ,"menu","other","page","shop","specsheet","symbiote","item", "anatips","livepipe", "modalbox", "livepipe_selectmultiple", "reset","styles" , :media => "all" ,:cache => 'cache/all'%>
+<% else %>
+<%= stylesheet_link_tag  "administration" if admin?%>
+<%= stylesheet_link_tag  "admin" ,"main" ,"menu","other","page","shop","specsheet","symbiote","item", "anatips","livepipe", "modalbox", "livepipe_selectmultiple", "reset","styles", :media => "all"  %>
+<% end  %>
+<!-- End Shared Stylesheets-->
+
+
+
+<style type="text/css">
+
+    <% if controller_name == 'specsheet' %>
+
+    .page_content {
+        width: 850px;
+    }
+    <% end %>
+</style>

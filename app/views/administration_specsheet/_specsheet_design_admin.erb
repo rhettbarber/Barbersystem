@@ -1,0 +1,60 @@
+
+<% design = @design %>
+			<table border="1">
+				<tr>
+					<td width="280"><strong>DESIGN TABLE</strong> </td>
+				</tr>
+				<tr>
+					<td width="280">design.category.id:<%=  design.category.id   %></td>
+				</tr>		
+				<tr>
+					<td width="280">design.ItemLookupCode:<%=  design.ItemLookupCode   %></td>
+				</tr>	
+				<tr>
+					<td width="280">design.Description:<%=  design.Description   %></td>
+				</tr>	
+				<tr>
+					<td width="280">department:<%=  design.department.Name   %></td>
+				</tr>
+<%  form_for:category, design.category , :url => { :controller => "categories", :action => "update" } do |f|  %>	
+				<%= hidden_field_tag "id", design.category.id %>
+
+				<tr>
+					<td><%= f.text_field( :Name ,:size => 31 ) %>--category name</td>
+				</tr>
+				<tr>
+					<td width="280"><%= f.text_field( :breast_print ,:size => 1 ) %>--breast_print</td>
+				</tr>
+				<tr>
+					<td width="280"><%= f.text_field( :category_specific_breast_print  ) %>--category_specific_breast_print</td>
+				</tr>
+				<tr>
+					<td width="280"><%= text_field_tag( :design_specific_breast_print ,:size => 1 ) %>--design_specific_breast_print</td>
+				</tr>
+				<tr>
+					<td width="280"><%= f.text_field( :prefix ,:size => 2 ) %>--prefix</td>
+				</tr>
+				<tr>
+					<td><%=   select("category", "category_class_id", CategoryClass.find(:all,:order => "name ASC").collect {|p| [ p.name, p.id ] } ,{:selected =>  design.category.category_class_id  } ) %>--category_class</td>
+				</tr>
+				<tr>
+					<td width="280"><%= f.text_field( :use_generic_department ,:size => 1 ) %>--use_generic_department</td>
+				</tr>
+				<tr>
+					<td width="280"><%= f.text_field( :web_category ,:size => 1 ) %>--web_category</td>
+				</tr>
+				<tr>
+					<td width="280"><%= f.text_field( :additive_category_ids ,:size => 20 ) %>--additive_category_ids</td>
+				</tr>
+				<tr>
+					<td width="280"><%= f.text_field( :use_picturename ,:size => 1 ) %>--use_picturename</td>
+				</tr>
+                                <%= hidden_field(:item_id, design.id) %>
+
+				<tr>
+					<td width="280"><%= submit_tag('Update Category') %></td>
+				</tr>
+
+<%  end  %> 
+		
+			</table>

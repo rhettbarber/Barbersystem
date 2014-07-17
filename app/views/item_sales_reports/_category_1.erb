@@ -1,0 +1,11 @@
+<div class="item_sales_report_category">
+      <%= category.Name -%>
+      <div class="item_sales_report_items">
+      <% if category.generic_counterpart %>
+                  <% @items = Item.find(:all_not_scoped, :conditions => ["items.category_id in (?) and items_with_yearly_sales.sale_year in (?)",  [ category.id, category.generic_counterpart.id ] ,  [ nil , @chosen_year ]   ] ,:include => ["items_with_yearly_sales"]  )       -%>
+       <% else  %>
+                 <% @items = Item.find(:all_not_scoped, :conditions => ["items.category_id = ? and items_with_yearly_sales.sale_year in (?) ",  [ category.id ] ,    [ nil , @chosen_year ]   ] ,:include => ["items_with_yearly_sales"]  )       -%>
+        <% end %>
+         <%= render :partial => 'item', :collection => @items  -%>
+      </div>
+</div>

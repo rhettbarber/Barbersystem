@@ -1,0 +1,7 @@
+
+					<div class="report_item">
+							<%=  image_tag( item.image_url( item.department, 'item_thumbnails/','x'  )  , :size => "150x150") %><br />
+							<%=  item.ItemLookupCode   %><br />
+							<%=  i.text_area(:Notes, :size => "20x20",:index => item.id)  %>
+							<%=  image_tag(  item.opacity_football ,:size => "20"  )  %>
+					</div>

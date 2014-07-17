@@ -1,0 +1,28 @@
+<p>
+  <b>Creditcardexpiration:</b>
+  <%=h @quote_tender_entry.CreditCardExpiration %>
+</p>
+
+<p>
+  <b>Creditcardnumber:</b>
+  <%=h hide_card_number(@quote_tender_entry.CreditCardNumber)  %>
+</p>
+
+<p>
+  <b>Creditcardapprovalcode:</b>
+  <%=h @quote_tender_entry.CreditCardApprovalCode %>
+</p>
+
+
+<%= link_to 'Edit', edit_quote_tender_entry_path(@quote_tender_entry) %> |
+<%= link_to 'Back', quote_tender_entries_path %>
+
+
+<% if controller.controller_name == 'quote_tender_entries' %>
+	<% light_gold_box do -%>   
+	
+			<strong>	Your card will be charged at time of shipment : </strong> <br /> <br /> 	
+	
+		<%=link_to( image_tag( "/images/buttons/continue_button_gold.gif",:border => 0) ,:controller => 'cart' , :action => 'next_checkout_step')  %>
+	<% end %>
+<% end %>

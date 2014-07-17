@@ -1,0 +1,41 @@
+<!--   #######################  BEGIN DESIGNS  PANEL   ####################### -->
+<!--   #######################  BEGIN DESIGNS  PANEL   ####################### -->
+<!--   #######################  BEGIN DESIGNS  PANEL   ####################### -->
+<!--   #######################  BEGIN DESIGNS  PANEL   ####################### -->
+<!--   #######################  BEGIN DESIGNS  PANEL   ####################### -->
+<div class="left-panel"   data-role="panel" id="designs_panel" data-position="left" data-display="reveal" data-position="left"  data-theme="a">
+              <div class="ui-panel-inner">
+                            <ul data-role="listview"  id="designs_listview">
+                                      <li data-icon="back" class="ui-first-child"><a href="#" data-rel="close" class="ui-btn ui-btn-icon-right ui-icon-back">Close</a></li>
+                                      <li data-icon="search"><a href="/cart">Quick Cart</a></li>
+                                      <li data-icon="search"><a href="/search">Search</a></li>
+                                      <li data-icon="gear"><a href="/search/scroll">Scroll</a></li>
+                                       <% if @singular_item_customer == true %>
+                                       <li data-icon="gear"><a href="/new_designs">New designs</a></li>
+                                       <li data-icon="gear"><a href="/sale_designs">Sale designs</a></li>
+                                       <% end %>
+                                        <li data-icon="gear"><a href="/order_tracking">Track Order </a></li>
+                                        <div id="designs_departments_list">
+                                        <% @website.default_design_departments.each do |department| %>
+                                                                        <div data-role="collapsible"  class="department_collapsible"   id="department_collapsible_<%= department.id %>"   data-department_id="<%= department.id %>" >
+                                                                                      <h3><%= department.Name  %></h3>
+                                                                                      <ul data-role="listview">
+                                                                                                    <% department.categories.where("web_category = 1 and visible = 1").sort_by{|a| a.Name}.each do |category| %>
+                                                                                                                    <li   class="category_li"   data-category_id="<%= category.id %>"> <a href="/store/category_items/<%=  department.id  %>/<%= category.id %>" data-transition="slide"> <%= category.Name %></a></li>
+                                                                                                  <% end %>
+                                                                                      </ul>
+                                                                        </div>
+                                         <% end %>
+                                        </div>
+                                         <li class="symbiote_designs_menu_options" style="display:none;"><a data-icon="arrow-r"  href='#items_panel' data-role="button" style="white-space:normal;"> You have already chosen a design. Please choose a item to complete it.</a></li>
+                                         <li class="symbiote_designs_menu_options" style="display: none;"><a  data-icon="delete"  href="/cart/delete_incomplete_symbiote"  style="white-space:normal;">or Delete chosen design  from cart</a></li>
+                                         <%= @website.phone %>
+                            </ul>
+              </div>
+</div>
+<!--   #######################  END DESIGNS  PANEL   ####################### -->
+<!--   #######################  END DESIGNS  PANEL   ####################### -->
+<!--   #######################  END DESIGNS  PANEL   ####################### -->
+<!--   #######################  END DESIGNS  PANEL   ####################### -->
+<!--   #######################  END DESIGNS  PANEL   ####################### -->
+

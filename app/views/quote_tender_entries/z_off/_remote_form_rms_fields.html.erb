@@ -1,0 +1,53 @@
+<%= form_for(@quote_tender_entry, :remote => true ) do |f| %>
+  <% if @quote_tender_entry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@quote_tender_entry.errors.count, "error") %> prohibited this quote_tender_entry from being saved:</h2>
+
+      <ul>
+      <% @quote_tender_entry.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= f.hidden_field "tender_id", :value => 2 %>
+
+
+<p>
+	<table>
+			<tr>
+			<td>
+				   <b>Expiration</b>
+		   	</td>
+		  	</tr>
+		<tr>
+		<td>
+				   <b>Month</b>
+				    <select name="CreditCardExpirationMonth">
+				 		<%=  options_for_select(QuoteTenderEntry.months , @selected_month   )  %>
+				   </select>
+
+				 	<b>Year</b>
+				    <select name="CreditCardExpirationYear">
+				 		<%=  options_for_select(QuoteTenderEntry.years , @selected_year  )  %>
+				   </select>
+		   	</td>
+		  	</tr>
+		</table>
+  </p>
+
+  <p>
+    <b>Credit Card Number</b><br />
+    <%= f.text_field :CreditCardNumber %>
+  </p>
+
+  <p>
+    <b>Credit Card Approval Code</b><br />
+    <%= f.text_field :CreditCardApprovalCode %>What's this?:<%= link_to image_tag("/images/buttons/question-mark-orange-tiny.jpg",:border => 0),{:controller => 'cart', :action => 'show_cc_code_info'} , :popup => ['new_window_name', 'height=400,width=800']    %>
+  </p>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

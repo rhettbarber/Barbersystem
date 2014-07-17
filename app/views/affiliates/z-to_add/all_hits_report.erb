@@ -1,0 +1,43 @@
+
+<h1>All Hits Affiliate Statistics for <%= @website.domain  %> </h1>
+These pages were viewed due to referral from your affiliate link(s).<br />
+This is an all incompassing listing, for a listing of referrals you are eligible to receive compensation for,<br />
+please check "This quarter's eligible <%= link_to "compensation report", :action => 'compensation_report' %>"
+<div id="pathslegend">
+  <h2>Stats</h2>
+  <% if @user_sessions %>
+          <table class="list">
+            <tr><th>Session Id/Refered To/Refered From:</th><th>SessionId:</th><th>Referred from:</th><th>Purchase ID/Amount:</th></tr>
+         	<% @user_sessions.each do |user_session| -%>
+			            <tr class="<%= alternator %>">
+					    	<td> <%= user_session.id %> </td>
+						    <td> <%= user_session.created_at %> </td>
+						    <td> <%=
+						    	 if user_session.purchase
+						    	 	user_session.purchase.Total
+					    	 	else
+					    	 		0
+				    	 		end
+						    	   %>
+							</td>
+					    	<td> .</td>
+				    	</tr>
+			            <tr class="<%= alternator %>">
+					    	<td> <%= user_session.rail_stats.sort_by{|a| a.created_at}.first   %></td>
+						    <td> b </td>
+						    <td> c </td>
+					    	<td> d</td>
+				    	</tr>
+			            <tr class="<%= alternator %>">
+					    	<td> e  </td>
+						    <td> f </td>
+						    <td> g </td>
+					    	<td> h </td>
+				    	</tr>
+				    	<tr>
+				            <td colspan="4"><img width="100%" height="2" src="/images/pixels/grey.gif" alt="_____"/></td>
+				        </tr>
+        	<%   end    %>
+          </table>
+          <% end %>
+</div>

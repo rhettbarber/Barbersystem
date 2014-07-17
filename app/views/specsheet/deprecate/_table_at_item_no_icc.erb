@@ -1,0 +1,32 @@
+<% if @show_admin %>
+   table_at_item_no_icc
+ <% end %>
+
+<div  id="specsheet_table_css">
+
+<style>
+
+    #specsheet_table {
+        max-width: 100%;
+    }
+
+    #specsheet_table img {
+        max-width: 100%;;
+    }
+
+
+
+</style>
+
+  </div>
+
+   <% if @model %>
+  <div style="width: 300px;overflow: hidden;"> <%=  image_tag @item.image_url( @department  , 'item_specsheets/', @design,'0' )  %></div>
+  <% end %>
+
+
+
+
+   <div  id="specsheet_table">
+     <%= image_tag   '/images/item_specsheets/' + @item.PictureName.gsub(".jpg", "").gsub(".png", "")  + '.jpg'  %>
+ </div>

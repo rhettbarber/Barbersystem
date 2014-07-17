@@ -1,0 +1,68 @@
+
+
+<div style="width:850px;margin-left:auto;margin-right:auto;display:table;">
+
+ <div style="width:298px;display:table-cell;">
+                    <%= image_tag('/images/company_logos/' + @website.name + '_top_bar_icon.png') %>
+</div>
+
+<div style="width:670px;margin-left:auto;margin-right:auto;margin-top:15px;display:table-cell;">
+<% if @website.store_website == true %>
+                <div id="progress_bar_container" style="display:none;"> <%= image_tag( '/images/icons/progress-bar.gif'   ) %> </div>
+		 <%=  form_tag( '/ajax/search', :remote => true    , :onSubmit => "$('search_progress_bar_container').show();"     ) do  %>
+
+                  <% if session[:advanced_search] == true %>
+                                <select id="search_scope" name="search_scope" ><option value="Matches Any">Matches Any  - (Most Results)</option><option value="Matches All">Matches All -(Less Results)</option></select>
+                 <% end  %>
+                
+		  <select name="search_type_name">
+		    <option value="products" selected="selected"> Products </option>
+		    <option value="articles"> Articles </option>
+		  </select>
+			<%= text_field_tag("query", params[:query], :autocomplete => "off", :size => 35 ) %>
+			<%= submit_tag "Search" %>
+		<%  end  %> 		
+
+<% else %>
+
+		 <%=  form_tag( {:controller =>  'page' ,  :action => 'page_search'   } ) do  %>
+			<%= text_field_tag  'item_keywords' %>
+			<%= submit_tag "Search" %>
+		<%  end  %> 	
+
+<% end %>
+</div>
+
+</div>
+
+
+
+
+<% if @example  %>
+
+
+
+
+<style type="text/css">
+    .search_button {
+        width:40px;
+    }
+</style>
+
+
+
+<%= form_tag( '/films/search', :remote => true    , :onSubmit => "$('progress_bar_container').show();"       )  do %>
+<select id="search_scope" name="search_scope" ><option value="Matches All">Matches All -(Less Results)</option><option value="Matches Any">Matches Any  - (Most Results)</option></select>
+	   <%= text_field_tag("query", params[:query], :autocomplete => "off", :size => 50 ) %>
+
+          <div id="progress_bar_container" style="display:none;"> <%= image_tag( '/images/icons/progress-bar.gif'   ) %> </div>
+           <%= image_submit_tag('/images/buttons/48x48-search.png', :class => "search_button")  %>
+
+           <%= link_to image_tag("/images/buttons/enter-new-film.png", :border => 0), new_film_path %>
+    <%   end   %>
+
+
+<% end  %>
+
+
+

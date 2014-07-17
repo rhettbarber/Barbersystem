@@ -1,0 +1,52 @@
+<div class="menu" style="text-align: center;">
+
+                 <% if  action_name == "list_completed" %>
+                                          <a href="/purchases_entries/layout_manager">Back to Layout Manager  </a>
+                 <% end %>
+
+               <a href="/purchases_entries/change_layout"  title="Type layout number." onclick="Modalbox.show(this.href, {title: this.title, evalScripts:true ,  params: {  purchases_entry_ids:  getCheckboxValues()   }  }); return false;"> Change Layout  </a>
+
+               <% if session[:show_completed] %>
+                   <% unless action_name == "list_completed" %>
+                   <a href="/purchases_entries/dont_show_completed"> Hide Completed </a>
+                  <% end %>
+               <% else %>
+                   <a href="/purchases_entries/show_completed">Show Completed  </a>
+               <% end %>
+
+
+
+
+  <% if session[:show_thumbnails] %>
+                  <a href="/purchases_entries/hide_thumbnails">Hide Thumbnails  </a>
+  <% else %>
+                 <a href="/purchases_entries/show_thumbnails">Show Thumbnails  </a>
+<% end %>
+
+             <% if session[:sort_by_layouts] %>
+                   <a href="/purchases_entries/sort_by_due_date"> Sort by due date  </a>
+             <% else %>
+                           <a href="/purchases_entries/sort_by_layouts"> Sort by layouts </a>
+             <% end %>
+
+                <% if  session[:chosen_colors]  != session[:all_colors] or params[:query]  %>
+                                  <% unless action_name == "list_completed" %>
+                                             <a href="/purchases_entries/show_all">  Show All </a>
+                                 <% end  %>
+                 <% end %>
+
+
+              <%  unless  session[:chosen_colors].nil? or   action_name == "list_completed"  %>
+                        <a href="/purchases_entries/hide_all">  Hide All </a>
+               <% end %>
+
+                     <%=  link_to "List Completed", :controller => "purchases_entries", :action => "list_completed"  unless  action_name  == "list_completed" %>
+
+                     <%=  link_to "List Declared Fulfilled", :controller => "purchases_entries", :action => "list_declared_fulfilled"  unless  action_name  == "list_declared_fulfilled" %>
+
+                     <%=  link_to "List Incomplete", :controller => "purchases_entries", :action => "list_incomplete"  unless  action_name  == "list_incomplete" %>
+
+                    <a href="/purchases_entries/choose_customer"  title="Select a Customer." onclick="Modalbox.show(this.href, {title: this.title, evalScripts:true   }); return false;"> Choose Customer  </a>
+
+
+</div>

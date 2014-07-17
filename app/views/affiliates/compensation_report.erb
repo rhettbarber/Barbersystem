@@ -1,0 +1,80 @@
+
+<h1>Affiliate Compensation Report</h1>
+<h3>Graphing will be added soon!</h3>
+
+
+
+<li>A sale qualifies for commission after 30 days. This gives the sale time to be returned for refund or exchange.</li>
+<li>Qualifying Time:<%= Sale.qualifying_time.utc %> - 30 Days ago</li>
+
+<h3>Combined Affiliate and Recruited Affiliate Sales Totals:</h3>
+<li> (This is the  total of all affiliate earnings.) </li> 
+<%= render :partial => "compensation_report_combined_totals"     %>
+
+<h3>		
+Total Paid: $<%= number_with_precision( @total_paid ,:precision =>  2 )  %>
+</h3>		
+		
+<br />
+		<h2>Details: </h2>
+		
+		<h3>Your Affiliate Sales:</h3>
+		<li> (These sales were directed to our website by your affiliate link or banner)</li> 
+		<li> Commission Multiplier: <%= Sale.link_affiliate_percentage %></li>
+				<table class="sale_table">
+					<tbody>
+								<th> Sale Time  </th><th>Sale Total  </th><th>Shipping Charge  </th><th>Total Returned  </th><th>Total Payable  </th><th> Commission Amount </th> <th> Qualifying?  </th> <th> Time Until Qualifies  </th><th> Commission Paid?  </th>
+										<% if @user_sales_by_affiliates %>
+													<%= render :partial => "user_sales_by_affiliate", :collection => @user_sales_by_affiliates.sort_by{|a| a.sale.id}  %>
+										<% else %>
+														<%= render :partial => "rail_stat_empty"  %>
+										<% end %>
+					</tbody>
+				</table>
+		
+<h3>		
+Total Paid: $<%= number_with_precision( @total_paid ,:precision =>  2 )  %>
+</h3>		
+
+
+<%= render :partial => "compensation_report_totals"    %>
+
+<% @recruited = true %>
+
+<% if @recruited %>
+
+		<br />
+				<br /><br />
+		<h3>Your Recruited Affiliate Sales:</h3>
+		<li> (These sales were directed to our website by another affiliate that you originally directed/recruited to our affiliate system.) </li> 
+		<li> Commission Multiplier: <%= Sale.recruited_affiliate_percentage %></li>
+		
+				<table class="sale_table">
+					<tbody>
+								<th> Sale Time  </th><th> Sale Total  </th><th> Shipping Charge  </th><th>Total Returned  </th><th>Total Payable  </th><th> Commission Amount </th> <th> Qualifying?  </th> <th> Time Until Qualifies  </th><th> Commission Paid?  </th>
+										<% if @user_sales_by_affiliate_recruiters != []  %>
+													<%= render :partial => "user_sales_by_affiliate_recruiter",:collection => @user_sales_by_affiliate_recruiters  %>
+										<% else %>
+														<%= render :partial => "recruited_rail_stat_empty" %>
+										<% end %>
+					</tbody>
+				</table>
+
+		<%= render :partial => "compensation_report_recruited_totals"    %>
+		<br /><br />
+		
+		
+		
+	<% else %>
+			<h3> Recruiter tracking will be online by 03/15/2010.</h3>
+<% end %>	
+		<br />
+		<%= render :partial => "compensation_report_notes"  %>
+		
+<br />
+<% if @user and @showing  %>
+				<% if @user.id == 145 %>
+								@recruited_users.to_xml: <%= @recruited_users.to_xml %><br />
+								size:<%=  @user_sales_by_affiliate_recruiters.size %><br />
+				<% end %>
+<% end %>

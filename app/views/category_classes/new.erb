@@ -1,0 +1,41 @@
+<h1>New category_class</h1>
+
+<%= error_messages_for :category_class %>
+
+<% form_for(@category_class) do |f| %>
+  <p>
+    <b>Name</b><br />
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <b>Item type</b><br />
+    <%= f.text_field :item_type %>
+  </p>
+
+  <p>
+    <b>Opposite category ids(Optional, Easier to add these after creation using "Combinations and Alignment" action)</b><br />
+    <%= f.text_field :opposite_category_ids %>
+  </p>
+
+  <p>
+    <b>Appearing sections(Optional)</b><br />
+    <%= f.text_field :appearing_sections %>
+  </p>
+
+  <p>
+    <b>Slaves opposite master default department(Optional)</b><br />
+    <%= f.text_field :slaves_opposite_master_default_department_id %>
+  </p>
+
+  <p>
+    <b>Notes(Optional)</b><br />
+    <%= f.text_field :notes %>
+  </p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', category_classes_path %>

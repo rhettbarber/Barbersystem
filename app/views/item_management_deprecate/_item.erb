@@ -1,0 +1,77 @@
+<% unless item.PictureName.nil? or  item.PictureName == '' or  item.PictureName == '0' %>
+<%   @table_row_class =  cycle('odd', 'even')  %>
+      <tr class="<%=@table_row_class  %>">
+            <td class="zoomy">
+                   <% if item.PictureName %>
+                               <a href="<%= "http://" + @asset_server + "/images/item_specsheets/" + item.PictureName %>">
+                                     <%=   image_tag "http://" + @asset_server + "/images/item_specsheets/" + item.PictureName ,:size => "50x50" ,:border => 0 %>
+                               </a>
+                  <% else  %>
+                            'Missing Image'
+                   <% end  %>
+            </td>
+            <td><%= item.ItemLookupCode %></td>
+            <td><%= item.Description %></td>
+            <td><%# number_with_precision(      item.item_sales_this_year.sum_of_quantity       , 0 )  %></td>
+             <td>
+                <%  unless  item.stock_design_file_exists?  %>
+                          <span class="anatips" title="Stock Design Missing from Database! It should be located at: <%= item.stock_design_filename %> as .psd or .tif">
+                                      <%= image_tag('/images/icons/stock.jpg',:size => "35x35") %>
+                           </span>
+                  <% end  %>
+                <%  unless  item.design_separation_file_exists?  %>
+                          <span class="anatips" title="Design Separation is Missing! It should be located at: <%= item.design_separation_filename %> as .psd or .tif">
+                                      <%= image_tag('/images/icons/separation.jpg',:size => "35x35") %>
+                           </span>
+                  <% end  %>
+                <%  unless  item.all_over_file_exists?  %>
+                          <span class="anatips" title="All Over Image  is Missing! It should be located at: <%= item.all_over_filename %> as .jpg">
+                                      <%= image_tag('/images/icons/all-over-image.png',:size => "35x35") %>
+                           </span>
+               <% end  %>
+             </td>
+              <td onclick="showOptions(<%= item.id   %>, 0 )">
+                      <span class="anatips" title="Click here to create new Clone types"> <%= image_tag('/images/icons/' + item.main_item_status.to_s + '.jpg'   ,:size => "35x35") %> </span>
+             </td>
+           </tr>
+             <tr class="<%=@table_row_class  %> clone_items_status_dropdown">
+               <td colspan="6">
+
+                 <div class="clone_item_dropdown_items">
+                          <div class="clone_item_dropdown_item"> Clone Types Overview: 
+                                  <%= link_to "Manage Clones", :controller => 'item_management', :action => 'management_options', :item_id => item.id  %>
+                          </div>
+
+                          <% CloneItemType.all.each do |clone_item_type| %>
+                          <div class="clone_item_dropdown_item" onclick="showOptions(<%= item.id   %>, <%= clone_item_type.id %> )">
+
+
+                                            <span class="anatips" title="<%=  item.clone_item_status(clone_item_type.id ) %>">
+                                                   <% image_tag( '/images/icons/' + item.clone_item_status(clone_item_type.id ).to_s + '.jpg' , :size => "35x35" ) %>
+
+                                                  <%= clone_item_type.name %><br />
+                                                  <%  unless  clone_item_type.template_file_exists?  %>
+                                                        <span class="anatips" title="Template is missing from Production Folder! It should be located at: <%= clone_item_type.template_file_name_with_path   %> ">
+                                                              <%= image_tag('/images/icons/template.gif',:size => "35x35") %>
+                                                         </span>
+                                                 <% end  %>
+
+                                                   <% @clone_item_of_type = item.clone_item_of_type(clone_item_type.id) %>
+                                                   <% if @clone_item_of_type  %>
+                                                              <%= image_tag(  @clone_item_of_type.production_ready_status_image_name  , :size => "35x35" ,:class => 'anatips', :title => 'testing anatips' ) %>
+                                                              <%= image_tag( @clone_item_of_type.web_ready_status_image_name  , :size => "35x35" ) %>
+                                                    <% else  %>
+                                                              <%= image_tag( '/images/icons/clone_not_requested.png'  , :size => "35x35" ) %>
+                                                    <% end  %>
+                                            </span>
+                      </div>
+                      <% end %>
+                 </div>
+
+               </td>
+             </tr>
+             <tr><td colspan="6" class="item_management_row_divider">&nbsp; </td></tr>
+
+
+
+<% end  %>

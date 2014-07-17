@@ -1,0 +1,30 @@
+<%= if @customer 
+                   if @customer.CurrentDiscount > 0
+                                if @customer.PriceLevel == 0
+                                        render(:partial => "cart/message_volume_discount" ) 
+                                 else  
+                                         render(:partial => "cart/message_permanent_discount") 
+                                  end 
+            else 
+                 render(:partial => "cart/message_discount_eligibility") unless @user
+           end                                
+     end   %>
+
+
+
+<%  if @customer  %>
+                              <%  if @customer.PriceLevel > 1  %>
+							  				<% if @purchase %>
+														<%  if @purchase.slave_entries_count  > 0  %>
+																<div id='online_discount_message'>	A 5% online discount was applied to your order. Thank you for ordering Online! </div>
+														<% end  %>
+												<% end  %>
+								<% end  %>
+
+<%  end  %>
+
+<br />
+
+
+
+

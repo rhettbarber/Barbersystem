@@ -1,0 +1,58 @@
+<style type="text/css" media="screen">
+      .sort_info {
+        background-color: black;
+        width:640px;
+        color:white;
+        height:20px;
+      }
+    </style>
+
+<% if controller.action_name == "recently_added_news"  %>
+    <%= image_tag "/images/headers/southern-heritage-news-from-the-frontlines.png" %>
+    <div class="sort_info"></div>
+<% elsif  controller.action_name == "recently_added_email"  %>
+    <%= image_tag "/images/headers/southern-heritage-interesting-email.png" %>
+     <div class="sort_info"></div>
+<% end  %>
+
+
+
+<% if controller.action_name == 'recently_added_pages' %>
+	<% cache (@website.name + "/user_type_id/" + @user_array_user_type_id + "/recently_added_pages/customer_type/" + @customer_array_customer_type  ) do %>
+		<% for page_container in @page_containers %>
+				<% if page_container.page %>
+					<% if   @customer_array_viewable_page_types.include?(page_container.page.page_type_id)  or  @customer_array_viewable_page_types.include?(page_container.page.page_type_id.to_s)   %>
+							<% if @latest_revision_ids.include?(page_container.id) or  @latest_revision_ids.include?(page_container.id.to_s) %>
+									<div class="page_name"> 
+										<strong> 
+											<%= page_container.id  %> ---<%= page_container.page.name  %> --- Released:  <%= time_ago_in_words(  page_container.created_at,  include_seconds = false ) %>  Ago.  ----  <%=  page_container.page.created_at  %><br />
+											<%= link_to "See related pages and categories" ,:controller => 'page', :action => 'show',:id => page_container.page.slug       %>
+										</strong>              
+									 </div>		
+									<div class="page_content_capsule"><%= highlight( page_container.content , @tokens , '<strong class="highlight">\1</strong>' ) %> </div>
+							<% end %>
+					<% end %>
+				<%  end  %>
+		<%  end  %>
+	<%  end  %>
+<% else %>
+		<% for page_container in @page_containers %>
+				<% if page_container.page %>
+					<% if   @customer_array_viewable_page_types.include?(page_container.page.page_type_id)  or  @customer_array_viewable_page_types.include?(page_container.page.page_type_id.to_s)   %>
+								<% if @latest_revision_ids.include?(page_container.id) or  @latest_revision_ids.include?(page_container.id.to_s) %>
+										<div class="page_name"> 
+											<strong> 
+												<%= page_container.id  %> ---<%= page_container.page.name  %> --- Released:  <%= time_ago_in_words(  page_container.created_at,  include_seconds = false ) %>  Ago.  ----  <%=  page_container.page.created_at  %><br />
+												<%= link_to "See related pages and categories" ,:controller => 'page', :action => 'show',:id => page_container.page.slug       %>
+											</strong>              
+										 </div>		
+										<div class="page_content_capsule"><%= highlight( page_container.content , @tokens , '<strong class="highlight">\1</strong>' ) %> </div>
+								<% else %>
+								 <!-- lrinoinc: <% page_container.id %>  rt <%= page_container.page.root.id %>  -->
+								<% end %>
+					<% else %>
+					 <!-- lrinoinc: cavptnoinc -->
+					<% end %>
+				<%  end  %>
+		<%  end if @page_containers  %>
+<% end %>

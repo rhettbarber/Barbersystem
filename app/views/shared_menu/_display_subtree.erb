@@ -1,0 +1,30 @@
+<% if child and !child.nil? %>
+
+<li>
+	<% node = child %>
+	<%  if node.children.count > 0
+	  opened_leaf = node.id
+	else
+	  opened_leaf = 'no'
+	end %>
+
+
+ 	<% if @customer_array_viewable_page_types.include?( node.page_type_id ) %>
+	 &raquo; <%= link_to(node.name, :action => "show", :id => node.slug ,:pi => node.parent_id, :ri => node.root.id ,:ol => opened_leaf ) %>
+	<% end  %>
+
+
+                          <% if ancestors.include?(node) || node.slug == selected_node.slug %>
+                            <ul>
+                                    <% node.children.each do |child| %>
+                                                      <%= render :partial => "shared_menu/display_subtree", :locals => { :selected_node => selected_node, :child => child, :ancestors => ancestors  } %>
+                                    <% end %>
+                                    <% if node.slug == selected_node.slug && user_can?('modify') %>
+                                              <li>
+                                              <%= actions(node) %>
+                                              </li>
+                                    <% end %>
+                            </ul>
+                          <% end %>
+</li>
+<% end %>

@@ -1,0 +1,19 @@
+
+
+		
+<% if item %>	
+		<div class="item_container">
+				<div id="<%= "item_" + item.id.to_s  %>">	
+						<%=  image_tag( item.image_url( @department, 'item_thumbnails/','x' )  ) %>	
+					<br />
+
+
+						<%=  item.ItemLookupCode  %><%=  item.Description  %><br />
+
+			        	
+			        <span style="color:red;"> Design available on light items only.</span>
+
+			        	<br />     
+				</div>
+		</div>
+<% end %>

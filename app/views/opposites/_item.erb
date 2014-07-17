@@ -1,0 +1,12 @@
+
+
+		
+<% if item %>	
+	<% if @category.category_class.item_type == 'master' %>
+		<% department = item.masters_department_decides_default_department_id %>
+	<% else %>
+		<% department = item.design_decides_opposites_department %>
+	<% end %>			
+						
+						<%= image_tag( item.image_url( department, 'item_thumbnails/','x' ),:size => "100x100")  %>	
+<% end %>

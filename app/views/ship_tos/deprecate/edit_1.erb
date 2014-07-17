@@ -1,0 +1,59 @@
+<h1>Editing Customer Shipping Address</h1>
+
+<%= error_messages_for :ship_to %>
+
+<%= form_for(:ship_to, :url => ship_to_path(@ship_to), :html => { :method => :put }) do |f| %>
+  <p>
+    <b>Company</b><br />
+    <%= f.text_field :Company %>
+  </p>
+
+  <p>
+    <b>Name</b><br />
+    <%= f.text_field :Name %>
+  </p>
+
+  <p>
+    <b>Address</b><br />
+    <%= f.text_field :Address %>
+  </p>
+
+  <p>
+    <b>Address2</b><br />
+    <%= f.text_field :Address2 %>
+  </p>
+
+  <p>
+    <b>City</b><br />
+    <%= f.text_field :City %>
+  </p>
+
+  <p>
+    <b>State</b><br />
+    <%= f.text_field :State %>
+  </p>
+
+  <p>
+    <b>Zip</b><br />
+    <%= f.text_field :Zip %>
+  </p>
+
+    <%= hidden_field_tag("Country", "United States" )  %>
+    
+  <p>
+    <b>Phonenumber</b><br />
+    <%= f.text_field :PhoneNumber %>
+  </p>
+
+  <p>
+    <b>Faxnumber</b><br />
+    <%= f.text_field :FaxNumber %>
+  </p>
+
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', ship_to_path(@ship_to) %> |
+<%= link_to 'Back', ship_tos_path %>

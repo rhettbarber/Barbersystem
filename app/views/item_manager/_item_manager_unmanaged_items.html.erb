@@ -1,0 +1,32 @@
+
+
+
+
+<div id="item_manager_items">
+
+
+
+
+
+  <div style="width:850px;height:80px;display:none;" id="item_type_editor">
+                    <div style="margin-top:15px;width:425px;float:left;text-align:center;">
+                                    This Item is not managed by item type. If you would like to manage it, <br />
+                                     please select the appropriate Item Type and hit "Confirm"
+                    </div>
+                  <div style="margin-top:15px;width:425px;float:left;text-align:center;">
+                                     Item Type:<%= select("clone_item_type","id", CloneItemType.all.collect {|p| [ p.name  , p.id ] }, { :include_blank => true }) %>
+                                     <%= hidden_field_tag 'category_id', @category.id %> 
+                                     <%= image_tag(  '/images/buttons/confirm.png'  , :alt =>  'Confirm' , :onclick => "chooseItemType();" ) %>
+                    </div>
+  </div>
+
+  
+<table style="table-layout: auto;">
+  <tbody>
+
+                   <%= render :partial => 'item_manager/item_unmanaged', :collection => @items  %>
+
+  </tbody>
+</table>
+
+ </div>

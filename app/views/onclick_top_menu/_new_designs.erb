@@ -1,0 +1,12 @@
+<div class='onclick_menu'>
+					<%= link_to ' <li> Affiliates Admin </li>' ,:controller => 'affiliates_admin',:action => 'index'  if @show_affiliates_admin  %>
+		<li>
+					<%= link_to 'Reports' ,:controller => 'reports',:action => 'index'   %>
+		</li>
+		<li>
+					<%= link_to 'Items' ,:controller => 'items'   %>
+		</li>
+                <%  unless controller.controller_name == 'admin_links'  %>
+                      <li style="float:right;"><%= link_to image_tag('/images/menu_icons_and_labels/new-designs.png',:width => '400'  , :class => 'no_border'), :controller => 'admin_links' %></li>
+                <% end  %>
+</div>

@@ -1,0 +1,12 @@
+
+	  <div class="item_list_thumbnail_container_admin" style="padding:15px;width:150px;height:250px;overflow:hidden;float:left;background-color:white;">
+	    
+			<%=   image_tag( item.image_url(  item.default_master_department_id , 'item_thumbnails/','x' ),:border => 0, :size =>"120x120"   )  -%><br /> 
+			<%=  item.ItemLookupCode -%><br />
+			Size-Color:<%= item.SubDescription1 %><br />
+			Terms Found:<%= item.SubDescription3 %><br />
+			<%=  item.Description -%><br />
+			<%=  item.category.Name -%><br />
+			<%= link_to_function "Load Item", "SetSpecificItem('#{item.id}','#{item.ItemLookupCode}' )" %><br />
+		</div>
+ 

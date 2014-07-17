@@ -1,0 +1,14 @@
+
+<div class="item_list_thumbnail_container" style="border:solid 2px black;">	
+
+
+<div id="symbiote_category">
+<%=  image_tag( "/images/buttons/category-drop.jpg",:border => 0, :size =>"120x120"   ) %>	
+<%= drop_receiving_element( "symbiote_category" , 
+												:url => { :controller => "opposites", 
+												:selected_category_id => category.id,
+												:action => "add_category_into_opposites" }) %>
+												
+</div>											
+												
+</div>

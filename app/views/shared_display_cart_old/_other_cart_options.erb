@@ -1,0 +1,10 @@
+
+
+<div style="float:right;">
+ <%= form_tag :action => "delete_all_purchases_entries" do -%>
+ 	<%= submit_tag "Empty Cart" if controller.action_name == 'index' %>
+ <% end -%>
+
+
+
+</div>

@@ -1,0 +1,38 @@
+<p>
+  <b>Name:</b>
+  <%=h @category_class.name %>
+</p>
+
+<p>
+  <b>Id:</b>
+  <%=h @category_class.id %>
+</p>
+
+<p>
+  <b>Item type:</b>
+  <%=h @category_class.item_type %>
+</p>
+
+<p>
+  <b>Opposite category ids:</b>
+  <%=h @category_class.opposite_category_ids %>
+</p>
+
+<p>
+  <b>Appearing sections:</b>
+  <%=h @category_class.appearing_sections %>
+</p>
+
+<p>
+  <b>Slaves opposite master default department:</b>
+  <%=h @category_class.slaves_opposite_master_default_department_id %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%=h @category_class.notes %>
+</p>
+
+
+<%= link_to 'Edit', edit_category_class_path(@category_class) %> |
+<%= link_to 'Back', category_classes_path %>

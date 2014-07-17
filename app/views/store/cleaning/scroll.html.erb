@@ -1,0 +1,121 @@
+
+<div id="items">
+  <%=  render @items %>
+</div>
+
+<%= will_paginate @items %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @old_junk %>
+
+
+
+<%= stylesheet_link_tag '/assets/store/scroll' %>
+<script src="/assets/store/scroll.js"></script>
+
+
+
+
+
+<%#=  DepartmentsCategory.all.to_json %>
+
+
+ <script type="text/javascript">
+
+   var department_categories =   <%= raw  DepartmentsCategory.all.to_json %>  ;
+
+
+
+
+
+
+ </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% @view = false %>
+
+
+<% @departments_categories[0..10].each do |dc| %>
+            <%= dc %> <br>
+<% end  if @view%>
+
+
+
+
+
+
+<div class="wrapper">
+  <ul>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+    <li>Activity</li>
+  </ul>
+  <a href="#" class="loader"><span class="loader__label">more activity</span></a>
+</div>
+
+<% end %>

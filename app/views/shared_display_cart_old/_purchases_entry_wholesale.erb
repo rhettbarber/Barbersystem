@@ -1,0 +1,151 @@
+
+
+
+<%=  fields_for "purchase[purchases_entry_attributes][]" , purchases_entry do |p|  %>
+
+<% if purchases_entry.item_id  == 0  %>
+					      <tr id="<%= 'purchases_entry_' + purchases_entry.id.to_s %>">
+					                <td class="purchases_entry_delete" id="delete">
+					        		</td>    		
+					                <td  class="purchases_entry_image" id="image">		
+					                 	</td>
+					       
+					                <td  class="purchases_entry_quantity" id="quantity">        
+
+					                </td>
+					              
+					                <td  class="purchases_entry_itemlookupcode" id="itemlookupcode"></td>
+					             
+					                <td  class="purchases_entry_description" id="description">
+												<h3>  Complete this item by choosing a  
+														<% if @purchase %>
+																	<% if @purchase.symbiote_type == 'master' %>
+																		<%= link_to "Design", :action => 'browse' %>
+																	<% else %>
+																		<%= link_to "Garment", :action => 'browse' %>
+																	<% end %>
+														<% else %>
+														
+														<% end %>
+												</h3>
+						 </td>
+					           
+					                 <td  class="purchases_entry_full_unit_price" id="full_unit_price">
+					                                <div  id="full_unit_price_<%= purchases_entry.id %>"> 
+					                                                
+					                                </div>
+					                </td>
+					
+					                 <td  class="purchases_entry_full_extended_price" id="full_extended_price">
+					                                  <div  id="full_extended_price_<%= purchases_entry.id %>">
+					                                                
+					                                   </div>
+					                  </td>
+					
+									  <td  class="purchases_entry_your_extended_price_savings" id="your_extended_price_savings">  
+					                                <div  id="your_extended_price_savings_<%= purchases_entry.id %>"> 
+					                                                
+					                                 </div>  
+					                 </td>  
+					                                
+					                 <td  class="purchases_entry_your_extended_price" id="your_extended_price">
+					                                  <div  id="your_extended_price_<%= purchases_entry.id %>">
+					                                             
+					                                   </div>
+					                  </td>
+					     
+					      </tr>
+<% else %>
+ 					<% item =  Item.find(purchases_entry.item_id)  %>
+					<% quantity = purchases_entry.QuantityOnOrder %>
+					
+					      <tr id="<%= 'purchases_entry_' + purchases_entry.id.to_s %>">
+					                <td class="purchases_entry_delete" id="delete">
+														<%=  link_to(image_tag("/images/buttons/delete.gif",:border => 0), {:action =>"delete_purchases_entry",:purchases_entry_id => purchases_entry.id} ) %>
+					        		</td>    		
+					                <td  class="purchases_entry_image" id="image">
+					                				<% if purchases_entry.master_department_id != 0 %>
+					                					<%=   image_tag purchases_entry.item.image_url( purchases_entry.master_department_id , 'item_thumbnails/','x'  ),:size => '80x80'  %>
+					                				<% else %>		
+					                                    <%=   image_tag purchases_entry.item.image_url( purchases_entry.item.default_master_department_id , 'item_thumbnails/','x'  ),:size => '80x80'  %>	
+					                                <% end %>
+					                                        <%   link_to(image_tag( 'item_thumbnails/' + purchases_entry.item.PictureName ,:size => "100x100",  :border => 0), { :action => "enlarge_cart_image",		:item => purchases_entry.item_id  }, :popup => ['new_window_name', 'height=400,width=400'])  %>
+					        		</td>
+					       
+					                <td  class="purchases_entry_quantity" id="quantity">        
+					                    	 <% unless controller.controller_name == 'purchases'  %>
+															  <%= p.hidden_field :id  ,:index => nil%>
+ 															<%= p.text_field :QuantityOnOrder ,:index => nil ,:size => 2 , :value => number_with_precision(purchases_entry.QuantityOnOrder, :precision => 0 )   %>
+						            		<%  else  %>
+															<%=  quantity   %>
+											<%  end  %>
+							        </td>
+					              
+					                <td  class="purchases_entry_itemlookupcode" id="itemlookupcode">
+					                	
+					                	<%= item.ItemLookupCode %>
+					                	<% if item.department_is_permanent_or_volume_discountable == true %>
+					                		<%= link_to image_tag('/images/buttons/dollar-sign.png',:size => "30x30", :border => 0 ), { :action => 'show_discount_info' } , :popup => ['new_window_name', 'height=400,width=800']  %>
+					                	<% end %>
+					                	
+					                  </td>
+					             
+					                <td  class="purchases_entry_description" id="description">
+					                	
+					                	
+					                	
+					                	
+					                	
+					                	
+									Description:<%= item.Description %>	<br />
+					                
+					                <%= 'Dimensions:' if item.dimensions != '' %> <%= item.dimensions %><br />
+					                	
+					                <%= link_to image_tag('/images/buttons/view_details_short.png', :border => 0), :controller => "designer_specsheet", :purchases_entry_id => purchases_entry.id  unless controller.controller_name == 'purchases' %>
+					                
+					                	
+					                	
+					                	
+					                	
+					                	
+					                	
+				                	</td>
+					           
+					                 <td  class="purchases_entry_full_unit_price" id="full_unit_price">
+					                                <div  id="full_unit_price_<%= purchases_entry.id %>"> 
+					                                                <%=  number_to_currency(item.full_unit_price(@customer))  %>
+					                                </div>
+					                </td>
+					               
+					                 <td  class="purchases_entry_unit_quantity_tier_discount_price" id="unit_quantity_tier_discount_price">
+					                             <div id="unit_quantity_tier_discount_price_<%= purchases_entry.id %>">
+					                                              <%= number_to_currency(  item.unit_quantity_tier_discount_price(@customer, quantity))   %>  
+					                             </div>
+					                  </td> 
+					               
+					
+					                 <td  class="purchases_entry_full_extended_price" id="full_extended_price">
+					                                  <div  id="full_extended_price_<%= purchases_entry.id %>">
+					                                                <%=    number_to_currency(  purchases_entry.full_extended_price(@customer,item))  %> 
+					                                   </div>
+					                  </td>
+
+					                <td  class="purchases_entry_your_extended_price_savings" id="your_extended_price_savings">  
+					                                <div  id="your_extended_price_savings_<%= purchases_entry.id %>"> 
+					                                                <%=  number_to_currency(   purchases_entry.your_extended_price_savings(@customer,quantity,item))   %>
+					                                 </div>  
+					                 </td>  
+					                                
+					                 <td  class="purchases_entry_your_extended_price" id="your_extended_price">
+					                                  <div  id="your_extended_price_<%= purchases_entry.id %>">
+					                                             <strong>   <%=  number_to_currency(   purchases_entry.your_extended_price(@customer,quantity,item))  %>  </strong>
+					                                   </div>
+					                  </td>
+					     
+					      </tr>   
+<%  end  %>
+
+
+<% end %>
+
+

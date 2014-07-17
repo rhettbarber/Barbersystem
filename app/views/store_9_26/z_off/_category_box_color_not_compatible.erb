@@ -1,0 +1,23 @@
+
+<% logger.debug "-------------------------------------start category_box" %>
+
+<div class="category_box">	
+			
+		    
+		
+		    	<span style="font-size:medium;"><%=  item.category.Name.camelize  %> </span> 
+
+		   <br />
+		   
+		   <% logger.debug "-------------------------------------category box color not compatible" %>
+		   
+		   <%=  image_tag( item.image_url( department, 'item_thumbnails/','x' )  )  %>
+		   
+		   
+		   
+			<br />	<span style="color:red;"> Designs available on light items only.</span> 
+			 
+			
+</div>
+
+<% logger.debug "------------------------------------- end category_box" %>

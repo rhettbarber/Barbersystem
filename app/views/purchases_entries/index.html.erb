@@ -1,0 +1,139 @@
+<div id="colors" style="width:850px;margin-left:auto;margin-right:auto;">
+
+ <span id="spinner" style="display:none;"><%= image_tag "/images/search/ajax-spinner.gif" %> </span>
+
+
+<div id="layout">
+
+<%=  javascript_include_tag :defaults %>
+
+
+<style type="text/css">
+.color_to_add {
+   float:left;
+   padding-left:10px;
+   padding-right:10px;
+  color:red;
+}
+.color_to_remove {
+   float:left;
+ padding-left:10px;
+ padding-right:10px;
+  color:green;
+}
+</style>
+<script type="text/javascript">
+function addColor( the_color ) {
+            new Ajax.Updater('colors', '/purchases_entries/add_color' ,   {evalScripts:true, parameters:{ color: the_color ,   action: 'addColor'}} );
+}
+function removeColor( the_color ) {
+            new Ajax.Updater('colors', '/purchases_entries/remove_color' ,   {evalScripts:true, parameters:{ color: the_color ,   action: 'removeColor'}} );
+}
+function showAll(  ) {
+            new Ajax.Updater('colors', '/purchases_entries/show_all' ,   {evalScripts:true, parameters:{  action: 'showAll'}} );
+}
+function hideAll(  ) {
+            new Ajax.Updater('colors', '/purchases_entries/hide_all' ,   {evalScripts:true, parameters:{  action: 'hideAll'}} );
+}
+
+</script>
+
+
+
+ <%   unless session[:more_colors].empty? == true   %>
+ <div id="all_by_date_due" onclick="$('spinner').show(), $('layout').hide(),  showAll()"  style="width:850px;float:left;">
+   Show all by date due:
+ </div>
+ <br />
+<% end %>
+
+Chosen Colors:
+<div id="chosen_colors" style="width:850px;float:left;">
+<%   session[:chosen_colors].each do |color|    %>
+     <div class="color_to_remove"  onclick="$('spinner').show(), $('layout').hide()  , removeColor( '<%= color %>')"> <%= color  %></div>
+<% end %>
+</div>
+<br /><br />
+
+
+ <%   if session[:more_colors].empty? == true   %>
+                 <div id="hide_all" onclick="$('spinner').show(), $('layout').hide() , hideAll()"  style="width:850px;float:left;color:red;">
+                  Click here to hide all to begin to add colors for layout.
+                </div>
+<% else  %>
+                  <div onclick="$('more_colors').toggle()" style="width:850px;float:left;"> Toggle more colors:</div>
+                  <div id="more_colors" style="display: none;">
+                  <%   session[:more_colors].each do |color|    %>
+                     <div class="color_to_add"  onclick='$("spinner").show(), $("layout").hide()  ,addColor( "<%= color %>")'> <%= color  %></div>
+                  <% end %>
+                  </div>
+<% end  %>
+
+
+<br />  <br /> <br />  <br />
+
+
+<table style="width: 850px;;">
+            <tr>
+                      <th>PO #</th>
+                      <th>Item #</th>
+                      <th>Description</th>
+                      <th>Colors</th>
+                      <th>Quantity On Order</th>
+                      <th>Quantity RTD</th>
+                      <th>Due Date</th>
+            </tr>
+
+          <% @purchases_entries.sort_by{ |a| a.due_date  }.each do |purchases_entry| %>
+                            <%
+                                        test_colors =  purchases_entry.item.colors
+                                        chosen_colors =  session[:chosen_colors]
+                            %>
+                            <%#  if  purchases_entry.item.has_same_colors_but_introduces_none(chosen_colors)     %>
+                                                            <tr>
+                                                          <td style="color: blue;"><%= purchases_entry.purchase.ReferenceNumber  %></td>
+                                                          <td><%=h purchases_entry.item.ItemLookupCode %></td>
+                                                          <td><%=h purchases_entry.item.Description %></td>
+                                                          <td>
+                                                                        <%    test_colors.each do |color| %>
+                                                                           <%= color  %> ,
+                                                                          <% end  %>
+                                                             </td>
+                                                          <td><%=h purchases_entry.QuantityOnOrder %></td>
+                                                          <td><%=h purchases_entry.QuantityRTD %></td>
+                                                          <td><%=h  purchases_entry.due_date   %></td>
+
+                                                        </tr>
+                                                         <tr><td style="height: 5px;background-color:lightgray;" colspan="10"></td></tr>
+                             <%# end %>
+            <% end %>
+</table>
+
+<br />
+
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @show_form %>
+<%  form_for:customer, id  , :url => { :controller => "purchases_entries", :action => "add_color" } do |f|  %>
+          <span id="selected_colors">   <%= select_tag "color",   options_for_select(  @colors,  params[:color]    )     %></span>
+           <%= submit_tag('Add Color') %>
+<%  end  %>
+<br />    <br />
+<% end  %>

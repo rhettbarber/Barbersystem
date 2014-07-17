@@ -1,0 +1,9 @@
+
+<%   show_department = "true"    if main_category.Name == category.Name %>
+
+
+<% if show_department == "true" %>  
+	<li class="additive_category" id="category_<%= category.id %>"> &nbsp;  &nbsp;  <%= link_to category.Name, :controller  => 'browse', :category_id => category.id %></li>
+<% else %>
+	<li class="additive_category" id="category_<%= category.id %>"> &nbsp;  &nbsp;  <%= link_to category.department.Name + '-' + category.Name, :controller => 'browse', :category_id => category.id %></li>
+<% end %>

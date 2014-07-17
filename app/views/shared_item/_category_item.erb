@@ -1,0 +1,28 @@
+ 
+
+<% if item %>				
+			<div class="item_container">
+					<div id="'item_' + <%= item.id.to_s %>">
+						 <div class="item_thumbnail">
+							 <% if controller.action_name == 'browse'%>		
+							 		<%= link_to( image_tag( item.image_url( @department , '/images/item_thumbnails/','x' )  ), { :controller  => "browse", :category_id => category.id , :department_id => @department.id ,:sym_category_class_id => @purchase_symbiote_item_category_category_class_id, :sym_type => @purchase_symbiote_item_category_category_class_item_type    })  %>
+							 <% else %>			
+							 		<%= link_to( image_tag( item.image_url( @department, '/images/item_thumbnails/','x' )  ), { :controller  => "specsheet", :item_id => item.id , :department_id => @department   })  %>
+							 <% end %>		
+						</div>
+						<br />
+						<%=  item.department.Name  %><br />
+						<%=  item.category.Name  %><br />
+						<% unless !@category %>
+							<%=  item.number  %>   <%=  item.description_before_color_and_size  %><br />
+						<% end %>
+						
+				        <% if controller.action_name == 'browse'%>	
+				        	<%=   link_to('details', :controller => "browse",		:category_id => category.id , :department_id => @department ,:sym_category_class_id => @purchase_symbiote_item_category_category_class_id, :sym_type => @purchase_symbiote_item_category_category_class_item_type  )  %>
+				        <% else %>	
+				        	<%=   link_to('details', :controller => "specsheet",		:item_id => item.id , :department_id => @department  )  %>
+				        <% end %>
+				        <br />   
+					</div>
+			</div>
+<% end %>

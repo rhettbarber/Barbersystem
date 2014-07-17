@@ -1,0 +1,71 @@
+
+
+
+<% if @purchase %>
+	<% unless @incomplete_symbiont or @purchases_entries_size == 0 or @purchase.has_on_hold_entries?  %>
+		<div class="checkout_links_container">
+		<div class="gold_lace_seperator"></div>
+		<div class="checkout_links_header"><%= link_to image_tag( 'headers/checkout.gif', :border => 0) ,:controller =>  'cart' , :action => 'next_checkout_step'  unless controller.action_name == 'new'  %></div>
+			<% if @user && @customer %>
+				<% unless ['browse','view_details','category_browser'].include?(controller.action_name) or controller.controller_name == 'page' %>
+				
+				<div class="checkout_links">
+				<li>
+				<%= link_to_unless_current " 1. Billing Address",:controller => 'customers',  :action => 'show'  %>
+				</li>
+				<li>
+				<%= link_to_unless_current  " 2. Shipping Address",:controller => 'ship_tos', :action => 'index' %> 
+				</li>
+				<li>
+				<%= link_to_unless_current  " 3. Shipping Method",:controller => 'ship_tos', :action => 'shipping_services' %> 
+				</li>
+				<li>
+				<%= link_to_unless_current  "4. Payment Type" ,:controller => 'quote_tender_entries', :action => 'index' %>
+				</li>
+				<li>
+				<%= link_to_unless_current  "5. Checkout Review",:controller => 'cart' ,:action => 'next_checkout_step' %>
+				</li>
+				</div>
+				<div class="checkout_steps">
+				<li>
+				<%= link_to " ", {:controller => 'customers',  :action => 'show' },
+				if @customer
+				{ :class => "current" }
+				end 
+				%>
+				</li>
+				<li>
+				<%= link_to  "  ", {:controller => 'ship_tos', :action => 'show_chosen'},
+				if @purchase.ship_to
+				{ :class => "current" }
+				end 
+				%> 
+				</li>
+				<li>
+				<%= link_to  "  ", {:controller => 'ship_tos', :action => 'shipping_services'},
+				if @purchase.shipping_service or @purchase.free_catalog_purchase
+				{ :class => "current" }
+				end 
+				%> 
+				</li>
+				<li>
+				<%= link_to   ""  , {:controller => 'quote_tender_entries', :action => 'index' },
+				if @purchase.quote_tender_entry  or @purchase.free_catalog_purchase
+				{ :class => "current" }
+				end 
+				%>
+				</li>
+				<li>
+				<%= link_to   " " ,{:controller => 'cart', :action => 'next_checkout_step' },
+				if @purchase_checkout_review
+				{ :class => "current" }
+				end 
+				%>
+				
+				</li>
+				</div>
+			<% end %>
+			<% end %>
+		</div>
+	<% end %>
+<% end %>

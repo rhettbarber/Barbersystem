@@ -1,0 +1,33 @@
+<h1>Listing category_classes</h1>
+
+<table style="background-color:white;">
+  <tr>
+    <th>show</th>
+    <th>edit</th>
+    <th>destroy type</th>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Item type</th>
+    <th>Appearing sections</th>
+    <th>Slaves opposite master default department</th>
+    <th>Opposite category ids</th>
+  </tr>
+
+<% for category_class in @category_classes %>
+  <tr>
+    <td><%= link_to 'Show', category_class %></td>
+    <td><%= link_to 'Edit', edit_category_class_path(category_class) %></td>
+    <td><%= link_to 'Destroy', category_class, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%=h category_class.id %></td>
+    <td><%=h category_class.name %></td>
+    <td><%=h category_class.item_type %></td>
+    <td><%=h category_class.appearing_sections %></td>
+    <td><%=h category_class.slaves_opposite_master_default_department_id %></td>
+    <td><%=h category_class.opposite_category_ids %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New category_class', new_category_class_path %>

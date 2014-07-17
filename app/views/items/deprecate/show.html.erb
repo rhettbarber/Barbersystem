@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Itemlookupcode:</b>
+  <%= @item.ItemLookupCode %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @item.Description %>
+</p>
+
+<p>
+  <b>Extended Description:</b>
+  <%= @item.ExtendedDescription %>
+</p>
+
+<p>
+  <b>Keywords:</b>
+  <%= @item.Notes %>
+</p>
+
+<p>
+  <b>Picturename:</b>
+  <%= @item.PictureName %>
+</p>
+
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>

@@ -1,0 +1,34 @@
+    <% logger.debug " begin page/content  ##################################### "  %>
+    <% logger.debug "###################################################### "  %>
+    <% logger.debug "###################################################### "  %>
+    <% logger.debug "###################################################### "  %>
+
+
+  <div id="page_content" class="page_content" style="display: inline;">
+
+                     <script type="text/javascript">
+                                            if ( $.cookie('barber_admin') == "barber_admin" ) {
+                                                                             $(".admin_hidden").show() ;
+                                            }
+                      </script>
+
+
+                    <%= hidden_field_tag "page_id" , @page.id if @page %>
+                    <%= @revision.content.html_safe  if @revision %>
+
+                     <span  class="admin_hidden" style="display: none;">
+                                    <% if @revision and @revision.published  %>
+                                        <a href="#" data-role="button" data-icon="arrow-u" data-iconpos="left" id="publish_button" class="publish_button admin_hidden">Already published delete cache  </a>
+                                    <% else %>
+                                        <a href="#" data-role="button" data-icon="arrow-u" data-iconpos="left" id="publish_button" class="publish_button admin_hidden">Publish and delete cache </a>
+                                    <% end %>
+                    </span>
+
+   </div>
+
+
+
+    <% logger.debug " end  page/content  ##################################### "  %>
+    <% logger.debug "###################################################### "  %>
+    <% logger.debug "###################################################### "  %>
+    <% logger.debug "###################################################### "  %>

@@ -1,0 +1,32 @@
+<% logger.debug "about to show flash in _flash" %>
+<% logger.debug "flash in _flash _flash: " + flash[:notice] if flash %>
+<div class="ui-bar ui-bar-a">
+              <h3 style="margin-top: 8px; float: left;">Attention: </h3>
+              <div style="margin-top: 4px; float: right;">
+                             <% if @close_button %>   <a title="Button" href="#" data-role="button" data-theme="e" data-iconpos="notext" data-icon="delete">Button</a><% end %>
+              </div>
+              <p style="clear: both; font-size: 85%; margin-bottom: 8px;">a<%=  flash[:notice] unless flash.nil? %>b</p>
+</div>
+
+
+
+
+
+    <% if flash and  flash[:notice].kind_of?(Array) %>
+        <%  flash[:notice] =  flash[:notice].flatten %>
+    <% end %>
+    <% if flash %>
+        <% if flash[:notice].nil? or flash[:notice] == []   -%>
+            <% logger.debug("flash is nil!")    %>
+        <% else %>
+            <% logger.debug("flash is:" + flash[:notice].inspect )    %>
+            <div class="ui-bar ui-bar-a">
+              <h3 style="margin-top: 8px; float: left;">Attention: </h3>
+              <div style="margin-top: 4px; float: right;">
+                <% if @close_button %>   <a title="Button" href="#" data-role="button" data-theme="e" data-iconpos="notext" data-icon="delete">Button</a><% end %>
+              </div>
+              <p style="clear: both; font-size: 85%; margin-bottom: 8px;"><%=  flash[:notice] %></p>
+            </div>
+        <% end -%>
+    <% end -%>
+

@@ -1,0 +1,22 @@
+<%= image_tag '/images/headers/record-groups.png' %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+
+<% @record_groups.each do |record_group| %>
+  <tr>
+    <td><%=h record_group.name %></td>
+    <td><%=h record_group.description %></td>
+    <td><%= link_to 'Show', record_group %></td>
+    <td><%= link_to 'Edit', edit_record_group_path(record_group) %></td>
+    <td><%= link_to 'Destroy', record_group, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New record_group', new_record_group_path %>

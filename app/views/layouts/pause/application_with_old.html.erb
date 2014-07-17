@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<% if admin? %>
+  <!--  show admin information -->
+  <!--  current_layout: <%= current_layout  %>  -->
+  <!--  request.fullpath: <%=  request.fullpath  %>  -->
+<% end %>
+
+
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+
+
+  <title> Dixie Outfitters</title>
+
+  <%= stylesheet_link_tag '/assets/application/application_application' %>
+  <%= stylesheet_link_tag '/assets/articles/application_articles' %>
+  <%= stylesheet_link_tag '/assets/application/cart' %>
+  <%= stylesheet_link_tag '/assets/bootstrap_customized' %>
+  <%= stylesheet_link_tag '/assets/responsive-tables' %>
+
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="/assets/html5shiv.js"></script>
+  <script src="/assets/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+
+<%= render :partial => "application/menu" %>
+<%= render :partial => "application/modal" %>
+
+   <% v = "v" %>
+
+<% if request.path  == '/purchases/checkout_review' %>
+                <%  @show_class = "show_printable" %>
+ <% else %>
+                <% @show_class = "show" %>
+<% end %>
+
+
+<div id="the_yield" style="margin-left:auto;margin-right:auto;">
+              <div class="show">
+                        <% if flash[:notice] != nil -%><div class="alert alert-danger"><%= flash[:notice] %>&nbsp;</div><% end -%>
+                        <%= yield %>
+             </div>
+  </div>
+
+<%#= render :partial => "application/share_link" %>
+
+</body>
+
+
+<!-- JavaScript
+================================================== -->
+<!-- NORMALLY Placed at the end of the document so the pages load faster -->
+<script src="/assets/jquery/jquery.js"></script>
+<script src="/assets/jquery/jquery_ujs.js"></script>
+<script src="/assets/jquery/array_utilities.js"></script>
+<script src="/assets/bootstrap.js"></script>
+<script src="/assets/responsive-tables.js"></script>
+<script src="/assets/jquery/bootstrap-slider.js"></script>
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+<script src="/assets/holder.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="/assets/application/application_application.js"></script>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @old %>
+
+<% @checkout_links_controllers =['account', 'ship_tos', 'cart','quote_tender_entries'] %>
+<% @simple_view_controllers =['account', 'designer_specsheet', 'custom_items','quote_tender_entries','films','items','websites','breast_prints','advanced_combinations','test','design_alignment_groups'] %>
+
+
+<!DOCTYPE html>
+<html>
+<%= render(:partial => "layout_elements/head") %>
+
+<%= yield :head_additions %>
+
+<body class="body">
+<div class="page">
+<% unless params[:no_yield]   %>
+
+
+
+      <%= render :partial => 'layout_elements/header'   %>
+
+
+      <div class="main-wrapper">
+
+
+
+                      <%= render :partial =>  'shared_symbiont/symbiote_wrapper_container' if ['browse','opposites'].include?(controller_name) %>
+                      <%= render :partial => "layout_elements/wholesale_login_message" %>
+
+
+                      <div  id='progress' style="display:none;width: 850px;text-align: center;background-color:white;"><%= image_tag "/images/search/ajax-spinner.gif" %> </div>
+                      <div id="yield_container" class="yield_container">
+
+
+
+                                    <div id="error_div_id" class="flash flash_error"></div>
+                                    <div id="notice_div_id" class="flash flash_notice"></div>
+                                    <script type="text/javascript">
+                                        Flash.transferFromCookies();
+                                        Flash.writeDataTo('error', jQuery('#error_div_id'));
+                                        Flash.writeDataTo('notice', jQuery('#notice_div_id'));
+                                    </script>
+
+
+
+
+
+                                <%=  render :partial => "shared_menu/menu_affiliate" if controller.controller_name == 'affiliates' %>
+                                <%=  render :partial => "shared_menu/pages_tree_menu"  if controller.controller_name == 'page' %>
+                                <%=  render(:partial => "shared_menu/menu_organized_category" ) if controller_name == "browse" %>
+
+                              <% if [ "account", "affiliates","cart" , "quote_tender_entries", "opposites", "search"].include?(controller_name) or request.fullpath == "/" %>
+                                            <% page_content_style = "width:850px;" %>
+                              <% end %>
+
+                                <div class="page_content"  id="page_content" style="<%= page_content_style %>">
+                                        <%= yield  %>
+
+                                </div>
+                      </div>
+
+
+
+            <%= render :partial => 'advanced_main_menu/search_results_container' %>
+
+
+            <% if  @checkout_links_controllers.include?( controller.controller_name ) %>
+                <% unless @incomplete_symbiont == true or @website.store_website == false  %>
+                    <%= render(:partial => "shared_links/checkout_links")  %>
+                <%  end  %>
+            <%  end  %>
+       </div>
+
+
+
+
+
+
+
+
+    <%= render :partial => 'layout_elements/footer'  %>
+
+
+
+
+<% end  %>
+</div>
+</body>
+<%= render :partial => 'development/development_bar'  %>
+</html>
+
+<% end %>

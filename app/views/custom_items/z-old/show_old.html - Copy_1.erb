@@ -1,0 +1,46 @@
+
+
+
+<div id="specsheet_div" style="height:353px;">			
+					<%= render "view_details/item" -%>
+					
+					<%= render "view_details/mask" -%>
+					
+					<%= render "view_details/left_print" -%>
+					
+
+
+			
+</div>
+
+<div id="controls_menu"style="float:left; height:60px;width:850px; background-image: url(/images/backgrounds_repeating/gold_lace.jpg)">
+		<%= link_to_function('Left Print | ', "Element.toggle('left_print_controls')") %> 
+		<%= link_to_function('Right Print | ', "Element.toggle('right_print_controls')") %> 
+</div>
+
+
+<div id="left_print_controls" style="display:none; float:left; height:60px;width:425px; background-image: url(/images/backgrounds_repeating/gold_lace.jpg)">
+		<div id="positioning_controls"style=" float:left;width:180px;">
+			<%=  link_to_function "UP", "moveUp()"  -%><br>
+			<%=  link_to_function "LEFT", "moveLeft()"  -%> | 
+			<%=  link_to_function "RIGHT", "moveRight()"  -%> <br>
+			<%=  link_to_function "DOWN", "moveDown()"  -%>
+		</div>
+		<div id="sizing_controls" style="float:left;width:180px;">
+			<%=  link_to_function "GROW", "growFast()"  -%> <br>
+			<%=  link_to_function "SHRINK", "shrinkFast()"  -%>
+		</div>
+</div>
+
+
+
+<% if @controls %>
+			<h1> large purple </h1>
+			<h3> smaller green </h3>
+			<div id="front_print_controls" style="float:left">	
+			 	asdf asd fas <%=  link_to_function "MOVE VIA JS", "moveTo( 100, 200)"  -%>asdf asdf asd f<br>
+			 	asdf asd asfd a sd fas dfa sdf<%= link_to_remote "Enlarge", :update => "mugshots",:url => { :action => "enlarge", :id => @mugshot.id }  -%>asdf asdf asd <br>
+			 	<br>
+			</div>
+<% end %>
+

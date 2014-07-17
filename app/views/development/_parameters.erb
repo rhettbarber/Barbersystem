@@ -1,0 +1,21 @@
+<div data-role="collapsible" data-theme="b" data-content-theme="b">
+  <h2>Parameters</h2>
+
+<div id="parameter_container" style="">
+  <ul data-role="listview"  id="designs_listview">
+                  <% count = 0 %>
+                  <% params.sort.each do |key, value| %>
+                                    <% count += 1 %>
+
+
+                                                           <li> <%=  key  %>:<%= value.inspect  %>  </li>
+                                                            <%# if value.size > 0  %>
+                                                                       <%#  show_expander = true  %>
+                                                            <%# end  %>
+                                                            <!--<img src="/images/buttons/expand.png" id="toggle_parameter_inspect" alt="<%= count %>" class="toggle_parameter_inspect"/>-->
+                  <% end  %>
+      </ul>
+</div>
+</div>
+<!--<img src="/images/buttons/parameters.png" id="toggle_parameters" class="toggle_parameters" />-->
+

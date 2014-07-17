@@ -1,0 +1,9 @@
+<% @dont_show_items = ["/customer_item_sales_by_years", "/p/index","/search","/search/scroll","/p/recently-added","/order_tracking","/test"] %>
+<% if ssl_required? or @dont_show_items.include?( request.path  ) %>
+    <% logger.debug "items_menu skipped due to ssl requirement" %>
+<% else %>
+    <div id="items_menu" style="width: 100%;display: inline-block;">
+      <%= image_tag "/assets/throbber.gif" %> Loading ..
+    </div>
+    <%= render "layout_elements/breadcrumb"   %>
+<% end %>

@@ -1,0 +1,11 @@
+<div class="item_sales_report_category">
+      <%= category.Name -%>
+      <div class="item_sales_report_items">
+      <% if category.generic_counterpart %>
+              <% @generic_items = category.generic_counterpart.items -%>
+              <%= render :partial => 'item', :collection => @generic_items  -%>
+      <% end %>
+      <% @items = category.items -%>
+      <%= render :partial => 'item', :collection => @items  -%>
+      </div>
+</div>

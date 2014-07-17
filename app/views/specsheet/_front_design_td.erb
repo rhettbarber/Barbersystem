@@ -1,0 +1,15 @@
+<div style="margin:0px; padding: 0px;min-width:425px;text-align:center;"   id="front_design_td">
+
+<span>  </span>
+<img src="<%= @front_design_image_name   %>"
+     id="front_design_image"
+     class="front_design_image drag"
+     alt="<%= @front_design_image_name %>"
+     style=" position: relative;
+             left:<%=   @front_advanced_combination ? @front_advanced_combination.front_left : "0"   %>;
+             top:<%=   @front_advanced_combination ? @front_advanced_combination.front_top  : "0" %>;
+             width:<%= @front_advanced_combination ? @front_advanced_combination.front_width : "100"  %>;
+             display:inline-block;
+     " />
+
+    </div>

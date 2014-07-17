@@ -1,0 +1,17 @@
+
+
+
+<% if params[:utm_type] == 'wholesale' %>
+        <%  unless @user   -%>
+                 <%  session['return-to'] = request.request_uri  %>
+                <div style="width:850px;border:1px solid black;min-height:100px;text-align:center;background:url(/images/backgrounds_repeating/belt_floral_yellow.jpg);">
+
+                            <div style="width:400px;border:1px solid black;min-height:100px;text-align:center;margin-right:auto;margin-left:auto;background:url(/images/backgrounds_repeating/belt_floral_white.jpg);">
+                                        <br />Welcome wholesale customer. <br /><br />Please  <%= link_to 'Log In',:controller => 'account', :action => "login"    -%>  to see your prices or add items to your cart. <br /> <br />You will be sent back to this page after login.<br />
+                                         <%= link_to 'Log In',:controller => 'account', :action => "login"    -%>
+                                        <br /><br />
+                            </div>
+
+                </div>
+        <%  end  -%>
+<%  end  -%>

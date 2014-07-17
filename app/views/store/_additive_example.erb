@@ -1,0 +1,112 @@
+<%= render :partial => 'administration_category/options_header' if admin?  %>
+
+<% logger.debug "-------------------------------------begin _shared_item/items " %>
+
+
+<% logger.warn "@fragment_name: #{@fragment_name} " %>
+<% logger.warn "_shared_item/items is TRUE LOCATION " %>
+
+<% cache (@fragment_name ) do %>
+    <%  if @items  %>
+
+        <% if @purchase_symbiote_item_type == "master" && @purchase_symbiote_item_shade == "colored" %>
+            <% @opaque_design_ids = [] %>
+            <%  @items.each do |item| %>
+                <% @opaque_design_ids << item.id if item.shade == "opaque" %>
+            <% end %>
+        <% end %>
+
+
+
+        <% if @department && @category %>
+
+            <%   if @website.name == 'big_cocke'  %>
+                <%  @full_width_department_header = true %>
+            <% end  %>
+            <% if @full_width_department_header %>
+
+                <%   if params[:department_id] == '43' %>
+                    <%=  image_tag("/images/headers/"   +    @department.section_name    +   ".jpg", :border => 0)  -%>
+                <% else  %>
+                    <% unless @category.category_header_image  %>
+                        <% @full_width_department_header_name =    "/images/headers/"  +  Util::Slug.generate(  @website.name + '-' + @department.Name  + "-department-header-wide" ) + ".jpg" %>
+                        <%=  image_tag( @full_width_department_header_name , :border => 0)  -%>
+                    <% end  %>
+                <% end  %>
+            <%  end   %>
+
+            <%= render(:partial => "shared_category/category_description" ) if @category.category_header_image == 1  -%>
+        <% end %>
+        <div class="item_row_surround">
+
+
+
+
+
+          <% unless @category.category_header_image == 1%>
+              <div class="department_header" style="font-size:15px;">
+                <strong> Department: <%=  @department.Name.capitalize  %> -
+                  Category: <%=  @category.Name.capitalize  %> </strong>
+              </div>
+          <% end %>
+
+          <% if @category.additives and @category.additives != []  and  ![ 'master', 'slave'].include?(  @category.category_class.item_type  )   %>
+              <%  if @category.additives.size == 1 %>
+                  <% logger.debug "------------------------------------- @category.additives.size == 1  " -%>
+                  <% logger.debug "-------------------------------------  LIST ALL ITEMS IN THE SINGLE ADDITIVE CATEGORY" -%>
+
+                  <% @category.additives.first.items.each do |item| -%>
+                      <%= render(:partial => "shared_item/item",:locals => { :item => item } )   -%>
+                  <% end -%>
+
+              <%  else  %>
+                  <%  @category.additives.each do |additive| %>
+                      <% if additive.items.first  %>
+                          <div class="item_container">
+
+                            <%=  link_to(  image_tag( additive.items.first.image_url( @department, 'item_thumbnails/','x' )  ) , :controller => @website.name, :action => 'browse', :department_id => @department.id, :category_id => additive.id  )  %><br />
+                            <% image_tag( '/images/breast_prints/' + Util::Slug.generate(additive.department.Name) + '.png' , :size => '80' ) %>
+                            <%= link_to additive.Name, :controller => @website.name, :action => 'browse', :department_id => @department.id, :category_id => additive.id %><br />
+                                                                                                     <span class="category_box_more">
+                                                                                                               <%= link_to  "Click for More", :controller => @website.name, :action => 'browse', :department_id => @department.id, :category_id => additive.id %>
+                                                                                                    </span>
+
+                          </div>
+
+                      <% end %>
+                  <% end  %>
+              <%  end   %>
+          <% else   %>
+              <% if @opaque_design_ids %>
+                  <% logger.debug "-------------------------------------@opaque_design_ids " -%>
+                  <% @items.sort_by{|a| a.ItemLookupCode}.reverse.each do |item| -%>
+                      <% if @opaque_design_ids.include?(item.id)  %>
+                          <%= render(:partial => "shared_item/item",:locals => { :item => item } )  -%>
+                      <% else %>
+                          <%= render(:partial => "shared_item/item_color_not_compatible",:locals => { :item => item } )  -%>
+                      <% end %>
+                  <% end -%>
+              <% else %>
+                  <% logger.debug "------------------------------------- NOT @opaque_design_ids " -%>
+                  <% @items.each do |item| -%>
+                      <%= render(:partial => "shared_item/item",:locals => { :item => item } )   -%>
+                  <% end -%>
+              <% end %>
+          <% end %>
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+    <%  else  -%>
+        no items found
+    <% end -%>
+<% end -%>
+<% logger.debug "-------------------------------------end _shared_item/items " -%>

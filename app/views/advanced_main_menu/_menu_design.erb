@@ -1,0 +1,24 @@
+<% if @incomplete_symbiote %>
+    <% @menu_design_departments = @design_departments.intersection(@departments) %>
+<% else %>
+    <% @menu_design_departments = @design_departments %>
+<% end %>
+<%  if @menu_design_departments   %>
+    <% if @menu_design_departments.size > 0 %>
+    <div class='menu_design'>
+          <ul>
+          <li class="menu_icon"><%= link_to image_tag("/images/icons/new.png", :border => 0, :size => "30x30" ) ,{ :controller => 'browse' , :action => "new_designs"}    %></li>
+          <% if @custom_designs  %>
+                      <li class="menu_icon"><%= link_to image_tag("/images/buttons/upload.png", :border => 0, :size => "30x30" ) + " Upload",{ :controller => 'custom_items' }    %></li>
+          <% end  %>
+
+          <% if @singular_item_customer == true  %>
+                     <li class="menu_icon"> <%= link_to image_tag("/images/icons/clearance.png", :border => 0 , :size => "30x30"), {:controller => "browse" , :action => "sale_designs" } %></li>
+           <% end  %>
+                <%  @menu_design_departments.each do |department|   %>
+                                               <%=   render(:partial => "browse/department_li", :locals => {:department => department }  )  unless department.item_department   %>
+                 <% end %>
+          </ul>
+    </div>
+    <% end  %>
+<% end %>

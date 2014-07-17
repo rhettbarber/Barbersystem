@@ -1,0 +1,13 @@
+
+ <%= link_to_function( 'Edit Category', "Element.toggle('category_edit_' + #{category.id}   )") %>
+<div id="category_edit_<%= category.id %>" style="display:none;">
+
+
+      Edit category
+
+      <%= render 'categories/remote_form' ,:category => category     %>
+
+      <%= link_to 'Show', category %> |
+      <%= link_to 'Back', categories_path %>
+
+</div>

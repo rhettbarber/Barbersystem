@@ -1,0 +1,109 @@
+<% if @show_admin %>
+    <div class="specsheet_admin">table_at_item_two_sides_latest  </div>
+<% end %>
+
+
+  <% @product_background_image_name =  'http://cdn.dixieoutfitters.com/images/item_specsheets/' + @item.PictureName.gsub(".png", "").gsub(".jpg", "")  + '.jpg'  %>
+
+  <%  @back_advanced_combination = AdvancedCombination.find_or_create_combo( @item, '0' )  if @item.item_class_component   %>
+
+
+
+
+
+  <!--[if lt IE 8]><style>
+      .design_span span {
+          display: inline-block;
+          height: 100%;
+      }
+  </style><![endif]-->
+
+
+  <style>
+      .specsheet_table_container {
+          /*background-color: yellow;*/
+          width: 850px ;
+          position: relative;
+      }
+
+      #specsheet_table {
+          background: url(<%=  @product_background_image_name  -%>) no-repeat right;
+          height:328px;
+          width:425px;
+          float:left;
+      }
+
+      #specsheet_table_front {
+          background: url(<%=  @product_background_image_name  -%>) no-repeat left;
+          height:328px;
+          width:425px;
+          float:left;
+      }
+
+      #back_design_td {
+          width: 425px;
+          height:328px;
+          overflow:hidden;
+      }
+
+      .specsheet_table_sizer {
+          width: <%= @specsheet_table_sizer_width %>;
+
+      }
+      /*   ---------- Media queries for mobile go here -------------    */
+      /*   ---------- Media queries for mobile go here -------------    */
+      /*   ---------- Media queries for mobile go here -------------    */
+      @media (max-width: 700px) {
+
+          .specsheet_table_container {
+              left:-63px;
+          }
+
+
+          #specsheet_table {
+              float:none;
+          }
+
+          #specsheet_table_front {
+              float:none;
+          }
+
+          .specsheet_table_sizer {
+              width:300px;
+              overflow: hidden;
+          }
+
+      }
+
+  </style>
+
+
+
+<% if @model %>
+    <div style="width: 300px;overflow: hidden;"> <%=  image_tag @item.image_url( @department  , 'item_specsheets/', @design,'0' )  %></div>
+<% end %>
+
+
+
+<table style="margin-left:auto;margin-right:auto;">
+
+  <tbody>
+  <tr>
+    <td>
+      <div class="specsheet_table_sizer">
+        <div class="specsheet_table_container">
+          <div class="drag"  id="specsheet_table">
+
+          </div>
+
+
+          <div class="drag"  id="specsheet_table_front">
+
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+
+</table>

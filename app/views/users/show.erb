@@ -1,0 +1,121 @@
+<script type="text/javascript">
+
+  function SetCustomer()
+{
+ qsBridge.FireEvent('SetCustomer', <%= @selected_customer.id    %>   ) ;
+ qsBridge.FireEvent('ShowTransaction' ) ;
+}
+  
+</script>
+
+<div style="border:solid black 1px;width:220px;height:310px;float:left;padding:5px;margin:5px;"> 
+
+		<p>
+		  <b>Email:</b>
+		  <%=h @selected_user.email %>
+		</p>
+		
+		
+		<p>
+		  <b>Firstname:</b>
+		  <%=h @selected_customer.FirstName %>
+		</p>
+		
+		<p>
+		  <b>Lastname:</b>
+		  <%=h @selected_customer.LastName %>
+		</p>
+		
+		<p>
+		  <b>Company:</b>
+		  <%=h @selected_customer.Company %>
+		</p>
+		
+		<p>
+		  <b>Accountnumber:(Also their password unless they change it)</b>
+		  <%=h @selected_customer.AccountNumber %>
+		</p>
+
+</div>
+
+<div style="border:solid black 1px;width:220px;height:310px;float:left;padding:5px;margin:5px;">
+		<p>
+		  <b>Address:</b>
+		  <%=h @selected_customer.Address %>
+		</p>
+		
+		<p>
+		  <b>Address2:</b>
+		  <%=h @selected_customer.Address2 %>
+		</p>
+		
+		<p>
+		  <b>City:</b>
+		  <%=h @selected_customer.City %>
+		</p>
+		
+		<p>
+		  <b>State:</b>
+		  <%=h @selected_customer.State %>
+		</p>
+		
+		<p>
+		  <b>Zip:</b>
+		  <%=h @selected_customer.Zip %>
+		</p>
+		
+</div>		
+<div style="border:solid black 1px;width:220px;height:310px;float:left;padding:5px;margin:5px;">
+		
+		<p>
+		  <b>Country:</b>
+		  <%=h @selected_customer.Country %>
+		</p>
+		
+		<p>
+		  <b>Emailaddress:</b>
+		  <%=h @selected_customer.EmailAddress %>
+		</p>
+		
+		<p>
+		  <b>Faxnumber:</b>
+		  <%=h @selected_customer.FaxNumber %>
+		</p>
+		
+		<p>
+		  <b>Phonenumber:</b>
+		  <%=h @selected_customer.PhoneNumber %>
+		</p>
+		
+		<p>
+		  <b>Taxnumber:</b>
+		  <%=h @selected_customer.TaxNumber %>
+		</p>
+
+
+		<p>
+		  <b>Current Discount Percentage:</b>
+		  <%=h @selected_customer.CurrentDiscount %>
+		</p>
+
+
+		<p>
+		  <b>Membership:</b>
+		  <%=h @selected_customer.CustomText4 %>
+		</p>
+
+		
+		<p>
+		  <b>Customer Type:</b>
+		  <%=h @selected_customer.customer_type %>
+		</p>
+
+
+</div>
+<div style="border:solid black 1px;width:220px;height:310px;float:left;padding:5px;margin:5px;">
+<input type="button" onclick="SetCustomer()" value="Load this customer Into RMS" /> <br />
+After you "Load this customer into RMS", hold "Shift" and go to "Customer Info" if the shipping address needs to be different from this billing address.<br /><br />
+<%= link_to 'Edit User/Customer', edit_user_path(@selected_user) %> <br /> <br />
+<%= link_to 'List User/Customers', users_path if admin? %> <br />
+</div>
+

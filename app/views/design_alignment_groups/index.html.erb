@@ -1,0 +1,29 @@
+<h1>Listing design_alignment_groups</h1>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Category</th>
+    <th>Item class</th>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @design_alignment_groups.each do |design_alignment_group| %>
+  <tr>
+    <td><%= design_alignment_group.id %></td>
+    <td><%= design_alignment_group.category_id %></td>
+    <td><%= design_alignment_group.item_class_id %></td>
+    <td><%= design_alignment_group.name %></td>
+    <td><%= link_to 'Show', design_alignment_group %></td>
+    <td><%= link_to 'Edit', edit_design_alignment_group_path(design_alignment_group) %></td>
+    <td><%= link_to 'Destroy', design_alignment_group, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Design alignment group', new_design_alignment_group_path %>

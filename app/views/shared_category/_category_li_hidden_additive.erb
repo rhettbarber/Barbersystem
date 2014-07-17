@@ -1,0 +1,16 @@
+
+
+<li class="hidden_additive_category" style="padding:0px;"> 
+	
+		<div id="category_<%= category.id %>" style="float:left;">
+		 	&nbsp; &nbsp;  <%= image_tag "/images/buttons/draggable.png",:height => "20" %> 
+		</div>
+	
+	<div style="float:left;width:100px;">
+	  	<%= link_to '..' + category.department.Name + ' ' + category.Name, :controller => 'browse', :department_id => @department.id, :category_id => category.id %>
+	 </div> 
+	  
+</li>
+
+<%= draggable_element("category_" +  category.id.to_s , :revert => true) if admin? %>
+

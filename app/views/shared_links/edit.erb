@@ -1,0 +1,41 @@
+<h1>Editing link</h1>
+
+<%= error_messages_for :link %>
+
+<%= form_for(:link, :url => link_path(@link), :html => { :method => :put }) do |f| %>
+  <p>
+    <b>Url</b><br />
+    <%= f.text_area :url %>
+  </p>
+
+  <p>
+    <b>Category</b><br />
+    <%= f.text_field :category %>
+  </p>
+
+  <p>
+    <b>action_name</b><br />
+    <%= f.text_field :action_name %>
+  </p>
+  
+  
+    <p>
+    <b>controller_name</b><br />
+    <%= f.text_field :controller_name %>
+  </p>
+  
+  
+    <p>
+    <b>description</b><br />
+    <%= f.text_field :description %>
+  </p>
+
+
+
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', link_path(@link) %> |
+<%= link_to 'Back', links_path %>

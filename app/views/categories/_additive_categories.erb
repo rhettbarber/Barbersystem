@@ -1,0 +1,91 @@
+<% if session[:show_additive_categories] %>
+<% if  @category %>
+
+        <% if @category %>
+                <% @this_category = @category    %>
+        <% else %>
+              <% @this_category = @item.category %>
+        <% end  %>
+
+
+        <% if @this_category  %>
+
+                               <% if params[:department_id] %>
+                                                        <% if @website.default_design_department_ids.split(/,/).include?(params[:department_id] ) %>
+                                                                            <%# ddd %>
+                                                                          <% @nadditive_categories_select_list_departments =  @website.default_design_departments %>
+                                                        <% elsif @website.default_item_department_ids.split(/,/).include?(params[:department_id] ) %>
+                                                                          <%# did %>
+                                                                          <% @nadditive_categories_select_list_departments =  @website.default_item_departments %>
+                                                         <% end  %>
+                               <% else %>
+                                                    <% @nadditive_categories_select_list_departments =  @website.default_all_departments %>
+                               <% end  %>
+
+
+
+                                  <div  id="additive_categories" class="administration_yellow" style="display:table;float:left;width:850px;">
+                                              <% ct = 'additive' %>
+                                                <%= form_for( ct + '_javascript', :method => :put,  :remote => true  , :url => {:controller => 'categories', :action => 'ajax_add_to_additives'}  ) do |f| %>
+                                                          <%= hidden_field_tag "selected_category_id", @this_category.id %>
+                                                          <%= f.collection_select :department_id,  @nadditive_categories_select_list_departments   , :id, :Name, :prompt => "Select a department" %>
+                                                          <span id="<%= ct %>_category_field">
+                                                                <%= f.collection_select :category_id, Category.limit("2"), :id, :Name, :prompt => "Select a category" %>
+                                                          </span>
+                                                           <%= submit_tag "Add to this category as an additive" %>
+                                                  <% end  %>
+                                                <%= render :partial => "categories/additive_categories_list" %>
+                                  </div>
+
+
+                                  <script type="text/javascript">
+
+                                  var categories = new Array();
+                                  <% for category in  Category.all.sort_by{|a| a.Name}  -%>
+                                    categories.push(new Array(<%= category.department_id %>, '<%=h Util::Slug.generate(category.Name.to_s) %>', <%= category.id %>));
+                                  <% end -%>
+
+                                  function <%= ct %>departmentSelected() {
+                                              department_id = $('<%= ct %>_javascript_department_id').getValue();
+                                              options = $('<%= ct %>_javascript_category_id').options;
+                                              options.length = 1;
+                                              categories.each(function(category) {
+                                                      if (category[0] == department_id) {
+                                                        options[options.length] = new Option(category[1], category[2]);
+                                                      }
+                                                   }
+                                                 );
+
+                                                if (options.length == 1) {
+                                                  $('<%= ct %>_category_field').hide();
+                                                } else {
+                                                  $('<%= ct %>_category_field').show();
+                                                }
+                                  };
+                                  function <%= ct %>categorySelected() {
+                                              console.log('<%= ct %>categorySelected()');
+                                              category_id =  $('<%= ct %>_javascript_category_id').getValue();
+                                               //new Ajax.Updater('category_items_<%= ct %>', '/item_manager/update_items_listing', {
+                                               //        parameters: { current_category_id: category_id , ct: '<%= ct %>', search_type_name: search_type_name }
+                                               //                                 , onComplete:function(request){Element.hide('spinner')}, onLoading:function(request){Element.show('spinner')}
+                                               // });
+                                  };
+
+
+                                  <%= ct %>departmentSelected();
+                                  $('<%= ct %>_javascript_department_id').observe('change', <%= ct %>departmentSelected);
+                                  $('<%= ct %>_javascript_category_id').observe('change', <%= ct %>categorySelected);
+
+
+                                  </script>
+        <% else %>
+
+        <div  id="additive_categories" class="administration_yellow" style="display:table;padding:5px;float:left;width:850px;">
+                      This item has no category. Please define one using the Category Editor tab.
+         </div>
+
+
+        <% end  %>
+
+<% end  %>
+<% end  %>

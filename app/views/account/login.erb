@@ -1,0 +1,84 @@
+
+          <% if @user %>
+                                  You are already logged in as <%= @user.email %>. <br /><br />
+                                  If you wish, you may <%= link_to "Log Out",:controller => 'account', :action => 'logout'  -%>. <br />  <br />
+
+                                  <% if admin?  %>
+                                      <br/>
+                                      You are listed as a admin. <br>
+                                  <% end  %>
+                                  <% if cashier?  %>
+                                      <br/>
+                                      You are listed as a cashier. <br>
+                                  <% end  %>
+                                  <% if manager?  %>
+                                      <br/>
+                                      You are listed as a manager.  <br>
+                                  <% end  %>
+
+          <% else %>
+
+
+                                  <p style="font-size:16px;font-weight: bolder;text-align: center;">Please log in or sign up </p>
+
+                                  <%= form_tag :controller => 'account',:action => "login"  do  %>
+                                                      <p><label for="email">Email Address</label>
+                                                        <%= text_field_tag( 'email', params[:email], :size => "20")  %></p>
+
+                                                      <p><label for="password">Password</label>
+                                                        <%= password_field_tag 'password' ,"", :size => 20 %></p>
+
+                                                        <p><%= submit_tag 'Log in'  ,:data => {:theme => "b",  :role => "button" , :icon => "arrow-r"} %></p>
+                                  <% end %>
+
+                                  <br>
+                                  <p> <%= link_to 'Click here if you have forgotten your password.' ,{:controller => 'account', :action => 'forgot_password'}  , {:class => "ui-btn"}  %></p>
+
+                                    <p><%= link_to 'Click Here to Sign up!' ,{ :controller => 'account', :action => 'signup'}  , {:class => "ui-btn"}  %></p>
+          <% end %>
+
+
+
+  <br><br><br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @stay_signed_in %>
+    <p><label for="stay_signed_in">Keep me signed in:</label>
+      <%= check_box_tag 'stay_signed_in' %></p>
+    <p>for 2 weeks unless I sign out.</p>
+    <p>[Uncheck if on a shared computer]</p>
+<% end %>

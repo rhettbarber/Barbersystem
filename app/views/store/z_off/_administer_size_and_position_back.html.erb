@@ -1,0 +1,216 @@
+
+
+<span  class="size_and_position" style="display:none;">
+<div id="administer_size_and_position_back" style="display:table;width:300px;text-align:center;background-color: white;margin-left: auto;margin-right: auto;">
+
+    <div style="width:150px;float:left;"># Sides: <%= select_tag( :back_design_number_of_sides,  options_for_select([['One', '1'], ['Two', '2']], '2')  ) %></div>
+    <div style="width:150px;float:left;">Default: <%= select_tag( :back_design_default_side,  options_for_select([['Back', 'back'], ['Front', 'front']])  ) %></div>
+    <%= hidden_field_tag 'back_advanced_combination_id', @back_advanced_combination.id   if @back_advanced_combination  %>
+    <br/>
+    <div style="width:300px;">
+                        <input id="back_slider" type="text" class="span2" value="" data-slider-min="-50" data-slider-max="50"
+                        data-slider-step="1" data-slider-value="0" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="hide">
+                        <a href="#"  id="submit_size_and_position_back" class="btn btn-warning">Submit</a>
+    </div>
+
+</div>
+</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @old %>
+<div id="ajax_administer_size_and_position" style="width:850px;text-align:left;background-color: white;display:table;margin-left: auto;margin-right: auto;">
+
+<%= render(:partial => "designer_specsheet/specsheet_resize")     -%>
+
+<%  @front_control_panel_form   = 'none'   %>
+<% @front_control_panel_sides  = 'none'   %>
+<%  @front_control_panel_crest_prints = 'none'      %>
+
+<div id="front_control_panel" style="float:left;width:425px;display:inline;min-height:160px;">
+<% if @front_design %>
+      <% logger.debug "@front_design.ItemLookupCode:  " +  @front_design.ItemLookupCode  %>
+     <% logger.debug "@front_design.is_crest_print?  " +  @front_design.is_crest_print?.to_s  %>
+<% else %>
+      <% logger.debug "@front_design not found  "  %>
+<% end %>
+<% if @back_design %>
+      <% logger.debug "@back_design.ItemLookupCode:  " +  @back_design.ItemLookupCode  %>
+      <% logger.debug "@back_design.is_crest_print?  " +  @back_design.is_crest_print?.to_s  %>
+<% else %>
+      <% logger.debug "@back_design not found  "  %>
+<% end %>
+<% logger.debug "@front_advanced_combination: " + @front_advanced_combination.inspect  %>
+<% logger.debug "@front_advanced_combination:.number_of_sides " + @front_advanced_combination.number_of_sides  %>
+<% logger.debug "@front_advanced_combination:.default_side " + @front_advanced_combination.default_side  %>
+<% logger.debug "@back_advanced_combination.number_of_sides " + @back_advanced_combination.number_of_sides  %>
+<% logger.debug "@back_advanced_combination.default_side " + @back_advanced_combination.default_side  %>
+
+
+                      <% if  @back_advanced_combination.number_of_sides == '1' and @back_design.is_crest_print? == false %>
+                                           <% @front_control_panel_sides  = 'inline-block'   %>
+                                           <%  @front_control_panel_form   = 'none'   %>
+                    <% else  %>
+                                          <% @front_control_panel_sides  = 'none'   %>
+                                           <%  @front_control_panel_form   = 'inline-block'   %>
+                    <% end  %>
+
+                   <div id="front_control_panel_form" style="display: <%=  @front_control_panel_form  %>;">
+                                <%= form_for( @front_advanced_combination, :method => :put,  :remote => true, :html => { :id => "admin_combination_front" }    ) do |f| %>
+                                                  <%= hidden_field_tag "side", "front" %>
+                                                  <%= @front_advanced_combination.id %><br />
+                                                  <%= f.text_field( :front_left ,:size => 4 ) %>Front Left<br />
+                                                   <%= f.text_field( :front_top ,:size => 4 ) %>Front Top<br />
+                                                   <%= f.text_field( :front_width ,:size => 4 ) %>Front Width<br />
+                                                   <% if @front_design.is_crest_print?  %>
+                                                            <% @display_side_options_front = 'none'   %>
+                                                  <% else  %>
+                                                            <% @display_side_options_front = 'inline-block'   %>
+                                                  <% end  %>
+
+                                                     <span style="display:<%= @display_side_options_front   %>;">
+                                                                 <%= f.select( :number_of_sides,   { 'One'=> "1",  'Two' => "2" } ) %>Number of Sides<br />
+                                                                  <%= f.select( :default_side  , { 'Back'=> "back",  'Front' => "front" }   ) %>Default Side<br />
+                                                     </span>
+
+                                                   <div style="width:425px;float:left;"> <%=  submit_tag( 'Save Changes',:disabled => true, :id => "save_changes_front")   %></div><br />
+                                  <% end %>
+                                                     <div id="advanced_combinations_saved_front"></div>
+                   </div>
+
+                      <div id="front_control_panel_sides"  style="display: <%=  @front_control_panel_sides  %>;">
+                                Choose number of sides at the panel to your right.<br />
+                      </div>
+
+                          <div id="front_control_panel_crest_prints"   style="display: <%=  @front_control_panel_crest_prints  %>;">
+                                     No crest Prints were found for this main design. <br />
+                                    <%= link_to(  "Manage crest Prints", "#", :onclick=> "opencrestPrintAdministration();"  ) %>
+                           </div>
+</div>
+
+
+<div id="back_control_panel"  style="float:left;width:425px;display:inline;min-height:160px;">
+<% if @back_advanced_combination %>
+                              <%= form_for( @back_advanced_combination, :method => :put,  :remote => true , :html => { :id => "admin_combination_back" }   ) do |f| %>
+                                            <%= hidden_field_tag "side", "back" %>
+                                            <%= @back_advanced_combination.id %><br />
+                                            <%= f.text_field( :back_left ,:size => 4 ) %>Back Left<br />
+                                            <%= f.text_field( :back_top ,:size => 4 ) %>Back Top<br />
+                                            <%= f.text_field( :back_width ,:size => 4 ) %>Back Width<br />
+                                             <% if @back_design.is_crest_print?  %>
+                                                      <% @display_side_options_back = 'none'   %>
+                                            <% else  %>
+                                                      <% @display_side_options_back = 'inline-block'   %>
+                                            <% end  %>
+                                            <span style="display:<%= @display_side_options_back   %>;">
+                                                            <%= f.select( :number_of_sides,   { 'One'=> "1",  'Two' => "2" } ) %>Number of Sides<br />
+                                                            <% if  @back_advanced_combination.number_of_sides == '1'  %>
+                                                                            <% @default_side_select = 'none' %>
+                                                            <% else %>
+                                                                            <% @default_side_select = 'inline-block' %>
+                                                            <% end  %>
+                                                            <div id="default_side_select" style="display:<%= @default_side_select %>;">
+                                                            <%= f.select( :default_side  , { 'Back'=> "back",  'Front' => "front" }   ) %>Default Side<br />
+                                                            </div>
+                                            </span>
+                                          <div style="width:425px;float:left;"><%=  submit_tag( 'Save Changes',:disabled => true, :id => "save_changes_back")  %></div><br />
+                            <% end %>
+                                    <div id="advanced_combinations_saved_back"></div>
+<% else  %>
+                                No crest Prints were found for this department.
+<% end  %>
+</div>
+</div>
+
+
+<script type="text/javascript">
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+  createSliders();
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+$('advanced_combination_front_left').observe('change',  frontLeftFormChange );
+$('advanced_combination_front_top').observe('change',  frontTopFormChange );
+$('advanced_combination_front_width').observe('change',  frontWidthFormChange );
+$('advanced_combination_back_left').observe('change',  backLeftFormChange );
+$('advanced_combination_back_top').observe('change',  backTopFormChange );
+$('advanced_combination_back_width').observe('change',  backWidthFormChange );
+
+$('admin_combination_back').advanced_combination_number_of_sides.observe('change',  backNumberOfSides  );
+
+ if  ($('admin_combination_front')  != undefined) {
+      $('admin_combination_front').observe('change',  allowFrontSave );
+}
+ if  ($('admin_combination_back')  != undefined) {
+      $('admin_combination_back').observe('change',  allowBackSave );
+}
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+
+ if  ($('front_design_image')  != undefined) {
+                        new Draggable('front_design_image', { handle: 'handle',
+                                                        onEnd: function() {
+                                                                                                    var top_value = $('front_design_image').getStyle('top');
+                                                                                                    var left_value = $('front_design_image').getStyle('left');
+                                                                                                     $('advanced_combination_front_top').value = top_value ;
+                                                                                                     $('advanced_combination_front_left').value = left_value ;
+                                                                                                     $('save_changes_front').disabled = false;
+                                                                                                     $('advanced_combinations_saved_front').innerHTML = "";
+                                                                                              }
+                                                                        }
+                            );
+}
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+ if  ($('back_design_image')  != undefined) {
+                    new Draggable('back_design_image', { handle: 'handle',
+                                                    onEnd: function() {
+                                                                                                var top_value = $('back_design_image').getStyle('top');
+                                                                                                var left_value = $('back_design_image').getStyle('left');
+                                                                                                 $('advanced_combination_back_top').value = top_value ;
+                                                                                                 $('advanced_combination_back_left').value = left_value ;
+                                                                                                 $('save_changes_back').disabled = false;
+                                                                                                 $('advanced_combinations_saved_back').innerHTML = "";
+                                                                                          }
+                                                                    }
+                        );
+ }
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+  </script>
+
+ <% end %>

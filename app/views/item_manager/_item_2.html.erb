@@ -1,0 +1,20 @@
+         <%= item.ItemLookupCode  %>
+         <% CloneItemType.all.each do |clone_item_type| %>
+                                                            <%= clone_item_type.name %> -
+                                                            <% @rms = false %>
+                                                            <% if item.clone_items %>
+                                                                        <% item.clone_items.each do |cli|  %>
+                                                                                      <%  if cli.clone_item_type_id == clone_item_type.id  %>
+                                                                                                  RMS_TRUE
+                                                                                                  <% @rms = true %>
+                                                                                      <% end  %>
+                                                                        <% end  %>
+                                                                        <% if @rms == false %>
+                                                                                      NO_RMS
+                                                                       <% end  %>
+                                                            <% else %>
+                                                                          NO_RMS
+                                                            <% end  %>
+                                                            file_status: <%= File.file?( 'W:\\AUTOMATION_DATABASE\\PRODUCTION_JPG\\' + clone_item_type.name + '\\' + clone_item_type.prefix_code +    item.ItemLookupCode + '.jpg' ) %>
+              <% end %>
+<br/>

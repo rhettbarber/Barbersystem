@@ -1,0 +1,51 @@
+
+
+<% logger.debug "-------------------------------------begin _shared_item/sale_items " %>
+
+
+<% logger.warn "_shared_item/new_items is TRUE LOCATION " %>
+
+
+
+	<%  if @items  %>
+				<% if @customer %>
+								<% if @customer.PriceLevel > 1 %>
+													<div  style="width:850px;float:left;">  <%= link_to image_tag("/images/headers/clearance-designs.png", :border => 0), :controller => 'browse' , :action => "sale_items"    %>   </div>
+													<% if @purchase_symbiote_item_type == "master" && @purchase_symbiote_item_shade == "colored" %>
+																<% @opaque_design_ids = [] %>
+																<%  @items.each do |item| %>
+																	<% @opaque_design_ids << item.id if item.shade == "opaque" %>
+																<% end %>
+													<% end %>
+											
+				
+																		<div class="item_row_surround">	
+																				
+																			<% if @opaque_design_ids %>	
+																					<% logger.debug "-------------------------------------@opaque_design_ids " -%>
+																					<% @items.each do |item| -%>
+																							<% if @opaque_design_ids.include?(item.id)  %>
+																								<%= render(:partial => "shared_item/sale_item",:locals => { :item => item } )  -%>
+																							<% else %>
+																								<%= render(:partial => "shared_item/sale_item_color_not_compatible",:locals => { :item => item } )  -%>
+																							<% end %>
+																					<% end -%>
+																			<% else %>
+																					<% logger.debug "------------------------------------- NOT @opaque_design_ids " -%>		
+																					<% @items.each do |item| -%>
+																						<%= render(:partial => "shared_item/sale_item",:locals => { :item => item } )   -%>
+																					<% end -%>
+																			<% end %>
+																		</div>
+								<% else %>
+												Our sale items are for wholesale customers only. Thank You for your interest.
+								<% end %>
+				<% else %>				
+									Our sale items are for wholesale customers only. Thank You for your interest.
+				<% end %>
+
+<%  else  -%>		
+			no items found
+<% end -%>
+
+<% logger.debug "-------------------------------------end _shared_item/sale_items " -%>

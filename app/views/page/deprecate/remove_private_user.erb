@@ -1,0 +1,18 @@
+
+<% light_gold_box do %>      
+       <h2>Remove your friends or users that can view unpublished/private pages here.</h2>
+	   
+	   
+	    <%= error_messages_for :user %>
+      
+	    <%= form_for :user, @user, :url => { :action => "remove_private_user" } do |f| -%>
+        
+        <p><label for="email">Email</label><br/>
+        <%= f.text_field :email ,:value => '' %></p>
+        
+
+        <p><%= submit_tag 'Remove this private user' %></p>
+        <% end -%>
+		
+		
+<% end -%>

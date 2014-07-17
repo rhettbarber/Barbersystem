@@ -1,0 +1,81 @@
+<p style="text-align:center;">Edit your  billing information </p>
+
+<%= errors_for(@customer, "Opps, unable to edit customer").html_safe if @customer %>
+
+<%= form_for(:customer, :url => customer_path(@customer), :html => { :method => :put }) do |f| %>
+
+
+    <p>
+      <label for="Company">Company</label>
+      <input data-clear-btn="true" name="customer[Company]" id="Company_Req" value="<%= @customer.Company %>">
+    </p>
+
+    <p>
+      <label for="FirstName">FirstName</label>
+      <input data-clear-btn="true" name="customer[FirstName]" id="FirstName_Req" value="<%= @customer.FirstName %>">
+    </p>
+
+    <p>
+      <label for="LastName">LastName</label>
+      <input data-clear-btn="true" name="customer[LastName]" id="LastName_Req" value="<%= @customer.LastName %>">
+    </p>
+
+    <p>
+      <label for="Address">Address</label>
+      <input data-clear-btn="true" name="customer[Address]" id="Address_Req" value="<%= @customer.Address %>">
+    </p>
+
+    <p>
+      <label for="Address2">Address2 (optional)</label>
+      <input data-clear-btn="true" name="customer[Address2]" id="Address2" value="<%= @customer.Address2 %>">
+    </p>
+
+    <p>
+      <label for="City">City </label>
+      <input data-clear-btn="true" name="customer[City]" id="City_Req" value="<%= @customer.City %>">
+    </p>
+
+    <p>
+      <label for="State">State </label>
+      <input data-clear-btn="true" name="customer[State]" id="State_Req" value="<%= @customer.State %>">
+    </p>
+
+
+    <p>
+      <label for="Zip">Zip</label>
+      <input type="number" data-clear-btn="true" name="customer[Zip]" id="Zip_Req" value="<%= @customer.Zip %>">
+    </p>
+
+
+    <p>
+      <label for="TaxNumber">TaxNumber (optional)</label>
+      <input type="number" data-clear-btn="true" name="customer[TaxNumber]" id="TaxNumber_Req" value="<%= @customer.TaxNumber %>">
+    </p>
+
+    <%= hidden_field_tag("Country", "United States" )  %>
+
+
+    <p>
+      <label for="FaxNumber">FaxNumber (optional)</label>
+      <input type="tel" data-clear-btn="true" name="customer[FaxNumber]" id="FaxNumber_Req" value="<%= @customer.FaxNumber %>">
+    </p>
+
+    <p>
+      <label for="PhoneNumber">PhoneNumber</label>
+      <input type="tel" data-clear-btn="true" name="customer[PhoneNumber]" id="PhoneNumber_Req" value="<%= @customer.PhoneNumber %>">
+    </p>
+
+
+
+    <p>
+
+
+    <%= button_tag(type: "submit", class: "ui-btn ui-btn-b" ) do %>
+        Submit and Update <i class="icon-repeat"></i>
+    <% end    %>
+
+  </p>
+<% end %>
+
+<%= link_to 'Cancel', customer_path(@customer) , :class => "ui-btn" %>
+

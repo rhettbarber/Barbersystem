@@ -1,0 +1,24 @@
+			<div id="main">
+				<% if @revision != nil && @show_nav  -%>
+								<div id="sub-navigation" class="inverse">
+									
+									<%= display_contextual_navigation_tree(@revision.page , @customer_array_viewable_page_types ) %>
+								</div>
+								
+
+										<div class="page_content_capsule">
+
+									<% if flash[:notice] != nil -%><div style="color: blue; text-align: center;">&nbsp;<%= flash[:notice] %>&nbsp;</div><% end -%>
+									<%= @content_for_layout %>
+								</div>
+				<% else -%>
+							
+							
+							
+								<% if flash[:notice] != nil -%><div style="color: red; text-align: center;">&nbsp;<%= flash[:notice] %>&nbsp;</div><% end -%>
+							
+							
+							
+								<%= @content_for_layout %>
+				<% end -%>
+			</div>

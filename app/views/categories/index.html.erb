@@ -1,0 +1,49 @@
+<% if params[:department_id] %>
+<h1>Listing categories in <%= @department.Name %>  Department</h1>
+<% else %>
+<h1>Listing categories</h1>
+<% end  %>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Code</th>
+    <th>Prefix</th>
+    <th>Use generic department</th>
+    <th>Web category</th>
+    <th>Additive category ids</th>
+    <th>Use picturename</th>
+    <th>Breast print</th>
+    <th>Category specific breast print</th>
+    <th>Category header image</th>
+    <th>Visible</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @categories.each do |category| %>
+  <tr>
+    <td><%= category.id %></td>
+    <td><%= category.Name %></td>
+    <td><%= category.Code %></td>
+    <td><%= category.prefix %></td>
+    <td><%= category.use_generic_department %></td>
+    <td><%= category.web_category %></td>
+    <td><%= category.additive_category_ids %></td>
+    <td><%= category.use_picturename %></td>
+    <td><%= category.breast_print %></td>
+    <td><%= category.category_specific_breast_print %></td>
+    <td><%= category.category_header_image %></td>
+    <td><%= category.visible %></td>
+    <td><%= link_to 'Show', category %></td>
+    <td><%= link_to 'Edit', edit_category_path(category) %></td>
+    <td><%= link_to 'Destroy', category, :confirm => 'Are you sure?', :method => :delete if @override == true %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Category', new_category_path %>

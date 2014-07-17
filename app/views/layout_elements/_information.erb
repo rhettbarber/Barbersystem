@@ -1,0 +1,8 @@
+<div  class="information_bar">
+  <%#= link_to "Full website", @website.name + "/?mobile=false", :class => "ui-btn" %>
+  <div data-role="controlgroup" data-type="horizontal" data-inline="true">
+    <a href="<%= "http://" + "dixieoutfitters.net" + "/?mobile=false" %>" data-role="button" data-icon="gear" data-iconpos="left">Full site</a>
+    <a href="mailto:sales@<%= @website.domain %>" data-role="button" data-icon="info"  data-iconpos="left" target="_blank"> email</a>
+    <a href="tel:<%= @website.phone %>" data-role="button"><%= @website.phone %></a>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<%= error_messages_for :custom_item %>
+
+<%= form_for(:custom_item, :url => custom_items_path,
+                      :html => { :multipart => true }) do |f| -%>
+  <p>
+    <label for="custom_item">Upload A Custom Design</label>
+    <%= f.file_field :uploaded_data %>
+  </p>
+  <p>
+    <%= submit_tag 'Create' %>
+  </p>
+<% end -%>
+
+
+
+<h1>Listing Your Custom Items</h1>
+
+<% for custom_item in @custom_items %>
+      <% begin try %>
+
+                      <div class='custom_item_container'>
+                           width: <%= custom_item.width %><br />
+                           height <%= custom_item.height %><br />
+
+                           custom_item.methods.inspect <% custom_item.methods.inspect %><br />
+
+                           <br />
+                           <br />
+                           <br />
+
+                    custom_item.public_filename: <%=custom_item.filename %><br />
+
+                    <br /><br />
+                    custom_item.new_full_filename <%=custom_item.new_full_filename('thumb') %><br />
+                    <br /><br />
+
+                            <%= link_to image_tag(custom_item.public_filename, :size => "100x100")  %>
+
+
+                            <%= link_to 'Show', custom_item %>
+                            <%= link_to 'Edit', edit_custom_item_path(custom_item) %>
+                            <%= link_to 'Destroy', custom_item, :confirm => 'Are you sure?', :method => :delete %>
+                            <%= link_to 'View on Designer Specsheet', :controller => 'specsheet_advanced', :action => 'view_details', :custom_item_id => custom_item.id %>
+                      </div>
+        <% rescue %>
+                        bad ci <br />
+        <% end  %>
+<% end %>
+<br />
+
+
+
+<%= link_to 'New custom_item', new_custom_item_path %>
+
+
+

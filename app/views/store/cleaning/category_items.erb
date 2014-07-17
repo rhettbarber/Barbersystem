@@ -1,0 +1,65 @@
+<style type="text/css">
+    .ui-btn:link {
+        font-size: 12px;
+    font-weight: normal;;
+    }
+</style>
+
+
+<% logger.debug "------------------------------------- store/_items.erb begin" -%>
+
+
+
+    <% category_class_item_type = @category.category_class.item_type     %>
+    <% @already_rendered_item_class = [] %>
+
+
+            <ul data-role="listview" data-divider-theme="b" data-inset="true">
+              <% if @category.additives and @category.additives != []  and  ![ 'master', 'slave'].include?(  @category.category_class.item_type  )  %>
+                  <%= render :partial => 'additives' %>
+              <% else   %>
+                  <% @items.sort_by{|a| a.item_class_sales_this_years_with_item_id.to_s   }.reverse.each do |item| -%>
+                      <% if item %>
+                          <% if item.category %>
+                              <%  if item.item_class_component  -%>
+                                  <% unless @already_rendered_item_class.include?( item.item_class.id.to_s ) %>
+                                      <%  @already_rendered_item_class  <<  item.item_class.id.to_s   %>
+                                       <li data-theme="c">
+                                        <% if category_class_item_type == 'slave' %>
+                                           <a href="/store/item/">
+                                             <img src="<%=  item.image_url( @department, '/item_thumbnails/','x' )  %>" alt="260x180" class="selector_item" data-item_class_sales="<%= item.item_class_sales_this_years_with_item_id %>" data-item_id="<%= item.id %>" data-department_id="<%= @department.id %>"  data-category_id="<%= item.category_id %> data-applicable='<%= params[:applicable] || 0 %>'">
+                                             <%= item.description_before_color_and_size %>
+                                           </a>
+                                       <% else %>
+                                             <a href="/store/item/">
+                                               <img src="<%=  item.image_url( @department, '/item_thumbnails/','x' )  %>" alt="260x180" class="selector_item"  data-item_class_sales="<%= item.item_class_sales_this_years_with_item_id %>" data-item_id="<%= item.id %>" data-department_id="<%= @department.id %>"  data-category_id="<%= item.category_id %> data-applicable='<%= params[:applicable] || 0 %>'">
+                                               <%= item.description_before_color_and_size %>
+                                             </a>
+                                        <% end %>
+                                      </li>
+                                  <% end %>
+                              <% else %>
+                                  <li data-theme="c">
+                                    <% if category_class_item_type == 'slave' %>
+                                        <a href="/store/item/">
+                                          <img src="<%=  item.image_url( @department, '/item_thumbnails/','x' )  %>" alt="260x180" class="selector_item" data-item_class_sales="<%#= item.item_class_sales_this_years_with_item_id if item.category %>" data-item_id="<%= item.id %>" data-department_id="<%= @department.id %>"  data-category_id="<%= item.category_id %> data-applicable='<%= params[:applicable] || 0 %>'">
+                                          <%= item.description_before_color_and_size %>
+                                        </a>
+                                    <% else %>
+                                        <a href="/store/item/">
+                                          <img src="<%=  item.image_url( @department, '/item_thumbnails/','x' )  %>" alt="260x180" class="selector_item"  data-item_class_sales="<%= item.item_class_sales_this_years_with_item_id %>" data-item_id="<%= item.id %>" data-department_id="<%= @department.id %>"  data-category_id="<%= item.category_id %> data-applicable='<%= params[:applicable] || 0 %>'">
+                                          <%= item.description_before_color_and_size %>
+                                        </a>
+                                    <% end %>
+                                  </li>
+                              <% end %>
+                          <% end %>
+                      <% end %>
+                  <% end -%>
+              <% end %>
+            </ul>
+
+
+
+
+

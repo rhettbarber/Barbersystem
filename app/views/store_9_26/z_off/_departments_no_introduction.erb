@@ -1,0 +1,9 @@
+<% logger.debug "-------------------------------------begin shared_browse/departments_no_introduction " %>
+
+<%# cache (@content_fragment_name  ) do %>
+		<% for department  in @departments %>
+				<%=  render(:partial => "shop/department_categories", :locals => {:department => department } )     %>
+		<% end %>
+<%# end %>
+
+<% logger.debug "-------------------------------------begin shared_browse/departments_no_introduction " %>

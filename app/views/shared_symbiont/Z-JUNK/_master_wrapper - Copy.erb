@@ -1,0 +1,31 @@
+
+
+<div id="symbiote_wrapper">
+<table width="850" border="0" cellspacing="0" cellpadding="0" background="/images/headers/symbiont_ribbon.jpg" style="background-repeat: no-repeat;">
+  <tr>
+    <th width="80" height="80" rowspan="2" scope="col">
+      <% item =   @purchase.symbiote.item  %>
+      <%=   image_tag( item.image_url( @purchase.symbiote.master_department_id  ,'item_thumbnails/','x') ,:size => "80x80")    %> </th>
+    <td width="312" height="31" scope="col">
+      <%= item.ItemLookupCode %></th>
+    <th width="458" scope="col">
+    	Please select a design for your <%= item.description_before_color_and_size %>
+		
+	<% if @purchase.master.item.SubDescription2  == 'colored' %>	
+				-- Designs choices limited because this is a dark item.
+	<%  end  %>
+	
+	</th>
+  </tr>
+  <tr>
+    <td height="30"><%= item.Description %>		</td>
+    <td height="30"><div align="right">Other options: </div>
+			<ul>            
+			 			<li><%= link_to 'Choose a decoration' ,:action => 'category_browser' unless controller.action_name == 'category_browser' %></li>
+			 			<li><%= link_to 'Change color/size' ,:action => 'view_details', :purchases_entry_id  =>  @purchase.symbiote.id   %></li>
+					   <li><%= link_to 'Forget this garment' ,:action => 'delete_incomplete_symbiote' %></li>
+			 </ul>	  
+	 </td>
+  </tr>
+</table>
+</div>

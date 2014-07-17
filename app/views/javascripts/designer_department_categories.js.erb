@@ -1,0 +1,51 @@
+var categories = new Array();
+<% for category in @designer_department_categories  -%>
+  categories.push(new Array(<%= category.department_id %>, '<%=h Util::Slug.generate(category.Name.to_s) %>', <%= category.id %>));
+<% end -%>
+
+<% ct = 'design' %>
+
+          function <%= ct %>departmentSelected() {
+                       $('designer_item_search_<%= ct %>_field').value = '';
+                      department_id = $('<%= ct %>_javascript_department_id').getValue();
+                      options = $('<%= ct %>_javascript_category_id').options;
+                      options.length = 1;
+                      categories.each(function(category) {
+                              if (category[0] == department_id) {
+                                options[options.length] = new Option(category[1], category[2]);
+                              }
+                           }
+                         );
+
+                        if (options.length == 1) {
+                          $('<%= ct %>_category_field').hide();
+                        } else {
+                          $('<%= ct %>_category_field').show();
+                        }
+        };
+        function <%= ct %>categorySelected() {
+        console.log('<%= ct %>categorySelected()');
+                category_id =  $('<%= ct %>_javascript_category_id').getValue();
+                search_type_name = $('search_type_name').getValue();
+                $('designer_item_search_<%= ct %>_field').value = '';
+                 new Ajax.Updater('category_items_<%= ct %>', '/designer/update_items_listing', {
+                         parameters: { current_category_id: category_id , choice_type: '<%= ct %>', search_type_name: search_type_name }
+                  });
+        };
+        function <%= ct %>searchSubmitted() {
+                item_keywords =  $F('designer_item_search_<%= ct %>_field');
+                search_type_name = $('search_type_name').getValue();
+                 new Ajax.Updater('category_items_<%= ct %>_design', '/designer/designer_item_search', {
+                         parameters: { item_keywords:  item_keywords, page: 1 , choice_type: '<%= ct %>' , search_type_name: search_type_name }
+                  });
+        };
+
+
+
+
+document.observe('dom:loaded', function() {
+                <%= ct %>departmentSelected();
+                $('<%= ct %>_javascript_department_id').observe('change', <%= ct %>departmentSelected);
+                $('<%= ct %>_javascript_category_id').observe('change', <%= ct %>categorySelected);
+               // $('designer_item_search_<%= ct %>_field').observe('change', <%= ct %>searchSubmitted);
+});

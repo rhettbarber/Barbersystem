@@ -1,0 +1,180 @@
+<% if @junk %>
+
+
+<% if @show_admin %><div class="specsheet_admin"> table_at_item_and_design_one_side_latest</div> <% end %>
+
+
+<div  id="specsheet_table_css">
+<%  @back_design = @design %>
+
+
+<%
+    @items_front =         @back_design.applicable_crest_prints
+    @front_design =  @items_front.first
+    @front_design_name = @front_design.ItemLookupCode + '.png'
+    if @front_design
+            @front_advanced_combination = AdvancedCombination.find_or_create_combo( @item, @front_design)
+    else
+            @front_design_name = Util::Slug.generate(@back_design.department.Name) + '.png'
+    end
+        if @back_design
+          @back_advanced_combination = AdvancedCombination.find_or_create_combo( @item, @back_design)
+        end
+%>
+
+
+
+<% @product_background_image_name =  'http://cdn.dixieoutfitters.com/images/item_specsheets/' + @item.PictureName.gsub(".jpg", "")  + '.jpg' %>
+<%  @front_design_image_name      =   '/images/item_specsheets/' + @front_design_name     %>
+<%   @back_design_image_name     =    '/images/item_specsheets/' + @back_design.PictureName        %>
+
+
+
+      <!--[if lt IE 8]><style>
+    .design_span span {
+        display: inline-block;
+        height: 100%;
+    }
+</style><![endif]-->
+
+
+<style>
+    .specsheet_table_container {
+        /*background-color: yellow;*/
+        width: 850px ;
+        position: relative;
+    }
+
+    #specsheet_table {
+        background: url(<%=  @product_background_image_name  -%>) no-repeat right;
+        height:328px;
+        width:425px;
+        float:left;
+    }
+
+    #specsheet_table_front {
+        background: url(<%=  @product_background_image_name  -%>) no-repeat left;
+        height:328px;
+        width:425px;
+        float:left;
+    }
+
+    #back_design_td {
+        width: 425px;
+        height:328px;
+        overflow:hidden;
+    }
+
+    .specsheet_table_sizer {
+        width: <%= @specsheet_table_sizer_width %>;
+
+    }
+    /*   ---------- Media queries for mobile go here -------------    */
+    /*   ---------- Media queries for mobile go here -------------    */
+    /*   ---------- Media queries for mobile go here -------------    */
+    @media (max-width: 800px) {
+
+        .specsheet_table_container {
+            left:-63px;
+         }
+
+
+        #specsheet_table {
+            float:none;
+        }
+
+        #specsheet_table_front {
+            float:none;
+        }
+
+        .specsheet_table_sizer {
+            width:300px;
+            overflow: hidden;
+        }
+
+   }
+
+</style>
+
+ </div>
+  <table style="margin-left:auto;margin-right:auto;">
+
+    <tbody>
+            <tr>
+                    <td>
+                            <div class="specsheet_table_sizer">
+                                        <div class="specsheet_table_container">
+                                                            <div class="drag"  id="specsheet_table">
+                                                                            <% if  @back_design %>
+                                                                                                    <% if @front_design and @back_advanced_combination.number_of_sides == '2' %>
+                                                                                                                 <% @min_width = '425px'  %>
+                                                                                                    <% else %>
+                                                                                                                <% @min_width = '850px'  %>
+                                                                                                    <%  end  %>
+                                                                                                    <div style="margin:0px; padding: 0px;;text-align:center;"  id="back_design_td"  class="design_span">
+                                                                                                      <span>  </span>
+
+                                                                                                                                  <img src="<%= @back_design_image_name  %>"
+                                                                                                                                       data-back_advanced_combination_id="<%= @back_advanced_combination.id   if @back_advanced_combination %>"
+                                                                                                                                       id="back_design_image"
+                                                                                                                                       class="back_design_image drag"
+                                                                                                                                       alt=""
+                                                                                                                                       <% if @back_advanced_combination %>
+                                                                                                                                       style="
+                                                                                                                                               left:<%=  @back_advanced_combination ? @back_advanced_combination.back_left  : "0px" %>;
+                                                                                                                                               top:<%=  @back_advanced_combination ?  @back_advanced_combination.back_top  : "0px" %>;
+                                                                                                                                               width:<%= @back_advanced_combination ? @back_advanced_combination.back_width : "300px" %>;
+                                                                                                                                               position:relative;
+                                                                                                                                        <% end %>
+                                                                                                                                       " />
+                                                                                                    </div>
+                                                                            <% end  %>
+                                                             </div>
+
+
+
+
+
+                                                            <div class="drag"  id="specsheet_table_front">
+                                                                                            <div style="margin:0px; padding: 0px;min-width:425px;text-align:center;"   id="front_design_td">
+                                                                                                          <span>  </span>
+                                                                                                          <img src="<%= @front_design_image_name   %>"
+                                                                                                               id="front_design_image"
+                                                                                                               class="front_design_image drag"
+                                                                                                               alt="<%= @front_design_image_name %>"
+                                                                                                               style=" position: relative;
+                                                                                                                       left:<%=   @front_advanced_combination ? @front_advanced_combination.front_left : "0"   %>;
+                                                                                                                       top:<%=   @front_advanced_combination ? @front_advanced_combination.front_top  : "0" %>;
+                                                                                                                       width:<%= @front_advanced_combination ? @front_advanced_combination.front_width : "100"  %>;
+                                                                                                                       display:inline-block;
+                                                                                                               " />
+                                                                                            </div>
+                                                             </div>
+
+
+                                         </div>
+                              </div>
+                    </td>
+            </tr>
+    </tbody>
+
+  </table>
+
+
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

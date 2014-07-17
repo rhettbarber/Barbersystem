@@ -1,0 +1,30 @@
+<h1>Listing purchases_entry_designs</h1>
+
+<table>
+  <tr>
+    <th>Purchase</th>
+    <th>Background color</th>
+    <th>Background filename</th>
+    <th>Front design filename</th>
+    <th>Back design filename</th>
+    <th>Resize info</th>
+  </tr>
+
+<% @purchases_entry_designs.each do |purchases_entry_design| %>
+  <tr>
+    <td><%=h purchases_entry_design.purchase_id %></td>
+    <td><%=h purchases_entry_design.background_color %></td>
+    <td><%=h purchases_entry_design.background_filename %></td>
+    <td><%=h purchases_entry_design.front_design_filename %></td>
+    <td><%=h purchases_entry_design.back_design_filename %></td>
+    <td><%=h purchases_entry_design.resize_info %></td>
+    <td><%= link_to 'Show', purchases_entry_design %></td>
+    <td><%= link_to 'Edit', edit_purchases_entry_design_path(purchases_entry_design) %></td>
+    <td><%= link_to 'Destroy', purchases_entry_design, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New purchases_entry_design', new_purchases_entry_design_path %>

@@ -1,0 +1,179 @@
+<% if controller.action_name == 'align_category_to_selected_category' %>
+
+
+<% @item = item  %>
+
+
+<% if @combination %>
+	
+	
+	<div style="float:left;">				
+				<table border="1" width="850">
+					<tr>
+						<td><strong>COMBO TABLE</strong></td>
+					</tr>
+					
+					<tr>
+						<td>
+							<table border="1" width="280">
+							<tr>
+								<td><strong>CHOOSE A DIFFERENT DESIGN</strong></td>
+							</tr>	
+				
+								<%= form_for(:combination, :url => {:controller => 'opposites', :action => 'align_category_to_selected_category'}, :html => { :method => :put }) do |f| %>
+									<%= hidden_field_tag "id", @category.id %>
+									<%= hidden_field_tag "selected_category_id", @selected_category.id %>
+									    <b>Item Type</b>
+									      
+									      size:<%= @designs_for_select_list.size -%><br />
+									      <select name="design_id">
+											<% @designs_for_select_list.each do |select_list_design| -%>
+											    <option value="<%=  select_list_design.id -%>" 
+											    	<% if select_list_design.id == @design.id -%>
+											    		selected="selected">
+											    	<% else %>	
+											    		>
+											    	<% end -%>
+											    	<%=  select_list_design.ItemLookupCode + ' - ' + select_list_design.Description  -%> 
+											    </option>
+											<% end -%>
+										 </select>
+										<tr>
+											<td><%= submit_tag('Change Design') %></td>
+										</tr>	
+									</table>
+								<% end %>	
+						</td>
+					</tr>
+<% end %>			
+	
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<tr>
+						<td>@item.category.prefix: <%=  @item.category.prefix   %></td>
+					</tr>
+					<tr>
+						<td>@design.category.prefix: <%=  @design.category.prefix   %></td>
+					</tr>
+					<tr>
+						<td><%=  @item.image_url( @local_department  , '/images/@item_specsheets/', 'x' ,@item_prefix_override )   %></td>
+					</tr>	
+					<tr>
+						<td>breast_print_name:<%=  @breast_print_name   %></td>
+					</tr>	
+					<tr>
+						<td>@item & @design bp turned on? 
+							<% if @design.category.breast_print == '1' && @item.category.breast_print == '1'  %>
+								<%= image_tag("/images/buttons/checkmark-green.jpg",:size => "20x20") %>
+							<% else %>
+								<%= image_tag("/images/buttons/cancel-x-mark-red.jpg",:size => "20x20") %>
+							<% end %>
+						</td>
+					</tr>	
+					<tr>
+						<td>Compatible Combination?
+							 <% if Combination.compatible_symbiont?(@item, @design)  %>
+							 	<%= image_tag("/images/buttons/checkmark-green.jpg",:size => "20x20") %>
+							<% else %>
+								<%= image_tag("/images/buttons/cancel-x-mark-red.jpg",:size => "20x20") %>
+							<% end %>
+						 </td>
+					</tr>		
+				<%= form_for(:combination, :url => combination_path(@combination), :html => { :method => :put }) do |f| %>
+							<%= hidden_field_tag "id", @combination.id %>
+								<tr>
+									<td><%= f.text_field( :item_prefix_override ,:size => 2 ) %>--@item_prefix_override</td>
+								</tr>	
+								<tr>
+									<td><%= f.text_field( :left ,:size => 4 ) %>--left</td>
+								</tr>	
+								<tr>
+									<td><%= f.text_field( :top ,:size => 4 ) %>--top</td>
+								</tr>
+								<tr>
+									<td><%= f.text_field( :height ,:size => 4 ) %>--height</td>
+								</tr>	
+								<tr>
+									<td><%= f.text_field( :bp_left ,:size => 4 ) %>--bp_left</td>
+								</tr>
+								<tr>
+									<td><%= f.text_field( :bp_top ,:size => 4 ) %>--bp_top</td>
+								</tr>	
+								<tr>
+									<td><%= f.text_field( :bp_height ,:size => 4 ) %>--bp_height</td>
+								</tr>
+								<tr>
+									<td>Verified Correct?
+										 <%= f.text_field( :verified_correct ,:size => 1 ) %>
+										 <% if @combination.verified_correct == 1  %>
+										 	<%= image_tag("/images/buttons/checkmark-green.jpg",:size => "20x20") %>
+										<% else %>
+											<%= image_tag("/images/buttons/cancel-x-mark-red.jpg",:size => "20x20") %>
+										<% end %>
+									 </td>
+								</tr>
+								<tr>
+									<td><%= submit_tag('Update Combination') %></td>
+								</tr>	
+							</table>
+						<% end %>
+				
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+			
+	
+				
+				
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+<% else %>
+	"No Combination Exists for these item/design prefixes"
+<% end  %>

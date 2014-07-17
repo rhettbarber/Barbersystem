@@ -1,0 +1,28 @@
+
+<% if @item %>
+      <% @current_category_id = @item.category_id.to_i %>
+
+<% else %>
+       <% @current_category_id = params[:category_id].to_i %>
+<% end  %>
+<% @current_category_id = @current_category_id.to_i %>
+
+<div id="categories">
+<%= @current_category_id = @current_category_id.to_i  %>
+
+<% collection_select( 'categories_select_list', :selected_category_id, @categories, :id, :Name, {:selected => @current_category_id  }   ) %>
+
+<%=  select("categories_select_list", "selected_category_id", @categories.collect {|p| [ p.Name , p.id ] } ,{:selected =>  @current_category_id  } ) %>
+
+
+<%= observe_field :categories_select_list_selected_category_id   ,
+:frequency => 4,
+:url => { :action => 'update_category_display' } ,
+:loading => "Element.show('spinner')",
+:complete => "Element.hide('spinner')" ,
+:with => " 'category_id=' + value + '&department_id=' + 10"
+
+%>
+
+
+</div>

@@ -1,0 +1,29 @@
+
+
+<% unless @changed %>
+<h1>Change account email address - Step 1 of 3</h1> 
+<p>Enter the new email address that you wish to use for this account</p>
+<br />
+<%= start_form_tag %>
+<p><label for="email">Email Address</label> 
+<%= text_field_tag 'email' %><%= submit_tag 'Update my email' %></p>
+
+</form>
+<% else %>
+<h1>Change account email address - Step 2 of 3</h1> 
+
+<p>  
+  Thanks. An email has been sent to the address provided (<%= self.current_user.new_email %>).
+  </p>
+<p>
+  Please follow the instructions contained within the email 
+ to complete this process.
+ </p> 
+<% end %>
+
+
+
+Please visit this url to update your account to use the new email address:
+
+  <%= @url %>
+

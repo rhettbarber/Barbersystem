@@ -1,0 +1,59 @@
+<h1>Listing Commisions for <%=h @item.ItemLookupCode  %> -  <%=h @item.Description  %></h1>
+
+&nbsp; <strong><%= link_to "Back", :controller => "reports", :action => "commissions"  %></strong><br /><br />
+
+Begin Date:<%= @begin_date %><br />
+End Date:<%= @end_date %><br /> 
+
+<h3>Item Sales Entry Breakdown:</h3>
+
+
+
+<table>
+	  <tr>
+	    <th>Time</th>
+	    <th>Sale #</th>
+	    <th>Customer FirstName</th>
+	    <th>Customer LastName</th>
+	      <th>Quantity  </th>
+	     <th>Actual Price</th>
+	     <th>Commissioned Price</th>
+	      <th>Total at Commissioned Price</th>
+	     <th> Fixed Amount</th>
+	     <th>Percent of Sale (%)</th>
+	      <th>Fixed Total</th>
+	       <th>Percent Total </th>
+	        <th>Combined Total </th>
+
+	  </tr>
+
+	  <% if @sales_entries %>
+	  
+
+				  <% @sales_entries.each do |se| %>
+							  <tr>
+							    <td style="width:200px;"><%=h se.sale.sale_time %></td>
+							    <td style="width:100px;"><%=h se.sale.customer.FirstName if se.sale.customer %></td>
+							     <td style="width:100px;"><%=h se.sale.customer.LastName if se.sale.customer %></td>
+							      <td style="width:100px;"><%=h se.sale.id %></td>
+							     <td style="width:100px;"><%=h se.Quantity %></td> 
+							    <td style="width:100px;"><%=h se.Price %></td> 
+							    <td style="width:100px;"><%=h se.commissioned_price  %></td> 
+							    <td style="width:100px;"><%=h se.extended_total_at_commissioned_price  %></td> 
+							    <td style="width:100px;"><%=h se.item.CommissionAmount %></td> 
+							    <td style="width:100px;"><%=h se.item.CommissionPercentSale %></td> 
+							     <td style="width:100px;"><%=h se.fixed_total %></td> 
+							      <td style="width:100px;"><%=h se.percent_total  %></td>
+							          <td style="width:100px;"><%=h se.combined_total %></td>
+							  </tr>
+					<% end %>
+		<% else %>	  
+			 		<tr><td>No Sales for this item in this Time Period</td></tr>
+	 	<% end %>
+</table>
+
+
+
+<h3>Total Sales at Commissioned Price: <%= @total_sales_at_commissioned_price %></h3>
+
+<h3>Total Commissions at Commissioned Price:<%= @total_commissions_at_commissioned_price %></h3>

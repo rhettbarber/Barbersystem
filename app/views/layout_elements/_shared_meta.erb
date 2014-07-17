@@ -1,0 +1,14 @@
+<!-- Begin Meta-->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="Description" content="<%= @website.meta_description %>"/>
+<meta name="Keywords" content="<%= @website.meta_keywords %>"/>
+<% if @item && @design -%>
+<meta name="ItemKeywords" content="<%= @item.notes_as_keywords %>"/>
+<meta name="DesignKeywords" content="<%= @design.notes_as_keywords %>"/>
+<% elsif @item && !@design -%>
+<meta name="ItemKeywords" content="<%= @item.notes_as_keywords %>"/>
+<% elsif !@item && @design -%>
+<meta name="DesignKeywords" content="<%= @design.notes_as_keywords %>"/>
+<% end -%>
+<!-- End Meta-->

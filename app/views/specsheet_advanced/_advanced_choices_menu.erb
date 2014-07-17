@@ -1,0 +1,8 @@
+<div class="advanced_choices_menu">
+    <ul>
+        <li> <%= link_to_function('Change Background ', "Element.toggle('background_choices'), $('front_choices', 'back_choices', 'shirt_style_choices').invoke('hide')     ") %> </li>
+        <li> <%= link_to_function('Change Front Design', "Element.toggle('front_choices'), $('background_choices', 'back_choices', 'shirt_style_choices').invoke('hide')     ") %> </li>
+        <li> <%= link_to_function('Change Back Design', "Element.toggle('back_choices'), $('front_choices', 'background_choices', 'shirt_style_choices').invoke('hide')     ") %> </li>
+         <li> <%= link_to_function('Change Shirt Style', "Element.toggle('shirt_style_choices'), $('front_choices', 'back_choices', 'background_choices').invoke('hide')     ") %> </li>
+    </ul>
+</div>

@@ -1,0 +1,32 @@
+<table class="header_table"  border="0" cellpadding="0" cellspacing="0">
+        <td style="width:436px;height:119px;">
+          <% $stdout.puts "@WEBSITE: " + @website.inspect %>
+                        <% if @website.domain == '0'  -%>
+                              <%= image_tag( "/uploads/Image/shared_affiliate/ecommerce_website_creator.png" ) %>
+                          <% elsif @website.name == "dixie_store" -%>
+                                          <%=   link_to(image_tag( "/uploads/Image/shared_affiliate/" + @website.name + "_" + numeric_day_of_the_week + ".png",  :border => 0 ,:size => '436x119' ), :controller => "page",  :action => "show", :id => "home" )  -%>
+                          <% else -%>
+                                          <%=   link_to(image_tag( "/images/company_logos/" + @website.name + ".jpg",  :border => 0 ,:size => '436x119' ), :controller => "page",  :action => "show", :id => "home" )  -%>
+                          <% end -%>
+        </td>
+        <td style="width:414px;height:119px;">
+                        <table style="width:414px;height:119px;"  border="0" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                                        <td style="text-align: right; color: grey;width:414px;height:29px;">
+                                                                                        <%=  render(:partial => "layout_elements/user" )  %>
+                                                        </td>
+                                        </tr>
+                                        <tr>
+                                                                <td style="width:414px;height:50px;color:gray;">
+                                                                        old_flash_area
+                                                                        <% render(:partial => "shared/flash") %>
+                                                                </td>
+                                        </tr>
+                                        <tr>
+                                                                <td style="padding-right:5px; text-align:right;width:414px;height:20px;">
+                                                                                <%#=  render(:partial => "shared_search/search_form") %>
+                                                                </td>
+                                        </tr>
+                        </table>
+        </td>
+</table>

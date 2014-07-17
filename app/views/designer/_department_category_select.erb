@@ -1,0 +1,76 @@
+<% choice_type = 'design' %>
+<% @the_department_variable = '@department_choices_' + choice_type  %>
+
+
+<div id="<%= choice_type %>_choices" class="x_choices">
+      <%= form_for( choice_type + '_javascript', :url => {:action => 'update_categories'}) do |f| %>
+
+                              <%= f.collection_select :department_id, @departments_for_department_select  , :id, :Name, :prompt => "Select a department" %>
+                              <span id="<%= choice_type %>_category_field">
+                              <%= f.collection_select :category_id, Category.find(:all), :id, :Name, :prompt => "Select a category" %>
+                              </span>
+                              <span id="search-type-name" style="font-size: 12px;color:blue;">
+                              <%= text_field_tag "designer_item_search_design_field" %>
+                              <%= image_tag '/images/icons/search-icon.png', :size => '40x40' %>
+                               <span class="search_type_links"  id="search_derivative_details">| Derivatives |</span>
+                               <span class="search_type_links"  id="search_sales_details">Sales |</span>
+                               <span class="search_type_links"  id="search_item_details">Standard Info |</span>
+                               <span class="search_type_links"  id="search_clone_item_types">Clone Item Types </span>
+                              </span>
+                              <span id="spinner" style="display:none;"><%= image_tag "/images/search/ajax-spinner.gif" %> </span>
+
+                              <%= hidden_field_tag "search_type_name", "search_item_details" %>
+
+                         	<%= observe_field :search_type_name,
+                              :frequency => 4,
+                              #:update => 'designer_items_listing',
+                               :loading => "Element.show('spinner')",
+                               :complete => "Element.hide('spinner')",
+                              :url => { :action => 'update_items_listing' } ,
+                                    :with => "Form.serializeElements( $(  'designer_item_search_design_field', 'search_type_name' )   )" %>
+
+
+      <% end  %>
+
+</div>
+
+
+<script type="text/javascript">
+Event.observe(window, 'load', function() {
+          <% if params[:search_type_name] %>
+                $(<%= params[:search_type_name].to_s %>).removeClassName('search_type_links');
+                $(<%= params[:search_type_name].to_s %>).addClassName('search_type_links_active');
+          <% else  %>
+                $('search_item_details').removeClassName('search_type_links');
+                $('search_item_details').addClassName('search_type_links_active');
+          <%  end   %>
+         $$('span[class=search_type_links]', 'span[class=search_type_links_active]'   ).invoke('observe', 'click', function(event) {
+                      clickHandler(event)
+           });
+});
+
+function clickHandler(e) {
+          target =  findTarget(e);
+
+
+
+         $$('span[class=search_type_links]', 'span[class=search_type_links_active]'   ).invoke('removeClassName', 'search_type_links_active').invoke('addClassName', 'search_type_links');
+         target.className =  'search_type_links_active' ;
+          Form.Element.setValue('search_type_name' , target.id    ) ;
+         if (target.id == "search_using_yahoo") {
+           $('yahoo_preferences').show()
+         }
+         else if (target.id == "go_home") {
+           window.location =  "http://dixieoutfitters.com" ;
+         }
+         else {
+             <%#*$('yahoo_preferences').hide()%>
+         }
+}
+
+
+function findTarget(e) {
+           return Event.element(e) ;
+}
+
+</script>

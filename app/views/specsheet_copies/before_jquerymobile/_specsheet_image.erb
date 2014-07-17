@@ -1,0 +1,6 @@
+
+<% if @item  && @design  %>
+						 <span id='combo_image'><%= render(:partial => 'specsheet/specsheet_table')     %></span>
+<%  else  %>
+						 <div align="center"><span id='specsheet_image'><%=  image_tag @item.image_url( @department  , '/item_specsheets/', @design,'0' )  %></span></div>
+<%  end  %>

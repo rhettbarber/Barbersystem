@@ -1,0 +1,79 @@
+
+<% @clone_item_type_name = CloneItemType.find( params[:clone_item_type_id]).name  %>
+
+
+<div align="center"> <h1>Link Main design to existing <%= @clone_item_type_name  %>  </h1> </div>
+
+<%= form_for(@clone_item) do |f| %>
+  <%= f.error_messages %>
+
+    <%= hidden_field_tag  'item_id' ,  params[:item_id]  %>
+    <%= hidden_field_tag  'clone_id' ''  %>
+    <%= hidden_field_tag  'clone_item_type_id', params[:clone_item_type_id]   %>
+
+<% @item = Item.find params[:item_id] %>
+
+
+<table>
+  <tr>
+      <td><%= image_tag('http://' + @asset_server + '/images/item_specsheets/' + @item.PictureName) %></td>
+      <td style="text-align:center;">Will be Linked to:<br /><%= image_tag('/images/icons/link.jpg', :size => "60x60",:border => 0 )  %></td>
+      <td id="clone_image" style="border:gray 1px solid;">Your chosen <%= @clone_item_type_name %>  will appear here</td>
+  </tr>
+  <tr>
+      <td><%= @item.ItemLookupCode %> </td>
+      <td>&nbsp;</td>
+      <td id="clone_itemlookupcode">&nbsp;</td>
+  </tr>
+   <tr>
+      <td><%= @item.Description %> </td>
+      <td>&nbsp;</td>
+      <td id="clone_description">&nbsp;</td>
+  </tr>
+</table>
+
+
+
+  <p>
+    <div id="form_submit_button" align="center" style="display:none;"><%= f.submit 'Confirm Link of Item to Clone' %> </div>
+  </p>
+<% end %>
+
+<br/>
+
+<br/><%= image_tag('/images/icons/down-arrow.jpg', :size => "100x100",:border => 0 )  %>
+
+<%= stylesheet_link_tag "shared_user" %>
+
+<div style="border:solid black 1px;width:100%;height:70px;float:left;padding:5px;margin:5px;">
+
+	<div style="width:500px;">
+		Search for Clone to link to the main design:
+		<%  form_remote_tag :url => 'add_to_cart'  do %>
+		<%=    text_field_tag  "item_keywords"  %>
+
+
+
+		<%= observe_field :item_keywords, :frequency => 7, :update => 'item_rows',  :url => { :action => 'find_item' } ,  :with => 'item_keywords'  %>
+		<% end %>
+	</div>
+</div>
+
+<div style="border:solid black 1px;padding:5px;margin:5px;width:100%;">
+
+	<table>
+		<tbody>
+		<tr>
+	  		<td>
+	  		<div id="item_rows">
+	  		<%= render :partial => "/users/item", :collection => @items %>
+	  		</div>
+	  		</td>
+	  	</tr>
+		</tbody>
+		</table>
+
+
+</div>
+
+<br />

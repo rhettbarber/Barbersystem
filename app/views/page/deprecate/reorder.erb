@@ -1,0 +1,15 @@
+<% @sortable_list = true -%>
+<% @rounded_divs = ',div#reorder_information' -%>
+<div id="reorder_information">
+	<p>Reorder pages by dragging them into the correct order.</p>
+	<p>When you're done, go back to <%= link_to "#{@parent.name}", :controller => 'page', :action => 'show', :id => @parent.slug %>.</p>
+	<p>Changes are instantaneous.</p>
+</div>
+<div id="reorder_list">
+	<ul id="sortable_list">
+		<% for page in @pages -%>
+		<li id="page_<%= page.id %>"><span class="handle"><img src="/images/buttons/drag.gif"/></span> <h3 style="display:inline;"><%= page.name %></h3></li>
+		<% end -%>
+	</ul>
+	<%= sortable_element('sortable_list', :handle => "handle", :url => {:action => :update_page_positions, :id => 'sortable_list'}) %>
+</div>

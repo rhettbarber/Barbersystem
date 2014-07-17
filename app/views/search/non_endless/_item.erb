@@ -1,0 +1,63 @@
+<% if item and item.category and  @website_search_item_ids.include?(item.id) %>
+        <%    category_class_item_type  =  item.category.category_class.item_type  %>
+        <li>
+          <a href="/specsheet/<%= item.id %>">
+            <div style="width: 240px;height:240px;overflow: hidden;">
+            <img src="<%=   "/images/item_thumbnails/" + item.PictureName  %>" class="ui-li-thumb"  style="widtht:200px;position:relative;">
+            </div>
+
+          </a>
+          <div style="font-weight:bold;text-align:center;position: absolute;bottom:0;width:100%;;">
+            <%= item.ItemLookupCode %>
+          </div>
+
+        </li>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @dd %>
+    <%= url_for(:controller => 'specsheet', :item_id => item.id , :department_id => @department , :item_type =>  category_class_item_type ) %>
+    <%= link_to( image_tag( "/images/item_thumbnails/" + item.PictureName, :class => "ui-li-thumb")  ,  { :controller => 'specsheet', :item_id => item.id , :department_id => @department , :item_type =>  category_class_item_type   }  )  %>
+
+    <% item.id %>
+
+    <br />
+    <% if controller.action_name == 'search' %>
+        Keywords Hit: <%= item.SubDescription3  %><br />
+    <% end %>
+
+
+    <%=   link_to('details', :controller =>  'specsheet' , :action => "index", :item_id => item.id , :department_id => @department  )  %>
+    <br />
+    </div>
+
+
+
+<% end %>

@@ -1,0 +1,56 @@
+
+
+
+<div id="colors">
+
+
+<%=  javascript_include_tag :defaults %>
+
+
+<style type="text/css">
+.color_to_add {
+     float:left;
+     padding-left:10px;
+     padding-right:10px;
+    color:red;
+}
+.color_to_remove {
+     float:left;
+   padding-left:10px;
+   padding-right:10px;
+    color:green;
+}
+</style>
+<script type="text/javascript">
+  function addColor( the_color ) {
+              new Ajax.Updater('colors', '/purchases_entries/add_color' ,   {evalScripts:true, parameters:{ color: the_color ,   action: 'addColor'}} );
+  }
+  function removeColor( the_color ) {
+              new Ajax.Updater('colors', '/purchases_entries/remove_color' ,   {evalScripts:true, parameters:{ color: the_color ,   action: 'removeColor'}} );
+  }
+
+</script>
+
+
+
+
+Chosen Colors:
+<div id="chosen_colors">
+<%   session[:chosen_colors].each do |color|    %>
+       <div class="color_to_remove"  onclick='removeColor( "<%= color %>")'> <%= color  %></div>
+<% end %>
+</div>
+<br /><br />
+
+
+More Colors:
+<div id="more_colors">
+<%   session[:more_colors].each do |color|    %>
+   <div class="color_to_add"  onclick='addColor( "<%= color %>")'> <%= color  %></div>
+<% end %>
+</div>
+<br />  <br />
+
+
+
+</div>

@@ -1,0 +1,107 @@
+
+<script type="text/javascript">
+
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+
+</script>
+
+
+
+
+<script type="text/javascript">
+// EDITING INFORMATION IN THIS AREA WILL NOT HELP YOU.
+// IT WILL GET YOU BANNED OR PROSECUTED !!
+
+try {
+
+  var pageTracker = _gat._getTracker("<%= @website.tracking_number %>");
+
+  pageTracker._setVar("<%= @purchase.customer_id  %>");
+
+  pageTracker._addTrans(
+
+    "<%= "#{@purchase.id},#{@purchase.a_id || 0}" %>",                                     // Order ID
+
+    "<%= @purchase.a_id %>",                            // Affiliation
+
+    "<%= @purchase.subtotal_after_all_discounts  %>",                                    // Total
+
+    "<%= @purchase.tax_amount %>",                                     // Tax
+
+    "<%= @purchase_shipping  %>",                                        // Shipping
+
+    "<%= h @customer.City %>",                                 // City
+
+    "<%= h @customer.State %>",                               // State
+
+    "<%= h @customer.Zip %>"                                       // Country
+
+  );
+
+<%= render :partial => "tracking/receipt_analytics_tracking_items" %>
+
+
+<%   if  ['production'].include?( Rails.env )   %>
+
+ pageTracker._trackTrans();
+
+<% end %>
+
+
+} catch(err) {}
+</script>
+
+
+
+
+
+
+
+
+<% if @new %>
+
+
+    <!--https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiBasicConfiguration#_gat.GA_Tracker_._setCustomVar-->
+
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', '<%= @website.tracking_number %>']);
+    _gaq.push(['_setCustomVar', 1, 'customer_id', '<%= @purchase.customer_id  %>']);
+    _gaq.push(['_setCustomVar', 1, 'customer_name', '<%= @customer.Name  %>']);
+    _gaq.push(['_trackPageview']);
+    _gaq.push(['_addTrans',
+        '<%= "#{@purchase.id},#{@purchase.a_id || 0}" %>',           // transaction ID - required
+        '<%= @customer.Name  %>',  // affiliation or store name
+        '<%= @purchase.subtotal_after_all_discounts  %>',          // total - required
+        '1.29',           // tax
+        '5',              // shipping
+        'San Jose',       // city
+        'California',     // state or province
+        'USA'             // country
+    ]);
+
+    // add item might be called for every item in the shopping cart
+    // where your ecommerce engine loops through each item in the cart and
+    // prints out _addItem for each
+    _gaq.push(['_addItem',
+        '1234',           // transaction ID - required
+        'DD44',           // SKU/code - required
+        'T-Shirt',        // product name
+        'Green Medium',   // category or variation
+        '11.99',          // unit price - required
+        '1'               // quantity - required
+    ]);
+    _gaq.push(['_trackTrans']); //submits transaction to the Analytics servers
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+</script>
+
+   <% end %>
+

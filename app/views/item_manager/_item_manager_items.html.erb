@@ -1,0 +1,40 @@
+
+<div id="item_manager_items">
+
+
+  <% if @category  %>
+          <div style="width:850px;height:80px;display:none;"  id="item_type_editor">
+                            <div style="margin-top:15px;width:425px;float:left;text-align:center;">
+                                            This Item is  managed by item type and is currently of type <strong><%= @category.clone_item_type.name %></strong>.  To change it's Item Type choose from the select menu and click "Confirm"
+
+                            </div>
+                          <div style="margin-top:15px;width:425px;float:left;text-align:center;">
+                                             Item Type:<%= select("clone_item_type","id", CloneItemType.all.collect {|p| [ p.name  , p.id ] }, { :include_blank => true }) %>
+                                             <%= hidden_field_tag 'category_id', @category.id %>
+                                             <%= image_tag(  '/images/buttons/confirm.png'  , :alt =>  'Confirm' , :onclick => "chooseItemType();" ) %>
+                            </div>
+          </div>
+<% else %>
+          <div style="width:850px;height:80px;display:none;"  id="item_type_editor">
+                            <div style="margin-top:15px;width:425px;float:left;text-align:center;font-weight: bolder;">
+                              You need to select a category. Derivatives are based upon categories.
+
+                            </div>
+          </div>
+
+<% end  %>
+
+
+<table style="table-layout: auto;">
+  <tbody>
+
+
+<% @ss = '22' %>
+
+
+                   <%= render :partial => 'item_manager/item', :collection => @items  %>
+
+  </tbody>
+</table>
+
+ </div>

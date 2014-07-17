@@ -1,0 +1,18 @@
+<p>
+  <b>Name:</b>
+  <%=h @record_group.name %>
+</p>
+
+<p>
+  <b>Ids:</b>
+  <%=h @record_group.ids %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @record_group.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_record_group_path(@record_group) %> |
+<%= link_to 'Back', record_groups_path %>

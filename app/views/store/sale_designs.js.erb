@@ -1,0 +1,20 @@
+
+console.log("begin store\sale_designs.js.erb");
+
+$(".load-more-revisions").remove();
+
+
+
+
+ $('.revisions').append('<%= escape_javascript(   render partial: "store/items", :locals => { :paginated_results => @paginated_results }   ) %>');
+
+
+
+bindInfiniteScroll();
+
+
+
+console.log("end store\sale_designs.js.erb");
+
+
+

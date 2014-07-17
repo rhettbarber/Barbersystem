@@ -1,0 +1,28 @@
+<h1>Listing departments</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Code</th>
+    <th>Id</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @departments.each do |department| %>
+  <tr>
+    <td><%= department.Name %></td>
+    <td><%= department.code %></td>
+    <td><%= department.id %></td>
+    <td><%= link_to 'Show', department %></td>
+    <td><%= link_to 'Edit', edit_department_path(department) %></td>
+    <td><%= link_to 'Show Categories', :controller => 'categories', :department_id => department.id %></td>
+    <td><%= link_to 'Destroy', department, :confirm => 'Are you sure?', :method => :delete if @override == true %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Department', new_department_path %>

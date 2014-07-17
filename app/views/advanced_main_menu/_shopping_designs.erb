@@ -1,0 +1,24 @@
+<%# cache ( @standard_topbar_menus_fragment_name ) do %>
+
+          
+          <% unless @website.store_website == false %>
+
+                  <% display_extras = false    if  ['purchases'].include?(controller.controller_name)   %>
+
+                  <% unless display_extras == false   %>
+                                  <% if @purchase %>
+                                               <% if @purchase_symbiote_item_type == 'master' %>
+                                                                                       <%= render(:partial => "advanced_main_menu/menu_design") %>
+                                                <% elsif @purchase_symbiote_item_type == 'slave'   %>
+                                                                                <div class='menu_design' style="text-align: center;height:80px;">You have already chosen a design, please choose a  <%= link_to "Product", "/browse" %>  to apply it to. </div>
+                                                    <% else %>
+                                                                               <%= render(:partial => "advanced_main_menu/menu_design") %>
+                                                    <% end %>
+                                  <% else %>
+                                                                               <%= render(:partial => "advanced_main_menu/menu_design") %>
+                                  <% end %>
+                  <% end %>
+
+          <% end %>
+
+<%# end %>

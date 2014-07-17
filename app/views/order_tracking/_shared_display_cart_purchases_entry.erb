@@ -1,0 +1,64 @@
+<% begin  %>
+
+
+<% if purchases_entry.item %>
+
+          <%=  fields_for "purchase[purchases_entry_attributes][]" , purchases_entry do |p|  %>
+
+                                  <% quantity = purchases_entry.QuantityOnOrder %>
+                                  <% item = purchases_entry.item    %>
+
+                                                        <tr id="<%= "purchases_entry_" + purchases_entry.id.to_s %>">
+                                                                  <td  class="purchases_entry_delete">
+                                                                                          <%=  link_to(image_tag("/images/buttons/delete.gif",:border => 0), {:controller => 'cart', :action =>"delete_purchases_entry",:purchases_entry_id => purchases_entry.id} ) %>
+                                                                          </td>
+                                                                  <td  class="purchases_entry_master_image">
+                                                                                                                          <%=   image_tag purchases_entry.item.image_url( purchases_entry.item.default_master_department_id , 'item_thumbnails/','x'  ),:size => '80x80'  %>
+                                                                          </td>
+                                                                  <td  class="purchases_entry_slave_image">
+                                                                          </td>
+
+
+                                                                  <td  class="purchases_entry_quantity"> <%= number_with_precision(purchases_entry.QuantityOnOrder, :precision => 2)   %>	</td>
+
+                                                                  <td  class="purchases_entry_itemlookupcode"><%= item.ItemLookupCode %>  </td>
+
+                                                                  <td  class="purchases_entry_description">
+
+
+                                                                 <div style="float:left;width:240px;">
+                                                                                          Description:<%= item.Description %>	<br />
+                                                                          </div>
+                                                                  <div style="float:left;width:140px;"></div>
+
+
+                                                                  <%= 'Dimensions:' if item.dimensions != '' %> <%= item.dimensions %><br />
+
+
+
+                                                                   </td>
+
+                                                                   <td  class="purchases_entry_full_unit_price">
+                                                                                  <div  id="full_unit_price_<%= purchases_entry.id %>">
+                                                                                                  <%=  number_with_precision(   purchases_entry.QuantityOnOrder , :precision =>  2 ) %>
+                                                                                  </div>
+                                                                  </td>
+                                                                   <td  class="purchases_entry_full_extended_price">
+                                                                                    <div  id="full_extended_price_<%= purchases_entry.id %>">
+                                                                                                  <%=   number_with_precision(  purchases_entry.Price , :precision =>  2  )  %>
+                                                                                     </div>
+                                                                    </td>
+
+                                                        </tr>
+
+          <%  end  %>
+
+<% else  %>
+                             <% logger.warn "whats_this_item_with_no_category"  %>
+
+<% end  %>
+
+<% rescue  %>
+
+Somthing went wrong.
+<% end %>

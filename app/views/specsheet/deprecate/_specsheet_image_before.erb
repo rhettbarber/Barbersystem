@@ -1,0 +1,52 @@
+
+<% if @item  && @design  %>
+                         <%  @back_advanced_combination = AdvancedCombination.find_or_create_combo( @item, '0' )    %>
+                                                     <% if @back_advanced_combination.number_of_sides ==  '2' %>
+                                                                            <% if @back_advanced_combination.specsheet_type_id == 1 %>
+                                                                                                         <span id='combo_image'><%= render(:partial => 'specsheet/table_at_item_and_design_two_sides_legacy')     %></span>
+                                                                             <% else %>
+                                                                                                        <span id='combo_image'><%= render(:partial => 'specsheet/table_at_item_and_design_latest')     %></span>
+                                                                             <% end %>
+                                                     <% else %>
+                                                                                   <span id='combo_image'><%= render(:partial => 'specsheet/table_at_item_and_design_one_side')     %></span>
+                                                     <% end %>
+<%  else  %>
+
+
+
+                         <% @show_wide_specsheet = false  %>
+						<% if @item.item_class_component %>
+                                                        <% logger.debug "@item.item_class_component.item_class.id.to_s: " + @item.item_class_component.item_class.id.to_s  %>
+                                                          <% if @item.item_class_component.item_class.wide_specsheet == 1 %>
+                                                                    <% @show_wide_specsheet = true %>
+                                                         <% end %>
+                         <% end %>
+                        <% if @show_wide_specsheet == true  %>
+                                                    table show_wide_specsheet<br>
+                                                    <%= render :partial => "specsheet/table_show_wide_specsheet" %>
+                        <% else %>
+
+                                                 <% if @item.item_class_component %>
+                                                                          <%  @back_advanced_combination = AdvancedCombination.find_or_create_combo( @item, '0' )    %>
+                                                                          <% if @show_admin %>
+                                                                         <!--@back_advanced_combination.id: <%= @back_advanced_combination.id %><br>-->
+                                                                         <!--@back_advanced_combination.number_of_sides:<%= @back_advanced_combination.number_of_sides %><br>-->
+                                                                         <!--@back_advanced_combination.specsheet_type_id:<%= @back_advanced_combination.specsheet_type_id %><br>-->
+                                                                         <% end %>
+                                                                         <% if @back_advanced_combination.number_of_sides ==  '2'   %>
+                                                                                            <% if @back_advanced_combination.specsheet_type_id == 1 or @back_advanced_combination.specsheet_type_id == nil %>
+                                                                                                            <%= render :partial => "specsheet/table_legacy" %>
+                                                                                            <% else %>
+                                                                                                            <%= render :partial => "specsheet/table_at_item_split" %>
+                                                                                            <% end %>
+                                                                         <% else %>
+                                                                                                 <%= render :partial => "specsheet/table_at_item" %>
+                                                                          <% end %>
+                                                 <% else %>
+                                                                                <%= render :partial => "specsheet/table_at_item_no_icc" %>
+                                                  <% end %>
+                         <% end  %>
+<%  end  %>
+
+
+

@@ -1,0 +1,29 @@
+
+<div class="shipping_service_review">
+
+				<p>
+				<% if @purchase.shipping_service.web_carrier_name == 'ups' %>
+	          		<%= image_tag '/images/company_logos/ups_logo_small.jpg',:size => "30x30"  %>
+	          	<% elsif @purchase.shipping_service.web_carrier_name == 'usps' %>
+	          		<%= image_tag '/images/company_logos/usps_logo_small.jpg',:size => "30x30"  %>
+	          	<% end %>
+          		<br />
+				</p>
+
+				<p>
+				  <b>Shipping Service:</b>  
+				   <%= @purchase.shipping_service.Name%><br />
+				</p>
+	   
+				<p>
+				  <b>Shipping Cost:</b>
+					<%=  @purchase_shipping  %>
+				</p>
+
+<%   hide_from_receipt_page do   %>
+		<%= link_to 'Change', :controller => 'ship_tos', :action => 'shipping_services' %>
+<%  end %>
+
+</div>
+
+

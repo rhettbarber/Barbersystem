@@ -1,0 +1,58 @@
+<%= javascript_include_tag  '/ckeditor/ckeditor.js'  %>
+<div id="edit-content">
+
+<% @page_title = "Edit A Page" -%>
+<%# @rounded_divs = ',div#revision_redirect_to,div#' + fckeditor_div_id('revision', 'content') %>
+<%# @show_nav = false %>
+
+
+
+<%#=form_for(:page, :url => page_path(@page), :html => { :method => :put }  ) do   |f|  %>
+<%=form_for(:page, :url => page_path(@page), :html => { :method => :put }  ) do   |f|  %>
+
+      <%=  f.text_field   "name"  %>
+
+	<%= render :partial => 'form' %>
+	<p style="float:right;"><%= cancel_button(@revision.page) %> <%= submit_tag 'Save' %></p>
+<% end %>
+
+</div>
+
+
+     <script type="text/javascript">
+
+
+
+         $(document).ready(function() {
+             console.log("##################################") ;
+             console.log("about to start editor") ;
+//             .show_page width must be 720
+
+
+             $(".show_page").width("720px");
+             CKEDITOR.replace( 'revision_content' );
+
+             CKEDITOR.config.allowedContent = true;
+
+
+             console.log("##################################") ;
+
+
+//             CKEDITOR.replace( 'editor1' );
+
+
+//                         if ($('textarea').length > 0) {
+//                                        console.log("found textarea");
+//                                         var data = $('textarea');
+//                                         $.each(data, function(i) {
+//                                                     CKEDITOR.replace(data[i].id);
+//                                         });
+//                         } else {
+//                             console.log("did not find textarea");
+//                         }
+
+         });
+
+
+
+     </script>

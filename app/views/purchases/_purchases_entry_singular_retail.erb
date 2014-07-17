@@ -1,0 +1,39 @@
+<% item =  purchases_entry.item  %>
+<% quantity = purchases_entry.QuantityOnOrder %>
+
+
+<tr class="<%= cycle('even', 'odd') -%>">
+  <td>
+    <% if @show_pe_type %>
+    sr:
+   <% end %>
+    <% unless controller.controller_name == 'purchases'  %>
+        <%=  fields_for "purchase[purchases_entry_attributes][]" , purchases_entry do |p|  %>
+            <%= p.hidden_field :id  ,:index => nil%>
+            <%= p.text_field :QuantityOnOrder ,:index => nil ,:size => 2 , :value => number_with_precision(purchases_entry.QuantityOnOrder,:precision => 0 )   %>
+        <% end %>
+    <%  else  %>
+        <%=  quantity   %>
+    <%  end  %>
+    <%=  link_to("Delete", {:controller => 'cart', :action =>"delete_purchases_entry",:purchases_entry_id => purchases_entry.id}, {:class => "ui-btn"} ) %>
+
+  </td>
+  <td>
+
+
+            <% if purchases_entry.master_department_id != 0 %>
+                <%=   image_tag purchases_entry.item.image_url( purchases_entry.master_department_id , 'item_thumbnails/','x'  ) ,:style => "max-height:100px;max-width:100px;" %>
+            <% else %>
+                <%=   image_tag purchases_entry.item.image_url( purchases_entry.item.default_master_department_id , 'item_thumbnails/','x'  )  ,:style => "max-height:100px;max-width:100px;"  %>
+            <% end %>
+
+
+
+  </td>
+  <td>.</td>
+  <td><%= item.ItemLookupCode %></td>
+  <td><%= item.Description %></td>
+  <td> <%#= 'Dimensions:' if item.dimensions != '' %> <%= item.dimensions %></td>
+  <td><%=  number_to_currency(item.your_unit_price(@customer, quantity))   %></td>
+  <td> <strong>   <%=  number_to_currency(   purchases_entry.your_extended_price(@customer,quantity,item))  %>  </strong></td>
+</tr>

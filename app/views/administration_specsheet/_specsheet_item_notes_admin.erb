@@ -1,0 +1,22 @@
+
+<% item = @item %>
+			<table border="1" width="280">
+				<tr>
+					<td><strong>ITEM KEYWORDS/NOTES</strong></td>
+				</tr>	
+
+<%=  form_for item, :url => { :controller => "items", :action => "update_and_send_back" } do |f|  %>
+				<%= hidden_field_tag "id", item.id %>
+				<tr>
+					<td><%= f.text_area( :Notes ,:rows => 10, :cols => 25 ) %></td>
+				</tr>
+				<tr>
+					<td><%= submit_tag('Update Item') %></td>
+				</tr>
+
+<%  end  %> 			
+			</table>
+		
+			
+			
+	

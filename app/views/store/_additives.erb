@@ -1,0 +1,43 @@
+
+<%  @category.additives.each do |additive| %>
+        <% if additive.items.first  %>
+                       <li>
+                         <div style="width: 240px;height:260px;overflow: hidden;">
+                                      <%=  link_to(  image_tag( additive.items.first.image_url( @department, 'item_thumbnails/','x' )  ) , :controller => "store", :action => 'category_items', :department_id => @department.id, :category_id => additive.id  )  %>
+
+                                     <div style="font-weight:bold;text-align:center;position: absolute;bottom:0;width:100%;height: 19%;">
+                                                    <%= link_to additive.Name,  :controller => "store", :action => 'category_items',  :department_id => @department.id, :category_id => additive.id %> <br>
+                                                <%= link_to  "Click for More",  :controller => "store", :action => 'category_items' , :department_id => @department.id, :category_id => additive.id %>
+                                     </div>
+                         </div>
+                       </li>
+
+        <% end %>
+<% end %>
+
+
+
+
+
+
+
+<% if @ss %>
+
+
+    <%  @category.additives.each do |additive| %>
+        <% if additive.items.first  %>
+            <li>
+
+              <%=  link_to(  image_tag( additive.items.first.image_url( @department, 'item_thumbnails/','x' )  ) , :controller => "store", :action => 'category_items', :department_id => @department.id, :category_id => additive.id  )  %><br />
+              <%= link_to additive.Name, :controller => @website.name, :action => 'browse', :department_id => @department.id, :category_id => additive.id %><br />
+                         <span class="category_box_more">
+                                   <%= link_to  "Click for More", :controller => @website.name, :action => 'browse', :department_id => @department.id, :category_id => additive.id %>
+                        </span>
+
+            </li>
+
+        <% end %>
+    <% end %>
+
+
+<% end %>

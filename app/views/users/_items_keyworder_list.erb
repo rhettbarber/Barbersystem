@@ -1,0 +1,14 @@
+
+
+<%=  form_tag(  "update_item_notes" , :method => :put ) do -%>
+		<br />
+		<br />
+		<% @items.each do |item| %>
+		<%= fields_for item do |i| %>
+		 					<div class="report_item" style="float:left">
+								<%= render(:partial => "users/item_keyworder_thumbnail_box" , :locals => {:item => item, :i => i} )    %>
+							</div>
+		<% end %>
+		<% end %>
+		<%= submit_tag -%> 
+<% end %>

@@ -1,0 +1,32 @@
+<% @item = item %>
+
+
+<% if @item  && @design  %>	
+<div style="width:845px;border:2px solid black;">
+						 <span id='combo_image'><%= render(:partial => 'shared_specsheet/specsheet_table')     %></span>
+						 
+						
+						 <% if @item.category.category_class.opposite_category_ids.split(',',77777).to_a.include?(@design.category_id.to_s) %>
+						 	<div align="left">
+						 		item ItemLookupCode: <%= @item.ItemLookupCode  %> <br />
+						 		
+						 		<%=  @item.image_url( @department  , '/images/item_specsheets/', 'x' ,@item_prefix_override )   %><br />
+						 		 @item_prefix_override: <%= @item_prefix_override   %> <br />
+						 		item opposite ids: <%= @item.category.category_class.opposite_category_ids  %> <br />
+								design category id: <%= @design.category_id.to_s %>  <br />
+						 		true opposite 
+					 		</div>
+						 	<div align="right"><%= image_tag "/images/buttons/checkmark-green.jpg",:size => "30x30" %></div>
+						 <% else %>
+						 	<div align="left">
+						 		not a real opposite 
+						 		</div>
+						 		<div align="right"><%= image_tag "/images/buttons/cancel-x-mark-red.jpg",:size => "30x30" %></div>
+						 		<% link_to "view this category classes opposites to see if it needs to be added"%>
+						 <% end %>
+</div>						 
+						 
+						 				 
+<%  else  %>
+						 <div align="center"><span id='specsheet_image'><%=  image_tag @item.image_url( @department  , 'item_specsheets/', @design,'0' )  %></span></div>
+<%  end  %>

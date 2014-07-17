@@ -1,0 +1,61 @@
+<h1>New category</h1>
+
+<%= error_messages_for :category %>
+
+<%= form_for(@category) do |f| %>
+  <p>
+    <b>Name</b><br />
+    <%= f.text_field :Name %>
+  </p>
+
+  <p>
+    <b>Code</b><br />
+    <%= f.text_field :Code %>
+  </p>
+
+  <p>
+    <b>Prefix</b><br />
+    <%= f.text_field :prefix %>
+  </p>
+
+  <p>
+    <b>Category class</b><br />
+    <%= f.text_field :category_class_id %>
+  </p>
+
+  <p>
+    <b>Use generic department</b><br />
+    <%= f.text_field :use_generic_department %>
+  </p>
+
+  <p>
+    <b>Web category</b><br />
+    <%= f.text_field :web_category %>
+  </p>
+
+  <p>
+    <b>Additive category ids</b><br />
+    <%= f.text_field :additive_category_ids %>
+  </p>
+
+  <p>
+    <b>Use picturename</b><br />
+    <%= f.text_field :use_picturename %>
+  </p>
+
+  <p>
+    <b>Breast print</b><br />
+    <%= f.text_field :breast_print %>
+  </p>
+
+  <p>
+    <b>Category specific breast print</b><br />
+    <%= f.text_field :category_specific_breast_print %>
+  </p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', :controller => 'categories', :action => 'departments_categories' %>

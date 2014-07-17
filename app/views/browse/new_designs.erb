@@ -1,0 +1,52 @@
+
+
+<% logger.debug "-------------------------------------begin _shared_item/items " %>
+
+
+<% logger.warn "_shared_item/new_items is TRUE LOCATION " %>
+
+
+
+<%  if @items  %>
+
+<div  style="width:850px;margin-left:auto;margin-right:auto;display:table;">
+
+<div  style="width:850px;float:left;">  <%= image_tag "/images/headers/new-designs.png" %>   </div>
+
+
+
+		<% if @purchase_symbiote_item_type == "master" && @purchase_symbiote_item_shade == "colored" %>
+					<% @opaque_design_ids = [] %>
+					<%  @items.each do |item| %>
+						<% @opaque_design_ids << item.id if item.shade == "opaque" %>
+					<% end %>
+		<% end %>
+
+
+
+							<div class="item_row_surround">	
+									
+								<% if @opaque_design_ids %>	
+										<% logger.debug "-------------------------------------@opaque_design_ids " -%>
+										<% @items.each do |item| -%>
+												<% if @opaque_design_ids.include?(item.id)  %>
+													<%= render(:partial => "shared_item/new_item",:locals => { :item => item } )  -%>
+												<% else %>
+													<%= render(:partial => "shared_item/new_item_color_not_compatible",:locals => { :item => item } )  -%>
+												<% end %>
+										<% end -%>
+								<% else %>
+										<% logger.debug "------------------------------------- NOT @opaque_design_ids " -%>		
+										<% @items.each do |item| -%>
+											<%= render(:partial => "shared_item/new_item",:locals => { :item => item } )   -%>
+										<% end -%>
+								<% end %>
+							</div>
+   </div>
+
+<%  else  -%>		
+        no items found
+<% end -%>
+
+
+<% logger.debug "-------------------------------------end _shared_item/items " -%>

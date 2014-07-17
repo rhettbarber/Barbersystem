@@ -1,0 +1,21 @@
+<%= form_for(@user, :html => { :id => 'custom_item_upload_form', :class => 'example',  :multipart => true, :target => 'upload_frame' }) do |f| %>
+  <%= f.file_field :avatar %>
+  <%= f.submit "Submit" %>
+<% end %>
+
+
+<iframe id='upload_frame' name="upload_frame" style="width:1px;height:1px;border:0px" ></iframe>
+
+
+
+
+  <script type="text/javascript">
+    new Form.Observer('custom_item_upload_form', 0.3, function(form, value){
+    })
+
+    $('custom_item_upload_form').onsubmit = function() {
+      alert("great");
+      this.down().setStyle({ background:null, borderColor:null })
+      return false
+    }
+  </script>

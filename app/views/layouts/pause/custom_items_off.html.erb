@@ -1,0 +1,18 @@
+
+<!DOCTYPE html>
+<html>
+<%= render :partial => 'layout_elements/head' %>
+<%= stylesheet_link_tag 'custom_items.css'  %>
+<%= javascript_include_tag 'custom_items.js' %>
+<%= render :partial => 'onclick_top_menu/onclick_top_menu' %>
+<body>
+<% unless controller.action_name == 'index' %>
+      <h3><%= link_to 'Back to Custom Items', :controller => 'custom_items' %></h3>
+<% end  %>
+
+
+<%= yield %>
+
+</body>
+</html>
+

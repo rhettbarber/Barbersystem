@@ -1,0 +1,63 @@
+
+console.log("begin search\index.js.erb");
+
+$(".load-more-revisions").remove();
+
+<%   if @articles %>
+                $('.revisions').append('<%= escape_javascript(   render partial: "search/revisions", :locals => { :paginated_results => @paginated_results }   ) %>');
+<% end %>
+
+
+<%  if @products or @designs  %>
+                $('.revisions').append('<%= escape_javascript(   render partial: "search/items", :locals => { :paginated_results => @paginated_results }   ) %>');
+<% end %>
+
+
+bindInfiniteScroll();
+
+
+
+console.log("end search\index.js.erb");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//$('.revisions').append('teasdf asdf asd asdf asdf asd fasdf asdf asdf asd fasdf asd fasdfas fasdf asdf asdf asd fasdfasdfasdfasdfasdfst');
+//alert("wonderous");
+//$('a.load-more-revisions').attr('href', '#{posts_path page: @posts.next_page}');

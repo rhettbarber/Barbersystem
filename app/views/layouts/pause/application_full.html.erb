@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<%= render(:partial => "layout_elements/head") %>
+<body class="body">
+      <div class="header">
+              <%= render :partial => 'onclick_top_menu/onclick_top_menu' unless ssl_required? == true %>
+              <%= render(:partial => "layout_elements/header_table") unless params[:id] == 'home'        %>
+              <%= render(:partial => "shared_menu/standard_topbar_menus") %>
+
+      </div>
+
+      <div class="page_content_wide">
+
+                  <% render :partial => "shared_menu/contextual_navigation_tree"  unless params[:id] == 'home' %>
+                  <% if flash[:notice] != nil -%>
+                          <% if flash[:notice].size > 0 -%>
+                                    <div style="color: blue; text-align: center;">&nbsp;<%= flash[:notice] %>&nbsp;</div>
+                          <% end -%>
+                  <% end -%>
+                  <%= render :partial =>  'shared_symbiont/symbiote_wrapper_container' %>
+                  <%= yield %>
+
+
+
+                                    <%= render(:partial => "cart/display_cart_messages_bottom")%>
+                                    <%=  render(:partial => "cart/display_cart_options") %>
+
+
+
+
+
+
+      </div>
+      <div class="footer">
+                  <%= render(:partial => "layout_elements/shared_footer") %>
+      </div>
+  
+<% if admin?  %>
+  <%= render :partial => 'development/instance_variables' , :locals => { :instance_variables => instance_variables } %>
+  <%= render :partial => 'development/parameters' , :locals => { :params => params } %>
+  <%= render :partial => 'development/request' , :locals => { :request => request } %>
+  <%= render :partial => 'development/response' , :locals => { :request => response } %>
+<% end %>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<h1>Editing Credit Card Payment Info</h1>
+
+<%= error_messages_for :quote_tender_entry %>
+
+<%= form_for(:quote_tender_entry, :url => quote_tender_entry_path(@quote_tender_entry), :html => { :method => :put }) do |f| %>
+  <p>
+    <b>Creditcardexpiration</b><br />
+    <%= f.text_field :CreditCardExpiration %>
+  </p>
+
+  <p>
+    <b>Creditcardnumber</b><br />
+    <%= f.text_field :CreditCardNumber %>
+  </p>
+
+  <p>
+    <b>Creditcardapprovalcode</b><br />
+    <%= f.text_field :CreditCardApprovalCode %>
+  </p>
+
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', quote_tender_entry_path(@quote_tender_entry) %> |
+<%= link_to 'Back', quote_tender_entries_path %>

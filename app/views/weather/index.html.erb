@@ -1,0 +1,26 @@
+
+<style type="text/css">
+  #weather_container {
+    border: 4px solid #0066FF;
+    text-align:center;
+}
+</style>
+
+
+<h1> Tallahassee Marine Weather Forecast and Tide Chart link</h1>
+
+<div id="weather_container">
+    <%= image_tag("/images/references/tallahassee-map.png") %><br />
+    <%= link_to "Click to go to the National Weather Service Forecast Office of Tallahassee, FL", "http://www.srh.noaa.gov/tlh/" %><br />
+    <%= @weather_forecast.html_safe  %><br />
+    <br />
+    <%= link_to( image_tag("/images/buttons/tide-charts.png") ,   "http://www.mobilegeographics.com:81/locations/6035.html" ) %><br />
+     <%= link_to "Click for Tide Charts", "http://www.mobilegeographics.com:81/locations/6035.html" %><br /><br />
+</div>
+
+
+
+
+
+
+

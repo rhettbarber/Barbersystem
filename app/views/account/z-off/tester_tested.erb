@@ -1,0 +1,56 @@
+<% first_user_session = UserSession.find :first %> <br />
+
+first_user_session.id:::<%= first_user_session.id %> <br />
+
+first_user_session.rail_stats::: <%= first_user_session.rail_stats %> <br />
+
+@user:::<%= @user = User.find(126) %> <br />
+
+@user.user_sessions:::<%= @user.user_sessions %> <br />
+
+@user.user_sessions.rail_stats:::<%= @user.user_sessions.first.rail_stats %> <br />
+
+REQUIRED TO TRACK:<br />
+
+@affiliate.user.purchases.user_sessions.rail_stats<br />
+
+
+@affiliate.purchases.trails.referring_trail<br />
+
+
+@user.customer.purchases.trails:::<%= @user.customer.purchases.trails  %><br />
+
+@user:::<%= @user = User.find(126)%><br />
+
+@user.customer.id:::<%= @user.customer.id  %><br />
+
+@user.customer.purchases:::<%= @user.customer.purchases  %><br />
+
+@user.customer.purchases.count:::<%= @user.customer.purchases.count  %><br />
+
+
+@user.customer.purchases.first.trails.count:::<%= @user.customer.purchases.first.trails.count  %><br />
+
+@user.customer.purchases.first.trails.first.id:::<%= @user.customer.purchases.first.trails.first.id  %><br />
+<br />
+
+Id's of trails:<br />
+<% @user.customer.purchases.each do |p| %>
+		<% p.trails.each do |t|         %><br />
+				<%= t.id %>
+		<% end %>
+<% end %>	
+	
+<br />
+<br />
+<br />
+<br />
+<br />
+@user.user_sessions.rail_stats::: <%= @user.user_sessions.first.rail_stats.count %>
+<br />
+Id's of rail_stats of users:
+<% @user.user_sessions.each do |us|  %>
+		<% us.rail_stats.each do |rs| %>
+			<%= rs.doc_name %> <br />
+		<% end %>
+<% end %>	

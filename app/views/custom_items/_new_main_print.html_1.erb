@@ -1,0 +1,14 @@
+<div   style=" display:none; float:left; height:80px; width:850px;border: 1px solid #ddd; color:red; text-align:left;"  id="new_main_print">
+				<%= error_messages_for :custom_item %>
+				
+				<%= form_for(:custom_item, :url => custom_items_path, 
+				                      :html => { :multipart => true }) do |f| -%>
+				  <p>
+				    <label for="custom_item">Upload your own Main Print Image!</label>
+				    <%= f.file_field :uploaded_data %>
+				  </p>
+				  <p>
+				    <%= submit_tag 'Create' %>
+				  </p>
+				<% end -%>
+</div>

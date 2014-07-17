@@ -1,0 +1,144 @@
+
+
+
+
+
+
+
+<style type="text/css">
+    .carousel_link_container_100 {
+        width: 100%;
+        float: left;;
+    }
+    .carousel_link_container_50 {
+        width: 50%;
+        float: left;;
+    }
+
+        .stock-carousel {
+            background-image: url(http://cdn.dixieoutfitters.com/images/carousel/dixie_homepage_june/carousel-background.jpg);
+            background-size: 100%;
+        }
+
+        .carousel_image_container img {
+            display: block;
+            margin-left: auto;
+            margin-right:auto;
+        }
+
+</style>
+
+
+
+<div style="float: left;max-width: 100%;"><img src="http://cdn.dixieoutfitters.com/images/carousel/dixie_homepage_june/preserving-southern-heritage.png"></div>
+<div class="stock-carousel" style="float: left;width: 100%;">
+  <div class="carousel_item_container">
+    <div class="carousel_image_container"><img src="http://cdn.dixieoutfitters.com/images/carousel/dixie_homepage_june/stickers.png"></div>
+    <div class="carousel_link_container_100"> <a data-theme="b" data-role="button" href="/store">Shop now! </a></div>
+    <!--<div class="carousel_link_container"> <a data-role="button"  href="/store?department_id=22">Shop products </a></div>-->
+  </div>
+
+  <div class="carousel_item_container">
+    <div class="carousel_image_container"><img  data-lazy="http://cdn.dixieoutfitters.com/images/carousel/dixie_homepage_june/injustice.png"></div>
+    <div class="carousel_link_container_100"> <a data-theme="b"  data-role="button" href="/store/category_items/35/672">Shop Dixie All Over shirts </a></div>
+    <!--<div class="carousel_link_container"> <a data-role="button"  href="/store?department_id=12">Shop products </a></div>-->    -
+  </div>
+
+  <div class="carousel_item_container">
+    <div class="carousel_image_container"><img  data-lazy="http://cdn.dixieoutfitters.com/images/carousel/dixie_homepage_june/battle-flags.png"></div>
+    <div class="carousel_link_container_100"> <a data-theme="b"  data-role="button" href="/store/category_items/35/910">Shop Virginia Flaggers shirts </a></div>
+    <!--<div class="carousel_link_container"> <a data-role="button"  href="/store?department_id=26">Shop products </a></div>-->
+  </div>
+
+</div>
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        $('.stock-carousel').slick({
+                        lazyLoad: 'ondemand',
+                        infinite: true,
+                        dots:false,
+                        autoplay: true,
+                        autoplaySpeed: 5000,
+                        speed: 300,
+            //            fade: true,
+                        slide: 'div',
+                        cssEase: 'linear'
+        });
+
+    })
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @previous %>
+
+    <p><img alt="" src="/images/home_page_images/forrest.jpg" /></p>
+
+
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <% if @second %>
+
+<div style="float: left;max-width: 100%;"><img src="http://cdn.dixieoutfitters.com/images/carousel/carousel-header-custom-products.jpg"></div>
+<div class="custom-carousel" style="float: left;width: 100%;">
+  <a href="/p/custom-silk-screened-transfer-price-sheet"><img src="http://cdn.dixieoutfitters.com/images/customs/custom-heat-transfers.jpg"></a>
+  <a href="/p/direct-screening-price-list"><img  data-lazy="http://cdn.dixieoutfitters.com/images/customs/custom-direct-screen-printing.jpg">  </a>
+  <a href="#"> <img  data-lazy="http://cdn.dixieoutfitters.com/images/customs/custom-merchandise.jpg"></a>
+</div>
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        $('.custom-carousel').slick({
+            lazyLoad: 'ondemand',
+            infinite: true,
+            dots:false,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            speed: 300,
+            fade: true,
+            slide: 'a',
+            cssEase: 'linear'
+        });
+
+    })
+</script>
+
+<% end %>

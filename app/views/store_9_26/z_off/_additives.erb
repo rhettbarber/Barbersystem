@@ -1,0 +1,20 @@
+<%  if @category.additives.size == 1 %>
+    <% logger.debug "------------------------------------- @category.additives.size == 1  " -%>
+    <% logger.debug "-------------------------------------  LIST ALL ITEMS IN THE SINGLE ADDITIVE CATEGORY" -%>
+    <% @category.additives.first.items.sort_by{|a| a.item_class_sales_this_years_with_item_id.to_s}.reverse.each do |item| -%>
+        <%= render(:partial => "store/item",:locals => { :item => item } )   -%>
+    <% end -%>
+<%  else  %>
+    <%  @category.additives.each do |additive| %>
+        <% if additive.items.first  %>
+
+            <%=  link_to(  image_tag( additive.items.first.image_url( @department, '/images/item_thumbnails/','x' )  ) , :controller => 'browse', :action => 'index', :department_id => @department.id, :category_id => additive.id  )  %><br />
+            <% image_tag( '/images/breast_prints/' + Util::Slug.generate(additive.department.Name) + '.png' , :size => '80' ) %>
+            <%= link_to additive.Name, :controller => 'browse', :action => 'index', :department_id => @department.id, :category_id => additive.id %><br />
+            <span class="category_box_more">
+                                                                                                                                                               <%= link_to  "Click for More", :controller => 'browse', :action => 'index', :department_id => @department.id, :category_id => additive.id %>
+                                                                                                                                                    </span>
+
+        <% end %>
+    <% end  %>
+<%  end   %>

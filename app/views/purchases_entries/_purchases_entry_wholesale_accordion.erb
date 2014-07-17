@@ -1,0 +1,108 @@
+<div id="pe_<%= purchases_entry.id  %>" class="panel-collapse collapse" style="height: 0px;">
+                  <div class="panel-body details-panel">
+
+                                    <div style="text-align: center;float:left;width: 100%;">
+
+                                                    <%=  fields_for "purchase[purchases_entry_attributes][]" , purchases_entry do |p|  %>
+
+                                                                        <% if purchases_entry.item_id  == 0  %>
+                                                                                            <tr id="<%= 'purchases_entry_' + purchases_entry.id.to_s %>">
+                                                                                              <td class="purchases_entry_delete" id="delete">
+                                                                                              </td>
+                                                                                              <td  class="purchases_entry_image" id="image">
+                                                                                              </td>
+
+                                                                                              <td  class="purchases_entry_quantity" id="quantity">
+
+                                                                                              </td>
+
+                                                                                              <td  class="purchases_entry_itemlookupcode" id="itemlookupcode"></td>
+
+                                                                                              <td  class="purchases_entry_description" id="description">
+                                                                                                <h3>  Complete this item by choosing a
+                                                                                                  <% if @purchase %>
+                                                                                                      <% if @purchase.symbiote_type == 'master' %>
+                                                                                                          <%= link_to "Design", :controller => 'browse' %>
+                                                                                                      <% else %>
+                                                                                                          <%= link_to "Garment", :controller => 'browse' %>
+                                                                                                      <% end %>
+                                                                                                  <% else %>
+
+                                                                                                  <% end %>
+                                                                                                </h3>
+                                                                                              </td>
+
+                                                                                              <td  class="purchases_entry_full_unit_price" id="full_unit_price">
+                                                                                                <div  id="full_unit_price_<%= purchases_entry.id %>">
+
+                                                                                                </div>
+                                                                                              </td>
+
+                                                                                              <td  class="purchases_entry_full_extended_price" id="full_extended_price">
+                                                                                                <div  id="full_extended_price_<%= purchases_entry.id %>">
+
+                                                                                                </div>
+                                                                                              </td>
+
+                                                                                              <td  class="purchases_entry_your_extended_price_savings" id="your_extended_price_savings">
+                                                                                                <div  id="your_extended_price_savings_<%= purchases_entry.id %>">
+
+                                                                                                </div>
+                                                                                              </td>
+
+                                                                                              <td  class="purchases_entry_your_extended_price" id="your_extended_price">
+                                                                                                <div  id="your_extended_price_<%= purchases_entry.id %>">
+
+                                                                                                </div>
+                                                                                              </td>
+
+                                                                                            </tr>
+                                                                        <% else %>
+                                                                                            <% item =  Item.find(purchases_entry.item_id)  %>
+                                                                                            <% quantity = purchases_entry.QuantityOnOrder %>
+
+                                                                                            <tr id="<%= 'purchases_entry_' + purchases_entry.id.to_s %>">
+
+                                                                                                          <td  class="purchases_entry_full_unit_price" id="full_unit_price">
+                                                                                                            <div  id="full_unit_price_<%= purchases_entry.id %>">
+                                                                                                              Full Unit Price: <%=  number_to_currency(item.full_unit_price(@customer))  %>
+                                                                                                            </div>
+                                                                                                          </td>
+
+                                                                                                          <td  class="purchases_entry_unit_quantity_tier_discount_price" id="unit_quantity_tier_discount_price">
+                                                                                                            <div id="unit_quantity_tier_discount_price_<%= purchases_entry.id %>">
+                                                                                                              Quantity Tier Discount Price:<%= number_to_currency(  item.unit_quantity_tier_discount_price(@customer, quantity))   %>
+                                                                                                            </div>
+                                                                                                          </td>
+
+
+
+
+                                                                                                          <td  class="purchases_entry_full_extended_price" id="full_extended_price">
+                                                                                                            <div  id="full_extended_price_<%= purchases_entry.id %>">
+                                                                                                              Full Extended Price: <%=    number_to_currency(  purchases_entry.full_extended_price(@customer,item))  %>
+                                                                                                            </div>
+                                                                                                          </td>
+
+                                                                                                          <td  class="purchases_entry_your_extended_price_savings" id="your_extended_price_savings">
+                                                                                                            <div  id="your_extended_price_savings_<%= purchases_entry.id %>">
+                                                                                                              Your Extended Price Savings: <%=  number_to_currency(   purchases_entry.your_extended_price_savings(@customer,quantity,item))   %>
+                                                                                                            </div>
+                                                                                                          </td>
+
+                                                                                            </tr>
+                                                                        <%  end  %>
+
+
+                                                     <% end %>
+                                    </div>
+                    <%= link_to "View Combination", {  :controller  => "specsheet", :purchases_entry_id => purchases_entry.id  }   , :class => "btn btn-primary"   %>  <br><br>
+                    <%= link_to "Find Similar Products",{  :controller => 'search' ,  :action => 'search' , :search_type_name => 'products', :query => purchases_entry.Description },    :class => "btn btn-primary"    %>
+
+                  </div>
+</div>
+
+
+
+
+

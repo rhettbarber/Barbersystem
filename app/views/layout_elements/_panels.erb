@@ -1,0 +1,25 @@
+<!--   #######################  BEGIN  PANELS   ####################### -->
+<!--   #######################  BEGIN  PANELS   ####################### -->
+<!--   #######################  BEGIN  PANELS   ####################### -->
+<!--   #######################  BEGIN  PANELS   ####################### -->
+<!--   #######################  BEGIN  PANELS   ####################### -->
+
+
+   <%  logger.debug "@pages_tree_menu_fragment_name: " + @pages_tree_menu_fragment_name %>
+
+
+<%# cache(@panels_fragment_name)   do   %>
+    <%= render :partial => "panels/articles"  unless @development  %>
+<%# end %>
+
+
+<%# cache(@website.name + "/panels")   do   %>
+    <%#= render :partial => "panels/designs" unless @development  %>
+    <%#= render :partial => "panels/items"       unless @development%>
+<%# end %>
+<!--   #######################  END  PANELS   ####################### -->
+<!--   #######################  END  PANELS   ####################### -->
+<!--   #######################  END  PANELS   ####################### -->
+<!--   #######################  END  PANELS   ####################### -->
+<!--   #######################  END  PANELS   ####################### -->
+

@@ -1,0 +1,70 @@
+<style type="text/css">
+    #administer_size_and_position_back {
+            float:left;
+            display:table;width:400px;text-align:center;
+    }
+
+    #administer_size_and_position_front {
+            float:left;
+            display:table;width:400px;text-align:center;
+    }
+    #back_slider {
+             display: none;
+    }
+    #front_slider {
+             display: none;
+    }
+ </style>
+
+
+
+
+
+<div  id="size_and_position_container" style="width: 850px;">
+        <div id="administer_size_and_position_back">
+                      <div style="width:300px;float:left;">Back:</div>
+                      <div style="width:150px;float:left;"># Sides: <%= select_tag( :back_design_number_of_sides,  options_for_select([['One', '1'], ['Two', '2']], '2')  ) %></div>
+                      <div style="width:150px;float:left;">Default: <%= select_tag( :back_design_default_side,  options_for_select([['Back', 'back'], ['Front', 'front']])  ) %></div>
+                      <%= hidden_field_tag 'back_advanced_combination_id', @back_advanced_combination.id   if @back_advanced_combination  %>
+
+                      <div style="width:300px;display: inline-block;float:left;">
+                                <label for="back_slider" style="display: none;">Input slider:</label>
+                                <div id="div-back_slider"> <input type="range" name="back_slider" id="back_slider" value="0" min="-25" max="25" /> </div>
+                                 <a href="#"  id="submit_size_and_position_back" class="ui-btn">Submit</a>
+                        </div>
+        </div>
+
+
+            <div id="administer_size_and_position_front">
+                        <div style="width:300px;float:left;">Front:</div>
+                        <div style="width:150px;float:left;"># Sides: <%= select_tag( :front_design_number_of_sides,  options_for_select([['One', '1'], ['Two', '2']], '2')  ) %></div>
+                        <div style="width:150px;float:left;">Default: <%= select_tag( :front_design_default_side,  options_for_select([['Back', 'back'], ['Front', 'front']])  ) %></div>
+                        <%= hidden_field_tag 'front_advanced_combination_id', @front_advanced_combination.id  if @front_advanced_combination %>
+
+                        <div style="width:300px;display: inline-block;float:left;">
+                                      <label for="front_slider" style="display: none;">Input slider:</label>
+                                    <div id="div-front_slider"> <input type="range" name="front_slider" id="front_slider" value="0" min="-25" max="25" /> </div>
+                                    <a href="#"  id="submit_size_and_position_front" class="ui-btn">Submit</a>
+                         </div>
+            </div>
+</div>
+
+
+
+
+ <script type="text/javascript">
+     $('#div-back_slider').on( "change", function(){
+         var back_slider_value =   $("#back_slider").val() ;
+         scaleBack( back_slider_value );
+     })
+
+     $('#div-front_slider').on( "change", function(){
+         var front_slider_value =   $("#front_slider").val() ;
+         scaleFront( front_slider_value );
+     })
+
+     watchForDragging() ;
+ </script>
+
+
+

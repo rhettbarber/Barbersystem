@@ -1,0 +1,34 @@
+
+
+
+<div align="center">
+      <%= image_tag('/images/icons/compass-rose.png' ,:size => "35x35" )%> <span style="font-size:2em;vertical-align:top;">Status Type Legend</span><%= image_tag('/images/icons/compass-rose.png' ,:size => "35x35" )%>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<table style="width:850px;">
+  <% Item.status_tips_hash.each do |key,value| %>
+  <tr class="<%=  cycle('odd', 'even')  %>">
+    <td>
+       <%= image_tag( '/images/icons/' + key.to_s + '.jpg' , :size => "35x35" ) %>
+    </td>
+    <td>
+      <%= value %>
+    </td>
+  </tr>
+  <% end  %>
+</table>
+
+
+
+

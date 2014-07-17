@@ -1,0 +1,5 @@
+
+
+<% @purchase.purchases_entries.each do |purchases_entry|  %>
+            <%= render :partial => "tracking/receipt_analytics_tracking_item" , :locals => { :purchases_entry => purchases_entry } %>
+<% end %>

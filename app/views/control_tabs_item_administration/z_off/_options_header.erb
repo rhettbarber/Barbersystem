@@ -1,0 +1,37 @@
+
+<div  id="lower_this_menu" style="height:700px;text-align:left;width:640px;display:none;"></div>
+
+<h3> <%= @category.department.Name %> -- <%= @category.Name %> </h3>
+<%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Lower this menu |', "Element.toggle('lower_this_menu')")   %>
+<%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Category Menu |', "Element.toggle('actual_categories')")   %>
+<%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Category Header |', "Element.toggle('categories_description')")   %>
+<%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Category Options |', "Element.toggle('category_options_header')")   %>
+<%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Class Options |', "Element.toggle('class_options_header')")   %>
+
+<div  id="category_options_header" style="text-align:left;width:640px;display:none;">
+  <h3> Category Options </h3>
+  <%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Technical Editor | ', "Element.toggle('category_technical_editor')")   %> 
+  <%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Menu Organizer | ', "Element.toggle('category_menu_organizer')")   %> 
+  <%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Other Options | ', "Element.toggle('other_category_options')")   %>
+  <%= link_to "Edit Departments/Categories | " ,{:controller => 'categories', :action => 'departments_categories'} , :popup => ['new_window_name', 'height=650,width=700']    %> <br /><br />
+</div>
+
+<div  id="class_options_header" style="text-align:left;width:640px;display:none;">
+  <h3> Category Class Options </h3>
+  <%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Technical Editor |', "Element.toggle('category_class_technical_editor')")   %>
+  <%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Opposites Organizer | ', "Element.toggle('opposites_organizer')")   %>
+  <%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Categories in same class', "Element.toggle('categories_in_same_class')")   %> <br />
+  <%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Select a different Class', "Element.toggle('select_class')")   %>
+  <%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Duplicate Class', "Element.toggle('duplicate_class')")   %>
+  <%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Create New Class from scratch', "Element.toggle('new_class')")   %>
+</div>
+
+  <%= render :partial => 'administration_category/category_technical_editor' %>
+  <%= render :partial => 'administration_category/category_menu_organizer' %>
+  <%= render :partial => 'administration_category/other_category_options' %>
+
+  <%= render :partial => 'administration_category_class/category_class_technical_editor' %>
+
+  <%= render :partial => 'administration_category_class/opposites_organizer' %>
+  <%= render :partial => 'administration_category_class/categories_in_same_class' %>
+

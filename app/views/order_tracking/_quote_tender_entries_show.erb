@@ -1,0 +1,31 @@
+
+<div class="quote_tender_entry_review">
+		<% if    @viewable_purchase.quote_tender_entry.tender.id == 2  %>
+								<p>
+								  <b>Creditcardexpiration:</b>
+								  <%=h @quote_tender_entry.CreditCardExpiration %>
+								</p>
+								
+								<p>
+								  <b>Creditcardnumber:</b>
+								  <%=h hide_card_number(@quote_tender_entry.CreditCardNumber)  %>
+								</p>
+								
+								<p>
+								  <b>Creditcardapprovalcode:</b>
+								  <%=h @quote_tender_entry.CreditCardApprovalCode %>
+								</p>
+		<% elsif    [1,3].include?(@viewable_purchase.quote_tender_entry.tender.id)  %>
+			<%= link_to image_tag( '/images/company_logos/check_or_money_order.gif',:border => 0,:size => "120x120" ) ,  :controller => 'quote_tender_entries', :action => 'index'    %>
+		<% elsif    @viewable_purchase.quote_tender_entry.tender.id == 5  %>
+			<%= image_tag( '/images/company_logos/net_30_account.gif',:border => 0,:size => "120x120" ) %>
+		<% elsif    @viewable_purchase.quote_tender_entry.tender.id == 14  %>
+			<%= image_tag( '/images/company_logos/cod_money_order_cashiers_check.gif',:border => 0,:size => "120x120" ) %>	
+		<% elsif    @viewable_purchase.quote_tender_entry.tender.id == 12  %>
+			<%= image_tag( '/images/company_logos/cod_check.gif',:border => 0,:size => "120x120" ) %>
+		<% elsif    @viewable_purchase.quote_tender_entry.tender.id == 10  %>
+		free catalog
+		<%  end  %>
+		<br />
+		Tender: <%= @viewable_purchase.quote_tender_entry.tender.Description %> - <%= link_to 'Edit', quote_tender_entries_path %>
+</div>

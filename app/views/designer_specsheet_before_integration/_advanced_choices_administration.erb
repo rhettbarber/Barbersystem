@@ -1,0 +1,25 @@
+
+<div id="administration_choices" style="display:none;" >
+<div style="display:table;">
+
+
+        <div class="advanced_choices_administration_menu"  style="width:850px;">
+                    <ul id="tabs_advanced_choices_administration_menu" class="subsection_tabs">
+                                  <li class="tab"><a  id="administration_help_tab_a" href="#administration_help" >Help </a></li>
+                                  <li class="tab"  onclick="administerSizeAndPosition();"><a  id="ajax_administer_size_and_position_empty_tab_a" href="#ajax_administer_size_and_position_empty" >Size and Position </a></li>
+                                  <li class="tab"  onclick="requestBreastPrints();"><a   id="ajax_administer_breast_prints_empty_tab_a"  href="#ajax_administer_breast_prints_empty" >Breast Prints</a></li>
+                                  <li class="tab"  onclick="new Ajax.Updater('ajax_administer_edit_front_design_empty', '/designer_specsheet/ajax_administer_edit_item' ,   { evalScripts:true, parameters: { item_id:    $('details_form_front').design_id.value , side: 'front'  }  }  );" ><a  id="ajax_edit_front_design_empty_tab_a"  href="#ajax_administer_edit_front_design_empty"    >Edit Front Design</a></li>
+                                  <li class="tab"  onclick="new Ajax.Updater('ajax_administer_edit_back_design_empty', '/designer_specsheet/ajax_administer_edit_item' ,   { evalScripts:true, parameters: { item_id:   $('details_form_back').design_id.value , side: 'back' }  }  );" ><a   id="ajax_edit_back_design_empty_tab_a" href="#ajax_administer_edit_back_design_empty">Edit Back Design </a></li>
+                                  <li class="tab"  onclick="new Ajax.Updater('ajax_administer_edit_back_design_empty', '/designer_specsheet/ajax_administer_edit_item' ,   { evalScripts:true, parameters: { item_id:   $('details_form').item_id.value , side: 'product' }  }  );" ><a   id="ajax_edit_product_empty_tab_a" href="#ajax_administer_edit_back_design_empty">Edit Product </a></li>
+                    </ul>
+        </div>
+
+        <%= render :partial => "designer_specsheet/administration_help"  %>
+        <%= render :partial => "designer_specsheet/ajax_administer_size_and_position_empty"  %>
+        <%= render :partial => "designer_specsheet/ajax_administer_breast_prints_empty"  %>
+        <%= render :partial => "designer_specsheet/ajax_administer_edit_front_design_empty" %>
+        <%= render :partial => "designer_specsheet/ajax_administer_edit_back_design_empty"  %>
+        <%= render :partial => "designer_specsheet/ajax_administer_edit_product_empty"  %>
+
+</div>
+</div>

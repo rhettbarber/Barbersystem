@@ -1,0 +1,45 @@
+
+
+
+<div id="symbiote_wrapper">
+
+
+<!-- ImageReady Slices (ribbon.psd) -->
+<table id="Table_01" width="850" height="80" border="0" cellpadding="0" cellspacing="0" background="/images/headers/ribbon/symbiont_choose_ribbon.jpg">
+	<tr>
+		<td rowspan="3"  width="284" height="80">
+			
+			 <div style="float:left;"><%=   image_tag(@purchase.symbiote.item.image_url(   @purchase.symbiote.item.department ,'item_thumbnails/','x' ),:size => "80x80")    -%></div>
+				
+			<div style="float:left; margin:0px; padding:0px; height:80px; width:200px;">
+			
+			<%= @purchase.symbiote.item.ItemLookupCode -%><br />
+			<%= @purchase.symbiote.item.Description %><br />		
+			<%=  image_tag @purchase.symbiote.item.opacity_football %>  
+			
+
+			</div>
+			
+
+			
+		</td>
+		<td colspan="3" width="566" height="51"></td>
+	</tr>
+	<tr>
+		<td rowspan="2" width="113" height="29"></td>
+		<td width="334" height="23">
+			
+			<a href="/delete_incomplete_symbiote"><img src="/images/headers/ribbon/ribbon_04.png" width="334" height="23" border="0" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('delete1','','/images/headers/ribbon/ribbon_04_down.png',1)" id="delete1" name="delete1" ></a>
+			
+		</td>
+		<td rowspan="2" width="119" height="29"></td>
+	</tr>
+	<tr>
+		<td width="334" height="6" alt=""></td>
+	</tr>
+</table>
+<!-- End ImageReady Slices -->
+
+
+</div>
+

@@ -1,0 +1,6 @@
+<li class="lone_category">
+  <div id="category_<%= category.id %>"> <%= image_tag "/images/buttons/draggable.jpg",:height => "20" %> </div>
+  <span id="category_<%= category.id %>_name"><%= link_to category.Name.camelcase , :controller  => 'browse', :department_id => category.department, :category_id => category.id %></span>
+</li>
+
+<%= draggable_element("category_" +  category.id.to_s , :revert => true) if admin? %>

@@ -1,0 +1,33 @@
+
+
+<tr>
+          <td valign="top">
+          	
+          	<% if service.web_carrier_name == 'ups' %>
+          		<%= image_tag '/images/company_logos/ups_logo_small.jpg',:size => "20x20"  %>
+          	<% elsif service.web_carrier_name == 'usps' %>
+          		<%= image_tag '/images/company_logos/usps_logo_small.jpg',:size => "20x20"  %>
+          	<% end %>
+                 <%=  radio_button( 'purchase',  'shipping_service_id' ,  service.id   )   unless   @purchase.ship_to.shipping_service_price(service.web_carrier_name, service.web_name)  == 'shipping service unavailable'   %>
+                  
+                   <%= hidden_field_tag('service_type', service.Name )  %>
+
+          </td>
+          <td width="100%" valign="top"> 
+                        <%= service.Name%> - 
+                        
+                        <span style="color:grey;">
+	                        <% if @customer.PriceLevel > 1 %>
+	                        	<%= service.processing_time_transfers %>
+	                        <% else %>
+	                        	<%= service.processing_time %>
+	                        <% end %>
+                        </span>
+                        <br/>
+ <br/>
+            </td>
+  <td valign="top" align="right">
+      <%=  @purchase.ship_to.shipping_service_price(service.web_carrier_name, service.web_name)   %>
+      
+   </td>
+</tr>

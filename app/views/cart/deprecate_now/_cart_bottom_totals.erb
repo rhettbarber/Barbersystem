@@ -1,0 +1,132 @@
+
+
+
+<table class="purchase_totals" width="850" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th>Info:</th>
+    <th></th>
+    <th></th>
+    <th>Totals:</th>
+  </tr>
+  <tr>
+    <td></td>
+    <td> 
+            <div id="cart_count">
+                               </div>    </td>
+    <td> Total</td>
+    <td>
+            <div id="full_price_total">    
+                     <%=  number_to_currency(@purchase_full_price_total)   %>            
+			</div>    
+	</td>
+  </tr>
+  <tr>
+    <td>login name </td>
+    <td>
+             <div id="login">
+                    <%= if logged_in?
+                     current_user.email    
+                     else
+                     'Log in for discounts'
+                     end %>              </div>     </td>
+    <td>&nbsp;</td>
+    <td>
+             <div id="total_savings"></div>     </td>
+  </tr>
+  
+      <tr>
+    <td>&nbsp;</td>
+        <td>
+              <div id="licensed_for"></div>          </td>
+        <td>&nbsp;</td>
+        <td>
+            <div id="subtotal"></div>        </td>
+     </tr>
+     
+  <tr>
+    <td>&nbsp;</td>
+    <td> 
+                 <div id="PriceLevel"></div>    </td>
+    <td>&nbsp;</td>
+    <td>
+    		<div id="volume_discount_savings"></div>	</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>
+                   <div id="CurrentDiscount"></div>    </td>
+    <td>&nbsp;</td>
+    <td> 
+		<div id="total_after_volume_discount"></div>	</td>
+  </tr>
+  <tr>
+    <td>total weight</td>
+    <td><%=  number_with_precision( @purchase_total_weight , :precision => 2 )  %></td>
+    <td>subtotal</td>
+    <td>
+		<div id="subtotal_after_all_discounts">     
+                   <%=    number_to_currency(@purchase_subtotal_after_all_discounts)      %>
+		</div> 	
+	</td>
+  </tr>
+  <tr>
+    <td>.</td>
+    <td>. </td>
+    <td><%=  '(Taxes may apply at checkout) ' if !@customer    %>total after tax </td>
+    <td>		
+		<div id="total_after_tax">     
+                   <%=    number_to_currency(@purchase_total_after_tax)     %>
+		</div> 
+	</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td> 
+			<%    if @purchase   %>
+						<%  if @purchase.shipping_service && @purchase.ship_to  %>
+									<%=   'UPS standard shipping estimate' %>
+						<%  else  %>
+									<%=   ' * Average ground shipping'  %>
+						<%  end  %>
+			<%  else %>
+				<%=   ' * Average ground shipping'  %>
+			<%  end  %>
+	  </td>
+    <td>
+		<div id="shipping">     
+                   <%=   number_to_currency(@purchase_shipping)        %>
+		</div>
+	</td>
+  </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td><%= 'COD Charge' if @purchase_cod_charge %></td>
+    <td>
+			<div id="cod_charge">     
+                        <%=     number_to_currency(@purchase_cod_charge)    %>
+		</div>
+	
+	</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>final total after shipping </td>
+    <td>
+		<div id="final_total_after_shipping">     
+                  <% if @purchase_shipping == 'shipping service unavailable' %> 
+                 	<%= link_to "Edit Shipping Service", :controller => 'ship_tos',:action => 'shipping_services'    %>
+                 <% else %>     
+				 	<%= number_to_currency(@purchase_final_total_after_shipping)    %>
+				 <% end %>
+		</div>
+	
+	</td>
+  </tr>
+  <tr>
+  <tr>  
+</table>
+<br />
+

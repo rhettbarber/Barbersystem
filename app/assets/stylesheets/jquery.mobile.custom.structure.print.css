@@ -1,0 +1,10 @@
+    /* Show the table header rows and set all cells to display: table-cell */
+    .phone-breakpoint td,
+    .phone-breakpoint th,
+    .phone-breakpoint tbody th,
+    .phone-breakpoint tbody td,
+    .phone-breakpoint thead td,
+    .phone-breakpoint thead th {
+        display: table-cell;
+        margin: 0;
+    }

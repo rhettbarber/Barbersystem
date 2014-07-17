@@ -1,0 +1,68 @@
+<div class="checkout_customers_show purchases_checkout_review_show">
+
+<span style="font-size: 20px;color:blue;">
+Billing Address
+  </span>
+
+<p>
+  <b>AccountNumber:</b>
+   <span id="AccountNumber"><%=h @customer.AccountNumber %></span>
+</p>
+
+<p>
+  <b>Company:</b>
+  <span id="Company"><%=h @customer.Company %></span>
+</p>
+
+<p>
+  <b>FirstName:</b>
+  <span id="FirstName"><%=h @customer.FirstName %></span>
+</p>
+
+<p>
+  <b>LastName:</b>
+  <span id="LastName"><%=h @customer.LastName %></span>
+</p>
+
+
+<p>
+  <b>Address:</b>
+  <span id="Address"><%=h @customer.Address %></span>
+</p>
+
+<p>
+  <b>Address2:</b>
+  <span id="Address2"><%=h @customer.Address2 %></span>
+</p>
+
+<p>
+  <b>City:</b>
+  <span id="City"><%=h @customer.City %></span>
+</p>
+
+
+<p>
+  <b>State:</b>
+ <span id="State"> <%=h @customer.State %></span>
+</p>
+
+<p>
+  <b>Zip:</b>
+  <span id="Zip"><%=h @customer.Zip %></span>
+</p>
+
+<p>
+  <b>EmailAddress</b>
+  <%=h @customer.EmailAddress %>
+</p>
+
+<p>
+  <b>Phone Number</b>
+  <%=h @customer.PhoneNumber  %>
+</p>
+
+
+<%   unless controller.action_name == 'checkout_receipt'   %>
+		<%= link_to 'Edit Billing Address', edit_customer_path(@customer)  , :class =>  'btn btn-default'  ,:data => {:theme => "e",  :role => "button" ,:ajax=> "false"}%>
+<%  end %>
+</div>

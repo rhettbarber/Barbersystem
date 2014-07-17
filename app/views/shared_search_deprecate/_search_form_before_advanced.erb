@@ -1,0 +1,21 @@
+
+
+<% if @website.store_website == true %>
+ 
+		 <%=  form_tag( {:controller =>  @website.name ,  :action => 'search'   } ) do  %>
+		  <select name="search_type_name">
+		    <option value="products" selected="selected"> Products </option>
+		    <option value="articles"> Articles </option>
+		  </select>
+			<%= text_field_tag  'item_keywords' %>
+			<%= submit_tag "Search" %>
+		<%  end  %> 		
+
+<% else %>
+
+		 <%=  form_tag( {:controller =>  'page' ,  :action => 'page_search'   } ) do  %>
+			<%= text_field_tag  'item_keywords' %>
+			<%= submit_tag "Search" %>
+		<%  end  %> 	
+
+<% end %>

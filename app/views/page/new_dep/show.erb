@@ -1,0 +1,269 @@
+
+<style type="text/css">
+    .jstree-leaf > a > .jstree-themeicon {
+        /*display:none !important;*/
+        background-position: -107px -74px  !important;
+    }
+
+    .jstree-default .jstree-node {
+        margin-left:15px;}
+
+
+    .ui-collapsible-content {
+        padding:0px;
+    }
+</style>
+
+
+
+<div class="ui-corner-all custom-corners">
+  <div class="ui-bar ui-bar-a">
+    <h3>Click on an article or subject  to view it.</h3>
+  </div>
+  <div class="ui-body ui-body-a">
+
+    <div data-role="collapsible" data-inset="false" data-collapsed="false" id="article_subjects">
+      <h3 id="root_page_name">Browse Article Subjects</h3>
+      <div id="jstree"></div>
+    </div><!-- /collapsible -->
+
+  </div>
+</div>
+
+<div class="revisions">
+  <%=   render :partial  => "page/content"   %>
+</div>
+
+
+
+<script>
+    $(function () {
+        // 6 create an instance when the DOM is ready
+        $('#jstree').jstree();
+
+
+        $(".jstree-closed li a").on('click', function(e){
+            console.log("clicked jstree-closed" );
+
+        });
+
+
+
+
+        // 7 bind to events triggered on the tree
+        $('#jstree').on("changed.jstree", function (e, data) {
+            console.log(data.selected);
+            console.log("changed.jstree");
+            console.log("data.type: " + data.type );
+
+            if (data.node) {
+                if (data.node.data.type == "page") {
+                    console.log("This is a page");
+
+
+                    $.mobile.loading('show');
+
+                    jQuery.ajax({
+                        type: "GET",
+                        url: "/p/show_page_on_index",
+                        data: { page_id:  data.node.data.page_id   }
+                    });
+
+
+
+                } else {
+                    console.log("This is not a page");
+                    // if node is open, close it.. closed open it
+                    console.log("data.node.state.opened: " + data.node.state.opened.toString() );
+                    if (data.node.state.opened) {
+                        $('#jstree').jstree("close_node", data.selected  );
+                    } else {
+
+
+//                                                                                                                  jQuery.ajax({
+//                                                                                                                      type: "GET",
+//                                                                                                                      url: "/p/show_page_on_index",
+//                                                                                                                      data: { page_id:  data.node.data.page_id   }
+//                                                                                                                  });
+
+                        $('#jstree').jstree("open_node", data.selected  );
+
+                    }
+                }
+            }
+        });
+
+        // 8 interact with the tree - either way is OK
+        $('button').on('click', function () {
+            $('#jstree').jstree(true).select_node('child_node_1');
+            $('#jstree').jstree('select_node', 'child_node_1');
+            $.jstree.reference('#jstree').select_node('child_node_1');
+        });
+    });
+
+
+
+    <% if params[:scope_by_page_id]  %>
+    var test = "t";
+    console.log( "begin Scope by page");
+    $('#jstree').jstree({
+        'core' : {
+            'data' : {
+                'url' : '/p/pages_navigation/' + <%=  params[:scope_by_page_id] %>,
+                'data' : function (node) {
+
+                    console.log( "no contextual scoping");
+                    if (node.data) {
+                        return {
+                            'id' : node.id,
+                            'page_id' :   node.data.page_id
+                        };
+                    } else {
+                        return {
+                            'id' : node.id,
+                            'page_id' :    '0'
+                        };
+                    }
+
+                }
+            }
+        }
+    } );
+    <% else %>
+    $('#jstree').jstree({
+        'core' : {
+            'data' : {
+                'url' : '/p/pages_navigation/',
+                'data' : function (node) {
+
+                    console.log( "no contextual scoping");
+                    if (node.data) {
+                        return {
+                            'id' : node.id,
+                            'page_id' :   node.data.page_id
+                        };
+                    } else {
+                        return {
+                            'id' : node.id,
+                            'page_id' :    '0'
+                        };
+                    }
+                }
+            }
+        }
+    } );
+    <% end %>
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @olddd %>
+
+
+                <% logger.warn "------------------------------------FIX USER_CAN?"	  %>
+                <% logger.warn "------------------------------------FIX USER_CAN?"	  %>
+                <% logger.warn "------------------------------------FIX USER_CAN?"	  %>
+
+                <% logger.warn "-------------------------------------begin page show"	  %>
+
+
+                <% params_id = params[:id] || '0' %>
+                <% logger.warn "----------------------------------params[:id]: #{params[:id]}" if params[:id]	  %>
+                <% logger.warn "----------------------------------@user_array_user_type_id: #{@user_array_user_type_id}"	  %>
+                <% if @revision %>
+                                                            <% g = "g" %>
+
+                                                            <% @page_title = @page.name -%>
+
+                                                            <%= render :partial => 'content' %>
+
+                <% else %>
+                                                           No revision.
+                                                            <% if admin? %>
+                                                                        <%= link_to("Remove Orphan Page", :action => "remove_orphaned_page", :id => @page.id) %>
+
+                                                            <% end %>
+                <% end %>
+
+                <% logger.warn "-------------------------------------end page show"	  %>
+
+
+
+
+                <%# unless @page_title == 'Home' -%>
+                 <% if @show_this %>
+                    <h3 style="display:inline;"><%= @revision.page.name unless params[:id] == 'home' or params[:id] == nil  %></h3>
+                <% end -%>
+
+
+<% end -%>
+
+
+

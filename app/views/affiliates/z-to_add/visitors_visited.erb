@@ -1,0 +1,18 @@
+
+<h4>Here is a list of views to your pages.<br /></h4>
+
+<table>
+  <tr>
+	<th>Purchased?</th>
+	<th>Time Visited</th>
+    <th>Document Name</th>
+  </tr>
+
+<%  @user.rail_stats.each do |rs|  %>
+		  <tr>
+		 	<td><%= image_tag "buttons/checkmark-green.jpg",:size => "20x20" if rs.user_session.purchase_id != 0 %></td>
+		 	<td><%=h rs.created_at %></td>
+		    <td><%=h rs.doc_name %></td>  
+		  </tr>
+<% end %>
+</table>

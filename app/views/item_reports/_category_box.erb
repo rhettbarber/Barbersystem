@@ -1,0 +1,7 @@
+
+<div class="category_box">
+                   <li> <%=    link_to(  item.category.Name,  :action => "browse", :department_id =>  department.id  ,  :category_id => category.id  )  %> </li>
+                  <%= link_to( image_tag( item.image_url( department, 'item_thumbnails/','x' )  ), { :action => "browse", :department_id =>  department.id  ,  :category_id => category.id  })  %>
+		  <%=  render(:partial => "shared_development/category_development" , :locals => {:item => item, :category => category} )  %>
+
+</div>

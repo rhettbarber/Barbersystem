@@ -1,0 +1,156 @@
+
+
+<%#= form_tag('/ship_tos/set_shipping_charge_on_order' ) do -%>
+
+<p style="text-align: center;"> Select a shipping service:    </p>
+
+
+
+<% if @customer  %>
+Set chosen as my default shipping method:
+<%= check_box_tag( 'default_this_shipping_method' , value = "1" ,checked = false, options = {} )   %><br>
+<% end %>
+
+
+<table class="table table-striped">
+<tbody>
+    <% for service in @shipping_services  %>
+
+                 <%= render(:partial => "ship_tos/shipping_service", :locals => { :service => service } ) %>
+
+                 <%#= render(:partial => "shared/row_pad") %>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+
+<span style="color:red;">
+If all services show "shipping service unavailable", shipping is not available for the zipcode you entered ( <%= @purchase.ship_to.Zip %> ).  <%= link_to "Click Here",:controller => "ship_tos",:action => "index" %> to change shipping address.	<br />
+</span>
+
+<br />
+* Please allow shipping time in addition to processing time.		<br />
+** Processing time not guaranteed on all items.		<br />
+<% if [5,6].include?(@customer.account_type_id)   %>
+     <br /> Your account is approved for C.O.D. <br />
+    $8.50 C.O.D. charges will apply if you choose to pay using C.O.D. payment method. <br />
+<% end %>
+<%# end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @old %>
+
+<% unless @purchase.free_catalog_purchase  %>
+
+<%= image_tag "/images/headers/shipping_method.gif" %>
+<td width="100%" valign="top"><table width="795" cellspacing="0" cellpadding="0" border="0">
+    <tbody>
+      <tr>
+        <td colspan="2"><img width="1" height="10" alt=" " src="/images/pixels/none.gif"/></td>
+      </tr>
+      <tr>
+        <td width="7"><img width="7" height="1" alt=" " src="/images/pixels/none.gif"/></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td colspan="2"><img width="1" height="10" alt=" " src="/images/pixels/none.gif"/></td>
+      </tr>
+    </tbody>
+  </table>
+  <br/>
+  <table cellspacing="0" cellpadding="0" bordercolor="Fuchsia" border="0" bgcolor="#ffffff">
+   <%= form_tag('/ship_tos/set_shipping_charge_on_order' ) do -%>
+    <tbody>
+      <tr>
+        <td width="7"><img width="7" height="1" alt=" " src="/images/pixels/none.gif"/></td>
+        <td width="100%"><table width="795" cellspacing="0" cellpadding="0" border="0" bgcolor="#cccccc">
+            <tbody>
+              <tr>
+                <td><table width="100%" cellspacing="1" cellpadding="4" border="0" bgcolor="#cccccc">
+                    <tbody>
+                      <tr bgcolor="#efefef">
+                        <td class="btsb">Select a shipping service </td>
+
+                        <% if @customer  %>
+                        <td>  Set chosen as my default shipping method:
+                       <%= check_box_tag( 'default_this_shipping_method' , value = "1" ,checked = false, options = {} )   %>
+                        </td>
+                        <% end %>
+
+                      </tr>
+                    </tbody>
+                </table></td>
+              </tr>
+            </tbody>
+          </table>
+          <table width="795" cellspacing="0" cellpadding="3" bordercolor="teal" border="0">
+            <tbody>
+				<% for service in @shipping_services  %>
+
+							 <%= render(:partial => "ship_tos/shipping_service", :locals => { :service => service } ) %>
+
+							 <%= render(:partial => "shared/row_pad") %>
+				<% end %>
+                <td colspan="3"></td>
+              </tr>
+              <tr>
+                <td colspan="3"></td>
+              </tr>
+
+          </table>
+<span style="color:red;">
+If all services show "shipping service unavailable", shipping is not available for the zipcode you entered ( <%= @purchase.ship_to.Zip %> ).  <%= link_to "Click Here",:controller => "ship_tos",:action => "index" %> to change shipping address.	<br />
+</span>
+
+<br />
+* Please allow shipping time in addition to processing time.		<br />
+** Processing time not guaranteed on all items.		<br />
+<% if [5,6].include?(@customer.account_type_id)   %>
+	 <br /> Your account is approved for C.O.D. <br />
+	$8.50 C.O.D. charges will apply if you choose to pay using C.O.D. payment method. <br />
+<% end %>
+
+		 <div align="center"> <input type="image" border="0" alt="Continue" name="image1" id="image1" src="/images/buttons/continue_button_gold.gif"/></div>
+
+
+	 <% end %>
+
+		  </td>
+        <td width="7"><img width="7" height="1" alt=" " src="/images/pixels/none.gif"/></td>
+      </tr>
+    </tbody>
+  </table></td>
+
+  <% else %>
+
+<%= image_tag "/images/headers/shipping_method.gif" %>
+
+<% light_gold_box do -%>
+		<strong>	Your catalog will be shipped free of charge. <strong />
+<% end %>
+<br /><br />
+<div align="center">
+	<%=link_to( image_tag( "/images/buttons/continue_button_gold.gif",:border => 0) ,:controller => "cart" , :action => 'next_checkout_step')  %>
+</div>
+
+
+
+<% end %>
+<% end %>

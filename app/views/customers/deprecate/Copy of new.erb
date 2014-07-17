@@ -1,0 +1,92 @@
+<h1>Customer Billing information</h1>
+
+<%= error_messages_for :customer %>
+
+<%= form_for(:customer, :url => customers_path) do |f| %>
+  <p>
+    <b>Accountnumber-(optional)</b><br />
+    <%= f.text_field :AccountNumber %>
+  </p>
+
+  <p>
+    <b>Company-(optional)</b><br />
+    <%= f.text_field :Company %>
+  </p>
+
+  <p>
+    <b>Firstname</b><br />
+    <%= f.text_field :FirstName %>
+  </p>
+
+  <p>
+    <b>Lastname</b><br />
+    <%= f.text_field :LastName %>
+  </p>
+
+
+  <p>
+    <b>Address</b><br />
+    <%= f.text_field :Address %>
+  </p>
+
+  <p>
+    <b>Address2 (optional)</b><br />
+    <%= f.text_field :Address2 %>
+  </p>
+
+  <p>
+    <b>City</b><br />
+    <%= f.text_field :City %>
+  </p>
+
+  <p>
+    <b>State</b><br />
+    <%= f.text_field :State %>
+  </p>
+
+
+  <p>
+    <b>Zip</b><br />
+    <%= f.text_field :Zip %>
+  </p>
+
+ <p>
+    <b>Taxnumber-(optional)</b><br />
+    <%= f.text_field :TaxNumber %>
+  </p>
+
+  <p>
+    <b>Country</b><br />
+    
+    <%= country_select( USPSCountries , :Country, priority_countries = ['United States'], options = {}, html_options = {})  %>
+    
+  </p>
+
+  <p>
+    <b>Emailaddress</b><br />
+    <%= f.hidden_field :EmailAddress, :value => @user.email %>
+	<%= h @user.email %>
+  </p>
+
+  <p>
+    <b>Faxnumber (optional)</b><br />
+    <%= f.text_field :FaxNumber %>
+  </p>
+
+  <p>
+    <b>Phonenumber</b><br />
+    <%= f.text_field :PhoneNumber %>
+  </p>
+  
+  <p>
+    <b>Use Same address for shipping</b><br />
+                    <%= check_box_tag "use_billing_for_shipping", value = "1", checked = true  %>
+  </p>
+
+
+  <p>
+    <%= submit_tag "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', customers_path %>

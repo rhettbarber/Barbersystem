@@ -1,0 +1,37 @@
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Shop<b class="caret"></b></a>
+  <ul class="dropdown-menu designs_menu">
+        <li>Designs for <strong>your</strong> item</li>
+        <li data-department_id="10"><a data-toggle="modal" href="" data-href="/store/department/10" data-target="#myModal">Design or find a product</a></li>
+                    <li role="presentation" class="divider"></li>
+                    <li><a data-toggle="modal" href="" data-href="/store/department?any=true" data-target="#myModal">Show designs for <strong>any</strong> item</a></li>
+  </ul>
+</li>
+
+
+
+
+
+
+
+
+
+<% if @orig %>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Designs<b class="caret"></b></a>
+  <ul class="dropdown-menu designs_menu" id="designs_menu" data-last_updated_for_department="0">
+    <li data-department_id="10"><a data-toggle="modal" href="" data-href="/store/department/10" data-target="#myModal">Dixie Outfitters</a></li>
+    <li data-department_id="11"><a data-toggle="modal" href="" data-href="/store/department/11" data-target="#myModal">Dixie Girls</a></li>
+    <li data-department_id="12"><a href="#">Dixie Boys</a></li>
+    <li data-department_id="12"><a href="#">Dixie Baby</a></li>
+    <li data-department_id="12"><a href="#">Southern Heritage Dixie</a></li>
+    <li data-department_id="12"><a href="#">Straight from the South</a></li>
+    <li class="divider"></li>
+    <li class="nav-header">Other Southern Brands</li>
+    <li data-department_id="12"><a href="#">Legends of the Confederacy</a></li>
+    <li data-department_id="12"><a href="#">Straight from the South</a></li>
+    <li data-department_id="12"><a href="#">Tropical Soul</a></li>
+    <li data-department_id="12"><a href="#">All Over Shirts</a></li>
+  </ul>
+</li>
+<% end %>

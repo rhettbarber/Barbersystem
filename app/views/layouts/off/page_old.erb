@@ -1,0 +1,35 @@
+<html>
+
+<%= render(:partial => "layout_elements/head") %>
+
+  <% if @website.name == 'big_cocke' %>
+          <body class="body_big_cocke">
+  <% else  %>
+          <body class="body">
+  <% end  %>
+
+
+      <div class="header">
+                   <%= render :partial => 'advanced_main_menu/advanced_main_menu' %>
+                    <%= render(:partial => "layout_elements/header_table") unless params[:id] == 'home'        %>
+                    <% render(:partial => "shared_menu/page_navigation_bar") %>
+      </div>
+
+      <div class="page_content_wide">
+            <%= render :partial => "shared_menu/contextual_navigation_tree"  unless params[:id] == 'home' %>
+            <% if flash[:notice] != nil -%><div style="color: blue; text-align: center;">&nbsp;<%= flash[:notice] %>&nbsp;</div><% end -%>
+            <%= yield %>
+      </div>
+
+    <%= render(:partial => "layout_elements/shared_footer") %>
+
+
+<% if admin?  %>
+  <%= render :partial => 'development/instance_variables' , :locals => { :instance_variables => instance_variables } %>
+  <%= render :partial => 'development/parameters' , :locals => { :params => params } %>
+  <%= render :partial => 'development/request' , :locals => { :request => request } %>
+  <%= render :partial => 'development/response' , :locals => { :request => response } %>
+<% end %>
+
+</body>
+</html>

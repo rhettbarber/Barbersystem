@@ -1,0 +1,40 @@
+
+
+<div id="ajax_breast_prints_list">
+
+<span style="text-align: center;">
+          <h1>  Listing Breast Prints  </h1>
+          <div id="items_list">
+          <% if @items.size > 0 %>
+                                    <table>
+                                      <tr>
+                                        <th>ItemLookupCode</th>
+                                        <th>Description</th>
+                                        <th>Category Name</th>
+                                         <th>Select Departments</th>
+                                      </tr>
+
+                                    <% @items.each do |item| %>
+                                      <tr>
+                                        <td><%= item.ItemLookupCode %></td>
+                                        <td><%=image_tag( 'http://dixieoutfitters.com/images/item_thumbnails/' +  item.ItemLookupCode + '.png', :size => "100x100"  )%></td>
+                                        <td><%= item.Description %></td>
+                                        <td><%= item.category.Name %></td>
+                                         <td><%= link_to " Select Departments ", :action => 'select_departments', :item_id => item.id   %></td>
+                                      </tr>
+                                    <% end %>
+                                    </table>
+                                    <br />
+          <% else  %>
+                                    <span style="font-size:20px;color:red;">  No Results Found! </span>
+          <% end  %>
+          </div>
+</span>
+
+</div>
+
+
+
+<script type="text/javascript">
+        $('show_only_webitems_progress').hide();
+  </script>

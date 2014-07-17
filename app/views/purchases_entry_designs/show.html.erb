@@ -1,0 +1,33 @@
+<p>
+  <b>Purchase:</b>
+  <%=h @purchases_entry_design.purchase_id %>
+</p>
+
+<p>
+  <b>Background color:</b>
+  <%=h @purchases_entry_design.background_color %>
+</p>
+
+<p>
+  <b>Background filename:</b>
+  <%=h @purchases_entry_design.background_filename %>
+</p>
+
+<p>
+  <b>Front design filename:</b>
+  <%=h @purchases_entry_design.front_design_filename %>
+</p>
+
+<p>
+  <b>Back design filename:</b>
+  <%=h @purchases_entry_design.back_design_filename %>
+</p>
+
+<p>
+  <b>Resize info:</b>
+  <%=h @purchases_entry_design.resize_info %>
+</p>
+
+
+<%= link_to 'Edit', edit_purchases_entry_design_path(@purchases_entry_design) %> |
+<%= link_to 'Back', purchases_entry_designs_path %>

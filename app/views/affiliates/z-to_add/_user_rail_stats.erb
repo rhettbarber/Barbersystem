@@ -1,0 +1,65 @@
+
+<br />
+<br />
+These are the pages you have visited on our websites:(please confirm all of your submitted pages appear here)<br />
+<% @affiliate.user.user_sessions.each do |us|  %>
+		<% us.rail_stats.each do |rs| %>
+			<%= rs.doc_name %> <br />
+		<% end %>
+<% end %>	
+<br />
+<br />
+<br />
+<br />
+
+
+
+<h4>These are all of your pages users have visited (purchased or non).<br /></h4>
+<table>
+  <tr>
+    <th>Purchase ID</th>
+    <th>Purchase Time</th>
+    <th>Purchase Total</th>
+    <th>UserSessionID</th>
+    <th>Document Name</th>
+  </tr>
+<%  @stat_affiliate = Affiliate.find( @affiliate.id ,:include => [:rail_stats]  )    %>
+<%  @stat_affiliate.rail_stats.find(:all, :include => [:user_session]).each do |stat_aff|    %>
+  <tr>
+    <td><%=h stat_aff.user_session.purchase_id %></td>
+    <td><%=h stat_aff.user_session.purchase.Time if stat_aff.user_session.purchase %></td>
+    <td><%=h stat_aff.user_session.purchase.Total  if stat_aff.user_session.purchase %></td>
+    <td><%=h stat_aff.user_session_id %></td>
+    <td><%=h stat_aff.doc_name %></td>
+  </tr>
+<% end %>
+</table>
+
+
+
+
+<br />
+<br />
+<br />
+<br />
+
+<h4>Affiliates with Rail Stats included so can qualify.<br /></h4>
+<table>
+  <tr>
+    <th>Purchase ID</th>
+    <th>Purchase Time</th>
+    <th>Purchase Total</th>
+    <th>UserSessionID</th>
+    <th>Document Name</th>
+  </tr>
+<%  @stat_affiliate = Affiliate.find( @affiliate.id ,:include => [:rail_stats]  )    %>
+<%  @stat_affiliate.rail_stats.find(:all, :include => [:user_session] ,:conditions => ["purchase_id != ?", 0 ]).each do |stat_aff|    %>
+  <tr>
+    <td><%=h stat_aff.user_session.purchase_id %></td>
+    <td><%=h stat_aff.user_session.purchase.Time  if stat_aff.user_session.purchase %></td>
+    <td><%=h stat_aff.user_session.purchase.Total   if stat_aff.user_session.purchase %></td>
+    <td><%=h stat_aff.user_session_id %></td>
+    <td><%=h stat_aff.doc_name %></td>
+  </tr>
+<% end %>
+</table>

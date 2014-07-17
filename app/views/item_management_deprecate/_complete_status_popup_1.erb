@@ -1,0 +1,74 @@
+
+<div align="center">
+      <%= image_tag('/images/icons/report.jpg' ,:size => "50x50" )%> <span style="font-size:2em;vertical-align:top;">Complete Status Report</span><%= image_tag('/images/icons/report.jpg' ,:size => "50x50" )%>
+</div>
+
+  <table>
+<h2>Main Item Information</h2>
+<th>Image</th><th>Item Code </th><th>Description</th><th>Stock Design Status</th<th>Design Separation Status</th>
+                 <tr class="odd">
+                   <td>
+                       <% if @item.PictureName %>
+                                   <a href="<%= "http://sandra-mac/images/item_specsheets/" + @item.PictureName %>">
+                                         <%=   image_tag "http://sandra-mac/images/item_specsheets/" + @item.PictureName ,:size => "50x50" ,:border => 0 %>
+                                   </a>
+                      <% else  %>
+                                'Missing Image'
+                       <% end  %>
+                   </td>
+                   <td>
+                        <%= @item.ItemLookupCode %>
+                   </td>
+                   <td>
+                        <%= @item.Description %>
+                   </td>
+                   <td>
+                          <%  unless  @item.stock_design_file_exists?  %>
+                                    <span class="anatips" title="Stock Design Missing from Database! It should be located at: <%= @item.stock_design_filename_with_path %> as .psd or .tif">
+                                                <%= image_tag('/images/icons/stock.jpg',:size => "35x35") %>
+                                     </span>
+                            <% end  %>
+                      </td>
+                      <td>
+                          <%  unless  @item.design_separation_file_exists?  %>
+                                <span class="anatips" title="Design Separation is Missing! It should be located at: <%= @item.design_separation_filename_with_path %> as .psd or .tif">
+                                            <%= image_tag('/images/icons/separation.jpg',:size => "35x35") %>
+                                 </span>
+                           <% end  %>
+                      </td>
+                 </tr>
+  </table>
+
+<h2>Clone Item Information</h2>
+  <table>
+<th>Image</th><th>Item Code </th><th>Description</th><th>Status</th><th>Web Images Online?</th><th>RMS:WebItem and WebCategory?</th><th>Online?</th>
+                  <tr class="odd">
+                   <td>
+                       <% if @the_clone.PictureName %>
+                                   <a href="<%= "http://sandra-mac/images/item_specsheets/" + @the_clone.PictureName %>">
+                                         <%=   image_tag "http://sandra-mac/images/item_specsheets/" + @the_clone.PictureName ,:size => "50x50" ,:border => 0 %>
+                                   </a>
+                      <% else  %>
+                                'Missing Image'
+                       <% end  %>
+                   </td>
+                   <td>
+                        <%= @the_clone.ItemLookupCode %>
+                   </td>
+                   <td>
+                        <%= @the_clone.Description %>
+                   </td>
+                   <td>
+                               s
+                   </td>
+                   <td>
+                        web images online?
+                   </td>
+                   <td>
+                        rms webitem and webcategory?
+                   </td>
+                   <td>
+                        online?
+                   </td>
+                 </tr>
+  </table>

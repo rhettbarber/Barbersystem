@@ -1,0 +1,23 @@
+
+
+
+<% if page_container.page %>
+	<% if   @customer_array_viewable_page_types.include?(page_container.page.page_type_id)  or  @customer_array_viewable_page_types.include?(page_container.page.page_type_id.to_s)   %>
+			<% if @latest_revision_ids.include?(page_container.id) or  @latest_revision_ids.include?(page_container.id.to_s) %>
+					<div class="page_name">  
+						<strong> 
+							<%= page_container.id  %> ---<%= page_container.page.name  %> --- Released:  <%= time_ago_in_words(  page_container.created_at,  include_seconds = false ) %>  Ago.  ----  <%=  page_container.page.created_at  %><br />
+							<%= link_to "See related pages and categories" ,:controller => 'page', :action => 'show',:id => page_container.page.slug       %>
+						</strong>              
+					 </div>		
+					<div class="page_content"><%= highlight( page_container.content , @tokens , '<strong class="highlight">\1</strong>' ) %> </div>
+			<% else %>
+				lri no include  : <%= page_container.id %> <br />
+			<% end %>
+	<% else %>
+	cavpt no include <br />
+	<% end %>
+<% end %>
+
+
+<% debugger %>

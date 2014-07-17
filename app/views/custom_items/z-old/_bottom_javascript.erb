@@ -1,0 +1,116 @@
+
+<script language="JavaScript">
+
+/*
+
+INFORMATION:
+============
+
+Copyright 2001 by CodeFoot.com
+Free for all users, but leave in this notice
+
+For IE4.X and later; degrades gracefully.
+
+INSTRUCTIONS:
+=============
+
+Step One:
+---------
+
+Place this script in the head of the page.
+Set the six dimensioning variables where
+shown in the script (below).
+
+Step Two:
+---------
+
+In the body, give each image a unique name
+and attach the functions as shown:
+
+<img src="someimage.jpg"
+name="imageOne"
+width="100" height="100"
+onDrag="dragResizeImage(event,this.name)"
+onClick="clickResetImageSize(this.name)">
+
+<img src="anotherimage.jpg"
+name="imageTwo"
+width="100" height="100"
+onDrag="dragResizeImage(event,this.name)"
+onClick="clickResetImageSize(this.name)">
+
+Any number of images may be used; however, 
+all should usually be the same default size.
+
+Step Three:
+-----------
+
+Add the iBeReady variable to an onload event
+in the body tag:
+
+<body onload="iBeReady=true;">
+
+*/
+
+// THE SCRIPT:
+// ===========
+
+// sets the default size of the image(s)
+defaultXsize = 100;
+defaultYsize = 100;
+
+// sets the minimum size of the image(s)
+minimumXsize = 50;
+minimumYsize = 50;
+
+// sets the maximum size of the image(s)
+maximumXsize = 250;
+maximumYsize = 250;
+
+// Do not edit below this line.
+// ----------------------------
+
+iBeReady =  false;
+
+function dragResizeImage(dragEvent,which){
+if (iBeReady){
+posX = eval("document."+which+".offsetLeft");
+posY = eval("document."+which+".offsetTop");
+newXsize = dragEvent.x;
+newYsize = dragEvent.y;
+newXsize = newXsize - posX;
+newYsize = newYsize - posY;
+if (newXsize >= maximumXsize) newXsize = maximumXsize;
+if (newYsize >= maximumYsize) newYsize = maximumYsize;
+if (newXsize <= minimumXsize) newXsize = minimumXsize;
+if (newYsize <= minimumYsize) newYsize = minimumYsize;
+eval("document."+which+".width=newXsize");
+eval("document."+which+".height=newYsize");
+}
+}
+
+function clickResetImageSize(which){
+if (iBeReady){
+eval("document."+which+".width=defaultXsize");
+eval("document."+which+".height=defaultYsize");
+}
+}
+
+</script>
+
+
+
+
+
+
+<% if @mine %>
+				
+				<script language="JavaScript" type="text/javascript">
+				<!--
+				   var orgCursor=null;   // The original Cursor (mouse) Style so we can restore it
+				   var dragOK=false;     // True if were allowed to move the element under mouse
+				   var dragXoffset=0;    // How much weve moved the element on the horozontal
+				   var dragYoffset=0;    // How much weve moved the element on the vertical
+				//-->
+				</script>
+<% end %>

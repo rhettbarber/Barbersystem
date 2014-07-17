@@ -1,0 +1,114 @@
+
+
+<% if @revision.page.parent_id != nil -%>
+    <span style="font-size:smaller;font-style:italic;">(Child of <%= link_to Page.find(@revision.page.parent_id).name, :controller => "page", :action => "show", :id => Page.find(@revision.page.parent_id).slug %> <%= hidden_field "page", "parent_id", :value => @revision.page.parent_id %>)</span>
+<% else %>
+    <span style="font-size:smaller;font-style:italic;">(This is a root page)</span>
+<% end %>
+
+<br />
+<%  @page_types = PageType.find :all %>
+<%  @selected = @revision.page.page_type.id if @revision.page.page_type  %>
+<%  @selected = 1 if !@selected %>
+Permissions: <%= select("page_type", "id", @page_types.collect {|p| [ p.name , p.id ] } ,{:selected =>  @selected  } ) %>
+<% if @revision.page.website_id == 777 %>
+    <% @check_status = true %>
+<% else %>
+    <% @check_status = false %>
+    <% @check_status = false if @check_status.nil? %>
+<% end %>
+All Websites Override:<%=  check_box_tag('website_id', value = "777", checked = @check_status , options = {})   %>    <br />
+
+	<p><%= text_area "revision", "content" %></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <% if @before %>
+
+
+        <div style="height:20px;">
+          <div id="edit-header">
+            <% if @revision.page_id == nil %>
+                <%= text_field 'page', 'name', :value => @revision.page.name %>
+            <% elsif user_can?('publish') %>
+                <span onclick="javascript:if('<%= @revision.page.slug %>' != 'home'){alert('Be advised that changing the name of a page happens regardless of the published status of the current revision. The change will be instantly visible on the public facing version of this page as well as modify all URLs pointing to this page.');this.style.display = 'none';document.getElementById('page_name').setAttribute('type','text');}"><%= @revision.page.name %> <% if @revision.page.slug != 'home' %><span class="edit" style="font-size:smaller;font-style:italic;">(change)</span><% end %></span> <%= hidden_field 'page', 'name', :value => @revision.page.name %>
+            <% else %>
+                <%= @revision.page.name %> <%= hidden_field 'page', 'name', :value => @revision.page.name %>
+            <% end -%>
+            <% if @revision.page.parent_id != nil -%>
+                <span style="font-size:smaller;font-style:italic;">(Child of <%= link_to Page.find(@revision.page.parent_id).name, :controller => "page", :action => "show", :id => Page.find(@revision.page.parent_id).slug %> <%= hidden_field "page", "parent_id", :value => @revision.page.parent_id %>)</span>
+            <% else %>
+                <span style="font-size:smaller;font-style:italic;">(This is a root page)</span>
+            <% end %>
+            <br />
+            <%  @page_types = PageType.find :all %>
+            <%  @selected = @revision.page.page_type.id if @revision.page.page_type  %>
+            <%  @selected = 1 if !@selected %>
+            Page Type: <%= select("page_type", "id", @page_types.collect {|p| [ p.name , p.id ] } ,{:selected =>  @selected  } ) %>
+            <% if @revision.page.website_id == 777 %>
+                <% @check_status = true %>
+            <% else %>
+                <% @check_status = false %>
+                <% @check_status = false if @check_status.nil? %>
+            <% end %>
+            All Websites Override:<%=  check_box_tag('website_id', value = "777", checked = @check_status , options = {})   %>
+            <br />
+          </div>
+          <div id="tab-wrapper">
+            <ul id="tabs">
+              <li><a id="content" onclick="javascript:selectTab('content');">Content</a></li>
+              <li><a id="properties" onclick="javascript:selectTab('properties');">Properties</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="<%= fckeditor_div_id('revision', 'content') %>" style="display: block; background-color: #FFFFCC; text-align: center; padding-top: 10px; padding-bottom: 10px;">
+          <p><%= fckeditor_textarea( "revision", "content", {:toolbarSet => "Simple", :height => "850", :width => "100%"} ).html_safe %></p>
+        </div>
+
+        <div id="revision_redirect_to" style="display: none; background-color: #CBEBD6; padding: 25px; padding-top: 10px;">
+          <h3>Category</h3>
+          <div style="padding-left: 10px;">
+            <p>For this page to act as a category, select a child to automatically display when this page is accessed.</p>
+            <input id="revision_redirect_to_0" name="revision[redirect_to]" type="radio" value="" <% if @revision.redirect_to == nil %>checked="checked"<% end -%>/> <label for="revision_redirect_to_0" style="font-weight: bold; font-style: italic;">Not a Category</label><br/>
+            <% for child in @revision.page.children %>
+                <input id="revision_redirect_to_<%= child.id %>" name="revision[redirect_to]" type="radio" value="<%= child.id %>" <% if @revision.redirect_to == child.id %>checked="checked"<% end -%>/> <label for="revision_redirect_to_<%= child.id %>"><%= child.name %></label><br/>
+            <% end -%>
+          </div>
+        </div>
+
+
+        <script type="text/javascript" charset="utf-8">
+            tabs = ['<%= fckeditor_div_id('revision', 'content') %>', 'revision_redirect_to'];
+
+            function selectTab(tabName) {
+                if(tabName == 'content') {
+                    document.getElementById(tabs[1]).style.display = 'none';
+                    document.getElementById(tabs[0]).style.display = 'block';
+                } else {
+                    document.getElementById(tabs[0]).style.display = 'none';
+                    document.getElementById(tabs[1]).style.display = 'block';
+                }
+            }
+        </script>
+
+
+    <% end %>

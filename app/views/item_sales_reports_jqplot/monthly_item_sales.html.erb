@@ -1,0 +1,66 @@
+<h1>MonthlyItemSalesReport</h1>
+
+<%= stylesheet_link_tag 'jqplot/main'  %>
+<%= javascript_include_tag 'jqplot/jquery-1.4.2.min.js'  %>
+<%= javascript_include_tag 'jqplot/jquery.jqplot.js'  %>
+<%= javascript_include_tag 'jqplot/plugins/jqplot.canvasTextRenderer.min.js'  %>
+<%= javascript_include_tag 'jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js'  %>
+<%= javascript_include_tag 'jqplot/plugins/jqplot.dateAxisRenderer.min.js'  %>
+<%= javascript_include_tag 'jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js'  %>
+<%= javascript_include_tag 'jqplot/plugins/jqplot.highlighter.min.js'  %>
+<%= javascript_include_tag 'jqplot/plugins/jqplot.cursor.min.js'  %>
+
+
+
+<div  id="chart2" class="jqPlot jqplot-target" style="height: 320px; width: 480px; position: relative;">
+
+</div>
+
+<script type="text/javascript">
+line1=[
+['23-May-08', 578.55],
+['20-Jun-08', 566.5],
+['25-Jul-08', 480.88],
+['22-Aug-08', 509.84],
+['26-Sep-08', 454.13],
+['24-Oct-08', 379.75],
+['21-Nov-08', 303],
+['26-Dec-08', 308.56],
+['23-Jan-09', 299.14],
+['20-Feb-09', 346.51],
+['20-Mar-09', 325.99],
+['24-Apr-09', 386.15]];
+
+
+plot2 = $.jqplot('chart2', [line1], {
+    title:'Item Sales by Month',
+    axes:{
+        xaxis:{
+            renderer:$.jqplot.DateAxisRenderer,
+            rendererOptions:{tickRenderer:$.jqplot.CanvasAxisTickRenderer},
+            tickOptions:{
+                formatString:'%b %#d, %Y',
+                fontSize:'10pt',
+                fontFamily:'Tahoma',
+                angle:-30
+            }
+        },
+        yaxis:{
+          tickOptions:{ formatString:'$%.2f'} }
+      },
+        highlighter: {show: true},
+        cursor: {show:false}
+});
+
+</script>
+
+
+
+
+<% @this_year  = ItemClassSalesByYearAndMonth.find(:all, :conditions => ['sale_time_year = ? and sale_time_month = ?', 2010, 9  ] ) %>
+<% @this_year.sort_by{|a| a.sum_of_quantity}.reverse.each do |sale_data| %>
+  <%= sale_data.ItemLookupCode %>..<%= sale_data.sale_time_month %>.. <%= sale_data.sum_of_quantity %><br />
+
+<% end  %>
+
+

@@ -1,0 +1,24 @@
+
+<% cache(@header_fragment_name, :unless => ssl_or_admin? ) do %>
+
+    <div class="header">
+
+        <div id="advanced_main_menu_header" style="width:850px;">
+                  <div style="width:298px;display:table-cell;"  id="top_bar_icon"><%= link_to  image_tag('/images/company_logos/' + @website.name + '_top_bar_icon.png', :border => "0" ) , "/"  %></div>
+
+                  <div style="width:400px;margin-left:auto;margin-right:auto;margin-top:15px;display:table-cell;"><%=  render(:partial => "search/search_form") %></div>
+
+                  <div style="display:table-cell;text-align:center;width:200px;">
+                  <%= link_to image_tag("/images/icons/cart.png", :border => 0, :size => "20x20", :class => "anatips", :title => "Your Cart"  ), "/cart" %>
+                  &nbsp; &nbsp;
+                  <%= link_to "Account", :controller => 'account'  -%>
+              </div>
+        </div>
+
+
+        <%=  render "advanced_main_menu/advanced_main_menu" %>
+    </div>
+
+<% end %>
+
+

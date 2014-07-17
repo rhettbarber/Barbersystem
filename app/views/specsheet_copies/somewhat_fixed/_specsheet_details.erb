@@ -1,0 +1,105 @@
+
+  <style type="text/css">
+
+      @media ( min-width: 40em ) {
+          /* Show the table header rows and set all cells to display: table-cell */
+          .specsheet-details-table td,
+          .specsheet-details-table th,
+          .specsheet-details-table tbody th,
+          .specsheet-details-table tbody td,
+          .specsheet-details-table thead td,
+          .specsheet-details-table thead th {
+              display: table-cell;
+              margin: 0;
+          }
+          /* Hide the labels in each cell */
+          .specsheet-details-table td .ui-table-cell-label,
+          .specsheet-details-table th .ui-table-cell-label {
+              display: none;
+          }
+      }
+
+  </style>
+
+
+
+
+
+
+<table data-role="table" class="specsheet-details-table">
+  <thead>
+  <tr>
+            <th><%= 'Item Code' if @item %></th>
+            <th><%= 'Item Description' if @item %></th>
+            <th><%= 'Design Code' if @design  %></th>
+            <th><%= 'Design Description' if @design  %></th>
+            <th><%= 'Your Price'  if @your_unit_price  unless  @your_unit_price == 0.01  %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+            <td id="item_itemlookupcode"><%=   @item.ItemLookupCode.to_s  if @item   %></td>
+            <td id="item_description"><%=   @item.description_before_color_and_size  if @item   %></td>
+            <td id="design_itemlookupcode"><%=    @design.ItemLookupCode.to_s  if @design   %></td>
+            <td id="design_description"><%=     @design.Description.downcase.camelize.to_s  if @design %></td>
+            <td id="your_unit_price" >
+              <%=    number_with_precision(@your_unit_price, :precision => 2) unless  @your_unit_price == 0.01  %>
+            </td>
+  </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @old %>
+<div class="specsheet_details">
+
+	<table  border="0" cellspacing="0" cellpadding="0" height="60" width="850" style="font-size:12px;">
+			  <tr height="30">
+				    <th  scope="col"><%= 'Item Code' if @item %></th>
+				    <th  scope="col"><%= 'Item Description' if @item %></th>
+				    <th  scope="col"><%= 'Design Code' if @design  %></th>
+				    <th  scope="col"><%= 'Design Description' if @design  %></th>
+				   <th  scope="col"><%= 'Your Price'  if @your_unit_price  unless  @your_unit_price == 0.01  %></th>
+			  </tr>
+			  <tr height="30">
+					<td id="item_itemlookupcode"><%=   @item.ItemLookupCode.to_s  if @item   %></td>
+					<td id="item_description"><%=   @item.description_before_color_and_size  if @item   %></td>
+					<td id="design_itemlookupcode"><%=    @design.ItemLookupCode.to_s  if @design   %></td>
+					<td id="design_description"><%=     @design.Description.downcase.camelize.to_s  if @design %></td>
+					<td id="your_unit_price" >
+						<%=    number_with_precision(@your_unit_price, :precision => 2) unless  @your_unit_price == 0.01  %>
+					</td>
+			</tr>
+	</table>
+
+	<table  border="0" cellspacing="0" cellpadding="0"  style="font-size:12px;height:123px;width:850px;">
+			<tr>
+					<td id="item_extended_description">
+                                                <%= @item.opacity_description  %><%= @item.ExtendedDescription.html_safe  %>
+					 </td>
+			</tr>
+	</table>
+
+
+    <%= link_to(  image_tag( '/images/headers/available-as-all-over-series.png', :border => 0 ),  :controller => 'designer_specsheet', :action => 'index', :item_id => params[:item_id] , :designer => true  )    if admin? and @designer %>
+
+
+</div>
+
+  <% end %>

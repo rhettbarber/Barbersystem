@@ -1,0 +1,81 @@
+<%= javascript_include_tag 'customers'  %>
+
+<div class="box" style="display:table;">
+
+
+
+<div class="box-form">
+    <form action="send.php" method="post" id="test">
+        <fieldset>
+            <legend>Try the Demo</legend>
+            <div>
+                <label for="name_Req">Name <strong>*</strong></label>
+                <input type="text" id="name_Req" name="name" title="Required! Please enter your name" />
+            </div>
+            <div>
+                <label for="contact_Req_Email">E-mail <strong>*</strong></label>
+                <input type="text" id="contact_Req_Email" name="email" title="Required! Please enter a valid email address" />
+            </div>
+            <div>
+                <label for="telephone_Tel">Telephone</label>
+                <input type="text" id="telephone_Tel" name="telephone" title="Please enter a valid telephone number" />
+            </div>
+            <div>
+                <label for="date_Date">Date</label>
+                <input type="text" id="date_Date" name="date" title="Please enter a valid date" />
+            </div>
+             <div>
+                <label for="gender">Preferences <strong>*</strong></label>
+                <input type="checkbox" id="preference1_Req" name="preference" value="HMTL5"  title="Required! Please enter your preferences" />
+                <span>CSS3</span>
+                <input type="checkbox" id="preference2" name="preference" value="CSS3" />
+                <span>HMTL5</span>
+            </div>
+            <div>
+                <label for="message_Req">Message <strong>*</strong></label>
+                <textarea id="message_Req" name="message" rows="5" cols="20" title="Required! Please enter your message"></textarea>
+            </div>
+            <div>
+                <input type="submit" value="Send" class="button" />
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+</div>
+
+
+
+<% if @gooo %>
+
+
+
+            <%= link_to  image_tag( '/images/icons/true.jpg', :size => "25x25"  )  ,{  :controller => 'breast_prints', :action => 'ajax_update_breast_print_status', :item_id => item.id }  ,:remote => true, :class => "yes-button"  %>
+
+
+
+
+
+
+
+
+
+
+                        <% if @something %>
+
+
+                          <div id="advanced_combinations_saved">ss</div>
+
+
+
+                        <%= form_for( @advanced_combination, :method => :put,  :remote => true    ) do |f| %>
+
+
+                                        <%= f.text_field( :front_left ,:size => 4 ) %><br />
+
+                                        <%=  image_submit_tag( '/images/buttons/continue_button_gold.gif',:border => 0)  %>
+
+                        <% end %>
+            <% end %>
+
+ <% end %>

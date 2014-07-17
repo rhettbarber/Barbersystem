@@ -1,0 +1,17 @@
+
+
+
+  <%=image_tag( '/images/icons/spinner.gif', :size => "25x25",  :id => "show_only_webitems_progress" , :style => "display:none;")%>  <%= check_box_tag  "show_only_webitems", true , false, { :onchange => "showOnlyWebItems();$('show_only_webitems_progress').show();" } %>Show only WebItems <br/>
+
+
+<%= render :partial => "breast_prints/ajax_breast_prints_list" %>
+
+
+
+
+    <% content_for :head_additions do -%>
+          <!-- BeginDesigner Specsheet Index Head Additions -->
+          <% stylesheet_link_tag 'designer_specsheet.css'  %>
+          <%= javascript_include_tag 'breast_prints.js' %>
+          <!-- End Designer Specsheet Index Head Additions -->
+    <% end  -%>

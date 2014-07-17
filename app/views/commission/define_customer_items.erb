@@ -1,0 +1,26 @@
+
+
+Search for Items to add:	
+<%  form_remote_tag :url => 'add_to_cart'  do %>
+		<%=    text_field_tag  "item_keywords"  %>
+		<%= observe_field :item_keywords, :frequency => 7, :update => 'item_rows',  :url => { :action => 'find_item' ,:customer_id =>  @commission_customer.id } ,  :with => 'item_keywords'  %>
+<% end %>
+
+
+
+<div style="border:solid black 1px;float:left;padding:5px;margin:5px;width:100%;">
+	
+	<table>
+		<tbody>
+		<tr>
+	  		<td> 
+	  		<div id="item_rows">
+	  		<%= render :partial => "/commission/item", :collection => @items %>
+	  		</div>
+	  		</td>
+	  	</tr>	
+		</tbody>
+		</table>
+
+
+</div>

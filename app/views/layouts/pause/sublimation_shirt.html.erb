@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<%= render(:partial => "layout_elements/head") %>
+<body class="body">
+      <div class="header">
+              <%= render :partial => 'onclick_top_menu/onclick_top_menu' %>
+      </div>
+
+      <div class="page_content_wide">
+            <% if flash[:notice] != nil -%><div style="color: blue; text-align: center;">&nbsp;<%= flash[:notice] %>&nbsp;</div><% end -%>
+            <%= yield %>
+      </div>
+      <div class="footer">
+
+      </div>
+  <%= render :partial => 'development/instance_variables' , :locals => { :instance_variables => instance_variables } %>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<div class="container" id="items_container">
+  <div class="row-fluid">
+    <ul class="thumbnails">
+
+        <% @items.each do |item| %>
+            <% if item %>
+              <li class="col-12 col-lg-6 item_choice" style="list-style-type: none;">
+										<%= image_tag(   '/images/item_thumbnails/' +     item.PictureName )    %>
+						</li>
+                <% end %>
+      <% end %>
+
+    </ul>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @junk %>
+    <br />
+    <% if controller.action_name == 'search' %>
+        Keywords Hit: <%= item.SubDescription3  %><br />
+    <% end %>
+    <%=  item.category.Name  %><br />
+    <% unless !@category %>
+        <%=  item.number  %><%=  item.description_before_color_and_size  %><br />
+    <% end %>
+<% end %>

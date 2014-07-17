@@ -1,0 +1,90 @@
+
+
+
+<div style="float:left;width:850px;background-color:lightblue;">
+
+@purchases_entry: <%= @purchases_entry  %> <br>
+
+@purchases_entry.Comment: <%= @purchases_entry.Comment   if @purchases_entry %> <br>
+
+<br>
+@background_name: <%= @background_name  %> <br>
+
+@reverse_print_name: <%= @reverse_print_name  %> <br>
+
+
+session[:customization]["item_id"]: <%= session[:customization]["item_id"]  %> <br>
+
+session[:customization]["design_id"]: <%= session[:customization]["design_id"] %><br>
+
+session[:customization]["supersize"]: <%= session[:customization]["supersize"]  %> <br>
+
+
+
+show_supersize?: <%= show_supersize? %> <br>
+@item.id: <%= @item.id if @item %><br>
+@design.id: <%= @design.id if @design %><br>
+
+
+
+
+session[:customization]: <%= session[:customization].inspect %> <br>
+
+
+
+
+ @purchases_entry.Comment: <%= @purchases_entry.Comment  if @purchases_entry %><br>
+
+
+<br><br>
+
+
+<% 		
+@request = request
+@response = response
+@env = request.env 
+%>
+		
+
+
+session: 
+<% session.each do |sesss|  %>
+			<%= sesss %>----
+<% end %>
+
+
+
+
+
+
+params: <%= params  %><br /><br />
+
+env: <%= @env   %><br /><br />
+
+
+
+@request.headers: 
+<% @request.methods.each do |hd|  %>
+			<%= hd %>----
+<% end %>
+
+
+
+@request.methods: 
+<% @request.methods.each do |met|  %>
+			<%= met %>----
+<% end %>
+
+
+
+
+<br />--------------------------------<br />
+
+response: <%= @response   %><br /><br />
+
+@response.methods: 
+<% @response.methods.each do |met|  %>
+			<%= met %>----
+<% end %>
+
+</div>

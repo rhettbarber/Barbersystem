@@ -1,0 +1,55 @@
+
+
+    <div id="crest_prints_list">
+        <% default_crest_print = CrestPrint.where("category_id = ? and default_crest = ?", @main_design.category_id, 1  ).first    %>
+        <% default_crest_item_id = default_crest_print.item_id if default_crest_print %>
+      <%= hidden_field_tag "main_design_id", @main_design.id %>
+      <%= hidden_field_tag "category_id", @main_design.category_id %>
+      <%= hidden_field_tag "item_ids",  "" %>
+      <%= hidden_field_tag "item_ids_to_remove",  "" %>
+      <%= hidden_field_tag "item_id_to_default",  "" %>
+
+      Available Crest Prints:
+      <% @already_show_cp_item_ids = Set.new %>
+      <% @available_size = 0 %>
+      <fieldset id="admin_crest_print_choices_to_remove" data-role="controlgroup">
+        <% @main_design.applicable_crest_prints.sort_by{ |x| x.ItemLookupCode }.each do |item| %>
+                        <%  @already_show_cp_item_ids.add?( item.id ) %>
+                        <% @available_size += 1 %>
+                        <% crest_image_url =  'http://cdn.dixieoutfitters.com/images/item_thumbnails/' +  item.ItemLookupCode + '.png'    %>
+                         <% if default_crest_item_id == item.id %>
+                                            <input  type="checkbox" id="<%= item.id %>" value="<%= item.id %>" name="<%= item.id %>"/>
+                                            <label style="background-color: skyblue;" for="<%= item.id %>"><%= image_tag( crest_image_url , :size => "70x70"   )%> <%= item.ItemLookupCode %> - <%= item.Description %></label>
+                         <% else %>
+                                            <input  type="checkbox" id="<%= item.id %>" value="<%= item.id %>" name="<%= item.id %>"/>
+                                            <label for="<%= item.id %>"><%= image_tag( crest_image_url , :size => "70x70"   )%> <%= item.ItemLookupCode %> - <%= item.Description %></label>
+                         <% end %>
+
+        <% end %>
+        <% if @available_size == 0 %>
+            0 Crest prints available. Add them below.
+        <% end %>
+      </fieldset>
+      <% unless  @available_size == 0 %>
+                <a id="submit_remove_crest_prints" data-role="button">Remove  crest prints from  available</a>
+                 <a id="submit_default_crest_print" data-role="button">Set as default</a>
+      <% end %>
+
+      Crest Prints which could be made available:
+      <%     @other_crest_prints  = Item.includes(:category).where("categories.Name like ? and Inactive = ?",  'pocket prints' , false )   %>
+      <fieldset id="admin_crest_print_choices" data-role="controlgroup">
+        <% @other_crest_prints.sort_by{ |x| x.ItemLookupCode }.each do |item| %>
+            <% unless @already_show_cp_item_ids.include?( item.id ) %>
+                <% crest_image_url =  'http://cdn.dixieoutfitters.com/images/item_thumbnails/' +  item.ItemLookupCode + '.png'    %>
+                <input  type="checkbox" id="<%= item.id %>" value="<%= item.id %>" name="<%= item.id %>"/>
+                <label for="<%= item.id %>"><%= image_tag( crest_image_url , :size => "70x70"   )%> <%= item.ItemLookupCode %> - <%= item.Description %></label>
+            <% end %>
+        <% end %>
+      </fieldset>
+
+      <a id="submit_add_crest_prints" data-role="button">Add crest prints to available</a>
+
+
+
+
+    </div>

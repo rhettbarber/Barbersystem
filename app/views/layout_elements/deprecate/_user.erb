@@ -1,0 +1,39 @@
+<% if @website.store_website == true %>
+
+			<% if controller.controller_name != 'page'  %>	
+					<div id="user" style="margin:0px;padding:0px;border:0px;max-height:29px;">
+								<%= link_to "Back One Page", :back  -%> |
+									<%  if @user   -%>
+													    <% unless controller.controller_name == 'page' %>			
+													     		<%= h @user.email -%> | 					  
+														<% end %>
+														<%= link_to "Log Out",:controller => 'account', :action => 'logout'  -%>  | <br />
+														<% if @purchase %>
+																Order #: 
+																<%= @purchase.id %>
+														<% end %>
+														  <%= link_to 'Customer Area',:controller => "account", :action => "index" -%>
+																				    
+															
+									<% else %>
+                                                                                        <%= link_to 'Log In',:controller => 'account', :action => "login"    -%>
+									<%  end  -%>
+								
+								| <%= link_to image_tag("/images/icons/gold-coin.png",:border => 0, :size => "20x20"),:controller => 'affiliates', :action => "index"  %>		
+								| <%= link_to image_tag("/images/icons/mail.gif",:border => 0, :size => "20x20"),:controller => 'account', :action => "inbox"  %>	
+								<% unless @website.store_website == false  %>
+									| <%= link_to image_tag("/images/buttons/cart-icon-red.gif",:border => 0),:controller => 'cart', :action => "index"  %>
+								<%  end  %>
+					
+					</div>
+			<% else %>
+					<div id="user" style="margin:0px;padding:0px;border:0px;max-height:29px;">
+								<%= link_to 'Customer Area',:controller => "account", :action => "index" -%>
+								| <%= link_to image_tag("/images/icons/gold-coin.png",:border => 0, :size => "20x20"),:controller => 'affiliates', :action => "index"  %>		
+								| <%= link_to image_tag("/images/icons/mail.gif",:border => 0, :size => "20x20"),:controller => 'account', :action => "inbox"  %>	
+								| <%= link_to image_tag("/images/buttons/cart-icon-red.gif",:border => 0),:controller => 'cart', :action => "index"  %>
+					</div>
+			<% end %>
+<% else %>
+			<%= link_to image_tag("/images/icons/mail.gif",:border => 0, :size => "20x20") , :controller => "page" , :action => "show", :id => "contact-us"  %>	
+<% end %>

@@ -1,0 +1,17 @@
+ <%# cache (@browse_fragment_name  ) do %>
+
+
+        <% logger.debug "-------------------------------------begin store/browse " %>
+        <% if @department and @category %>
+                        <%= render :partial => 'breadcrumb', :locals => {:crumb => 'item'} %>
+                        <%=   render :partial => "store/items" %>
+        <% elsif @department and !@category %>
+                        <%= render :partial => 'breadcrumb', :locals => {:crumb => 'category'}  %>
+                        <%=   render(:partial => "store/department_category_list",:locals => {:department => @department } )  %>
+        <% else %>
+     <% cc %>
+                        <%= render :partial => 'breadcrumb', :locals => {:crumb => 'department'}  %>
+                        <%=  render(:partial => "store/departments",:locals => {:department_type => department_type } )  %>
+        <% end %>
+            <% logger.debug "-------------------------------------end store/browse " %>
+ <%# end  %>

@@ -1,0 +1,35 @@
+
+<%= stylesheet_link_tag 'item_management.css'  %>
+
+<div align="center">
+          <%= image_tag( '/images/icons/tools.png' ,:size => "50x50" ) %>
+          <br/>
+          <%= link_to "Back to Item Management", :controller => "item_management" %>
+          <%= link_to "Clone Item Types", :controller => "clone_item_types",  :action => "index" %> |
+          <%= link_to "Clone Items", :controller => "clone_items",  :action => "index" %> |
+          <%= link_to "Status Legend",{:controller => 'item_management', :action => 'status_legend_popup'} , :popup => ['Status Legend', 'height=300,width=800']    %><%= link_to image_tag("/images/icons/compass-rose.png", :size => "25x25" ,:border => 0),{:controller => 'item_management', :action => 'status_legend_popup'} , :popup => ['Status Legend', 'height=300,width=800']    %>
+    </div>
+<br/>
+
+<% unless File.exists?( @verification_file ) %>
+      <h1 style="color:red;">Error! Server is having trouble accessing 'STORAGE_DISK_1'</h1>
+<% end  %>
+
+
+<br/>
+<table id="content item_management_table"  cellspacing="0">
+      <tr>
+          <th>Image</th>
+          <th>Item Lookup Code</th>
+          <th id="th_description">Description</th>
+           <th style="width:100px;">YTDN</th>
+            <th style="width:100px;">Warn</th>
+           <th>Basic Status</th>
+        </tr>
+        <%= render :partial => "item_management/item",:collection => @items %>
+    </table>
+
+
+
+ <%=   will_paginate @items %>
+

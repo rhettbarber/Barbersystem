@@ -1,0 +1,12 @@
+
+<% if @last_posted_page  %>
+		<table width="850" height="40" cellspacing="0" cellpadding="0" border="0">
+	    <tbody>
+	        <tr>
+	            <td style="background-color: darkgrey; height: 20px;"> 
+					<%= link_to "Last News Post: " + @last_posted_page.name, :controller => 'page', :action => 'show', :id => @last_posted_page.slug  %>
+				</td>
+	        </tr>
+	    </tbody>
+		</table>
+<%  end  %>

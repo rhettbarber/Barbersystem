@@ -1,0 +1,113 @@
+<script type="text/javascript">
+if  ($('tabs_advanced_item_management')  != undefined) {
+            var tabs_advanced_item_management = new Control.Tabs('tabs_advanced_item_management',{
+                     defaultTab:'none',
+                    afterChange: function(new_container){
+            }
+});
+}
+</script>
+
+<div id="menu_item_management"  class="menu_item_management"    style="width:850px;text-align:left;">
+          <% if @item.category %>
+                                          <ul  id="tabs_advanced_item_management" class="subsection_tabs">
+                                                  <li class="tab"><a  id="item_technical_editor_tab_a" href="#item_technical_editor">Item Editor</a></li>
+                                                   <li class="tab"><a  id="category_technical_editor_tab_a" href="#category_technical_editor">Category Editor</a></li>
+                                                   <li class="tab"><a  id="additive_categories_tab_a" href="#additive_categories">Additive Categories</a></li>
+                                                   <li class="tab"><a  id="category_opposites_tab_a" href="#category_opposites">Category Opposites</a></li>
+                                                   <% if @class_editor %>
+                                                  <li class="tab"><a  id="class_options_header_tab_a" href="#category_class_technical_editor">Class Editor</a></li>
+                                                  <% end  %>
+                                          </ul>
+                                        <%= render :partial => 'control_tabs_item_administration/item_technical_editor',  :locals => { :side =>  side  }  %>
+                                        <%= render :partial => 'control_tabs_item_administration/additive_categories' %>
+                                        <%= render :partial => 'control_tabs_item_administration/category_technical_editor' %>
+                                        <%= render :partial => 'control_tabs_item_administration/category_opposites' %>
+
+                                        <% if @class_editor %>
+                                                    <%= render :partial => 'administration_category_class/category_class_technical_editor' if @category.category_class %>
+                                        <% end  %>
+
+            <% else  %>
+                              <div style="width:850px;height:40px;text-align:center;" class="black_floral">
+                                <br />
+                                    Your item has no category..
+                              </div>
+
+            <% end  %>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @off %>
+
+
+
+<% if @category %>
+
+                <ul  id="tabs_advanced_menu_category" class="subsection_tabs">
+                        <li class="tab"><a  id="category_technical_editor_tab_a" href="#category_technical_editor">Category Editor</a></li>
+                         <li class="tab"><a  id="additive_categories_tab_a" href="#additive_categories">Additive Categories</a></li>
+                        <li class="tab"><a  id="class_options_header_tab_a" href="#category_class_technical_editor">Class Editor</a></li>
+                </ul>
+
+
+
+
+  <%= render :partial => 'administration_category/additive_categories' %>
+  <%= render :partial => 'administration_category/category_technical_editor' %>
+  <%= render :partial => 'administration_category_class/category_class_technical_editor' if @category.category_class %>
+
+
+ <% end  %>
+
+
+
+                <li><%= link_to 'Custom Items' ,:controller => 'custom_items'  %></li>
+                <li><%= link_to ' Email' , "http://mail.google.com/a/barbersystem.com"  %></li>
+                <li> <%= link_to 'Department / Category Editor' ,:controller => 'categories', :action => 'departments_categories'  %></li>
+                 <li> <%= link_to 'Items' ,:controller => 'items'  %></li>
+                <li> <%= link_to 'Item Manager' ,:controller => 'item_manager'  %></li>
+                <li> <%= link_to 'Item Reports' ,:controller => 'item_reports'  %></li>
+                <li><%= link_to 'Record Groups' ,:controller => 'record_groups'  %></li>
+<% end  %>

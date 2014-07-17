@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<%= render(:partial => "layout_elements/head") %>
+<%= yield :head_additions %>
+
+<body>
+   <div class="page_content_wide">
+              <%= yield %>
+   </div>
+
+</body>
+</html>

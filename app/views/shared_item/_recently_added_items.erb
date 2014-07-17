@@ -1,0 +1,30 @@
+<% logger.debug "-------------------------------------begin _shared_item/items " %>
+
+	<%  if @items  %>
+			<% if @purchase_symbiote_item_type == "master" && @purchase_symbiote_item_shade == "colored" %>
+						<% @opaque_design_ids = [] %>
+						<%  @items.each do |item| %>
+							<% @opaque_design_ids << item.id if item.shade == "opaque" %>
+						<% end %>
+			<% end %>
+
+
+			<div class="recently_added_items_surround">	
+				<% if @opaque_design_ids %>	
+						<% logger.debug "-------------------------------------@opaque_design_ids " -%>
+						<% @items.sort_by{|a| a.ItemLookupCode}.each do |item| -%>
+								<% if @opaque_design_ids.include?(item.id)  %>
+									<%= render(:partial => "shared_item/item_small",:locals => { :item => item } )  -%>
+								<% else %>
+									<%= render(:partial => "shared_item/item_color_not_compatible_small",:locals => { :item => item } )  -%>
+								<% end %>
+						<% end -%>
+				<% else %>
+						<% logger.debug "------------------------------------- NOT @opaque_design_ids " -%>		
+						<% @items.sort_by{|a| a.ItemLookupCode}.each do |item| -%>
+							<%= render(:partial => "shared_item/item_small",:locals => { :item => item } )   -%>
+						<% end -%>
+				<% end %>
+			</div>
+		<% end %>
+<% logger.debug "-------------------------------------end _shared_item/items " -%>

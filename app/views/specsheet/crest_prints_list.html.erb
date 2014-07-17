@@ -1,0 +1,32 @@
+
+<%= render :partial => "specsheet/crest_prints_list" %>
+
+<script type="text/javascript">
+
+
+    $(".specsheet_crest_prints_list").on('pagecreate', function(event){
+        console.log("begin .specsheet_crest_prints_list pageshow");
+        $(".crest_print").on('click', function(event){
+            console.log("begin .crest_print on click");
+            var crest_item_id  = $(this).attr("data-id");
+            //              changepage to back
+            var the_referrer =  document.referrer      ;
+            var specsheet_page_url  = addParameter( the_referrer , 'crest_id', crest_item_id );
+//                                                    console.log("specsheet_page_url: " + specsheet_page_url );;
+            $.mobile.pageContainer.pagecontainer('change', "/specsheet/4379?crest_id=6603", {   reload:true   });
+//                                                        $.mobile.navigate(  specsheet_page_url , { reload:true} );
+
+//                                                        transition: 'flip' ,
+//                                                        reload:true
+            //                    changeHash: false,
+            //                    reverse: true,
+            //                    showLoadMsg: true
+//                                                    });
+//                                   $( ".ui-dialog" ).dialog( "close" );
+
+            console.log("end .crest_print on click");
+        });
+        console.log("end .specsheet_crest_prints_list pageshow");
+    });
+
+</script>

@@ -1,0 +1,31 @@
+
+
+<h1>
+<%= render :partial => "shared/flash" %>
+</h1>
+
+
+<% if response %>
+
+Credit Card Entry
+
+@response.message: <%= @response.message  %><br />
+@response.params: <%= @response.params  %> <br />
+
+@response.authorization: <%= @response.authorization  %> <br />
+@response.avs_result: <%= @response.avs_result  %> <br />
+@response.cvv_result: <%= @response.cvv_result  %> <br />
+@response.test: <%= @response.test  %> <br />
+
+<% else %>
+              No Response
+
+<% end  %>
+
+
+
+
+
+  users/charge_credit_card
+
+

@@ -1,0 +1,27 @@
+
+       <div>
+                                         <h2>Create an account by filling out the form below.</h2>
+
+                                         (We do not sell or exchange our customer's information.)
+
+                                        <%= errors_for(@user, "Opps, unable to add new user").html_safe if @user %>
+
+                                        <%= form_for  @user, :url => { :action => "signup_action" } do |f| -%>
+
+                                        <p><label for="email">Email</label>
+                                        <%= f.text_field :email %></p>
+
+                                        <p><label for="password">Password</label>
+                                        <%= f.password_field :password %></p>
+
+                                        <p><label for="password_confirmation">Confirm Password</label>
+                                        <%= f.password_field :password_confirmation %></p>
+
+                                        <%#= show_simple_captcha.html_safe %>
+
+                                           <br>
+                                        <p><%= submit_tag 'Sign up' %></p>
+
+                                         <% end -%>
+       </div>
+

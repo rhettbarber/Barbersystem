@@ -1,0 +1,9 @@
+		<% if @customer && @page_developing_mode %>
+				<li>
+					customer.customer_viewable_page_types::<%= @customer.customer_viewable_page_types  %><br />
+					customer.customer_type_record:: <%= 	@customer.customer_type_record.name  %><br />
+					customer.customer_type_record:: <%= 	@customer.customer_type_record.id  %><br />
+					page.website_id:: <%= 	@page.website_id if @page  %><br />
+					page.page_type_id:: <%= 	@page.page_type_id if @page  %><br />
+				</li>
+		<% end %>

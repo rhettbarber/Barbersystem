@@ -1,0 +1,6 @@
+
+
+				 	<table id="specsheet_table" cellpadding="0" border="0" background="<%=  @item.image_url( @department  , '/images/item_specsheets/', 'x' ,@item_prefix_override )   %>" width="720" height="353" style="background-repeat: no-repeat;">	
+						<td><img src="/images/item_specsheets/<%= @design.PictureName %>" alt="<%= @design.PictureName %>"     style=" position: relative; height:<%=   @combination_height  =  @combination.height  if @combination   %>px; left:<%=     @combination_left   =  @combination.left    if @combination  %>px; top:<%=    @combination_top   =  @combination.top    if @combination  %>px;  " /></td>
+					</table>	
+

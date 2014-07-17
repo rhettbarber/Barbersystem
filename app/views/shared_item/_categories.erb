@@ -1,0 +1,61 @@
+
+<% deprecate__shared_item__categories %>
+
+shared_item\categories <br />
+<%= render :partial => 'administration_category/options_header' if admin?  %>
+
+<% if admin? %>
+	categories:<%= @categories %>:<br />
+	@purchase.opposite_category_ids:<%=@purchase.opposite_category_ids if @purchase %>:<br />
+<% end %>
+
+<% 
+if @department
+	local_department_id = @department.id.to_s
+else
+	local_department_id = '0'
+end
+
+if @purchase_symbiote_item_category_category_class_id
+	local_purchase_symbiote_item_category_category_class_id = @purchase_symbiote_item_category_category_class_id.to_s
+else
+	local_purchase_symbiote_item_category_category_class_id = '0'
+end	
+
+
+if @user_array_user_type_id
+	local_user_array_user_type_id = @user_array_user_type_id.to_s
+else
+	local_user_array_user_type_id = '0'
+end	
+%>
+
+
+<% logger.debug "- LOG ------------------------------------begin _shared_item/categories " %>
+<% cache (@website.name + "/user_type_id/" + local_user_array_user_type_id + "/shared_item/items/department_id/" + local_department_id +  "/symbiote_item_category_category_class_id/" + local_purchase_symbiote_item_category_category_class_id ) do  %>
+		<%  if @categories  %>	
+				
+				
+					<div class="item_row_surround">	
+
+						
+							<% @categories.sort_by{|a| a.Name}.each do |category| %>
+										<% if category.items  %>
+												<% if category.items.first %>
+															<% item = category.items.first %>
+															<%= render(:partial => "shared_item/category_item",:locals => { :item => item } )   %>
+												
+												<% else %>			
+															<% if category.generic_counterpart %>
+																	<% item = category.generic_counterpart.items.first   %>
+																	<%= render(:partial => "shared_item/category_item",:locals => { :item => item } )   %>
+															<% end %>
+												<% end %>
+										<% end %>
+							<% end if @categories  %>
+					</div>
+		<%  else  %>		
+			no items found
+		<% end %>
+<% end %>
+<% logger.debug "- LOG ------------------------------------end _shared_item/categories " %>

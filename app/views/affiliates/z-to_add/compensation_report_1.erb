@@ -1,0 +1,55 @@
+<h1>Link Affiliate commission report for quarter starting <%= Time.now.at_beginning_of_quarter.to_date %> and ending <%= Time.now.at_beginning_of_quarter.to_date + 3.months %> </h1>
+These pages were viewed due to referral from your affiliate link(s) which produced sales.<br />
+You currently get <%= @user.commision_percentage %>% commission from every sale referred from your links.<br />
+Commissions must be at least $50.00 per quarter to be eligible to be paid. Commissions not paid will add onto the next quarter's commissions.<br />
+
+<div id="pathslegend">
+  <h2>Stats</h2>
+  <% if @user_sessions.size > 0 %>
+          <table class="list">
+            <tr><th>Time/Document Name/Referrer:</th><th></th><th>Purchase Amount:</th><th>Payable Amount:</th></tr>
+         	<% @user_sessions.each do |user_session| -%>
+				    <% if user_session.purchase %>        
+				          <% if user_session.purchase.Total > 0  %>
+					            <tr class="<%= alternator %>">
+								    <td> <%= user_session.created_at %> </td>
+								    <td>   </td>
+								    <td> <%= user_session.purchase.Total %>  </td>
+								    <td> <%= user_session.purchase.affiliate_payable_amount %>  </td>
+							    </tr>
+					            <tr class="<%= alternator %>">
+								    <td> <%= user_session.rail_stats.first.doc_name if user_session.rail_stats.first %> </td>
+								    <td> .1  </td>
+								    <td> <%= user_session.purchase.affiliate_payable_amount  %>  </td>
+								    <td> .2  </td>
+							    </tr>
+							    <tr class="<%= alternator %>">
+								    <td> <%= user_session.rail_stats.first.referer if user_session.rail_stats.first %>   </td>
+							    </tr>
+							    <tr class="<%= alternator %>">
+								    <td> <%=  user_session.id if admin? %> </td>
+							    </tr>
+								<tr>
+				                	<td colspan="4"><img width="100%" height="2" src="/images/pixels/grey.gif" alt="_____"/></td>
+				              	</tr>
+	        			<%  end   %>
+	        		<%  end   %>
+        	<%   end    %>
+          </table>
+          <% end if  @user_sessions %>
+</div>
+
+
+<div id="pathslegend">
+  <h2>Totals</h2>
+          <table class="list">
+            <tr><th>This Quarter Payable Commission:</th><th>Previous Quarters Leftover Commission:</th><th>Total Payable Commission:</th></tr>
+	
+						            <tr class="<%= alternator %>">
+									    <td> <%= @this_quarter_payable_commision %> </td>
+									    <td> <%= @previous_quarters_leftover_commision %> </td>
+									    <td> <%= @total_payable_commision %>  </td>
+								    </tr>
+	
+          </table>
+</div>

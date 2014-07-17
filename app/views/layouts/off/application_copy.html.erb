@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+
+<%= render :partial => "layout_elements/head"    %>
+
+<div data-role="page"   id="<%= controller_name + "_" + action_name %>" class="<%= controller_name + "_" + action_name %>"  data-dom-cache="false">
+
+              <%= render :partial => "layout_elements/panels"  %>
+              <%= render :partial => "layout_elements/header"    %>
+
+
+              <!--   #######################  BEGIN  CONTENT  ####################### -->
+              <!--   #######################  BEGIN  CONTENT  ####################### -->
+              <!--   #######################  BEGIN  CONTENT  ####################### -->
+              <!--   #######################  BEGIN  CONTENT  ####################### -->
+              <!--   #######################  BEGIN  CONTENT  ####################### -->
+              <div data-role="content" data-theme="a">
+
+                            <script src="/assets/repeated/initiate_functions.js"></script>
+
+                            <% if request.path  == '/purchases/checkout_review' %>
+                                <%  @show_class = "show_printable" %>
+                            <% elsif controller_name  == 'page' %>
+                                <%  @show_class = "show_page" %>
+                            <% else %>
+                                <% @show_class = "show" %>
+                            <% end %>
+
+
+                            <div id="the_yield" style="margin-left:auto;margin-right:auto;">
+                                              <div class="<%=  @show_class %>">
+                                                                <%= render :partial => "layout_elements/flash"    %>
+                                                                <%= yield %>
+                                              </div>
+                            </div>
+              </div>
+              <!--   #######################  END CONTENT    ####################### -->
+              <!--   #######################  END CONTENT    ####################### -->
+              <!--   #######################  END CONTENT    ####################### -->
+              <!--   #######################  END CONTENT    ####################### -->
+              <!--   #######################  END CONTENT    ####################### -->
+
+              <%= render :partial => "layout_elements/footer"    %>
+</div><!-- page -->
+
+</html>
+
+
+<!--Controller and Action <%= controller_and_action_name %> -->
+<!--Page Rendered in <%= sprintf('%.3f', (Time.now.usec - @start_time).abs / 1000000.0) %> seconds-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

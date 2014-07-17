@@ -1,0 +1,59 @@
+
+
+<div id="specsheet_div"   class="specsheet_div"
+     style="height:328px;
+     width:850px;
+     background-image: url( '/images/item_specsheets_advanced/BG0001.png');">
+
+      <div id="front_design_div" style=" height:328px;width:425px;float:left;text-align: center;">
+              <img src="/images/item_specsheets_advanced/6727_o_rp.png"
+              id="front_design_spot"
+              class="specsheet_class"
+              alt="6558l_o_rp.png"
+              style=" position: relative;
+              margin:0px;
+              padding:0px;
+              left:0px;
+              top:0px;
+              " />
+      </div>
+
+        <div id="back_design_div" style=" height:328px;width:425px;float:left;text-align: center;">
+            <img src="/images/item_specsheets_advanced/6727_o_rp.png"
+            id="back_design_spot"
+            class="specsheet_class"
+            alt="6558l_o_rp.png"
+            style=" position: relative;
+            margin:0px;
+            padding:0px;
+            left:0px;
+            top:0px;
+            " />
+      </div>
+
+
+        <div id="mask_div" style=" height:0px;width:0px;float:left;text-align: center;display:none;">
+            <img src="/images/item_masks/all-over-front-mask.png"
+            id="mask_spot"
+            class="specsheet_class"
+            alt="6558l_o_rp.png"
+            style=" position: relative;
+            margin:0px;
+            padding:0px;
+            left:-850px;
+            top:0px;
+            " />
+      </div>
+
+
+</div>
+
+<div  id="preference_fields" style="width: 850px; min-height: 50px;background-color:yellow;">
+front_design: <%= text_field_tag  'front_design' , 0 %><br />
+back_design: <%= text_field_tag  'back_design' , 0 %><br />
+production_filenames:  <%= text_field_tag  'production_filenames:' , 0 %><br />
+front_print_string  <%= text_field_tag  'front_print_string' , 'composite -gravity center 6727_o_rp.png -geometry 5000x5000 11085-REBEL_front.jpg  purchase_entry_id.png', :size => 130 %>
+</div>
+
+
+<%= render :partial => "specsheet_advanced/department_category_select" %>

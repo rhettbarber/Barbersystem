@@ -1,0 +1,125 @@
+<% content_for :head_additions do -%>
+    <%= stylesheet_link_tag 'sublimation_shirt.css'  %>
+<% end  -%>
+
+
+<h1>SublimationShirt  </h1>
+
+
+<div class="system_description">
+      This system  processes .jpg images located in  AUTOMATION_DATABASE\ORIGINAL_JPG<br/>
+      It outputs files to:<br/>
+      AUTOMATION_DATABASE\FINISHED_PRODUCTION_JPGS<br/>
+      AUTOMATION_DATABASE\FINISHED_WEBSITE_ITEM_SPECSHEETS<br/>
+</div>
+
+<div class="system_commands">
+      Commands:<br/>
+        <% if @incomplete_item_specsheets.size > 0 %>
+                <%= link_to "Complete All Incomplete","complete_selected_incomplete" %>
+         <% else %>
+               All files are completed, Add some files into AUTOMATION_DATABASE\ORIGINAL_PSD and once the separator computer converts them to JPG and  are found in
+               AUTOMATION_DATABASE\ORIGINAL_JPG they will become available to convert for production.
+               If either item specsheet or production image is missing it will be created by clicking the link below..
+          <% end %>
+             <br/><br/>
+              <%= link_to "View Completed Specsheet Thumbnails","complete_selected_incomplete" %>
+</div>
+
+
+<div class="content">
+
+               <% if @unfinished_original_jpgs.size > 0 %>
+                      <div  class="completeness_banner"><h1>Shirt - <span style="color: red"> <%= @unfinished_original_jpgs.size %> @unfinished_original_jpgs (Separator creates these files) </span> </h1></div>
+                      <% @unfinished_original_jpgs.each do |name|     %>
+                                    <div class="item">
+                                               <%= name %>
+                                    </div>
+                      <% end  %>
+              <% else %>
+                    <br/><br/> <span style="color:red"> ALL ORIGINAL JPGS are finished. </span><br/><br/><br/>
+              <% end %>
+
+
+               <% if @unavailable_production_jpgs.size > 0 %>
+              <div  class="completeness_banner"><h1>Shirt - <span style="color: red"> <%= @unavailable_production_jpgs.size %> @unavailable_production_jpgs Item SpecSheets </span> </h1></div>
+                      <% @unavailable_production_jpgs.each do |name|     %>
+                                    <div class="sublimation_item">
+                                      <% if name.to_s.split(' ').size <= 1 %>
+                                               <%= name %>
+                                      <% else  %>
+                                            <span style="color:red"><%= name %> - Remember that files with spaces will not be processed !! </span>
+                                      <% end  %>
+                                    </div>
+                      <% end  %>
+              <% else %>
+                    <br/><br/> <span style="color:red"> All .jpg images located in  AUTOMATION_DATABASE\ORIGINAL_JPG have been made into production images. 0 Images to process. </span><br/><br/><br/>
+              <% end %>
+
+              <% if @incomplete_item_specsheets.size > 0 %>
+              <div  class="completeness_banner"><h1>Shirt - <span style="color: red"> <%= @incomplete_item_specsheets.size %> @incomplete_item_specsheets </span> </h1></div>
+                      <% @incomplete_item_specsheets.each do |name|     %>
+                                    <div class="sublimation_item">
+                                      <% if name.to_s.split(' ').size <= 1 %>
+                                               <%= name %>
+                                      <% else  %>
+                                            <span style="color:red"><%= name %> - Remember that files with spaces will not be processed !! </span>
+                                      <% end  %>
+                                    </div>
+                      <% end  %>
+              <% else %>
+                    <br/><br/> <span style="color:red"> All .jpg images located in  AUTOMATION_DATABASE\ORIGINAL_JPG have been processed. 0 Images to process. </span><br/><br/><br/>
+              <% end %>
+
+
+               <% if @available_production_jpgs.size > 0 %>
+              <div  class="completeness_banner"><h1>Shirt - <span style="color: red"> <%= @available_production_jpgs.size %>@available_production_jpgs </span> </h1></div>
+                      <% @available_production_jpgs.each do |name|     %>
+                                    <div class="sublimation_item">
+                                      <% if name.to_s.split(' ').size <= 1 %>
+                                               <%= name %>
+                                      <% else  %>
+                                            <span style="color:red"><%= name %> - Remember that files with spaces will not be processed !! </span>
+                                      <% end  %>
+                                    </div>
+                      <% end  %>
+              <% else %>
+                    <br/><br/> <span style="color:red"> All .jpg images located in  AUTOMATION_DATABASE\ORIGINAL_JPG have been made into production images. 0 Images to process. </span><br/><br/><br/>
+              <% end %>
+
+
+
+
+
+
+
+
+
+              <% if @completed_item_specsheets.size > 0 %>
+                      <div  class="completeness_banner"><h1>Shirt - <span style="color: red"> <%= @completed_item_specsheets.size %> Completed Item SpecSheets </span> </h1></div>
+                      <% @completed_item_specsheets.each do |name|     %>
+                                    <div class="item">
+                                               <%= name %>
+                                    </div>
+                      <% end  %>
+              <% else %>
+                    <br/><br/> <span style="color:red"> NO FILES HAVE BEEN COMPLETED, OR FOLDER NOT FOUND. MAKE SURE YOU ARE MAPPED. </span><br/><br/><br/>
+              <% end %>
+
+
+
+                    
+               <% if @finished_original_jpgs.size > 0 %>
+                      <div  class="completeness_banner"><h1>Shirt - <span style="color: red"> <%= @finished_original_jpgs.size %> Finished Original Jpgs </span> </h1></div>
+                      <% @finished_original_jpgs.each do |name|     %>
+                                    <div class="item">
+                                               <%= name %>
+                                    </div>
+                      <% end  %>
+              <% else %>
+                    <br/><br/> <span style="color:red"> NO JPGS HAVE BEEN MADE </span><br/><br/><br/>
+              <% end %>
+
+
+
+</div>

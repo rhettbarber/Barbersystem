@@ -1,0 +1,12 @@
+
+	  <div class="item_list_thumbnail_container_admin" style="padding:15px;width:150px;height:250px;overflow:hidden;float:left;background-color:white;">
+	    
+			<%=   image_tag( item.image_url(  item.default_master_department_id , 'item_thumbnails/','x' ),:border => 0, :size =>"120x120"   )  -%><br /> 
+			<%=  item.ItemLookupCode -%><br />
+			Size-Color:<%= item.SubDescription1 %><br />
+			Terms Found:<%= item.SubDescription3 %><br />
+			<%=  item.Description -%><br />
+			<%=  item.category.Name -%><br />
+			<%= link_to "Add to Commision Items", :controller => "reports", :action => "add_to_commission_items", :customer_id => @commissioned_artist , :item_id => item.id %><br />
+		</div>
+ 

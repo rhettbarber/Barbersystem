@@ -1,0 +1,53 @@
+
+
+
+<br />
+<div id="items_list">
+
+<% if @items %>
+
+            <%=  @items.size %><br />
+            <%=  @items.class %><br />
+            <%=  Item.last_core_value %><br />
+
+
+              <table>
+                <tr>
+                  <th>id</th>
+                  <th>ItemLookupCode</th>
+                  <th>prefix_from_full_item_lookup_code</th>
+                  <th>core_grep_value</th>
+                  <th>Description</th>
+                </tr>
+
+             <%   @potential_last_core_values = Set.new  %>
+              <% @items.each do |item| %>
+
+
+
+
+                <tr>
+                  <td><%= item.id %></td>
+                  <td><%= item.ItemLookupCode %></td>
+                  <td><%= item.prefix_from_full_item_lookup_code %></td>
+                  <td><%= item.core_grep_value %></td>
+                  <td><%= item.Description %></td>
+                </tr>
+
+                <%   @potential_last_core_values.add?(  item.core_grep_value )  %>
+
+
+              <% end %>
+              </table>
+              <br />
+
+              a<%=   @potential_last_core_values.sort.last %>a
+
+
+
+<% else  %>
+
+                No Results Found!
+
+<% end  %>
+</div>

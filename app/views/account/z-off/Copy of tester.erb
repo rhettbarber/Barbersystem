@@ -1,0 +1,47 @@
+
+<% if @last_posted_page  %>
+
+	<%= link_to "Last News Post: " +  @last_posted_page.name, :controller => 'page',:action => 'show',:id => @last_posted_page.slug  %>
+
+<%  end  %>
+<br />
+request_uri:	<%= @request_uri %> <br />
+request_accepts:	<%= @request_accepts  %> <br />
+request_body:	<%= @request_body  %> <br />
+request_body.class:	<%= @request_body.class  %> <br />
+request_content_length:	<%= @request_content_length  %> <br />
+request_content_type:	<%= @request_content_type %> <br />
+request_content_type_with_parameters:	<%= @request_content_type_with_parameters  %> <br />
+request_content_type_without_parameters:	<%= @request_content_type_without_parameters  %> <br />
+request_delete:	 @request_delete?   <br />
+request_domain:	<%= @request_domain  %> <br />
+request_format:	<%= @request_format  %> <br />
+request_format:	 @request_format=   <br />
+request_get:	 @request_get?    <br />
+request_head:	 @request_head?    <br />
+request_headers:	<%= @request_headers   %> <br />
+request_host:	<%= @request_host  %> <br />
+request_host_with_port:	<%= @request_host_with_port  %> <br />
+request_method:	<%= @request_method  %> <br />
+request_parameters:	<%= @request_parameters %> <br />
+request_path:	<%= @request_path  %> <br />
+request_path_parameters:	<%= @request_path_parameters  %> <br />
+request_port:	<%= @request_port  %> <br />
+request_port_string:	<%= @request_port_string  %> <br />
+request_post:	 @request_post?   <br />
+request_protocol:	<%= @request_protocol  %> <br />
+request_put:	 @request_put?   <br />
+request_query_string:	<%= @request_query_string  %> <br />
+request_raw_post:	<%= @request_raw_post  %> <br />
+request_relative_url_root:	<%= @request_relative_url_root  %> <br />
+request_remote_ip:	<%= @request_remote_ip  %> <br />
+request_:	<%= @request_  %> <br />
+request_request_method:	<%= @request_request_method  %> <br />
+request_server_software:	<%= @request_server_software  %> <br />
+request_ssl:	 @request_ssl?   <br />
+request_standard_port:	<%= @request_standard_port  %> <br />
+request_subdomains:	<%= @request_subdomains  %> <br />
+request_symbolized_path_parameters:	<%= @request_symbolized_path_parameters %> <br />
+request_url:	<%= @request_url  %> <br />
+request_xhr:	 @request_xhr?   <br />
+request_xml_http_request:	 @request_xml_http_request?   <br />

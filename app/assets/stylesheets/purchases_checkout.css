@@ -1,0 +1,132 @@
+body {
+    font-size:13px;
+    font-family: sans-serif;
+}
+
+
+.complete {
+    border-left: 5px solid green;
+}
+
+.incomplete {
+    border-left: 5px solid red;
+}
+
+/*.ui-btn-active { color: red !important; background: none !important; background-color: green !important;  }*/
+
+
+
+
+@media ( min-width: 767px  ) {
+    /* Show the table header rows and set all cells to display: table-cell */
+    .my-custom-breakpoint td,
+    .my-custom-breakpoint th,
+    .my-custom-breakpoint tbody th,
+    .my-custom-breakpoint tbody td,
+    .my-custom-breakpoint thead td,
+    .my-custom-breakpoint thead th {
+        display: table-cell;
+        margin: 0;
+    }
+    /* Hide the labels in each cell */
+    .my-custom-breakpoint td .ui-table-cell-label,
+    .my-custom-breakpoint th .ui-table-cell-label {
+        display: none;
+    }
+}
+
+
+#purchase-table {
+    font-size: 12px;
+    border-bottom:10px solid black;
+    border-top:10px solid black;
+}
+
+.ui-body-c, .ui-overlay-c {background-color: white;}
+
+
+
+.even {
+    background-color: lightcyan;
+    border-bottom: 10px solid black;
+    border-top: 10px solid black;
+}
+
+.odd {    background-color: white;
+}
+
+/*.show_printable   .btn {width:100%;}*/
+
+.show_printable {
+    margin-left: auto;
+    margin-right:auto;
+    max-width:850px;
+    padding:4px;
+    border: 2px dashed lightslategray;
+}
+
+.checkout_review_header {
+    background-color:black;
+    min-height: 100px;
+    border: 1px solid black;
+    display:inline-block;
+    color:white;
+    text-align: center;
+    font-size: 18px;
+    width:100%;
+}
+
+
+.purchases_checkout_review_information {
+    display:inline-block;
+}
+
+#checkout_review_container {
+    /*background-color: yellow;*/
+    display:table;
+    border-bottom: 12px solid black;
+}
+
+
+.purchases_checkout_review_show {
+    border:3px dashed lightgray;
+    width:273px;
+    padding:0px;
+    float:left;
+}
+
+
+.checkout_ship_tos_show {
+
+}
+.ship_tos_show_shipping_service {
+    min-height: 257px;
+}
+
+.quote_tender_entries_show {
+    min-height: 250px;
+}
+
+
+.ship_to_review {
+    float:left;
+    width:245px;
+}
+
+.checkout_customers_show {
+    min-height: 512px;
+}
+
+.checkout_ship_tos_show {
+    min-height: 512px;
+}
+
+@media (max-width: 767px) {
+    .customer_billing_review {
+        /*width:240px;*/
+        /*padding:0px;*/
+    }
+
+}
+
+

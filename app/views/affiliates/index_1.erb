@@ -1,0 +1,67 @@
+	<h1> 2 Great affiliate Money Making opportunities! </h1>
+	<h2> ( You can of course do both!)</h2>
+
+<div style="float:left;padding-bottom:10px;">
+	<table>
+		<td><%= image_tag "/images/headers/make_money.jpg" %></td>
+		<td>
+				<table>
+				  <li>By adding a link or banner, you agree to be bound by our  <%= link_to  "Affiliate Terms and Conditions",:action => 'terms_and_conditions' %>  </li>	
+				  <br />
+				   <li> <span style="font-size:15px;"> <b> 1. Link up to <%= @website.title %> Today! </b>  </span> </li> 
+						<li>  Add one of the affiliate  links or banners below to your website or send them in emails to others. <%= "(You must log in to see your custom links and banners)"  unless @user  %> </li>   
+					<li> You earn  5% commission for each sale originating from your link or banner.  </li>	 
+					<li> As an affiliate, your prospects are tracked for 45 days.  </li>	 
+					<br /><br />
+					  <li> <span style="font-size:15px;"> <b>  2.  Recruit other  affiliates!  </b>  </span> </li> 
+					<li>  Add one of the affiliate  links or banners below to your website or send them in emails directed toward  those who would be interested in becoming an affiliate. <%= "(You must log in to see your custom links and banners)"  unless @user  %> </li>  
+					<li> If they become an affiliate, you earn 1% of each sale that comes to us from THEIR website or email.</li>
+					<li> As a recruiter, your prospects are tracked for 180 days.</li>
+			</table>
+		</td>
+	</table>
+</div>
+
+
+		After a minimum of $50.00 revenue has accrued and each products refund period (30 days) has passed, your check will be sent in the mail to the address we have on file for your customer information.
+		<br /><br />
+		This system is in Beta testing mode so we will be manually confirming all affiliate commission totals. Please report any bugs or miscalculations to <%= @website.phone %>.<br />
+		<br />
+	
+	
+<%	 unless @user  %>
+	<h2>If you already have a login/password with us,
+	<%= link_to "Sign In", :controller => "account", :action => "login"    %>
+	Otherwise, All you have to do to become an affiliate is
+	 <%= link_to "Sign Up", :controller => "account", :action => "signup"    %>!</h2>
+
+<% end %>
+
+
+		
+		<%= render :partial => 'affiliates/links_and_banners' if @user %>
+		
+		
+		<br />
+		
+		<%= link_to 'Email Templates', :controller => 'affiliates',:action => 'email_templates' %>	are a good way to get you started with our affiliate system.
+		
+
+<h3><span style="color:red;"> For all affiliate questions, please email <a href="mailto:affiliate@<%= @website.domain %>">affiliate@<%= @website.domain %></a>   </span></h3>	
+
+<h3><span style="color:red;"> For program version history and changelog, please visit: <%= link_to "Version Information", :controller => "affiliates", :action => "version_information"    %>  </span></h3>	
+
+<br />
+
+
+					<table>
+						<h3> Quick Notices: </h3>	 
+						<li> 1. Act with integrity and love for your fellow man! </li>
+						<li> 2. Do not include these links or banners in mass emails (more than 20 people)  without prior review by <%= @website.title %></li> 
+						<li> 3. If you have plans other than a simple link or banner from your website, please read <%= link_to  "Affiliate Terms and Conditions",:action => 'terms_and_conditions' %> extensively and contact us as needed. </li>  	 
+						<li> <b> Thank you, we wish for a long an prosperous business relationship! </b> </li>  
+				</table>
+		<br />
+		
+
+

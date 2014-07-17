@@ -1,0 +1,46 @@
+<h1>Listing customers</h1>
+
+<table>
+  <tr>
+    <th>Accountnumber</th>
+    <th>Address</th>
+    <th>Address2</th>
+    <th>City</th>
+    <th>Company</th>
+    <th>Country</th>
+    <th>Emailaddress</th>
+    <th>Faxnumber</th>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Phonenumber</th>
+    <th>State</th>
+    <th>Taxnumber</th>
+    <th>Zip</th>
+  </tr>
+  
+<% for customer in @customers %>
+  <tr>
+    <td><%=h customer.AccountNumber %></td>
+    <td><%=h customer.Address %></td>
+    <td><%=h customer.Address2 %></td>
+    <td><%=h customer.City %></td>
+    <td><%=h customer.Company %></td>
+    <td><%=h customer.Country %></td>
+    <td><%=h customer.EmailAddress %></td>
+    <td><%=h customer.FaxNumber %></td>
+    <td><%=h customer.FirstName %></td>
+    <td><%=h customer.LastName %></td>
+    <td><%=h customer.PhoneNumber %></td>
+    <td><%=h customer.State %></td>
+    <td><%=h customer.TaxNumber %></td>
+    <td><%=h customer.Zip %></td>
+    <td><%= link_to 'Show', customer_path(customer) %></td>
+    <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
+    <td><%= link_to 'Destroy', customer_path(customer), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New customer', new_customer_path %>

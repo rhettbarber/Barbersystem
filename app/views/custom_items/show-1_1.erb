@@ -1,0 +1,89 @@
+
+
+<div style="margin-left:auto;margin-right:auto; height:1000px; width:850px;">
+			<div style="float:left; height:80px; width:850px;;border: 1px solid #ddd; color:#ddd; text-align:left;">
+			</div>
+			<div style="float:left; height:353px; width:850px;">
+			
+							<div style="position: absolute; height:0px; width:0px; z-index: 2;">
+									<img src="/images/item_specsheets/11001_custom_lmrp_ash.png" style="left:300px; top:100px;"  id="11001_lmrp_ash"  class='specsheet'>
+							</div>
+							
+							<div style="position: absolute; height:0px; width:0px; z-index: 3;" id='main_container'>			
+									<img src='/custom_items/0000/0009/6407l_o_rp.png'  style="position:relative;cursor: move; left:300px; top:100px;"  class='main'  id="main_print" title="nothing">
+							</div>
+							
+							<div style="position: absolute; height:0px; width:0px; z-index: 4;">
+									<img src='/custom_items/0000/0011/6334l_o_rp.png' style="position:relative;cursor: move; left:600px; top:100px;" class='reverse'  id="reverse_print">
+							</div>
+							
+							<div style="position: absolute; height:0px; width:0px; z-index: 5;" id="mask">
+											<img src= "/images/item_masks/11012_legends_mask.png"  style="left:0px; top:0px;" class='mask'>		
+							</div>
+				
+			</div>
+			
+			<%= render "new" %>
+			
+			
+			<div style="text-align:center; float:left; height:80px; width:850px;border: 1px solid #ddd; color:#ddd;">
+			
+				<div style="float:left; height:80px; width:220px;border: 1px solid #ddd; color:#ddd;">
+							
+								<div style="width: 200px; background-color: rgb(204, 204, 204); height: 10px;" id="track3">
+                                      <div style="width: 10px; height: 15px; background-color: rgb(255, 0, 0); cursor: move; left: 95px; position: relative;" id="handle3" class="selected"/>
+                                 </div>
+						
+								
+								<div style="margin: 4px 0pt 0pt 10px; width: 200px; background-image: url(/images/controls/slide_track.gif); background-repeat: repeat-x; background-position: left center; height: 18px;" id="reverse_print_track">
+									<div style="width: 18px; height: 18px; left: 200px; position: relative;" id="reverse_print_handle" class="selected"><img src="/images/controls/slide_control.gif"/></div>
+								</div>
+								<div style="margin: 4px 0pt 0pt 10px; width: 200px;height: 18px;" id="reverse_print_track">
+											SIZE CONTROLS:
+								</div>
+					</div>
+					
+					<div style="float:left; height:80px; width:400px;;border: 1px solid #ddd; color:#ddd; text-align:center;">
+								DRAG OR RESIZE EITHER DESIGN
+					</div>
+					<div style="float:left; height:80px; width:220px;;border: 1px solid #ddd; color:#ddd; text-align:center;">
+								DOUBLE CLICK EITHER DESIGN TO REPLACE IT WITH YOUR OWN
+					</div>
+			</div>
+			
+
+					<div style="float:left; height:80px; width:850px;;border: 1px solid #ddd; color:#ddd; text-align:left;">
+							MAIN:<div id="lpos" style="float:left;"></div><br>
+							REVERSE:<div id="rpos" style="float:left;"></div>
+					</div>
+				
+</div>
+
+
+		<script type="text/javascript" language="javascript">
+		// <![CDATA[
+
+			// horizontal slider control
+			new Control.Slider('handle1', 'track1', {
+				onSlide: function(v) { $('debug1').innerHTML = 'slide: ' + v },
+				onChange: function(v) { $('debug1').innerHTML = 'changed: ' + v }
+			});
+
+			// vertical slider control
+			new Control.Slider('handle2', 'track2', {
+				axis: 'vertical',
+				onSlide: function(v){ $('debug2').innerHTML = 'slide: ' + v },
+				onChange: function(v){ $('debug2').innerHTML = 'changed: ' + v }
+			});
+
+			// horizontal slider control with preset values
+			new Control.Slider('handle3', 'track3', {
+				range: $R(-200, 200),
+				values: [-200, -150, -100, -50, 0, 50, 100, 150, 200],
+				sliderValue: 1, // won't work if set to 0 due to a bug(?) in script.aculo.us
+				onSlide: function(v){ $('debug3').innerHTML = 'slide: ' + v },
+				onChange: function(v){ $('debug3').innerHTML = 'changed: ' + v }
+			});
+		// ]]>
+		</script>
+

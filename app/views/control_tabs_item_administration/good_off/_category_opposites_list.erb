@@ -1,0 +1,44 @@
+<% if @category %>
+              <% @this_category = @category %>
+<% else %>
+              <% @this_category = @item.category %>
+<% end  %>
+
+<% @this_category.reload %>
+
+<div id="category_opposites_list">
+
+        <div style="font-weight:bolder;font-size:15px;">
+                            Department:<%= @this_category.department.Name %>  Category: <%= @this_category.Name %> Opposites <br />
+        </div>
+
+        <% if @this_category.potential_opposite_categories %>
+                                    <%= form_tag '/menus/unlink_opposites_using_hash' do -%>
+                                                    <h3>Current Opposites: </h3>
+                                                    <% 	@this_category.opposite_categories.each do |cat| %>
+                                                                      <%= check_box_tag "product[category_ids][]", cat.id %>
+                                                                     <%= cat.department.Name %> - <%= cat.Name %><span style="color:gray;"> -(<%= cat.id %>)</span><br />
+                                                    <% end if @this_category.opposite_categories	%>
+                                                    <br />
+                                                    <%= hidden_field_tag 'selected_category_id', @this_category.id  %>
+                                                    <%= submit_tag 'Remove checked from opposites' %>
+                                            <% end %>
+                                            <br /><br />
+                                             <%= form_tag '/menus/link_opposites_using_hash' do -%>
+                                                                    <h3>Potential Opposites: </h3>
+                                                                    <%  @this_category.potential_opposite_categories.each do |potential_opposite_category| %>
+                                                                            <%= check_box_tag "product[category_ids][]", potential_opposite_category.id %>
+                                                                            <%= potential_opposite_category.department.Name %>-<%= potential_opposite_category.Name %><span style="color:gray;">-(<%= potential_opposite_category.id %>)</span>
+                                                                            <br />
+                                                                    <% end %>
+                                                                    <%= hidden_field_tag 'selected_category_id', @this_category.id  %>
+                                                                    <%= submit_tag 'Add checked to opposites' %>
+                                                    <% end %>
+        <% else %>
+            <br /><br />
+            This category is not in a symbiont category class. It is in a non or unknown item type category class. <br /><br />
+            <br /><br />
+        <% end %>
+            
+</div>
+

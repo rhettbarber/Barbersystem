@@ -1,0 +1,27 @@
+<table class="franchise_order_item_table">
+
+ <% if  @category_generic_counterpart   %>
+              <%  category.generic_counterpart.items_with_yearly_sales.sales_in_year(  @chosen_year  ).sort_by{|a| a.ItemLookupCode}.each do |the_item| %>
+               <% if the_item.WebItem == true  %>
+                  <div class="franchise_order_item anatips" title="Description: In the year <%=   the_item.Description %> - -  <%=   the_item.sale_year %> this items category id is <%=   the_item.category_id %> ">
+                          <%= image_tag(  the_item.available_image_name ) %>
+                           <%=   the_item.ItemLookupCode %><br/>
+                            QTY: <%=   the_item.sum_of_quantity %><br/>
+                  </div>
+              <% end  %>
+              <% end  %>
+<% else  %>
+                <%  category.items_with_yearly_sales.sales_in_year(  @chosen_year  ).sort_by{|a| a.ItemLookupCode}.each do |the_item| %>
+                 <%  if the_item.WebItem == true %>
+                      <div class="franchise_order_item anatips" title="Description: In the year <%=   the_item.Description %> - -  <%=   the_item.sale_year %> this items category id is <%=   the_item.category_id %> ">
+                              <%= image_tag(  the_item.available_image_name ) %>
+                               <%=   the_item.ItemLookupCode %><br/>
+                                QTY: <%=   the_item.sum_of_quantity %><br/>
+                      </div>
+                <% end   %>
+                <% end   %>
+ <% end  %>
+</table>
+
+
+

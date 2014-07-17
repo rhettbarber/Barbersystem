@@ -1,0 +1,36 @@
+
+
+<table>
+
+                                    <tr>
+                                                           <th> ItemLookupCode  </th>
+
+                                                           <th>retail full </th>
+                                                           <th>retail qty tier</th>
+                                                           <th>retail your</th>
+                                                           
+                                                            <th>preprint full unit</th>
+                                                           <th> preprint  unit qty tier discount</th>
+                                                           <th>preprint your unit</th>                                                          
+                                                           
+                                                           
+                                                            <th>blank full </th>
+                                                           <th>blank unit qty tier discount</th>
+                                                           <th>blank your unit</th>                                                          
+                                                           
+                                                           
+                                                           <th>franchise full unit </th>
+                                                           <th>franchise unit qty tier discount</th>
+                                                           <th> franchise your unit </th>    
+
+                                     </tr>
+
+
+
+
+<%         for item in @items  %>
+<%=        render :partial => "item"  , :locals => { :item => item }    %>
+<%       end  %>
+
+
+ </table>

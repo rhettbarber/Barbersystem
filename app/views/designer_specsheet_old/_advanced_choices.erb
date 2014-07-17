@@ -1,0 +1,20 @@
+<% @the_department_variable = '@department_choices_' + choice_type  %>
+
+<div id="<%= choice_type %>_choices" style="float: left;display:none;" class="x_choices">
+      <%= form_for( choice_type + '_javascript', :url => {:action => 'update_categories'}) do |f| %>
+              <%= f.collection_select :department_id,  instance_variable_get(@the_department_variable  ) , :id, :Name, :prompt => "Select a department" %>
+              <span id="<%= choice_type %>_category_field">
+              <%= f.collection_select :category_id, Category.find(:all), :id, :Name, :prompt => "Select a category" %>
+              </span>
+              <span id="clear_graphic_all" style="color:red;font-weight: bold;">
+                  Start Over!
+                </span>
+              <span id="specsheet_item_search_<%= choice_type %>_field_container">
+              <%= text_field_tag "specsheet_item_search_" + choice_type + "_field" %>
+              <%= image_tag '/images/icons/search-icon.png', :size => '20x20' %>
+              </span>
+      <% end  %>
+      <div id="category_items_<%= choice_type %>">
+              <%= render :partial => "designer_specsheet/category_items" , :locals => {:choice_type => choice_type  } %>
+      </div>
+</div>

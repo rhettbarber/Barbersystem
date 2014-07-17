@@ -1,0 +1,25 @@
+<% unless params[:id] == 'home'   %>
+                            <div class="pages_tree_menu" class="inverse">
+                                                                  <% if controller.action_name == 'recently_added_pages'  %>
+                                                                                                        <%= render :partial => "shared_item/recently_added_items" %>
+                                                                  <% else %>
+                                                                                                        <%# cache( @pages_tree_menu_fragment_name ) do %>
+                                                                                                                            <% if @revision %>
+                                                                                                                                    <ul>
+                                                                                                                                               <% selected_node = @revision.page  %>
+                                                                                                                                               <% ancestors = selected_node.ancestors %>
+                                                                                                                                                <% root = selected_node.root %>
+                                                                                                                                                <% root.children.each do |child| %>
+                                                                                                                                                                <% if child.has_published_revision? || user_can?('modify')  or user_can?('view_unpublished') %>
+                                                                                                                                                                            <%= render :partial => "shared_menu/display_subtree", :locals => { :selected_node => selected_node, :child => child, :ancestors => ancestors, :customer_viewable_page_types => @customer_array_viewable_page_types } %>
+                                                                                                                                                                <% end %>
+                                                                                                                                                <% end %>
+                                                                                                                                                <% if root.slug == selected_node.slug && user_can?('modify') %>
+                                                                                                                                                                 <li><%= actions(root) %></li>
+                                                                                                                                                <% end %>
+                                                                                                                                    </ul>
+                                                                                                                            <% end %>
+                                                                                                        <%# end %>
+                                                                  <% end %>
+                            </div>
+<% end %>

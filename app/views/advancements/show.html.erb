@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @advancement.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @advancement.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_advancement_path(@advancement) %> |
+<%= link_to 'Back', advancements_path %>

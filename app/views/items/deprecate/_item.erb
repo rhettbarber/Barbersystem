@@ -1,0 +1,27 @@
+
+  <tr>
+    <td class="lightgreen"><%= item.ItemLookupCode  %></td>
+    <td class="lightgreen"><%= item.color %></td>
+    <td class="lightgreen"><%= item.size %></td>
+    
+    <td class="lightblue"><%=  item.full_unit_price(@retail_customer)  %></td>
+
+    <td class="mistyrose"><%=  item.full_unit_price(@preprint_customer)  %></td>
+    <td class="mistyrose"><%=  item.unit_quantity_tier_discount_price(@preprint_customer,1)  %></td>
+    <td class="mistyrose"><%=  item.unit_quantity_tier_discount_price(@preprint_customer,3)  %></td>
+    <td class="mistyrose"><%=  item.unit_quantity_tier_discount_price(@preprint_customer,7)  %></td>
+    <td class="mistyrose"><%=  item.unit_quantity_tier_discount_price(@preprint_customer,50)  %></td>
+	
+    <td class="lightcyan"><%=  item.full_unit_price(@blank_customer)  %></td>
+    <td class="lightcyan"><%=  item.unit_quantity_tier_discount_price(@blank_customer,1)  %></td>
+    <td class="lightcyan"><%=  item.unit_quantity_tier_discount_price(@blank_customer,3)  %></td>
+    <td class="lightcyan"><%=  item.unit_quantity_tier_discount_price(@blank_customer,7)  %></td>
+    <td class="lightcyan"><%=  item.unit_quantity_tier_discount_price(@blank_customer,50)  %></td>
+	
+    <td class="wheat"><%=  item.full_unit_price(@franchise_customer)  %></td>
+    <td class="wheat"><%=  item.unit_quantity_tier_discount_price(@franchise_customer,1)  %></td>
+    <td class="wheat"><%=  item.unit_quantity_tier_discount_price(@franchise_customer,3)  %></td>
+    <td class="wheat"><%=  item.unit_quantity_tier_discount_price(@franchise_customer,7)  %></td>
+    <td class="wheat"><%=  item.unit_quantity_tier_discount_price(@franchise_customer,50)  %></td>
+  </tr>
+

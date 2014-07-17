@@ -1,0 +1,12 @@
+
+<div id="item_<%= item.id %>" style="padding:15px;width:150px;height:250px;overflow:hidden;float:left;background-color:white;">
+
+
+      <span id="clone_image_<%= item.id %>"><img border="0" width="160" src="http://<%=  @asset_server  %>/images/item_specsheets/<%=  item.PictureName  %>" onclick="update_form(<%= item.id %> );"/> </span> <br />
+
+      <span id="clone_itemlookupcode_<%= item.id %>"><%=  item.ItemLookupCode -%></span><br />
+      <%=  item.id -%><br />
+      Size-Color:<%= item.SubDescription1 %><br />
+      Terms Found:<%= item.SubDescription3 %><br />
+      <span id="clone_description_<%= item.id %>"><%=  item.Description -%></span><br />
+  </div>

@@ -1,0 +1,22 @@
+<div class="checkout_review_header">
+        <% if controller.action_name == 'checkout_receipt' %>
+                          <div style="font-size:17px;"> <br /> Order Number: <%= @purchase.id %> <br />
+
+                            Thank you for your Order,  Print this page for your records.</div> <br />
+                                          <form><input type="button" onclick="window.print();return false;" value=" Print this page"/> </form>
+                           <br />
+        <% else %>
+
+                        <div class="container" style="background-color: yellow;color:black;font-weight: bolder;font-size: 16px;padding:10px;"> Please ensure all information is correct before submitting your order. </div>
+
+                       <%=  @website.title  + ' ' + controller.action_name.humanize   %> <%=  '  - Order # ' +  @purchase.id.to_s   if @purchase %>
+                        <% if @customer %>
+
+                                <p>
+                                  <b>Customer Account Number</b>
+                                  <%=h @customer.AccountNumber %>
+                                </p>
+
+                        <% end %>
+        <% end  %>
+</div>

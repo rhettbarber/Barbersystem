@@ -1,0 +1,36 @@
+<div style="text-align: center;font-size:15px;">
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Film Number:</b>
+  <%= @film.id %>
+</p>
+
+
+    <p>
+      <b>Customer:</b>
+            <%= @film.customer %>
+    </p>
+
+<p>
+  <b>Description:</b>
+  <%= @film.description %>
+</p>
+
+
+    <p>
+      <b>Work Order #:</b>
+            <%= @film.work_order_id %>
+    </p>
+
+
+<%= image_tag('/film_images/' + @film.id.to_s  + '.jpg'  )   %> <br />
+ <br />
+
+<%= link_to  image_tag("/images/buttons/edit-this-film.png", :border => 0) , edit_film_path(@film) %> <br />
+
+<br />
+ <%= link_to image_tag("/images/buttons/enter-new-film.png", :border => 0), new_film_path %>
+
+</div>

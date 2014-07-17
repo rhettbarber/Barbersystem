@@ -1,0 +1,60 @@
+
+ <% @calculate_view = true %>
+<% if @calculate_view %>
+
+
+<% cache (@browse_fragment_name  ) do %>
+<% logger.debug "-------------------------------------begin browse/index " %>
+<% logger.debug "-------------------------------------begin browse/index " %>
+<% logger.debug "-------------------------------------begin browse/index " %>
+<% logger.debug "--------! ---------! ------------! -------------- BEGIN EXAMINE CACHING --! - --! - " %>
+<% logger.debug "--------! ---------! ------------! -------------- BEGIN EXAMINE CACHING --! - --! - " %>
+<% if @department and @category %>
+                    <%=   render :partial => "shared_item/items" %>
+
+<% else %>
+                        <%
+                        if params[:department_type]
+                                department_type = params[:department_type]
+                        else
+                                department_type = '0'
+                        end
+                        %>
+
+                        <% if !@department and !@category %>
+                                    <% categories_container_style = "width: 850px;float:left;"  %>
+                        <% else %>
+                                    <% categories_container_style = "width: 720px;float:left;"  %>
+                        <% end %>
+
+                        <div class="categories_container" style="<%= categories_container_style %>">
+
+                                <% if @department %>
+
+                                                        <%=   render(:partial => "browse/at_department",:locals => {:department => @department } )  %>
+                                <% else %>
+                                                        <% if  @department_introduction == true  %>
+                                                                        <%=  render(:partial => "browse/departments_introduction",:locals => {:department_type => department_type } )  %>
+                                                        <%  else  %>
+                                                                         <% if @incomplete_symbiont %>
+                                                                                            <%# great %>
+                                                                                            <%=  render(:partial => "browse/categories_by_department",:locals => {:department_type => department_type } ) if @departments %>
+                                                                          <% else %>
+                                                                                               <% bad %>
+                                                                                                 <%=  render(:partial => "browse/departments_no_introduction",:locals => {:department_type => department_type } )  %>
+                                                                           <% end %>
+                                                        <% end %>
+                                <% end %>
+
+                        </div>
+
+<% end  %>
+<% logger.debug "--------! ---------! ------------! -------------- END EXAMINE CACHING --! - --! - " %>
+<% logger.debug "--------! ---------! ------------! -------------- END EXAMINE CACHING --! - --! - " %>
+<% logger.debug "-------------------------------------end browse/index " %>
+<% logger.debug "-------------------------------------end browse/index " %>
+<% logger.debug "-------------------------------------end browse/index" %>
+<% end  %>
+
+
+<% end  %>

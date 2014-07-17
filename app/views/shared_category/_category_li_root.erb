@@ -1,0 +1,6 @@
+<li class="category_li_root">
+	<div id="category_<%= category.id %>" style="float:left;">
+		 <%= image_tag "/images/buttons/draggable.png",:height => "20",:alt => category.Name %> 
+	</div> 
+  <span id="category_<%= category.id %>_name"><%= link_to category.Name.camelcase, :controller => 'browse', :action => 'index', :department_id => @department.id, :category_id => category.id %></span>
+</li>

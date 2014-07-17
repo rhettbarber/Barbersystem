@@ -1,0 +1,13 @@
+<p>
+  <b>Item:</b>
+  <%=h @cloneship.item_id %>
+</p>
+
+<p>
+  <b>Clone:</b>
+  <%=h @cloneship.clone_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_cloneship_path(@cloneship) %> |
+<%= link_to 'Back', cloneships_path %>

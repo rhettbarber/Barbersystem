@@ -1,0 +1,127 @@
+<%= render :partial => 'breadcrumb', :locals => {:crumb => 'department'} %>
+
+<div class="alert alert-info" style="display: none;"><a class="close" data-dismiss="alert" href="#">&times;</a>Please select from the menu below</div>
+
+
+
+
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary" id="search_designs"> Search Designs </button>
+            <button type="button" class="btn btn-primary" id="search_items">   Search Items </button>
+            <button type="button" class="btn btn-primary" id="search_cancel">  Search Articles </button>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+<% if @before %>
+
+
+
+
+
+    <style type="text/css">
+        .col-lg-12 {
+            padding-left: 0px;
+            padding-right:0px;
+        }
+    </style>
+
+
+
+    <% @departments.each do |department| %>
+        <% department_child_category_ids = []  %>
+        <% department.categories.each do |cat| %>
+            <% department_child_category_ids << cat.id  %>
+        <% end %>
+        <% department_child_category_ids = department_child_category_ids.join(',') %>
+        <div class="col-lg-12 grid_department_div department_<%= department.id %>" data-department_id="<%= department.id %>" data-child_category_ids="<%= department_child_category_ids %>">
+          <a href="#" class="grid_department department_<%= department.id %>" data-department_id="<%= department.id %>"><strong><%= department.Name %></strong></a>
+          <% department.categories.sort_by{|x| x.Name}.each do |category| %>
+              <div class="col-lg-12 grid_category_div department_<%= department.id %>_category department_<%= department.id %>" style="" data-applicable="0"   data-department_id="<%= department.id %>" data-category_id="<%= category.id %>"><a class="grid_category" href="#"  data-department_id="<%= department.id %>" data-category_id="<%= category.id %>"><%= category.Name %></a></div>
+          <% end %>
+        </div>
+    <% end %>
+    </div>
+    </div>
+
+
+
+
+
+
+
+    <script type="text/javascript">
+        console.log('render store/department_category_list calls function departmentCategoryList(item_type, department_id, show)' );
+
+        checkCookie();
+
+        <% if  params[:show] %>
+        $.cookie('barber_preferences','<%=  params[:show] %>');
+        console.log("just set cookie to url parameter based preference: <%=  params[:show] %>") ;
+        <% end %>
+
+        departmentCategoryList(  '<%= params[:item_type]   || 'design' %>'  , '<%= params[:department_id] || '0'  %>',  '<%=  params[:show]  ||   'show_designs_for_my_item'  %>'  ) ;
+
+
+    </script>
+
+
+
+<script type="text/javascript">
+        console.log('begin render store/department inline js');
+
+//    $('#specsheet_table').attr('data-item_type_choice', '<%= params[:item_type] || 'design' %>');
+
+    <% if params[:department_id] %>
+
+//             $(".grid_department_div").hide();
+//             $(".department_<%=  params[:department_id] %>").show();
+//
+//
+//             showDepartmentCategories( '<%= params[:department_id] %>' );
+//            $('#category_crumb').addClass('current');
+//            $("#show_designs_for_my_item").hide();
+
+    <% else %>
+//            $('#department_crumb').addClass('current');
+//            $('#category_crumb').addClass('disabled');
+//            $('#item_crumb').addClass('disabled');
+//            $('.grid_category_div').hide();
+            <% if params[:any] %>
+
+                    $('#show_button').attr('data-state','show_designs_for_any_item');
+                    $('#show_button_text').html(  "Showing designs for <strong>any</strong> item" );
+                    $("#show_designs_for_any_item").hide();
+            <% else %>
+                    updateDepartments();
+                    $("#show_designs_for_my_item").hide();
+            <% end %>
+    <% end %>
+
+
+
+
+    $('#category_crumb').click(function (e) {
+        e.preventDefault();
+        if ($(this).hasClass('disabled'))
+            return false; // Do something else in here if required
+        else
+            window.location.href = $(this).attr('href');
+    });
+
+
+
+
+        console.log('end render store/department inline js');
+
+</script>
+ <% end %>
+

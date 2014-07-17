@@ -1,0 +1,12 @@
+<% unless params[:item_type] == "item" %>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" data-state="show_designs_for_my_item" id="show_button">
+        <span id="show_button_text">Showing designs for MY item </span>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li id="choice_any_item"><a href="#" id="show_designs_for_any_item" class="show_button_link">Show designs for <strong>any</strong> item.</a></li>
+        <li id="choice_my_item"><a href="#" id="show_designs_for_my_item" class="show_button_link">Show designs for  <strong>my</strong> item.</a></li>
+      </ul>
+    </div>
+<% end %>

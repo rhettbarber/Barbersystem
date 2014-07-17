@@ -1,0 +1,36 @@
+
+<div id="category_menu_organizer" style="text-align:left;width:700px;height:170px;display:none;"> 
+		<%= image_tag "/images/headers/category_options.jpg" ,:border => 0, :width => "700" %>
+		<% if @category %>	
+				<div style="float:left;" id="menu_category_invisible"><%= image_tag "/images/buttons/hide.jpg" ,:border => 0, :width => "170" %></div>
+				<div style="float:left;" id="menu_category_visible"><%= image_tag "/images/buttons/show.jpg" ,:border => 0, :width => "170" %></div>
+				<div style="float:left;" id="add_to_additives_from_link"><%= image_tag "/images/buttons/add_to_additives.jpg" ,:border => 0, :width => "170" %></div>
+				<div style="float:left;" id="remove_from_additives_from_link"><%= image_tag "/images/buttons/remove_from_additives.jpg" ,:border => 0, :width => "170" %></div>
+		<% else %>
+			You must select a category to have options for it.
+		<% end %>
+</div>
+
+	<%= drop_receiving_element :menu_category_visible,
+	:with   => "'category_id=' + (element.id.split('_').last())",
+	:url => {:controller => 'menus', :action => 'menu_category_visible',
+	} %>
+	
+
+	<%= drop_receiving_element :menu_category_invisible,
+	:with   => "'category_id=' + (element.id.split('_').last())",
+	:url => {:controller => 'menus', :action => 'menu_category_invisible',
+	} %>
+	
+	
+
+	<%= drop_receiving_element :add_to_additives_from_link,
+	:with   => "'additive_category_id=' + (element.id.split('_').last()) + '&selected_category_id=' + #{@category.id.to_s}",
+	:url => {:controller => 'menus', :action => 'add_to_additives_from_link',
+	} %>
+	
+		<%= drop_receiving_element :remove_from_additives_from_link,
+	:with   => "'additive_category_id=' + (element.id.split('_').last()) + '&selected_category_id=' + #{@category.id.to_s}",
+	:url => {:controller => 'menus', :action => 'remove_from_additives_from_link',
+	} %>
+	

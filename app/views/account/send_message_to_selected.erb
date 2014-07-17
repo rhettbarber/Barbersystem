@@ -1,0 +1,77 @@
+
+<style type="text/css">
+
+  .email_us {
+    text-align: center;
+    font-size: 2em;
+}
+
+  .email_us a {
+    text-align: center;
+    font-size: 1em;
+}
+
+
+</style>
+
+
+
+
+<br />
+<br />
+
+<div class="email_us">  If you would like to send us an email or attachments, please send it to: <br />
+        <a href="mailto:support@<%=@website.domain %>">support@<%=@website.domain %></a>
+</div>
+
+<br />
+<br />
+<br />
+
+
+<% if @message_on %>
+
+<h2> This form sends us a internal message. If you would like to send us an email or attachments, please send it to:
+ <a href="mailto:support@<%=@website.domain %>">support@<%=@website.domain %></a></h2>
+
+
+<div class="" >
+<%= ezm_message_menu -%>
+  
+ <span style="color:red;"> <%= error_messages_for 'message' %></span>
+
+  <%= flash[:notice] %> 
+  <fieldset>
+    <legend>Send Message</legend>
+    
+    
+
+    <%= form_for :message, :url => {:action => :send_message_to_selected} do |form| %>
+     
+     
+     <p>
+	     <label>Please send all error messages or website suggestions to "Webmaster" and all sales inquiries to "Sales":</label>  
+	     <%  recipient_options = ["sales@barberandcompany.com","webmaster@barberandcompany.com"]   %>
+	     <%=  select("message", "recipient",  recipient_options     )  %>
+     </p>
+    
+    
+    
+      <p>
+        <label for="message_subject" >Subject:</label>  
+        <%= form.text_field :subject, :size => 40 %>
+      </p>
+      
+      <p>
+        <label for="message_body" >Message:</label>  
+        <%= form.text_area :body ,:cols => 60, :rows => 4 %>
+      </p>
+
+      <%= submit_tag "Send Message" %>
+
+    <% end %>
+  </fieldset>
+  
+</div>
+
+<% end %>

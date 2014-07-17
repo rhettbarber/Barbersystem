@@ -1,0 +1,15 @@
+
+		<% if @page %>
+				<% unless @page.slug == "home" %>
+						<br />	<br />
+							<%= image_tag "/uploads/Image/shared_affiliate/affiliate-page-banner.png", :border => '0' if @page %><br />
+								<span style="color:red;font-size:14px;"> YOUR LINK: </span> 
+							<% if @user and @page  %>
+												<%= text_field_tag("website_url", 'http://' + @website.domain + '/p/' + @page.slug + '?a_id=' + @user.a_id   ,:size => "60" ) %>
+		
+							<% else %>
+													You must <%= link_to "Log In", :controller => "account", :action => "login"  %> to see your custom link.
+							<% end %>
+							<br />	<br />
+				<% end %>
+			<% end %>		

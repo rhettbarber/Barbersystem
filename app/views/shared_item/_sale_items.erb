@@ -1,0 +1,40 @@
+
+
+<% logger.debug "-------------------------------------begin _shared_item/sale_items " %>
+
+
+<% logger.warn "_shared_item/new_items is TRUE LOCATION " %>
+
+
+<% if @customer %>
+				<% if @customer.PriceLevel > 1 %>
+										<%  if @items  %>
+					
+																<div  style="width:850px;float:left;"> <%= link_to  image_tag("/images/headers/clearance-items.png", :border => 0)  , :controller => "browse" , :action => "sale_designs"    %>   </div>
+																<% @already_rendered_item_class_colors = [] %>
+																<%  @items.each do |item| -%>
+																					<%  if item.item_class_component  -%>
+																									<% unless @already_rendered_item_class_colors.include?( item.item_class.id.to_s +  item.color) %>
+																												<%  @already_rendered_item_class_colors <<  item.item_class.id.to_s +  item.color  %>
+																												<%=  render(:partial => "shared_item/sale_item",:locals => { :item => item } )   -%>
+																									<% end %>
+																					<% else %>
+																									<%=  render(:partial => "shared_item/sale_item",:locals => { :item => item } )   -%>
+																					<% end %>
+																<% end -%>
+											
+											
+																				
+												<%  else  -%>		
+																no items found
+												<% end -%>
+
+				<% else %>
+								Our sale items are for wholesale customers only. Thank You for your interest.
+				<% end %>
+<% else %>
+				Our sale items are for wholesale customers only. Thank You for your interest.
+<% end %>
+
+
+<% logger.debug "-------------------------------------end _shared_item/sale_items " -%>

@@ -1,0 +1,18 @@
+
+<%   if admin?  %>
+<div class='onclick_menu deweys_power_panel'>
+    <div class='onclick_menu_links'>
+          <li><%= link_to ' Website Administration' ,:controller => 'websites'  %></li>
+          <li> <%= link_to 'Department / Category Editor' ,:controller => 'categories', :action => 'departments_categories'  %></li>
+           <li> <%= link_to 'Items' ,:controller => 'items'  %></li>
+          <li> <%= link_to 'Item Manager' ,:controller => 'item_manager'  %></li>
+          <li> <%= link_to 'Item Reports' ,:controller => 'item_reports'  %></li>
+          <li> <%= link_to 'Films' ,:controller => 'films'  %></li>
+          <li> <%= link_to 'Designer Controller' ,:controller => 'designer'  %></li>
+          <li><%= link_to 'Record Groups' ,:controller => 'record_groups'  %></li>
+          <li><%= link_to 'Incomplete Designer Series Resources' ,:controller => 'designer'  %></li>
+          <li><%= link_to 'Advancements' ,:controller => 'advancements'  %></li>
+    </div>
+     <div class="onclick_menu_label"> <%= link_to image_tag('/images/menu_icons_and_labels/deweys-power-panel.png',:width => '400'  , :class => 'no_border'), :controller => 'item_sales_reports' %></div>
+</div>
+<% end  %>

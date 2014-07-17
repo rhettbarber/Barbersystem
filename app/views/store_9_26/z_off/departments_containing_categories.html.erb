@@ -1,0 +1,79 @@
+<form id="presidentForm">
+  <fieldset>
+    <legend>President</legend>
+    <ul>
+      <li>
+        <label for="category_id" title="First Name">Category Id</label>
+        <input type="text" id="category_id" name="category_id" />
+      </li>
+      <li>
+        <label for="category_name" title="Category Name">Category Name</label>
+        <input type="text" id="category_name" name="category_name" />
+      </li>
+    </ul>
+  </fieldset>
+</form>
+
+
+
+<div id="presidents">test</div>
+
+<div id="departments">test</div>
+
+
+
+
+<script type="text/javascript">
+    var people =
+            [
+                { "department_id": 10, "department_name" : "Dixie Outfitters", "category_id": 18, "category_name": "Bear" },
+                { "department_id": 10, "department_name" : "Dixie Outfitters", "category_id": 21, "category_name": "Biker" },
+                { "department_id": 10, "department_name" : "Dixie Outfitters", "category_id": 23, "category_name": "Boar" },
+                { "department_id": 10, "department_name" : "Dixie Outfitters", "category_id": 45, "category_name": "Confederate" },
+                { "department_id": 15, "department_name" : "All American Outfitters", "category_id": 887, "category_name": "American" },
+                { "department_id": 15, "department_name" : "All American Outfitters", "category_id": 22, "category_name": "Boar" }
+            ];
+
+    $(function () {
+
+
+
+        //construct an unordered list of presedents
+
+        var departments = [];
+        var items = [];
+        $.each(people, function (index, value) {
+            items.push('<li data-category=\'' + JSON.stringify(value) + '\'>' + value.category_id + ' ' + value.category_name + '</i>');
+            departments.push('<li data-category=\'' + JSON.stringify(value) + '\'>' + value.department_id + ' ' + value.department_name + '</i>');
+
+        });
+        departments = $.unique(departments);
+        //add all <li> items to a <ul> element
+        $("<ul />", {
+            "id": "departmentsList",
+            "class": "list",
+            html: departments.join("")
+        }).appendTo("#departments");
+
+
+        //add all <li> items to a <ul> element
+        $("<ul />", {
+            "id": "presidentsList",
+            "class": "list",
+            html: items.join("")
+        }).appendTo("#presidents");
+
+        //assign a click event to the ul element
+        $("#presidentsList").click(function (e) {
+            var category = $(e.target).data("category");
+            assignFormFieldValues("presidentForm", category);
+        });
+    });
+
+    function assignFormFieldValues(formId, obj) {
+        var fields = $("#" + formId).serializeArray();
+        $.each(fields, function (index, field) {
+            var f = $("[name=" + field.name + "]").val(obj[field.name]);
+        });
+    }
+</script>

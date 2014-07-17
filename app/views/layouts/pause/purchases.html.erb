@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<%= render(:partial => "layout_elements/head") %>
+<%= yield :head_additions -%>
+<%= render(:partial => "layout_elements/shared_dynamic_head") %>
+
+<body class="body">
+      <div class="header">
+              <%= render :partial => 'onclick_top_menu/onclick_top_menu'  %>
+              <%= render(:partial => "shared_menu/standard_topbar_menus") %>
+
+      </div>
+
+      <div class="page_content_wide">
+<%= yield %>
+      </div>
+      <div class="footer">
+                  <%= render(:partial => "layout_elements/shared_footer") %>
+      </div>
+
+
+
+</body>
+
+ <%= render :partial => 'development/development_bar'  %>
+
+</html>

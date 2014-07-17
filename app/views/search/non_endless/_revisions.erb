@@ -1,0 +1,23 @@
+
+
+<% @revision_ids = Set.new %>
+<%   @revisions.each do |revision| %>
+    <%# unless @revision_ids.include?(  revision.id )  %>
+    <% @revision = revision %>
+    <% @revision_ids.add?(  revision.id )  %>
+    <div class="page_content_capsule">
+      <div class="page_name">
+        <strong>
+          Keywords Hit: <%= revision.total_column  %> ---
+          <%= revision.name  %>
+          <!----- Released:  -->
+          <%#= time_ago_in_words(  revision.created_at,  include_seconds = false ) %>  <%#=  revision.created_at  %><br />
+          <%#= link_to "See related pages and categories" ,:controller => 'page', :action => 'show',:id => revision.slug       %>
+        </strong>
+      </div>
+      <div class="page_yield">
+        <%= highlight( revision.content , params[:query].split(" ") , :highlighter => '<strong class="highlight">\1</strong>' ) %>
+      </div>
+    </div>
+    <%# end %>
+<% end %>

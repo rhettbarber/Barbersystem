@@ -1,0 +1,35 @@
+
+
+<% @shipping_service_price = @purchase.ship_to.shipping_service_price(service.web_carrier_name, service.web_name, @purchase )    %>
+
+<tr>
+          <td>
+          	
+          	<% if service.web_carrier_name == 'ups' %>
+          		<%= image_tag '/images/company_logos/ups_logo_small.jpg',:size => "20x20"  %>
+          	<% elsif service.web_carrier_name == 'usps' %>
+          		<%= image_tag '/images/company_logos/usps_logo_small.jpg',:size => "20x20"  %>
+          	<% end %>
+                  <%#= @shipping_service_price %>
+                 <%#=  radio_button( 'purchase',  'shipping_service_id' ,  service.id   )   unless   @shipping_service_price  == 'shipping service unavailable' or !@shipping_service_price    %>
+
+
+
+                   <%#= hidden_field_tag('service_type', service.Name )  %>
+
+                        <%= service.Name%><br>
+                         <%= link_to 'Choose and continue', { :controller => 'ship_tos', :action => 'set_shipping_charge_on_order' , :shipping_service_id => service.id }   , :class => 'btn btn-success'  %>
+                        
+                        <span style="color:grey;">
+	                        <% if @customer.PriceLevel > 1 %>
+	                        	<%= service.processing_time_transfers %>
+	                        <% else %>
+	                        	<%= service.processing_time %>
+	                        <% end %>
+                        </span>
+            </td>
+  <td>
+      <b><%=  @shipping_service_price   %> </b>
+      
+   </td>
+</tr>

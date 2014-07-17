@@ -1,0 +1,24 @@
+<h1>Editing clone_item</h1>
+
+<%= form_for(@clone_item) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+
+    <%=  select( [] , "clone_item_type_id", CloneItemType.all.collect {|p| [ p.name , p.id ] } ,{:selected =>  @clone_item.clone_item_type_id        }   )   %>   Clone Type<br />
+  </p>
+  <p>
+   Item Id of RP design<br />
+    <%= text_field_tag :item_id,  @clone_item.item_id   %>
+  </p>
+  <p>
+       <%=  select( [] , "status_id", Status.all.collect {|p| [ p.name , p.id ] }  ,{:selected =>  @clone_item.status_id    }  )   %>   Current Status<br /><br />
+
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @clone_item %> |
+<%= link_to 'Back', clone_items_path %>

@@ -1,0 +1,27 @@
+
+
+<h2>This is the list of visits you qualify to receive recompense for*: </h2>
+<% link_to "*Click here to find our about exceptions" %> <br />
+<table>
+  <tr>
+    <th>Purchase ID</th>
+    <th>Purchase Time</th>
+    <th>Purchase Total</th>
+    <th>UserSessionID</th>
+    <th>Document Name</th>
+  </tr>
+<%  @stat_affiliate = Affiliate.find( @affiliate.id ,:include => [:rail_stats]  )    %>
+<%  @stat_affiliate.rail_stats.find(:all, :include => [:user_session] ,:conditions => ["purchase_id != ?", 0 ]).each do |stat_aff|    %>
+	<% if stat_aff.user_session.purchase %>
+		<% if stat_aff.user_session.purchase.Total > 0 %>
+				  <tr>
+				    <td><%=h stat_aff.user_session.purchase_id %></td>
+				    <td><%=h stat_aff.user_session.purchase.Time %> </td>
+				    <td><%=h stat_aff.user_session.purchase.Total   %></td>
+				    <td><%=h stat_aff.user_session_id %></td>
+				    <td><%=h stat_aff.doc_name %></td>
+				  </tr>
+		<% end %>
+	<% end %>
+<% end %>
+</table>

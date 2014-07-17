@@ -1,0 +1,23 @@
+
+
+<div style="width:850px;background-color:greenyellow;color:black;">
+
+<ul id="messages"></ul>
+
+<%= js_extract_messages_from_flash %>
+</div>
+
+
+
+
+<span class="hlt">We accept Visa, MasterCard, Discover and American Express</span><br />
+
+<span class="hlt">For security reasons, no credit information is recalled on this website.</span><br />
+
+<%= render :partial => "shared/flash" %><br />
+
+<%= error_messages_for :quote_tender_entry %>
+
+
+<%= render :partial => "quote_tender_entries/remote_form" %><br />
+

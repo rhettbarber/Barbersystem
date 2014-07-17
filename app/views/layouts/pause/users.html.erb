@@ -1,0 +1,340 @@
+<html>
+<head>
+  <meta http-equiv="Content-Language" content="en-us">
+  <title>Users: <%= controller.action_name %></title>
+  <%= stylesheet_link_tag 'scaffold' %>
+
+<%= javascript_include_tag 'prototype'  %>
+<%= javascript_include_tag 'builder'  %>
+  <%= javascript_include_tag 'effects'  %>
+  <%= javascript_include_tag 'slider'  %>
+<%= javascript_include_tag 'application'  %>
+
+	<style type="text/css">
+	a:link {color: blue}
+	a:visited {color: blue}
+	a:hover {color: #FF00FF}
+	a:active {color: #0000FF}
+	</style>
+	<OBJECT classid="clsid:44C4C3AC-D0F1-11D2-919D-006008C88FC3" height="0" id="qsBridge" style="LEFT: 0px; TOP: 0px" width="0">
+		<PARAM NAME="_ExtentX" VALUE="26">
+		<PARAM NAME="_ExtentY" VALUE="26">
+	</OBJECT>
+
+<script type="text/javascript">
+
+
+function ConfirmFindUserByEmailStartup()
+{
+var QSRules = qsBridge.RequestQSRules();
+  if (QSRules.Transaction.Customer.Loaded)
+	{
+	document.getElementById('boldStuff').innerHTML = '<input type="button" onclick="FindUserByEmail()" value="Find User with this Email Address" />' ;
+	}
+	else
+	{
+	document.getElementById('boldStuff').innerHTML = 'No address loaded.' ;
+	}
+}
+
+function FindUserByEmail()
+{
+var QSRules = qsBridge.RequestQSRules();
+  if (QSRules.Transaction.Customer.Loaded)
+	{
+  		var the_user_id_sql = "SELECT id FROM users WHERE email = '" + QSRules.Transaction.Customer.EmailAddress + "'" ;
+  		var the_user_id_RS  = QSRules.OpenRecordSet((the_user_id_sql),(true));
+  		var the_user_id = the_user_id_RS("id");
+  		//document.getElementById('boldStuff').innerHTML = 'http://barberandcompany.com/users/find_user_by_email/' +  the_user_id ;
+  		window.location =  'http://barberandcompany.com/users/find_user_by_email/' +  the_user_id ;
+		}
+	else
+	{
+		document.getElementById('boldStuff').innerHTML = 'Customer not Loaded, Parameter Pass Error' ;
+	}
+}
+
+
+
+
+
+
+
+
+//var current_order =  QSRules.Transaction.OrderID ;
+//var QSCancel = qsBridge.FireEvent('ConcludeTransaction' ) ;
+//var QSCancel = qsBridge.FireEvent('PostTransactionUnattended', 1 ) ;
+//var QSCancel = qsBridge.FireEvent('PostNoSale' )
+//document.getElementById('boldStuff').innerHTML = 'http://barberandcompany.com/users/sort_purchase_entries_by_itemlookupcode/' +  QSRules.Transaction.OrderID ;
+
+
+
+
+
+function RecallQuote()
+{
+	var QSCancel = qsBridge.FireEvent('RecallQuote') ;
+}
+
+
+
+function FinishedSortingStartup()
+{
+	{
+	document.getElementById('boldStuff').innerHTML = '<input type="button" onclick="RecallQuote()" value="Recall the Quote # above, you will have to find it manually" />' ;
+	}
+}
+
+
+
+function ConfirmSortPurchaseEntriesByItemLookupCodeStartup()
+{
+var QSRules = qsBridge.RequestQSRules();
+  if (QSRules.Transaction.IsOrder)
+	{
+	document.getElementById('boldStuff').innerHTML = '<input type="button" onclick="SortPurchaseEntriesByItemLookupCode()" value="Sort Purchase Entries By Item Lookup Code" />' ;
+	}
+	else
+	{
+	document.getElementById('boldStuff').innerHTML = 'No Order Loaded.' ;
+	}
+}
+
+
+
+function ConfirmCreditCardStartup()
+{
+var QSRules = qsBridge.RequestQSRules();
+  if (QSRules.Transaction.IsOrder)
+	{
+	document.getElementById('boldStuff').innerHTML = '<input type="button" onclick="EditCreditCard()" value="Edit and Confirm Credit Card" />' ;
+	}
+	else
+	{
+	document.getElementById('boldStuff').innerHTML = 'No Order Loaded.' ;
+	}
+}
+
+
+
+
+
+
+
+function SortPurchaseEntriesByItemLookupCode()
+{
+	var QSRules = qsBridge.RequestQSRules();
+	var current_order =  QSRules.Transaction.OrderID;
+	var QSCancel = qsBridge.FireEvent('PostTransactionUnattended', 1 ) ;
+	window.location =  'http://barberandcompany.com/users/sort_purchase_entries_by_itemlookupcode/' +  current_order ;
+}
+
+function ShowShippingInfo()
+{
+	var QSRules = qsBridge.RequestQSRules();
+	var current_order =  QSRules.Transaction.OrderID;
+	window.location =  'http://barberandcompany.com/users/show_shipping_info/' +  current_order ;
+}
+
+
+function EditCreditCard()
+{
+	var QSRules = qsBridge.RequestQSRules();
+	var current_order =  QSRules.Transaction.OrderID;
+	var QSCancel = qsBridge.FireEvent('PostTransactionUnattended', 1 ) ;
+	window.location =  'http://192.168.0.125:1000/users/edit_credit_card/' +  current_order ;
+}
+
+
+
+function ChargeCreditCard()
+{
+	var QSRules = qsBridge.RequestQSRules();
+	var current_order =  QSRules.Transaction.OrderID;
+	var QSCancel = qsBridge.FireEvent('PostTransactionUnattended', 1 ) ;
+	window.location =  'http://192.168.0.125:1000/users/charge_credit_card/' +  current_order ;
+}
+
+function ShowShippingInfo()
+{
+	var QSRules = qsBridge.RequestQSRules();
+	var current_order =  QSRules.Transaction.OrderID;
+	window.location =  'http://barberandcompany.com/users/show_shipping_info/' +  current_order ;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+function LoadUsersLastQuote(quote_id) // in progress
+{
+	qsBridge.FireEvent("SetCustomer", specific_customer_id ) ;
+}
+
+
+
+
+function SetSpecificCustomer(specific_customer_id)
+{
+		qsBridge.FireEvent("SetCustomer", specific_customer_id ) ;
+}
+
+
+
+
+function SetSpecificItem(specific_item_id, specific_item_item_lookup_code )
+{
+		qsBridge.FireEvent("PerformAddItem", specific_item_id , specific_item_item_lookup_code, 1, 0, 0, 0, 0 ) ;
+}
+
+
+
+
+
+
+
+
+function ConfirmAssociateUserToCustomerStartup()
+{
+var QSRules = qsBridge.RequestQSRules();
+  if (QSRules.Transaction.Customer.Loaded)
+	{
+  		var find_all_customers_with_this_email_sql = "SELECT COUNT(id) as 'Number' FROM customers WHERE EmailAddress = '" + QSRules.Transaction.Customer.EmailAddress + "'" ;
+    	var find_all_customers_with_this_email_sql_RS = QSRules.OpenRecordSet((find_all_customers_with_this_email_sql),(true));
+							if (find_all_customers_with_this_email_sql_RS("Number") == 1)
+		                  	{
+  							document.getElementById('boldStuff').innerHTML = '<input type="button" onclick="AssociateUserToCustomer()" value="Confirm Associate User to Customer" />' ;
+								}
+								else
+								{
+								document.getElementById('boldStuff').innerText = 'This customer cannot be associated' ;
+								}
+
+		}
+	else
+	{
+		document.getElementById('boldStuff').innerHTML = 'Customer not Loaded, Parameter Pass Error' ;
+	}
+}
+
+function AssociateUserToCustomer()
+{
+var QSRules = qsBridge.RequestQSRules();
+  if (QSRules.Transaction.Customer.Loaded)
+	{
+  		var the_user_id_sql = "SELECT id FROM users WHERE email = '" + QSRules.Transaction.Customer.EmailAddress + "'" ;
+  		var the_user_id_RS  = QSRules.OpenRecordSet((the_user_id_sql),(true));
+  		var the_user_id = the_user_id_RS("id");
+  		//document.getElementById('boldStuff').innerHTML = 'http://barberandcompany.com/users/associate_user_to_customer?' + 'customer_id=' + QSRules.Transaction.Customer.ID + '&user_id=' +  the_user_id ;
+  		window.location =  'http://barberandcompany.com/users/associate_user_to_customer?' + 'customer_id=' + QSRules.Transaction.Customer.ID + '&user_id=' +  the_user_id ;
+		}
+	else
+	{
+		document.getElementById('boldStuff').innerHTML = 'Customer not Loaded, Parameter Pass Error' ;
+	}
+}
+
+
+function CreateUserFromCustomer()
+{
+	var QSRules = qsBridge.RequestQSRules();
+	  if (QSRules.Transaction.Customer.Loaded)
+		{
+	  		window.location =  'http://barberandcompany.com/users/create_user_from_existing_customer/' + QSRules.Transaction.Customer.ID ;
+	  	//	document.getElementById('boldStuff').innerHTML = 'http://barberandcompany.com/users/create_user_from_existing_customer/' + QSRules.Transaction.Customer.ID ;
+			}
+		else
+		{
+			document.getElementById('boldStuff').innerHTML = 'Customer not Loaded, Parameter Pass Error' ;
+		}
+}
+
+</script>
+
+
+<script type="text/javascript">
+	function CustomerStartup(){
+	    var QSRules = qsBridge.RequestQSRules();
+	    if (QSRules == null)
+	        return(0);
+	      	if (QSRules.Transaction.Customer.Loaded)
+			{
+			var sql =  "SELECT COUNT(*) as 'Number' FROM users WHERE email = '" + QSRules.Transaction.Customer.EmailAddress + "'" ;
+			var EAddressRS =QSRules.OpenRecordSet((sql),(true));
+                if (EAddressRS)
+                  {
+                      if (EAddressRS("Number") > 0)
+                        {
+                         document.getElementById('boldStuff').innerHTML = 'Internet User with this Email address exists, another cannot be created.<br /> The AccountNumber of the Customer with the proper user is X. <br /> Please consolidate the other customers with this email address <br /> into this AccountNumber as it is the one that can be accessed via the internet' ;
+                        }
+                      else
+                        {
+                          document.getElementById('boldStuff').innerHTML = '<input type="button" onclick="CreateUserFromCustomer()" value="Confirm Create User from this Customer" />' ;
+                        }
+                  }
+                  else
+                  {
+                     document.getElementById('boldStuff').innerHTML = '<input type="button" onclick="CreateUserFromCustomer()" value="Confirm Create User from this Customer" />' ;
+                  }
+			}
+			else
+			{
+			 document.getElementById('boldStuff').innerHTML = 'No Customer Found' ;
+			}
+	}
+</script>
+
+</head>
+
+
+
+
+<% if controller.action_name == 'new_user_from_existing_customer' %>
+<body onload="CustomerStartup()" scroll="yes" STYLE="position:absolute; top:0px; left:0px; width:100%; height:100%; padding:0px; margin:0px; color:black;
+ filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=1, StartColorStr='#8eb6d9', EndColorStr='#236B8E')">
+<% elsif controller.action_name == 'confirm_sort_purchase_entries_by_itemlookupcode' %>
+<body onload="ConfirmSortPurchaseEntriesByItemLookupCodeStartup()" scroll="yes" STYLE="position:absolute; top:0px; left:0px; width:100%; height:100%; padding:0px; margin:0px; color:black;
+ filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=1, StartColorStr='#8eb6d9', EndColorStr='#236B8E')">
+
+
+<% elsif controller.action_name == 'confirm_credit_card' %>
+<body onload="ConfirmCreditCardStartup()" scroll="yes" STYLE="position:absolute; top:0px; left:0px; width:100%; height:100%; padding:0px; margin:0px; color:black;
+ filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=1, StartColorStr='#8eb6d9', EndColorStr='#236B8E')">
+
+
+<% elsif controller.action_name == 'edit_credit_card' %>
+<body onload="ConfirmCreditCardStartup()" scroll="yes" STYLE="position:absolute; top:0px; left:0px; width:100%; height:100%; padding:0px; margin:0px; color:black;
+ filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=1, StartColorStr='#8eb6d9', EndColorStr='#236B8E')">
+
+
+
+
+<% elsif controller.action_name == 'finished_sorting' %>
+<body onload="FinishedSortingStartup()" scroll="yes" STYLE="position:absolute; top:0px; left:0px; width:100%; height:100%; padding:0px; margin:0px; color:black;
+ filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=1, StartColorStr='#8eb6d9', EndColorStr='#236B8E')">
+<% elsif controller.action_name == 'confirm_associate_user_to_customer' %>
+<body onload="ConfirmAssociateUserToCustomerStartup()" scroll="yes" STYLE="position:absolute; top:0px; left:0px; width:100%; height:100%; padding:0px; margin:0px; color:black;
+ filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=1, StartColorStr='#8eb6d9', EndColorStr='#236B8E')">
+<% elsif controller.action_name == 'confirm_find_user_by_email' %>
+<body onload="ConfirmFindUserByEmailStartup()" scroll="yes" STYLE="position:absolute; top:0px; left:0px; width:100%; height:100%; padding:0px; margin:0px; color:black;
+ filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=1, StartColorStr='#8eb6d9', EndColorStr='#236B8E')">
+<% else %>
+<body scroll="yes" STYLE="position:absolute; top:0px; left:0px; width:100%; height:100%; padding:0px; margin:0px;  color:black;
+ filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=1, StartColorStr='#8eb6d9', EndColorStr='#236B8E')">
+<% end %>
+
+
+<p style="color: black; font-size:20px;"><%= flash[:notice] %></p>
+<%= error_messages_for :object => [@selected_user, @selected_customer] if @selected_user and @selected_customer  %>
+
+<%= yield  %>
+
+</body>
+</html>

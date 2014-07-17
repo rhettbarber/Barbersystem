@@ -1,0 +1,52 @@
+console.log("begin store\items_menu.js.erb");
+console.log("begin store\items_menu.js.erb");
+console.log("begin store\items_menu.js.erb");
+console.log("begin store\items_menu.js.erb");
+console.log("begin store\items_menu.js.erb");
+
+
+
+$.mobile.loading('hide');
+
+//$('.revisions').html('<%#= escape_javascript(   render partial: "page/content"  ) %>').trigger('create');
+
+$("#items_menu").html(  '<%= escape_javascript( render :partial => "store/items_menu" ) %>' ).trigger('create');
+
+
+
+console.log("###############################");
+console.log("###############################");
+console.log("###############################");
+console.log("###############################")
+
+console.log("singular_item_customer.val: " + $("#singular_item_customer").val() );
+displaySaleTags($("#singular_item_customer").val() );
+
+console.log("###############################");
+console.log("###############################");
+console.log("###############################");
+console.log("###############################");
+
+console.log("request.referrer: <%= request.referer %>" );
+
+
+var activePage = $.mobile.activePage;
+filterDepartments( activePage   );
+filterCategories(activePage);
+
+var activePage =   $.mobile.activePage;
+buildFooterFromCookie(activePage);
+
+<% if params[:department_id] and  !request.referer.include? "view_details" and  !request.referer.include? "specsheet"  %>
+expandCollapsibleDepartment(   <%= params[:department_id] %>  )
+<% else %>
+expandItemMenu();
+<% end %>
+
+
+
+console.log("end store\items_menu.js.erb");
+console.log("end store\items_menu.js.erb");
+console.log("end store\items_menu.js.erb");
+console.log("end store\items_menu.js.erb");
+console.log("end store\items_menu.js.erb");

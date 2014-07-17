@@ -1,0 +1,23 @@
+
+<div style="text-align:center;font-size:17px;font-weight:bolder;"> Please create the following <%= @clone_item_type.name  %> Files </div>
+
+<%= link_to("Back to Summary", :controller => 'clone_item_requests',   :action => 'summary'  ) %>
+
+<p id="notice"><%= notice %></p>
+
+<table>
+  <tbody>
+
+
+      <% @clone_item_requests.each do |cir| %>
+
+              <tr>
+                <td>  <%= image_tag( '/images/designer_item_thumbnails/' +   cir.item.ItemLookupCode + '.png'  , :size => "100x100" )  %>  </td>
+                <td>  <%= cir.item.ItemLookupCode %>  </td>
+                <td>  <%= cir.item.Description  %>  </td>
+                <td>  <span style="color:red"><%= 'W:\\AUTOMATION_DATABASE\\PRODUCTION_FILES\\' + cir.clone_item_type.name + '\\' + cir.clone_item_type.prefix_code + '-' +   cir.item.ItemLookupCode.gsub('L', '') + cir.clone_item_type.production_extension %> </span> </td>
+              </tr>
+
+      <% end %>
+</tbody>
+</table>

@@ -1,0 +1,39 @@
+<h1>Listing purchases</h1>
+
+<table>
+  <tr>
+    <th>Website</th>
+    <th>Id</th>
+    <th>Store</th>
+    <th>Time</th>
+    <th>Closed</th>
+    <th>Comment</th>
+    <th>Customer</th>
+    <th>Total</th>
+    <th>Referencenumber</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @purchases.each do |purchase| %>
+  <tr>
+    <td><%= purchase.website.name %></td>
+    <td><%= purchase.id %></td>
+    <td><%= purchase.store_id %></td>
+    <td><%= purchase.Time %></td>
+    <td><%= purchase.Closed %></td>
+    <td><%= purchase.Comment %></td>
+    <td><%= purchase.customer_id %></td>
+    <td><%= purchase.Total %></td>
+    <td><%= purchase.ReferenceNumber %></td>
+    <td><%= link_to 'Show', purchase %></td>
+    <td><%= link_to 'Edit', edit_purchase_path(purchase) %></td>
+    <td><%= link_to 'Destroy', purchase, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Purchase', new_purchase_path %>

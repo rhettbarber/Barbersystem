@@ -1,0 +1,9 @@
+
+<% @all_category_classes = CategoryClass.find :all %>
+<div  id="select_class" style="background-color:LightGreen;text-align:left;width:640px;display:none;"> 	<br />
+   <%= form_tag '/' + @website.name + '/change_category_class' do -%>
+      <%=  select("category_class", "id", @all_category_classes.collect {|p| [ p.name , p.id ] }.uniq ,{:selected =>  @category.category_class_id } ) %><br />
+      <%= hidden_field_tag 'category_id', @category.id  %>		
+    <%= submit_tag 'Change Category Class' %>
+<% end %>
+							

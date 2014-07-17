@@ -1,0 +1,27 @@
+
+<% if  @back_advanced_combination.number_of_sides == 1 and @back_design.is_breast_print? == false %>
+                     <% display_front  = 'none'   %>
+<% else  %>
+                    <% display_front  = 'inline-block'   %>
+<% end  %>
+
+<% if  @front_advanced_combination.number_of_sides == 1 and @front_design.is_breast_print? == false %>
+                     <% display_back  = 'inline-block'   %>
+<% else  %>
+                    <% display_back  = 'none'   %>
+<% end  %>
+
+<div class="specsheet_resize">
+          <div style="text-align:center;width:850px;">
+                              <div class="resize_handle_container">
+                                                                <div style="display:<%=   display_front %>;float: left; margin-left:100px; width: 200px; background-image: url(/images/controls/slide_track.gif); background-repeat: repeat-x; background-position: left center; height: 18px;" id="main_print_track">
+                                                                                            <div style="width: 18px; height: 18px; left: 200px; position: relative;" id="main_print_handle" class="selected"><img src="/images/controls/slide_control.gif"  alt="slide_control" /></div>
+                                                                 </div>
+                                </div>
+                              <div class="resize_handle_container">
+                                                                  <div style="display:<%=   display_back %>,float: left;margin-left:100px; width: 200px; background-image: url(/images/controls/slide_track.gif); background-repeat: repeat-x; background-position: left center; height: 18px;" id="reverse_print_track">
+                                                                                      <div style="width: 18px; height: 18px; left: 200px; position: relative;" id="reverse_print_handle" class="selected"><img src="/images/controls/slide_control.gif" alt="slide_control" /></div>
+                                                                  </div>
+                               </div>
+            </div>
+</div>

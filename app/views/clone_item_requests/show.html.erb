@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Item:</b>
+  <%= @clone_item_request.item_id %>
+</p>
+
+<p>
+  <b>Clone item type:</b>
+  <%= @clone_item_request.clone_item_type_id %>
+</p>
+
+<p>
+  <b>Created at:</b>
+  <%= @clone_item_request.created_at %>
+</p>
+
+<p>
+  <b>Updated at:</b>
+  <%= @clone_item_request.updated_at %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @clone_item_request.status_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_clone_item_request_path(@clone_item_request) %> |
+<%= link_to 'Back', clone_item_requests_path %>

@@ -1,0 +1,21 @@
+console.log("begin page\show_page_on_index.js.erb");
+
+console.log("leaving collapsible open!");
+//$('#article_subjects').collapsible( "option", "collapsed", true);
+
+$.mobile.loading('hide');
+
+//$('.revisions').html('<%#= escape_javascript(   render partial: "page/content"  ) %>').trigger('create');
+
+
+$(".page_content").remove();
+
+
+<% if @first_page %>
+                        $('#yield_content').prepend('<%= escape_javascript(   render partial: "page/content"  ) %>').trigger('create');
+<% else %>
+                        $('#yield_content').append('<%= escape_javascript(   render partial: "page/content"  ) %>').trigger('create');
+<% end %>
+
+
+console.log("end page\show_page_on_index.js.erb");

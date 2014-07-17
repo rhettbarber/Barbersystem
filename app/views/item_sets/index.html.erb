@@ -1,0 +1,33 @@
+<h1>Listing item_sets</h1>
+
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Category</th>
+    <th>Department</th>
+    <th>Opposite category ids</th>
+    <th>Opposite department ids</th>
+    <th>Opposite item ids</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @item_sets.each do |item_set| %>
+  <tr>
+    <td><%= item_set.item_id %></td>
+    <td><%= item_set.category_id %></td>
+    <td><%= item_set.department_id %></td>
+    <td><%= item_set.opposite_category_ids %></td>
+    <td><%= item_set.opposite_department_ids %></td>
+    <td><%= item_set.opposite_item_ids %></td>
+    <td><%= link_to 'Show', item_set %></td>
+    <td><%= link_to 'Edit', edit_item_set_path(item_set) %></td>
+    <td><%= link_to 'Destroy', item_set, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Item set', new_item_set_path %>

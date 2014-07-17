@@ -1,0 +1,68 @@
+     <style type="text/css">
+                  .listview_span {
+                                 min-width: 10%;
+                                overflow: hidden;
+                  }
+             .left_floater {
+                 float:left;
+             }
+
+     </style>
+
+
+
+
+
+      <%= form_tag "/item_sales" do %>
+
+
+          <label for="search-basic">Year to date sales number report</label>
+          <input type="search" name="week_number" id="search-basic" value="<%= params[:week_number]  %>"   placeholder="Enter a Week Number. Ex: 37 or leave blank for this week" />
+
+               <%= submit_tag "View YTDN for this Account Number" %>
+        <% end %>
+
+
+
+     <% if @selected_week %>
+         <div class="ui-bar ui-bar-a">
+           <h3>Showing item sales for Week:  <%= @selected_week %>:</h3>
+
+         </div>
+     <% end %>
+
+
+      <% if @customer_item_sales_by_years and  @customer_item_sales_by_years.size > 0 %>
+    <ul data-role="listview">
+              <% @customer_item_sales_by_years.each do |customer_item_sales_by_year| %>
+                                 <%  if customer_item_sales_by_year.item  and customer_item_sales_by_year.item.category %>
+                                                      <li>
+                                                                       <a href="#">
+                                                                                            <div class="left_floater" style="max-width: 140px;max-height:140px;overflow: hidden;">
+                                                                                                                                  <img src="<%= "/images/item_thumbnails/" + customer_item_sales_by_year.item.PictureName.gsub(".png","").gsub(".jpg","")   + ".jpg"  %>" class="ui-li-thumb"  style="max-height:200px;position:relative;">
+                                                                                           </div>
+                                                                                            <div class="listview_span left_floater"> <%= customer_item_sales_by_year.item.category.Name %> </div>
+                                                                                            <div class="listview_span left_floater"><%= customer_item_sales_by_year.item.ItemLookupCode %> </div>
+                                                                                            <div class="listview_span left_floater"><%= customer_item_sales_by_year.item.Description   %>  </div>
+                                                                                            <div class="listview_span left_floater"> <%= customer_item_sales_by_year.sum_of_quantity %>   </div>
+                                                                       </a>
+                                                      </li>
+                                 <% end %>
+              <% end %>
+    </ul>
+      <% else %>
+
+           No customer chosen. Please enter an account number in the search field above.
+      <% end %>
+
+
+
+
+
+
+
+
+
+
+
+

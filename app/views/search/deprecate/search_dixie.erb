@@ -1,0 +1,64 @@
+
+<!-- Begin Designer Specsheet Index -->
+<% content_for :head_additions do -%>
+<!-- BeginDesigner Specsheet Index Head Additions -->
+
+<%= stylesheet_link_tag 'search.css'  %>
+<!-- End Designer Specsheet Index Head Additions -->
+<% end  -%>
+
+
+<div class="search-area">
+         <div class="search-area-bar">
+              <div class="search-area-links">
+                   <span id="search_designs" class="search_type_links">Designs |</span>
+                   <span id="search_articles" class="search_type_links">Articles |</span>
+                   <span id="search_using_yahoo" class="search_type_links">Yahoo Search |</span>
+                   <span id="go_home" class="search_type_links">Home</span>
+                 </div>
+                  <div class="search-area-image"><%= image_tag "/images/search/defend-ones-honor-horseman.png" %></div>
+        </div>
+        <div class="search-area-form">
+                	<%= render "search_form" %>
+          </div>
+</div>
+
+<div id="results" class="results">
+      <%= render "results" %>
+</div>
+
+
+<script type="text/javascript">
+Event.observe(window, 'load', function() {
+          $('search_using_yahoo').removeClassName('search_type_links');
+          $('search_using_yahoo').addClassName('search_type_links_active');
+         $$('span[class=search_type_links]', 'span[class=search_type_links_active]'   ).invoke('observe', 'click', function(event) {
+                      clickHandler(event)
+           });
+});
+
+function clickHandler(e) {
+          target =  findTarget(e);
+
+
+
+         $$('span[class=search_type_links]', 'span[class=search_type_links_active]'   ).invoke('removeClassName', 'search_type_links_active').invoke('addClassName', 'search_type_links');
+         target.className =  'search_type_links_active' ;
+          Form.Element.setValue('search_type_name' , target.id    ) ;
+         if (target.id == "search_using_yahoo") {
+           $('yahoo_preferences').show()
+         }
+         else if (target.id == "go_home") {
+           window.location =  "http://dixieoutfitters.com" ;
+         }
+         else {
+             $('yahoo_preferences').hide()
+         }
+}
+
+
+function findTarget(e) {
+           return Event.element(e) ;
+}
+
+</script>

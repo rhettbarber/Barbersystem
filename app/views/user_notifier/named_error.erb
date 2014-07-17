@@ -1,0 +1,12 @@
+
+
+A named error occurred on <% @website.domain %>. Here are the details.
+
+purchase.id: <%= @purchase.id if @purchase %>
+
+customer email: <%= @user.email if @user %>
+
+Error Name: <%= @error_name %>
+
+params: <%= @params %>
+

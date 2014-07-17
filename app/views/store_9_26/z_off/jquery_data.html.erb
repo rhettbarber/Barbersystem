@@ -1,0 +1,66 @@
+
+<div id="presidents"></div>
+<form id="presidentForm">
+  <fieldset>
+    <legend>President</legend>
+    <ul>
+      <li>
+        <label for="firstName" title="First Name">First Name</label>
+        <input type="text" id="firstName" name="firstName" />
+      </li>
+      <li>
+        <label for="lastName" title="Last Name">Last Name</label>
+        <input type="text" id="lastName" name="lastName" />
+      </li>
+      <li>
+        <label for="username" title="Username">Username</label>
+        <input type="text" id="username" name="username" />
+      </li>
+      <li>
+        <label for="email" title="Email Address">Email</label>
+        <input type="text" id="email" name="email" />
+      </li>
+    </ul>
+  </fieldset>
+</form>
+
+<script type="text/javascript">
+    var people =
+            [
+                { "email": "gwashington@whitehouse.us.gov", "firstName": "George", "id": 1, "lastName": "Washington", "username": "gwashington" },
+                { "email": "jadams@whitehouse.us.gov", "firstName": "John", "id": 2, "lastName": "Adams", "username": "jadams" },
+                { "email": "tjefferson@whitehouse.us.gov", "firstName": "Thomas", "id": 3, "lastName": "Jefferson", "username": "tjefferson" },
+                { "email": "jmadison@whitehouse.us.gov", "firstName": "James", "id": 4, "lastName": "Madison", "username": "jmadison" },
+                { "email": "jmonroe@whitehouse.us.gov", "firstName": "James", "id": 5, "lastName": "Monroe", "username": "jmonroe" },
+                { "email": "jqadams@whitehouse.us.gov", "firstName": "John Quincy", "id": 6, "lastName": "Adams", "username": "jqadams" },
+                { "email": "ajackson@whitehouse.us.gov", "firstName": "Andrew", "id": 7, "lastName": "Jackson", "username": "ajackson" }
+            ];
+
+    $(function () {
+        //construct an unordered list of presedents
+        var items = [];
+        $.each(people, function (index, value) {
+            items.push('<li data-person=\'' + JSON.stringify(value) + '\'>' + value.firstName + ' ' + value.lastName + '</i>');
+        });
+
+        //add all <li> items to a <ul> element
+        $("<ul />", {
+            "id": "presidentsList",
+            "class": "list",
+            html: items.join("")
+        }).appendTo("#presidents");
+
+        //assign a click event to the ul element
+        $("#presidentsList").click(function (e) {
+            var person = $(e.target).data("person");
+            assignFormFieldValues("presidentForm", person);
+        });
+    });
+
+    function assignFormFieldValues(formId, obj) {
+        var fields = $("#" + formId).serializeArray();
+        $.each(fields, function (index, field) {
+            var f = $("[name=" + field.name + "]").val(obj[field.name]);
+        });
+    }
+</script>

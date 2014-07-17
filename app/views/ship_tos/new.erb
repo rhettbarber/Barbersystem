@@ -1,0 +1,72 @@
+<div class="container text-primary text-center">Create new Ship To: </div><br>
+
+
+<%= errors_for(@ship_to, "Opps, unable to add new user").html_safe if @ship_to %>
+
+
+<%= form_for(:ship_to, :url => ship_tos_path) do |f| %>
+    <p>
+      <label for="Company">Company (optional)</label>
+      <input data-clear-btn="true" name="ship_to[Company]" id="Company" value="">
+    </p>
+
+    <p>
+      <label for="Name">Name</label>
+      <input data-clear-btn="true" name="ship_to[Name]" id="Name_Req" value="">
+    </p>
+
+    <p>
+      <label for="Address">Address</label>
+      <input data-clear-btn="true" name="ship_to[Address]" id="Address_Req" value="">
+    </p>
+
+    <p>
+      <label for="Address2">Address2 (optional)</label>
+      <input data-clear-btn="true" name="ship_to[Address2]" id="Address2" value="">
+    </p>
+
+    <p>
+      <label for="City">City </label>
+      <input data-clear-btn="true" name="ship_to[City]" id="City_Req" value="">
+    </p>
+
+    <p>
+      <label for="State">State </label>
+      <input data-clear-btn="true" name="ship_to[State]" id="State_Req" value="">
+    </p>
+
+    <p>
+      <label for="Zip">Zip</label>
+      <input type="number" data-clear-btn="true" name="ship_to[Zip]" id="Zip_Req" value="">
+    </p>
+
+  
+    <%= hidden_field_tag("Country", "United States" )  %>
+
+    <p>
+      <label for="PhoneNumber">PhoneNumber</label>
+      <input type="tel" data-clear-btn="true" name="ship_to[PhoneNumber]" id="PhoneNumber_Req" value="">
+    </p>
+
+    <p>
+      <label for="FaxNumber">FaxNumber (optional)</label>
+      <input type="tel" data-clear-btn="true" name="ship_to[FaxNumber]" id="FaxNumber_Req" value="">
+    </p>
+
+
+  <p>
+    <%#= submit_tag "Create" %>
+    <%= button_tag(type: "submit", class: "ui-btn ui-btn-b" ) do %>
+        Create Ship To <i class="icon-repeat"></i>
+    <% end %>
+
+
+  </p>
+<% end %>
+
+
+<%=link_to(  "Cancel creating Ship To" ,  ship_tos_path , :class => "ui-btn")    %>
+
+
+
+

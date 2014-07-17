@@ -1,0 +1,57 @@
+
+
+<div id="cat_side" style="padding-left:15px;float:left;width:230px;height:500px;">
+		Categories:<br />
+		<div id="cat_list" style="font-size:11px;font-family:Arial,Helvetica;overflow:scroll;float:left;width:230px;height:500px;border:1px black solid;">
+			<div style="padding-left:5px;float:left;width:40px;">Code</div><div style="padding-left:7px;float:left;width:140px;">Name</div>
+			<table style="font-size:9px;">
+						<% @departments.each do |department| %>
+										<div id="department_categories_<%= department.id.to_s %>" style="display:none;">
+												
+												<% @categories = Category.find_all_by_department_id(department.id) %>
+												
+												<% @categories.each do |category| %>
+
+
+
+														<div style="padding-left:5px;float:left;width:40px;">
+															
+															
+															<% if category.visible == 1 %>
+																	<span style="color:black;">
+																			<%= category.Code %>
+															<% else %>
+																	<span style="color:lightgrey;">
+																			..<%= category.Code %>
+															<% end %>
+																	</span>
+														
+														</div><div style="padding-left:7px;float:left;width:140px;">
+														
+<%=  link_to_function(category.Name, nil, :id => "cat_more_link") do |page|
+			page.hide 'department_buttons'
+			page.hide 'department_properties'												
+			page.show 'category_properties'
+			page.show 'category_name'
+			page.replace_html 'category_name', "#{category.Code} - #{category.Name}<br />"
+			page.replace_html 'category_properties', "#{ link_to 'Category Properties', :controller => 'categories', :action => 'category_properties', :category_id => category.id }<br /><br />"
+			page.show 'hide_category' if category.visible == 1
+			page.replace_html 'hide_category', "#{ link_to 'Hide Category', :controller => 'categories', :action => 'hide_category', :category_id => category.id }<br /><br />" if category.visible == 1
+			page.show 'unhide_category' if category.visible == 0
+			page.replace_html 'unhide_category', "#{ link_to 'Unhide Category', :controller => 'categories', :action => 'unhide_category', :category_id => category.id }<br /><br />" if category.visible == 0
+			page.show 'duplicate_category'
+			page.replace_html 'duplicate_category', "#{ link_to 'Duplicate Category', :controller => 'categories', :action => 'duplicate_category', :category_id => category.id }<br /><br />"
+end  %>
+													
+														
+														</div><br />
+												<% end %>
+										</div>	
+						<% end %>
+			</table>	
+		</div>
+			<div id="category_buttons" style="float:right;display:none;">
+		<%= link_to 'New', :controller => 'categories', :action => 'new_category' %>
+	</div>
+</div>	
+

@@ -1,0 +1,48 @@
+<% if item %>
+<% if item.category %>
+
+<%    category_class_item_type  =  item.category.category_class.item_type  %>
+
+
+
+<div class="item_container">
+        <div id="<%= 'item_' + item.id.to_s %>">
+         <%= link_to( image_tag( item.image_url( @department, '/images/item_thumbnails/','x' )  ), { :controller => 'specsheet', :item_id => item.id , :department_id => @department , :item_type =>  category_class_item_type   })  %>
+
+
+          <% item.id %>
+
+                <br />
+                <% if controller.action_name == 'search' %>
+                        Keywords Hit: <%= item.SubDescription3  %><br />
+                <% end %>
+
+                <% unless params[:category_id]    %>
+                                <%=  item.category.Name  %><br />
+                <% end %>
+
+                <% if  category_class_item_type  == 'slave' %>
+                                <div id="opacity_football_image">
+                                                <%# CONVERT TO MODAL BOX  link_to image_tag( item.opacity_football , :size => "22x12" ,:border => 0   ),{:controller =>  'help' , :action => 'opacity_help_popup'} , :popup => ['opacity_help_popup', 'height=300,width=600']    %>
+                                                <%=  image_tag( item.opacity_football , :size => "22x12" ,:border => 0   ) %>
+                                </div>
+                <% end %>
+
+
+                <% unless !@category %>
+                  <%=  item.number  %> <%=  item.description_before_color_and_size  %> <br />
+                <% end %>
+
+                <% if admin? and params[:show_sales] %>
+                        <%#= item.item_class_sales_this_years_with_item_id.sum_of_quantity if  item.item_class_sales_this_years_with_item_id   %>
+                        #YTDN: <%=  item.ytdn  %><br />
+                        #LYTDN: <%=  item.lytdn  %><br />
+                <% end  %>
+
+
+                <%=   link_to('details', :controller =>  'specsheet' , :action => "index", :item_id => item.id , :department_id => @department  )  %>
+                <br />
+        </div>
+</div>
+<% end %>
+<% end %>

@@ -1,0 +1,22 @@
+<%= form_for(@purchase, :url => { :controller => "purchases",:action => "update",:id => @purchase}, :html => {:id => "purchase_update" ,  :method => :put }) do |f| %>
+     <ul data-role="listview">
+        <!--   Begin purchases entries -->
+        <% if @customer && @customer.PriceLevel > 1 # Blank / Transfer and Franchise  %>
+            <!--   Begin # Blank / Transfer and Franchise Order  -->
+            <% @purchases_entries.each do |purchases_entry| %>
+                <%= render :partial => 'purchases_entry_wholesale' ,:locals => { :purchases_entry => purchases_entry } %>
+            <% end if @purchases_entries %>
+        <% elsif @customer && @customer.PriceLevel == 1   # PrePrint   %>
+            <!--   Begin # PrePrint  Order -->
+            <% @purchases_entries.each do |purchases_entry| %>
+                <%= render :partial => 'purchases_entry_wholesale_preprint' ,:locals => { :purchases_entry => purchases_entry } %>
+            <% end if @purchases_entries %>
+        <% else  # Retail Order   %>
+            <!--   Begin # Retail Order   -->
+            <% @purchases_entries.each do |purchases_entry| %>
+                <%= render :partial => 'purchases_entry_retail' ,:locals => { :purchases_entry => purchases_entry } %>
+            <% end if @purchases_entries %>
+        <% end %>
+        <!--   End  purchases entries -->
+    </ul>
+<% end if @purchases_entries %>

@@ -1,0 +1,39 @@
+<div style="float:left;">
+<table>
+	<td><%= image_tag "/uploads/Image/shared_introductions/make_money.jpg" %></td>
+	<td>	<h3> Link up to <%= @website.title %> Today! </h3>
+			All you have to do is choose from the link or a banner below to start earning money by driving traffic to our site.
+			You will receive a percentage of each sale that originates from your link.
+			<br />
+			<table>
+				<h3> How to become an affiliate: It's free and easy! </h3>
+				<li> 1. Add one of the following link or banners to your website. </li>  	 
+				<li> 2. Read our <%= link_to "Affiate Terms and Conditions" %> regarding affiliate sales. </li>  	 
+				<li> 3. Check <%= link_to "Your Affiliate All Hits Report", :action => 'all_hits_report' %> </li>  	 
+				<li> 4. Check <%= link_to "Your Compensation Report" ,:action => 'compensation_report' %> </li> 
+				<li> 5. After a minimum of $50.00 revenue has accrued, your check will be sent in the mail to the address we have on file for your customer infomation. </li>  
+		</table>
+	</td>
+</table>
+</div>
+
+
+
+<br />
+
+
+<%= render :partial => 'affiliates/links_and_banners' %>
+
+
+<br />
+
+
+<table>
+	<h2> Interested in even more opportunites to earn money? </h2> 
+	<h3> Become an affiliate recruiter! </h3> 
+	Affiliate recruiters find websites to link to <%= @website.domain  %> and get a portion of the sales made originating from those sites.
+	<%= link_to "Find out more", :controller => 'affiliates',:action => 'affiliate_recruiter_information'	   %>
+</table>
+
+<br />
+<br />

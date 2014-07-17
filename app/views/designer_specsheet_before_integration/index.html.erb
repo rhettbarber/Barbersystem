@@ -1,0 +1,97 @@
+          <!-- Begin Designer Specsheet Index -->
+    <% content_for :head_additions do -%>
+          <!-- BeginDesigner Specsheet Index Head Additions -->
+          <%= stylesheet_link_tag 'designer_specsheet.css'  %>
+          <%= javascript_include_tag 'designer_specsheet.js' %>
+          <%= javascript_include_tag 'proto.menu.js' %>
+          <%= stylesheet_link_tag 'proto.menu.css'  %>
+          <% javascript_include_tag 'dynamic_categories.js' %>
+          <%= stylesheet_link_tag 'custom_items.css'  %>
+          <!-- End Designer Specsheet Index Head Additions -->
+    <% end  -%>
+
+    <div id="null_replace"></div>
+
+
+    <div class="specsheet_container" >
+              <%= render(:partial => "designer_specsheet/specsheet_table_double") -%>
+              <%= render(:partial => "designer_specsheet/item_status_bar") -%>
+
+              <%= render(:partial => "designer_specsheet/specsheet_resize") if @designer   -%>
+
+              <%= render(:partial => "designer_specsheet/advanced_choices_menu") -%>
+              <%= render(:partial => "designer_specsheet/advanced_choices_administration") -%>
+              <% render :partial => 'designer_specsheet/custom_items' if @custom_items %>
+
+              <%= render :partial => "designer_specsheet/category_choices_background"    -%>
+              <%= render :partial => "designer_specsheet/category_choices_front"  -%>
+              <%= render :partial => "designer_specsheet/category_choices_back" -%>
+              <%= render :partial => "designer_specsheet/category_choices_product"   -%>
+              <%= render :partial => 'designer_specsheet/color_choices_pallete' %>
+              <%= render :partial => "designer_specsheet/details"  -%>
+    </div>
+
+    <!-- End Designer Specsheet Index -->
+<%   @all_categories = Category.all    %>
+<%#  @back_design.opposite_category_ids.inspect        %>
+
+    
+ <script type="text/javascript">
+
+var categories = new Array();
+<% for category in @all_categories.sort_by{|a| a.Name.camelize}  -%>
+      categories.push(new Array(<%= category.department_id %>, '<%=h Util::Slug.generate(category.Name.to_s) %>', <%= category.id %>));
+<% end -%>
+
+//------------------------------------------------------------------------------------------------------
+          function backdepartmentSelected() {
+                              $('specsheet_item_search_back_field').value = '';
+                              department_id = $('back_javascript_department_id').getValue();
+                              options = $('back_javascript_category_id').options;
+                              options.length = 1;
+                              categories.each(function(category) {
+                                            if (category[0] == department_id) {
+                                              options[options.length] = new Option(category[1], category[2]);
+                                            }
+                                   }
+                           );
+
+                          if (options.length == 1) {
+                                $('back_category_field').hide();
+                          } else {
+                                $('back_category_field').show();
+                          }
+            };
+            function backcategorySelected() {
+                          console.log('backcategorySelected()');
+                          category_id =  $('back_javascript_category_id').getValue();
+                          item_id =  $('item_id').getValue();
+                          $('specsheet_item_search_back_field').value = '';
+                           new Ajax.Updater('category_items_back', '/designer_specsheet/select_list_update_category_back', {
+                                   parameters: { category_id: category_id , item_id: item_id , swap: $('swap').value   }, evalScripts:true
+                            });
+            };
+            function backsearchSubmitted() {
+                    item_keywords =  $F('specsheet_item_search_back_field');
+                     new Ajax.Updater('category_items_back_design', '/designer_specsheet/specsheet_item_search', {
+                             parameters: { item_keywords:  item_keywords, page: 1 , choice_type: 'back' }
+                      });
+            };
+
+            function createSelectLists( ) {
+                backdepartmentSelected();
+                $('back_javascript_department_id').observe('change', backdepartmentSelected);
+                $('back_javascript_category_id').observe('change', backcategorySelected);
+                $('specsheet_item_search_back_field').observe('change', backsearchSubmitted);
+            };
+
+
+
+        createSelectLists( );
+
+//        $$('.add_to_cart_button').invoke('observe', 'click', ajaxAddToCart );
+
+
+    </script>
+
+

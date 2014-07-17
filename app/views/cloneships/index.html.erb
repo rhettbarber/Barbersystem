@@ -1,0 +1,22 @@
+<h1>Listing cloneships</h1>
+
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Clone</th>
+  </tr>
+
+<% @cloneships.each do |cloneship| %>
+  <tr>
+    <td><%=h cloneship.item_id %></td>
+    <td><%=h cloneship.clone_id %></td>
+    <td><%= link_to 'Show', cloneship %></td>
+    <td><%= link_to 'Edit', edit_cloneship_path(cloneship) %></td>
+    <td><%= link_to 'Destroy', cloneship, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New cloneship', new_cloneship_path %>

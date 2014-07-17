@@ -1,0 +1,33 @@
+
+                          <%= form_for(  :custom_item, :url =>{ :controller => 'custom_items', :action => 'create_from_url_via_ajax' } ,
+                                                  :html => { :id => 'custom_item_upload_form' ,  :multipart => true, :target => 'upload_frame'  }) do |f| -%>
+                            <p>
+                              <label for="custom_item" style="font-size:27px;color:red;">Upload A Custom Design</label>
+                              <%= f.text_field :url %>
+                            </p>
+                            <p>
+                              <%= submit_tag 'Create' %>
+                            </p>
+                          <% end -%>
+
+        <div id="progress_bar_container" style="display:none;"> <%= image_tag( '/images/icons/progress-bar.gif'   ) %> </div>
+
+
+<iframe id='upload_frame' name="upload_frame" style="width:1px;height:1px;border:0px" >
+
+  
+
+</iframe>
+
+
+
+<script type="text/javascript">
+    new Form.Observer('custom_item_upload_form', 0.3, function(form, value){
+    })
+
+    $('custom_item_upload_form').onsubmit = function() {
+            $('progress_bar_container').show();
+             $('custom_item_upload_form').request();
+
+    }
+</script>

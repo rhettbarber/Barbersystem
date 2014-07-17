@@ -1,0 +1,35 @@
+<%= stylesheet_link_tag "shared_user" %>
+
+<div style="border:solid black 1px;width:100%;height:70px;float:left;padding:5px;margin:5px;">
+
+	<div style="float:left;width:500px;">
+		Search:	
+		<%  form_remote_tag :url => 'add_to_cart'  do %>
+		<%=    text_field_tag  "item_keywords"  %>
+		
+		<%= observe_field :item_keywords, :frequency => 7, :update => 'item_rows',  :url => { :action => 'find_item' } ,  :with => 'item_keywords'  %>
+		<% end %>
+	</div>
+	<div style="float:left;">	
+		<% link_to 'Create New user', new_user_path %>
+
+	</div>
+
+</div>
+
+<div style="border:solid black 1px;float:left;padding:5px;margin:5px;width:100%;">
+	
+	<table>
+		<tbody>
+		<tr>
+	  		<td> 
+	  		<div id="item_rows">
+	  		<%= render :partial => "/users/item", :collection => @items %> 
+	  		</div>
+	  		</td>
+	  	</tr>	
+		</tbody>
+		</table>
+
+
+</div>

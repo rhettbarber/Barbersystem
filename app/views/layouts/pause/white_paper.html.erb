@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<%= render :partial => "layout_elements/shared_javascripts" %>
+<%= render :partial => "layout_elements/shared_stylesheets" %>
+  
+<%= yield :head_additions -%>
+
+</head>
+
+<body class="designer_body">
+      <div class="header">
+
+
+      </div>
+
+      <div class="page_content_wide">
+
+                  <% if flash[:notice] != nil -%>
+                          <% if flash[:notice].size > 0 -%>
+                                    <div style="color: blue; text-align: center;">&nbsp;<%= flash[:notice] %>&nbsp;</div>
+                          <% end -%>
+                  <% end -%>
+                  <%= yield %>
+
+      </div>
+      <div class="footer">
+      </div>
+  
+
+  <%= render :partial => 'development/instance_variables' , :locals => { :instance_variables => instance_variables } %>
+  <%= render :partial => 'development/parameters' , :locals => { :params => params } %>
+
+
+</body>
+</html>

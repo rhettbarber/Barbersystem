@@ -1,0 +1,214 @@
+
+
+
+<div  id="category_items_front">
+  <% @items_front ||= []  %>
+        <div  class="category_items">
+                        <table id="front_designs_table" class="designs_table" >
+                          <tr>
+                                  <% if @items_front.size > 0  %>
+                                                <%  @items_front.each do |item| %>
+                                                                   <%  if item  %>
+                                                                                     <td>
+                                                                                                <%= image_tag(  "/images/item_thumbnails/"  + item.ItemLookupCode + ".png"   , :width => '280' ,:alt =>  item.ItemLookupCode , :border => '0'  , :class =>  'front_design',  :data_item_id => item.id ,   :data_category_id => item.category_id ,  :data_department_id => item.department_id ) %>
+                                                                                     </td>
+
+                                                                    <% end  %>
+                                                 <% end %>
+                                       <% else %>
+                                                                     <td style="text-align:center;width:850px;min-height:100px;">
+                                                                               No breast prints available for this department.<br />
+                                                                               <% if admin? %>
+                                                                                                  <%= link_to "Please define some breast prints for this department!", "#ajax_administer_breast_prints_empty"  ,:onclick => "openBreastPrintAdministration();"  %>
+                                                                               <% end  %>
+                                                                     </td>
+                                       <% end %>
+                          </tr>
+                        </table>
+              </div>
+
+
+
+
+<% if @from_ajax  %>
+<script type="text/javascript">
+
+      console.log("begin render :partial => category_items_front);");
+      console.log("This runs javascript which updates the ");
+      console.log(  $('swap').value );
+
+
+//###########################################################################
+//###########################################################################
+
+<% if @front_design_image_name %>
+          console.log("@front_design_image_name: <%=  @front_design_image_name  %>" )
+        $("front_design_image").src =   "<%=  @front_design_image_name %>"     ;
+ <% else %>
+         console.log("@front_design_image_name DOES NOT EXIST" )
+<% end  %>
+
+<% if @back_design_image_name %>
+            console.log("@back_design_image_name: <%=  @back_design_image_name  %>" )
+        $("back_design_image").src =   "<%=  @back_design_image_name %>"     ;
+<% else  %>
+          console.log("@back_design_image_name: DOES NOT EXIST" )
+<% end  %>
+
+
+<% if @new_item %>
+                    console.log( "GREAT @new_item")
+
+                    <% if @product_mask_image_name %>
+                              if  ($('mask_image')  != undefined) { $('mask_image').src =  "<%= @product_mask_image_name %>" ; };
+                               $('mask_image').show() ;
+                    <% else  %>
+                               if  ($('mask_image')  != undefined) {
+                                              $('mask_image').hide() ;
+                               };
+                    <% end  %>
+
+                    $('specsheet_table').setStyle( { backgroundImage:  'url(<%= @product_background_image_name %>)'  } ) ;
+
+                    $('details_form').item_id.value              =   "<%=  @new_item.id   %>";
+<% end  %>
+
+
+<% if @back_advanced_combination %>
+          console.log("@back_advanced_combination" );
+          console.log("@back_design_image_name:  <%= @back_design_image_name %>"  );
+          $('back_design_image').style.width =   "<%= @back_advanced_combination.back_width %>";
+          $('back_design_image').style.left =        "<%= @back_advanced_combination.back_left %>";
+          $('back_design_image').style.top  =       "<%= @back_advanced_combination.back_top %>";
+
+          $('details_form_back').design_id.value              =   "<%=  @back_design.id   %>";
+          $('details_form_back').department_id.value    =   "<%=  @back_design.department_id   %>";
+          $('details_form_back').category_id.value         =    "<%=  @back_design.category_id   %>";
+          $('details_form_back').item_type.value             =    "<%=  @back_design.category.category_class.item_type   %>";
+          $('details_form_back').image_name.value       =   "<%= @back_design_image_name %>";
+
+            console.log( " @back_advanced_combination.id: " +  "<%= @back_advanced_combination.id  %>" );
+            console.log( " @back_advanced_combination.back_width: " +  "<%= @back_advanced_combination.back_width  %>" );
+
+            $('details_form_back').advanced_combination_id.value = "<%= @back_advanced_combination.id  %>";
+            $('details_form_back').advanced_combination_back_width.value = "<%= @back_advanced_combination.back_width  %>";
+            $('details_form_back').advanced_combination_back_left.value = "<%=  @back_advanced_combination.back_left  %>";
+            $('details_form_back').advanced_combination_back_top.value =  "<%=  @back_advanced_combination.back_top %>";
+            $('details_form_back').advanced_combination_back_width.value = "<%=  @back_advanced_combination.back_width  %>";
+            $('details_form_back').advanced_combination_front_left.value = "<%=  @back_advanced_combination.front_left  %>";
+            $('details_form_back').advanced_combination_front_top.value =  "<%=  @back_advanced_combination.front_top %>";
+            $('details_form_back').advanced_combination_front_width.value = "<%=  @back_advanced_combination.front_width  %>";
+            $('details_form_back').advanced_combination_number_of_sides.value = "<%=  @back_advanced_combination.number_of_sides  %>";
+            $('details_form_back').advanced_combination_default_side.value = "<%=  @back_advanced_combination.default_side  %>";
+
+
+<% end  %>
+
+<% if @front_advanced_combination %>
+             console.log("@front_advanced_combination" );
+             console.log("@front_design_image_name: <%= @front_design_image_name %>"  );
+          $('front_design_image').style.width =   "<%= @front_advanced_combination.front_width %>";
+          $('front_design_image').style.left =        "<%= @front_advanced_combination.front_left %>";
+          $('front_design_image').style.top  =       "<%= @front_advanced_combination.front_top %>";
+
+          $('details_form_front').design_id.value              =    "<%=  @front_design.id   %>";
+          $('details_form_front').department_id.value    =    "<%=  @front_design.department_id   %>";
+          $('details_form_front').category_id.value         =    "<%=  @front_design.category_id   %>";
+          $('details_form_front').item_type.value             =    "<%=  @front_design.category ? @front_design.category.category_class.item_type : 'unknown'  %>";
+          $('details_form_front').image_name.value       =    "<%= @front_design_image_name %>";
+
+            console.log( " @front_advanced_combination.id: " +  "<%= @front_advanced_combination.id  %>" );
+            console.log( " @front_advanced_combination.back_width: " +  "<%= @front_advanced_combination.front_width  %>" );
+
+          $('details_form_front').advanced_combination_id.value = "<%= @front_advanced_combination.id  %>";
+          $('details_form_front').advanced_combination_back_width.value = "<%= @front_advanced_combination.back_width  %>";
+          $('details_form_front').advanced_combination_back_left.value = "<%=  @front_advanced_combination.back_left  %>";
+          $('details_form_front').advanced_combination_back_top.value =  "<%=  @front_advanced_combination.back_top %>";
+          $('details_form_front').advanced_combination_back_width.value = "<%=  @front_advanced_combination.back_width  %>";
+          $('details_form_front').advanced_combination_front_left.value = "<%=  @front_advanced_combination.front_left  %>";
+          $('details_form_front').advanced_combination_front_top.value =  "<%=  @front_advanced_combination.front_top %>";
+          $('details_form_front').advanced_combination_number_of_sides.value = "<%=  @front_advanced_combination.number_of_sides  %>";
+          $('details_form_front').advanced_combination_default_side.value = "<%=  @front_advanced_combination.default_side  %>";
+
+<% end  %>
+
+
+if ( $('details_form_back').item_type.value == 'all_over_design') {
+              $('front_choices_tab_a').hide();
+              $('back_choices_tab_a').innerHTML = "Design";
+  } else {
+
+              $('front_choices_tab_a').show();
+              $('back_choices_tab_a').innerHTML = "Back Design";
+  }
+  ;
+
+
+//###########################################################################
+//###########################################################################
+
+
+<% if @old_method  %>
+
+        if ( $('swap').value == '1' ) {
+                            console.log(' from ajax swap == 1 great');
+
+                              if ($$("#front_designs_table img").first()) {
+
+                                             new_back_design = $$("#front_designs_table img").first();
+                                              $("back_design_image").src =   new_back_design.src ;
+
+
+                                              $('details_form_back').design_id.value   =    new_back_design.getAttribute('data_item_id') ;
+                                              $('details_form_back').department_id.value = new_back_design.getAttribute('data_department_id') ;
+                                              $('details_form_back').category_id.value = new_back_design.getAttribute('data_category_id') ;
+                                               $('details_form_back').image_name.value = new_back_design.alt ;
+
+                                              $('back_design_image').style.width  =  $('details_form_back').selected_category_advanced_combination_back_width.value  ;
+                                              $('back_design_image').style.left       =  $('details_form_back').selected_category_advanced_combination_back_left.value  ;
+                                              $('back_design_image').style.top       =  $('details_form_back').selected_category_advanced_combination_back_top.value  ;
+                                    } else {
+                                              console.log("warning this design has no breast print defined");
+
+                                              $("back_design_image").src =  "/images/pixels/transparent.png";
+
+                                      }
+
+
+          } else {
+                               console.log(' from ajax swap != 1 bad');
+
+                                if ($$("#front_designs_table img").first()) {
+
+                                             new_front_design = $$("#front_designs_table img").first();
+                                              $("front_design_image").src =   new_front_design.src ;
+
+                                              new_category_id =   new_front_design.getAttribute('data_category_id') ;
+                                              $('details_form_front').design_id.value   =    new_front_design.getAttribute('data_item_id') ;
+                                              $('details_form_front').category_id.value = new_category_id;
+
+                                              $('front_design_image').style.width  =  $('details_form_front').selected_category_advanced_combination_front_width.value  ;
+                                              $('front_design_image').style.left       =  $('details_form_front').selected_category_advanced_combination_front_left.value  ;
+                                              $('front_design_image').style.top       =  $('details_form_front').selected_category_advanced_combination_front_top.value  ;
+
+
+                                      }else {
+                                                console.log("warning this design has no breast print defined");
+                                                $("front_design_image").src =  "/images/pixels/transparent.png";
+                                        }
+        }
+
+<% end  %>
+
+      $$('.back_design').invoke('observe', 'click', changeBack);
+      $$('.front_design').invoke('observe', 'click', changeFront );
+
+      console.log("end  render :partial => category_items_front);");
+
+</script>
+<% end  %>
+
+
+  </div>
+
+

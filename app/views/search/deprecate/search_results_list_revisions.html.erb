@@ -1,0 +1,78 @@
+
+
+<!--<script src="/assets/jquery/jquery.js"></script>-->
+<!--<script src="/assets/jquery/jquery_ujs.js"></script>-->
+<!--<script src="/assets/bootstrap.js"></script>-->
+<!--<script src="/assets/application/application_application.js"></script>-->
+
+
+<div id="search_results_container" style="text-align:left;min-height:200px;background-color:white;padding:15px;">
+
+
+
+        <div class="modal_search_form_container">
+
+                            <div class="container"> Increasing relevant keywords will improve your search.    </div>
+
+
+                             <div class="container">
+                                    <% if @revisions  %>
+                                                Search found <%= @revisions.size  %>   results.<br />
+                                    <% else %>
+                                                 Search did not find any articles matching your keywords. Try different keywords.<br />
+                                    <% end  %>
+                         </div>
+        </div>
+
+
+
+         <% @revision_ids = Set.new %>
+         <%   @revisions.each do |revision| %>
+                              <%# unless @revision_ids.include?(  revision.id )  %>
+                                              <% @revision = revision %>
+                                              <% @revision_ids.add?(  revision.id )  %>
+                                              <div class="page_content_capsule">
+                                                            <div class="page_name">
+                                                              <strong>
+                                                                Keywords Hit: <%= revision.total_column  %> ---<%= revision.name  %> --- Released:  <%#= time_ago_in_words(  revision.created_at,  include_seconds = false ) %>  Ago.  ----  <%#=  revision.created_at  %><br />
+                                                                <%= link_to "See related pages and categories" ,:controller => 'page', :action => 'show',:id => revision.slug       %>
+                                                              </strong>
+                                                            </div>
+                                                            <div class="page_yield">
+                                                            <%= highlight( revision.content , @tokens , :highlighter => '<strong class="highlight">\1</strong>' ) %>
+                                                            </div>
+                                              </div>
+                             <%# end %>
+         <% end %>
+
+
+
+
+</div>
+
+
+
+
+
+
+<% if @junk %>
+
+    <div class="container">
+      <form id="search_form" style="width:100%;margin:0 auto;" class="navbar-form navbar-left" role="search" method="get">
+        <% if session[:advanced_search] == true %>
+            <select id="search_scope" name="search_scope" ><option value="Matches Any">Matches Any  - (Most Results)</option><option value="Matches All">Matches All -(Less Results)</option></select>
+        <% end  %>
+        <% if @options %>
+            <select name="search_type_name">
+              <option value="products" selected="selected"> Products </option>
+              <option value="articles"> Articles </option>
+            </select>
+        <% end %>
+        <%= text_field_tag("query_modal", params[:query].split("+"), :autocomplete => "off",  :class => "form-control",   :placeholder => "Search" , :style => "float:left;") %>
+        <%= submit_tag "Go" , :id => "modal_search_submit" , :class => "btn btn-primary" , :style => "float:left;" %>
+      </form>
+    </div>
+
+
+
+<% end %>

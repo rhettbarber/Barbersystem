@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+
+
+
+<%= render :partial => "layout_elements/head"    %>
+
+
+    <script>
+        //    $.ajaxSetup ({
+        //// Disable caching of AJAX responses
+        //        cache: false
+        //    });
+        $.mobile.ajaxEnabled = false;
+    </script>
+
+
+
+<div data-role="dialog"   id="<%= controller_name + "_" + action_name %>" class="<%= controller_name + "_" + action_name %> application"  data-dom-cache="true">
+
+  <%#= render :partial => "layout_elements/panels"  %>
+  <%#= render :partial => "layout_elements/header"    %>
+
+
+  <!--   #######################  BEGIN  CONTENT  ####################### -->
+  <!--   #######################  BEGIN  CONTENT  ####################### -->
+  <!--   #######################  BEGIN  CONTENT  ####################### -->
+  <!--   #######################  BEGIN  CONTENT  ####################### -->
+  <!--   #######################  BEGIN  CONTENT  ####################### -->
+  <div data-role="content" data-theme="a">
+
+    <% if request.path  == '/purchases/checkout_review' %>
+        <%  @show_class = "show_printable" %>
+    <% elsif controller_name  == 'page' %>
+        <%  @show_class = "show_page" %>
+    <% elsif controller_name  == 'specsheet' %>
+        <%  @show_class = "show_specsheet" %>
+    <% else %>
+        <% @show_class = "show" %>
+    <% end %>
+
+
+    <div id="the_yield" style="margin-left:auto;margin-right:auto;">
+      <div class="<%=  @show_class %> yield">
+        <%= render :partial => "layout_elements/flash"    %>
+
+        <script src="/assets/repeated/initiate_functions.js"></script>
+
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+  <!--   #######################  END CONTENT    ####################### -->
+  <!--   #######################  END CONTENT    ####################### -->
+  <!--   #######################  END CONTENT    ####################### -->
+  <!--   #######################  END CONTENT    ####################### -->
+  <!--   #######################  END CONTENT    ####################### -->
+
+  <%= render :partial => "layout_elements/footer"    %>
+</div><!-- page -->
+
+</html>
+
+
+<%= render :partial => "layout_elements/render_information"    %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

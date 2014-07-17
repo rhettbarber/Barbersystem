@@ -1,0 +1,18 @@
+
+
+<div class="enlarge_cart_image_container">
+				 <%=  image_tag @item.image_url( @department  , 'item_specsheets/', @design,'0')   %> <br />
+				
+				ItemLookupCode: <%= @item.ItemLookupCode   %>  <br />
+				 Description: <%= @item.Description   %> <br />
+				 Price: <%= @item.Price   %> <br />
+				
+				
+				  <%  if admin? %>  
+						 <%= render(:partial => "shared_admin/enlarge_image_admin") %>                
+				<% end %>
+
+
+</div>
+
+

@@ -1,0 +1,85 @@
+
+<form id="articles_search" action="/search/search/articles" method="get">
+  <label for="query" style="display: none;">Articles  search:</label>
+  <input type="search" name="search_query" id="search_query"  placeholder="Search articles" >   <span class="ui-icon ui-icon-search ui-icon-shadow">&nbsp;</span>
+</form>
+
+
+<ul data-role="listview">
+      <li data-icon="search"><a href="#" id="search_heritage_news" class="articles_search_button">Search  heritage news</a></li>
+      <li data-icon="search"><a href="#" id="search_interesting_emails"  class="articles_search_button">Search interesting emails</a></li>
+      <li data-icon="search"><a href="#" id="search_southern_history"  class="articles_search_button">Search Southern history</a></li>
+</ul>
+
+
+
+
+<% if @articles %>
+
+    @articles
+
+    <style type="text/css">
+        .page_name <  a {
+            color: white;
+        }
+    </style>
+
+
+
+    <div id="search_results_container" style="text-align:left;min-height:200px;background-color:white;padding:15px;">
+
+
+
+      <div class="modal_search_form_container" style="text-align:center;">
+
+        <div class="container">
+          Increasing relevant keywords will improve your search.
+        </div>
+
+
+        <div class="container">
+          <% if @revisions  %>
+              Search found <%= @revisions.size  %>   results.<br />
+          <% else %>
+              Search did not find any articles matching your keywords. Try different keywords.<br />
+          <% end  %>
+        </div>
+      </div>
+
+
+
+      <% @revision_ids = Set.new %>
+      <%   @revisions.each do |revision| %>
+          <%# unless @revision_ids.include?(  revision.id )  %>
+          <% @revision = revision %>
+          <% @revision_ids.add?(  revision.id )  %>
+          <div class="page_content_capsule">
+            <div class="page_name">
+              <strong>
+                <!--Keywords Hit: <%#= revision.total_column  %> ----->
+                <%= revision.name  %>
+                <!----- Released:  -->
+                <%#= time_ago_in_words(  revision.created_at,  include_seconds = false ) %>  <%#=  revision.created_at  %><br />
+                <%#= link_to "See related pages and categories" ,:controller => 'page', :action => 'show',:id => revision.slug       %>
+              </strong>
+            </div>
+            <div class="page_yield">
+              <%= highlight( revision.content , params[:query].split(" ") , :highlighter => '<strong class="highlight">\1</strong>' ) %>
+            </div>
+          </div>
+          <%# end %>
+      <% end %>
+
+
+
+
+    </div>
+
+
+
+
+<% else %>
+
+                           Not at articles
+
+<% end %>

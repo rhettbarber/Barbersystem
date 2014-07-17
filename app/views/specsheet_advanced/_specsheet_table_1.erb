@@ -1,0 +1,45 @@
+<table id="specsheet_table"  cellspacing="0"cellpadding="0" border="0" 
+       background="<%= @background_url  -%>" width="850" height="328"
+       style="background-repeat: no-repeat;margin:0px;padding:0px;">
+  <tbody style="margin:0px; padding: 0px;">
+         <tr style="margin:0px; padding: 0px;">
+      <td style="margin:0px; padding: 0px;min-width:425px;text-align:center;"   id="front_design_td">
+		<img src="/images/item_specsheets/<%= @item.PictureName %>.png"
+                   id="front_design_image"
+		 alt="<%= @item.PictureName %>"
+		 style=" position: relative;
+                 margin:0px;
+                 padding:0px;
+		 left:0px;
+		 top:0px;
+		 " />
+	</td>
+        
+        <td style="margin:0px; padding: 0px;min-width:425px;text-align:center;"  id="back_design_td">
+		<img src="/images/item_specsheets/<%= @item.PictureName %>_back.png"
+                 id="back_design_image"
+		 alt="<%= @item.PictureName %>"
+		 style=" position: relative;
+                 margin:0px;
+                 padding:0px;
+		 left:0px;
+		 top:0px;
+		 " />
+	</td>
+
+        <td style="margin:0px; padding: 0px;"  id="mask_td">
+		<img src="/images/item_masks/all-over-front-mask.png"
+		 alt=''
+		 style="position: relative;
+                 height:328px;
+		 left:-850px;
+		 top:0px;
+                 margin:0px;
+                 opacity:.5;
+                 padding:0px; "
+                  id="mask_image"
+                 />
+        </td>
+    </tr>
+</tbody>
+</table>

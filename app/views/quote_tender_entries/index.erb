@@ -1,0 +1,100 @@
+<style type="text/css">
+   .payment_types {
+       font-size:17px;
+       font-weight:bolder;
+       text-align: center
+   }
+
+
+
+
+    .payment_type {
+        width:100%;
+        text-align: center;
+        border: 2px dashed dimgray;
+    }
+</style>
+
+
+
+
+  <%= render :partial => "application/checkout_links"  %>
+
+
+<div class="payment_types">
+
+            <%  if @purchase.free_catalog_purchase %>
+
+                        <%= 'Your catalog will be shipped free of charge'  %>
+                        <div align="center"><%=  image_submit_tag( '/images/buttons/continue_button_gold.gif',:border => 0)   %></div>
+
+            <% else %>
+                        <p style="text-align: center;">Please choose a payment method:</p>
+
+
+
+                                    <div class="payment_type">
+                                          Debit or Credit Card:<br>
+                                          <%= link_to  image_tag( '/images/company_logos/credit_card.gif',:border => 0 ) ,{ :controller => 'quote_tender_entries', :action => 'credit_card'}, {:class => "ui-btn"}  %>
+                                    </div>
+
+                                    <div class="payment_type">
+                                          Check or Money Order: <br>
+                                          <%= link_to image_tag( '/images/company_logos/check_or_money_order.gif',:border => 0 ) ,{ :controller => 'quote_tender_entries', :action => 'check'},  {:class => "ui-btn"}    %>
+                                     </div>
+
+
+                                    <% if @customer.account_type_id == 2 %>
+                                          <div class="payment_type">
+                                                  On Account - Net 30:<br>
+                                                  <%= link_to image_tag( '/images/company_logos/net_30_account.gif',:border => 0 ) ,  {:controller => 'quote_tender_entries', :action => 'net_30'}, {:class => "ui-btn"}   %>
+                                            </div>
+                                    <% end %>
+
+
+
+                            <% if @customer.account_type_id == 6 %>
+                                <%  unless [13,14,15].include?(@purchase.shipping_service_id)  %>
+                                                                  <div class="payment_type">
+                                                                            COD Check:<br />
+                                                                            <%= link_to image_tag( '/images/company_logos/cod_check.gif',:border => 0 ) ,  :controller => 'quote_tender_entries', :action => 'cod_check'  %><br />
+                                                                  </div>
+                                <% else %>
+                                                                  <div class="payment_type">
+                                                                            <strong>C.O.D. Payment Methods not available through the Post Office. </strong> <br />
+                                                                            Please <%= link_to "click here", :controller => "ship_tos", :action => "shipping_services" %> to change your shipping service to UPS if you require C.O.D. <br />
+                                                                  </div>
+                                <% end %>
+                            <% elsif @customer.account_type_id == 5 %>
+                                <%  unless [13,14,15].include?(@purchase.shipping_service_id)  %>
+                                                                  <div class="payment_type">
+                                                                            COD Money Order or Cashier's Check:<br />
+                                                                            <%= link_to image_tag( '/images/company_logos/cod_money_order_cashiers_check.gif',:border => 0 ) ,  :controller => 'quote_tender_entries', :action => 'cod_money_order_cashiers_check'  %>	<br />
+                                                                 </div>
+                                <% else %>
+                                                                 <div class="payment_type">
+                                                                            <strong>C.O.D. Payment Methods not available through the Post Office.</strong> <br />
+                                                                            Please <%= link_to "click here", :controller => "ship_tos", :action => "shipping_services" %> to change your shipping service to UPS if you require C.O.D. <br />
+                                                                </div>
+                                <% end %>
+                            <% end %>
+                        <br />
+                        <br />
+                            Or if you prefer, call us anytime from 8am-5pm Eastern Standard Time for payment arrangements. <br />
+                            <div style="font-size:15px;font-weight:bolder;">
+                                <% if @website.phone %>
+                                        <% @website.phone %>
+                                        <a  class="ui-btn"  href="tel:<%= @website.phone.gsub("-", "") %>"><%= @website.phone %></a>
+                                <% else %>
+                                        <a href="tel:8004483061" class="ui-btn"> 1-800-448-3061</a>
+                                <% end %>
+                            <br />
+                                Your Order #: <%= @purchase.id %>.
+                            </div>
+            <% end %>
+
+</div>
+
+
+	
+

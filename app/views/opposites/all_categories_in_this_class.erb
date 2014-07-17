@@ -1,0 +1,59 @@
+<%= render :partial => "shared_admin/menu_opposites"%>
+
+<% if @selected_category_class.categories.first %>
+	<div align="center">
+		<% first_selected_item = @selected_category_class.categories.first.items.first %>
+		<% if @selected_category_class.item_type == 'master' %>
+			<% selected_department = first_selected_item.masters_department_decides_default_department_id %>
+		<% else %>
+			<% selected_department = first_selected_item.design_decides_opposites_department %>
+		<% end %>
+		 <%= image_tag( first_selected_item.image_url( selected_department  ,'item_thumbnails/','x') ,:size => "100x100")    %> 
+	
+	<%  form_tag( '/opposites/all_categories_in_this_class' , :method => :put )  do %>
+		<%=  select("category_class", "category_class_id", CategoryClass.find(:all).collect {|p| [ p.item_type + ' ' + p.name , p.id ] } ,{:selected =>  @selected_category_class.id  } )   %>
+		<%= submit_tag('Go to this category class') %>
+	<%  end  %>
+	
+	</div>
+	
+	<h1>Listing First Item from each category in <%= @selected_category_class.name %>.</h1>
+	<table>
+	  <tr>	
+	    <th>Image</th>
+	    <th>Prefix</th>
+	    <th>Category class Name</th>
+	    <th>Category Code</th>
+	    <th>Category Name</th>
+	    <th>Category Id</th>
+	  </tr>
+	
+	<% for category in @categories %>
+	<% first_item = category.items.first %>
+	<% if first_item != nil %>
+	
+	
+	<% if category.category_class.item_type == 'master' %>
+		<% department = first_item.masters_department_decides_default_department_id %>
+	<% else %>
+		<% department = first_item.design_decides_opposites_department %>
+	<% end %>
+	
+	  <tr>
+		<td> <%= image_tag( first_item.image_url( department  ,'item_thumbnails/','x') ,:size => "90x90")    %> </td>	
+	    <td><%=h category.prefix %></td>
+	    <td><%=h category.category_class.name if category.category_class %></td>
+	    <td><%=h category.Code %></td>
+	    <td><%=h category.Name %></td>
+	    <td><%=h category.id %></td>
+	    <td><%= link_to "List all items in this category", :controller => 'opposites', :action => 'list_all_items_in_this_category',:id => category.id  %></td>
+	  </tr>
+	<% end %>
+	<% end %>
+	</table>
+	
+	<br />
+<% else %>
+	This category class has no categories.<br />
+	Hit the back button on your browser to return.<br />
+<% end %>

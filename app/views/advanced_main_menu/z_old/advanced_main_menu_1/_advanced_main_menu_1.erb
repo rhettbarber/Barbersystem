@@ -1,0 +1,96 @@
+
+<div id="onclick_menu_container" class="onclick_menu_containers"  style="display: none;">
+          <div class='onclick_menu'>
+                          <%=  image_tag('/images/menu_icons_and_labels/main-menu-header.png'  , :class => 'no_border', :id => 'main_menu_close')  %>
+          </div>
+
+            <div class="advanced_main_menu">
+                            <ul id="tabs_advanced_main_menu" class="subsection_tabs">
+                                        <li class="tab"><a  id="ajax_bill_to_tab_a" href="#ajax_bill_to">Bill To</a></li>
+                                        <li class="tab"><a  id="ajax_ship_to_tab_a" href="#ajax_ship_to">Ship To</a></li>
+                                        <li class="tab"><a  id="ajax_delivery_tab_a" href="#ajax_delivery">Delivery Method</a></li>
+                                        <li class="tab"><a  id="ajax_tender_tab_a" href="#ajax_tender">Tender</a></li>
+
+                            </ul>
+            </div>
+
+
+            <div style=" background:url(/images/backgrounds_repeating/light_grey_paper.jpg);">
+              
+                      <%= render :partial => "advanced_main_menu/ajax_bill_to"  %>
+                      <%= render :partial => "advanced_main_menu/ajax_ship_to"  %>
+
+
+                      <div id="ajax_delivery" style="width:850px;text-align:left;display:none;">Delivery info here</div>
+                      <div id="ajax_tender" style="height:400px; width:850px;text-align:left;display:none;">Tender info here</div>
+
+          </div>
+
+
+
+
+
+</div>
+
+<div id="onclick_main_menu_buttons_container" style="width:850px;margin-left:auto;margin-right:auto;">
+            <div style="display:table-cell;width:298px;">
+                    <%= image_tag('/images/company_logos/' + @website.name + '_top_bar_icon.png') %>
+            </div>
+
+
+            <div style="display:table-cell;font-size: 17px;text-align: center;color:gray;width:254px;">
+                      <%=  controller.controller_name.humanize %> / <%=  controller.action_name.humanize %>
+            </div>
+
+
+            <div id="main_menu_div" style="display:table-cell;width:298px;">
+                        <span style="float:right;"><%= image_tag('/images/menu_icons_and_labels/main-menu.png' , :border => '0' , :id => "main_menu_button")  %></span>
+            </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @show_example  %>
+
+
+
+
+        <div class="advanced_choices_administration_menu"  style="width:850px;">
+                    <ul id="tabs_advanced_choices_administration_menu" class="subsection_tabs">
+                                  <li class="tab"><a  id="administration_help_tab_a" href="#administration_help" >Help </a></li>
+                                  <li class="tab"  onclick="new Ajax.Updater('ajax_administer_size_and_position_empty', '/designer_specsheet/ajax_administer_size_and_position'  , {evalScripts:true,  parameters: { item_id:  $('item_id').value , front_design_id: $('front_design_id').value , back_design_id: $('back_design_id').value    }  }    );"><a  id="ajax_administer_size_and_position_empty_tab_a" href="#ajax_administer_size_and_position_empty" >Size and Position </a></li>
+                                  <li class="tab"  onclick="this.onclick=null; new Ajax.Updater('ajax_administer_breast_prints_empty', '/designer_specsheet/ajax_administer_breast_prints_list' ,   { parameters: { back_design_id:  $('back_design_id').value  }  }  );"><a   id="ajax_administer_breast_prints_empty_tab_a"  href="#ajax_administer_breast_prints_empty" >Breast Prints</a></li>
+                                  <li class="tab"  onclick="new Ajax.Updater('ajax_administer_edit_front_design_empty', '/designer_specsheet/ajax_administer_edit_item' ,   { evalScripts:true, parameters: { item_id:   $('front_design_id').value , side: 'front'  }  }  );" ><a  id="ajax_edit_front_design_empty_tab_a"  href="#ajax_administer_edit_front_design_empty"    >Edit Front Design</a></li>
+                                  <li class="tab"  onclick="new Ajax.Updater('ajax_administer_edit_back_design_empty', '/designer_specsheet/ajax_administer_edit_item' ,   { evalScripts:true, parameters: { item_id:  $('back_design_id').value , side: 'back' }  }  );" ><a   id="ajax_edit_back_design_empty_tab_a" href="#ajax_administer_edit_back_design_empty">Edit Back Design </a></li>
+                    </ul>
+        </div>
+
+<% end  %>
+
+

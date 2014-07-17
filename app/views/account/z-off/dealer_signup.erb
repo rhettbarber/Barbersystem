@@ -1,0 +1,29 @@
+
+<% light_gold_box do %>      
+       <h2>Create a New user by filling out the form below.</h2>
+	   
+            <%= errors_for(@user, "Opps, unable to add new user").html_safe if @user %>
+      
+	    <%= form_for :user, @user, :url => { :action => "signup_action" } do |f| -%>
+
+        <p><label for="authorization_code">Authorization Code <br />
+         ( Please do not guess  if you have not been given this code. ) </label><br/>
+         
+        <%= f.text_field :authorization_code %></p>
+
+        <p><label for="email">Email</label><br/>
+        <%= f.text_field :email %></p>
+        
+        <p><label for="password">Password</label><br/>
+        <%= f.password_field :password %></p>
+        
+        <p><label for="password_confirmation">Confirm Password</label><br/>
+        <%= f.password_field :password_confirmation %></p>
+  
+  		<%= show_simple_captcha.html_safe %>
+  
+        
+        <p><%= submit_tag 'Sign up' %></p>
+        <% end -%>
+		
+<% end -%>

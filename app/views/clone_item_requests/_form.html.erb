@@ -1,0 +1,25 @@
+<%= form_for(@clone_item_request) do |f| %>
+  <% if @clone_item_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@clone_item_request.errors.count, "error") %> prohibited this clone_item_request from being saved:</h2>
+
+      <ul>
+      <% @clone_item_request.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :item_id %><br />
+    <%= f.text_field :item_id %>
+  </div>
+  <div class="field">
+    <%= f.label :clone_item_type_id %><br />
+    <%= f.text_field :clone_item_type_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

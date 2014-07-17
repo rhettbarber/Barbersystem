@@ -1,0 +1,77 @@
+
+<div align="center">
+      <%= image_tag('/images/icons/report.jpg' ,:size => "40x40" )%> <span style="font-size:2em;vertical-align:top;">Complete Status Report</span><%= image_tag('/images/icons/report.jpg' ,:size => "50x50" )%><br />
+      <%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Toggle Main Item Visibility', "Element.toggle('main_item')")   %>
+      <%= link_to_function(image_tag('/images/buttons/plus.gif',:border => 0) + 'Toggle Clone Item Visibility', "Element.toggle('clone_item')")  if @clone_item   %>
+</div>
+
+<% unless File.exists?( @verification_file ) %>
+      <h1 style="color:red;">Error! Server is having trouble accessing 'STORAGE_DISK_1'</h1>
+<% end  %>
+
+
+
+<% if @clone_item %>
+<div id="clone_item">
+            <h3><%= image_tag(   'http://' + @asset_server + '/images/item_specsheets/' + @clone_item.clone.PictureName ,:size => "40x40")  if @clone_item.specsheet_image_exists?     %>
+                    <%= @clone_item.clone_item_type.name  %> <%= @the_clone.ItemLookupCode  %></h3>
+            <%= @the_clone.Description  %><br />
+            <div id="extra_clone_info" style="display:none;">
+            <%= @the_clone.PictureName  %><br />
+            <%= @the_clone.id  %><br />
+            <%= @the_clone.category_id  %><br />
+            </div>
+
+
+            <% @not_status_for_clone_item = ['design_separation_file_exists?'] %>
+            <table>
+                <%  Status.all(:order => "the_order ASC").each do |the_status| %>
+                           <%  unless @not_status_for_clone_item.include?( the_status.name )   %>
+                                  <tr class="<%=  cycle('odd', 'even')  %> anatips" title="<%= @clone_item.status_tip( the_status.name ) %>">
+                                    <td> <%=  image_tag('/images/icons/info.png', :size => '35x35' )  %> </td>
+                                      <td> <%=  the_status.the_order  %> </td>
+                                       <td> <%=  image_tag( '/images/icons/' + the_status.group_name + '.jpg', :size => '35x35'  )  %> </td>
+                                       <td> <%=  the_status.name  %> </td>
+                                       <td> <%= the_status.description  %></td>
+                                       <td>  <%= image_tag( '/images/icons/' +  @clone_item.call_method(  the_status.name ).to_s + '.jpg' , :size => '35x35' )  %></td>
+                                  </tr>
+                           <% end  %>
+                <% end  %>
+            </table>
+</div>
+
+<% end  %>
+
+
+
+<div id="main_item">
+<h3><%= image_tag(   'http://' + @asset_server + '/images/item_specsheets/' + @item.PictureName ,:size => "40x40")  if @item.specsheet_image_exists?     %> Main RP Design   <%= @item.ItemLookupCode  %></h3>
+<%= @item.Description  %><br />
+<div id="extra_clone_info" style="display:none;">
+<%= @item.PictureName  %><br />
+<%= @item.id  %><br />
+<%= @item.category_id  %><br />
+</div>
+    <% @not_status_for_main_item = ['production_file_exists?', 'template_file_exists?'] %>
+    <table>
+        <%  Status.all(:order => "the_order ASC").each do |the_status| %>
+                <%  unless @not_status_for_main_item.include?( the_status.name )   %>
+                        <tr class="<%=  cycle('odd', 'even')  %> anatips" title="<%= @item.status_tip( the_status.name ) %>">
+                          <td> <%=  image_tag('/images/icons/info.png', :size => '35x35' )  %> </td>
+                            <td> <%=  the_status.the_order  %> </td>
+                             <td> <%=  image_tag( '/images/icons/' + the_status.group_name + '.jpg' , :size => '35x35'  )  %> </td>
+                             <td> <%=  the_status.name  %> </td>
+                             <td> <%= the_status.description  %></td>
+                             <td>  <%= image_tag( '/images/icons/' +  @item.call_method(  the_status.name ).to_s + '.jpg' , :size => '35x35' )  %></td>
+                        </tr>
+                <% end  %>
+        <% end%>
+    </table><br />
+</div>
+
+
+<%  if @item and !@clone_item %>
+      <%=link_to  image_tag('/images/buttons/click-to-link-to-or-create-clones.png'), :controller => "item_management", :action => 'management_options', :item_id => @item.id    %>
+<% else  %>
+      <%=link_to  image_tag('/images/buttons/create-more-clones.png'), :controller => "item_management", :action => 'management_options', :item_id => @item.id    %>
+<% end  %>

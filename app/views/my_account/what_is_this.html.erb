@@ -1,0 +1,23 @@
+<%= image_tag '/images/banners/for-sale-my-custom-designs.jpg', :width => 250 %>
+
+<h1>What is this about Selling Custom Designs?</h1>
+
+Any items you are interested in selling can be made available for sale to the public. <br/>
+We value your privacy and by default do not allow items to be sold without express permission. <br/>
+
+<br/>
+<span style="color:blue;font-size:18px;">Allow sales: </span><%= check_box_tag 'allow_sales', 'true' %> Check this box if you wish to allow some items to be sold.<br/>
+<br/>
+<span style="color:red;font-size:18px;">Only the items you mark as "For Sale" will be sold.</span><br/>
+<br/>
+
+<h1>How much will you make?</h1>
+You will make 10% of the Selling price. For a T-Shirt sold at retail this would be  $1.60 per shirt. ( $16.00 * .10 )<br/>
+
+<h1>When will you be told of the sale?</h1>
+You will get a preliminary email announcing the purchase of an item. It will then show up in your <%= link_to  'Sales Report', :controller => 'my_account', :action => 'my_sales_report'  %> in the pending transactions. After the Sale has been finalized it will enter a 'Return Period' phase for 30 days.
+After this time the money will be added to your account balance. You may withdraw funds after your balance has reached $50.00.
+
+<br/>
+
+

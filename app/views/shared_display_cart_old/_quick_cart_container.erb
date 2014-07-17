@@ -1,0 +1,25 @@
+
+ <div style="float:left;">
+ <%=  form_tag(  "add_to_cart" , :method => :put ) do -%>	
+	<table style="border:solid black 1px; width:250px;">
+		<tr>
+			<td bgcolor="#cccccc">
+				<strong> Quick Cart:</strong> Enter a part # to quickly add items to your cart
+			</td>
+		</tr>
+		<% unless @singular_item_customer == true  %>
+		<tr>
+			<td> 
+				Place Item on hold:<%= check_box_tag "on_hold", "true", false -%> What's this?:<%= link_to image_tag("/images/buttons/question-mark-orange-tiny.jpg",:border => 0),{:controller => 'help', :action => 'help_popup'} , :popup => ['new_window_name', 'height=300,width=600']    %>
+			</td>
+		</tr>
+		<% end %>
+		
+		<tr>
+			 <td>
+				 <%= text_field "purchases_entries", "ItemLookupCode",:value => "", :size => 12 -%><%= image_submit_tag('/images/buttons/plus.gif') -%> 
+			</td>
+		</tr>
+	</table>
+<%  end  -%> 
+</div>

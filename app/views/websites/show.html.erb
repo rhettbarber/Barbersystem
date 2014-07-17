@@ -1,0 +1,80 @@
+<p>
+  <b>Id:</b>
+  <%=h @website.id %>
+</p>
+
+
+<p>
+  <b>Assigned Port Numbers:</b>
+  <%=h @website.id.to_s + '0*' %>
+</p>
+
+
+<p>
+  <b>Name:</b>
+  <%=h @website.name %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%=h @website.title %>
+</p>
+
+<p>
+  <b>Default item department ids:</b>
+  <%=h @website.default_item_department_ids %>
+</p>
+
+<p>
+  <b>Default design department ids:</b>
+  <%=h @website.default_design_department_ids %>
+</p>
+
+<p>
+  <b>Domain:</b>
+  <%=link_to( @website.domain,   'http://' + @website.domain  ) if @website.domain %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%=h @website.phone %>
+</p>
+
+<p>
+  <b>Meta description:</b>
+  <%=h @website.meta_description %>
+</p>
+
+<p>
+  <b>Meta keywords:</b>
+  <%=h @website.meta_keywords %>
+</p>
+
+<p>
+  <b>Allowed admin ips:</b>
+  <%=h @website.allowed_admin_ips %>
+</p>
+
+<p>
+  <b>Allowed cashiers:</b>
+  <%=h @website.allowed_cashiers %>
+</p>
+
+<p>
+  <b>Store website:</b>
+  <%=h @website.store_website %>
+</p>
+
+<p>
+  <b>Catalog item:</b>
+  <%=h @website.catalog_item_id %>
+</p>
+
+<p>
+  <b>Google Analytics Tracking number:</b>
+  <%=h @website.tracking_number %>
+</p>
+
+
+<%= link_to 'Edit', edit_website_path(@website) %> |
+<%= link_to 'Back', websites_path %>

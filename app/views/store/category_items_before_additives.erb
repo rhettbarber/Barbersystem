@@ -1,0 +1,279 @@
+<% unless  @development %>
+      <style type="text/css">
+
+                      /*.ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper {*/
+                          /*background-color: black;*/
+                      /*}*/
+
+      </style>
+  <% end %>
+
+
+   <%# sort_by{|a| a.ytdn   }.reverse %>
+   <%#  @items.sort_by{|a| a.ytdn   }.reverse.each do |item|   %>   <%# sort_by{|a| a.ytdn   }.reverse %>
+   <%#  @items.sort_by{|a| a.ytdn   }.reverse.each do |item|   %>   <%# sort_by{|a| a.ytdn   }.reverse %>
+   <%#  @items.sort_by{|a| a.ytdn   }.reverse.each do |item|   %>   <%# sort_by{|a| a.ytdn   }.reverse %>
+   <%#  @items.sort_by{|a| a.ytdn   }.reverse.each do |item|   %>
+
+
+ <% if @category %>
+                         <div style="width: 100%;text-align: center;"><%= @department.Name %> -  <%= @category.Name %> </div>
+                         <% category_class_item_type = @category.category_class.item_type    if @category  %>
+                        <% @already_rendered_item_class = [] %>
+                        <div role="main" class="ui-content responsive_listview_grid">
+                                      <ul data-role="listview" data-inset="true">
+                                      <%# if @category.additives and @category.additives != []  and  ![ 'master', 'slave'].include?(  @category.category_class.item_type  )  %>
+                                          <%#= render :partial => 'additives' %>
+                                      <%# else   %>
+                                                      <% @items.sort_by{|a| a.ItemLookupCode   }.each do |item| -%>
+                                                                  <% if item %>
+                                                                                  <% if item.category %>
+                                                                                                  <%  if item.item_class_component  -%>
+                                                                                                                                      <% unless @already_rendered_item_class.include?( item.item_class.id.to_s ) %>
+                                                                                                                                                        <%  @already_rendered_item_class  <<  item.item_class.id.to_s   %>
+                                                                                                                                                        <li>
+                                                                                                                                                                  <a href="/specsheet/<%= item.id %>?department_id=<%= @department.id %>">
+                                                                                                                                                                    <div style="width: 240px;height:240px;overflow: hidden;">
+
+
+                                                                                                                                                                                                        <%  @back_advanced_combination = AdvancedCombination.find_or_create_combo( item, '0' )  %>
+
+                                                                                                                                                                      <img src="<%=   "/images/item_thumbnails/" + item.PictureName.gsub(".png","").gsub(".jpg","") + ".jpg"   %>" class="ui-li-thumb"  style="height:200px;position:relative;">
+                                                                                                                                                                                                        <!--<%#  if @back_advanced_combination.specsheet_type_id == 1 or  @back_advanced_combination.specsheet_type_id == nil  %>-->
+                                                                                                                                                                                                                                     <!--<img src="<%#=   "/images/item_thumbnails/" + item.PictureName.gsub(".png","").gsub(".jpg","") + ".jpg"   %>" class="ui-li-thumb"  style="height:200px;position:relative;left:-112px;">-->
+                                                                                                                                                                                                         <!--<%# else %>-->
+                                                                                                                                                                                                                                    <!--<img src="<%#=   "/images/item_specsheets/" + item.PictureName.gsub(".png","").gsub(".jpg","") + ".jpg"   %>" class="ui-li-thumb"  style="height:200px;position:relative;left:-32px;">-->
+                                                                                                                                                                                                         <!--<%# end %>-->
+
+
+                                                                                                                                                                    </div>
+
+
+                                                                                                                                                                  </a>
+                                                                                                                                                                <div style="font-weight:bold;text-align:center;position: absolute;bottom:0;width:100%;height: 20%;">
+                                                                                                                                                                              <%= item.number_only %>
+                                                                                                                                                                              <%#=  item.item_class_sales_this_years_with_item_id.sum_of_quantity %>
+                                                                                                                                                                              <%= item.description_before_color_and_size  %>
+                                                                                                                                                                </div>
+                                                                                                                                                        </li>
+                                                                                                                                         <% end %>
+                                                                                                  <% else %>
+                                                                                                                    <li>
+                                                                                                                                <a href="/specsheet/<%= item.id %>">
+                                                                                                                                <img src="<%=  "/images/item_thumbnails/" + item.PictureName.gsub(".png","").gsub(".jpg","") + ".jpg"   %>" class="ui-li-thumb" style="display:inline;max-height: 90%;"></a>
+                                                                                                                                <div style="font-weight:bold;text-align:center;position: absolute;bottom:0;width:100%;height: 10%;"><%= item.ItemLookupCode %> </div>
+                                                                                                                    </li>
+                                                                                                  <% end %>
+                                                                                   <% end %>
+                                                                   <% end -%>
+                                                  <% end %>
+                                      <%# end %>
+                                    </ul>
+                          </div>
+<% else %>
+                            <div class="ui-bar ui-bar-a" style="max-width: 100%;">
+                                       <% if @incomplete_symbiont %>
+                                                            <% if @purchase_symbiote_item_type == "master" %>
+                                                                            Please complete your chosen item by choosing a design.<%#= link_to "design", "#designs_panel" %>
+                                                            <% else %>
+                                                                            Please complete your chosen design  by choosing a item.<%#= link_to "item", "#items_panel" %>
+                                                             <% end %>
+
+                                                            <% if @show_dev %>
+                                                                        @purchase_symbiote_item: <%= @purchase_symbiote_item.ItemLookupCode %><br>
+                                                                        @purchase_symbiote_item.description_before_color_and_size: <%= @purchase_symbiote_item.description_before_color_and_size %><br>
+                                                                        @purchase_symbiote_item.dimensions: <%= @purchase_symbiote_item.dimensions %>
+                                                                        @purchase_symbiote_item.PictureName: <%= @purchase_symbiote_item.PictureName %><br>
+                                                                        @purchase_symbiote_item.category.potential_opposite_department_ids.to_a.join(","): <%= @purchase_symbiote_item.category.potential_opposite_department_ids.to_a.join(",") %><br>
+                                                                        @purchase_symbiote_item.category.category_class.opposite_category_ids: <%= @purchase_symbiote_item.category.category_class.opposite_category_ids %><br>
+                                                                        @purchase_symbiote_item.id:<%= @purchase_symbiote_item.id %><br>
+                                                              <% end %>
+                                    <% else %>
+                                                                 not @incomplete_symbiont
+                                    <% end %>
+                         </div>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+  <% if @model_images %>
+
+
+    <% @items.each do |item| -%>
+        <% if item %>
+            <% if item.category %>
+                <%  if item.item_class_component  -%>
+                    <% unless @already_rendered_item_class.include?( item.item_class.id.to_s ) %>
+                        <%  @already_rendered_item_class  <<  item.item_class.id.to_s   %>
+                        <li>
+                          <a href="/specsheet/<%= item.id %>?department_id=<%= @department.id %>">
+                            <img src="<%=  item.image_url( @department, 'item_thumbnails/','x' )  %>" class="ui-li-thumb"  style="display:inline;max-height: 80%;">
+                          </a>
+                          <div style="font-weight:bold;text-align:center;position: absolute;bottom:0;width:100%;height: 20%;">
+                            <%= item.number_only %>
+                            <%#=  item.item_class_sales_this_years_with_item_id.sum_of_quantity %>
+                            <%= item.description_before_color_and_size  %>
+                          </div>
+                        </li>
+                    <% end %>
+                <% else %>
+                    <li>
+                      <a href="/specsheet/<%= item.id %>">
+                        <img src="<%=  item.image_url( @department , 'item_thumbnails/','x' )  %>" class="ui-li-thumb" style="display:inline;max-height: 90%;"></a>
+                      <div style="font-weight:bold;text-align:center;position: absolute;bottom:0;width:100%;height: 10%;"><%= item.ItemLookupCode %> </div>
+                    </li>
+                <% end %>
+            <% end %>
+        <% end -%>
+    <% end %>
+
+
+    <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @real %>
+
+
+
+    <% if  @categories  %>
+        <div class="menu_organized_category">
+          <ul>
+								<span id="actual_categories">
+											<%  @categories.sort_by{|a| a.Name}.each do |category|   %>
+																<% if !category.additives.nil? %>
+																				<% if category.visible == 1 %>
+                                                                                                                                                                                <% if @website.hidden_website_category_ids.include?(category.id)  %>
+                                                                                                                                                                                        <%= render :partial => "shared_category/category_li_website_hidden_root", :locals => {:category => category} if admin? %>
+                                                                                                                                                                                <% else  %>
+                                                                                                                                                                                        <%= render :partial => "shared_category/category_li_root", :locals => {:category => category} %>
+                                                                                                                                                                                <% end  %>
+
+																				<% else %>
+																						<%= render :partial => "shared_category/category_li_hidden_root", :locals => {:category => category} if admin? %>
+																				<% end %>
+																<% else %>
+																				<% unless @website.hidden_website_category_ids.include?(category.id)  %>
+																								<%= render :partial => "shared_category/category_li_lone", :locals => {:category => category} %>
+																				<% end %>
+																<% end %>
+
+												<% end %>
+									</span>
+            <%= render :partial => "administration_category/menu_list_items" if admin? %>
+          </ul>
+        </div>
+    <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <% unless  @development %>
+        <style type="text/css">
+
+            .ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper {
+                background-color: black;
+            }
+
+        </style>
+    <% end %>
+
+
+
+
+    <% if @category %>
+
+
+        <% category_class_item_type = @category.category_class.item_type    if @category  %>
+        <% @already_rendered_item_class = [] %>
+
+
+        <div role="main" class="ui-content responsive_listview_grid">
+          <ul data-role="listview" data-inset="true">
+            <%# if @category.additives and @category.additives != []  and  ![ 'master', 'slave'].include?(  @category.category_class.item_type  )  %>
+            <%#= render :partial => 'additives' %>
+            <%# else   %>
+            <% @items.sort_by{|a| a.item_class_sales_this_years_with_item_id.to_s   }.reverse.each do |item| -%>
+                <% if item %>
+                    <% if item.category %>
+                        <%  if item.item_class_component  -%>
+                            <% unless @already_rendered_item_class.include?( item.item_class.id.to_s ) %>
+                                <%  @already_rendered_item_class  <<  item.item_class.id.to_s   %>
+                                <li>
+
+                                  <a href="/specsheet/<%= item.id %>">
+                                    <img src="<%=  item.image_url( params[:department_id], 'item_thumbnails/','x' )  %>" class="ui-li-thumb" style="max-height: 90%;"></a>
+                                  <div style="font-weight:bold;text-align:center;position: absolute;bottom:0;width:100%;height: 10%;"><%= item.ItemLookupCode %> </div>
+                                </li>
+                            <% end %>
+                        <% else %>
+                            <li>
+
+                              <a href="/specsheet/<%= item.id %>">
+                                <img src="<%=  item.image_url( params[:department_id], 'item_thumbnails/','x' )  %>" class="ui-li-thumb" style="max-height: 90%;"></a>
+                              <div style="font-weight:bold;text-align:center;position: absolute;bottom:0;width:100%;height: 10%;"><%= item.ItemLookupCode %> </div>
+                            </li>
+                        <% end %>
+                    <% end %>
+                <% end -%>
+            <% end %>
+            <%# end %>
+          </ul>
+        </div>
+
+    <% else %>
+
+
+
+        <%     if @incomplete_symbiont   %>
+            <%     if @purchase_symbiote_item_type == "slave"    %>
+                <a data-icon="arrow-r"  href='#items_panel' data-role="button" style="white-space:normal;"> You have already chosen a design. Please choose a item  to complete it.</a>
+            <%     elsif  @purchase_symbiote_item_type == "master"  %>
+                <a data-icon="arrow-r"  href='#designs_panel' data-role="button" style="white-space:normal;"> You have already chosen a item. Please choose a design  to complete it.</a>
+            <%  end %>
+        <%     else     %>
+            Pick a item or design to using the menu to  begin shopping.
+        <%     end   %>
+
+
+
+    <% end %>
+<% end %>
+

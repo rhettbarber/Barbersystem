@@ -1,0 +1,47 @@
+
+
+<% @paginated_results.each do |item| %>
+    <% if item %>
+        <% if item.category_name %>
+                                    <li class="sale_type_<%= item.SaleType %>">
+                                      <a href="/specsheet/<%= item.id %>/<%= item.department_id  %>">
+                                                    <div style="min-height: 300px;">
+
+                                                                    <% if item.PictureName.include? ".jpg" or  item.PictureName.include? ".png" %>
+                                                                                                        <img src="<%=     "http://cdn.dixieoutfitters.com/images/item_thumbnails/" + item.PictureName.gsub(".png", ".jpg")    %>" class="ui-li-thumb" style="display:inline;max-height: 250px;"><br>
+                                                                     <% else %>
+                                                                                                        <img src="<%=     "http://cdn.dixieoutfitters.com/images/item_thumbnails/" + item.PictureName + '.jpg'    %>" class="ui-li-thumb" style="display:inline;max-height: 250px;"><br>
+                                                                    <% end %>
+
+
+                                                                  <%= item.category_name %>
+                                                                  <%= item.ItemLookupCode %>  <%#= item.item_class_number %>
+                                                    </div>
+                                      </a>
+                                      <span  style="display:none;" class="sale_label_<%= item.SaleType %>">Sale item!</span>
+                                    </li>
+        <% end %>
+    <% end -%>
+    <% @last_item  = item %>
+<% end %>
+
+<div class="last_item" style="width: 100%;height: 20px;float:left;">
+  <% if @last_item and @paginated_results and  @paginated_results.next_page   %>
+
+     <% if @department %>
+                            <% @the_department = @department.id  %>
+      <% else %>
+                            <% @the_department = @last_item.department_id  %>
+      <% end %>
+
+      <a href="/search/scroll/<%= @the_department %>/<%= @paginated_results.next_page %>" class="load-more-revisions" data-automatic="false" data-role="button" data-icon="arrow-d" data-iconpos="left" data-theme="a" id="page-link" style="width:100%;float: left;">
+        Scroll more categories
+      </a>
+  <% end %>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,71 @@
+<%=  fields_for "purchase[purchases_entry_attributes][]" , purchases_entry do |p|  %>
+
+			<% if purchases_entry.item_id  == 0 or  purchases_entry.item_id  == '0'  %>
+			
+			<% else %>
+						<% item =  Item.find(purchases_entry.item_id)  %>
+						<% quantity = purchases_entry.QuantityOnOrder %>
+							      <tr id="<%= 'purchases_entry_' + purchases_entry.id.to_s %>">
+							                <td  class="purchases_entry_delete_incomplete">
+							                            		<%=  link_to(image_tag("/images/buttons/delete.gif",:border => 0),  { :action => "delete_symbiont_purchases_entry",:purchases_entry_id => purchases_entry.id  }) unless controller.controller_name == 'purchases'  %>
+							        		</td>    		
+							                <td  class="purchases_entry_master_image_incomplete">	
+							                		
+							                		<% if purchases_entry.master_department_id != 0 %>
+					                					<%=   image_tag purchases_entry.item.image_url( purchases_entry.master_department_id , 'item_thumbnails/','x'  ),:size => '80x80'  %>
+					                				<% else %>		
+					                                    <%=   image_tag purchases_entry.item.image_url( purchases_entry.item.default_master_department_id , 'item_thumbnails/','x'  ),:size => '80x80'  %>	
+					                                <% end %>
+							                							        		</td>
+							                <td  class="purchases_entry_slave_image_incomplete">	
+												   <%  if purchases_entry.opposite_entry != '0'  %>	
+												   				<%  if purchases_entry.opposite_entry.item %>
+							                                    <%=   link_to(image_tag( 'item_thumbnails/' + purchases_entry.opposite_entry.item.PictureName ,:size => "100x100",  :border => 0), { :action => "enlarge_cart_image",		:purchases_entry_id => purchases_entry.opposite_entry  }, :popup => ['new_window_name', 'height=700,width=800'])   %>
+										        				<% end %>
+													<%  end  %>
+							        		</td>					       
+							                <td  class="purchases_entry_quantity_incomplete">        
+							                              
+														  
+													<% unless controller.controller_name == 'purchases'  %>
+															  <%= p.hidden_field :id  ,:index => nil%>
+ 															<%= p.text_field :QuantityOnOrder ,:index => nil ,:size => 2 , :value => number_with_precision(purchases_entry.QuantityOnOrder,0)   %>
+								            		<%  else  %>
+																	<%=  quantity   %>
+													<%  end  %>
+										
+										
+										    </td>
+							              
+							                <td  class="purchases_entry_itemlookupcode_incomplete"><%= item.ItemLookupCode %></td>
+							              <td  class="purchases_entry_symbiont_description_incomplete">
+							              	<%  if purchases_entry.opposite_entry != '0'  %>
+							              					Design:<%= purchases_entry.opposite_entry.ItemLookupCode  %>
+															<%= purchases_entry.opposite_entry.Description  %><br />
+															Printed on: <%= purchases_entry.ItemLookupCode  %>
+															<%= purchases_entry.Description  %><br />	
+															Dimensions: <%= item.dimensions %>
+															<%= link_to image_tag('/images/buttons/complete_this_combination.gif', :border => 0), :action => "complete_this_combination", :purchases_entry_id => purchases_entry.id  %>
+											<%  end  %>
+											
+										   </td>
+										<td  class="purchases_entry_full_unit_price_incomplete">   
+												<div  id="full_unit_price_<%= purchases_entry.id %>">
+													<%  if purchases_entry.complete_symbiont  %>
+											  				<%= number_to_currency(purchases_entry.symbiont_full_unit_price)   %>
+													<%  end  %> 
+											  </div> 
+										</td>
+									    <td  class="purchases_entry_full_extended_price_incomplete"> 
+											<div  id="full_extended_price_<%= purchases_entry.id %>">  
+													<%  if purchases_entry.complete_symbiont  %>
+															<%=  number_to_currency(purchases_entry.symbiont_full_extended_price)  %> 
+													<%  end  %> 
+											</div>  
+										</td>
+							      </tr>
+			<%  end  %>
+			    
+<%  end  %>
+
+

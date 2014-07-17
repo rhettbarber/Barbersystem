@@ -1,0 +1,21 @@
+<h1>SublimationShirt#index</h1>
+<p>Find me in app/views/sublimation_shirt/index.html.erb</p>
+
+
+<table>
+  <tbody>
+     <%  @original_jpgs.each do |oj| %>
+              <tr><td> -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</td> </tr>
+
+<% if   rio(  'W:\\AUTOMATION_DATABASE\\ITEM_SPECSHEETS\\' + oj.basename + '-0.jpg' ).exist?  %> 
+              <%= controller.send_data(  'W:\\AUTOMATION_DATABASE\\ITEM_SPECSHEETS\\' + oj.basename + '-0.jpg' , {:disposition => 'inline', :type => 'image/jpeg'}   )  %>
+<% end %>
+
+              <%= oj.basename   %> ## <%= rio(  'W:\\AUTOMATION_DATABASE\\ITEM_SPECSHEETS\\' + oj.basename + '-0.jpg' ).exist?  %> ### <%=  rio(   'W:\\AUTOMATION_DATABASE\\ITEM_SPECSHEETS\\' + oj.basename + '-1.jpg' ).exist? %><br/> <br/>
+              
+
+
+              <tr><td> -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</td> </tr>
+    <%  end %>
+  </tbody>
+</table>

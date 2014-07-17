@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+
+<%= render :partial => "layout_elements/head" %>
+
+
+<script>
+                    //    $.ajaxSetup ({
+                    //// Disable caching of AJAX responses
+                    //        cache: false
+                    //    });
+                    $.mobile.ajaxEnabled = false;
+</script>
+
+
+<body>
+
+                <div data-role="page"   id="<%= controller_name + "_" + action_name %>" class="<%= controller_name + "_" + action_name %> application jqm-demos"  data-dom-cache="false">
+
+                                  <% unless controller_name == 'purchases' %>
+                                                      <%= render :partial => "layout_elements/panels"  %>
+                                                      <%= render :partial => "layout_elements/header"    %>
+                                  <% end %>
+
+                                  <div data-role="content" data-theme="a">
+                                    <!--   #######################  BEGIN  CONTENT  ####################### -->
+                                    <!--   #######################  BEGIN  CONTENT  ####################### -->
+                                    <!--   #######################  BEGIN  CONTENT  ####################### -->
+                                    <!--   #######################  BEGIN  CONTENT  ####################### -->
+                                    <!--   #######################  BEGIN  CONTENT  ####################### -->
+
+                                    <% if request.path  == '/purchases/checkout_review' or  request.path  == '/purchases/checkout_receipt' %>
+                                        <%  @show_class = "show_printable" %>
+                                    <% elsif controller_name  == 'page' or @articles %>
+                                        <%  @show_class = "show_page"  %>
+                                    <% elsif controller_name  == 'specsheet' %>
+                                        <%  @show_class = "show_specsheet" %>
+                                    <% else %>
+                                        <% @show_class = "show" %>
+                                    <% end %>
+
+
+                                                    <div id="the_yield" style="margin-left:auto;margin-right:auto;overflow:hidden;">
+
+                                                                             <div class="<%=  @show_class %> yield">
+
+                                                                                                 <%= javascript_include_tag "/assets/non_compiled_assets/initiate_functions.js" %>
+
+                                                                                                 <%= render "application/flash_messages" %>
+
+
+                                                                                                <span id="yield_content">
+
+
+                                                                                                                   <% home_urls = ['/index', '/', '/p/home', '/p/home-mobile', '/p/home_mobile']   %>
+                                                                                                                    <%   unless home_urls.include?(request.path) %>
+                                                                                                                                              <%= render "store/items_menu_container" %>
+                                                                                                                   <% end %>
+
+                                                                                                                     <%= yield %>
+
+                                                                                                                   <%   if home_urls.include?(request.path) %>
+                                                                                                                                              <%= render "store/items_menu_container" %>
+                                                                                                                   <% end %>
+
+                                                                                                </span>
+
+                                                                                                 <span class="other_content">
+                                                                                                                 <%   if ['/index', '/', '/p/home', '/p/home-mobile', '/p/home_mobile'].include?(request.path) %>
+
+                                                                                                                                  <% if @website.name == 'barber_store' %>
+                                                                                                                                                 <%= render "layout_elements/slick_carousel"   %>
+                                                                                                                                  <% end %>
+
+                                                                                                                                  <%= render "layout_elements/homepage_options"   %>
+
+                                                                                                                  <% end %>
+                                                                                                   </span>
+
+
+                                                                                                   <br class="clear" style="height: 1px;" />
+                                                                              </div>
+                                                    </div>
+                                    <!--   #######################  END CONTENT    ####################### -->
+                                    <!--   #######################  END CONTENT    ####################### -->
+                                    <!--   #######################  END CONTENT    ####################### -->
+                                    <!--   #######################  END CONTENT    ####################### -->
+                                    <!--   #######################  END CONTENT    ####################### -->
+                                  </div>
+                                  <%#= render :partial => "layout_elements/footer"    %>
+                </div><!-- page -->
+</body>
+
+
+</html>
+
+
+<%= render "layout_elements/render_information"    %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <% if @old_flash %>
+
+    <% if flash and  flash[:notice].kind_of?(Array) %>
+        <%  flash[:notice] =  flash[:notice].flatten %>
+    <% end %>
+    <% if flash %>
+        <% if flash[:notice].nil? or flash[:notice] == []   -%>
+            <% logger.debug("flash is nil!")    %>
+        <% else %>
+            <% logger.debug("flash is:" + flash[:notice].inspect )    %>
+            <div class="ui-bar ui-bar-a">
+              <h3 style="margin-top: 8px; float: left;">Attention: </h3>
+              <div style="margin-top: 4px; float: right;">
+                <% if @close_button %>   <a title="Button" href="#" data-role="button" data-theme="e" data-iconpos="notext" data-icon="delete">Button</a><% end %>
+              </div>
+              <p style="clear: both; font-size: 85%; margin-bottom: 8px;"><%=  flash[:notice] %></p>
+            </div>
+        <% end -%>
+    <% end -%>
+
+
+<% end %>
+
+
+
+
+
+
+
+

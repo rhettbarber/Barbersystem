@@ -1,0 +1,22 @@
+<h1>New Department</h1>
+
+<%= error_messages_for :department %>
+
+  <%= form_tag '/categories/create_department' do -%>
+  <p>
+    <b>Name</b><br />
+    <%= text_field :Name %>
+  </p>
+
+  <p>
+    <b>Code</b><br />
+    <%= text_field :Code %>
+  </p>
+
+  <p>
+    <%= submit "Create Department" %>
+  </p>
+<% end %>
+
+
+<%= link_to 'Back', :controller => 'categories', :action => 'departments_categories' %>

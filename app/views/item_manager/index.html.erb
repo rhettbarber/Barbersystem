@@ -1,0 +1,18 @@
+
+<% content_for :head_additions do -%>
+        <%   stylesheet_link_tag 'search.css' %>
+        <%=  stylesheet_link_tag 'item_manager.css' %>
+        <%= javascript_include_tag  'item_manager.js' %>
+        <%= javascript_include_tag  'dynamic_department_categories.js' %>
+<% end  -%>
+
+<div style="width:300px;margin-left:auto;margin-right:auto;text-align: center;font-size: 16px;">Item Manager</div>
+
+<%= link_to( "Edit Item Types", :controller => "clone_item_types"   ) %> - -
+<%= link_to( "Requested Items Summary", :controller => "clone_item_requests", :action => 'summary'   ) %> 
+<%   link_to( "Linked Items Review", :controller => "item_manager", :action => 'linked_index'   ) %> -
+<br/><br/>
+
+<%= render :partial => "item_manager/department_category_select" %>
+
+<%= render :partial => "item_manager/item_manager_items"   %>

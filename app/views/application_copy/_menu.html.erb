@@ -1,0 +1,42 @@
+<style type="text/css">
+  .dropdown_div {
+      float:left;
+  }
+</style>
+
+
+
+
+<!-- Docs master nav -->
+<div class="navbar navbar-inverse navbar-fixed-top bs-docs-nav">
+      <div class="container">
+            <a href="/" class="navbar-brand"> <%= image_tag "dixieoutfitters-logo.png" %> D.O. Mobile</a>
+            <div class="nav-collapse collapse bs-navbar-collapse">
+                  <ul class="nav navbar-nav">
+                    <%= render :partial => 'application/menu_designs' %>
+                    <%= render :partial => 'application/menu_items' %>
+                    <%#= render :partial => 'application/menu_articles' %>
+                    <%#= render :partial => 'menu_options' %>
+                    <div class="dropdown_div"><%=  link_to  "Cart" , :controller => "cart", :action => "index"  %> </div>
+                  </ul>
+            </div>
+      </div>
+</div>
+
+
+
+<table class="table table-bordered">
+  <tr>
+    <td class="rl2">
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
+        <ul class="dropdown-menu" aria-labelledby="dLabel" role="menu">
+          <li><a href="#" class="rl1">rl1</a></li>
+          <li><a href="#" class="rl2">rl2</a></li>
+        </ul>
+      </div>
+    </td>
+    <td>...</td>
+    <td>...</td>
+  </tr>
+</table>

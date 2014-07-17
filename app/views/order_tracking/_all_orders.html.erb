@@ -1,0 +1,230 @@
+<style type="text/css">
+                        @media ( min-width: 40em ) {
+                            /* Show the table header rows and set all cells to display: table-cell */
+                            .order-tracking-table td,
+                            .order-tracking-table th,
+                            .order-tracking-table tbody th,
+                            .order-tracking-table tbody td,
+                            .order-tracking-table thead td,
+                            .order-tracking-table thead th {
+                                display: table-cell;
+                                margin: 0;
+                            }
+                            /* Hide the labels in each cell */
+                            .order-tracking-table td .ui-table-cell-label,
+                            .order-tracking-table th .ui-table-cell-label {
+                                display: none;
+                            }
+                        }
+</style>
+
+
+<% if  @user %>
+                                    <% @user_viewable_purchases = @user.viewable_purchases.sort_by{ |a|  a.purchase_id  }.reverse  %>
+                                    <% if @user_viewable_purchases.size > 0 %>
+
+                                                                <table data-role="table" class="order-tracking-table">
+                                                                              <thead>
+                                                                                          <tr>
+                                                                                                            <th data-priority="1">Order #:</th>
+                                                                                                            <th style="width:40%">Status</th>
+                                                                                                            <th data-priority="2">Begin Date:</th>
+                                                                                                            <th data-priority="3"><abbr title="Rotten Tomato Rating">Total</abbr></th>
+                                                                                                            <th data-priority="4">Service</th>
+                                                                                                            <th data-priority="4">Ship Date</th>
+                                                                                          </tr>
+                                                                              </thead>
+                                                                              <tbody>
+                                                                                                      <% @user_viewable_purchases.each do |a_purchase|  %>
+
+                                                                                                                      <% @show = true %>
+                                                                                                                      <% if @purchase and @hide_in_progress %>
+                                                                                                                                          <% if a_purchase.purchase_id == @purchase.id  and a_purchase.TransactionNumber  %>
+                                                                                                                                                            <% @show = false %>
+                                                                                                                                          <% end  %>
+                                                                                                                      <% end %>
+
+                                                                                                                      <% if @show == true %>
+                                                                                                                                                  <tr class="<%= cycle("even", "odd") %>">
+                                                                                                                                                                        <td>  <%=   a_purchase.purchase_id   %> </td>
+                                                                                                                                                                        <td class="status">
+                                                                                                                                                                          <%  if a_purchase.tracking_number %>
+                                                                                                                                                                                                      <%= a_purchase.tracking_number  %>  &nbsp
+                                                                                                                                                                                                      <%= link_to "Track Order",  'http://wwwapps.ups.com/WebTracking/processInputRequest?TypeOfInquiryNumber=T&InquiryNumber1='  +  a_purchase.tracking_number  %>
+                                                                                                                                                                          <% else %>
+                                                                                                                                                                                                      <% if a_purchase.sale_id  %>
+                                                                                                                                                                                                                              <% if a_purchase.CarrierName == "United States Postal Service" %>
+                                                                                                                                                                                                                                                      <% if a_purchase.ShippingDateProcessed %>
+                                                                                                                                                                                                                                                          Shipped.  USPS  does not have tracking.
+                                                                                                                                                                                                                                                      <% else %>
+                                                                                                                                                                                                                                                          Scheduled to ship via USPS.
+                                                                                                                                                                                                                                                      <% end  %>
+                                                                                                                                                                                                                              <% else  %>
+                                                                                                                                                                                                                                                Shipped UPS but has no tracking information.
+                                                                                                                                                                                                                              <% end  %>
+                                                                                                                                                                                                      <% else  %>
+                                                                                                                                                                                                                              <% if a_purchase.Closed %>
+                                                                                                                                                                                                                                  Order Cancelled...
+                                                                                                                                                                                                                              <% else %>
+                                                                                                                                                                                                                                                 <span style="color:red;">   Order is Processing....   </span>
+                                                                                                                                                                                                                              <% end  %>
+
+                                                                                                                                                                                                      <% end  %>
+                                                                                                                                                                          <% end  %>
+                                                                                                                                                                        </td>
+                                                                                                                                                                        <td class="date"><%=   a_purchase.Time.to_date   %></td>
+                                                                                                                                                                        <td class="total"><%=   a_purchase.Total   %></td>
+                                                                                                                                                                        <td class="total"><%=   a_purchase.ServiceName   %></td>
+                                                                                                                                                                        <td class="total"><%=   a_purchase.ShippingDateProcessed   %></td>
+                                                                                                                                                  </tr>
+                                                                                                                      <% end %>
+                                                                                                      <% end  %>
+                                                                              </tbody>
+                                                                </table>
+                                    <% else %>
+                                                             <br><br><span style="font-size: 20px;"> You have no orders on file.</span> <br> <br>
+                                    <% end %>
+<% else  %>
+                            <br><br><span style="font-size: 20px;">Please log in to view your orders. <%= link_to "Log-in", :controller => 'account' %><br>  </span> <br> <br>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <% if @olld %>
+
+
+    <style type="text/css">
+        tr {
+            height:28px;
+        }
+
+        .odd {
+            background-color:#add8e6;
+        }
+        .even {
+            background-color: #e0ffff;
+        }
+        .status {
+            width:300px;
+        }
+        .total {
+            width:150px;
+            text-align: center;
+        }
+        .date {
+            width:125px;
+            text-align: center;
+        }
+
+        .orders_table_container {
+            width: 850px;
+            font-size: 12px;;
+        }
+
+
+    </style>
+
+<div class="orders_table_container">
+    <div align="center">
+                <% if  @user %>
+                                      <% @user_viewable_purchases = @user.viewable_purchases.sort_by{ |a|  a.purchase_id  }.reverse  %>
+                                      <% if @user_viewable_purchases.size > 0 %>
+                                            <div class="swipe_instructions">Swipe on table below to see details
+                                                        <%= image_tag "/images/icons/swipe-left.gif" %>
+                                            </div>
+                                              <table class="order_table responsive">
+                                                    <tr>
+                                                                      <th>Order #:</th>
+                                                                       <th>Status</th>
+                                                                      <th>Begin Date:</th>
+                                                                      <th>Total</th>
+                                                                        <th>Service</th>
+                                                                       <th>Ship Date</th>
+                                                    </tr>
+                                              <% @user_viewable_purchases.each do |a_purchase|  %>
+
+                                                                       <% @show = true %>
+                                                                        <% if @purchase and @hide_in_progress %>
+                                                                                        <% if a_purchase.purchase_id == @purchase.id  and a_purchase.TransactionNumber  %>
+                                                                                                     <% @show = false %>
+                                                                                        <% end  %>
+                                                                        <% end %>
+
+                                                                      <% if @show == true %>
+                                                                                      <tr class="<%= cycle("even", "odd") %>">
+                                                                                                <td>  <%=   a_purchase.purchase_id   %> </td>
+                                                                                                <td class="status">
+                                                                                                  <%  if a_purchase.tracking_number %>
+                                                                                                      <%= a_purchase.tracking_number  %>  &nbsp
+                                                                                                      <%= link_to "Track Order",  'http://wwwapps.ups.com/WebTracking/processInputRequest?TypeOfInquiryNumber=T&InquiryNumber1='  +  a_purchase.tracking_number  %>
+                                                                                                  <% else %>
+                                                                                                      <% if a_purchase.sale_id  %>
+                                                                                                          <% if a_purchase.CarrierName == "United States Postal Service" %>
+                                                                                                              <% if a_purchase.ShippingDateProcessed %>
+                                                                                                                  Shipped.  USPS  does not have tracking.
+                                                                                                              <% else %>
+                                                                                                                  Scheduled to ship via USPS.
+                                                                                                              <% end  %>
+                                                                                                          <% else  %>
+                                                                                                              Shipped UPS but has no tracking information.
+                                                                                                          <% end  %>
+                                                                                                      <% else  %>
+                                                                                                          <% if a_purchase.Closed %>
+                                                                                                              Order Cancelled...
+                                                                                                          <% else %>
+                                                                                                              <span style="color:red;">   Order is Processing....   </span>
+                                                                                                          <% end  %>
+
+                                                                                                      <% end  %>
+                                                                                                  <% end  %>
+                                                                                                </td>
+                                                                                                <td class="date"><%=   a_purchase.Time.to_date   %></td>
+                                                                                                <td class="total"><%=   a_purchase.Total   %></td>
+                                                                                                 <td class="total"><%=   a_purchase.ServiceName   %></td>
+                                                                                                <td class="total"><%=   a_purchase.ShippingDateProcessed   %></td>
+
+                                                                                      </tr>
+                                                                     <% end %>
+
+
+                                              <% end  %>
+                                              </table>
+                                      <% else %>
+                                                <br><br><span style="font-size: 20px;"> You have no orders on file.</span> <br> <br>
+                                      <% end %>
+                  <% else  %>
+                         <br><br><span style="font-size: 20px;">Please log in to view your orders. <%= link_to "Log-in", :controller => 'account' %><br>  </span> <br> <br>
+                  <% end %>
+          </div>
+</div>
+
+  <% end %>

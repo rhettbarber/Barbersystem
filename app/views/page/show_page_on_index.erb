@@ -1,0 +1,311 @@
+
+<!--<div class="revisions"  id="revisions"> <%#=   render :partial  => "page/content"   %></div>-->
+
+
+
+<br class="clear" style="height: 1px;" />
+
+
+<div data-role="collapsible" data-inset="true" data-collapsed="false" data-theme="b" id="article_subjects" class="article_subjects">
+                          <h3 id="root_page_name">Browse Articles</h3>
+                          <div id="jstree"></div>
+</div>
+
+
+
+<br class="clear" style="height: 1px;" />
+
+
+<% if admin? %>
+                     <span  class="admin_hidden"  style="display: none;">
+                                <div data-role="controlgroup" data-type="vertical" data-inline="true">
+                                                  <a class="admin_hidden" href="#" data-role="button" data-icon="arrow-u" data-iconpos="left" id="new_page">New  page </a>
+                                                  <a class="admin_hidden" href="#" data-role="button" data-icon="arrow-u" data-iconpos="left" id="edit_this_page">Edit this page </a>
+                                                  <a class="admin_hidden" href="#" data-role="button" data-icon="arrow-u" data-iconpos="left" id="delete_this_page">Delete  this page </a>
+                                </div>
+                    </span>
+<% end %>
+
+
+
+
+
+
+
+
+
+<script>
+
+    function getInitialPage(  ) {
+                        console.log( "begin getInitialPage");
+                        jQuery.ajax({
+                                        type: "GET",
+                                        dataType: 'script',
+                                        url: "/c/p/<%=  params[:page_id] %>"  ,
+                                        data: { first_page: 'true'  }
+                        });
+                        console.log( "end getInitialPage");
+    }
+
+
+ function getPage( data ) {
+                         console.log("-------------begin getPage")
+                         $.mobile.loading('show');
+                         $(".other_content").hide();
+
+                        var  the_data_node =  data.node.data.page_id ;
+                        console.log("the_data_node: " + the_data_node);
+
+                        var page_url  =  "/p/" +  the_data_node
+
+                        //       OPEN PAGE WITHOUT AJAX
+                        //                         window.location =  page_url;
+
+                         jQuery.ajax({
+                                         type: "GET",
+                                         dataType: 'script',
+                                         url: "/c/p/" +  data.node.data.page_id  ,
+                                         data: {   }
+                         });
+                        console.log("-------------end getPage")
+ }
+
+
+
+
+
+            $(function () {
+                                // 6 create an instance when the DOM is ready
+                                $('#jstree').jstree();
+
+                                <%  if params[:page_id] %>
+                                                getInitialPage("<%=  params[:page_id] %>"  );
+                                <% end %>
+
+                                $(".jstree-closed li a").on('click', function(e){
+                                    console.log("clicked jstree-closed" );
+
+                });
+
+
+
+
+                // 7 bind to events triggered on the tree
+                $('#jstree').on("changed.jstree", function (e, data) {
+                                    console.log(data.selected);
+                                    console.log("changed.jstree");
+                                    console.log("data.type: " + data.type );
+
+                                    if (data.node) {
+                                                                                        if (data.node.data.type == "page") {
+                                                                                                                console.log("This is a page");
+                                                                                                                getPage( data ) ;
+                                                                                         }  else {
+                                                                                                                console.log("This is not a page");
+                                                                                                                console.log("This is not a page");
+                                                                                                                console.log("This is not a page");
+                                                                                                                console.log("This is not a page");
+                                                                                                                // if node is open, close it.. closed open it
+                                                                                                                console.log("?  data.node.state.opened: " + data.node.state.opened.toString() );
+                                                                                                                if (data.node.state.opened) {
+                                                                                                                                            console.log("data.node.state.open- close node: " );
+                                                                                                                                            $('#jstree').jstree("close_node", data.selected  );
+                                                                                                                } else {
+                                                                                                                                                console.log("data.node.state.closed- run getPage: " );
+                                                                                                                                            getPage( data );
+                                                                                                                                              $('#jstree').jstree("open_node", data.selected  );
+
+                                                                                                                  }
+                                                                                         }
+                                    }  else {
+                                                console.log("no nodes loaded");
+                                                console.log("no nodes loaded");
+                                                console.log("no nodes loaded");
+                                                console.log("no nodes loaded");
+                                    }
+                });
+
+
+
+
+                // 8 interact with the tree - either way is OK
+                $('button').on('click', function () {
+                    $('#jstree').jstree(true).select_node('child_node_1');
+                    $('#jstree').jstree('select_node', 'child_node_1');
+                    $.jstree.reference('#jstree').select_node('child_node_1');
+                });
+            });
+
+
+
+    <% if params[:scope_by_page_id]  %>
+                    var scope_by_id =    "<%= params[:scope_by_page_id]  %>"  ;
+  <% else %>
+                    var scope_by_id =    "0"  ;
+    <% end %>
+
+
+    var page_id = null;
+
+    $('#jstree').jstree({
+
+        'core' : {
+            'data' : {
+                                "url": function (node) {
+                                                if (node.data) {
+                                                                the_node_id  = node.id ;
+                                                                page_id  =   node.data.page_id  ;
+                                                } else {
+                                                                the_node_id  = node.id ;
+                                                                page_id  =  "0" ;
+                                                }
+
+                                               var url = "/p/pages_navigation/";
+                                                url = url + page_id;
+
+                                                if (scope_by_id != '0') {
+                                                    url = url + "/" + scope_by_id;
+                                                }
+                                    return url;
+                                },
+
+
+                        'data' : function (node) {
+
+                                            if (node.data) {
+                                                 the_node_id  = node.id ;
+                                                  page_id  =   node.data.page_id  ;
+                                            } else {
+                                                    the_node_id  = node.id ;
+                                                      page_id  =  "0" ;
+                                            }
+
+                                            return {
+                                                'id' : the_node_id ,
+                                                'page_id' :   page_id
+                                            };
+
+                        }
+            }
+        }
+    } );
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @offf %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <%   if ['/index', '/', '/p/home', '/p/home-mobile', '/p/home_mobile'].include?(request.path) %>
+
+
+
+
+        <div class="revisions"  id="revisions">
+          <%#=   render :partial  => "page/content"   %>
+        </div>
+
+
+        <br style="clear: both;" />
+
+        <div data-role="collapsible" data-inset="true" data-collapsed="false" data-theme="b" id="article_subjects" class="article_subjects">
+          <h3 id="root_page_name">Browse Articles</h3>
+          <div id="jstree"></div>
+        </div>
+
+    <% else %>
+
+
+
+
+
+        <div data-role="collapsible" data-inset="true" data-collapsed="false" data-theme="b" id="article_subjects" class="article_subjects">
+          <h3 id="root_page_name">Browse Articles</h3>
+          <div id="jstree"></div>
+        </div>
+
+
+        <br style="clear: both;" />
+
+        <div class="revisions"  id="revisions">
+          <%#=   render :partial  => "page/content"   %>
+        </div>
+
+    <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="ui-corner-all custom-corners">
+      <div class="ui-bar ui-bar-a" style="font-size: x-large;background-color: black ;color:white;">
+        <h3>Click on an article or subject  to view it.</h3>
+      </div>
+      <div class="ui-body ui-body-a">
+
+        <div data-role="collapsible" data-inset="false" data-collapsed="false" data-theme="a" id="article_subjects">
+          <h3 id="root_page_name">Browse Article Subjects</h3>
+          <div id="jstree"></div>
+        </div><!-- /collapsible -->
+
+      </div>
+    </div>
+
+    <% if admin? %>
+        <span  class="admin_hidden"  style="display: none;">
+                                <div data-role="controlgroup" data-type="vertical" data-inline="true">
+                                  <a class="admin_hidden" href="#" data-role="button" data-icon="arrow-u" data-iconpos="left" id="new_page">New  page </a>
+                                  <a class="admin_hidden" href="#" data-role="button" data-icon="arrow-u" data-iconpos="left" id="edit_this_page">Edit this page </a>
+                                  <a class="admin_hidden" href="#" data-role="button" data-icon="arrow-u" data-iconpos="left" id="delete_this_page">Delete  this page </a>
+                                </div>
+                    </span>
+    <% end %>
+
+    <div class="revisions"  id="revisions">
+      <%#=   render :partial  => "page/content"   %>
+    </div>
+
+
+
+
+<% end %>
+
+

@@ -1,0 +1,16 @@
+<div id="search_form" style="text-align: center;width: 850px;">
+    <% form_tag(  "/purchases_entries/layout_manager") do %>
+              <% if  @menu_search %>
+                                    <select id="search_scope" name="search_scope" ><option value="Matches Any">Matches Any  - (Most Results)</option><option value="Matches All">Matches All -(Less Results)</option></select>
+                                  <select name="search_type_name">
+                                    <option value="products" selected="selected"> Products </option>
+                                    <option value="articles"> Articles </option>
+                                  </select>
+                  <% end  %>
+                <%= text_field_tag("query", params[:query], :autocomplete => "off", :size => 33 ) %>
+                <%= submit_tag "Search" %>
+    <% end %>
+</div>
+
+
+

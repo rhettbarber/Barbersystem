@@ -1,0 +1,33 @@
+<h1>New quote_tender_entry</h1>
+
+<%= error_messages_for :quote_tender_entry %>
+
+<%= form_for(:quote_tender_entry, :url => quote_tender_entries_path) do |f| %>
+ 
+ <p>
+    <b>Tender Type</b><br />
+    <%= f.text_field :tender_id %>
+  </p>
+ 
+  
+  <p>
+    <b>Creditcardexpiration</b><br />
+    <%= f.text_field :CreditCardExpiration %>
+  </p>
+
+  <p>
+    <b>Creditcardnumber</b><br />
+    <%= f.text_field :CreditCardNumber %>
+  </p>
+
+  <p>
+    <b>Creditcardapprovalcode</b><br />
+    <%= f.text_field :CreditCardApprovalCode %>
+  </p>
+
+  <p>
+    <%= submit_tag "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', quote_tender_entries_path %>

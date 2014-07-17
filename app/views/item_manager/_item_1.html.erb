@@ -1,0 +1,18 @@
+
+<%= item.ItemLookupCode  %>
+
+
+                 <% CloneItemType.all.each do |clone_item_type| %>
+                                                 <%= clone_item_type.name %> -
+                                                 <% if item.clone_item_type_ids %>
+                                                               <% if item.clone_item_type_ids.include?( clone_item_type.id.to_s ) %>
+                                                                      file_status: <%= File.file?( 'W:\\AUTOMATION_DATABASE\\PRODUCTION_JPG\\' + clone_item_type.name + '\\' + clone_item_type.prefix_code +    item.ItemLookupCode + '.jpg' ) %>
+                                                               <% else %>
+                                                                      doesnt_include
+                                                               <% end  %>
+                                                  <% else %>
+                                                                no_clone_item_type_ids
+                                                 <% end  %>
+                      <% end %>
+
+<br/>

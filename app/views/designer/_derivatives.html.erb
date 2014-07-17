@@ -1,0 +1,74 @@
+<table id="designer_items_listing">
+          <tr style="min-height:50px;">
+          <th>Itemlookupcode</th>
+          <th>Description</th>
+           <th>Original<br/>Png</th>
+          <th>Production Images</th>
+        </tr>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= item.ItemLookupCode %></td>
+          <td><%= item.Description %></td>
+
+          <td>
+                  <% if  @missing_original_pngs.include?(  item.ItemLookupCode )  %>
+                          <%= image_tag('/images/buttons/false.jpg' , :size => '20x20' ) %>
+                  <% else %>
+                          <%= image_tag('/images/buttons/true.jpg', :size => '20x20' ) %>
+                  <% end %>
+          </td>
+
+          <td>
+            <% if @items_requiring_production.include?(  item.ItemLookupCode )    %>
+                        <% if  @missing_production_jpgs.include?(  item.ItemLookupCode )  %>
+                                <%= image_tag('/images/buttons/false.jpg' , :size => '20x20' ) %>
+                        <% else %>
+                                <%= image_tag('/images/buttons/true.jpg', :size => '20x20' ) %>
+                        <% end %>
+            <% else %>
+                  N/A
+            <% end  %>
+          </td>
+          <td>
+                    <%= link_to( image_tag('/images/buttons/details.gif' , :size => '20x20', :border => 0 ) , 'designer/designer_item_details' )        %>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="5">
+                 <% CloneItemType.all.each do |clone_item_type| %>
+                          <div class="clone_item_dropdown_item" onclick="showOptions(<%= item.id   %>, <%= clone_item_type.id %> )">
+                                            <span class="anatips" title="<%=  item.clone_item_status(clone_item_type.id ) %>">
+                                                   <% image_tag( '/images/icons/' + item.clone_item_status(clone_item_type.id ).to_s + '.jpg' , :size => "35x35" ) %>
+
+                                                  <%= clone_item_type.name %><br />
+
+                                                   <% @clone_item_of_type = item.clone_item_of_type(clone_item_type.id) %>
+                                                   <% if @clone_item_of_type  %>
+                                                              <%= image_tag(  @clone_item_of_type.production_ready_status_image_name  , :size => "35x35" ,:class => 'anatips', :title => 'testing anatips' ) %>
+                                                              <%= image_tag( @clone_item_of_type.web_ready_status_image_name  , :size => "35x35" ) %>
+                                                    <% else  %>
+                                                              <%= image_tag( '/images/icons/clone_not_requested.png'  , :size => "35x35" ) %>
+                                                    <% end  %>
+                                            </span>
+                      </div>
+                      <% end %>
+
+                      <% if @show_plus  %>
+
+                       <div class="clone_item_dropdown_item">
+                                  <%= image_tag( '/images/buttons/48x48-add.png'  , :size => "35x35" ) %><br/>
+                                  Request derivative.
+                       </div>
+                       <% end  %>
+
+          </td>
+
+
+
+        </tr>
+         <tr><td colspan="5" class="item_management_row_divider">&nbsp; </td></tr>
+      <% end %>
+      </table>
+
+48x48-add.png
+

@@ -1,0 +1,13 @@
+<% @page_title = @revision.page.name + " (Revision)" -%>
+<% @show_nav = true %>
+<h3 style="display:inline;">Older Revision of <%= @revision.page.name %></h3>
+<span class="actions">
+	<% if user_can?('modify') -%>
+		<span class="edit"><%= link_to("see current", :action => "show", :id => @revision.page.slug) %></span>
+		<span class="revisions"><%= link_to("show revisions", :action => "revisions", :id => @revision.page.slug) %></span>
+	<% end -%>
+	<% if user_can?('remove') -%>
+		<span class="delete"><%= link_to("rollback", :action => "rollback", :id => @revision.id) %></span>
+	<% end -%>
+</span>
+<%= render :partial => 'content' %>

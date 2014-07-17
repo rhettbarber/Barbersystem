@@ -1,0 +1,70 @@
+
+<% @checkout_links_controllers =['account', 'ship_tos', 'cart','quote_tender_entries'] %>
+<% @simple_view_controllers =['account', 'designer_specsheet', 'custom_items','quote_tender_entries','films','items','websites','breast_prints','advanced_combinations','test','design_alignment_groups'] %>
+
+
+<!DOCTYPE html>
+<html>
+<%= render(:partial => "layout_elements/head") %>
+<% render(:partial => "layout_elements/shared_dynamic_head") %>
+  <%= yield :head_additions %>
+
+
+  <style type="text/css">
+            body {
+                background:url(/images/backgrounds_repeating/dark-blue-canvas.jpg);
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 12px;
+                margin: 0;
+                padding: 0;
+        }
+    </style>
+
+
+<body class="body">
+<% unless params[:no_yield]   %>
+
+
+                <div class="header">
+                  <%= render :partial => 'advanced_main_menu/advanced_main_menu'   %>
+                </div>
+
+                <div class="page_content_wide"  id="page_content">
+
+                                <%= render :partial => "layout_elements/wholesale_login_message" %>
+                                <%= render :partial => "shared_menu/menu_affiliate" if controller.controller_name == 'affiliates' %>
+                                <%= render :partial => "shared_menu/pages_tree_menu"  if controller.controller_name == 'page' %>
+
+                              <div  id="page_yield_container" style="display:table-cell;width:650px;">
+                                          <% if flash[:notice] != nil -%><div style="color: blue; text-align: center;">&nbsp;<%= flash[:notice] %>&nbsp;</div><% end -%>
+                                          <%= yield  %>
+                              </div>
+
+                </div>
+
+                <%= render :partial => 'advanced_main_menu/search_results_container' %>
+
+
+                <% if  @checkout_links_controllers.include?( controller.controller_name ) %>
+                  <% unless @incomplete_symbiont == true or @website.store_website == false  %>
+                          <%= render(:partial => "shared_links/checkout_links")  %>
+                  <%  end  %>
+                <%  end  %>
+
+
+
+
+
+
+
+
+
+                <%= render :partial => 'layout_elements/shared_footer'  %>
+
+
+
+
+  <% end  %>
+</body>
+ <%= render :partial => 'development/development_bar'  %>
+</html>

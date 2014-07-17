@@ -1,0 +1,5 @@
+<% if session[:show_category_opposites] %>
+                          <div  id="category_opposites" class="administration_yellow" style="display:table;float:left;width:850px;">
+                                        <%= render :partial => "categories/category_opposites_list" if @category or @items  %>
+                          </div>
+<% end  %>

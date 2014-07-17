@@ -1,0 +1,25 @@
+ 
+
+<div class="yield_container">   
+					<%= render(:partial => "shared/default_loading") %>    
+							 
+							 
+					<% if @department  %>
+								    <%  if  controller.action_name == 'browse' or  controller.action_name == 'category_browser'  or  controller.action_name == 'browse_and_complete'   %>
+											 <div class="yield_container_small">   
+				 					<% else  %>
+											 <div class="yield_container_full">   
+									 <%  end %>
+				  	 <% else %>
+											 <div class="yield_container_full">   
+											 <%= render(:partial => "layout_elements/login_warning" ) %>
+					 <%  end %>
+			
+			
+
+						<%= yield  %>
+
+			
+			
+											 </div>			
+</div>
