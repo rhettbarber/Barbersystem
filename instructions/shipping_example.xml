@@ -1,0 +1,418 @@
+GGGGGGGGGGGREEEAAAAAAAAAAATTTTTTTTTTTTT
+        GGGGGGGGGGGREEEAAAAAAAAAAATTTTTTTTTTTTT
+        GGGGGGGGGGGREEEAAAAAAAAAAATTTTTTTTTTTTT
+        BEGIN DATA
+        data: <?xml version="1.0" encoding="UTF-8"?>
+<RateV3Response>
+  <Package ID="1">
+    <ZipOrigination>31555</ZipOrigination>
+    <ZipDestination>31546</ZipDestination>
+    <Pounds>1</Pounds>
+    <Ounces>8</Ounces>
+    <Container>RECTANGULAR</Container>
+    <Size>REGULAR</Size>
+    <Machinable>FALSE</Machinable>
+    <Zone>1</Zone>
+    <Postage CLASSID="3">
+      <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt;</MailService>
+      <Rate>19.15</Rate>
+      <CommitmentDate>2014-02-07</CommitmentDate>
+    </Postage>
+    <Postage CLASSID="2">
+      <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Hold For Pickup
+      </MailService>
+      <Rate>19.15</Rate>
+      <CommitmentDate>2014-02-07</CommitmentDate>
+    </Postage>
+    <Postage CLASSID="55">
+      <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Flat Rate Boxes
+      </MailService>
+      <Rate>44.95</Rate>
+      <CommitmentDate>2014-02-07</CommitmentDate>
+    </Postage>
+    <Postage CLASSID="56">
+      <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Flat Rate Boxes Hold
+        For Pickup
+      </MailService>
+      <Rate>44.95</Rate>
+      <CommitmentDate>2014-02-07</CommitmentDate>
+    </Postage>
+    <Postage CLASSID="13">
+      <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Flat Rate Envelope
+      </MailService>
+      <Rate>19.99</Rate>
+      <CommitmentDate>2014-02-07</CommitmentDate>
+    </Postage>
+    <Postage CLASSID="27">
+      <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Flat Rate Envelope Hold
+        For Pickup
+      </MailService>
+      <Rate>19.99</Rate>
+      <CommitmentDate>2014-02-07</CommitmentDate>
+    </Postage>
+    <Postage CLASSID="30">
+      <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Legal Flat Rate
+        Envelope
+      </MailService>
+      <Rate>19.99</Rate>
+      <CommitmentDate>2014-02-07</CommitmentDate>
+    </Postage>
+    <Postage CLASSID="31">
+      <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Legal Flat Rate
+        Envelope Hold For Pickup
+      </MailService>
+      <Rate>19.99</Rate>
+      <CommitmentDate>2014-02-07</CommitmentDate>
+    </Postage>
+    <Postage CLASSID="62">
+      <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Padded Flat Rate
+        Envelope
+      </MailService>
+      <Rate>19.99</Rate>
+      <CommitmentDate>2014-02-07</CommitmentDate>
+    </Postage>
+    <Postage CLASSID="63">
+      <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Padded Flat Rate
+        Envelope Hold For Pickup
+      </MailService>
+      <Rate>19.99</Rate>
+      <CommitmentDate>2014-02-07</CommitmentDate>
+    </Postage>
+    <Postage CLASSID="1">
+      <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt;</MailService>
+      <Rate>5.80</Rate>
+    </Postage>
+    <Postage CLASSID="22">
+      <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Large Flat Rate Box
+      </MailService>
+      <Rate>17.45</Rate>
+    </Postage>
+    <Postage CLASSID="17">
+      <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Medium Flat Rate Box
+      </MailService>
+      <Rate>12.35</Rate>
+    </Postage>
+    <Postage CLASSID="28">
+      <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Small Flat Rate Box
+      </MailService>
+      <Rate>5.80</Rate>
+    </Postage>
+    <Postage CLASSID="16">
+      <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Flat Rate Envelope
+      </MailService>
+      <Rate>5.60</Rate>
+    </Postage>
+    <Postage CLASSID="44">
+      <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Legal Flat Rate Envelope
+      </MailService>
+      <Rate>5.75</Rate>
+    </Postage>
+    <Postage CLASSID="29">
+      <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Padded Flat Rate Envelope
+      </MailService>
+      <Rate>5.95</Rate>
+    </Postage>
+    <Postage CLASSID="38">
+      <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Gift Card Flat Rate Envelope
+      </MailService>
+      <Rate>5.60</Rate>
+    </Postage>
+    <Postage CLASSID="42">
+      <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Small Flat Rate Envelope
+      </MailService>
+      <Rate>5.60</Rate>
+    </Postage>
+    <Postage CLASSID="40">
+      <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Window Flat Rate Envelope
+      </MailService>
+      <Rate>5.60</Rate>
+    </Postage>
+    <Postage CLASSID="6">
+      <MailService>Media Mail&amp;lt;sup&amp;gt;&amp;#174;&amp;lt;/sup&amp;gt;</MailService>
+      <Rate>3.17</Rate>
+    </Postage>
+    <Postage CLASSID="7">
+      <MailService>Library Mail</MailService>
+      <Rate>3.02</Rate>
+    </Postage>
+  </Package>
+</RateV3Response>
+        END DATA
+
+
+        GGGGGGGGGGGREEEAAAAAAAAAAATTTTTTTTTTTTT
+        GGGGGGGGGGGREEEAAAAAAAAAAATTTTTTTTTTTTT
+        GGGGGGGGGGGREEEAAAAAAAAAAATTTTTTTTTTTTT
+        BEGIN DATA
+        data: <?xml version="1.0" encoding="UTF-8"?>
+<RateV3Response>
+<Package ID="1">
+  <ZipOrigination>31555</ZipOrigination>
+  <ZipDestination>31546</ZipDestination>
+  <Pounds>1</Pounds>
+  <Ounces>8</Ounces>
+  <Container>RECTANGULAR</Container>
+  <Size>REGULAR</Size>
+  <Machinable>FALSE</Machinable>
+  <Zone>1</Zone>
+  <Postage CLASSID="3">
+    <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt;</MailService>
+    <Rate>19.15</Rate>
+    <CommitmentDate>2014-02-07</CommitmentDate>
+  </Postage>
+  <Postage CLASSID="2">
+    <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Hold For Pickup
+    </MailService>
+    <Rate>19.15</Rate>
+    <CommitmentDate>2014-02-07</CommitmentDate>
+  </Postage>
+  <Postage CLASSID="55">
+    <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Flat Rate Boxes
+    </MailService>
+    <Rate>44.95</Rate>
+    <CommitmentDate>2014-02-07</CommitmentDate>
+  </Postage>
+  <Postage CLASSID="56">
+    <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Flat Rate Boxes Hold For
+      Pickup
+    </MailService>
+    <Rate>44.95</Rate>
+    <CommitmentDate>2014-02-07</CommitmentDate>
+  </Postage>
+  <Postage CLASSID="13">
+    <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Flat Rate Envelope
+    </MailService>
+    <Rate>19.99</Rate>
+    <CommitmentDate>2014-02-07</CommitmentDate>
+  </Postage>
+  <Postage CLASSID="27">
+    <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Flat Rate Envelope Hold
+      For Pickup
+    </MailService>
+    <Rate>19.99</Rate>
+    <CommitmentDate>2014-02-07</CommitmentDate>
+  </Postage>
+  <Postage CLASSID="30">
+    <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Legal Flat Rate
+      Envelope
+    </MailService>
+    <Rate>19.99</Rate>
+    <CommitmentDate>2014-02-07</CommitmentDate>
+  </Postage>
+  <Postage CLASSID="31">
+    <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Legal Flat Rate Envelope
+      Hold For Pickup
+    </MailService>
+    <Rate>19.99</Rate>
+    <CommitmentDate>2014-02-07</CommitmentDate>
+  </Postage>
+  <Postage CLASSID="62">
+    <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Padded Flat Rate
+      Envelope
+    </MailService>
+    <Rate>19.99</Rate>
+    <CommitmentDate>2014-02-07</CommitmentDate>
+  </Postage>
+  <Postage CLASSID="63">
+    <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Padded Flat Rate Envelope
+      Hold For Pickup
+    </MailService>
+    <Rate>19.99</Rate>
+    <CommitmentDate>2014-02-07</CommitmentDate>
+  </Postage>
+  <Postage CLASSID="1">
+    <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt;</MailService>
+    <Rate>5.80</Rate>
+  </Postage>
+  <Postage CLASSID="22">
+    <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Large Flat Rate Box</MailService>
+    <Rate>17.45</Rate>
+  </Postage>
+  <Postage CLASSID="17">
+    <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Medium Flat Rate Box
+    </MailService>
+    <Rate>12.35</Rate>
+  </Postage>
+  <Postage CLASSID="28">
+    <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Small Flat Rate Box</MailService>
+    <Rate>5.80</Rate>
+  </Postage>
+  <Postage CLASSID="16">
+    <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Flat Rate Envelope</MailService>
+    <Rate>5.60</Rate>
+  </Postage>
+  <Postage CLASSID="44">
+    <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Legal Flat Rate Envelope
+    </MailService>
+    <Rate>5.75</Rate>
+  </Postage>
+  <Postage CLASSID="29">
+    <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Padded Flat Rate Envelope
+    </MailService>
+    <Rate>5.95</Rate>
+  </Postage>
+  <Postage CLASSID="38">
+    <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Gift Card Flat Rate Envelope
+    </MailService>
+    <Rate>5.60</Rate>
+  </Postage>
+  <Postage CLASSID="42">
+    <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Small Flat Rate Envelope
+    </MailService>
+    <Rate>5.60</Rate>
+  </Postage>
+  <Postage CLASSID="40">
+    <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Window Flat Rate Envelope
+    </MailService>
+    <Rate>5.60</Rate>
+  </Postage>
+  <Postage CLASSID="6">
+    <MailService>Media Mail&amp;lt;sup&amp;gt;&amp;#174;&amp;lt;/sup&amp;gt;</MailService>
+    <Rate>3.17</Rate>
+  </Postage>
+  <Postage CLASSID="7">
+    <MailService>Library Mail</MailService>
+    <Rate>3.02</Rate>
+  </Postage>
+</Package>
+</RateV3Response>
+        END DATA
+
+
+        GGGGGGGGGGGREEEAAAAAAAAAAATTTTTTTTTTTTT
+        GGGGGGGGGGGREEEAAAAAAAAAAATTTTTTTTTTTTT
+        GGGGGGGGGGGREEEAAAAAAAAAAATTTTTTTTTTTTT
+        BEGIN DATA
+        data: <?xml version="1.0" encoding="UTF-8"?>
+<RateV3Response>
+<Package ID="1">
+  <ZipOrigination>31555</ZipOrigination>
+  <ZipDestination>31546</ZipDestination>
+  <Pounds>1</Pounds>
+  <Ounces>8</Ounces>
+  <Container>RECTANGULAR</Container>
+  <Size>REGULAR</Size>
+  <Machinable>FALSE</Machinable>
+  <Zone>1</Zone>
+  <Postage CLASSID="3">
+    <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt;</MailService>
+    <Rate>19.15</Rate>
+    <CommitmentDate>2014-02-07</CommitmentDate>
+  </Postage>
+  <Postage CLASSID="2">
+    <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Hold For Pickup
+    </MailService>
+    <Rate>19.15</Rate>
+    <CommitmentDate>2014-02-07</CommitmentDate>
+  </Postage>
+  <Postage CLASSID="55">
+    <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Flat Rate Boxes
+    </MailService>
+    <Rate>44.95</Rate>
+    <CommitmentDate>2014-02-07</CommitmentDate>
+  </Postage>
+  <Postage CLASSID="56">
+    <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Flat Rate Boxes Hold For
+      Pickup
+    </MailService>
+    <Rate>44.95</Rate>
+    <CommitmentDate>2014-02-07</CommitmentDate>
+  </Postage>
+  <Postage CLASSID="13">
+    <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Flat Rate Envelope
+    </MailService>
+    <Rate>19.99</Rate>
+    <CommitmentDate>2014-02-07</CommitmentDate>
+  </Postage>
+  <Postage CLASSID="27">
+    <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Flat Rate Envelope Hold
+      For Pickup
+    </MailService>
+    <Rate>19.99</Rate>
+    <CommitmentDate>2014-02-07</CommitmentDate>
+  </Postage>
+  <Postage CLASSID="30">
+    <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Legal Flat Rate
+      Envelope
+    </MailService>
+    <Rate>19.99</Rate>
+    <CommitmentDate>2014-02-07</CommitmentDate>
+  </Postage>
+  <Postage CLASSID="31">
+    <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Legal Flat Rate Envelope
+      Hold For Pickup
+    </MailService>
+    <Rate>19.99</Rate>
+    <CommitmentDate>2014-02-07</CommitmentDate>
+  </Postage>
+  <Postage CLASSID="62">
+    <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Padded Flat Rate
+      Envelope
+    </MailService>
+    <Rate>19.99</Rate>
+    <CommitmentDate>2014-02-07</CommitmentDate>
+  </Postage>
+  <Postage CLASSID="63">
+    <MailService>Priority Mail Express 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Padded Flat Rate Envelope
+      Hold For Pickup
+    </MailService>
+    <Rate>19.99</Rate>
+    <CommitmentDate>2014-02-07</CommitmentDate>
+  </Postage>
+  <Postage CLASSID="1">
+    <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt;</MailService>
+    <Rate>5.80</Rate>
+  </Postage>
+  <Postage CLASSID="22">
+    <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Large Flat Rate Box</MailService>
+    <Rate>17.45</Rate>
+  </Postage>
+  <Postage CLASSID="17">
+    <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Medium Flat Rate Box
+    </MailService>
+    <Rate>12.35</Rate>
+  </Postage>
+  <Postage CLASSID="28">
+    <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Small Flat Rate Box</MailService>
+    <Rate>5.80</Rate>
+  </Postage>
+  <Postage CLASSID="16">
+    <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Flat Rate Envelope</MailService>
+    <Rate>5.60</Rate>
+  </Postage>
+  <Postage CLASSID="44">
+    <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Legal Flat Rate Envelope
+    </MailService>
+    <Rate>5.75</Rate>
+  </Postage>
+  <Postage CLASSID="29">
+    <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Padded Flat Rate Envelope
+    </MailService>
+    <Rate>5.95</Rate>
+  </Postage>
+  <Postage CLASSID="38">
+    <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Gift Card Flat Rate Envelope
+    </MailService>
+    <Rate>5.60</Rate>
+  </Postage>
+  <Postage CLASSID="42">
+    <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Small Flat Rate Envelope
+    </MailService>
+    <Rate>5.60</Rate>
+  </Postage>
+  <Postage CLASSID="40">
+    <MailService>Priority Mail 1-Day&amp;lt;sup&amp;gt;&amp;#8482;&amp;lt;/sup&amp;gt; Window Flat Rate Envelope
+    </MailService>
+    <Rate>5.60</Rate>
+  </Postage>
+  <Postage CLASSID="6">
+    <MailService>Media Mail&amp;lt;sup&amp;gt;&amp;#174;&amp;lt;/sup&amp;gt;</MailService>
+    <Rate>3.17</Rate>
+  </Postage>
+  <Postage CLASSID="7">
+    <MailService>Library Mail</MailService>
+    <Rate>3.02</Rate>
+  </Postage>
+</Package>
+</RateV3Response>
+        END DATA
