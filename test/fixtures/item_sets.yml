@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  item_id: 1
+  category_id: 1
+  department_id: 1
+  opposite_category_ids: MyString
+  opposite_department_ids: MyString
+  opposite_item_ids: MyString
+
+two:
+  item_id: 1
+  category_id: 1
+  department_id: 1
+  opposite_category_ids: MyString
+  opposite_department_ids: MyString
+  opposite_item_ids: MyString
