@@ -1,1 +1,1 @@
-if (!window.console) console = {log: function() {}};// this is the best
+if (!window.console) console = {log: function() {}};// begin develop branch
