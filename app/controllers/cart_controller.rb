@@ -174,14 +174,19 @@ def add_to_cart_singular
 							redirect_to  :controller => 'cart',  :action => 'index'
 end
 ############################################################################################################
+def  pe_comment
+            if params[:crest_id] and   params[:crest_id] != ""
+                        @pe_comment =  Item.find(  params[:crest_id].to_s[0..10] ).PictureName
+            else
+                         @pe_comment =  ""
+            end
+end
+
+############################################################################################################
 def add_to_cart_purchases_entry
 			logger.debug "begin add_to_cart_purchases_entry"
 
-      if params[:crest_id] and   params[:crest_id] != ""
-        @pe_comment =  Item.find(  params[:crest_id].to_s[0..10] ).PictureName
-      else
-        @pe_comment =  ""
-      end
+      pe_comment
 
 			purchases_entry = @purchase.purchases_entries.find(params[:purchases_entry_id])
 			if purchases_entry.symbiotic_item == true
@@ -214,7 +219,13 @@ def add_to_cart_combo
 								# below we are adding both a master and a slave item at once
 								@department = params[:department_id]
 								@department = @item.default_master_department_id  if !@department
-								@purchase.new_combo_symbiont(@item, @design, @quantity, @department, "", "")
+
+                pe_comment
+
+
+                # def new_combo_symbiont(item, design, quantity, department, pe_item_comment, pe_design_comment )
+
+                @purchase.new_combo_symbiont(@item, @design, @quantity, @department,@pe_comment ,@pe_comment )
 								flash[:notice] = 'Your item was added.'
 								if  referring_action.include?('cart')
 									flash.keep
@@ -231,7 +242,7 @@ def add_to_cart
                   redirect_to(:controller =>  "account",  :action => 'wholesale_only_website')  ;
   else
                   if params[:on_hold]
-                        session[:on_hold] = params[:on_hold]
+                                session[:on_hold] = params[:on_hold]
                  end
 
                   if params[:submitted_from_cart]
@@ -244,49 +255,82 @@ def add_to_cart
 
                     logger.debug "begin add_to_cart"
                     if params[:purchases_entry_id] == nil
-                          find_item(params)
-                          if @item
-                                if params[:purchases_entries]
-                                  ensure_positive_quantity(params[:purchases_entries][:QuantityOnOrder])
-                                else
-                                  ensure_positive_quantity('1')
-                                end
-                                start_purchase unless @purchase
-                                if fails_membership_requirement?(@item)
-                                      redirect_to  :controller => 'cart', :action => 'index'
-                                else
-                                        if @singular_item_customer == true   ################################ (wholesale pricelevel B and C customers)
-                                                add_to_cart_singular_item_customer
-                                        elsif  @item.category.category_class.item_type  == 'all_over_item'
+                                      find_item(params)
+                                      if @item
+                                                              if params[:purchases_entries]
+                                                                          ensure_positive_quantity(params[:purchases_entries][:QuantityOnOrder])
+                                                              else
+                                                                           ensure_positive_quantity('1')
+                                                              end
+                                                              start_purchase unless @purchase
+                                                              if fails_membership_requirement?(@item)
+                                                                                      redirect_to  :controller => 'cart', :action => 'index'
+                                                              else
+                                                                                    if @singular_item_customer == true   ################################ (wholesale pricelevel B and C customers)
+                                                                                                      add_to_cart_singular_item_customer
+                                                                                    elsif  @item.category.category_class.item_type  == 'all_over_item'
 
-                                                add_to_cart_singular_designer
+                                                                                                       add_to_cart_singular_designer
 
-                                        else
-                                          ## SECTION 3  (incomplete symbiont in progress, this will complete it with the param item if compatible)
-                                              if @incomplete_symbiont == true &&  params[:on_hold] != 'true'
-                                                    add_to_cart_incomplete_symbiont_not_on_hold
-                                              else
-                                                  if params[:add_combo] == '1'
-                                                        @design = Item.find params[:design_id]
-                                                        add_to_cart_combo
-                                                  else
-                                                        if @item.category.category_class.item_type  == 'master'
-                                                            add_to_cart_master
-                                                        elsif @item.category.category_class.item_type  == 'slave'
-                                                            add_to_cart_slave
-                                                        else
-                                                            add_to_cart_singular
-                                                        end
-                                                    end
-                                              end
-                                        end
-                                end
-                          else
-                              flash[:notice] = "Item not found."
-                              redirect_to  :controller => 'cart',  :action => 'index'
-                          end
+                                                                                    else
+                                                                                                  ## SECTION 3  (incomplete symbiont in progress, this will complete it with the param item if compatible)
+                                                                                                      if @incomplete_symbiont == true &&  params[:on_hold] != 'true'
+                                                                                                                        add_to_cart_incomplete_symbiont_not_on_hold
+                                                                                                      else
+                                                                                                                        if params[:add_combo] == '1'
+                                                                                                                                        if  params[:design_id]
+                                                                                                                                                              @design = Item.find params[:design_id]
+                                                                                                                                        else
+                                                                                                                                                                @design = Item.find params[:at_design]
+                                                                                                                                        end
+                                                                                                                                         if  params[:commit].downcase  == "choose"
+                                                                                                                                                                logger.debug "COMMIT DOWNCASE == choose.. add_to_cart_combo"
+                                                                                                                                                                 add_to_cart_combo
+                                                                                                                                         elsif params[:commit].downcase  == "change shirt"
+                                                                                                                                                                 logger.debug "COMMIT DOWNCASE IS change shirt.. ADD design TO CART AS NECESSARY"
+                                                                                                                                                                 if @item.category.category_class.item_type  == 'master'
+                                                                                                                                                                                          logger.debug "@item.category.category_class.item_type  == master. SWITCH @ITEM TO @DESIGN"
+                                                                                                                                                                                        @item = @design
+                                                                                                                                                                                        add_to_cart_slave
+                                                                                                                                                                 elsif @item.category.category_class.item_type  == 'slave'
+                                                                                                                                                                                        logger.debug "@item.category.category_class.item_type  == slave"
+                                                                                                                                                                                         add_to_cart_slave
+                                                                                                                                                                 else
+                                                                                                                                                                                         add_to_cart_singular
+                                                                                                                                                                 end
+                                                                                                                                         elsif params[:commit].downcase  == "change design"
+                                                                                                                                                                 logger.debug "COMMIT DOWNCASE IS change design.. ADD shirt TO CART AS NECESSARY"
+                                                                                                                                                                 if @item.category.category_class.item_type  == 'master'
+                                                                                                                                                                                         logger.debug "@item.category.category_class.item_type  == master. SWITCH @ITEM TO @DESIGN"
+                                                                                                                                                                                         add_to_cart_master
+                                                                                                                                                                 elsif @item.category.category_class.item_type  == 'slave'
+                                                                                                                                                                                         logger.debug "@item.category.category_class.item_type  == slave"
+                                                                                                                                                                                         @item = @design
+                                                                                                                                                                                         add_to_cart_master
+                                                                                                                                                                 else
+                                                                                                                                                                                           add_to_cart_singular
+                                                                                                                                                                 end
+                                                                                                                                         else
+                                                                                                                                                              no_choose_value
+                                                                                                                                          end
+                                                                                                                        else
+                                                                                                                                          if @item.category.category_class.item_type  == 'master'
+                                                                                                                                                        add_to_cart_master
+                                                                                                                                          elsif @item.category.category_class.item_type  == 'slave'
+                                                                                                                                                        add_to_cart_slave
+                                                                                                                                          else
+                                                                                                                                                        add_to_cart_singular
+                                                                                                                                          end
+                                                                                                                          end
+                                                                                                      end
+                                                                                    end
+                                                              end
+                                      else
+                                                        flash[:notice] = "Item not found."
+                                                        redirect_to  :controller => 'cart',  :action => 'index'
+                                      end
                     else
-                        add_to_cart_purchases_entry
+                                       add_to_cart_purchases_entry
                     end
    end
 		logger.debug "end add_to_cart"

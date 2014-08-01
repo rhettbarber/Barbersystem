@@ -1,35 +1,33 @@
 class ApplicationController < ActionController::Base
-protect_from_forgery
+  protect_from_forgery
 
-include AuthenticatedSystem
-include ArticlesInitializer
-include CacheableFlash
-include RubyRequirements
-include LogSystem
-include WebsiteStartup
-include UserStartup
-include CustomerStartup
-include SecurityIdentifier
-include Security
-include StartupOptimusPrime
-include ::SslRequirement
-include UserSessionStartup
-#include SimpleCaptcha::ControllerHelpers
-include StoreAdminCacheCleaner
-include StoreItemInitializer
-include StoreItemSymbiontInitializer
-include StorePurchase
-#include StoreRequirements
-include StoreAllOverShirts
-include RubyArray
-include WebsiteDirectingActions
+  include AuthenticatedSystem
+  include ArticlesInitializer
+  include CacheableFlash
+  include RubyRequirements
+  include LogSystem
+  include WebsiteStartup
+  include UserStartup
+  include CustomerStartup
+  include SecurityIdentifier
+  include Security
+  include StartupOptimusPrime
+  include ::SslRequirement
+  include UserSessionStartup
+  #include SimpleCaptcha::ControllerHelpers
+  include StoreAdminCacheCleaner
+  include StoreItemInitializer
+  include StoreItemSymbiontInitializer
+  include StorePurchase
+  #include StoreRequirements
+  include StoreAllOverShirts
+  include RubyArray
+  include WebsiteDirectingActions
 
-helper_method  :current_layout, :controller_and_action_name, :referring_action, :show_admin?, :firebug, :user_can?, :strip_path_to_domain, :admin?, :developer?, :ssl_required?, :customer_retail?, :customer_wholesale?, :customer_franchise?, :customer_preprint?, :customer_transfer?,:admin?,:cashier?, :manager?,  :logged_in?, :current_log_position, :ssl_or_admin?
+  helper_method  :current_layout, :controller_and_action_name, :referring_action, :show_admin?, :firebug, :user_can?, :strip_path_to_domain, :admin?, :developer?, :ssl_required?, :customer_retail?, :customer_wholesale?, :customer_franchise?, :customer_preprint?, :customer_transfer?,:admin?,:cashier?, :manager?,  :logged_in?, :current_log_position, :ssl_or_admin?
 
   before_filter :at_guides , :params_to_session, :set_start_time
-
   before_filter :before_filter
-
   after_filter :after_filter
 
 
@@ -42,12 +40,15 @@ helper_method  :current_layout, :controller_and_action_name, :referring_action, 
               logger.debug "##############################################"
               logger.debug "BEGIN prepare_combination_variables"
               if params[:crest_id] and  params[:crest_id] != ""
-                              logger.debug "crest_id found"
-                              @breast_print = true
+                                  logger.debug "crest_id found"
 
-                                      @breast_print =    Item.find(params[:crest_id])
-
-                              @breast_print_name =    @breast_print.PictureName
+                                  if  params[:crest_id] == '0'
+                                                          @breast_print_name =    'no_crest.png'
+                                  else
+                                                          @breast_print = true
+                                                          @breast_print =    Item.find(params[:crest_id])
+                                                          @breast_print_name =    @breast_print.PictureName
+                                   end
               else
                               if design.category.breast_print == '1' && item.category.breast_print == '1'
                                              if @purchases_entry

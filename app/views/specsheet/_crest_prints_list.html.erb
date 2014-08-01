@@ -26,16 +26,26 @@
      <% @already_show_cp_item_ids = Set.new %>
      <ul id="available_crest_prints" class="thumbnails" data-role="listview" >
        <li data-role="list-divider">Available crest prints</li>
+
        <% @main_design.applicable_crest_prints.each do |item| %>
-           <% @already_show_cp_item_ids.add( item.id ) %>
-           <% crest_image_url =  'http://cdn.dixieoutfitters.com/images/item_thumbnails/' +  item.ItemLookupCode + '.png'    %>
-           <li class="item_choice" style="list-style-type: none;">
-             <a href="#" class="acrest_print"  data-id="<%= item.id %>">
-               <%= image_tag( crest_image_url , :size => "100x100"   )%>
-               <h3> <%= item.ItemLookupCode %> - <%= item.Description %></h3>
-             </a>
-           </li>
+                           <% @already_show_cp_item_ids.add( item.id ) %>
+                           <% crest_image_url =  'http://cdn.dixieoutfitters.com/images/item_thumbnails/' +  item.ItemLookupCode + '.png'    %>
+                           <li class="item_choice" style="list-style-type: none;">
+                             <a href="#" class="acrest_print"  data-id="<%= item.id %>">
+                               <%= image_tag( crest_image_url , :size => "100x100"   )%>
+                               <h3> <%= item.ItemLookupCode %> - <%= item.Description %></h3>
+                             </a>
+                           </li>
        <% end %>
+                           <li class="item_choice" style="list-style-type: none;">
+                             <a href="#" class="acrest_print"  data-id="0">
+                               <% crest_image_url =  'http://cdn.dixieoutfitters.com/images/item_thumbnails/no_crest.jpg'    %>
+                               <%= image_tag( crest_image_url , :size => "100x100"   )%>
+                               <h3> No crest print</h3>
+                             </a>
+                           </li>
+
+
      </ul>
 
 

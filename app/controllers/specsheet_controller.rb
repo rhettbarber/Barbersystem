@@ -3,8 +3,8 @@ class SpecsheetController < ApplicationController
  #caches_action :index , :cache_path => Proc.new{ 'action/' + @specsheet_fragment_name }
 
 
-
-def update_specsheet_template
+          # when purchases_entry exists... set item back to 0 to make incomplete symbiote.
+def choose_a_different_shirt_style
 
 end
 
@@ -270,6 +270,7 @@ end
    @required_form_elements << 'button_choose'  unless @purchases_entry
    @required_form_elements << 'icc_collection_select'   if @item_class_components
    @required_form_elements << 'hidden_department_id_field'
+   @required_form_elements << 'hidden_add_combo_field'   if @item and @design
    if @item.category.use_generic_department == '1'
      @department = @item.department
      logger.debug "VIEW_DETAILS-SINGULAR DEPARMENT--SET BY---------------@department = @item.department"
