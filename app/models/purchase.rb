@@ -304,9 +304,9 @@ end
 ########################################################################################################
 ########################################################################################################
 ####### SYMBIONT AREA
-def new_combo_symbiont(item, design, quantity, department, pe_item_comment, pe_design_comment )  # master_department_id needs work or testing
+def new_combo_symbiont(item, design, quantity, department_id, pe_item_comment, pe_design_comment )  # master_department_id needs work or testing
                                               purchases_entry_slave =  PurchasesEntry.new
-                                              purchases_entry_slave.master_department_id  = '1' # item.category.category_class.slaves_opposite_master_default_department_id
+                                              purchases_entry_slave.master_department_id  = department_id  # item.category.category_class.slaves_opposite_master_default_department_id
                                               purchases_entry_slave.ItemLookupCode  = item.ItemLookupCode
                                               purchases_entry_slave.QuantityOnOrder = quantity
                                               purchases_entry_slave.on_hold = 0
@@ -332,7 +332,7 @@ def new_combo_symbiont(item, design, quantity, department, pe_item_comment, pe_d
                                                   purchases_entry_master =  PurchasesEntry.new
                                                   purchases_entry_master.on_hold  = 0
                                                   purchases_entry_master.ItemLookupCode  = design.ItemLookupCode
-                                                  purchases_entry_master.master_department_id  =  '1' # item.category.category_class.slaves_opposite_master_default_department_id
+                                                  purchases_entry_master.master_department_id  =  department_id  # item.category.category_class.slaves_opposite_master_default_department_id
                                                   purchases_entry_master.QuantityOnOrder = quantity
                                                   purchases_entry_master.QuantityRTD = 0
                                                   purchases_entry_master.DetailID = 0

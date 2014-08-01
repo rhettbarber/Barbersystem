@@ -24,6 +24,12 @@
 
 %>
 
+
+
+
+
+
+
 <% @product_background_image_name =  'http://cdn.dixieoutfitters.com/images/item_specsheets/' + @item.PictureName.gsub(".png", "").gsub(".jpg", "")  + '.jpg' %>
 <%   @back_design_image_name     =    '/images/item_specsheets/' + @back_design.PictureName        %>
 
@@ -95,6 +101,28 @@
 </style>
 
  </div>
+
+
+
+<%  if params[:side] == 'front' %>
+                <%= hidden_field_tag "what_side", "front" %>
+
+                <%  @temp_front_design_image_name = @front_design_image_name    %>
+
+                <%  @front_design_image_name = @back_design_image_name    %>
+
+                <%  @back_design_image_name = @temp_front_design_image_name  if @temp_front_design_image_name  %>
+
+
+<% else %>
+
+                <%= hidden_field_tag "what_side", "back" %>
+
+
+<% end %>
+
+
+
   <table style="margin-left:auto;margin-right:auto;">
 
     <tbody>
@@ -103,13 +131,8 @@
                             <div class="specsheet_table_sizer">
                                         <div class="specsheet_table_container">
 
-                                                          <% if @back_advanced_combination.default_side != "front" %>
-                                                                                            <div class="drag"  id="specsheet_table">  <%= render :partial => "specsheet/back_design_td" %> </div>
-                                                                                             <div class="drag"  id="specsheet_table_front"><%= render :partial => "specsheet/front_design_td" %> </div>
-                                                          <% else %>
                                                                                               <div class="drag"  id="specsheet_table_front"><%= render :partial => "specsheet/front_design_td" %> </div>
                                                                                               <div class="drag"  id="specsheet_table">  <%= render :partial => "specsheet/back_design_td" %> </div>
-                                                          <% end %>
                                          </div>
                               </div>
                     </td>
