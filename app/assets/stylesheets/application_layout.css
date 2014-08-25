@@ -1,4 +1,13 @@
-
+#throbber{
+    position:relative;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:auto;
+    margin-bottom:auto;
+}
+#throbber img {
+    height: 150px;
+}
 
 .the_options {
         background-color: lightyellow;

@@ -32,6 +32,25 @@ class ApplicationController < ActionController::Base
 
 
   ###########################################################################################################
+  def  at_side  #  moved to application_controller prepare_combination_variables
+                # BEGIN @side code - NOTE OVERRIDE
+                # BEGIN @side code - NOTE OVERRIDE
+                # BEGIN @side code - NOTE OVERRIDE
+                if @purchases_entry and @purchases_entry.Comment.size > 1
+                              @side = @purchases_entry.Comment.split("_")[0]
+                end
+                # PARAMS OVERRIDE PURCHASES_ENTRY COMMENT ABOVE
+                if params[:side] == 'front'
+                            @side = 'front'
+                elsif params[:side] == 'back'
+                            @side = 'back'
+                end
+
+                @side ||= 'back'
+
+                # END  @side code - NOTE OVERRIDE
+  end
+  ###########################################################################################################
   def prepare_combination_variables(item,design)
               logger.debug "##############################################"
               logger.debug "##############################################"
@@ -42,7 +61,8 @@ class ApplicationController < ActionController::Base
               if params[:crest_id] and  params[:crest_id] != ""
                                   logger.debug "crest_id found"
 
-                                  if  params[:crest_id] == '0'
+                                  if  !params[:crest_id] or params[:crest_id] == '0'
+                                                          @breast_print = false
                                                           @breast_print_name =    'no_crest.png'
                                   else
                                                           @breast_print = true
@@ -50,7 +70,7 @@ class ApplicationController < ActionController::Base
                                                           @breast_print_name =    @breast_print.PictureName
                                    end
               else
-                              if design.category.breast_print == '1' && item.category.breast_print == '1'
+                              # if design.category.breast_print == '1' && item.category.breast_print == '1'
                                              if @purchases_entry
                                                                    logger.debug "CREST PRINT ATTACHED TO PURCHASES ENTRY"
 
@@ -59,19 +79,20 @@ class ApplicationController < ActionController::Base
 
                                                                    if @purchases_entry_slave
                                                                                 logger.warn "%%%%%%%%% @purchases_entry_slave    @@@@@@@@@@@@@@@"
-                                                                                logger.warn "%%%%%%%%% @purchases_entry_slave.Comment :     @@@@@@@@@@@@@@@"  + @purchases_entry_slave.Comment
+                                                                                logger.warn "%%%%%%%%% @purchases_entry_slave.Comment :     @@@@@@@@@@@@@@@ "  + @purchases_entry_slave.Comment
                                                                                 if @purchases_entry_slave.Comment.size > 1
-                                                                                                                            @breast_print_name = @purchases_entry_slave.Comment
+                                                                                                                            @breast_print_name = @purchases_entry_slave.Comment.split("_")[1]
                                                                                 end
                                                                    end
                                                                     if @purchases_entry_master
                                                                                 logger.warn "%%%%%%%%% @purchases_entry_master    @@@@@@@@@@@@@@@"
-                                                                                logger.warn "%%%%%%%%% @purchases_entry_master.Comment    @@@@@@@@@@@@@@@"  + @purchases_entry_master.Comment
+                                                                                logger.warn "%%%%%%%%% @purchases_entry_master.Comment    @@@@@@@@@@@@@@@ "  + @purchases_entry_master.Comment
                                                                                 if  @purchases_entry_master.Comment.size > 1
-                                                                                                        @breast_print_name = @purchases_entry_master.Comment
+                                                                                                        @breast_print_name = @purchases_entry_master.Comment.split("_")[1]
                                                                                 end
                                                                     end
 
+                                                                   logger.warn "%%%%%%%%% @breast_print_name:"  +  @breast_print_name.to_s
                                                                    @breast_print =   Item.find_by_PictureName @breast_print_name
 
                                             else
@@ -84,7 +105,7 @@ class ApplicationController < ActionController::Base
                                             else
                                                                   @breast_print_name =    @breast_print.item.PictureName    if @breast_print
                                             end
-                              end
+                              # end
               end
 
               logger.debug "###############################################"

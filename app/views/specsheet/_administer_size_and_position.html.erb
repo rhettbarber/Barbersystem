@@ -1,10 +1,7 @@
 <style type="text/css">
-
     .ui-content .ui-listview, .ui-panel-inner > .ui-listview {
         margin:0px;
     }
-
-
  </style>
 
 
@@ -12,21 +9,13 @@
 
 <div class="specsheet_admin" style="background-color: yellow;display:none;float: left;">
 
-
-
-
-
-
-
-
-
               <div id="administer_choices" data-role="listview" style="display:inline-block;width:100%;border-bottom:3px solid black;border-top:3px solid black;">
                             <!--<%# if @back_design %>-->
                            <!--<li> <a href="/specsheet/admin_crest_prints_list/<%#= @back_design.id %>" data-rel="dialog" class="ui-btn">Crest  prints</a> </li>-->
                            <!--<%# end %>-->
                             <li><a href="#" class="ui-btn" onclick="$('#administer_size_and_position_item').toggle();">Item</a></li>
                             <%  if @back_advanced_combination %>
-                            <li><a href="#" class="ui-btn" onclick="$('#administer_size_and_position_back').toggle();">Main Design</a></li>
+                            <li><a href="#" class="ui-btn" onclick="$('#administer_size_and_position_back').toggle();">Back Design</a></li>
                             <% end %>
                             <%  if @front_advanced_combination %>
                                 <li><a href="#" class="ui-btn" onclick="$('#administer_size_and_position_front').toggle();">Front  Design</a></li>
@@ -71,6 +60,7 @@
                         <div style="float:left;"> <%= select_tag( :back_design_number_of_sides,  options_for_select([['One side', 1 ], ['Two sides', 2 ]],  @item_advanced_combination.number_of_sides   )  ) %></div>
                         <% end %>
                         <div style="float:left;"> <%= select_tag( :back_design_default_side,  options_for_select([['Default on back', 'back'], ['Default on front', 'front']] ,@back_advanced_combination.default_side   )  ) %></div>
+                        <div style="float:left;"> <%= select_tag( :back_design_verified_correct,  options_for_select([['Unverified alignment', 0 ], ['Verified alignment',  true  ]],  @back_advanced_combination.verified_correct )  ) %></div>
                           <%= hidden_field_tag 'back_advanced_combination_id', @back_advanced_combination.id   if @back_advanced_combination  %>
                         <div style="width:300px;display: inline-block;">
                           <label for="back_slider" style="display: none;">Input slider:</label>
@@ -94,13 +84,14 @@
                                         <div style="float:left;"> <%= select_tag( :specsheet_type_id,  options_for_select([['Legacy specsheet', '1'], ['Latest specsheet', '2']],  @front_advanced_combination.specsheet_type_id )  ) %></div>
                                         <div style="float:left;"> <%= select_tag( :front_design_number_of_sides,  options_for_select([['One side', 1 ], ['Two sides', 2 ]],  @item_advanced_combination.number_of_sides   )  ) %></div>
                                         <div style="float:left;"> <%= select_tag( :front_design_default_side,  options_for_select([['Default on front', 'front'], ['Default on front', 'front']] ,@front_advanced_combination.default_side   )  ) %></div>
+
                         <% end %>
                         <%= hidden_field_tag 'front_advanced_combination_id', @front_advanced_combination.id   if @front_advanced_combination  %>
                         <div style="width:300px;display: inline-block;">
                           <label for="front_slider" style="display: none;">Input slider:</label>
                           <div id="div-front_slider"> <input type="range" name="front_slider" id="front_slider" value="0" min="-40" max="40" /> </div>
                         </div>
-
+                        <div style="float:left;"> <%= select_tag( :front_design_verified_correct,  options_for_select([['Unverified alignment', 0 ], ['Verified alignment',  true  ]],  @front_advanced_combination.verified_correct )  ) %></div>
                         <a href="#"  id="submit_size_and_position_front" class="ui-btn">Update front design</a>
       </div>
   <% end %>
@@ -110,11 +101,14 @@
 </div>
 
 
+  @side: <%= @side  %><br><br>
   @item: <%= @item.inspect %><br><br>
+  @item.item_class_component.item_class: <%= @item.item_class_component.item_class.inspect  if @item and @item.item_class_component   %><br><br>
   @design: <%= @design.inspect %><br><br>
   @breast_print<%= @breast_print %><br> <br>
   @back_advanced_combination: <%= @back_advanced_combination.inspect  %><br><br>
   @front_advanced_combination: <%= @front_advanced_combination.inspect  %><br><br>
+  @item_advanced_combination: <%= @item_advanced_combination.inspect  %><br><br>
 
 
 
@@ -135,7 +129,7 @@
 
 
 </div>
-<%= link_to "a", "#",:onclick => "$('.specsheet_admin').toggle();" %>
+<%= link_to "a", "#",:onclick => "watchForDragging(); $('.specsheet_admin').toggle();" %>
 
 
 

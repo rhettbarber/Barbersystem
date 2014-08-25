@@ -1,0 +1,23 @@
+--GO TO PRIMARY SERVER
+--Create a login on BS_PRIMARY_login for BS_MIRROR_login.
+USE master;
+CREATE LOGIN BS_MIRROR_login WITH PASSWORD = 'MIRROPASS77';
+GO
+
+--Create a user for that login.
+CREATE USER BS_MIRROR_user FOR LOGIN BS_MIRROR_login;
+GO
+
+
+--Associate the certificate with the user.
+CREATE CERTIFICATE BS_MIRROR_cert
+   AUTHORIZATION BS_MIRROR_user
+   FROM FILE = 'D:\CURRENT_DATAFILE\BS_MIRROR_cert.cer'
+GO
+
+
+--Grant CONNECT permission on the login for the remote mirroring endpoint.
+GRANT CONNECT ON ENDPOINT::BS_PRIMARY_ENDPOINT TO [BS_MIRROR_login];
+GO
+
+

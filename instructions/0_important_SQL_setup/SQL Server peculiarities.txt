@@ -1,0 +1,5 @@
+Warning Message:
+
+Saving changes is not permitted. The changes you have made require the following tables to be dropped and re-created. You have either made changes to a table that can't be re-created or enabled the option Prevent saving changes that require the table to be re-created.
+
+This is by design and can be quickly fixed in Management Studio by unchecking a property. To fix this in Management Studio, go to Tools -> Options then go to the Designer Page and uncheck "Prevent saving changes that require table re-creation".

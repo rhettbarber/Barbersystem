@@ -1,0 +1,88 @@
+
+instsrv 1000_dixieoutfitters  "C:\Program Files (x86)\Windows Resource Kits\Tools\srvany.exe"
+instsrv 1001_dixieoutfitters  "C:\Program Files (x86)\Windows Resource Kits\Tools\srvany.exe"
+instsrv 1002_dixieoutfitters  "C:\Program Files (x86)\Windows Resource Kits\Tools\srvany.exe"
+
+instsrv 2000_barber  "C:\Program Files (x86)\Windows Resource Kits\Tools\srvany.exe"
+instsrv 2001_barber  "C:\Program Files (x86)\Windows Resource Kits\Tools\srvany.exe"
+instsrv 2002_barber  "C:\Program Files (x86)\Windows Resource Kits\Tools\srvany.exe"
+instsrv 2003_barber  "C:\Program Files (x86)\Windows Resource Kits\Tools\srvany.exe"
+
+
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\service name
+
+AppDirectory
+C:\Users\Rhett Barber\Rails\ThreeTwoThreeDevelopment
+
+Application
+C:\Ruby193Rails3StableProduction\Ruby1.9.3\bin\ruby.exe
+
+AppParameters
+C:\Ruby193Rails3StableProduction\Ruby1.9.3\bin\thin start -e production  -p 1000
+
+
+
+instsrv 7777_thin_barbersecurity  "C:\Program Files (x86)\Windows Resource Kits\Tools\srvany.exe"
+
+sc create  "Memcached11211" binPath= "c:\memcached\memcached.exe -d runservice -p 11211 -m 200"  DisplayName= "Memcached11211" start= auto
+sc create  "Memcached11212" binPath= "c:\memcached\memcached.exe -d runservice -p 11212 -m 200"  DisplayName= "Memcached11212" start= auto
+sc create  "Memcached11213" binPath= "c:\memcached\memcached.exe -d runservice -p 11213 -m 200"  DisplayName= "Memcached11213" start= auto
+sc create  "Memcached11214" binPath= "c:\memcached\memcached.exe -d runservice -p 11214 -m 200"  DisplayName= "Memcached11214" start= auto
+sc create  "Memcached11215" binPath= "c:\memcached\memcached.exe -d runservice -p 11215 -m 200"  DisplayName= "Memcached11215" start= auto
+
+sc create  "Memcached11216" binPath= "c:\memcached\memcached.exe -d runservice -p 11216 -m 200"  DisplayName= "Memcached11216" start= auto
+sc create  "Memcached11217" binPath= "c:\memcached\memcached.exe -d runservice -p 11217 -m 200"  DisplayName= "Memcached11217" start= auto
+sc create  "Memcached11218" binPath= "c:\memcached\memcached.exe -d runservice -p 11218 -m 200"  DisplayName= "Memcached11218" start= auto
+sc create  "Memcached11219" binPath= "c:\memcached\memcached.exe -d runservice -p 11219 -m 200"  DisplayName= "Memcached11219" start= auto
+sc create  "Memcached11220" binPath= "c:\memcached\memcached.exe -d runservice -p 11220 -m 200"  DisplayName= "Memcached11220" start= auto
+sc create  "Memcached11221" binPath= "c:\memcached\memcached.exe -d runservice -p 11221 -m 200"  DisplayName= "Memcached11221" start= auto
+sc create  "Memcached11222" binPath= "c:\memcached\memcached.exe -d runservice -p 11222 -m 200"  DisplayName= "Memcached11222" start= auto
+
+
+LOCAL IP: 206.82.83.129
+
+74.208.98.150	available	u15309677.onlinehome-server.com  - dixieoutfitters.net
+74.208.104.110	available	barbersystem.com
+74.208.104.111	available	christianoutfitters.org
+74.208.104.127	available	allamericanoutfitters.com
+
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+SQL SERVER BACKUP TO LOCAL DRIVE... MAINTENCE PLAN
+SqlServerAgent is MaxPain7
+You must give shared folder full access
+You must create accounts on BOTH server and client computer receiving the backup
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+SERVER NAMES: 
+U15259091\U15259091
+74.208.44.80\U15259091
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+firewall exceptions:
+SCOPE: 206.82.83.129/255.255.255.255
+22
+C:\Apache2\bin\httpd.exe
+C:\ruby\bin\ruby.exe
+C:\Program Files\Microsoft SQL Server\90\Shared\sqlbrowser.exe
+C:\Program Files\Microsoft SQL Server\MSSQL.1\MSSQL\Binn\sqlservr.exe
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+PACKET-FILTER-(IMPORT STANDARD BARBERSYSTEM IPSEC FILTER)
+open http/s in and out
+dns lookup(tcp)
+1433 should have 8 entries, UDP AND TCP source ANY and destination 1434 and 1433-mirrored
+uncheck block all
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+APACHE:
+httpd.exe -k install
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+install mongrel_service:
+mongrel_rails service::install -N dixieoutfitters_1000 -c "C:\Documents and Settings\Administrator\My Documents\rails\barbersystem" -p 1000 -e production
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+MEMCACHED:
+   1. Unzip the binaries in your desired directory (eg. c:\memcached)
+   2. Install the service using the command: 'c:\memcached\memcached.exe -d install' from either the command line
+   3. Start the server from the Microsoft Management Console or by running the following command: 'c:\memcached\memcached.exe -d start'
+   4. Use the server, by default listening to port 11211
+Use 'memcached.exe -h' for extra help and command line server
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 

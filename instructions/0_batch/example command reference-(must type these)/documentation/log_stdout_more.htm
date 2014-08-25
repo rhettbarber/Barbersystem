@@ -1,0 +1,582 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>the { buckblogs :here }: More on watching ActiveRecord</title>
+
+
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link href="log_stdout_more_files/base.css" rel="stylesheet" type="text/css">
+  <link href="log_stdout_more_files/syntax.css" rel="stylesheet" type="text/css">
+  <script src="log_stdout_more_files/prototype.js" type="text/javascript"></script>
+  <script src="log_stdout_more_files/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _uacct = "UA-718320-1";
+    urchinTracker();
+  </script>
+  <link href="http://weblog.jamisbuck.org/feed/atom.xml" rel="alternate" type="application/atom+xml"></head><body>
+<div id="header">
+  <h1><a href="http://weblog.jamisbuck.org/">the { buckblogs :here }</a></h1>
+  <h2>assorted_ramblings.by JamisBuck</h2>
+</div>
+
+<div id="content">
+  <div class="post">
+    <div class="header">
+      <h1>More on watching ActiveRecord</h1>
+      <p class="auth">
+         Posted by Jamis 
+
+         on January 31, 2007 @ 12:50 PM
+
+       </p>
+    </div>
+    <div class="body">
+       
+      <a name="article_body"></a>
+       <p>Remember <a href="http://weblog.jamisbuck.org/2007/1/8/watching-activerecord-do-it-s-thing">Watching ActiveRecord Do Its Thing</a>, where I talked about redirecting the log to <span class="caps">STDOUT</span>
+when using the console? I’ve got a new trick based on this that I’ve
+found quite helpful. Simply put the following snippet in your <code>config/environment.rb</code>:</p>
+
+
+<table class="CodeRay"><tbody><tr>
+  <td class="line_numbers" title="click to toggle" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"><pre>1<tt>
+</tt>2<tt>
+</tt>3<tt>
+</tt>4<tt>
+</tt></pre></td>
+  <td class="code"><pre ondblclick="with (this.style) { overflow = (overflow == 'auto' || overflow == '') ? 'visible' : 'auto' }"><span class="r">def</span> <span class="fu">log_to</span>(stream)<tt>
+</tt>  <span class="co">ActiveRecord</span>::<span class="co">Base</span>.logger = <span class="co">Logger</span>.new(stream)<tt>
+</tt>  <span class="co">ActiveRecord</span>::<span class="co">Base</span>.clear_active_connections!<tt>
+</tt><span class="r">end</span><tt>
+</tt></pre></td>
+</tr></tbody></table>
+
+
+	<p>Now, when you’re at the console, you can just do:</p>
+
+
+<table class="CodeRay"><tbody><tr>
+  <td class="line_numbers" title="click to toggle" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"><pre>1<tt>
+</tt>2<tt>
+</tt>3<tt>
+</tt>4<tt>
+</tt><strong>5</strong><tt>
+</tt>6<tt>
+</tt></pre></td>
+  <td class="code"><pre ondblclick="with (this.style) { overflow = (overflow == 'auto' || overflow == '') ? 'visible' : 'auto' }">&gt;&gt; log_to <span class="co">STDOUT</span><tt>
+</tt>=&gt; ...<tt>
+</tt>&gt;&gt; <span class="co">Post</span>.find(<span class="sy">:first</span>)<tt>
+</tt>  <span class="co">Post</span> <span class="co">Load</span> (<span class="fl">0.000138</span>)   <span class="co">SELECT</span> * <span class="co">FROM</span> posts <span class="co">LIMIT</span> <span class="i">1</span><tt>
+</tt>=&gt; <span class="c">#&lt;Post:0x1234 ...&gt;</span><tt>
+</tt>&gt;&gt;<tt>
+</tt></pre></td>
+</tr></tbody></table>
+
+
+	<p>The best part is, by clearing the active
+connections after setting the logger, you can change the logger at any
+time, even after you’ve made any number of find calls.</p>
+
+
+	<p><em>And</em>, you can pass your own stream objects into it:</p>
+
+
+<table class="CodeRay"><tbody><tr>
+  <td class="line_numbers" title="click to toggle" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"><pre>1<tt>
+</tt>2<tt>
+</tt>3<tt>
+</tt>4<tt>
+</tt><strong>5</strong><tt>
+</tt>6<tt>
+</tt>7<tt>
+</tt>8<tt>
+</tt>9<tt>
+</tt></pre></td>
+  <td class="code"><pre ondblclick="with (this.style) { overflow = (overflow == 'auto' || overflow == '') ? 'visible' : 'auto' }">&gt;&gt; buffer = <span class="co">StringIO</span>.new<tt>
+</tt>=&gt; ...<tt>
+</tt>&gt;&gt; log_to buffer<tt>
+</tt>=&gt; ...<tt>
+</tt>&gt;&gt; <span class="co">Post</span>.find(<span class="sy">:first</span>)<tt>
+</tt>=&gt; <span class="c">#&lt;Post:0x1234 ...&gt;</span><tt>
+</tt>&gt;&gt; p buffer.string<tt>
+</tt>=&gt; <span class="s"><span class="dl">"</span><span class="k">  </span><span class="ch">\e</span><span class="k">[4;35;1mPost Load (0.000138)</span><span class="ch">\e</span><span class="k">[0m   </span><span class="ch">\e</span><span class="k">[0mSELECT * FROM posts LIMIT 1</span><span class="ch">\e</span><span class="k">[0m</span><span class="ch">\n</span><span class="dl">"</span></span><tt>
+</tt>&gt;&gt;<tt>
+</tt></pre></td>
+</tr></tbody></table>
+
+
+	<p>Why would you want to do this? Well, for
+one thing, you can use log_to in your tests, and make sure that
+sensitive things like credit card numbers aren’t being written to your
+logs. Or, you can use this in tests to make sure that your latest
+optimization really does reduce the number of queries made to the
+database.</p>
+
+
+	<p>Good fun!</p>
+    </div>
+
+    <p class="meta">
+      
+        Posted in <a class="selected" href="http://weblog.jamisbuck.org/tips-and-tricks">Tips &amp; Tricks</a> 
+      
+    </p>
+
+    <div class="comments">
+      <a name="comments" id="comments"></a>
+
+      <div class="header">
+        <h1>Comments</h1>
+        <h2>Have something to add? <a href="#respond">Click here to leave a comment</a>.</h2>
+      </div>
+
+      <div class="commentlist">
+        
+        <div id="comment-1579" class="comment">
+          <a name="comment-1579"></a> 
+
+          <div class="date">
+            <span class="day">31</span>
+            <span class="month">Jan</span>
+            <span class="year">2007</span>
+          </div>
+
+          <h3>1. Kevin Marsh said...</h3>
+          <div class="body"><p>Pretty
+clever hack, and it made me realize that AR alternates syntax
+highlighting. Every other query is either pink or cyan. Never really
+thought about it before…</p></div>
+        </div>
+        
+        <div id="comment-1580" class="comment">
+          <a name="comment-1580"></a> 
+
+          <h3>2. Erik Kastner said...</h3>
+          <div class="body"><p>Amazingly cool hack. Thank you.</p>
+
+
+	<p>Any chance of getting log_to into core? :)</p></div>
+        </div>
+        
+        <div id="comment-1581" class="comment">
+          <a name="comment-1581"></a> 
+
+          <h3>3. John said...</h3>
+          <div class="body"><p>That’s a really nice trick!</p></div>
+        </div>
+        
+        <div id="comment-1582" class="comment">
+          <a name="comment-1582"></a> 
+
+          <h3>4. UnderpantsGnome said...</h3>
+          <div class="body"><p>Jamis- Very nice. Though sometimes you may not want color (it could happen, I guess), here’s a slight variation.</p>
+
+
+<pre><code>
+def log_to(stream, colorize=true)
+  ActiveRecord::Base.logger = Logger.new(stream)
+  ActiveRecord::Base.clear_active_connections!
+  ActiveRecord::Base.colorize_logging = colorize
+end
+</code></pre>
+
+	<p>Michael-</p></div>
+        </div>
+        
+        <div id="comment-1583" class="comment">
+          <a name="comment-1583"></a> 
+
+          <h3>5. Jamis said...</h3>
+          <div class="body"><p>Nice variation, UnderpantsGnome. I’m adding that to my own local copy, since I personally hate the colorized logging. :)</p></div>
+        </div>
+        
+        <div id="comment-1584" class="comment">
+          <a name="comment-1584"></a> 
+
+          <div class="date">
+            <span class="day">01</span>
+            <span class="month">Feb</span>
+            <span class="year">2007</span>
+          </div>
+
+          <h3>6. Kevin Barnes said...</h3>
+          <div class="body"><p>Building on UG’s, default the stream to <span class="caps">STDOUT</span> in the method definition, since that’s probably what you want most of the time.</p>
+
+
+	<p>Jamis, as always, great stuff!</p></div>
+        </div>
+        
+        <div id="comment-1587" class="comment">
+          <a name="comment-1587"></a> 
+
+          <h3>7. mathie said...</h3>
+          <div class="body"><p>Nice!  That’s another snippet added to my `~/.irbrc`.</p></div>
+        </div>
+        
+        <div id="comment-1665" class="comment">
+          <a name="comment-1665"></a> 
+
+          <div class="date">
+            <span class="day">05</span>
+            <span class="month">Feb</span>
+            <span class="year">2007</span>
+          </div>
+
+          <h3>8. Tim Lucas said...</h3>
+          <div class="body"><p>nice! Might give this a go to ensure eager loading is working from tests.</p></div>
+        </div>
+        
+      </div>
+
+    </div>
+  
+  <div class="comment-box">
+
+  </div>
+</div>
+
+</div>
+
+<div id="sidebar">
+  <div class="item">
+    <h1>Search</h1>
+    <div class="content">
+      <form action="/search" id="sform" method="get">
+        <input id="q" name="q" value="" size="15" type="text">
+      </form>
+    </div>
+  </div>
+
+  <div class="item">
+    <h1>About</h1>
+    <div class="content">
+        <strong>Jamis Buck</strong> is a software developer who has the good
+        fortune to be both employed by <a href="http://37signals.com/">37signals</a> <em>and</em>
+        counted among those who maintain the <a href="http://www.rubyonrails.com/">Ruby on Rails</a> web
+        framework. Life is good! If you're feeling particularly nosy, you can
+        <a href="http://family.jamisbuck.org/">follow his family blog</a>.
+    </div>
+  </div>
+
+<div class="item">
+<h1>Advertisements</h1>
+<div class="content">
+<a href="http://peepcode.com/" target="_blank"><img src="log_stdout_more_files/peepcode-screencasts.png" alt="Ad: PeepCode Screencasts" border="0" height="200" width="200"></a>
+</div>
+</div>
+
+  <div class="item">
+    <h1>Sections</h1>
+    <div class="content">
+      <table class="archives">
+
+        <tbody><tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/">Home</a></td>
+          <td class="count">262</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/announcements">Announcements</a></td>
+          <td class="count">34</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/essays-and-rants">Essays and Rants</a></td>
+          <td class="count">24</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/under-the-hood">Under the Hood</a></td>
+          <td class="count">17</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/tips-and-tricks">Tips &amp; Tricks</a></td>
+          <td class="count">54</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/spotlight">Spotlight</a></td>
+          <td class="count">5</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/reviews">Reviews</a></td>
+          <td class="count">20</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/redirect">Redirect</a></td>
+          <td class="count">10</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/projects">Projects</a></td>
+          <td class="count">34</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/life">Life</a></td>
+          <td class="count">22</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/metablog">Metablog</a></td>
+          <td class="count">9</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/odds-and-ends">Odds &amp; Ends</a></td>
+          <td class="count">32</td>
+        </tr>
+
+      </tbody></table>
+    </div>
+  </div>
+
+  <div class="item">
+    <h1>Archives</h1>
+    <div class="content">
+      <table class="archives">
+
+        <tbody><tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2007/9">September 2007</a></td>
+          <td class="count">1</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2007/8">August 2007</a></td>
+          <td class="count">2</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2007/7">July 2007</a></td>
+          <td class="count">3</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2007/6">June 2007</a></td>
+          <td class="count">5</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2007/5">May 2007</a></td>
+          <td class="count">4</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2007/4">April 2007</a></td>
+          <td class="count">3</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2007/3">March 2007</a></td>
+          <td class="count">4</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2007/2">February 2007</a></td>
+          <td class="count">14</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2007/1">January 2007</a></td>
+          <td class="count">27</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2006/12">December 2006</a></td>
+          <td class="count">1</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2006/11">November 2006</a></td>
+          <td class="count">9</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2006/10">October 2006</a></td>
+          <td class="count">15</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2006/9">September 2006</a></td>
+          <td class="count">11</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2006/8">August 2006</a></td>
+          <td class="count">3</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2006/5">May 2006</a></td>
+          <td class="count">1</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2006/4">April 2006</a></td>
+          <td class="count">1</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2006/3">March 2006</a></td>
+          <td class="count">7</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2006/2">February 2006</a></td>
+          <td class="count">2</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2006/1">January 2006</a></td>
+          <td class="count">5</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2005/12">December 2005</a></td>
+          <td class="count">10</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2005/11">November 2005</a></td>
+          <td class="count">4</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2005/10">October 2005</a></td>
+          <td class="count">5</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2005/9">September 2005</a></td>
+          <td class="count">2</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2005/8">August 2005</a></td>
+          <td class="count">5</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2005/7">July 2005</a></td>
+          <td class="count">4</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2005/6">June 2005</a></td>
+          <td class="count">2</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2005/5">May 2005</a></td>
+          <td class="count">8</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2005/4">April 2005</a></td>
+          <td class="count">3</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2005/3">March 2005</a></td>
+          <td class="count">7</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2005/2">February 2005</a></td>
+          <td class="count">7</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2005/1">January 2005</a></td>
+          <td class="count">7</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2004/12">December 2004</a></td>
+          <td class="count">4</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2004/11">November 2004</a></td>
+          <td class="count">8</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2004/10">October 2004</a></td>
+          <td class="count">15</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2004/9">September 2004</a></td>
+          <td class="count">9</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2004/6">June 2004</a></td>
+          <td class="count">2</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2004/5">May 2004</a></td>
+          <td class="count">3</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2004/4">April 2004</a></td>
+          <td class="count">7</td>
+        </tr>
+
+        <tr class="odd">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2004/3">March 2004</a></td>
+          <td class="count">23</td>
+        </tr>
+
+        <tr class="even">
+          <td class="date"><a href="http://weblog.jamisbuck.org/archives/2004/2">February 2004</a></td>
+          <td class="count">9</td>
+        </tr>
+
+      </tbody></table>
+    </div>
+  </div>
+
+  <div class="item">
+    <h1>License</h1>
+    <div class="content">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="log_stdout_more_files/somerights20.png"></a>
+<br><br>
+<small>This work is licensed under a<br>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/2.5/">Creative Commons Attribution-NonCommercial-ShareAlike 2.5  License</a>.</small><!--/Creative Commons License--><!-- <rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<Work rdf:about="">
+		<license rdf:resource="http://creativecommons.org/licenses/by-nc-sa/2.5/" />
+	<dc:date>2006</dc:date>
+	<dc:creator><Agent><dc:title>Jamis Buck</dc:title></Agent></dc:creator>
+	<dc:rights><Agent><dc:title>Jamis Buck</dc:title></Agent></dc:rights>
+	<dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" />
+	<dc:source rdf:resource="http://weblog.jamisbuck.org" />
+	</Work>
+	<License rdf:about="http://creativecommons.org/licenses/by-nc-sa/2.5/"><permits rdf:resource="http://web.resource.org/cc/Reproduction"/><permits rdf:resource="http://web.resource.org/cc/Distribution"/><requires rdf:resource="http://web.resource.org/cc/Notice"/><requires rdf:resource="http://web.resource.org/cc/Attribution"/><prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"/><permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/><requires rdf:resource="http://web.resource.org/cc/ShareAlike"/></License></rdf:RDF> -->
+    </div>
+  </div>
+
+  <div class="item">
+    <h1>Syndicate</h1>
+    <div class="content">
+      <a href="http://feeds.feedburner.com/buckblog"><img src="log_stdout_more_files/buckblog.gif" style="border: 0pt none ;" alt="" height="26" width="88"></a>
+    </div>
+  </div>
+
+</div>
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" id="paypal-form">
+  <input name="cmd" value="_xclick" type="hidden">
+  <input name="business" value="jamis@jamisbuck.org" type="hidden">
+  <input id="paypal-item-name" name="item_name" value="Donation" type="hidden">
+  <input name="no_note" value="0" type="hidden">
+  <input name="currency_code" value="USD" type="hidden">
+  <input name="tax" value="0" type="hidden">
+</form>
+
+</body></html>

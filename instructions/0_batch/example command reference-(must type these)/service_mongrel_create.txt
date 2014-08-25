@@ -1,0 +1,1 @@
+mongrel_rails service::install -N barbersystem_1001  -p 1001

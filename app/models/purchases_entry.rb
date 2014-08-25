@@ -206,8 +206,8 @@ def complete_symbiote(item,master_department, pe_comment)
 end   
     
  def masters_department_letter_section_code
-        dep = Department.find(self.master_department_id)
-        dep.letter_section_code
+          dep = Department.find(self.master_department_id)
+          dep.letter_section_code
  end
  
   def potential_slave_decides_item_class_components(design) 
@@ -220,11 +220,18 @@ end
  end
 
   def slaves_item_class_components_decision
-        if  self.item.opacity_letter == 'o'
-                 self.opposite_entry.item.item_class_component.item_class.item_class_components
-        else
-                   self.opposite_entry.item.item_class_component.item_class.light_components_only
-        end
+                 iccs = Set.new
+                 self.opposite_entry.item.item_class_component.item_class.item_class_components.each do | icc |
+                                if icc.item
+                                                if icc.item.WebItem == true
+                                                            if  !icc.item.Inactive
+                                                                 iccs.add( icc)
+                                                            end
+                                                end
+                                  end
+
+                 end
+           return iccs
  end
 
  def slaves_department_decision

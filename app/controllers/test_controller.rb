@@ -1,6 +1,6 @@
 class TestController < ApplicationController
 
-  #before_filter  :initialize_variables
+  before_filter  :initialize_variables
 before_filter :redirect_unless_admin
 
   skip_before_filter :verify_authenticity_token, :only => [:form_action ]

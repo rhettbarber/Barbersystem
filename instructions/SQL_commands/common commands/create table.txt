@@ -1,0 +1,87 @@
+USE barbersystem_testing;
+CREATE TABLE [dbo].[a_tester_first]
+(
+ID INT NOT NULL IDENTITY(1,1) PRIMARY KEY
+[TransactionNumber] [int],
+[Name] VARCHAR(50)
+)
+GO
+
+-------------------------------------------------------
+USE barbersystem_testing;
+CREATE TABLE [dbo].[a_tester_second]
+(
+ID INT,
+[RecallID] [int],
+[Name] VARCHAR(50),
+[source_id] [int]
+)
+GO
+
+--------------------------------------------------------
+USE barbersystem_testing;
+DROP TABLE [dbo].[a_tester_second]
+--------------------------------------------------------
+USE barbersystem_testing
+IF EXISTS (SELECT name FROM sysobjects
+      WHERE name = 'source_id_from_orders_to_transactions' AND type = 'TR')
+   DROP TRIGGER source_id_from_orders_to_transactions
+GO
+CREATE TRIGGER source_id_from_orders_to_transactions
+ON [a_tester_second]
+FOR INSERT
+AS
+/*  */
+
+DECLARE @source_id tinyint
+
+DECLARE @row_to_modify tinyint
+
+SELECT @row_to_modify = RecallID 
+FROM inserted
+
+
+UPDATE a_tester_second
+
+    SET  source_id = 777
+
+WHERE RecallID = @row_to_modify
+
+GO
+
+
+--------------------------------------------------------
+
+
+
+--------------------------------------------------------
+
+USE barbersystem_testing
+IF EXISTS (SELECT name FROM sysobjects
+      WHERE name = 'source_id_from_orders_to_transactions' AND type = 'TR')
+   DROP TRIGGER source_id_from_orders_to_transactions
+GO
+CREATE TRIGGER source_id_from_orders_to_transactions
+ON [a_tester_second]
+FOR INSERT
+AS
+/*  */
+DECLARE @record_id tinyint
+DECLARE @source_id tinyint
+SELECT @record_id = inserted.RecallID
+SELECT @source_id = 5
+
+SET 
+
+
+--------------------------------------------------------
+
+
+
+USE barbersystem_testing
+INSERT INTO [dbo].[a_tester_second] VALUES (1,343,'treat',111);
+--------------------------------------------------------
+
+USE barbersystem_testing
+INSERT INTO [dbo].[a_tester_first] VALUES (1,343,'treat',111);
+--------------------------------------------------------

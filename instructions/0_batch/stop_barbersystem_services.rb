@@ -1,0 +1,12 @@
+Thread.new{ system("cmd /c sc stop 1000_dixie_store")}
+Thread.new{ system("cmd /c sc stop 1001_dixie_store")}
+Thread.new{ system("cmd /c sc stop 1002_dixie_store")}
+Thread.new{ system("cmd /c sc stop 1003_dixie_store")}		
+Thread.new{ system("cmd /c sc stop 2000_barber_store")}
+Thread.new{ system("cmd /c sc stop 2001_barber_store")}
+Thread.new{ system("cmd /c sc stop 2002_barber_store")}
+Thread.new{ system("cmd /c sc stop 2003_barber_store")}
+#Thread.new{ system("cmd /c sc stop 3000_american_store")}
+#Thread.new{ system("cmd /c sc stop 4000_rhett_barber")}
+#Thread.new{ system("cmd /c sc stop 7000_christian_store")}
+#Thread.new{ system("cmd /c sc stop 7001_christian_store")}

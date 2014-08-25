@@ -1,0 +1,12 @@
+
+http://faq.1and1.com//dedicated_servers/windows_server/serial_console_sercon/4.html
+
+
+7. There are two ways of switching to a channel.
+From SAC using the ch command, e.g. ch -si 1 to switch to the first channel. 
+Or using <Esc><Tab> (in sequence, not pressed together at the same time) 
+
+
+
+sercon.onlinehome-server.com
+u45561804

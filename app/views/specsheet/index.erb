@@ -1,28 +1,6 @@
 
-<%#  @item_advanced_combination = AdvancedCombination.find_or_create_combo( @item, '0' )    %>
 
-<%#= render :partial => "administer_size_and_position" %>
-
-
-
-
-
-<%#= @department.Name  %>
-<%# if @item and @design and @website.name == 'dixie_store' and  @design.category.id.to_s  != '801'   %>
-            <%#  @breast_prints = Item.includes(:category).where("categories.Name like ? and Inactive = ?",  'pocket prints' , false  )      %>
-<%# end %>
-<%# logger.warn "view @specsheet_fragment_name.inspect: " +  @specsheet_fragment_name.inspect %>
-
-
-<%# @cache = false %>
-
-
-<%#= cache(@specsheet_fragment_name,  :if =>   @cache != false  )  do %>
-
-    <%# logger.warn "CACHING: NOT READING CACHE"  %>
-
-	<%#= render(:partial => "administration_specsheet/specsheet_admin") if admin?  %>
-
+<%= link_to "Back" , :back   ,:class => "ui-btn"  %>
 
 <%= render(:partial => "specsheet/specsheet_image") %>
 
@@ -41,7 +19,61 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
  <% if @oldd %>
+
+
+
+
+
+
+
+
+
+
+<%#  @item_advanced_combination = AdvancedCombination.find_or_create_combo( @item, '0' )    %>
+
+<%#= render :partial => "administer_size_and_position" %>
+
+
+
+
+
+<%#= @department.Name  %>
+<%# if @item and @design and @website.name == 'dixie_store' and  @design.category.id.to_s  != '801'   %>
+    <%#  @breast_prints = Item.includes(:category).where("categories.Name like ? and Inactive = ?",  'pocket prints' , false  )      %>
+<%# end %>
+<%# logger.warn "view @specsheet_fragment_name.inspect: " +  @specsheet_fragment_name.inspect %>
+
+
+<%# @cache = false %>
+
+
+<%#= cache(@specsheet_fragment_name,  :if =>   @cache != false  )  do %>
+
+    <%# logger.warn "CACHING: NOT READING CACHE"  %>
+
+    <%#= render(:partial => "administration_specsheet/specsheet_admin") if admin?  %>
+
+
+
+
+
+
+
+
+
+
+
 
     <a name="fb_share" type="button" href="https://www.facebook.com/dialog/feed?app_id=120689167949854&redirect_uri=http://dixieoutfitters.net&link=http://dixieoutfitters.net&picture=http://placekitten.com/500/500&caption=thecaption&description=thedescription&properties={text:’value1′,key2:’value2′}&actions={name:'I LOVE SCOTCH',link:'http://dixieoutfitters.net'}">share</a>
 

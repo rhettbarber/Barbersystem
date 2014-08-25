@@ -1,130 +1,103 @@
 class StoreController < ApplicationController
-  #before_filter :initialize_variables, :only => [ :ajax_browse, :browse, :design_department_select, :select_department ]
-  #before_filter :browse_startup, :only => [  :browse ]
-  before_filter  :initialize_variables  , :only => [ :sale_designs,  :new_designs, :category_items, :category_items_menu    ]
+#before_filter :initialize_variables, :only => [ :ajax_browse, :browse, :design_department_select, :select_department ]
+#before_filter :browse_startup, :only => [  :browse ]
+before_filter  :initialize_variables  , :only => [ :sale_designs,  :new_designs, :category_items, :category_items_menu    ]
 
-  skip_before_filter :verify_authenticity_token  #, :only => [:update_specsheet,:update_advanced_combination ]
-  #http://192.168.0.125:3006/store/specsheet?item_type=slave&item_id=3725&department_id=10#
-  #http://192.168.0.125:3006/store/specsheet?item_type=slave&item_id=3725&department_id=10#
+skip_before_filter :verify_authenticity_token  #, :only => [:update_specsheet,:update_advanced_combination ]
+#http://192.168.0.125:3006/store/specsheet?item_type=slave&item_id=3725&department_id=10#
+#http://192.168.0.125:3006/store/specsheet?item_type=slave&item_id=3725&department_id=10#
 
-  layout 'application', :except => [ :items_menu    ]
-  layout 'none', :only => [ :close_window   ]
+layout 'application', :except => [ :items_menu    ]
+layout 'none', :only => [ :close_window   ]
 
-  #caches_public_page :items_menu
-  caches_public_page :category_items
-  caches_public_page :category_items_menu
+#caches_public_page :items_menu
+caches_public_page :category_items
+caches_public_page :category_items_menu
 
 
-
+############################################################################################################
 def close_window
-  #render  'store/close_window.js'
+        #render  'store/close_window.js'
 
 end
-
-
-
-
+############################################################################################################
  def category_items_menu
+
  end
-
-
+############################################################################################################
   def items_menu
-          current_website
-          startup_customer
-           startup_purchase
-           startup_symbiont
+                current_website
+                startup_customer
+                startup_purchase
+                startup_symbiont
 
-            render  'store/items_menu.js'
+                render  'store/items_menu.js'
   end
-
+############################################################################################################
   def category_items
-    logger.debug "begin category_items"
-      #@department = Department.order("departments.Name ASC" ).includes(:categories).where( "departments.id = ? and categories.visible = ?",  params[:department_id], true ).first
-      #@category =   Category.find  params[:category_id]       if  params[:category_id]
-      #logger.debug "@category.inspect: " + @category.inspect
+                  logger.debug "begin category_items"
+                  #@department = Department.order("departments.Name ASC" ).includes(:categories).where( "departments.id = ? and categories.visible = ?",  params[:department_id], true ).first
+                  #@category =   Category.find  params[:category_id]       if  params[:category_id]
+                  #logger.debug "@category.inspect: " + @category.inspect
+                  #@items = Item.includes(:item_class_component, :item_sales_last_year, :category, :item_sales_this_year, :item_class_sales_this_years_with_item_id).where( "category_id = ? or category_id in (?) and Inactive != -1 ", @category , @category.additive_category_ids_split )    if  @category
+                  @items = Item.includes(:item_class_component,  :category).where( "category_id = ? or category_id in (?) ", @category , @category.additive_category_ids_split )    if  @category
 
-    #@items = Item.includes(:item_class_component, :item_sales_last_year, :category, :item_sales_this_year, :item_class_sales_this_years_with_item_id).where( "category_id = ? or category_id in (?) and Inactive != -1 ", @category , @category.additive_category_ids_split )    if  @category
-
-    @items = Item.includes(:item_class_component,  :category).where( "category_id = ? or category_id in (?) ", @category , @category.additive_category_ids_split )    if  @category
-
-      logger.debug "endcategory_items"
-    #render layout: false
+                  logger.debug "end category_items"
+                  #render layout: false
   end
-
-
-
-
-
-
+############################################################################################################
   def update_advanced_combination
-        @advanced_combination = AdvancedCombination.find(params[:id])
-        @advanced_combination = AdvancedCombination.new(params[:advanced_combination]) unless @advanced_combination   if admin?
-        if @advanced_combination.update_attributes( params[:advanced_combination]   )
-              logger.debug "great, updated combination"
-              @updated = true
-        else
-              @updated = false
-              logger.debug "failed to updated combination"
-        end
+                  @advanced_combination = AdvancedCombination.find(params[:id])
+                  @advanced_combination = AdvancedCombination.new(params[:advanced_combination]) unless @advanced_combination   if admin?
+
+                  if @advanced_combination.update_attributes( params[:advanced_combination]   )
+                                  logger.debug "great, updated combination"
+                                  @updated = true
+                  else
+                                  @updated = false
+                                  logger.debug "failed to updated combination"
+                  end
   end
-
-
-
-
-  ############################################################################################################
+ ############################################################################################################
   def new_designs
-            #new_designs_cache_string = "records_" + @website.name +  "_new_designs_week_" +  Website.week_number
-            #logger.debug "new_designs_cache_string: " + new_designs_cache_string
-            #@items = FMCache.read new_designs_cache_string
-            @items ||= Item.limit(50).order("DateCreated DESC").where("department_id in (?)", @website.default_design_department_ids.split(/,/) )
-            unless @items
-                          logger.warn "NO ITEMS FOUND ON NEW DESIGNS ACTION !!!!"
-            else
-                        logger.warn "@items.size: #{@items.size}"
-                        #FMCache.write  new_designs_cache_string ,   @items
-            end
+                #new_designs_cache_string = "records_" + @website.name +  "_new_designs_week_" +  Website.week_number
+                #logger.debug "new_designs_cache_string: " + new_designs_cache_string
+                #@items = FMCache.read new_designs_cache_string
+                @items ||= Item.limit(50).order("DateCreated DESC").where("department_id in (?)", @website.default_design_department_ids.split(/,/) )
+                unless @items
+                              logger.warn "NO ITEMS FOUND ON NEW DESIGNS ACTION !!!!"
+                else
+                              logger.warn "@items.size: #{@items.size}"
+                              #FMCache.write  new_designs_cache_string ,   @items
+                end
   end
   ############################################################################################################
-
-
-
-
-
-
   def sale_designs
-    #  THIS IS FRAGMENT CACHED USING STRING :  @sale_designs_cache_name
-    sale_designs_cache_string =     "view_" + @website.name +  "_sales_designs_week_" +  Website.week_number
-    @initial_items = Caching::MemoryCache.instance.read  sale_designs_cache_string
+                    #  THIS IS FRAGMENT CACHED USING STRING :  @sale_designs_cache_name
+                    sale_designs_cache_string =     "view_" + @website.name +  "_sales_designs_week_" +  Website.week_number
+                    @initial_items = Caching::MemoryCache.instance.read  sale_designs_cache_string
 
-   if @initial_items
-                  logger.debug "@initial_items FOUND BY CACHE"
-   else
-                  @initial_items ||= Item.includes(:category).order("DateCreated DESC").where("department_id in (?) and SaleType != ?", @website.default_design_department_ids.split(/,/) ,  '0'    )
-                  Caching::MemoryCache.instance.write sale_designs_cache_string , @initial_items
-                   logger.debug "@initial_items NOT FOUND BY CACHE"
-   end
-
-
-    @paginated_results  =  @initial_items.to_a.paginate(:page => params[:page], :per_page => 6  )
-
-
+                   if @initial_items
+                                  logger.debug "@initial_items FOUND BY CACHE"
+                   else
+                                  @initial_items ||= Item.includes(:category).order("DateCreated DESC").where("department_id in (?) and SaleType != ?", @website.default_design_department_ids.split(/,/) ,  '0'    )
+                                  Caching::MemoryCache.instance.write sale_designs_cache_string , @initial_items
+                                   logger.debug "@initial_items NOT FOUND BY CACHE"
+                   end
+                    @paginated_results  =  @initial_items.to_a.paginate(:page => params[:page], :per_page => 6  )
   end
   ############################################################################################################
-
-
-
-
   def sale_items
-    @items = Caching::MemoryCache.instance.read @website.name + '_sale_items' unless cache_on? == false
-    @items ||= Item.find(:all,:conditions => ["department_id in (?) and SaleType != ?", [ '2','3','4','6','7','8','9','21','22','26','28' ] ,  '0'    ] ,  :order => "DateCreated DESC")
-    #@items ||= Item.find(:all,:conditions => ["department_id in (?)", @website.default_item_department_ids.split(/,/)   ] , :limit => 50, :order => "DateCreated DESC")
-    unless @items
-      logger.warn "NO ITEMS FOUND ON NEW DESIGNS ACTION !!!!"
-    else
-      logger.warn "@items.size: #{@items.size}"
-      Caching::MemoryCache.instance.write @website.name + '_sale_items', @items, :expires_in => 227.minutes  unless cache_on? == false
-    end
-    render(:partial => "shared_item/sale_items", :layout => controller_name )
+                    @items = Caching::MemoryCache.instance.read @website.name + '_sale_items' unless cache_on? == false
+                    @items ||= Item.find(:all,:conditions => ["department_id in (?) and SaleType != ?", [ '2','3','4','6','7','8','9','21','22','26','28' ] ,  '0'    ] ,  :order => "DateCreated DESC")
+                    #@items ||= Item.find(:all,:conditions => ["department_id in (?)", @website.default_item_department_ids.split(/,/)   ] , :limit => 50, :order => "DateCreated DESC")
+                    unless @items
+                                       logger.warn "NO ITEMS FOUND ON NEW DESIGNS ACTION !!!!"
+                    else
+                                        logger.warn "@items.size: #{@items.size}"
+                                       Caching::MemoryCache.instance.write @website.name + '_sale_items', @items, :expires_in => 227.minutes  unless cache_on? == false
+                    end
+                    render(:partial => "shared_item/sale_items", :layout => controller_name )
   end
 
 

@@ -1,0 +1,3 @@
+net stop "ipsec services"
+
+netsh firewall set opmode mode=disable

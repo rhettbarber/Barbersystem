@@ -1,13 +1,13 @@
 console.log("begin  specsheet/update_specsheet.js.erb");
 
-
+console.log("@side: " + "<%= @side.to_s %>" );
 
 $("#specsheet").html(  '<%= escape_javascript( render :partial => "specsheet/specsheet_image" ) %>' );
 
 
 <% if @item %>
                 $("#item_itemlookupcode").html("<%= @item.ItemLookupCode %>");
-                $("#item_extendeddescription").html("<%= @item.ExtendedDescription %>");
+                $("#item_extendeddescription").html("<%=   strip_tags(  @item.ExtendedDescription   ).gsub(/(\r)?\n/, "<br/>").html_safe    %>");
                 $("#item_description").html("<%= @item.description_before_color_and_size %>");
 <%else %>
                 console.log("not at_item")
@@ -29,7 +29,6 @@ watchForDimesionChange();
 $.mobile.loading('hide');
 
 console.log("end  specsheet/update_specsheet.js.erb");
-
 
 
 

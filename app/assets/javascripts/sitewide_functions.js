@@ -1,6 +1,24 @@
 console.log("-----BEGIN file sitewide_functions.js") ;
 
 
+function add_to_cart_purchases_entry_change(  thing_to_change  )  {
+            if (  thing_to_change == "item") {
+                                 console.log("Change submit value to add_to_cart_purchases_entry_change_item_keep_design");
+                                  $("#special_submit").val("add_to_cart_purchases_entry_change_item_keep_design");
+                                   $( "#change_design_options" ).popup( "close" );
+                                    $('#special_submit').trigger('click');
+            } else if ( thing_to_change  == "design") {
+                                   console.log("Change submit value to add_to_cart_purchases_entry_change_design_keep_item");
+                                  $("#special_submit").val("add_to_cart_purchases_entry_change_design_keep_item");
+                                  $( "#change_item_options" ).popup( "close" );
+                                  $('#special_submit').trigger('click');
+            }
+            console.log(" $(#special_submit).val(: " +  $("#special_submit").val()  );
+}
+
+
+
+
 function displaySaleTags( singular_item_customer_status) {
                 if (singular_item_customer_status == "true") {
                                     console.log("customer is  singular type. show sale items");
@@ -19,11 +37,12 @@ function breastPrintChoices() {
                     //    $(".search_buttons").hide();
                     postNonAjax('/specsheet/crest_prints_list/', 'get', {
                                         item_class_component_item_id:  $('#item_class_component_item_id').val() ,
-                                        design_id:  $('#at_design').val(),
+                                        design_id:  $('#design_id').val(),
+                                        side:  $('#side').val(),
                                         main_design_id:  $('#back_design_id').val(),
                                         department_id:  $('#department_id').val(),
                                         purchases_entry_id:  $('#purchases_entry_id').val(),
-                                        parameter_item_id:  $('#the_parameter_item_id').val()
+                                        item_id:  $('#item_id').val()
                     });
                     console.log("end breastPrintChoices()");
 }
@@ -53,6 +72,11 @@ function loadjscssfile(filename, filetype){
 
 function shareSpecsheet(  ){
     console.log("begin shareSpecsheet");
+
+
+    var str = $( "form" ).serialize();
+   console.log( str );
+
 
      if (   $('#share_product').html().length > 10  ) {
                       console.log("share already exists");
@@ -183,7 +207,7 @@ function specsheetUrl() {
                     if ($("#item_class_component_item_id" ).val()  == ""  ||  $("#item_class_component_item_id").val() == undefined ) {
                                                 if ($("#parameter_item_id" ).val()  == ""  ||  $("#parameter_item_id").val() == undefined ) {
                                                                        if ($("#item_id" ).val()  == ""  ||  $("#item_id").val() == undefined ) {
-                                                                                             var the_item  =  $("#at_design").val() ;
+                                                                                             var the_item  =  $("#design_id").val() ;
                                                                        } else {
 
                                                                                              var the_item  =  $("#item_id").val() ;
@@ -205,10 +229,10 @@ function specsheetUrl() {
                                         var the_url  = addParameter( the_url , 'department_id',  $("#department_id").val()  );
                     }
 
-                    if ( $("#at_design").val() == ""  ||  $("#at_design").val() == undefined ) {
-                                        console.log("no at_design");
+                    if ( $("#design_id").val() == ""  ||  $("#design_id").val() == undefined ) {
+                                        console.log("no design_id");
                     }  else {
-                                        var the_url  = addParameter( the_url , 'design_id',  $("#at_design").val()  );
+                                        var the_url  = addParameter( the_url , 'design_id',  $("#design_id").val()  );
                     }
 
                     if ( $("#crest_id").val() == ""   ||  $("#crest_id").val() == undefined)  {
@@ -216,6 +240,13 @@ function specsheetUrl() {
                     }  else {
                                         var the_url  = addParameter( the_url , 'crest_id',  $("#crest_id").val()  );
                     }
+
+                    if ( $("#side").val() == ""   ||  $("#side").val() == undefined)  {
+                                     console.log("no side");
+                    }  else {
+                                    var the_url  = addParameter( the_url , 'side',  $("#side").val()  );
+                    }
+
 
 
                     if ( $("#item_class_component_item_id").val() == "" ||  $("#item_class_component_item_id").val() == undefined ) {
@@ -708,13 +739,12 @@ function itemDepartmentsListToContainer() {
 }
 
 function designDepartmentsListToContainer() {
-    if ( $('#design_choices_container').length > 0  )  {
-        console.log("append designs_departments_list to designs_choices_container");
-        $("#designs_departments_list").detach().appendTo('#design_choices_container')  ;
-    }  else {
-        console.log("no design_choices_container") ;
-    }
-
+                if ( $('#design_choices_container').length > 0  )  {
+                                console.log("append designs_departments_list to designs_choices_container");
+                                $("#designs_departments_list").detach().appendTo('#design_choices_container')  ;
+                }  else {
+                               console.log("no design_choices_container") ;
+                }
 }
 
 
@@ -813,13 +843,34 @@ function openPanel() {
 }
 
 
+
+
+
+
 //    BEGIN SPECSHEET FUNCTIONS
+
+function toggleSide() {
+
+                 $( "#change_design_options" ).popup( "close" );
+
+                if ( $("#side").val() == "front") {
+                                 $("#side").val("back");
+                } else {
+                                 $("#side").val("front");
+                }
+
+                 change_specsheet();
+}
+
+
+
+
 function change_specsheet() {
             jQuery.ajax({
                         type: "GET",
                         dataType: 'script',
                         url: "/specsheet/update_specsheet",
-                        data: { item_id:  $('#item_class_component_item_id').val()  , design_id:  $('#at_design').val()   , show_wide_specsheet:  $('#show_wide_specsheet').val()  , department_id:  $('#department_id').val() , purchases_entry_id:  $('#purchases_entry_id').val(), crest_id: $('#crest_id').val()  }
+                        data: { item_id:  $('#item_class_component_item_id').val()  , side:  $('#side').val()  , design_id:  $('#design_id').val()   , show_wide_specsheet:  $('#show_wide_specsheet').val()  , department_id:  $('#department_id').val() , purchases_entry_id:  $('#purchases_entry_id').val(), crest_id: $('#crest_id').val()  }
             });
 }
 

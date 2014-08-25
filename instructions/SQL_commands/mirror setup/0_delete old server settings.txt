@@ -1,0 +1,59 @@
+
+--DELETE ENDPOINT
+USE master;
+if exists(SELECT * FROM sys.endpoints WHERE name = 'BS_PRIMARY_ENDPOINT')
+DROP ENDPOINT BS_PRIMARY_ENDPOINT;
+GO
+
+--DELETE CERTIFICATE
+USE master;
+if exists(SELECT * FROM sys.certificates WHERE name = 'BS_PRIMARY_cert')
+DROP CERTIFICATE BS_PRIMARY_cert;
+GO
+
+--DELETE LOGIN
+USE master;
+if exists(SELECT * FROM sys.sql_logins WHERE name = 'BS_PRIMARY_login')
+DROP LOGIN BS_PRIMARY_login;
+GO
+
+--DELETE USER
+USE master;
+if exists(SELECT * FROM sys.sysusers WHERE name = 'BS_PRIMARY_user')
+DROP USER BS_PRIMARY_user;
+GO
+
+---------------------------------------------------------
+
+--DELETE ENDPOINT
+USE master;
+if exists(SELECT * FROM sys.endpoints WHERE name = 'BS_MIRROR_ENDPOINT')
+DROP ENDPOINT BS_MIRROR_ENDPOINT;
+GO
+
+--DELETE CERTIFICATE
+USE master;
+if exists(SELECT * FROM sys.certificates WHERE name = 'BS_MIRROR_cert')
+DROP CERTIFICATE BS_MIRROR_cert;
+GO
+
+--DELETE LOGIN
+USE master;
+if exists(SELECT * FROM sys.sql_logins WHERE name = 'BS_MIRROR_login')
+DROP LOGIN BS_MIRROR_login;
+GO
+
+--DELETE USER
+USE master;
+if exists(SELECT * FROM sys.sysusers WHERE name = 'BS_MIRROR_user')
+DROP USER BS_MIRROR_user;
+GO
+
+
+--DELETE KEY
+USE master;
+if exists(SELECT * FROM sys.symmetric_keys WHERE name = '##MS_DatabaseMasterKey##')
+DROP MASTER KEY;
+GO
+
+

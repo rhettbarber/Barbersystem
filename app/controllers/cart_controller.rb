@@ -1,242 +1,14 @@
 class CartController < ApplicationController
-
-
 skip_before_filter :verify_authenticity_token
-
 before_filter :initialize_variables, :only => [:wholesale_only_website_logged_in_retail?, :place_incomplete_symbiont_on_hold, :test,  :show_cc_code_info, :show_discount_info, :add_to_cart, :index ,:next_checkout_step, :place_symbiont_on_hold, :delete_symbiont_purchases_entry,:delete_purchases_entry,  :delete_incomplete_symbiote, :delete_all_on_hold_items,:delete_all_purchases_entries]
-
-
 after_filter :reset_incomplete_symbiont_status_found  # , :only =>  [ :add_to_cart, :place_symbiont_on_hold, :delete_symbiont_purchases_entry, :delete_incomplete_symbiote, :delete_all_purchases_entries, :complete_this_combination]
-
-
 #after_filter :initialize_variables   , :only =>  [ :add_to_cart, :place_symbiont_on_hold, :delete_symbiont_purchases_entry, :delete_incomplete_symbiote, :delete_all_purchases_entries, :complete_this_combination]
-
-
 ### SERIALIZE DETAILS: http://ar.rubyonrails.org/classes/ActiveRecord/Base.html
 ### SERIALIZE DETAILS: http://ar.rubyonrails.org/classes/ActiveRecord/Base.html
 ### SERIALIZE DETAILS: http://ar.rubyonrails.org/classes/ActiveRecord/Base.html
 
-############################################################################################################
-  def index
-    g = "g"
-          #logger.debug "flash in controller: " + flash[:notice].to_s  if flash
-            if @purchase
-                      prepare_purchase_totals(@purchase)  unless @incomplete_symbiont
-                      if @incomplete_symbiont
-                              if @purchase.symbiote_type == 'master'
-                                @completion_status_bar_message = 'Complete your chosen Item by adding a Design using the QuickCart below, or by clicking "Choose a Design" above'
-                              else
-                                @completion_status_bar_message = 'Complete your chosen Design by adding an Item using the QuickCart below, or by clicking "Choose an Item for your selected design" above'
-                              end
-                      end
-                      #the two purchases_entries calls below look redundant to the application controller purchase startup . be aware that they are not.
-                      @purchases_entries = @purchase.purchases_entries.order("id Desc")     #PurchasesEntry.find(:first,:conditions => ["id = ? ",  session[:purchase_id]  ] )
-                                                                           # @your_purchases_entries = @purchase.purchases_entries    # PurchasesEntry.find(:all,:conditions => ["purchase_id = ? ",session[:purchase_id] ] , :order => "id ASC"  )
-                                                                           #  render(:partial => "cart/display_cart",:layout => 'ajaxified_application' )
-            end
-  end
-############################################################################################################
-def add_to_cart_singular_item_customer
-								logger.debug "begin add_to_cart_singular_item_customer-------------------------------------------------@item.id: #{@item.id}"
-								if @item.category.category_class.item_type  == 'master'
-								  	@department = params[:department_id]
-									@department = @item.default_master_department_id  if !@department
-								  	@purchases_entry = PurchasesEntry.add_singular_item(@purchase,@item,@quantity,@department, params[:comment] )
-								else
-								  	@purchases_entry = PurchasesEntry.add_singular_item(@purchase,@item,@quantity,0, params[:comment] )
-								end
-								redirect_to  :controller => 'cart',  :action => 'index'
-end
-############################################################################################################
-def add_to_cart_incomplete_symbiont_not_on_hold
-              #@pe_comment = params[:crest_id].to_s[0..10]
-
-              if params[:crest_id] and   params[:crest_id] != ""
-                      @pe_comment =  Item.find(  params[:crest_id].to_s[0..10] ).PictureName
-               else
-                      @pe_comment =  ""
-              end
-
-							logger.debug "begin add_to_cart_incomplete_symbiont_not_on_hold-------------------------------------------------@item.id: #{@item.id}"
-              logger.debug "@purchase.symbiote.inspect: " + @purchase.symbiote.inspect
-							logger.debug "@item.inspect: : #{@item.inspect}"
-              logger.debug "@item.category.inspect: " + @item.category.inspect
-							logger.debug "@purchase.opposite_category_ids.include?(@item.category.id.to_s)  ----------- #{@purchase.opposite_category_ids}.include?(#{@item.category.id.to_s}) "
-							if  @purchase.opposite_category_ids.include?(@item.category.id.to_s) 
-                          if @purchase.symbiote_type == 'master'
-                                      # incomplete symbiont in progress with master already chosen)
-                                      # sometimes the master_department_id that was chosen by default will be wrong for this parameter slave we're trying to complete this symbiont with
-                                      # we will need to update the master_department_id if needed.
-                                      if @item.category.category_class.appearing_sections.include?(@purchase.symbiote.master_department_letter_section_code )
-                                        @department =  @purchase.master.master_department_id
-                                      else
-                                        @department = @item.design_decides_opposites_department
-                                      end
-                                      session[:symbiont_department_id] = @department.to_s if @department
-                                      #TODO: change @department to department_id..
-                                      #if color_compatible(@purchase_symbiote_item, @item) == 'true'
-                                      logger.debug "@purchase.symbiote_blank.complete_symbiote(x,x,x)"
-                                      logger.debug "@item: " + @item.inspect
-                                      logger.debug "@department: " + @department.inspect
-                                      logger.debug "@pe_comment: " + @pe_comment.inspect
-                                        @purchase.symbiote_blank.complete_symbiote(@item,@department, @pe_comment)
-                                        reset_symbiont_department_id
-                                        redirect_to   :controller =>  "cart"
-                                      #else
-                                      #  flash[:notice] = 'This design cannot go on colored garments. Light garments only'
-                                      #  redirect_to   :controller =>  "cart"
-                                      #end
-                          elsif @purchase.symbiote_type == 'slave'
-                                        if @department
-                                                  #scenerio:((((Design in cart with no master yet using  browse and view_details to add items )))
-                                                  # we will pass in the parameter based @department and see if it is in the appearing sections of the slaves category_class
-                                                  # if it is, then the master_department_id is the parameter department. If this design is not meant to appear in this parameter
-                                                  # based department (like a D.G. print with @department of 2 which is Men) then substitute the parameter department
-                                                  # with the slaves_opposite_master_default_department_id.
-                                                  # (summary: will try and use @department, else use default opposite department of slave)
-                                                  @chosen_department = @purchase.slave.design_decides_potential_masters_department(@department)
-                                        else
-                                                  #scenerio:((((Design in cart using quick cart to add the garment)))
-                                                  # this area is used with quick cart where there is no parameter based @department but
-                                                  # we still need a department so that we can properly represent the model image.
-                                                  # ex. (D.G. design added with quickcart, then 11001 garment..the model image needs to be a woman)
-                                                  @chosen_department = @item.masters_department_decides_default_department_id
-                                                  #@chosen_department = @purchase.slave.item.design_decides_opposites_department
-                                        end
-                                        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                                        if @chosen_department != false
-                                                         #if color_compatible(@item, @purchase_symbiote_item ) == 'true'
-                                                         #   yayayay
-                                                                            @purchase.symbiote_blank.complete_symbiote(@item,@chosen_department, @pe_comment)
-                                                                            reset_symbiont_department_id
-                                                                            redirect_to   :controller =>  "cart"
-                                                          #else
-                                                          #    garement_recieve_transparent
-                                                          #                  flash[:notice] = 'This garment cannot receive transparent designs, choose a light garment or a different design '
-                                                          #                  redirect_to   :controller =>  "cart"
-                                                          #end
-                                        else
-                                                          flash[:notice] = "error - this design has no default master department"
-                                                         redirect_to   :controller =>  "cart"
-                                        end
-                          end
-              else
-                            #incompat_item_not
-                            flash[:notice] = "Incompatible Item  not added. Please complete your in-progress Item or place it on hold to continue"  #######################################  (incomplete symbiont in progress and parameter item incompatible)
-                            redirect_to  :controller => 'cart'
-              end
-              logger.debug "end add_to_cart_incomplete_symbiont_not_on_hold-------------------------------------------------"
-end
-############################################################################################################
-def add_to_cart_master
-								# below we are adding a master item so we must record appropriate department for model image display.
-								# if params[:department_id is aavailable, we will use it as the department, else
-								# we will use  item.default_master_department_id which changes a generic department items generic department
-								# into the default department, like from adult department to men's.
-								# This is only temporary if the design that is placed on is a women's, the combo symbiont
-								# purchases entry will need to be updated to reflect that. this would be done in section  ( 3a )
-								logger.debug "begin add_to_cart_master-------------------------------------------------@item.id: #{@item.id}"
-								@department = params[:department_id]
-								@department = @item.default_master_department_id  if !@department
-                session[:symbiont_department_id] = @department.to_s if @department
-                change_at_department_to_department_id if params[:notes]
-								@purchase.new_master_symbiote(@item, @quantity, @department, params[:on_hold] ||  'false')
-                logger.debug "referring_action: "		+ referring_action
-                if  referring_action.include?('cart')
-                      flash[:notice] = 'Your item was added, please complete it by choosing a design.' unless params[:on_hold]
-                      flash[:notice] = 'Your item was added, please complete it by clicking "Complete Combination" and choosing a design, or you may add another item on hold.' if params[:on_hold]
-                      redirect_to  :controller => 'cart',  :action => 'index'
-								else
-                    redirect_to  :controller => 'store', :action => "category_items"
-                    logger.debug "REDIRECT CHANGED FROM BROWSE"
-
-								end
-                	logger.debug "end add_to_cart_master-------------------------------------------------"
-end
-############################################################################################################
-def add_to_cart_slave
-								logger.debug "begin add_to_cart_slave-------------------------------------------------@item.id: #{@item.id}"
-								# we will create new slave symbiote and set the master_department_id to the default for this slave items category_class
-								@purchase.new_slave_symbiote(@item,@quantity, params[:on_hold])
-								if  referring_action.include?('cart')
-                  flash[:notice] = 'Your design was added, please complete it by choosing a item' unless params[:on_hold]
-                  flash[:notice] = 'Your design was added, please complete it by clicking "Complete Combination" and choosing a item, or you may add another item on hold.' if params[:on_hold]
-								  redirect_to  :controller => 'cart',  :action => 'index'
-								else
-                  redirect_to  :controller => 'store',:action => "category_items"
-                  logger.debug "REDIRECT CHANGED FROM BROWSE"
-								end
-end
-############################################################################################################
-def add_to_cart_singular
-							logger.debug "begin add_to_cart_singular-------------------------------------------------@item.id: #{@item.id}"
-							@purchases_entry = PurchasesEntry.add_singular_item(@purchase,@item,@quantity,0, params[:comment] )
-							redirect_to  :controller => 'cart',  :action => 'index'
-end
-############################################################################################################
-def  pe_comment
-            if params[:crest_id] and   params[:crest_id] != ""
-                        @pe_comment =  Item.find(  params[:crest_id].to_s[0..10] ).PictureName
-            else
-                         @pe_comment =  ""
-            end
-end
-
-############################################################################################################
-def add_to_cart_purchases_entry
-			logger.debug "begin add_to_cart_purchases_entry"
-
-      pe_comment
-
-			purchases_entry = @purchase.purchases_entries.find(params[:purchases_entry_id])
-			if purchases_entry.symbiotic_item == true
-		              if @pe_comment.size > 1
-		                      purchases_entry_slave = purchases_entry.slave_of_symbiont_pair
-		                      purchases_entry_slave.Comment = @pe_comment
-		                      purchases_entry_slave.save
-		                       purchases_entry.master_of_symbiont_pair.Comment = @pe_comment
-		                        purchases_entry.master_of_symbiont_pair.save
-		              end
-		              purchases_entry.master_of_symbiont_pair.item_id =    params[:item_class_component][:item_id]
-		              updated_item = Item.find( params[:item_class_component][:item_id])
-		              purchases_entry.master_of_symbiont_pair.Description =Slug.generate(updated_item.Description)
-		              purchases_entry.save
-			else
-				if params[:item_class_component]
-					purchases_entry.item_id = params[:item_class_component][:item_id]
-				elsif params[:item_id]
-					purchases_entry.item_id = params[:item_id]
-				end
-				purchases_entry.Description =Slug.generate(purchases_entry.item.Description)
-				purchases_entry.save
-			end
-			flash[:notice] = "Your size/color was updated."
-			redirect_to  :controller => 'cart',  :action => 'index'
-end
-############################################################################################################
-def add_to_cart_combo
-								logger.debug "begin add_to_cart_combo @item: #{@item.id}--@design: #{@design.id}"
-								# below we are adding both a master and a slave item at once
-								@department = params[:department_id]
-								@department = @item.default_master_department_id  if !@department
-
-                pe_comment
-
-
-                # def new_combo_symbiont(item, design, quantity, department, pe_item_comment, pe_design_comment )
-
-                @purchase.new_combo_symbiont(@item, @design, @quantity, @department,@pe_comment ,@pe_comment )
-								flash[:notice] = 'Your item was added.'
-								if  referring_action.include?('cart')
-									flash.keep
-									redirect_to  :controller => 'cart',  :action => 'index'
-								else
-									flash.keep
-									redirect_to  :controller => 'cart',  :action => 'index'
-								end
-end
-############################################################################################################
 def add_to_cart
+  pe_comment
   if wholesale_only_website_logged_in_retail?
                   #flash[:notice] = "This is a wholesale only website and you are logged in with a retail account."
                   redirect_to(:controller =>  "account",  :action => 'wholesale_only_website')  ;
@@ -255,6 +27,12 @@ def add_to_cart
 
                     logger.debug "begin add_to_cart"
                     if params[:purchases_entry_id] == nil
+                                       logger.debug "NO PURCHASES_ENTRY_ID"
+                                       logger.debug "NO PURCHASES_ENTRY_ID"
+                                       logger.debug "NO PURCHASES_ENTRY_ID"
+                                       logger.debug "NO PURCHASES_ENTRY_ID"
+                                       logger.debug "NO PURCHASES_ENTRY_ID"
+                                       logger.debug "NO PURCHASES_ENTRY_ID"
                                       find_item(params)
                                       if @item
                                                               if params[:purchases_entries]
@@ -273,20 +51,18 @@ def add_to_cart
                                                                                                        add_to_cart_singular_designer
 
                                                                                     else
-                                                                                                  ## SECTION 3  (incomplete symbiont in progress, this will complete it with the param item if compatible)
+                                                                                                     ## SECTION 3  (incomplete symbiont in progress, this will complete it with the param item if compatible)
                                                                                                       if @incomplete_symbiont == true &&  params[:on_hold] != 'true'
                                                                                                                         add_to_cart_incomplete_symbiont_not_on_hold
                                                                                                       else
                                                                                                                         if params[:add_combo] == '1'
                                                                                                                                         if  params[:design_id]
                                                                                                                                                               @design = Item.find params[:design_id]
-                                                                                                                                        else
-                                                                                                                                                                @design = Item.find params[:at_design]
                                                                                                                                         end
                                                                                                                                          if  params[:commit].downcase  == "choose"
                                                                                                                                                                 logger.debug "COMMIT DOWNCASE == choose.. add_to_cart_combo"
                                                                                                                                                                  add_to_cart_combo
-                                                                                                                                         elsif params[:commit].downcase  == "change shirt"
+                                                                                                                                         elsif params[:commit].downcase  == "add_to_cart_purchases_entry_change_item_keep_design"
                                                                                                                                                                  logger.debug "COMMIT DOWNCASE IS change shirt.. ADD design TO CART AS NECESSARY"
                                                                                                                                                                  if @item.category.category_class.item_type  == 'master'
                                                                                                                                                                                           logger.debug "@item.category.category_class.item_type  == master. SWITCH @ITEM TO @DESIGN"
@@ -298,7 +74,7 @@ def add_to_cart
                                                                                                                                                                  else
                                                                                                                                                                                          add_to_cart_singular
                                                                                                                                                                  end
-                                                                                                                                         elsif params[:commit].downcase  == "change design"
+                                                                                                                                         elsif params[:commit].downcase  == "add_to_cart_purchases_entry_change_design_keep_item"
                                                                                                                                                                  logger.debug "COMMIT DOWNCASE IS change design.. ADD shirt TO CART AS NECESSARY"
                                                                                                                                                                  if @item.category.category_class.item_type  == 'master'
                                                                                                                                                                                          logger.debug "@item.category.category_class.item_type  == master. SWITCH @ITEM TO @DESIGN"
@@ -330,67 +106,351 @@ def add_to_cart
                                                         redirect_to  :controller => 'cart',  :action => 'index'
                                       end
                     else
-                                       add_to_cart_purchases_entry
+                                     logger.debug "PURCHASES_ENTRY_ID FOUND"
+                                     logger.debug "PURCHASES_ENTRY_ID FOUND"
+                                     logger.debug "PURCHASES_ENTRY_ID FOUND"
+                                     logger.debug "PURCHASES_ENTRY_ID FOUND"
+                                     logger.debug "PURCHASES_ENTRY_ID FOUND"
+                                     logger.debug "PURCHASES_ENTRY_ID FOUND"
+                                     logger.debug "PURCHASES_ENTRY_ID FOUND"
+                                     logger.debug "PURCHASES_ENTRY_ID FOUND"
+                                     logger.debug("params[:commit].downcase:  " + params[:commit].downcase  )
+                                     logger.debug( "params[:design_id] :" + params[:design_id] )
+                                     logger.debug( "params[:item_id] :" + params[:item_id] )
+                                     logger.debug( "params[:item_class_component] :" + params[:item_class_component].inspect  )
+                                     if params[:commit].downcase  == "add_to_cart_purchases_entry_change_design_keep_item"
+                                                         @add_to_cart_purchases_entry_change_design_keep_item = true
+                                      elsif params[:commit].downcase  == "add_to_cart_purchases_entry_change_item_keep_design"
+                                                          @add_to_cart_purchases_entry_change_item_keep_design = true
+                                      end
+                                      add_to_cart_purchases_entry
                     end
    end
 		logger.debug "end add_to_cart"
 end
+
+############################################################################################################
+  def add_to_cart_purchases_entry
+                        logger.debug "begin add_to_cart_purchases_entry"
+                        logger.debug "####### -####### -####### -####### -####### - #######"
+                        logger.debug "####### -####### -####### -####### -####### - #######"
+                        purchases_entry = @purchase.purchases_entries.find(params[:purchases_entry_id])
+
+                        if params[:item_class_component]
+                                           the_item_id  = params[:item_class_component][:item_id]
+                        elsif params[:item_id]
+                                          the_item_id = params[:item_id]
+                        end
+                        the_item = Item.find( the_item_id )
+
+                        the_design_id = params[:design_id]
+                        the_design  = Item.find( the_design_id )
+
+                         logger.debug "@add_to_cart_purchases_entry_change_design_keep_item: "  +  @add_to_cart_purchases_entry_change_design_keep_item.to_s
+                         logger.debug "@add_to_cart_purchases_entry_change_item_keep_design: "  +  @add_to_cart_purchases_entry_change_item_keep_design.to_s
+                        if the_item
+                                      logger.debug "the_item.id.to_s: "  +  the_item.id.to_s
+                        else
+                                      logger.debug "no the_item"
+                        end
+                        if the_design
+                                      logger.debug "the_design.id.to_s: "  +  the_design.id.to_s
+                        else
+                                      logger.debug "no the_design"
+                         end
+
+                        if purchases_entry.symbiotic_item == true
+                                            purchases_entry_slave = purchases_entry.slave_of_symbiont_pair
+                                            purchases_entry_master  = purchases_entry.master_of_symbiont_pair
+                                             if @add_to_cart_purchases_entry_change_design_keep_item and the_item
+                                                                                 logger.debug "@add_to_cart_purchases_entry_change_design_keep_item"
+                                                                                # check for item_id param since current item is empty
+                                                                                 if  the_item_id
+                                                                                                purchases_entry_master.item_id =  the_item_id
+                                                                                else
+                                                                                                 logger.warn "the_item_id NOT FOUND"
+                                                                                  end
+                                                                                  purchases_entry_master.Comment =  "0"
+                                                                                  purchases_entry_slave.Comment =   "0"
+                                                                                  purchases_entry_slave.Description =  "0"
+                                                                                  purchases_entry_slave.item_id =   "0"
+                                                                                 @flash_messages = "Choose a design for your shirt"
+                                                                                  @custom_redirect = "/store"
+                                             elsif  @add_to_cart_purchases_entry_change_item_keep_design and the_design
+                                                                                     logger.debug "@add_to_cart_purchases_entry_change_item_keep_design"
+                                                                                    if the_design_id
+                                                                                              purchases_entry_slave.item_id =  the_design_id
+                                                                                    else
+                                                                                                    logger.warn "the_design_id NOT FOUND"
+                                                                                      end
+                                                                                     purchases_entry_master.Comment =  "0"
+                                                                                     purchases_entry_slave.Comment =   "0"
+                                                                                     purchases_entry_master.Description =  "0"
+                                                                                     purchases_entry_master.item_id =   "0"
+                                                                                     @flash_messages = "Choose a shirt for your design"
+                                                                                    @custom_redirect = "/store"
+                                             else
+                                                                                     logger.debug "add_to_cart_purchases_entry update item class component"
+                                                                                    if the_item
+                                                                                                      purchases_entry_master.item_id = the_item_id
+                                                                                                      purchases_entry_master.ItemLookupCode = the_item.ItemLookupCode
+                                                                                                      purchases_entry_master.Description =Slug.generate( the_item.Description )
+                                                                                                      purchases_entry_slave.Comment = @pe_comment
+                                                                                                      purchases_entry_master.Comment = @pe_comment
+                                                                                    else
+                                                                                                      logger.warn "no the_item!!!!"
+                                                                                    end
+                                                                                    if the_design
+                                                                                                             purchases_entry_slave.item_id = the_design_id
+                                                                                                             purchases_entry_slave.Description = Slug.generate( the_design.Description )
+                                                                                                             purchases_entry_slave.ItemLookupCode =  the_design.ItemLookupCode
+                                                                                    else
+                                                                                                              logger.warn "no the_design!!!"
+                                                                                    end
+                                             end
+                                              purchases_entry_master.save
+                                              purchases_entry_slave.save
+                        else
+                                               logger.debug "purchases_entry.symbiotic_item IS NOT true"
+                                               purchases_entry.item_id =the_item_id
+                                                purchases_entry.Description =Slug.generate( purchases_entry.item.Description )
+                                                purchases_entry.save
+                        end
+                        logger.debug "####### -####### -####### -####### -####### - #######"
+                        logger.debug "####### -####### -####### -####### -####### - #######"
+                        # redirect_to  :controller => 'cart',  :action => 'index'
+                        flash[:notice] = @flash_messages    ||=  "Your product was updated."
+                        if @custom_redirect
+                                      redirect_to( @custom_redirect )
+                        else
+                                       redirect_to  :controller => 'cart',  :action => 'index'
+                          end
+  end
+############################################################################################################
+  def index
+    #logger.debug "flash in controller: " + flash[:notice].to_s  if flash
+    if @purchase
+      prepare_purchase_totals(@purchase)  unless @incomplete_symbiont
+      if @incomplete_symbiont
+        if @purchase.symbiote_type == 'master'
+          @completion_status_bar_message = 'Complete your chosen Item by adding a Design using the QuickCart below, or by clicking "Choose a Design" above'
+        else
+          @completion_status_bar_message = 'Complete your chosen Design by adding an Item using the QuickCart below, or by clicking "Choose an Item for your selected design" above'
+        end
+      end
+      #the two purchases_entries calls below look redundant to the application controller purchase startup . be aware that they are not.
+      @purchases_entries = @purchase.purchases_entries.order("id Desc")     #PurchasesEntry.find(:first,:conditions => ["id = ? ",  session[:purchase_id]  ] )
+      # @your_purchases_entries = @purchase.purchases_entries    # PurchasesEntry.find(:all,:conditions => ["purchase_id = ? ",session[:purchase_id] ] , :order => "id ASC"  )
+      #  render(:partial => "cart/display_cart",:layout => 'ajaxified_application' )
+    end
+  end
+############################################################################################################
+  def  pe_comment
+    if params[:crest_id] and   params[:crest_id] != ""
+      pe_crest =  Item.find(  params[:crest_id].to_s[0..10] ).PictureName
+    else
+      pe_crest =  "0"
+    end
+    if params[:side] and   params[:side] != ""
+      pe_side =   params[:side].to_s[0..5]
+    else
+      pe_side =  "back"
+    end
+    @pe_comment =   pe_side  +  "_" +  pe_crest
+  end
+############################################################################################################
+  def add_to_cart_singular_item_customer
+    logger.debug "begin add_to_cart_singular_item_customer-------------------------------------------------@item.id: #{@item.id}"
+    if @item.category.category_class.item_type  == 'master'
+      @department = params[:department_id]
+      @department = @item.default_master_department_id  if !@department
+      @purchases_entry = PurchasesEntry.add_singular_item(@purchase,@item,@quantity,@department, @pe_comment  )
+    else
+      @purchases_entry = PurchasesEntry.add_singular_item(@purchase,@item,@quantity,0,  @pe_comment  )
+    end
+    redirect_to  :controller => 'cart',  :action => 'index'
+  end
+############################################################################################################
+  def add_to_cart_incomplete_symbiont_not_on_hold
+    logger.debug "begin add_to_cart_incomplete_symbiont_not_on_hold-------------------------------------------------@item.id: #{@item.id}"
+    logger.debug "@purchase.symbiote.inspect: " + @purchase.symbiote.inspect
+    logger.debug "@item.inspect: : #{@item.inspect}"
+    logger.debug "@item.category.inspect: " + @item.category.inspect
+    logger.debug "@purchase.opposite_category_ids.include?(@item.category.id.to_s)  ----------- #{@purchase.opposite_category_ids}.include?(#{@item.category.id.to_s}) "
+    if  @purchase.opposite_category_ids.include?(@item.category.id.to_s)
+      if @purchase.symbiote_type == 'master'
+        # incomplete symbiont in progress with master already chosen)
+        # sometimes the master_department_id that was chosen by default will be wrong for this parameter slave we're trying to complete this symbiont with
+        # we will need to update the master_department_id if needed.
+        if @item.category.category_class.appearing_sections.include?(@purchase.symbiote.master_department_letter_section_code )
+          @department =  @purchase.master.master_department_id
+        else
+          @department = @item.design_decides_opposites_department
+        end
+        session[:symbiont_department_id] = @department.to_s if @department
+        #TODO: change @department to department_id..
+        #if color_compatible(@purchase_symbiote_item, @item) == 'true'
+        logger.debug "@purchase.symbiote_blank.complete_symbiote(x,x,x)"
+        logger.debug "@item: " + @item.inspect
+        logger.debug "@department: " + @department.inspect
+        logger.debug "@pe_comment: " + @pe_comment.inspect
+        @purchase.symbiote_blank.complete_symbiote(@item,@department, @pe_comment)
+        reset_symbiont_department_id
+        redirect_to   :controller =>  "cart"
+        #else
+        #  flash[:notice] = 'This design cannot go on colored garments. Light garments only'
+        #  redirect_to   :controller =>  "cart"
+        #end
+      elsif @purchase.symbiote_type == 'slave'
+        if @department
+          #scenerio:((((Design in cart with no master yet using  browse and view_details to add items )))
+          # we will pass in the parameter based @department and see if it is in the appearing sections of the slaves category_class
+          # if it is, then the master_department_id is the parameter department. If this design is not meant to appear in this parameter
+          # based department (like a D.G. print with @department of 2 which is Men) then substitute the parameter department
+          # with the slaves_opposite_master_default_department_id.
+          # (summary: will try and use @department, else use default opposite department of slave)
+          @chosen_department = @purchase.slave.design_decides_potential_masters_department(@department)
+        else
+          #scenerio:((((Design in cart using quick cart to add the garment)))
+          # this area is used with quick cart where there is no parameter based @department but
+          # we still need a department so that we can properly represent the model image.
+          # ex. (D.G. design added with quickcart, then 11001 garment..the model image needs to be a woman)
+          @chosen_department = @item.masters_department_decides_default_department_id
+          #@chosen_department = @purchase.slave.item.design_decides_opposites_department
+        end
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        if @chosen_department != false
+          #if color_compatible(@item, @purchase_symbiote_item ) == 'true'
+          #   yayayay
+          @purchase.symbiote_blank.complete_symbiote(@item,@chosen_department, @pe_comment)
+          reset_symbiont_department_id
+          redirect_to   :controller =>  "cart"
+          #else
+          #    garement_recieve_transparent
+          #                  flash[:notice] = 'This garment cannot receive transparent designs, choose a light garment or a different design '
+          #                  redirect_to   :controller =>  "cart"
+          #end
+        else
+          flash[:notice] = "error - this design has no default master department"
+          redirect_to   :controller =>  "cart"
+        end
+      end
+    else
+      #incompat_item_not
+      flash[:notice] = "Incompatible Item  not added. Please complete your in-progress Item or place it on hold to continue"  #######################################  (incomplete symbiont in progress and parameter item incompatible)
+      redirect_to  :controller => 'cart'
+    end
+    logger.debug "end add_to_cart_incomplete_symbiont_not_on_hold-------------------------------------------------"
+  end
+############################################################################################################
+  def add_to_cart_master
+    # below we are adding a master item so we must record appropriate department for model image display.
+    # if params[:department_id is aavailable, we will use it as the department, else
+    # we will use  item.default_master_department_id which changes a generic department items generic department
+    # into the default department, like from adult department to men's.
+    # This is only temporary if the design that is placed on is a women's, the combo symbiont
+    # purchases entry will need to be updated to reflect that. this would be done in section  ( 3a )
+    logger.debug "begin add_to_cart_master-------------------------------------------------@item.id: #{@item.id}"
+    @department = params[:department_id]
+    @department = @item.default_master_department_id  if !@department
+    session[:symbiont_department_id] = @department.to_s if @department
+    change_at_department_to_department_id if params[:notes]
+    @purchase.new_master_symbiote(@item, @quantity, @department, params[:on_hold] ||  'false')
+    logger.debug "referring_action: "		+ referring_action
+    if  referring_action.include?('cart')
+      flash[:notice] = 'Your item was added, please complete it by choosing a design.' unless params[:on_hold]
+      flash[:notice] = 'Your item was added, please complete it by clicking "Complete Combination" and choosing a design, or you may add another item on hold.' if params[:on_hold]
+      redirect_to  :controller => 'cart',  :action => 'index'
+    else
+      redirect_to  :controller => 'store', :action => "category_items"
+      logger.debug "REDIRECT CHANGED FROM BROWSE"
+
+    end
+    logger.debug "end add_to_cart_master-------------------------------------------------"
+  end
+############################################################################################################
+  def add_to_cart_slave
+    logger.debug "begin add_to_cart_slave-------------------------------------------------@item.id: #{@item.id}"
+    # we will create new slave symbiote and set the master_department_id to the default for this slave items category_class
+    @purchase.new_slave_symbiote(@item,@quantity, params[:on_hold])
+    if  referring_action.include?('cart')
+      flash[:notice] = 'Your design was added, please complete it by choosing a item' unless params[:on_hold]
+      flash[:notice] = 'Your design was added, please complete it by clicking "Complete Combination" and choosing a item, or you may add another item on hold.' if params[:on_hold]
+      redirect_to  :controller => 'cart',  :action => 'index'
+    else
+      redirect_to  :controller => 'store',:action => "category_items"
+      logger.debug "REDIRECT CHANGED FROM BROWSE"
+    end
+  end
+############################################################################################################
+  def add_to_cart_singular
+    logger.debug "begin add_to_cart_singular-------------------------------------------------@item.id: #{@item.id}"
+    @purchases_entry = PurchasesEntry.add_singular_item(@purchase,@item,@quantity,0, @pe_comment  )
+    redirect_to  :controller => 'cart',  :action => 'index'
+  end
+############################################################################################################
+  def add_to_cart_combo
+    logger.debug "begin add_to_cart_combo @item: #{@item.id}--@design: #{@design.id}"
+    # below we are adding both a master and a slave item at once
+    @department = params[:department_id]
+    @department = @item.default_master_department_id  if !@department
+    # def new_combo_symbiont(item, design, quantity, department, pe_item_comment, pe_design_comment )
+
+    @purchase.new_combo_symbiont(@item, @design, @quantity, @department,@pe_comment ,@pe_comment )
+    flash[:notice] = 'Your item was added.'
+    if  referring_action.include?('cart')
+      flash.keep
+      redirect_to  :controller => 'cart',  :action => 'index'
+    else
+      flash.keep
+      redirect_to  :controller => 'cart',  :action => 'index'
+    end
+  end
+############################################################################################################
+
 ###########################################################################################################
 def add_to_cart_singular_designer
   great_working_correctly
 							logger.debug "begin add_to_cart_singular_designer-------------------------------------------------@item.id: #{@item.id}"
               # item is a garment in the category_class.name of 'all_over_item'
-							@purchases_entry = PurchasesEntry.add_singular_designer_item(@purchase,@item,@quantity,0, params[:comment] )
+							@purchases_entry = PurchasesEntry.add_singular_designer_item(@purchase,@item,@quantity,0, @pe_comment  )
 							redirect_to  :controller => 'cart',  :action => 'index'
 end
 ###########################################################################################################
 def find_item(params)
-	logger.debug "start find_item params: #{params}"
-  if params[:the_parameter_item_id]
-              params[:item_id] = params[:the_parameter_item_id]
-   else
-              if params[:design_id] and !params[:item_id]
-                        params[:item_id] = params[:design_id]
-              end
-    end
-	departments_to_search = @website.default_all_department_ids + [ '1', '5' ]
-            if params[:purchases_entries]
-                          logger.debug "params[:purchases_entries]: #{params[:purchases_entries]}"
-                              ilc  =   params[:purchases_entries][:ItemLookupCode]
-                              conditions = [" ItemLookupCode LIKE ? and department_id in (?) ",  "#{ilc}%" , departments_to_search   ]
-                              ################## need to scope this find to website  ??
-                              @item = Item.find(:first,:conditions => conditions )
-                               unless @item
-                                        @alias = Aliasing.find(:first,:conditions =>  [" Alias LIKE ? ",  "#{ilc}%"    ] )
-                                        if @alias
-                                              if departments_to_search.include?(@alias.item.department_id.to_s )
-                                                          @item = @alias.item
-                                              end
-                                        end
-                                end
+        	logger.debug "start find_item params: #{params}"
+           the_item_id = params[:item_id] || params[:design_id]
+
+        	departments_to_search = @website.default_all_department_ids + [ '1', '5' ]
+           if params[:purchases_entries]
+                                   logger.debug "params[:purchases_entries]: #{params[:purchases_entries]}"
+                                    ilc  =   params[:purchases_entries][:ItemLookupCode]
+                                    ################## need to scope this find to website  ??
+                                    @item = Item.where(" ItemLookupCode LIKE ? and department_id in (?) ",  "#{ilc}%" , departments_to_search ).first
+                                     unless @item
+                                                      @alias = Aliasing.where("Alias LIKE ? ",  "#{ilc}%").first
+                                                      if @alias
+                                                                  if departments_to_search.include?(@alias.item.department_id.to_s )
+                                                                              @item = @alias.item
+                                                                  end
+                                                      end
+                                      end
             else
                             logger.debug "NO params[:purchases_entries]"
                             if params[:item_class_component]
-                                    logger.debug " params[:item_class_component][:item_id]: #{params[:item_class_component][:item_id]}"
-                                    item_id = params[:item_class_component][:item_id]  ## this stopped working
-                                end
-                                if params[:item_id]
-                                     logger.debug " params[:item_id]: #{params[:item_id]}"
-                                    item_id = params[:item_id]
+                                              logger.debug " params[:item_class_component][:item_id]: #{params[:item_class_component][:item_id]}"
+                                              the_item_id  = params[:item_class_component][:item_id]  ## this stopped working
                                 end
                                 if params[:item]
-                                     logger.debug " params[:item][:id]: #{params[:item][:id]}"
-                                    item_id = params[:item][:id]
+                                               logger.debug " params[:item][:id]: #{params[:item][:id]}"
+                                               the_item_id = params[:item][:id]
                                 end
-                                #item_id = params[:design_id] if params[:design_id]  and !@item
-                                #conditions => ["id = ? and department_id in (?)", item_id , departments_to_search ]
-                                conditions = ["id = ? ", item_id ]
-                                @item = Item.find(:first, :conditions => conditions )
+                                @item = Item.where(  "id = ? ", the_item_id  ).first
             end
              if @item
-       				 logger.debug "end find_item @item: #{@item.id}"
+       				             logger.debug "end find_item @item: #{@item.id}"
        		 else
-       		 		 logger.debug "end find_item NO ITEM FOUND"
+       		 	             	 logger.debug "end find_item NO ITEM FOUND"
        		 end
 end
 ###########################################################################################################
@@ -589,6 +649,10 @@ def delete_incomplete_symbiote
                                   @purchase.symbiote.destroy
                                   @purchase.symbiote_blank.destroy
                                   flash[:notice] = "Your chosen item was forgotten"
+                                  params.delete(  :purchases_entry_id   )
+
+                                  g = "test params to see if purchases_entry_id is deleted"
+
                                   if referring_action
                                             if  referring_action.include?('cart')
                                                       redirect_to(:controller => 'cart' ,:action => 'index')

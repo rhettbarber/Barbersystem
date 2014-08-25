@@ -524,7 +524,7 @@ def incomplete_symbiont
          CUSTOM_LOGGER.error "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
          CUSTOM_LOGGER.error "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
          CUSTOM_LOGGER.error "begin incomplete_symbiont"
-          if PurchasesEntry.exists?(:purchase_id  => self.id ,  :Description =>   '0' , :on_hold => '0'  )
+          if PurchasesEntry.exists?(:purchase_id  => self.id ,  :item_id =>   '0' , :on_hold => '0'  )
                  CUSTOM_LOGGER.error "PE Exists"
                   if self.customer
                                  CUSTOM_LOGGER.error "self.customer"
@@ -547,7 +547,7 @@ end
 ########################################################################################################
 def symbiote_blank
       if incomplete_symbiont == true
-               PurchasesEntry.find(:first, :conditions => [ "purchase_id = ? and Description = ? and on_hold = ?", self.id , '0', '0'  ])
+               PurchasesEntry.find(:first, :conditions => [ "purchase_id = ? and item_id = ? and on_hold = ?", self.id , '0', '0'  ])
         else
                  false
         end

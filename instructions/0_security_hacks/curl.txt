@@ -1,0 +1,7 @@
+curl -d "user[email]=hacker@barberandcompany.com&user[user_type_id]=3&user[password]=jerk&user[password_confirmation]=jerk" 192.168.0.116:1000/account/signup_action
+
+curl -d "user[email]=hacker@barberandcompany.com&user[revision_ids][]=1&revision_ids][]=2" 192.168.0.116:1000/account/signup_action
+
+
+
+BOTH OF THESE SECURITY VULNERABILITIES HAVE BEEN DEFEATED

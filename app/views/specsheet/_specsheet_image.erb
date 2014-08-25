@@ -20,7 +20,7 @@
                                                                                                                             <%= render(:partial => 'specsheet/table_at_item_and_design_two_sides_latest')     %>
                                                                                        <% end %>
                                     <% end %>
-              <% else %>
+             <% else %>
                                   <% if @item_advanced_combination.specsheet_type_id  == 1 %>
                                                                                     <% if @item_advanced_combination.number_of_sides ==  1 %>
                                                                                                              <%= render(:partial => 'specsheet/table_at_item_one_side_legacy')     %>
@@ -36,7 +36,7 @@
                                     <% end %>
               <% end %>
  <% else %>
-                           <%= render(:partial => 'specsheet/table_at_item_one_side_legacy')     %>
+                                    <%= render(:partial => 'specsheet/table_at_item_one_side_legacy')     %>
   <% end %>
     </span>
 

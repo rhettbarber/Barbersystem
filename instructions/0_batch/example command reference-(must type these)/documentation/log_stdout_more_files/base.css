@@ -1,0 +1,271 @@
+body {
+  width: 48em;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+
+a, a:visited {
+  color: #00f;
+}
+
+#header {
+  margin-top: 0.7em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #ccc;
+}
+
+#header h1 {
+  margin: 0;
+  font-family: monospace;
+  font-size: 2.5em;
+}
+
+#header h1 a {
+  text-decoration: none;
+  color: black;
+}
+
+#header h2 {
+  margin: 0;
+  font-family: monospace;
+  color: #999;
+  text-align: right;
+  font-size: 1.2em;
+}
+
+#content {
+  float: left;
+  width: 34em;
+}
+
+#content .post {
+  margin: 0;
+  padding: 1em 1em 1em 0;
+  border-bottom: 1px solid #eee;
+  border-right: 1px solid #ccc;
+}
+
+#content .post .date {
+  float: left;
+  margin-left: -4em;
+  width: 3.5em;
+  border: 1px solid #ccc;
+  font-size: 0.8em;
+  color: #777;
+}
+
+#content .post .date .day {
+  display: block;
+  text-align: center;
+  padding-top: 0.1em;
+}
+
+#content .post .date .month {
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  background: #e7e7e7;
+  padding-top: 0.1em;
+}
+
+#content .post .date .year {
+  display: block;
+  text-align: center;
+  background: #ccc;
+  color: white;
+  padding-top: 0.2em;
+}
+
+#content .post .header {
+  background: #dfd;
+  padding: 0.2em;
+  border: 1px solid #afa;
+}
+
+#content .post h1 {
+  font-family: monospace;
+  font-size: 1.5em;
+  margin: 0;
+}
+
+#content .post h1 a {
+  text-decoration: none;
+  color: black;
+}
+
+#content .post p.auth {
+  font-family: monospace;
+  font-size: 1.1em;
+  color: #999;
+  margin: 0;
+}
+
+#content .post > .body {
+  font-size: 1em;
+  line-height: 1.3em;
+  margin: 0 1em;
+}
+
+#content .post > .body h2 {
+  font-size: 1em;
+  line-height: 1.5em;
+  border-top: 2px solid black;
+  border-bottom: 1px solid black;
+}
+
+#content .post p.meta {
+  font-family: monospace;
+  font-size: 1.1em;
+  color: #999;
+  margin: 0;
+}
+
+#content .post p.meta a {
+  color: #999;
+  font-weight: bold;
+}
+
+#content .post .inset {
+  width: 10em;
+  float: right;
+  border: 1px solid #ccc;
+  padding: 0.5em;
+  margin: 0.5em;
+  font-size: 0.8em;
+  color: #666;
+}
+
+#content .post .tail {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-top: 0.5em;
+  border-top: 1px solid #ccc;
+  color: #666;
+  font-size: 0.8em;
+}
+
+#sidebar {
+  float: right;
+  width: 14em;
+  margin-top: 1em;
+  font-size: 0.9em;
+}
+
+#sidebar .item {
+  margin-bottom: 0.7em;
+}
+
+#sidebar .item h1 {
+  margin: 0;
+  padding: 0.3em;
+  font-size: 1.2em;
+  font-family: monospace;
+  color: #777;
+}
+
+#sidebar .item .content {
+  margin-left: 1em;
+}
+
+#sidebar .item .content ul {
+  margin: 0;
+  padding-left: 1em;
+}
+
+.comments {
+  padding: 0;
+  margin-top: 0.8em;
+  font-size: 0.9em;
+}
+
+.comments .header {
+  padding: 0.2em 0.5em;
+  border: 1px solid #afa;
+  margin-bottom: 0.5em;
+}
+
+.comments .header h2 {
+  font-size: 0.9em;
+  margin: 0.5em 0;
+  color: #555;
+  font-weight: normal;
+}
+
+.comments .comment {
+  margin-bottom: 1em;
+  padding-bottom: 0;
+}
+
+.comments .comment h3 {
+  background: #efe;
+  padding: 0.2em 0.5em;
+  border: 1px solid #afa;
+  font-size: 1em;
+  margin: 0.5em 0;
+  color: #555;
+}
+
+.comments .comment > .body {
+  margin: 0 1em;
+  font-size: 0.9em;
+  line-height: 1em;
+}
+
+.comment-box {
+  border-top: 1px solid #ccc;
+  padding-top: 0.5em;
+}
+
+.response {
+  width: 95%;
+  font-size: 0.9em;
+}
+
+.response th {
+  text-align: left;
+}
+
+.response td textarea {
+  width: 100%;
+  padding: 0.5em;
+}
+
+.response td.buttons {
+  text-align: right;
+}
+
+.archive h1 {
+  font-size: 1.2em;
+}
+
+.archive .results .article {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #eee;
+  padding: 0.5em;
+  font-size: 0.8em;
+  color: #777;
+}
+
+.archive .results .title {
+  font-size: 1.2em;
+  padding-left: 0.5em;
+}
+
+table.archives {
+  font-size: 0.9em;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table.archives tr.odd {
+  background: #eee;
+}
+
+table.archives td {
+  padding: 0.1em 0.3em;
+}
+
+table.archives .count {
+  text-align: right;
+  color: #999;
+}

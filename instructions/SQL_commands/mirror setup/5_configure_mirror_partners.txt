@@ -1,0 +1,30 @@
+--On the mirror server instance on BS_MIRROR, set the server instance on BS_PRIMARY as the partner (making it the initial --principal server instance). 
+--Substitute a valid network address for TCP://BS_PRIMARY.Mydomain.Corp.barbersystem.com:7024. 
+--For more information, see Specifying a Server Network Address (Database Mirroring).
+	 
+--At BS_MIRROR, set server instance on BS_PRIMARY as partner (principal server):
+ALTER DATABASE BARBERSYSTEM_WORKING 
+    SET PARTNER = 'TCP://BS_PRIMARY.s250913283.onlinehome.us:7024';
+GO
+ 
+
+--On the principal server instance on BS_PRIMARY, set the server instance on BS_MIRROR as the partner (making it the initial mirror server instance). Substitute a valid network address for TCP://BS_MIRROR.Mydomain.Corp.Adventure-Works.com:7024. 
+ 
+--At BS_PRIMARY, set server instance on BS_MIRROR as partner (mirror server).
+ALTER DATABASE BARBERSYSTEM_WORKING 
+    SET PARTNER = 'TCP://BS_MIRROR.s250913283.onlinehome.us:7025';
+GO
+ 
+
+
+
+
+--This example assumes that the session will be running in high-performance mode. To configure this session for high-performance mode, on the principal server instance (on BS_PRIMARY), set transaction safety to OFF.
+--Change to high-performance mode by turning off transacton safety.
+--ALTER DATABASE BARBERSYSTEM_WORKING 
+--    SET PARTNER SAFETY OFF
+--GO
+ 
+--Note:  
+--If you intend to run in high-safety mode with automatic failover, leave transaction safety set to FULL (the default setting) and add the witness as soon as possible after executing the second SET PARTNER 'partner_server' statement. 
+--note that the witness must first be configured for outbound and inbound connections.  

@@ -1,0 +1,491 @@
+
+===============================================================================
+XXCOPY ver 2.95.3   2007-09-18 13:26:53   Windows Ver 6.0.6000
+ Command Line  = XXCOPY  C:\rails Y:\XXCOPY\RAILS /OAC:barbersytem_1001_backup_log.txt /S /M /H /YY
+-------------------------------------------------------------------------------
+Switch Parameters
+ /ATA /B0 /C /CA /CB0 /CCY /CK /CR0 /D0 /DL0 /E0 /EC0 /ED0 /ER0 /F0 /FM0 /FF0
+ /FL /FT0 /FW /H /I /IN* /K0 /L0 /M /N0 /NP0 /NX0 /NI0 /NW /NC0
+ /oA"C:\Users\Rhett Barber\Documents\Batch\barbersytem_1001_backup_log.txt"
+ /oB0 /oD0 /oE0 /oF0 /oI0 /oP0 /oQ0 /oS0 /oX0 /P0 /PB0 /PBH /PC0 /PD0 /PN /Po0
+ /PZ0 /Q0 /QF0 /QB0 /QS0 /R0 /S /SP0 /SG0 /SX0 /SZ:- /T0 /TR00 /TS0 /TD0 /TTA0
+ /TCA0 /TCC0 /TCW /TM0 /U0 /V0 /W0 /WD /Y /YY /Z0 /ZE0 /ZS0 /ZX0
+-------------------------------------------------------------------------------
+ Source base directory = "C:\rails\"
+ Destination directory = "Y:\XXCOPY\RAILS\"
+ File name template    = "*"
+C:\rails\barbersystem_1001\.project                                 Copy failed
+C:\rails\barbersystem_1001\app\.project                             Copy failed
+C:\rails\barbersystem_1001\app\views\barber_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views\dixie_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views\store_shared\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\Copy of dixie_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\dixie_store_full\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\pos_live\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\pos_shared\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\config\.project                          Copy failed
+C:\rails\barbersystem_1001\lib\.project                             Copy failed
+C:\rails\barbersystem_1001\log\.DS_Store                            Copy failed
+C:\rails\barbersystem_1001\public\.htaccess                         Copy failed
+C:\rails\barbersystem_1001\public\images\.DS_Store                  Copy failed
+C:\rails\barbersystem_1001\public\images\._item_combinations              Copy failed
+C:\rails\barbersystem_1001\public\stylesheets\.project              Copy failed
+C:\rails\barbersystem_1001\vendor\.project                          Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\lib\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\tasks\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\theme_support\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\theme_support\generators\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins_off\jakes_toolbox\test\._jakes_toolbox_test.rb              Copy failed
+-------------------------------------------------------------------------------
+ Directories processed = 693
+ Total data in bytes   = 161
+ Elapsed time in sec.  = g
+ Action speed (MB/min) = g
+ Files examined        = 24
+ Files copied          = 1
+ Files copy failed     = 23
+ Log File Appended     = "C:\Users\Rhett Barber\Documents\Batch\barbersytem_1001_backup_log.txt"
+ Exit code             = 123 (Exit code is the number of failures plus 100)
+
+
+===============================================================================
+XXCOPY ver 2.95.3   2007-09-18 17:58:35   Windows Ver 6.0.6000
+ Command Line  = XXCOPY  C:\rails Y:\XXCOPY\RAILS /OAC:barbersytem_1001_backup_log.txt /S /M /H /YY
+-------------------------------------------------------------------------------
+Switch Parameters
+ /ATA /B0 /C /CA /CB0 /CCY /CK /CR0 /D0 /DL0 /E0 /EC0 /ED0 /ER0 /F0 /FM0 /FF0
+ /FL /FT0 /FW /H /I /IN* /K0 /L0 /M /N0 /NP0 /NX0 /NI0 /NW /NC0
+ /oA"C:\Users\Rhett Barber\Documents\Batch\barbersytem_1001_backup_log.txt"
+ /oB0 /oD0 /oE0 /oF0 /oI0 /oP0 /oQ0 /oS0 /oX0 /P0 /PB0 /PBH /PC0 /PD0 /PN /Po0
+ /PZ0 /Q0 /QF0 /QB0 /QS0 /R0 /S /SP0 /SG0 /SX0 /SZ:- /T0 /TR00 /TS0 /TD0 /TTA0
+ /TCA0 /TCC0 /TCW /TM0 /U0 /V0 /W0 /WD /Y /YY /Z0 /ZE0 /ZS0 /ZX0
+-------------------------------------------------------------------------------
+ Source base directory = "C:\rails\"
+ Destination directory = "Y:\XXCOPY\RAILS\"
+ File name template    = "*"
+C:\rails\barbersystem_1001\.project                                 Copy failed
+C:\rails\barbersystem_1001\app\.project                             Copy failed
+C:\rails\barbersystem_1001\app\views\barber_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views\dixie_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views\store_shared\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\Copy of dixie_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\dixie_store_full\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\pos_live\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\pos_shared\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\config\.project                          Copy failed
+C:\rails\barbersystem_1001\lib\.project                             Copy failed
+C:\rails\barbersystem_1001\log\.DS_Store                            Copy failed
+C:\rails\barbersystem_1001\public\.htaccess                         Copy failed
+C:\rails\barbersystem_1001\public\images\.DS_Store                  Copy failed
+C:\rails\barbersystem_1001\public\images\._item_combinations              Copy failed
+C:\rails\barbersystem_1001\public\stylesheets\.project              Copy failed
+C:\rails\barbersystem_1001\vendor\.project                          Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\lib\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\tasks\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\theme_support\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\theme_support\generators\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins_off\jakes_toolbox\test\._jakes_toolbox_test.rb              Copy failed
+-------------------------------------------------------------------------------
+ Directories processed = 693
+ Total data in bytes   = 125,472,348
+ Elapsed time in sec.  = g
+ Action speed (MB/min) = g
+ Files examined        = 94
+ Files copied          = 71
+ Files copy failed     = 23
+ Log File Appended     = "C:\Users\Rhett Barber\Documents\Batch\barbersytem_1001_backup_log.txt"
+ Exit code             = 123 (Exit code is the number of failures plus 100)
+
+
+===============================================================================
+XXCOPY ver 2.95.3   2007-09-19 17:05:56   Windows Ver 6.0.6000
+ Command Line  = XXCOPY  C:\rails Y:\XXCOPY\RAILS /OAC:barbersytem_1001_backup_log.txt /S /M /H /YY
+-------------------------------------------------------------------------------
+Switch Parameters
+ /ATA /B0 /C /CA /CB0 /CCY /CK /CR0 /D0 /DL0 /E0 /EC0 /ED0 /ER0 /F0 /FM0 /FF0
+ /FL /FT0 /FW /H /I /IN* /K0 /L0 /M /N0 /NP0 /NX0 /NI0 /NW /NC0
+ /oA"C:\Users\Rhett Barber\Documents\Batch\barbersytem_1001_backup_log.txt"
+ /oB0 /oD0 /oE0 /oF0 /oI0 /oP0 /oQ0 /oS0 /oX0 /P0 /PB0 /PBH /PC0 /PD0 /PN /Po0
+ /PZ0 /Q0 /QF0 /QB0 /QS0 /R0 /S /SP0 /SG0 /SX0 /SZ:- /T0 /TR00 /TS0 /TD0 /TTA0
+ /TCA0 /TCC0 /TCW /TM0 /U0 /V0 /W0 /WD /Y /YY /Z0 /ZE0 /ZS0 /ZX0
+-------------------------------------------------------------------------------
+ Source base directory = "C:\rails\"
+ Destination directory = "Y:\XXCOPY\RAILS\"
+ File name template    = "*"
+C:\rails\barbersystem_1001\.project                                 Copy failed
+C:\rails\barbersystem_1001\app\.project                             Copy failed
+C:\rails\barbersystem_1001\app\views\barber_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views\dixie_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views\store_shared\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\Copy of dixie_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\dixie_store_full\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\pos_live\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\pos_shared\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\config\.project                          Copy failed
+C:\rails\barbersystem_1001\lib\.project                             Copy failed
+C:\rails\barbersystem_1001\log\.DS_Store                            Copy failed
+C:\rails\barbersystem_1001\public\.htaccess                         Copy failed
+C:\rails\barbersystem_1001\public\images\.DS_Store                  Copy failed
+C:\rails\barbersystem_1001\public\images\._item_combinations              Copy failed
+C:\rails\barbersystem_1001\public\stylesheets\.project              Copy failed
+C:\rails\barbersystem_1001\vendor\.project                          Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\lib\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\tasks\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\theme_support\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\theme_support\generators\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins_off\jakes_toolbox\test\._jakes_toolbox_test.rb              Copy failed
+-------------------------------------------------------------------------------
+ Directories processed = 705
+ Total data in bytes   = 26,401,720
+ Elapsed time in sec.  = g
+ Action speed (MB/min) = g
+ Files examined        = 291
+ Files copied          = 268
+ Directories created   = 10
+ Files copy failed     = 23
+ Log File Appended     = "C:\Users\Rhett Barber\Documents\Batch\barbersytem_1001_backup_log.txt"
+ Exit code             = 123 (Exit code is the number of failures plus 100)
+
+
+===============================================================================
+XXCOPY ver 2.95.3   2007-09-20 11:41:02   Windows Ver 6.0.6000
+ Command Line  = XXCOPY  C:\rails Y:\XXCOPY\RAILS /OAC:barbersytem_1001_backup_log.txt /S /M /H /YY
+-------------------------------------------------------------------------------
+Switch Parameters
+ /ATA /B0 /C /CA /CB0 /CCY /CK /CR0 /D0 /DL0 /E0 /EC0 /ED0 /ER0 /F0 /FM0 /FF0
+ /FL /FT0 /FW /H /I /IN* /K0 /L0 /M /N0 /NP0 /NX0 /NI0 /NW /NC0
+ /oA"C:\Users\Rhett Barber\Documents\Batch\barbersytem_1001_backup_log.txt"
+ /oB0 /oD0 /oE0 /oF0 /oI0 /oP0 /oQ0 /oS0 /oX0 /P0 /PB0 /PBH /PC0 /PD0 /PN /Po0
+ /PZ0 /Q0 /QF0 /QB0 /QS0 /R0 /S /SP0 /SG0 /SX0 /SZ:- /T0 /TR00 /TS0 /TD0 /TTA0
+ /TCA0 /TCC0 /TCW /TM0 /U0 /V0 /W0 /WD /Y /YY /Z0 /ZE0 /ZS0 /ZX0
+-------------------------------------------------------------------------------
+ Source base directory = "C:\rails\"
+ Destination directory = "Y:\XXCOPY\RAILS\"
+ File name template    = "*"
+C:\rails\barbersystem_1001\.project                                 Copy failed
+C:\rails\barbersystem_1001\app\.project                             Copy failed
+C:\rails\barbersystem_1001\app\views\barber_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views\dixie_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views\store_shared\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\Copy of dixie_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\dixie_store_full\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\pos_live\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\pos_shared\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\config\.project                          Copy failed
+C:\rails\barbersystem_1001\lib\.project                             Copy failed
+C:\rails\barbersystem_1001\log\.DS_Store                            Copy failed
+C:\rails\barbersystem_1001\public\.htaccess                         Copy failed
+C:\rails\barbersystem_1001\public\images\.DS_Store                  Copy failed
+C:\rails\barbersystem_1001\public\images\._item_combinations              Copy failed
+C:\rails\barbersystem_1001\public\stylesheets\.project              Copy failed
+C:\rails\barbersystem_1001\vendor\.project                          Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\lib\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\tasks\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\theme_support\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\theme_support\generators\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins_off\jakes_toolbox\test\._jakes_toolbox_test.rb              Copy failed
+-------------------------------------------------------------------------------
+ Directories processed = 705
+ Total data in bytes   = 31,641,770
+ Elapsed time in sec.  = g
+ Action speed (MB/min) = g
+ Files examined        = 124
+ Files copied          = 101
+ Files copy failed     = 23
+ Log File Appended     = "C:\Users\Rhett Barber\Documents\Batch\barbersytem_1001_backup_log.txt"
+ Exit code             = 123 (Exit code is the number of failures plus 100)
+
+
+===============================================================================
+XXCOPY ver 2.95.3   2007-09-23 20:30:02   Windows Ver 6.0.6000
+ Command Line  = XXCOPY  C:\rails Y:\XXCOPY\RAILS /OAC:barbersytem_1001_backup_log.txt /S /M /H /YY
+-------------------------------------------------------------------------------
+Switch Parameters
+ /ATA /B0 /C /CA /CB0 /CCY /CK /CR0 /D0 /DL0 /E0 /EC0 /ED0 /ER0 /F0 /FM0 /FF0
+ /FL /FT0 /FW /H /I /IN* /K0 /L0 /M /N0 /NP0 /NX0 /NI0 /NW /NC0
+ /oA"C:\Users\Rhett Barber\Documents\Batch\barbersytem_1001_backup_log.txt"
+ /oB0 /oD0 /oE0 /oF0 /oI0 /oP0 /oQ0 /oS0 /oX0 /P0 /PB0 /PBH /PC0 /PD0 /PN /Po0
+ /PZ0 /Q0 /QF0 /QB0 /QS0 /R0 /S /SP0 /SG0 /SX0 /SZ:- /T0 /TR00 /TS0 /TD0 /TTA0
+ /TCA0 /TCC0 /TCW /TM0 /U0 /V0 /W0 /WD /Y /YY /Z0 /ZE0 /ZS0 /ZX0
+-------------------------------------------------------------------------------
+ Source base directory = "C:\rails\"
+ Destination directory = "Y:\XXCOPY\RAILS\"
+ File name template    = "*"
+C:\rails\barbersystem_1001\.project                                 Copy failed
+C:\rails\barbersystem_1001\app\.project                             Copy failed
+C:\rails\barbersystem_1001\app\views\barber_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views\dixie_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views\store_shared\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\Copy of dixie_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\dixie_store_full\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\pos_live\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\pos_shared\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\config\.project                          Copy failed
+C:\rails\barbersystem_1001\lib\.project                             Copy failed
+C:\rails\barbersystem_1001\log\.DS_Store                            Copy failed
+C:\rails\barbersystem_1001\public\.htaccess                         Copy failed
+C:\rails\barbersystem_1001\public\images\.DS_Store                  Copy failed
+C:\rails\barbersystem_1001\public\images\._item_combinations              Copy failed
+C:\rails\barbersystem_1001\public\stylesheets\.project              Copy failed
+C:\rails\barbersystem_1001\vendor\.project                          Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\lib\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\tasks\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\theme_support\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\theme_support\generators\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins_off\jakes_toolbox\test\._jakes_toolbox_test.rb              Copy failed
+-------------------------------------------------------------------------------
+ Directories processed = 706
+ Total data in bytes   = 7,177,775,068
+ Elapsed time in sec.  = 132,064
+ Action speed (MB/min) = g
+ Files examined        = 171,354
+ Files copied          = 171,331
+ Directories created   = 6
+ Files copy failed     = 23
+ Log File Appended     = "C:\Users\Rhett Barber\Documents\Batch\barbersytem_1001_backup_log.txt"
+ Exit code             = 123 (Exit code is the number of failures plus 100)
+
+
+===============================================================================
+XXCOPY ver 2.95.3   2007-09-26 17:33:37   Windows Ver 6.0.6000
+ Command Line  = XXCOPY  C:\rails Y:\XXCOPY\RAILS /OAC:barbersytem_1001_backup_log.txt /S /M /H /YY
+-------------------------------------------------------------------------------
+Switch Parameters
+ /ATA /B0 /C /CA /CB0 /CCY /CK /CR0 /D0 /DL0 /E0 /EC0 /ED0 /ER0 /F0 /FM0 /FF0
+ /FL /FT0 /FW /H /I /IN* /K0 /L0 /M /N0 /NP0 /NX0 /NI0 /NW /NC0
+ /oA"C:\Users\Rhett Barber\Documents\Batch\barbersytem_1001_backup_log.txt"
+ /oB0 /oD0 /oE0 /oF0 /oI0 /oP0 /oQ0 /oS0 /oX0 /P0 /PB0 /PBH /PC0 /PD0 /PN /Po0
+ /PZ0 /Q0 /QF0 /QB0 /QS0 /R0 /S /SP0 /SG0 /SX0 /SZ:- /T0 /TR00 /TS0 /TD0 /TTA0
+ /TCA0 /TCC0 /TCW /TM0 /U0 /V0 /W0 /WD /Y /YY /Z0 /ZE0 /ZS0 /ZX0
+-------------------------------------------------------------------------------
+ Source base directory = "C:\rails\"
+ Destination directory = "Y:\XXCOPY\RAILS\"
+ File name template    = "*"
+C:\rails\barbersystem_1001\.project                                 Copy failed
+C:\rails\barbersystem_1001\app\.project                             Copy failed
+C:\rails\barbersystem_1001\app\views\barber_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views\dixie_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views\store_shared\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\Copy of dixie_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\dixie_store_full\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\pos_live\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\pos_shared\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\config\.project                          Copy failed
+C:\rails\barbersystem_1001\lib\.project                             Copy failed
+C:\rails\barbersystem_1001\log\.DS_Store                            Copy failed
+C:\rails\barbersystem_1001\public\.htaccess                         Copy failed
+C:\rails\barbersystem_1001\public\images\.DS_Store                  Copy failed
+C:\rails\barbersystem_1001\public\images\._item_combinations              Copy failed
+C:\rails\barbersystem_1001\public\stylesheets\.project              Copy failed
+C:\rails\barbersystem_1001\vendor\.project                          Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\lib\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\tasks\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\theme_support\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\theme_support\generators\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins_off\jakes_toolbox\test\._jakes_toolbox_test.rb              Copy failed
+-------------------------------------------------------------------------------
+ Directories processed = 714
+ Total data in bytes   = 761,543,884
+ Elapsed time in sec.  = 2,359
+ Action speed (MB/min) = g
+ Files examined        = 4,989
+ Files copied          = 4,966
+ Directories created   = 7
+ Files copy failed     = 23
+ Log File Appended     = "C:\Users\Rhett Barber\Documents\Batch\barbersytem_1001_backup_log.txt"
+ Exit code             = 123 (Exit code is the number of failures plus 100)
+
+
+===============================================================================
+XXCOPY ver 2.95.3   2007-09-27 08:22:51   Windows Ver 6.0.6000
+ Command Line  = XXCOPY  C:\rails Y:\XXCOPY\RAILS /OAC:barbersytem_1001_backup_log.txt /S /M /H /YY
+-------------------------------------------------------------------------------
+Switch Parameters
+ /ATA /B0 /C /CA /CB0 /CCY /CK /CR0 /D0 /DL0 /E0 /EC0 /ED0 /ER0 /F0 /FM0 /FF0
+ /FL /FT0 /FW /H /I /IN* /K0 /L0 /M /N0 /NP0 /NX0 /NI0 /NW /NC0
+ /oA"C:\Users\Rhett Barber\Documents\Batch\barbersytem_1001_backup_log.txt"
+ /oB0 /oD0 /oE0 /oF0 /oI0 /oP0 /oQ0 /oS0 /oX0 /P0 /PB0 /PBH /PC0 /PD0 /PN /Po0
+ /PZ0 /Q0 /QF0 /QB0 /QS0 /R0 /S /SP0 /SG0 /SX0 /SZ:- /T0 /TR00 /TS0 /TD0 /TTA0
+ /TCA0 /TCC0 /TCW /TM0 /U0 /V0 /W0 /WD /Y /YY /Z0 /ZE0 /ZS0 /ZX0
+-------------------------------------------------------------------------------
+ Source base directory = "C:\rails\"
+ Destination directory = "Y:\XXCOPY\RAILS\"
+ File name template    = "*"
+C:\rails\barbersystem_1001\.project                                 Copy failed
+C:\rails\barbersystem_1001\app\.project                             Copy failed
+C:\rails\barbersystem_1001\app\views\barber_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views\dixie_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views\store_shared\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\Copy of dixie_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\dixie_store_full\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\pos_live\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\pos_shared\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\config\.project                          Copy failed
+C:\rails\barbersystem_1001\lib\.project                             Copy failed
+C:\rails\barbersystem_1001\log\.DS_Store                            Copy failed
+C:\rails\barbersystem_1001\public\.htaccess                         Copy failed
+C:\rails\barbersystem_1001\public\images\.DS_Store                  Copy failed
+C:\rails\barbersystem_1001\public\images\._item_combinations              Copy failed
+C:\rails\barbersystem_1001\public\stylesheets\.project              Copy failed
+C:\rails\barbersystem_1001\vendor\.project                          Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\lib\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\tasks\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\theme_support\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\theme_support\generators\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins_off\jakes_toolbox\test\._jakes_toolbox_test.rb              Copy failed
+-------------------------------------------------------------------------------
+ Directories processed = 861
+ Total data in bytes   = 402,718,775
+ Elapsed time in sec.  = g
+ Action speed (MB/min) = g
+ Files examined        = 409
+ Files copied          = 386
+ Directories created   = 67
+ Files copy failed     = 23
+ Log File Appended     = "C:\Users\Rhett Barber\Documents\Batch\barbersytem_1001_backup_log.txt"
+ Exit code             = 123 (Exit code is the number of failures plus 100)
+
+
+===============================================================================
+XXCOPY ver 2.95.3   2007-09-28 16:10:12   Windows Ver 6.0.6000
+ Command Line  = XXCOPY  C:\rails Y:\XXCOPY\RAILS /OAC:barbersytem_1001_backup_log.txt /S /M /H /YY
+-------------------------------------------------------------------------------
+Switch Parameters
+ /ATA /B0 /C /CA /CB0 /CCY /CK /CR0 /D0 /DL0 /E0 /EC0 /ED0 /ER0 /F0 /FM0 /FF0
+ /FL /FT0 /FW /H /I /IN* /K0 /L0 /M /N0 /NP0 /NX0 /NI0 /NW /NC0
+ /oA"C:\Users\Rhett Barber\Documents\Batch\barbersytem_1001_backup_log.txt"
+ /oB0 /oD0 /oE0 /oF0 /oI0 /oP0 /oQ0 /oS0 /oX0 /P0 /PB0 /PBH /PC0 /PD0 /PN /Po0
+ /PZ0 /Q0 /QF0 /QB0 /QS0 /R0 /S /SP0 /SG0 /SX0 /SZ:- /T0 /TR00 /TS0 /TD0 /TTA0
+ /TCA0 /TCC0 /TCW /TM0 /U0 /V0 /W0 /WD /Y /YY /Z0 /ZE0 /ZS0 /ZX0
+-------------------------------------------------------------------------------
+ Source base directory = "C:\rails\"
+ Destination directory = "Y:\XXCOPY\RAILS\"
+ File name template    = "*"
+C:\rails\barbersystem_1001\.project                                 Copy failed
+C:\rails\barbersystem_1001\app\.project                             Copy failed
+C:\rails\barbersystem_1001\app\views\barber_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views\dixie_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views\store_shared\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\Copy of dixie_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\dixie_store_full\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\pos_live\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\pos_shared\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\config\.project                          Copy failed
+C:\rails\barbersystem_1001\lib\.project                             Copy failed
+C:\rails\barbersystem_1001\log\.DS_Store                            Copy failed
+C:\rails\barbersystem_1001\public\.htaccess                         Copy failed
+C:\rails\barbersystem_1001\public\images\.DS_Store                  Copy failed
+C:\rails\barbersystem_1001\public\images\._item_combinations              Copy failed
+C:\rails\barbersystem_1001\public\stylesheets\.project              Copy failed
+C:\rails\barbersystem_1001\vendor\.project                          Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\lib\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\tasks\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\theme_support\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\theme_support\generators\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins_off\jakes_toolbox\test\._jakes_toolbox_test.rb              Copy failed
+-------------------------------------------------------------------------------
+ Directories processed = 953
+ Total data in bytes   = 125,202,838
+ Elapsed time in sec.  = 1,344
+ Action speed (MB/min) = g
+ Files examined        = 3,229
+ Files copied          = 3,206
+ Directories created   = 68
+ Files copy failed     = 23
+ Log File Appended     = "C:\Users\Rhett Barber\Documents\Batch\barbersytem_1001_backup_log.txt"
+ Exit code             = 123 (Exit code is the number of failures plus 100)
+
+
+===============================================================================
+XXCOPY ver 2.95.3   2007-09-30 12:58:43   Windows Ver 6.0.6000
+ Command Line  = XXCOPY  C:\rails Y:\XXCOPY\RAILS /OAC:barbersytem_1001_backup_log.txt /S /M /H /YY
+-------------------------------------------------------------------------------
+Switch Parameters
+ /ATA /B0 /C /CA /CB0 /CCY /CK /CR0 /D0 /DL0 /E0 /EC0 /ED0 /ER0 /F0 /FM0 /FF0
+ /FL /FT0 /FW /H /I /IN* /K0 /L0 /M /N0 /NP0 /NX0 /NI0 /NW /NC0
+ /oA"C:\Users\Rhett Barber\Documents\Batch\barbersytem_1001_backup_log.txt"
+ /oB0 /oD0 /oE0 /oF0 /oI0 /oP0 /oQ0 /oS0 /oX0 /P0 /PB0 /PBH /PC0 /PD0 /PN /Po0
+ /PZ0 /Q0 /QF0 /QB0 /QS0 /R0 /S /SP0 /SG0 /SX0 /SZ:- /T0 /TR00 /TS0 /TD0 /TTA0
+ /TCA0 /TCC0 /TCW /TM0 /U0 /V0 /W0 /WD /Y /YY /Z0 /ZE0 /ZS0 /ZX0
+-------------------------------------------------------------------------------
+ Source base directory = "C:\rails\"
+ Destination directory = "Y:\XXCOPY\RAILS\"
+ File name template    = "*"
+C:\rails\barbersystem_1001\.project                                 Copy failed
+C:\rails\barbersystem_1001\app\.project                             Copy failed
+C:\rails\barbersystem_1001\app\views\barber_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views\dixie_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views\store_shared\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\Copy of dixie_store\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\dixie_store_full\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\pos_live\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\app\views_off\z-junk\pos_shared\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\config\.project                          Copy failed
+C:\rails\barbersystem_1001\lib\.project                             Copy failed
+C:\rails\barbersystem_1001\log\.DS_Store                            Copy failed
+C:\rails\barbersystem_1001\public\.htaccess                         Copy failed
+C:\rails\barbersystem_1001\public\images\.DS_Store                  Copy failed
+C:\rails\barbersystem_1001\public\images\._item_combinations              Copy failed
+C:\rails\barbersystem_1001\public\stylesheets\.project              Copy failed
+C:\rails\barbersystem_1001\vendor\.project                          Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\lib\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\manage_fixtures\tasks\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\theme_support\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins\theme_support\generators\.DS_Store              Copy failed
+C:\rails\barbersystem_1001\vendor\plugins_off\jakes_toolbox\test\._jakes_toolbox_test.rb              Copy failed
+-------------------------------------------------------------------------------
+ Directories processed = 953
+ Total data in bytes   = 113,062,094
+ Elapsed time in sec.  = g
+ Action speed (MB/min) = g
+ Files examined        = 373
+ Files copied          = 350
+ Files copy failed     = 23
+ Log File Appended     = "C:\Users\Rhett Barber\Documents\Batch\barbersytem_1001_backup_log.txt"
+ Exit code             = 123 (Exit code is the number of failures plus 100)
+
+
+===============================================================================
+XXCOPY ver 2.95.3   2007-10-09 08:10:41   Windows Ver 6.0.6000
+ Command Line  = XXCOPY  C:\rails Y:\XXCOPY\RAILS /OAC:barbersytem_1001_backup_log.txt /S /M /H /YY
+-------------------------------------------------------------------------------
+Switch Parameters
+ /ATA /B0 /C /CA /CB0 /CCY /CK /CR0 /D0 /DL0 /E0 /EC0 /ED0 /ER0 /F0 /FM0 /FF0
+ /FL /FT0 /FW /H /I /IN* /K0 /L0 /M /N0 /NP0 /NX0 /NI0 /NW /NC0
+ /oA"C:\Users\Rhett Barber\Documents\Batch\barbersytem_1001_backup_log.txt"
+ /oB0 /oD0 /oE0 /oF0 /oI0 /oP0 /oQ0 /oS0 /oX0 /P0 /PB0 /PBH /PC0 /PD0 /PN /Po0
+ /PZ0 /Q0 /QF0 /QB0 /QS0 /R0 /S /SP0 /SG0 /SX0 /SZ:- /T0 /TR00 /TS0 /TD0 /TTA0
+ /TCA0 /TCC0 /TCW /TM0 /U0 /V0 /W0 /WD /Y /YY /Z0 /ZE0 /ZS0 /ZX0
+-------------------------------------------------------------------------------
+ Source base directory = "C:\rails\"
+ Destination directory = "Y:\XXCOPY\RAILS\"
+ File name template    = "*"
+C:\rails\.loadpath                                                  Copy failed
+C:\rails\.project                                                   Copy failed
+C:\rails\barbersystem\public\images\item_combinations\11012\w11012_royal-caribe_rp_5185l_t.jpg              Copy failed
+C:\rails\barbersystem\public\images\item_combinations\11012\w11012_royal-caribe_rp_5186l_t.jpg                Disk Full
+-------------------------------------------------------------------------------
+ Directories processed = 67
+ Total data in bytes   = 4,214,853,324
+ Elapsed time in sec.  = 97,852
+ Action speed (MB/min) = g
+ Files examined        = 97,159
+ Files copied          = 97,155
+ Directories created   = 37
+ Files copy failed     = 4
+ Log File Appended     = "C:\Users\Rhett Barber\Documents\Batch\barbersytem_1001_backup_log.txt"
+ Exit code             = 44 (Disk Full)
+
+
+===============================================================================
+XXCOPY ver 2.95.3   2007-10-10 18:12:41   Windows Ver 6.0.6000
+ Command Line  = XXCOPY  C:\rails Y:\XXCOPY\RAILS /OAC:barbersytem_1001_backup_log.txt /S /M /H /YY

@@ -1,0 +1,97 @@
+USE BARBERSYSTEM_WORKING
+IF EXISTS (SELECT name FROM sysobjects
+      WHERE name = 'website_id_from_orders_to_transactions' AND type = 'TR')
+   DROP TRIGGER website_id_from_orders_to_transactions
+GO
+CREATE TRIGGER website_id_from_orders_to_transactions
+ON [Transaction]
+FOR INSERT
+AS
+/*  */
+
+DECLARE @website_id int
+DECLARE @website_id_from_order int
+DECLARE @inserted_recall_id int
+
+ 
+SELECT @inserted_recall_id = RecallID 
+FROM inserted
+
+SELECT @website_id_from_order = website_id
+FROM [dbo].[Order]
+WHERE [ID] = @inserted_recall_id 
+
+
+IF @website_id_from_order > 0
+UPDATE [dbo].[Transaction]
+    SET  website_id = @website_id_from_order
+WHERE RecallID = @inserted_recall_id
+
+GO
+
+---------------------------------------------------OLD
+USE BARBERSYSTEM_WORKING
+IF EXISTS (SELECT name FROM sysobjects
+      WHERE name = 'website_id_from_orders_to_transactions' AND type = 'TR')
+   DROP TRIGGER website_id_from_orders_to_transactions
+GO
+CREATE TRIGGER website_id_from_orders_to_transactions
+ON [Transaction]
+FOR INSERT
+AS
+/*  */
+
+DECLARE @website_id int
+DECLARE @website_id_from_order int
+DECLARE @inserted_recall_id int
+
+ 
+SELECT @inserted_recall_id = RecallID 
+FROM inserted
+
+SELECT @website_id_from_order = website_id
+FROM [dbo].[Order]
+WHERE [ID] = @inserted_recall_id 
+
+
+IF @website_id_from_order > 0
+UPDATE [dbo].[Transaction]
+    SET  website_id = @website_id_from_order
+WHERE RecallID = @inserted_recall_id
+
+GO
+
+
+
+
+---------------------------------------------------OLD
+USE barbersystem_testing
+IF EXISTS (SELECT name FROM sysobjects
+      WHERE name = 'source_id_from_orders_to_transactions' AND type = 'TR')
+   DROP TRIGGER source_id_from_orders_to_transactions
+GO
+CREATE TRIGGER source_id_from_orders_to_transactions
+ON [Transaction]
+FOR INSERT
+AS
+/*  */
+
+DECLARE @source_id int
+DECLARE @source_id_from_order int
+DECLARE @inserted_recall_id int
+
+ 
+SELECT @inserted_recall_id = RecallID 
+FROM inserted
+
+SELECT @source_id_from_order = source_id
+FROM [dbo].[Order]
+WHERE [ID] = @inserted_recall_id 
+
+
+IF @source_id_from_order > 0
+UPDATE [dbo].[Transaction]
+    SET  source_id = @source_id_from_order
+WHERE RecallID = @inserted_recall_id
+
+GO

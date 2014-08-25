@@ -1,0 +1,57 @@
+USE barbersystem_testing
+
+
+
+USE barbersystem_testing
+
+DECLARE @order_id_in_progress int
+
+SET @order_id_in_progress = 1900
+
+
+
+UPDATE [Order]
+	SET source_id = 7878
+WHERE ID = @order_id_in_progress
+
+
+
+
+SELECT 
+ID,CustomerID,Total,source_id
+FROM
+[ORDER]
+WHERE [ID] = @order_id_in_progress
+
+----------------------------------------
+
+USE barbersystem_testing
+IF EXISTS (SELECT name FROM sysobjects
+      WHERE name = 'source_id_from_orders_to_transactions' AND type = 'TR')
+   DROP TRIGGER source_id_from_orders_to_transactions
+GO
+CREATE TRIGGER source_id_from_orders_to_transactions
+ON [a_tester_second]
+FOR INSERT
+AS
+/*  */
+
+DECLARE @source_id int
+DECLARE @source_id_from_order int
+DECLARE @inserted_recall_id int
+
+ 
+SELECT @inserted_recall_id = RecallID 
+FROM inserted
+
+SELECT @source_id_from_order = source_id
+FROM [dbo].[Order]
+WHERE [ID] = @inserted_recall_id 
+
+
+IF @source_id_from_order > 0
+UPDATE [dbo].[Transaction]
+    SET  source_id = @source_id_from_order
+WHERE RecallID = @inserted_recall_id
+
+GO

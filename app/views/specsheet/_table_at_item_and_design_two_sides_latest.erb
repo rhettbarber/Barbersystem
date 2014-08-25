@@ -1,4 +1,4 @@
-<!--table_at_item_and_design_latest-->
+<!--table_at_item_and_design_two_sides_latest-->
 <% if @show_admin %><div class="specsheet_admin"> table_at_item_and_design_two_sides_latest</div> <% end %>
 
 <div  id="specsheet_table_css">
@@ -16,17 +16,10 @@
     end
         if @back_design
           @back_advanced_combination = AdvancedCombination.find_or_create_combo( @item, @back_design)
+          s = "s"
         end
 
-
-
-
-
 %>
-
-
-
-
 
 
 
@@ -102,23 +95,32 @@
 
  </div>
 
+<% g = "g" %>
 
 
-<%  if params[:side] == 'front' %>
-                <%= hidden_field_tag "what_side", "front" %>
+<%  if @back_advanced_combination and @back_advanced_combination.default_side == 'front' %>
+                        <% if  params[:side] == 'back'  %>
+                                                 <% logger.debug "params[:side] is back" %>
+                        <% else %>
+                                                <% logger.debug "params[:side] is not back" %>
+                                                <% @side = 'front' %>
+                         <% end %>
+<% end  %>
 
-                <%  @temp_front_design_image_name = @front_design_image_name    %>
+<%  if  @side  == 'front' %>
+                                <%#= hidden_field_tag "what_side", "front"    MOVED INSIDE FORM  %>
 
-                <%  @front_design_image_name = @back_design_image_name    %>
+                                <%  @temp_front_design_image_name = @front_design_image_name    %>
+                                <%  @front_design_image_name = @back_design_image_name    %>
+                                <%  @back_design_image_name = @temp_front_design_image_name   %>
 
-                <%  @back_design_image_name = @temp_front_design_image_name  if @temp_front_design_image_name  %>
+                                <%  @temp_back_advanced_combination = @back_advanced_combination    %>
+                                <%  @temp_front_advanced_combination = @front_advanced_combination    %>
 
-
+                                <%  @back_advanced_combination = @temp_front_advanced_combination    %>
+                                <%  @front_advanced_combination = @temp_back_advanced_combination    %>
 <% else %>
-
-                <%= hidden_field_tag "what_side", "back" %>
-
-
+                                 <%#= hidden_field_tag "what_side", "back"   MOVED INSIDE FORM %>
 <% end %>
 
 

@@ -1,0 +1,8 @@
+
+be sure to turn off grant privileges to public.
+
+public has them by default.
+
+public is hard to find. you have to search for it.
+
+then you can change priviledes.

@@ -1,0 +1,25 @@
+
+<a class="change_options"  href="#change_design_options" data-rel="popup" data-position-to="window" data-transition="pop"  data-role="button" data-icon="gear" data-iconpos="left" data-theme="a">Design Options   </a>
+<div data-role="popup" id="change_design_options" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;background-color: #ffffff;">
+              <p>Design options:</p>
+
+
+              <% if @back_design.applicable_crest_prints.size > 0  %>
+                                <a href="#"  data-role="button" data-icon="arrow-l" data-iconpos="left" data-theme="b"  onclick="$('#breast_prints_link').trigger('click');" >Change  small design (breast print)</a>
+               <% end %>
+
+
+                <%  if @item_advanced_combination.specsheet_type_id.to_s  ==  "1"  and @item_advanced_combination.number_of_sides.to_i  !=  2 %>
+                                            <!--   specsheet_type_id  ==  1  -->
+                <% else %>
+                                            <a href="#"  data-role="button" data-icon="arrow-l" data-iconpos="left" data-theme="b" onclick="toggleSide();">Swap side design goes on</a>
+                 <% end %>
+
+                <a href="#" data-role="button" data-icon="arrow-l" data-iconpos="left" data-theme="b" onclick="add_to_cart_purchases_entry_change(  'item'  );">Keep this design and change shirt styles</a>
+
+                <a href="#" data-role="button" data-icon="arrow-l" data-iconpos="left" data-theme="b"  onclick="add_to_cart_purchases_entry_change( 'design' ); ">Keep this shirt  and change design</a>
+
+                <a href="index.html" data-rel="back"  data-role="button" data-icon="arrow-l" data-iconpos="left" data-theme="a"  class="no_loader">Cancel</a>
+</div>
+
+

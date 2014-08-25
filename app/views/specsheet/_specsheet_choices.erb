@@ -1,194 +1,79 @@
-<%  @back_design = @design %>
-<% @crest_prints =  @back_design.applicable_crest_prints if @back_design %>
-
-
-<style type="text/css">
-    .specsheet-choices-table  {
-        /*background-color: #c0c0c0;*/
-        /*float: left;*/
-        margin-left:auto;
-        margin-right:auto;
-    }
-
-    @media ( max-width: 700px ) {
-        .choice {
-            width:96%;
-        }
-    }
-
-    @media ( min-width: 700px ) {
-        /* Show the table header rows and set all cells to display: table-cell */
-        .specsheet-choices-table td,
-        .specsheet-choices-table th,
-        .specsheet-choices-table tbody th,
-        .specsheet-choices-table tbody td,
-        .specsheet-choices-table thead td,
-        .specsheet-choices-table thead th {
-            display: table-cell;
-            margin: 0;
-        }
-        /* Hide the labels in each cell */
-        .specsheet-choices-table td .ui-table-cell-label,
-        .specsheet-choices-table th .ui-table-cell-label {
-            display: none;
-        }
-
-        .specsheet-choices-table td {
-            /*background-color: blue;*/
-        }
-
-        .specsheet-choices-table  {
-            /*background-color: darkgray;*/
-            width:720px;
-        }
-
-        .back_button {width:80px;}
-        .breast_button_choice {width: 136px;}
-    }
-</style>
-
+<!-- begin  form /cart/add_to_cart --><!-- begin  form /cart/add_to_cart --><!-- begin  form /cart/add_to_cart --><!-- begin  form /cart/add_to_cart --><!-- begin  form /cart/add_to_cart --><!-- begin  form /cart/add_to_cart -->
 
 <%=  form_tag( '/cart/add_to_cart' , :method => :put )  do %>
-    <table data-role="table" class="specsheet-choices-table">
-      <thead>
-      <tr>
-        <th> </th>
-        <% if @crest_prints and @crest_prints.size > 0 and  @item.category.prefix == 'rp' %>
-            <th> </th>
-        <% end %>
-        <%   if  @required_form_elements.include?('icc_collection_select' ) %>
-            <th> </th>
-        <% end %>
-        <th> </th>
-        <%  if  @required_form_elements.include?('button_choose_this_design') %>
-            <th> </th>
-        <% end %>
-        <%  if  @required_form_elements.include?('button_choose_this_item') %>
-            <th></th>
-        <% end %>
-      </tr>
-      </thead>
-      <tbody>
+                            <!--hidden submit_tag referenced by javascripts from popups,etc.--><!--hidden submit_tag referenced by javascripts from popups,etc.--><!--hidden submit_tag referenced by javascripts from popups,etc.--><!--hidden submit_tag referenced by javascripts from popups,etc.--><!--hidden submit_tag referenced by javascripts from popups,etc.-->
+                            <%=  submit_tag 'special_submit' , :id => "special_submit" , :style=> "display:none;",     data: { role: "none"}      %>
+                            <!--hidden links mostly clicked by javascripts from popups--><!--hidden links mostly clicked by javascripts from popups--><!--hidden links mostly clicked by javascripts from popups--><!--hidden links mostly clicked by javascripts from popups--><!--hidden links mostly clicked by javascripts from popups-->
+                            <a href="#"  style="display:none !important;" class="breast_prints_link"  id="breast_prints_link" data-role="button">Breast  prints</a>
 
-      <tr>
-                    <td colspan="20">
+                            <!--begin hidden_field_tags--><!--begin hidden_field_tags--><!--begin hidden_field_tags--><!--begin hidden_field_tags--><!--begin hidden_field_tags-->
+                            <%=  hidden_field_tag "add_to_cart_type", "normal"   %>
+                             <%= hidden_field_tag "side", @side  %>
+                            <%=  hidden_field_tag "department_id", @department.id     if  @required_form_elements.include?('hidden_department_id_field' )  if @department   %>
+                            <%=  hidden_field_tag "item_id", @item.id     if  @item     %>
+                            <%#=  hidden_field_tag "the_parameter_item_id", @parameter_item.id  if @parameter_item        %>
+                            <%=  hidden_field_tag "add_combo",'1'     if  @required_form_elements.include?('hidden_add_combo_field' )     %>
+                            <%#=  hidden_field_tag "design_id", @design.id     if  @required_form_elements.include?('hidden_design_id_field' )     %>
+                            <%=  hidden_field_tag "design_id", @design.id     if  @design     %>
 
-                                            <!--  incomplete symbiont based   -->
-                                            <%=  submit_tag 'Add item to Cart and complete', data: { role: "button", theme:'b' }    if  @required_form_elements.include?('button_choose_this_item')     %>
+                            <% if  @purchases_entry  %>
+                                                    <%=  hidden_field_tag "purchases_entry_id", @purchases_entry.id      %>
+                            <% elsif @purchase and @purchase.symbiote %>
+                                                    <%=  hidden_field_tag "purchases_entry_id", @purchase.symbiote.id       %>
+                            <% end %>
 
-
-                                            <!--  purchases entry based -->
-                                            <%=  submit_tag 'Update',  data: { role: "button", theme:'b' }     if  @required_form_elements.include?('button_change_size_or_color')  %>
+                            <%=  hidden_field_tag "crest_id",  @breast_print.id if @breast_print  %>
+                            <%=  hidden_field_tag "show_wide_specsheet", @show_wide_specsheet  %>
+                            <%=  hidden_field_tag "back_design_id", @back_design.id  if @back_design  %>
+                            <!--end hidden_field_tags--> <!--end hidden_field_tags--> <!--end hidden_field_tags--> <!--end hidden_field_tags--> <!--end hidden_field_tags--> <!--end hidden_field_tags--> <!--end hidden_field_tags--> <!--end hidden_field_tags--> <!--end hidden_field_tags--> <!--end hidden_field_tags-->
 
 
-                                            <%#=  submit_tag 'Choose a different shirt style',  data: { role: "button", theme:'a' }     if  @required_form_elements.include?('button_change_size_or_color')  %>
-                                            <%#=  submit_tag 'Choose a different design',  data: { role: "button", theme:'a' }     if  @required_form_elements.include?('button_change_size_or_color')  %>
-                                            <%#=  submit_tag 'Choose', data: { role: "button", theme:'b' }    if  @required_form_elements.include?('button_choose')     %>
+                            <%   if  @required_form_elements.include?('button_choose_this_item') %>
+                                                    <!--  incomplete symbiont with design master, waiting for item to complete  --> <!--  incomplete symbiont with design master, waiting for item to complete  --> <!--  incomplete symbiont with design master, waiting for item to complete  --> <!--  incomplete symbiont with design master, waiting for item to complete  -->
+                                                    <%=  submit_tag 'Add item to Cart and complete', data: { role: "button", theme:'b' }    if  @required_form_elements.include?('button_choose_this_item')     %>
+                                                    <%= render :partial => "change_options" %>
+                            <% end %>
 
-                                            <% if params[:item_id] and params[:design_id] %>
-                                                                    <!--   @item and @design  parameters based combination  -->
-                                                                    <%#=  submit_tag 'Add to cart', data: { role: "button", theme:'b' }    if  @required_form_elements.include?('button_choose')     %>
-                                                                    <%=  submit_tag 'Change shirt' ,  :style=> "display:none;",    :id => "change_shirt" , data: { role: "none"}    if  @required_form_elements.include?('button_choose')     %>
-                                                                    <%=  submit_tag 'Change design',  :style=> "display:none;",  :id => "change_design",   data: { role: "none" }    if  @required_form_elements.include?('button_choose')     %>
+                            <%   if  @required_form_elements.include?('button_choose_this_design')  %>
+                                                    <!--  incomplete symbiont with item  master, waiting for design  to complete  --><!--  incomplete symbiont with item  master, waiting for design  to complete  --><!--  incomplete symbiont with item  master, waiting for design  to complete  --><!--  incomplete symbiont with item  master, waiting for design  to complete  -->
+                                                    <%=  submit_tag 'Add Design to Cart and complete',  data: { role: "button", theme:'b' }   %>
+                                                    <%= render :partial => "change_options" %>
+                            <% end %>
 
-
-                                                                      <a href="#change_design_options" data-rel="popup" data-position-to="window" data-transition="pop"  data-role="button" data-icon="gear" data-iconpos="left" data-theme="a">Design  options   </a>
-                                                                      <div data-role="popup" id="change_design_options" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;background-color: #ffffff;">
-                                                                                        <!--<h3>Design options</h3>-->
-                                                                                        <p>Design options:</p>
-                                                                                        <a href="#"  data-role="button" data-icon="arrow-l" data-iconpos="left" data-theme="b"  onclick="$('#breast_prints_link').trigger('click');" >Change  small design (breast print)</a>
-                                                                                        <a href="/cart/place_incomplete_symbiont_on_hold"  data-role="button" data-icon="arrow-l" data-iconpos="left" data-theme="b">Swap side design goes on</a>
-                                                                                        <a href="#" data-role="button" data-icon="arrow-l" data-iconpos="left" data-theme="b" onclick="$('#change_shirt').trigger('click');">Keep this design and change shirt styles</a>
-                                                                                        <a href="index.html" data-rel="back"  data-role="button" data-icon="arrow-l" data-iconpos="left" data-theme="a"  class="no_loader">Cancel</a>
-                                                                      </div>
-
-                                                                      <a href="#change_shirt_options" data-rel="popup" data-position-to="window" data-transition="pop"  data-role="button" data-icon="gear" data-iconpos="left" data-theme="a">Shirt options   </a>
-                                                                      <div data-role="popup" id="change_shirt_options" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;background-color: #ffffff;">
-                                                                                        <!--<h3>Design options</h3>-->
-                                                                                        <p>Change shirt options:</p>
-                                                                                        <!--<a href="/cart/place_incomplete_symbiont_on_hold"  data-role="button" data-icon="arrow-l" data-iconpos="left" data-theme="b">Change  small design (breast print)</a>-->
-                                                                                        <a href="/cart/place_incomplete_symbiont_on_hold"  data-role="button" data-icon="arrow-l" data-iconpos="left" data-theme="b">Swap side design goes on</a>
-                                                                                        <a href="#" data-role="button" data-icon="arrow-l" data-iconpos="left" data-theme="b"  onclick="$('#change_design').trigger('click');">Keep this shirt  and change designs</a>
-                                                                                        <a href="index.html" data-rel="back"  data-role="button" data-icon="arrow-l" data-iconpos="left" data-theme="a"  class="no_loader">Cancel</a>
-                                                                      </div>
+                            <%   if  @required_form_elements.include?('button_change_size_or_color') %>
+                                                  <!--  purchases entry based --><!--  purchases entry based --><!--  purchases entry based --><!--  purchases entry based --><!--  purchases entry based --><!--  purchases entry based --><!--  purchases entry based --><!--  purchases entry based --><!--  purchases entry based --><!--  purchases entry based --><!--  purchases entry based -->
+                                                   <%=  submit_tag 'Update',  data: { role: "button", theme:'b' }   %>
+                                                    <%= render :partial => "change_options" %>
+                            <% end %>
 
 
+                            <% if params[:item_id] and params[:design_id] and   @required_form_elements.include?('button_choose')   %>
+                                                  <!--   @item and @design  parameters based combination  --><!--   @item and @design  parameters based combination  --><!--   @item and @design  parameters based combination  --><!--   @item and @design  parameters based combination  --><!--   @item and @design  parameters based combination  -->
+                                                   <%=  submit_tag 'Choose', data: { role: "button", theme:'b' }      %>
 
-                                            <% else %>
-                                                                  <!--   singular item or item without combination shown   -->
-                                                                  <%=  submit_tag 'Choose', data: { role: "button", theme:'b' }    if  @required_form_elements.include?('button_choose')     %>
-                                            <% end %>
+                                                   <%= render :partial => "change_options" %>
 
-
-                                            <%=  submit_tag 'Update Item', data: { role: "button", theme:'b' }    if  @required_form_elements.include?('button_update_this_item')     %>
-                                            <%=  submit_tag 'Choose Design',  data: { role: "button", theme:'b' }     if  @required_form_elements.include?('button_choose_this_design')  %>
-                    </td>
-      </tr>
-
-      <tr>
-                    <td class="back_button choice"><%= link_to "Back" , :back   ,:class => "ui-btn"  %></td>
-                    <% if @crest_prints and @crest_prints.size > 0 and  @item.category.prefix == 'rp'  %>
-                         <%=  hidden_field_tag "back_design_id", @back_design.id  %>
-                        <td class="breast_button choice">
-                                        <!--<a href="/specsheet/crest_prints_list/<%#= @back_design.id %>"   class="ui-btn">Breast  prints</a></td>-->
-                                        <a href="#"  class="breast_prints_link"  id="breast_prints_link" data-role="button">Breast  prints</a></td>
-                    <% end %>
-                    <%   if  @required_form_elements.include?('icc_collection_select' ) %>
-                        <td class="dimension_selector choice">
-                                      <select name="item_class_component[item_id]" id="item_class_component_item_id"  data-native-menu="false">
-                                      <%=   options_for_select( @item_class_components.collect {|p| [ p.dimensions , p.item_id ] } ,  @selected_item_id.to_s  )      %>
-                                      </select>
-
-                                      <%#=  select("item_class_component", "item_id", @item_class_components.collect {|p| [ p.dimensions , p.item_id ] } ,{:selected =>  @selected_item_id  } )      if  @required_form_elements.include?('icc_collection_select' )   %>
-                                      <!--<select name="CreditCardExpirationYear" id="CreditCardExpirationYear" data-native-menu="false">-->
-                                        <!--<%#=  options_for_select(QuoteTenderEntry.years , @selected_year  )  %>-->
-                                      <!--</select>-->
-                        </td>
-                    <% end %>
-
-                    <td class="choose_button choice">
-                      <%#=  observe_field :item_class_component_item_id, :frequency => 2, :update => 'specsheet',  :url => { :action => 'update_specsheet',:design_id => @design , :department_id => @department_id ,:purchases_entry_id => @purchases_entry, :show_wide_specsheet => @show_wide_specsheet   } ,  :with => 'item_id'      if  @required_form_elements.include?('icc_collection_select' )        %>
+                            <% else %>
+                                                      <%  if  @required_form_elements.include?('button_choose') %>
+                                                                                        <!--   singular item or item without combination shown   -->  <!--   singular item or item without combination shown   -->  <!--   singular item or item without combination shown   -->  <!--   singular item or item without combination shown   -->  <!--   singular item or item without combination shown   -->
+                                                                                        <%=  submit_tag 'Choose', data: { role: "button", theme:'b' }    if  @required_form_elements.include?('button_choose')     %>
+                                                     <% end %>
+                            <% end %>
 
 
-                      <%=  hidden_field_tag "department_id", @department.id     if  @required_form_elements.include?('hidden_department_id_field' )  if @department   %>
-                      <%#=  hidden_field_tag "item_id", @item.id     if  @required_form_elements.include?('hidden_item_id_field' )     %>
-                      <%=  hidden_field_tag "item_id", @item.id     if  @item     %>
-                      <%=  hidden_field_tag "the_parameter_item_id", @parameter_item.id  if @parameter_item        %>
-                      <%=  hidden_field_tag "add_combo",'1'     if  @required_form_elements.include?('hidden_add_combo_field' )     %>
-                      <%=  hidden_field_tag "design_id", @design.id     if  @required_form_elements.include?('hidden_design_id_field' )     %>
-                      <%=  hidden_field_tag "at_design", @design.id     if  @design     %>
-                      <%=  hidden_field_tag "purchases_entry_id", @purchases_entry.id    if  @required_form_elements.include?('hidden_purchases_entry_id_field' )      %>
-
-                      <% if @breast_print %>
-                                    <%=  hidden_field_tag "crest_id",  @breast_print.id  %>
-                     <% else %>
-                                    <%=  hidden_field_tag "crest_id", params[:crest_id] || nil %>
-                    <% end %>
-
-                      <%=  hidden_field_tag "show_wide_specsheet", @show_wide_specsheet  %>
-                      <%#=  submit_tag 'Choose' , data: { role: "button", theme:'b' }    if  @required_form_elements.include?('button_choose')     %>
-                      <%#=  submit_tag 'Choose Item'  , data: { role: "button", theme:'b' }    if  @required_form_elements.include?('button_choose_this_item')     %>
-                      <%#=  submit_tag 'Update Item'  , data: { role: "button", theme:'b' }    if  @required_form_elements.include?('button_update_this_item')     %>
-                      <%#=  submit_tag 'Choose Design' , data: { role: "button", theme:'b' }     if  @required_form_elements.include?('button_choose_this_design')  %>
-                      <%#=  submit_tag 'Submit' , data: { role: "button", theme:'b' }     if  @required_form_elements.include?('button_change_size_or_color')  %>
+                            <% if  @required_form_elements.include?('button_update_this_item')  %>
+                                                    <!--    @purchases_entry with incomplete symbiont   --> <!--    @purchases_entry with incomplete symbiont   --> <!--    @purchases_entry with incomplete symbiont   --> <!--    @purchases_entry with incomplete symbiont   --> <!--    @purchases_entry with incomplete symbiont   --> <!--    @purchases_entry with incomplete symbiont   -->
+                                                    <%=  submit_tag 'Update Item', data: { role: "button", theme:'b' }     %>
+                            <% end  %>
 
 
-                      <%  if  @required_form_elements.include?('button_choose_this_design') %>
-                                                <td class="other_button choice" ><a href='#designs_panel'  data-role="button" data-icon="delete" data-iconpos="left" data-theme="a">Change design</a>  </td>
-                                                <td><a href="#designing_options" data-rel="popup" data-position-to="window" data-transition="pop"  data-role="button" data-icon="delete" data-iconpos="left" data-theme="a">Change Item   </a> </td>
-                        <% end %>
-                        <%  if  @required_form_elements.include?('button_choose_this_item') %>
-                                                <td><a href='#items_panel'  data-role="button" data-icon="delete" data-iconpos="left" data-theme="a">Change item</a></td>
-                                                <td><a href="#designing_options" data-rel="popup" data-position-to="window" data-transition="pop"  data-role="button" data-icon="delete" data-iconpos="left" data-theme="a">Change Design   </a> </td>
-                        <% end %>
-
-                    </td>
-
-      </tr>
-      </tbody>
-    </table>
+                            <%   if  @required_form_elements.include?('icc_collection_select' ) %>
+                                                      <% logger.debug "@selected_item_id: " + @selected_item_id.to_s %>
+                                                      <select name="item_class_component[item_id]" id="item_class_component_item_id"  data-native-menu="false">
+                                                                 <%=   options_for_select( @item_class_components.collect {|p| [ p.dimensions , p.item_id ] } ,  @selected_item_id.to_s  )      %>
+                                                      </select>
+                            <% end %>
 <% end %>
 
-
-
+<!--  end  form /cart/add_to_cart --><!--  end  form /cart/add_to_cart --><!--  end  form /cart/add_to_cart --><!--  end  form /cart/add_to_cart --><!--  end  form /cart/add_to_cart --><!--  end  form /cart/add_to_cart --><!--  end  form /cart/add_to_cart --><!--  end  form /cart/add_to_cart -->
 

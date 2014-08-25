@@ -6,6 +6,7 @@
 !doc/*
 !lib/*
 !instructions/*
+!non_ruby_source/*
 !script/*
 !test/*
 !/vendor/*
