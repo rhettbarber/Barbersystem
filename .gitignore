@@ -4,6 +4,8 @@
 !public/assets_production/
 !app/*
 !doc/*
+!config/initializers/*
+!config/routes.rb
 !lib/*
 #!instructions/*
 !non_ruby_source/*
