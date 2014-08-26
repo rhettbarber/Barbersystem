@@ -1,0 +1,43 @@
+
+http://blog.jayfields.com/2006/06/ruby-kernel-system-exec-and-x.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+irb(main):001:0> result = %x[uptime]
+=> "13:16  up 4 days,  1:30, 2 users, load averages: 0.39 0.29 0.23\n"
+irb(main):002:0> p result
+"13:16  up 4 days,  1:30, 2 users, load averages: 0.39 0.29 0.23\n"
+
+
+
+
+
+
+irb(main):014:0> s = system 'uptime'
+10:56  up 3 days, 23:10, 2 users, load averages: 0.17 0.17 0.14
+=> true
+irb(main):015:0> s.class
+=> TrueClass
+irb(main):016:0> $?.class
+=> Process::Status
+Process::Status does contain the exitstatus Fixnum, but it does not appear to capture any errors that may occur.
+irb(main):019:0> s = system "ruby -e 'invalid ruby $%^&'"
+-e:1: parse error, unexpected $undefined., expecting $
+invalid ruby $%^&
+              ^
+=> false

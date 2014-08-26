@@ -1,0 +1,30 @@
+There is one catch, if we have no new records in one of the intervals, than the count will be missing from the returned OrderedHash - we need to guard against this by injecting '0' counts for the missing intervals:
+
+> stat-graphs-ex2.rb
+
+# first, we will take the union of the date arrays and sort our results
+# ex: [1,2] | [2,3] => [1, 2, 3]
+months = (@users.keys | @votes.keys | @bookmarks.keys).sort
+ 
+# This is a tricky one. For the x-axis labels, Gruff requires a hash in the form of:
+#   { 1 => "label", 2=> "label2" ... }
+# Hence, we have a 'months' array, which we need to convert it into a hash. 
+#  1) * is the splat operator - it will split our array and pass each value separately to the block
+#    - give it a try, in console do: p *[1,2,3]
+#  2) Next, we will iterate over every value returned by the * operator and
+#     replace it with a [index, value] pair
+#    - ex: [a,b,c] => [[1,a],[2,b],[3,c]]
+#  3) Now we flatten the resulting array and obtain:
+#      [[1,a],[2,b],[3,c]].flatten => [1,a,2,b,3,c]
+#  4) Result is passed to the hash constructor, which converts every tuple
+#     into a key => value pair. Giving us:
+#     Hash[[1,a,2,b,3,c]] => { 1 => 'a', 2 => 'b', 3 => 'c' }
+#
+#   Phew.. 
+keys = Hash[*months.collect {|v| [months.index(v),v.to_s] }.flatten]
+ 
+# Now we can iterate over all keys ans insert the user values for the months
+# that have a count, and otherwise provide a '0'. 
+g.data("Users", keys.collect {|k,v| @users[v].nil? ? 0 : @users[v]})
+ 
+

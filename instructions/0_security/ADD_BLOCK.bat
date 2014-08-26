@@ -1,0 +1,1 @@
+netsh ipsec static  add filter filterlist="BLOCK_SOME_IPS" srcaddr="67.223.80.36" dstaddr="Me"

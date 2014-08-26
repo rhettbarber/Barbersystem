@@ -1,0 +1,21 @@
+As always, you can install Rails 2.2 through RubyGems. 
+We now require RubyGems 1.3.1, so be sure to update that first: gem update --system
+
+Then you can install Rails: gem install rails
+
+If you’re updating an existing application, 
+you can run rake rails:update to get the latest JavaScript files and scripts.
+
+
+From the RubyGems post-update-to-1.3.1 message (which is a bit late if you’re having trouble upgrading):
+
+NOTE: RubyGems 1.1 and 1.2 have problems upgrading when there is no rubygems-update installed. 
+
+You will need to follow the second set of update instructions if you see “Nothing to update”.
+
+NOTE: You may have to run the command twice if you have any previosly installed rubygems-update gems.
+
+If you have an older version of RubyGems installed, then you can still do it in two steps:
+
+$ gem install rubygems-update  (again, might need to be admin/root)
+$ update_rubygems              (... here too)

@@ -1,0 +1,30 @@
+def crypt_number
+  c = cipher
+  c.encrypt
+  c.key = key
+  c.iv = self.iv = generate_iv(passphrase)
+end
+
+def cipher
+  Open::Cipher::Cipher.new("aes-256-cbc")
+end
+
+def key
+  Digest::SHA256.digest(@@CreditCardSecretKey)
+end
+
+def generate_iv(Passphrase)
+  encode_into_base64(DIgest::SHA1.hexdigest(passphrase))
+end
+
+def encode_into_base64
+  Base64.encode64(string).chomp
+end 
+
+
+c = cipher is just caller the cipher method defined above, which just  
+does Open::Cipher::Cipher.new("aes-256-cbc"), i.e. give me a new  
+cipher object that does 256bit AES in CBC mode. c.encrypt says that  
+you want to encrypt and the iv is the initialization vector. You can  
+read up on that if you want, essentially it's just one of the  
+parameters for the encryption 

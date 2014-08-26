@@ -1,0 +1,7 @@
+ # the shipping gem had to be modified to ### prefs = "shipping.yml" in base.rb
+ 
+ 
+  ups_license_number: 7C0F90B0C9F0B730
+  ups_account: 392182
+  ups_user: rhettro
+  ups_password: onlineart
