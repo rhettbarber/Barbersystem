@@ -5,7 +5,7 @@
 !app/*
 !doc/*
 !lib/*
-!instructions/*
+#!instructions/*
 !non_ruby_source/*
 !script/*
 !test/*
