@@ -14,7 +14,7 @@ $(".page_content").remove();
 <%# if @first_page %>
                         $('#yield_content').prepend('<%= escape_javascript(   render partial: "page/content"  ) %>').trigger('create');
 <%# else %>
-//                        $('#yield_content').append('<%= escape_javascript(   render partial: "page/content"  ) %>').trigger('create');
+//                        $('#yield_content').append('<%#= escape_javascript(   render partial: "page/content"  ) %>').trigger('create');
 <%# end %>
 
 
