@@ -1,0 +1,37 @@
+<%= form_for(@featured_item) do |f| %>
+  <% if @featured_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@featured_item.errors.count, "error") %> prohibited this featured_item from being saved:</h2>
+
+      <ul>
+      <% @featured_item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :url %><br />
+    <%= f.text_area :url %>
+  </div>
+  <div class="field">
+    <%= f.label :image_name %><br />
+    <%= f.text_area :image_name %>
+  </div>
+  <div class="field">
+    <%= f.label :active %><br />
+    <%= f.check_box :active %>
+  </div>
+  <div class="field">
+    <%= f.label :carousel_name %><br />
+    <%= f.text_field :carousel_name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

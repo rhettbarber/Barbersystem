@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<p><%=  image_tag  "http://dixieoutfitters.com/images/carousel/featured/" + @featured_item.image_name %> </p>
+
+
+<p>
+  <b>Description:</b>
+  <%= @featured_item.description %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @featured_item.url %>
+</p>
+
+<p>
+  <b>Image name:</b>
+  <%= @featured_item.image_name %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @featured_item.active %>
+</p>
+
+<p>
+  <b>Carousel name:</b>
+  <%= @featured_item.carousel_name %>
+</p>
+
+
+<%= link_to 'Edit', edit_featured_item_path(@featured_item) %> |
+<%= link_to 'Back', featured_items_path %>

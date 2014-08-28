@@ -1,0 +1,33 @@
+<h1>Listing featured_items</h1>
+
+<table>
+  <tr>
+    <th>Image</th>
+    <th>Description</th>
+    <th>Url</th>
+    <th>Image name</th>
+    <th>Active</th>
+    <th>Carousel name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @featured_items.each do |featured_item| %>
+  <tr>
+    <td><%=  image_tag  "http://dixieoutfitters.com/images/carousel/featured/" + featured_item.image_name %> </td>
+    <td><%= featured_item.description %></td>
+    <td><%= featured_item.url %></td>
+    <td><%= featured_item.image_name %></td>
+    <td><%= featured_item.active %></td>
+    <td><%= featured_item.carousel_name %></td>
+    <td><%= link_to 'Show', featured_item %></td>
+    <td><%= link_to 'Edit', edit_featured_item_path(featured_item) %></td>
+    <td><%= link_to 'Destroy', featured_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Featured item', new_featured_item_path %>
