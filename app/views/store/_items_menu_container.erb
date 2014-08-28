@@ -2,11 +2,11 @@
 <% if ssl_required? or @dont_show_items.include?( request.path  ) %>
                              <% logger.debug "items_menu skipped due to ssl requirement" %>
 <% else %>
-                            <div id="items_menu" style="width: 100%;display: inline-block;min-height: 200px;text-align: center;">
+                            <div id="items_menu" style="width: 100%;display: inline-block;text-align: center;">
                                                   <%#= image_tag "/assets/throbber.gif" %>
                                                   <!--Loading ..-->
                                                   <div id="throbber">
-                                                                    <%= image_tag "/assets/throbber.gif" %>
+                                                                    <%= image_tag "/assets/throbber.gif", :style => "height:176px;" %>
                                                   </div>
                             </div>
                             <%= render "layout_elements/breadcrumb"   %>

@@ -1,73 +1,149 @@
 
+<%# if @test %>
+<img alt="" class="float_100" src="http://dixieoutfitters.com/images/home_page_images/tshirtsinabox/tshirtsinabox.jpg" />
+
+  <style type="text/css">
 
 
+  .new-designs-carousel-image-container img {
+      display: block;
+      margin-left: auto;
+      margin-right:auto;
+      height: 200px;;
+  }
+
+  #new-designs-carousel {
+      background-image: url(http://dixieoutfitters.com/images/backgrounds_repeating/light-plaid.jpg);
+      /*background-size: 100%;*/
+  }
+  </style>
 
 
+<!--<div class="carousel_link_container_100"><a data-role="button" data-theme="b" href="/store/new_designs">Shop New Designs </a></div>-->
+<a  href="/store/new_designs"><img alt="" class="float_100" src="http://dixieoutfitters.com/images/home_page_images/tshirtsinabox/brand-new-designs.gif" />
 
+<div id="new-designs-carousel" style="float: left;width: 100%;height: 230px;">
 
-<style type="text/css">
-    .carousel_link_container_100 {
-        width: 100%;
-        float: left;;
-    }
-    .carousel_link_container_50 {
-        width: 50%;
-        float: left;;
-    }
-
-        .stock-carousel {
-            background-image: url(http://cdn.dixieoutfitters.com/images/carousel/dixie_homepage_june/carousel-background.jpg);
-            background-size: 100%;
-        }
-
-        .carousel_image_container img {
-            display: block;
-            margin-left: auto;
-            margin-right:auto;
-        }
-
-</style>
-
-
-
-<div style="float: left;max-width: 100%;"><img src="http://cdn.dixieoutfitters.com/images/carousel/dixie_homepage_june/preserving-southern-heritage.png"></div>
-<div class="stock-carousel" style="float: left;width: 100%;">
-  <div class="carousel_item_container">
-    <div class="carousel_image_container"><img src="http://cdn.dixieoutfitters.com/images/carousel/dixie_homepage_june/stickers.png"></div>
-    <div class="carousel_link_container_100"> <a data-theme="b" data-role="button" href="/store">Shop now! </a></div>
-    <!--<div class="carousel_link_container"> <a data-role="button"  href="/store?department_id=22">Shop products </a></div>-->
-  </div>
-
-  <div class="carousel_item_container">
-    <div class="carousel_image_container"><img  data-lazy="http://cdn.dixieoutfitters.com/images/carousel/dixie_homepage_june/injustice.png"></div>
-    <div class="carousel_link_container_100"> <a data-theme="b"  data-role="button" href="/store/category_items/35/672">Shop Dixie All Over shirts </a></div>
-    <!--<div class="carousel_link_container"> <a data-role="button"  href="/store?department_id=12">Shop products </a></div>-->    -
-  </div>
-
-  <div class="carousel_item_container">
-    <div class="carousel_image_container"><img  data-lazy="http://cdn.dixieoutfitters.com/images/carousel/dixie_homepage_june/battle-flags.png"></div>
-    <div class="carousel_link_container_100"> <a data-theme="b"  data-role="button" href="/store/category_items/35/910">Shop Virginia Flaggers shirts </a></div>
-    <!--<div class="carousel_link_container"> <a data-role="button"  href="/store?department_id=26">Shop products </a></div>-->
-  </div>
-
+  <% @new_designs.sort_by{|a| a.ItemLookupCode   }.each do |item| -%>
+                                            <%= render :partial => "carousel_item", :locals => {:item => item} %>
+   <% end %>
 </div>
 
-
+</a>
 
 <script type="text/javascript">
 
     $(document).ready(function(){
 
-        $('.stock-carousel').slick({
-                        lazyLoad: 'ondemand',
+        $('#new-designs-carousel').slick({
+            lazyLoad: 'ondemand',
+            infinite: true,
+            dots:false,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            speed: 300,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            slide: 'div',
+            cssEase: 'linear' ,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
                         infinite: true,
-                        dots:false,
-                        autoplay: true,
-                        autoplaySpeed: 5000,
-                        speed: 300,
-            //            fade: true,
-                        slide: 'div',
-                        cssEase: 'linear'
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 750,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+
+    })
+</script>
+
+ <%# end %>
+
+
+<style type="text/css">
+
+    .featured-designs-carousel-image-container img {
+        display: block;
+        margin-left: auto;
+        margin-right:auto;
+       height: 220px;;
+    }
+
+    #featured-designs-carousel {
+        background-image: url(http://dixieoutfitters.com/images/backgrounds_repeating/light-plaid.jpg);
+        /*background-size: 100%;*/
+    }
+</style>
+
+
+<img alt="" class="float_100" src="http://dixieoutfitters.com/images/home_page_images/tshirtsinabox/many-styles.gif" />
+<div id="featured-designs-carousel" style="float: left;width: 100%;height: 330px;">
+
+  <% @featured_items.each do |item| -%>
+      <%= render :partial => "featured_item", :locals => {:item => item} %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        $('#featured-designs-carousel').slick({
+//            lazyLoad: 'ondemand',
+            autoplay: true,
+            dots: true,
+            autoplaySpeed: 5000,
+            speed: 300,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            slide: 'div',
+            cssEase: 'linear' ,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 750,
+                    settings: {
+                        infinite: true,
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        infinite: true,
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
         });
 
     })
@@ -86,7 +162,133 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <% if @previous %>
+
+
+
+
+
+
+
+    <style type="text/css">
+        .carousel_link_container_100 {
+            width: 100%;
+            float: left;;
+        }
+        .carousel_link_container_50 {
+            width: 50%;
+            float: left;;
+        }
+
+        .stock-carousel {
+            background-image: url(http://cdn.dixieoutfitters.com/images/carousel/dixie_homepage_june/carousel-background.jpg);
+            background-size: 100%;
+        }
+
+        .carousel_image_container img {
+            display: block;
+            margin-left: auto;
+            margin-right:auto;
+        }
+
+    </style>
+
+
+
+    <div style="float: left;max-width: 100%;"><img src="http://cdn.dixieoutfitters.com/images/carousel/dixie_homepage_june/preserving-southern-heritage.png"></div>
+    <div class="stock-carousel" style="float: left;width: 100%;">
+      <div class="carousel_item_container">
+        <div class="carousel_image_container"><img src="http://cdn.dixieoutfitters.com/images/carousel/dixie_homepage_june/stickers.png"></div>
+        <div class="carousel_link_container_100"> <a data-theme="b" data-role="button" href="/store">Shop now! </a></div>
+        <!--<div class="carousel_link_container"> <a data-role="button"  href="/store?department_id=22">Shop products </a></div>-->
+      </div>
+
+      <div class="carousel_item_container">
+        <div class="carousel_image_container"><img  data-lazy="http://cdn.dixieoutfitters.com/images/carousel/dixie_homepage_june/injustice.png"></div>
+        <div class="carousel_link_container_100"> <a data-theme="b"  data-role="button" href="/store/category_items/35/672">Shop Dixie All Over shirts </a></div>
+        <!--<div class="carousel_link_container"> <a data-role="button"  href="/store?department_id=12">Shop products </a></div>-->    -
+      </div>
+
+      <div class="carousel_item_container">
+        <div class="carousel_image_container"><img  data-lazy="http://cdn.dixieoutfitters.com/images/carousel/dixie_homepage_june/battle-flags.png"></div>
+        <div class="carousel_link_container_100"> <a data-theme="b"  data-role="button" href="/store/category_items/35/910">Shop Virginia Flaggers shirts </a></div>
+        <!--<div class="carousel_link_container"> <a data-role="button"  href="/store?department_id=26">Shop products </a></div>-->
+      </div>
+
+    </div>
+
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+            $('.stock-carousel').slick({
+                lazyLoad: 'ondemand',
+                infinite: true,
+                dots:false,
+                autoplay: true,
+                autoplaySpeed: 5000,
+                speed: 300,
+                //            fade: true,
+                slide: 'div',
+                cssEase: 'linear'
+            });
+
+        })
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <p><img alt="" src="/images/home_page_images/forrest.jpg" /></p>
 

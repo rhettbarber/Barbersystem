@@ -22,4 +22,5 @@
 //= require jstree.min.js
 //= require slick.js
 //= require jquery.share.js
+//= require jquery.rwdImageMaps.min.js
 

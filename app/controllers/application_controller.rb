@@ -30,6 +30,26 @@ class ApplicationController < ActionController::Base
   before_filter :before_filter
   after_filter :after_filter
 
+  def new_and_featured_items
+            @new_designs ||= Item.limit(15).order("DateCreated DESC").where("department_id in (?)", @website.default_design_department_ids.split(/,/) )
+            unless @new_designs
+              logger.warn "NO ITEMS FOUND ON index ACTION !!!!"
+            else
+              logger.warn "@new_designs.size: #{@new_designs.size}"
+              #FMCache.write  new_designs_cache_string ,   @items
+            end
+
+            @featured_items  ||= FeaturedItem.limit(15)
+            unless @featured_items
+              logger.warn "NO @featured_items FOUND ON index ACTION !!!!"
+            else
+              logger.warn "@featured_items.size: #{@featured_items.size}"
+              #FMCache.write  new_designs_cache_string ,   @items
+            end
+  end
+
+
+
 
   ###########################################################################################################
   def  at_side  #  moved to application_controller prepare_combination_variables

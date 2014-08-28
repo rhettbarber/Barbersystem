@@ -1,3 +1,27 @@
+
+
+.float_50 {
+    float: left;
+}
+.float_100 {
+    float: left;
+}
+
+.carousel_link_container_100 {
+    width: 100%;
+    float: left;;
+}
+.carousel_link_container_50 {
+    width: 50%;
+    float: left;;
+}
+
+
+
+
+
+
+
 #throbber{
     position:relative;
     margin-left:auto;

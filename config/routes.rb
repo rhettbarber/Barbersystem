@@ -3,6 +3,9 @@
 
 ThreeTwoThree::Application.routes.draw do
 
+  resources :featured_items
+
+
   #match '*_store', :controller => 'store', :action => 'category_items'
   match '*_store/view_details', :controller => 'specsheet', :action => 'index'
   #match '*_store/browse', :controller => 'store', :action => 'category_items'

@@ -290,6 +290,10 @@ end
 
   def show_page_on_index
 
+
+    new_and_featured_items
+
+
     if params[:first_page] == 'true'
           @first_page = 'true'
           #firsstt

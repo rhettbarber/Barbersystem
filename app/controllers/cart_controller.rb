@@ -651,7 +651,9 @@ def delete_incomplete_symbiote
                                   flash[:notice] = "Your chosen item was forgotten"
                                   params.delete(  :purchases_entry_id   )
 
-                                  g = "test params to see if purchases_entry_id is deleted"
+                                  logger.debug  "test params to see if purchases_entry_id is deleted"
+                                 logger.debug "params.inspect: " + params.inspect
+
 
                                   if referring_action
                                             if  referring_action.include?('cart')

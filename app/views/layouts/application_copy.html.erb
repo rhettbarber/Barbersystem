@@ -51,15 +51,39 @@
 
                                                                                                 <span id="yield_content">
 
+
+                                                                                                                   <% home_urls = ['/index', '/', '/p/home', '/p/home-mobile', '/p/home_mobile']   %>
+                                                                                                                    <%   unless home_urls.include?(request.path) %>
                                                                                                                                               <%= render "store/items_menu_container" %>
+                                                                                                                   <% end %>
 
-                                                                                                                                              <%= yield %>
+                                                                                                                     <%= yield %>
 
-                                                                                                                                             <%   if ['/index', '/', '/p/home', '/p/home-mobile', '/p/home_mobile'].include?(request.path) %>
-                                                                                                                                                                    <%= render "page/home_page_carousels" %>
-                                                                                                                                             <% end %>
+                                                                                                                   <%   if home_urls.include?(request.path) %>
+
+
+                                                                                                                                              <%= render "store/items_menu_container" %>
+                                                                                                                                                <%= render "page/home_page_carousels" %>
+
+
+                                                                                                                   <% end %>
+
                                                                                                 </span>
 
+                                                                                                 <span class="other_content">
+                                                                                                                 <%   if ['/index', '/', '/p/home', '/p/home-mobile', '/p/home_mobile'].include?(request.path) %>
+
+                                                                                                                                  <% if @website.name == 'barber_store' %>
+                                                                                                                                                 <%= render "layout_elements/slick_carousel"   %>
+                                                                                                                                  <% end %>
+
+                                                                                                                                  <%= render "layout_elements/homepage_options"   %>
+
+                                                                                                                  <% end %>
+                                                                                                   </span>
+
+
+                                                                                                   <br class="clear" style="height: 1px;" />
                                                                               </div>
                                                     </div>
                                     <!--   #######################  END CONTENT    ####################### -->
@@ -70,11 +94,6 @@
                                   </div>
                                   <%#= render :partial => "layout_elements/footer"    %>
                 </div><!-- page -->
-
-
-
-
-
 </body>
 
 

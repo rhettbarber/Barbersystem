@@ -4,11 +4,18 @@ class ListingAll  < ActiveRecord::Base
 # www.mssqltips.com/tip.asp?tip=1610
 #I had to create a view with combined fields so microsoft full text search would treat the columns equal
 #
-#Views have to have a special index created for schema binding
-#
-#ALTER VIEW [dbo].[listing_designs] WITH SCHEMABINDING AS
-#SELECT     id, Description, ItemLookupCode,  COALESCE (CAST( id AS varchar(MAX)), '')  + ' ' +  ItemLookupCode  + ' ' +  COALESCE (CAST( Notes AS varchar(MAX)), '')  + ' ' +  COALESCE (CAST( Description AS varchar(MAX)), '')   + ' ' +  COALESCE (CAST( ExtendedDescription AS varchar(MAX)), '')  AS items_combined
-#FROM         dbo.item
+
+  # ALTER VIEW [dbo].[listing_alls] WITH SCHEMABINDING AS
+  # SELECT     dbo.Item.ID as id, dbo.Item.ItemLookupCode, dbo.Item.Description, dbo.Item.Notes, dbo.Item.DepartmentID AS department_id, dbo.Item.CategoryID AS category_id,
+  #                                                                                                                                                       dbo.Category.Name AS category_name, dbo.Item.PictureName, dbo.Item.ExtendedDescription, dbo.Item.Inactive, dbo.Item.WebItem, dbo.Category.web_category,
+  #                                                                                                                                                                            dbo.category_classes.search_results_set, dbo.category_classes.item_type, dbo.category_classes.name, dbo.Department.Name AS department_name,
+  #                                                                                                                                                                                                                                                                                                       dbo.Item.SaleType
+  # FROM         dbo.Item INNER JOIN
+  # dbo.Category ON dbo.Item.CategoryID = dbo.Category.ID INNER JOIN
+  # dbo.category_classes ON dbo.Category.category_class_id = dbo.category_classes.id INNER JOIN
+  # dbo.Department ON dbo.Item.DepartmentID = dbo.Department.ID
+  # WHERE     (dbo.Item.WebItem = 1) AND (dbo.Item.Inactive = 0) AND (dbo.Category.web_category = '1')
+
 
   def description_before_color_and_size
     description_before = StringScanner.new(self.Description)
@@ -249,3 +256,12 @@ class ListingAll  < ActiveRecord::Base
     #
 
 end
+
+
+
+#old
+#Views have to have a special index created for schema binding
+#
+#ALTER VIEW [dbo].[listing_designs] WITH SCHEMABINDING AS
+#SELECT     id, Description, ItemLookupCode,  COALESCE (CAST( id AS varchar(MAX)), '')  + ' ' +  ItemLookupCode  + ' ' +  COALESCE (CAST( Notes AS varchar(MAX)), '')  + ' ' +  COALESCE (CAST( Description AS varchar(MAX)), '')   + ' ' +  COALESCE (CAST( ExtendedDescription AS varchar(MAX)), '')  AS items_combined
+#FROM         dbo.item

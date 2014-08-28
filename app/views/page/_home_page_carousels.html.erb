@@ -1,0 +1,150 @@
+
+<style type="text/css">
+
+
+    .new-designs-carousel-image-container img {
+        display: block;
+        margin-left: auto;
+        margin-right:auto;
+        height: 200px;;
+    }
+
+    #new-designs-carousel {
+        background-image: url(http://dixieoutfitters.com/images/backgrounds_repeating/light-plaid.jpg);
+        /*background-size: 100%;*/
+    }
+</style>
+
+
+<!--<div class="carousel_link_container_100"><a data-role="button" data-theme="b" href="/store/new_designs">Shop New Designs </a></div>-->
+<a  href="/new_designs"><img alt="" class="float_100" src="http://dixieoutfitters.com/images/home_page_images/tshirtsinabox/brand-new-designs.gif" />
+
+  <div id="new-designs-carousel" style="float: left;width: 100%;height: 230px;">
+
+    <% @new_designs.sort_by{|a| a.ItemLookupCode   }.each do |item| -%>
+        <%= render :partial => "page/carousel_item", :locals => {:item => item} %>
+    <% end %>
+  </div>
+
+</a>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        $('#new-designs-carousel').slick({
+            lazyLoad: 'ondemand',
+            infinite: true,
+            dots:false,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            speed: 300,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            slide: 'div',
+            cssEase: 'linear' ,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 750,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+
+    })
+</script>
+
+
+
+
+<style type="text/css">
+
+    .featured-designs-carousel-image-container img {
+        display: block;
+        margin-left: auto;
+        margin-right:auto;
+        height: 220px;;
+    }
+
+    #featured-designs-carousel {
+        background-image: url(http://dixieoutfitters.com/images/backgrounds_repeating/light-plaid.jpg);
+        /*background-size: 100%;*/
+    }
+</style>
+
+
+<img alt="" class="float_100" src="http://dixieoutfitters.com/images/home_page_images/tshirtsinabox/many-styles.gif" />
+<div id="featured-designs-carousel" style="float: left;width: 100%;height: 330px;">
+
+  <% @featured_items.each do |item| -%>
+      <%= render :partial => "page/featured_item", :locals => {:item => item} %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        $('#featured-designs-carousel').slick({
+//            lazyLoad: 'ondemand',
+            autoplay: true,
+            dots: true,
+            autoplaySpeed: 5000,
+            speed: 300,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            slide: 'div',
+            cssEase: 'linear' ,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 750,
+                    settings: {
+                        infinite: true,
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        infinite: true,
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+
+    })
+</script>
+
+
+

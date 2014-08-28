@@ -6,10 +6,20 @@ class ListingDesign  < ActiveRecord::Base
 #
 #Views have to have a special index created for schema binding
 #
-#ALTER VIEW [dbo].[listing_designs] WITH SCHEMABINDING AS
-#SELECT     id, Description, ItemLookupCode,  COALESCE (CAST( id AS varchar(MAX)), '')  + ' ' +  ItemLookupCode  + ' ' +  COALESCE (CAST( Notes AS varchar(MAX)), '')  + ' ' +  COALESCE (CAST( Description AS varchar(MAX)), '')   + ' ' +  COALESCE (CAST( ExtendedDescription AS varchar(MAX)), '')  AS items_combined
-#FROM         dbo.item
 
+  # ALTER VIEW [dbo].[listing_designs] WITH SCHEMABINDING AS
+  # SELECT     dbo.Item.ID as id, dbo.Category.Name AS category_name, dbo.Department.Name AS department_name, dbo.Item.Description, dbo.Item.Notes, dbo.Item.ItemLookupCode,
+  #                                                                                          dbo.Item.ExtendedDescription, dbo.Item.PictureName, dbo.category_classes.search_results_set, dbo.Department.ID AS department_id,
+  #                                                                                                                                                                                                            dbo.Item.CategoryID AS category_id
+  # FROM         dbo.Category INNER JOIN
+  # dbo.category_classes ON dbo.Category.category_class_id = dbo.category_classes.id INNER JOIN
+  # dbo.Item ON dbo.Category.ID = dbo.Item.CategoryID INNER JOIN
+  # dbo.Department ON dbo.Category.DepartmentID = dbo.Department.ID
+  # WHERE     (dbo.Item.WebItem = 1) AND (dbo.Item.Inactive = 0) AND (dbo.Category.web_category = '1') AND (dbo.Category.visible = 1) AND
+  # (dbo.category_classes.search_results_set = 'designs')
+  #
+  #
+  #
   def item_class_number
     a = StringScanner.new(self.PictureName)
     if a.nil?

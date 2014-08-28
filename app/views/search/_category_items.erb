@@ -4,7 +4,7 @@
     <% if item %>
         <% if item.category_name %>
                                     <li class="sale_type_<%= item.SaleType %>">
-                                      <a href="/specsheet/<%= item.id %>/<%= item.department_id  %>">
+                                      <a href="/specsheet/<%= item.id %>/<%= item.department_id  %>/<%= item.category_id  %>">
                                                     <div style="min-height: 300px;">
 
                                                                     <% if item.PictureName.include? ".jpg" or  item.PictureName.include? ".png" %>
