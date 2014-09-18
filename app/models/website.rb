@@ -13,6 +13,23 @@ cattr_accessor  :is_administrator_subdomain
 cattr_accessor  :current_website_id
 
 
+
+
+  def breast_print_category_ids
+          hwcids = Set.new
+
+          breast_print_categories = Category.unscoped.where("Name = ?", "pocket prints"   )
+
+          breast_print_categories.each do |whc|
+                    hwcids.add( whc.id )
+          end
+
+          return hwcids.to_a
+  end
+
+
+
+
   def self.day_and_hour
     return  Time.now.strftime("%j") + "_" + Time.now.strftime("%H")
   end

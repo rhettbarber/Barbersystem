@@ -5,6 +5,8 @@
                       <%= render(:partial => "layout_elements/shared_meta") %>
                       <%= render(:partial => "layout_elements/title") %>
 
+                      <%= javascript_include_tag "/assets_production/non_compiled_assets/remove_console"  if Rails.env.production? %>
+
                       <%= stylesheet_link_tag    "application", :media => "all" %>
                       <%= javascript_include_tag    "application" %>
 

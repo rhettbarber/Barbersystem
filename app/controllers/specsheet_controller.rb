@@ -67,10 +67,15 @@ end
             #	begin
             #@crest_print =  CrestPrint.where(:item_id =>  params[:crest_id]  ).first
             if  params[:purchases_entry_id] and !@purchase
-                                   redirect_back_or_default( '/store/category_items' )
+                                redirect_back_or_default( '/store/category_items' )
              else
-                                 @notes = []
-                                 @purchases_entry = @purchase.purchases_entries.find( params[:purchases_entry_id] )         if  params[:purchases_entry_id]
+                                @notes = []
+                                begin
+                                                  logger.debug   "trying to find @purchases_entry"
+                                                 @purchases_entry = @purchase.purchases_entries.find( params[:purchases_entry_id] )         if  params[:purchases_entry_id]
+                                rescue
+                                                  logger.debug   "not @purchases_entry"
+                                  end
                                   #        @purchases_entry_slave = @purchases_entry.slave_of_symbiont_pair if @purchases_entry
                                   #        @purchases_entry_master = @purchases_entry.master_of_symbiont_pair if @purchases_entry
                                  @parameter_design = Item.find(params[:design_id]) if params[:design_id]
@@ -330,16 +335,21 @@ end
  def view_details_parameter_item_and_parameter_design_and_no_incomplete_symbiont
                    logger.debug "VIEW_DETAILS-SINGULAR-------------------------@parameter_item && @incomplete_symbiont == false"
                  #A. item getting item and item_class_component info if applicable
-                 @design = @parameter_design
-                 @item = @parameter_item
-                 @selected_item_id  =  @parameter_item.id
-                 @item_class_components = @item.item_class_component.item_class.all_valid_components  unless  @item.item_class_component.nil?
+
+                 if  @singular_item_customer == true
+                               @item  = @parameter_design
+                 else
+                            @design = @parameter_design
+                              @item = @parameter_item
+                 end
+                 @selected_item_id  =  @parameter_item.id    if @item
+                 @item_class_components = @item.item_class_component.item_class.all_valid_components  if @item and   @item.item_class_component
                  @required_form_elements << 'hidden_item_id_field'   if @item unless @item_class_components
                  @required_form_elements << 'button_choose'  unless @purchases_entry
                  @required_form_elements << 'icc_collection_select'   if @item_class_components
                  @required_form_elements << 'hidden_department_id_field'
                  @required_form_elements << 'hidden_add_combo_field'   if @item and @design
-                 if @item.category.use_generic_department == '1'
+                 if  @item and @item.category and @item.category.use_generic_department == '1'
                                  @department = @item.department
                                  logger.debug "VIEW_DETAILS-SINGULAR DEPARMENT--SET BY---------------@department = @item.department"
                  end

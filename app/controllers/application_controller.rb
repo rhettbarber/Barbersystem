@@ -31,7 +31,9 @@ class ApplicationController < ActionController::Base
   after_filter :after_filter
 
   def new_and_featured_items
-            @new_designs ||= Item.limit(15).order("DateCreated DESC").where("department_id in (?)", @website.default_design_department_ids.split(/,/) )
+            @new_designs ||= Item.limit(35).order("DateCreated DESC").where("department_id in (?) and category_id NOT in (?)", @website.default_design_department_ids.split(/,/)  , @website.breast_print_category_ids      ).all
+           g = 'g'
+
             unless @new_designs
               logger.warn "NO ITEMS FOUND ON index ACTION !!!!"
             else
@@ -39,7 +41,7 @@ class ApplicationController < ActionController::Base
               #FMCache.write  new_designs_cache_string ,   @items
             end
 
-            @featured_items  ||= FeaturedItem.limit(15)
+            @featured_items  ||= FeaturedItem.limit(35)
             unless @featured_items
               logger.warn "NO @featured_items FOUND ON index ACTION !!!!"
             else

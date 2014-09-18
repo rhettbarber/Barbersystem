@@ -24,6 +24,8 @@ function displaySaleTags( singular_item_customer_status) {
                                     console.log("customer is  singular type. show sale items");
                                     $(".sale_type_1").addClass("tags");
                                     $(".sale_label_1").show();
+                                    $(".sale_type_2").addClass("tags");
+                                    $(".sale_label_2").show();
                 } else {
                                     console.log("customer is not singular type");
                 }

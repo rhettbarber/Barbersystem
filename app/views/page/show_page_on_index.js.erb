@@ -10,12 +10,22 @@ $.mobile.loading('hide');
 
 $(".page_content").remove();
 
+if ( $(".home-page-carousel-to-hide").length == 0 ) {
+                        $(".home-page-carousel").attr('class', 'home-page-carousel-to-hide');
+                        console.log("hide carousel next time");
+        }  else {
+                        $(".home-page-carousel-to-hide").remove();
+                        console.log("hide carousel");
+}
 
-<%# if @first_page %>
+
+
+
+<% if @first_page %>
                         $('#yield_content').prepend('<%= escape_javascript(   render partial: "page/content"  ) %>').trigger('create');
-<%# else %>
-//                        $('#yield_content').append('<%#= escape_javascript(   render partial: "page/content"  ) %>').trigger('create');
-<%# end %>
+<% else %>
+                        $('#yield_content').append('<%= escape_javascript(   render partial: "page/content"  ) %>').trigger('create');
+<% end %>
 
 
 console.log("begin resizable image maps");

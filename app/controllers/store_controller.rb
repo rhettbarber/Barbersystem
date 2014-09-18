@@ -60,16 +60,23 @@ end
   end
  ############################################################################################################
   def new_designs
-                #new_designs_cache_string = "records_" + @website.name +  "_new_designs_week_" +  Website.week_number
-                #logger.debug "new_designs_cache_string: " + new_designs_cache_string
-                #@items = FMCache.read new_designs_cache_string
-                @new_designs  ||= Item.limit(50).order("DateCreated DESC").where("department_id in (?)", @website.default_design_department_ids.split(/,/) )
-                unless @new_designs
-                              logger.warn "NO ITEMS FOUND ON NEW DESIGNS ACTION !!!!"
-                else
-                              logger.warn "@items.size: #{@new_designs.size}"
-                              #FMCache.write  new_designs_cache_string ,   @items
-                end
+
+               new_and_featured_items
+
+                @items   = @new_designs
+
+      s = "s"
+
+                # #new_designs_cache_string = "records_" + @website.name +  "_new_designs_week_" +  Website.week_number
+                # #logger.debug "new_designs_cache_string: " + new_designs_cache_string
+                # #@items = FMCache.read new_designs_cache_string
+                # @new_designs  ||= Item.limit(50).order("DateCreated DESC").where("department_id in (?)", @website.default_design_department_ids.split(/,/) )
+                # unless @new_designs
+                #               logger.warn "NO ITEMS FOUND ON NEW DESIGNS ACTION !!!!"
+                # else
+                #               logger.warn "@items.size: #{@new_designs.size}"
+                #               #FMCache.write  new_designs_cache_string ,   @items
+                # end
   end
   ############################################################################################################
   def sale_designs
