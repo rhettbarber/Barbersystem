@@ -5,19 +5,22 @@
                       <%= render(:partial => "layout_elements/shared_meta") %>
                       <%= render(:partial => "layout_elements/title") %>
 
-                      <%= javascript_include_tag "/assets_production/non_compiled_assets/remove_console"  if Rails.env.production? %>
+                      <% if request.protocol == "https://" %>
+                                    <%= javascript_include_tag   "/assets_production/non_compiled_assets/remove_console.js"  if Rails.env.production? %>
+                      <% else %>
+                                    <%= javascript_include_tag    "http://cdn.dixieoutfitters.com/assets_production/non_compiled_assets/remove_console.js"  if Rails.env.production? %>
+                      <% end %>
 
                       <%= stylesheet_link_tag    "application", :media => "all" %>
                       <%= javascript_include_tag    "application" %>
 
                      <style type="text/css">
                                      .ui-panel-wrapper {
-                                                background: url(http://dixieoutfitters.com/images/backgrounds_repeating/<%= @website.name %>_now.jpg) !important;
+                                         <% if request.protocol == "https://" %>
+                                                background: url(/images/backgrounds_repeating/<%= @website.name %>_now.jpg) !important;
+                                         <% else %>
+                                                background: url(http://cdn.dixieoutfitters.com/images/backgrounds_repeating/<%= @website.name %>_now.jpg) !important;
+                                         <% end %>
                                      }
                      </style>
-
-
-
 </head>
-
-

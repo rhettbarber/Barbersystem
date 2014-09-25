@@ -3,7 +3,6 @@
 
 <%= render :partial => "layout_elements/head" %>
 
-
 <script>
                     //    $.ajaxSetup ({
                     //// Disable caching of AJAX responses
@@ -14,7 +13,6 @@
 
 
 <body>
-
                 <div data-role="page"   id="<%= controller_name + "_" + action_name %>" class="<%= controller_name + "_" + action_name %> application jqm-demos"  data-dom-cache="false">
 
                                   <% unless controller_name == 'purchases' %>
@@ -43,9 +41,11 @@
                                                     <div id="the_yield" style="margin-left:auto;margin-right:auto;overflow:hidden;">
 
                                                                              <div class="<%=  @show_class %> yield">
-
-                                                                                                 <%= javascript_include_tag "/assets/non_compiled_assets/initiate_functions.js" %>
-
+                                                                                                 <% if request.protocol == "https://" %>
+                                                                                                            <%= javascript_include_tag  "/assets/non_compiled_assets/initiate_functions.js" %>
+                                                                                                 <% else %>
+                                                                                                            <%= javascript_include_tag  "http://cdn.dixieoutfitters.com/assets/non_compiled_assets/initiate_functions.js" %>
+                                                                                                <% end %>
 
                                                                                                  <%= render "application/flash_messages" %>
 
@@ -56,7 +56,7 @@
 
                                                                                                                                               <%= yield %>
 
-                                                                                                                                             <%   if ['/index', '/', '/p/home', '/p/home-mobile', '/p/home_mobile'].include?(request.path) %>
+                                                                                                                                             <%   if ['/index', '/', '/p/home', '/p/new-home', '/p/new-home'].include?(request.path) %>
                                                                                                                                                                     <%= render "page/home_page_carousels" %>
                                                                                                                                              <% end %>
                                                                                                 </span>
@@ -71,59 +71,9 @@
                                   </div>
                                   <%#= render :partial => "layout_elements/footer"    %>
                 </div><!-- page -->
-
-
-
-
-
 </body>
-
-
 </html>
 
 
 <%= render "layout_elements/render_information"    %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- <% if @old_flash %>
-
-    <% if flash and  flash[:notice].kind_of?(Array) %>
-        <%  flash[:notice] =  flash[:notice].flatten %>
-    <% end %>
-    <% if flash %>
-        <% if flash[:notice].nil? or flash[:notice] == []   -%>
-            <% logger.debug("flash is nil!")    %>
-        <% else %>
-            <% logger.debug("flash is:" + flash[:notice].inspect )    %>
-            <div class="ui-bar ui-bar-a">
-              <h3 style="margin-top: 8px; float: left;">Attention: </h3>
-              <div style="margin-top: 4px; float: right;">
-                <% if @close_button %>   <a title="Button" href="#" data-role="button" data-theme="e" data-iconpos="notext" data-icon="delete">Button</a><% end %>
-              </div>
-              <p style="clear: both; font-size: 85%; margin-bottom: 8px;"><%=  flash[:notice] %></p>
-            </div>
-        <% end -%>
-    <% end -%>
-
-
-<% end %>
-
-
-
-
-
-
-
 

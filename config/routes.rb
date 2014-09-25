@@ -171,7 +171,7 @@ ThreeTwoThree::Application.routes.draw do
   match "p/delete_static_page_cache/:page_id", :controller => "page", :action => "delete_static_page_cache"
 
 
-  match "index" => 'page#show_page_on_index', :page_id  => 'home-mobile'
+  match "index" => 'page#show_page_on_index', :page_id  => 'new-home'
 
 
   match "search/scroll/:department_id/:page", :controller => "search", :action => "scroll"
@@ -379,8 +379,13 @@ ThreeTwoThree::Application.routes.draw do
   match "/christian_store(/department/:department_id)(/category/:category_id)", :to => "browse#index"
   match "/christian_store(/department/:department_id)(/category/:category_id)", :to => "browse#index"
 
-  root :to => 'page#show_page_on_index', :page_id  => 'home-mobile'
+  root :to => 'page#show_page_on_index', :page_id  => 'new-home'
 
+  # match "*" , :controller => 'page', :action => 'show_page_on_index'  ,  :page_id  => 'new-home'
+
+  # match "*" , 'page/show_page_on_index/new-home'
+
+  match '*a', :to => 'page#show_page_on_index'
 
 end
 
