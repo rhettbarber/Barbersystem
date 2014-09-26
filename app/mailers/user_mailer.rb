@@ -8,7 +8,14 @@ class UserMailer < ActionMailer::Base
     #@subject    += 'Request to change your password'
     #@body[:url]  = "https://" + website.domain + "/account/reset_password/#{user.password_reset_code}"
 
-    @url  = "https://" + $request.server_name  + "/account/reset_password/#{user.password_reset_code}"
+
+   if Rails.env.to_s  == "production"
+                    @url  = "https://"  +  website.domain   + "/account/reset_password/#{user.password_reset_code}"
+    else
+                    @url  = "https://" + $request.server_name  + "/account/reset_password/#{user.password_reset_code}"
+   end
+
+
 
     logger.warn "#################################"
     logger.warn "#################################"
