@@ -290,16 +290,17 @@ end
 
   def show_page_on_index
 
+          new_and_featured_items
 
-    new_and_featured_items
+          if params[:first_page] == 'true'
+                        @first_page = 'true'
+                        # new_and_featured_items
+                        #firsstt
+         else
+                         # not_firstt
+          end
 
-
-    if params[:first_page] == 'true'
-          @first_page = 'true'
-          #firsstt
-   else
-             # not_firstt
-    end
+     g = "g"
 
     #baddd
               #initialize_variables_except_store

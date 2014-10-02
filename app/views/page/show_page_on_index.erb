@@ -43,6 +43,25 @@
     }
 
 
+
+
+    function getPageById( page_id  ) {
+        console.log("-------------begin getPageById")
+        $.mobile.loading('show');
+        $(".other_content").hide();
+
+        console.log("page_id: " + page_id  );
+
+        jQuery.ajax({
+            type: "GET",
+            dataType: 'script',
+            url: "/c/p/" +  page_id   ,
+            data: {   }
+        });
+        console.log("-------------end getPageById")
+    }
+
+
  function getPage( data ) {
                          console.log("-------------begin getPage")
                          $.mobile.loading('show');

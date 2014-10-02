@@ -1,10 +1,12 @@
-<h1>Listing featured_items</h1>
+
+<h1>Listing Featured Items</h1>
 
 <table>
   <tr>
     <th>Image</th>
     <th>Description</th>
     <th>Url</th>
+    <th>OnClick</th>
     <th>Image name</th>
     <th>Active</th>
     <th>Carousel name</th>
@@ -15,9 +17,10 @@
 
 <% @featured_items.each do |featured_item| %>
   <tr>
-    <td><%=  image_tag  "http://dixieoutfitters.com/images/carousel/featured/" + featured_item.image_name %> </td>
+    <td><%=  image_tag  "http://cdn.dixieoutfitters.com" + featured_item.image_name, :size => "100x100" %> </td>
     <td><%= featured_item.description %></td>
     <td><%= featured_item.url %></td>
+    <td><%= featured_item.onclick %></td>
     <td><%= featured_item.image_name %></td>
     <td><%= featured_item.active %></td>
     <td><%= featured_item.carousel_name %></td>
@@ -31,3 +34,7 @@
 <br />
 
 <%= link_to 'New Featured item', new_featured_item_path %>
+
+
+
+

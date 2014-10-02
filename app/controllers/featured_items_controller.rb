@@ -1,9 +1,10 @@
 class FeaturedItemsController < ApplicationController
   before_filter  :initialize_variables
   before_filter :redirect_unless_admin
+  skip_before_filter :verify_authenticity_token , :only => :destroy
 
   def index
-    @featured_items = FeaturedItem.all
+    @featured_items = FeaturedItem.where("website_id = ?", @website.id ). all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -42,6 +43,7 @@ class FeaturedItemsController < ApplicationController
   # POST /featured_items.json
   def create
     @featured_item = FeaturedItem.new(params[:featured_item])
+    @featured_item.website_id = @website.id
 
     respond_to do |format|
       if @featured_item.save

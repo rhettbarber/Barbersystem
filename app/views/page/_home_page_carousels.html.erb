@@ -1,150 +1,252 @@
 <div class="home-page-carousel">
-<style type="text/css">
 
 
-    .new-designs-carousel-image-container img {
-        display: block;
-        margin-left: auto;
-        margin-right:auto;
-        height: 200px;;
-    }
 
-    #new-designs-carousel {
-        background-image: url(http://cdn.dixieoutfitters.com/images/backgrounds_repeating/light-plaid.jpg);
-        /*background-size: 100%;*/
-    }
-</style>
+<% if @featured_new_designs  %>
+                <style type="text/css">
 
 
-<!--<div class="carousel_link_container_100"><a data-role="button" data-theme="b" href="/store/new_designs">Shop New Designs </a></div>-->
-<a  href="/new_designs"><img alt="" class="float_100" src="http://cdn.dixieoutfitters.com/images/home_page_images/tshirtsinabox/brand-new-designs.gif" />
-
-  <div id="new-designs-carousel" style="float: left;width: 100%;height: 230px;">
-
-    <% @new_designs.sort_by{|a| a.ItemLookupCode   }.each do |item| -%>
-        <%= render :partial => "page/carousel_item", :locals => {:item => item} %>
-    <% end %>
-  </div>
-
-</a>
-
-<script type="text/javascript">
-
-    $(document).ready(function(){
-
-        $('#new-designs-carousel').slick({
-            lazyLoad: 'ondemand',
-            infinite: true,
-            dots:false,
-            autoplay: true,
-            autoplaySpeed: 5000,
-            speed: 300,
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            slide: 'div',
-            cssEase: 'linear' ,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
-                        infinite: true,
-                        dots: true
+                    .new-designs-carousel-image-container img {
+                        display: block;
+                        margin-left: auto;
+                        margin-right:auto;
+                        height: 200px;;
                     }
-                },
-                {
-                    breakpoint: 750,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1
+
+                    #new-designs-carousel {
+                        background-image: url(http://cdn.dixieoutfitters.com/images/backgrounds_repeating/light-plaid.jpg);
+                        /*background-size: 100%;*/
                     }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
+                </style>
+
+
+                <!--<div class="carousel_link_container_100"><a data-role="button" data-theme="b" href="/store/new_designs">Shop New Designs </a></div>-->
+                <a  href="/new_designs"><img alt="" class="float_100" src="http://cdn.dixieoutfitters.com/images/carousel/brand-new-designs-grey.gif" />
+
+                  <div id="new-designs-carousel" style="float: left;width: 100%;">
+
+                    <%# @new_designs.sort_by{|a| a.ItemLookupCode   }.each do |item| -%>
+
+                    <% @featured_new_designs.each do |item| -%>
+                                     <%= render :partial => "page/featured_item", :locals => {:item => item} %>
+                    <% end %>
+                  </div>
+
+                </a>
+
+                <script type="text/javascript">
+
+                    $(document).ready(function(){
+
+                        $('#new-designs-carousel').slick({
+                            lazyLoad: 'ondemand',
+                            infinite: true,
+                            dots:false,
+                            autoplay: true,
+                            autoplaySpeed: 5000,
+                            speed: 300,
+                            slidesToShow: 3,
+                            slidesToScroll: 1,
+                            slide: 'div',
+                            cssEase: 'linear' ,
+                            responsive: [
+                                {
+                                    breakpoint: 1024,
+                                    settings: {
+                                        slidesToShow: 3,
+                                        slidesToScroll: 1,
+                                        infinite: true,
+                                        dots: true
+                                    }
+                                },
+                                {
+                                    breakpoint: 750,
+                                    settings: {
+                                        slidesToShow: 2,
+                                        slidesToScroll: 1
+                                    }
+                                },
+                                {
+                                    breakpoint: 600,
+                                    settings: {
+                                        slidesToShow: 1,
+                                        slidesToScroll: 1
+                                    }
+                                }
+                            ]
+                        });
+
+                    })
+                </script>
+<% end %>
+
+
+
+
+
+  <% if @featured_items %>
+
+                <style type="text/css">
+
+                    .featured-designs-carousel-image-container img {
+                        display: block;
+                        margin-left: auto;
+                        margin-right:auto;
+                        height: 220px;;
                     }
-                }
-            ]
-        });
 
-    })
-</script>
-
-
-
-
-<style type="text/css">
-
-    .featured-designs-carousel-image-container img {
-        display: block;
-        margin-left: auto;
-        margin-right:auto;
-        height: 220px;;
-    }
-
-    #featured-designs-carousel {
-        background-image: url(http://cdn.dixieoutfitters.com/images/backgrounds_repeating/light-plaid.jpg);
-        /*background-size: 100%;*/
-    }
-</style>
-
-
-<img alt="" class="float_100" src="http://cdn.dixieoutfitters.com/images/home_page_images/tshirtsinabox/many-styles.gif" />
-<div id="featured-designs-carousel" style="float: left;width: 100%;height: 330px;">
-
-  <% @featured_items.each do |item| -%>
-      <%= render :partial => "page/featured_item", :locals => {:item => item} %>
-  <% end %>
-</div>
-
-<script type="text/javascript">
-
-    $(document).ready(function(){
-
-        $('#featured-designs-carousel').slick({
-//            lazyLoad: 'ondemand',
-            autoplay: true,
-            dots: true,
-            autoplaySpeed: 5000,
-            speed: 300,
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            slide: 'div',
-            cssEase: 'linear' ,
-            responsive: [
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
-                        infinite: true,
-                        dots: true
+                    #featured-designs-carousel {
+                        background-image: url(http://cdn.dixieoutfitters.com/images/backgrounds_repeating/light-plaid.jpg);
+                        /*background-size: 100%;*/
                     }
-                },
-                {
-                    breakpoint: 750,
-                    settings: {
-                        infinite: true,
-                        slidesToShow: 2,
-                        slidesToScroll: 1
-                    }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        infinite: true,
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }
-            ]
-        });
+                </style>
 
-    })
-</script>
+
+               <% if @website.name == "barber_store" %>
+                                        <img alt="" class="float_100" src="http://cdn.dixieoutfitters.com/images/carousel/featured-stock-transfers-grey.gif" />
+               <% else %>
+                                        <img alt="" class="float_100" src="http://cdn.dixieoutfitters.com/images/carousel/many-styles.gif" />
+                <% end %>
+
+                <div id="featured-designs-carousel" style="float: left;width: 100%;">
+
+                  <% @featured_items.each do |item| -%>
+                      <%= render :partial => "page/featured_item", :locals => {:item => item} %>
+                  <% end %>
+                </div>
+
+                <script type="text/javascript">
+
+                    $(document).ready(function(){
+
+                        $('#featured-designs-carousel').slick({
+                //            lazyLoad: 'ondemand',
+                            autoplay: true,
+                            dots: true,
+                            autoplaySpeed: 5000,
+                            speed: 300,
+                            slidesToShow: 3,
+                            slidesToScroll: 1,
+                            slide: 'div',
+                            cssEase: 'linear' ,
+                            responsive: [
+                                {
+                                    breakpoint: 1024,
+                                    settings: {
+                                        slidesToShow: 3,
+                                        slidesToScroll: 1,
+                                        infinite: true,
+                                        dots: true
+                                    }
+                                },
+                                {
+                                    breakpoint: 750,
+                                    settings: {
+                                        infinite: true,
+                                        slidesToShow: 2,
+                                        slidesToScroll: 1
+                                    }
+                                },
+                                {
+                                    breakpoint: 600,
+                                    settings: {
+                                        infinite: true,
+                                        slidesToShow: 1,
+                                        slidesToScroll: 1
+                                    }
+                                }
+                            ]
+                        });
+
+                    })
+                </script>
+<% end %>
+
+
+
+
+
+
+
+<% if @featured_custom_items  and @website.name == "barber_store"  %>
+
+    <style type="text/css">
+
+        .custom-products-carousel-image-container img {
+            display: block;
+            margin-left: auto;
+            margin-right:auto;
+            height: 220px;;
+        }
+
+        #custom-products-carousel {
+            background-image: url(http://cdn.dixieoutfitters.com/images/backgrounds_repeating/light-plaid.jpg);
+            /*background-size: 100%;*/
+        }
+    </style>
+
+
+
+        <img alt="" class="float_100" src="http://cdn.dixieoutfitters.com/images/carousel/custom-products-grey.gif" />
+
+        <div id="custom-products-carousel" style="float: left;width: 100%;">
+
+          <% @featured_custom_items.each do |item| -%>
+                            <%= render :partial => "page/featured_item", :locals => {:item => item} %>
+          <% end %>
+        </div>
+
+        <script type="text/javascript">
+
+            $(document).ready(function(){
+
+                $('#custom-products-carousel').slick({
+                    //            lazyLoad: 'ondemand',
+                    autoplay: true,
+                    dots: true,
+                    autoplaySpeed: 5000,
+                    speed: 300,
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    slide: 'div',
+                    cssEase: 'linear' ,
+                    responsive: [
+                        {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 3,
+                                slidesToScroll: 1,
+                                infinite: true,
+                                dots: true
+                            }
+                        },
+                        {
+                            breakpoint: 750,
+                            settings: {
+                                infinite: true,
+                                slidesToShow: 2,
+                                slidesToScroll: 1
+                            }
+                        },
+                        {
+                            breakpoint: 600,
+                            settings: {
+                                infinite: true,
+                                slidesToShow: 1,
+                                slidesToScroll: 1
+                            }
+                        }
+                    ]
+                });
+
+            })
+        </script>
+<% end %>
+
+
+
+
+
 
 
 </div>
