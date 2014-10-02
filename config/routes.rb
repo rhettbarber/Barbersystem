@@ -19,6 +19,7 @@ ThreeTwoThree::Application.routes.draw do
   match 'quote_tender_entries/credit_card', :controller => 'quote_tender_entries', :action => 'credit_card'
   match 'quote_tender_entries/net_30', :controller => 'quote_tender_entries', :action => 'net_30'
   match 'quote_tender_entries/cod_money_order_cashiers_check', :controller => 'quote_tender_entries', :action => 'cod_money_order_cashiers_check'
+  match 'quote_tender_entries/cod_check', :controller => 'quote_tender_entries', :action => 'cod_check'
   match 'ship_tos/choose_ship_to', :controller => 'ship_tos', :action => 'choose_ship_to'
   match 'ship_tos/shipping_services', :controller => 'ship_tos', :action => 'shipping_services'
   match 'ship_tos/set_shipping_charge_on_order/:shipping_service_id', :controller => 'ship_tos', :action => 'set_shipping_charge_on_order'
