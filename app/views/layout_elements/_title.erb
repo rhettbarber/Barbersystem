@@ -1,7 +1,7 @@
 <!-- Begin Shared Title -->
 <title>
 <% if @page and  @website  -%>
-          <%= @page.name  -%>
+          <%=  @website.domain + '/' + @page.name  -%>
 <% else -%>
 <%=  controller.controller_name + ' /'  +  controller.action_name.humanize -%>
 <% end -%>
