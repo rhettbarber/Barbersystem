@@ -1,7 +1,7 @@
 <div class="carousel_item_container">
   <div class="featured-designs-carousel-image-container">
 
-                                  <% if item.onclick %>
+                                  <% if item.onclick and item.onclick  != "" %>
                                                      <a href="#" onclick="<%= item.onclick %>"><img src="http://cdn.dixieoutfitters.com/<%= item.image_name %>" />  </a>
                                  <% else %>
                                                     <a href="<%= item.url %>"><img src="http://cdn.dixieoutfitters.com/<%= item.image_name %>" />  </a>
