@@ -28,7 +28,7 @@ def scroll
                                                                         logger.debug("@product_search_results.inspect: " + @product_search_results.inspect )
                                                                          logger.debug "CACHE FOUND SCROLL"
                                                                          logger.debug "CACHE FOUND SCROLL"
-                                                                         @paginated_results  =  @product_search_results.to_a.paginate(:page => params[:page] || 1, :per_page => 6  )
+                                                                         @paginated_results  =  @product_search_results.to_a.paginate(:page => params[:page] || 1, :per_page => 8  )
                                                                          @designs = true
                                        else
 
@@ -147,11 +147,11 @@ def scroll
                                                                        FMCache.write  website_scroll_items_cache_string ,    @product_search_results
 
                                                                         if  params[:page]
-                                                                                            @paginated_results  =  @product_search_results.to_a.paginate(:page => params[:page], :per_page => 6  )
+                                                                                            @paginated_results  =  @product_search_results.to_a.paginate(:page => params[:page], :per_page => 8  )
                                                                                              g = "g"
                                                                         else
                                                                                             logger.debug "need_page_params"
-                                                                                            @paginated_results  =  @product_search_results.to_a.paginate(:page =>  1, :per_page => 6  )
+                                                                                            @paginated_results  =  @product_search_results.to_a.paginate(:page =>  1, :per_page => 8  )
                                                                           end
 
                                         end
@@ -194,7 +194,7 @@ def scroll
                                                                   logger.warn "CACHE FOUND SEARCH"
                                                                   logger.warn "CACHE FOUND SEARCH"
                                                                   logger.warn "CACHE FOUND SEARCH"
-                                                                  @paginated_results  =  website_search_items.to_a.paginate(:page => params[:page] || 1, :per_page => 6  )
+                                                                  @paginated_results  =  website_search_items.to_a.paginate(:page => params[:page] || 1, :per_page => 8  )
                                                                   @designs = true
                                       else
                                                                   if  params[:query]  and   params[:query] != ""
@@ -385,7 +385,7 @@ def scroll
                                                end
                                                logger.debug "website_search_items: " + @product_search_results.inspect
                                                FMCache.write  @website_search_items_cache_string ,    @product_search_results
-                                               @paginated_results  =  @product_search_results.to_a.paginate(:page => params[:page] || 1, :per_page => 6  )
+                                               @paginated_results  =  @product_search_results.to_a.paginate(:page => params[:page] || 1, :per_page => 8  )
                                                 logger.debug "END search_garments ########################################"
                                                 logger.debug "END search_garments ########################################"
                                                 logger.debug "END search_garments ########################################"
