@@ -7,7 +7,7 @@ $("#specsheet").html(  '<%= escape_javascript( render :partial => "specsheet/spe
 
 <% if @item %>
                 $("#item_itemlookupcode").html("<%= @item.ItemLookupCode %>");
-                $("#item_extendeddescription").html("<%=    ActionView::Base.full_sanitizer.sanitize( @item.ExtendedDescription )    %>");
+                $("#item_extendeddescription").html("<%=    ActionView::Base.full_sanitizer.sanitize( @item.ExtendedDescription )[0..50]    %>...");
                 $("#item_description").html("<%= @item.description_before_color_and_size %>");
 <%else %>
                 console.log("not at_item")
