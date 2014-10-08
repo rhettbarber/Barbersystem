@@ -66,7 +66,7 @@
 
   <table id="specsheet_table" cellpadding="0" border="0">
     <td>
-      <img src="http://cdn.dixieoutfitters.com/images/item_specsheets/<%= @design.PictureName %>"
+      <img src="/images/item_specsheets/<%= @design.PictureName %>"
            alt="<%= @design.PictureName %>"
            style=" position: relative;
                    height:<%=   @combination_height     %>px;
@@ -76,7 +76,7 @@
     </td>
     <% if @breast_print == true %>
         <td>
-          <img src="http://cdn.dixieoutfitters.com/images/breast_prints/<%=  @breast_print_name   %>"
+          <img src="/images/breast_prints/<%=  @breast_print_name   %>"
                alt="<%= @breast_print_name %>"
                id ="front_design_image"
                style=" position: relative;
@@ -129,9 +129,9 @@
 
 
 
-    <% @product_background_image_name =  'http://cdn.dixieoutfitters.com/images/item_specsheets/' + @item.PictureName.gsub(".jpg", "")  + '.jpg' %>
-    <%  @front_design_image_name      =   'http://cdn.dixieoutfitters.com/images/item_specsheets/' + @front_design_name     %>
-    <%   @back_design_image_name     =    'http://cdn.dixieoutfitters.com/images/item_specsheets/' + @back_design.PictureName        %>
+    <% @product_background_image_name =  '/images/item_specsheets/' + @item.PictureName.gsub(".jpg", "")  + '.jpg' %>
+    <%  @front_design_image_name      =   '/images/item_specsheets/' + @front_design_name     %>
+    <%   @back_design_image_name     =    '/images/item_specsheets/' + @back_design.PictureName        %>
 
 
 <% end %>

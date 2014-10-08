@@ -61,7 +61,7 @@ end
  ############################################################################################################
   def new_designs
 
-              @new_designs ||= Item.limit(35).order("DateCreated DESC").where("department_id in (?) and category_id NOT in (?)", @website.default_design_department_ids.split(/,/)  , @website.breast_print_category_ids      ).all
+              @new_designs ||= Item.limit(55).order("DateCreated DESC").where("department_id in (?) and category_id NOT in (?)", @website.default_design_department_ids.split(/,/)  , @website.breast_print_category_ids      ).all
 
 
               unless @new_designs

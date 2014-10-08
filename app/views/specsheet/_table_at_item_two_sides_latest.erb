@@ -3,7 +3,7 @@
 <% end %>
 
 
-  <% @product_background_image_name =  'http://cdn.dixieoutfitters.com/images/item_specsheets/' + @item.PictureName.gsub(".png", "").gsub(".jpg", "")  + '.jpg'  %>
+  <% @product_background_image_name =  '/images/item_specsheets/' + @item.PictureName.gsub(".png", "").gsub(".jpg", "")  + '.jpg'  %>
 
   <%  @back_advanced_combination = AdvancedCombination.find_or_create_combo( @item, '0' )  if @item.item_class_component   %>
 
