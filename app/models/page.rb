@@ -49,6 +49,53 @@ belongs_to :page_type
 
 
 
+
+def self.traverse_directory(  pages, skipped_page_ids,  final_child  )
+                list_string    =  "<ul>"
+                the_page = ""
+                pages.each do |the_page|
+                               unless  skipped_page_ids.include? the_page.id
+                                              if final_child.id == the_page.id
+                                                                        if the_page.children == []
+                                                                                                                          list_string    +=       "<li data-type='page' data-slug='#{the_page.slug}'  data-page_id='#{the_page.id}'  data-jstree='{\"selected\":true}' >#{the_page.name}</li>"
+                                                                        else
+                                                                                                                          list_string    +=       "<li data-type='folder' data-slug='#{the_page.slug}'  data-page_id='#{the_page.id}' data-jstree='{\"selected\":true,\"opened\":true}'>#{the_page.name}"
+                                                                                                                          list_string    +=  Page.traverse_directory( the_page.children,skipped_page_ids,  final_child )
+                                                                                                                          list_string    +=  "</li>"
+                                                                        end
+                                              else
+                                                              if   final_child.ancestor_ids.include?(the_page.id)
+                                                                                                  list_string    +=       "<li data-type='folder' data-slug='#{the_page.slug}'  data-page_id='#{the_page.id}' class='jstree-open'>#{the_page.name}"
+                                                                                                  list_string    +=  Page.traverse_directory( the_page.children, skipped_page_ids, final_child )
+                                                                                                  list_string    +=  "</li>"
+                                                              else
+                                                                                                if the_page.children == []
+                                                                                                                      list_string    +=       "<li data-type='page' data-slug='#{the_page.slug}'  data-page_id='#{the_page.id}'>#{the_page.name}</li>"
+                                                                                                else
+                                                                                                                      list_string    +=       "<li data-type='folder' data-slug='#{the_page.slug}'  data-page_id='#{the_page.id}' class='jstree-closed'>#{the_page.name}</li>"
+                                                                                                end
+                                                              end
+                                              end
+                                end
+                end
+                list_string    +=   "</ul>"
+                return list_string
+  end
+
+
+
+
+
+ def ancestor_ids
+            anc_ids = Set.new
+            self.ancestors.each do |anc|
+                             anc_ids.add( anc.id)
+            end
+          return anc_ids
+end
+
+
+
   def delete_page_cache
     #C:\Users\RubyMine4\RubymineProjects\ThreeTwoThreeDevelopment\public\apache_root\christianoutfitters_us
     logger.warn( '##############################')

@@ -344,17 +344,20 @@ ThreeTwoThree::Application.routes.draw do
 
 
 
+  match "p/pages_navigation/:page_id", :controller => "page", :action => "pages_navigation"
 
-  match "p/pages_navigation/:page_id/:scope_by_page_id", :controller => "page", :action => "pages_navigation"
-  match "p/pages_navigation/:scope_by_page_id", :controller => "page", :action => "pages_navigation"
-  match "p/pages_navigation", :controller => "page", :action => "pages_navigation"
+
+
+  # match "p/pages_navigation/:page_id/:scope_by_page_id", :controller => "page", :action => "pages_navigation"
+  # match "p/pages_navigation/:scope_by_page_id", :controller => "page", :action => "pages_navigation"
+
 
   match 'p/shopping', :to => redirect("/store/category_items")
 
-  match "page/:page_id/:scope_by_page_id", :controller => "page", :action => "show_page_on_index"
+  # match "page/:page_id/:scope_by_page_id", :controller => "page", :action => "show_page_on_index"
   match "page/:page_id", :controller => "page", :action => "show_page_on_index"
 
-  match "p/:page_id/:scope_by_page_id", :controller => "page", :action => "show_page_on_index"
+  # match "p/:page_id/:scope_by_page_id", :controller => "page", :action => "show_page_on_index"
   match "p/:page_id", :controller => "page", :action => "show_page_on_index"
 
 
