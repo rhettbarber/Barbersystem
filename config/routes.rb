@@ -3,6 +3,10 @@
 
 ThreeTwoThree::Application.routes.draw do
 
+
+  match "p/home", :to => 'page#show_page_on_index', :page_id  => 'new-home'
+
+
   resources :featured_items
 
 
@@ -382,6 +386,9 @@ ThreeTwoThree::Application.routes.draw do
   match "/christian_store/category_browser(/department/:department_id)(/category/:category_id)", :to => "browse#index"
   match "/christian_store(/department/:department_id)(/category/:category_id)", :to => "browse#index"
   match "/christian_store(/department/:department_id)(/category/:category_id)", :to => "browse#index"
+
+
+
 
   root :to => 'page#show_page_on_index', :page_id  => 'new-home'
 

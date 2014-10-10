@@ -55,7 +55,15 @@
 
 
               <div data-role="collapsible"  class="main_menu_choices"   id="item_menu_choices" data-theme="b" data-icon="gear"  data-inset="true" >
-                                            <h3 style="width: 100%;">View Items</h3>
+                                            <h3 style="width: 100%;">
+
+                                              <% if @website.name == "barber_store" %>
+                                                  View Stock Merchandise
+                                              <% else %>
+                                                  View Items
+                                              <% end %>
+
+                                            </h3>
                                             <div id="items_departments_list">
                                                                   <% if @singular_item_customer == true %>
                                                                                         <% @departments_to_show = @website.default_non_blank_item_departments %>
