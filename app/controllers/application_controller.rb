@@ -31,24 +31,60 @@ class ApplicationController < ActionController::Base
   after_filter :after_filter
 
   def new_and_featured_items
-            @new_designs ||= Item.limit(35).order("DateCreated DESC").where("department_id in (?) and category_id NOT in (?)", @website.default_design_department_ids.split(/,/)  , @website.breast_print_category_ids      ).all
-           g = 'g'
+            @featured_new_designs   ||= FeaturedItem.limit(35).where("website_id = ? and carousel_name = ? and active = ?",   @website.id, 'tshirts-new-1' , 'True'   ).all
 
-            unless @new_designs
-              logger.warn "NO ITEMS FOUND ON index ACTION !!!!"
+            unless @featured_new_designs
+              logger.warn "@new_designs NO ITEMS FOUND ON index ACTION !!!!"
             else
-              logger.warn "@new_designs.size: #{@new_designs.size}"
+              logger.warn "@new_designs.size: #{@featured_new_designs.size}"
               #FMCache.write  new_designs_cache_string ,   @items
             end
 
-            @featured_items  ||= FeaturedItem.limit(35)
+           @featured_items   ||= FeaturedItem.limit(35).where("website_id = ? and carousel_name = ?  and active = ?",   @website.id, 'home-featured-1' , 'True'   ).all
+
             unless @featured_items
-              logger.warn "NO @featured_items FOUND ON index ACTION !!!!"
+              logger.warn "@@featured_items NO ITEMS FOUND ON index ACTION !!!!"
             else
-              logger.warn "@featured_items.size: #{@featured_items.size}"
+              logger.warn "@@featured_items.size: #{@featured_items.size}"
               #FMCache.write  new_designs_cache_string ,   @items
             end
+
+
+
+            @featured_custom_items   ||= FeaturedItem.limit(35).where("website_id = ? and carousel_name = ? and active = ?",   @website.id, 'home-custom-1' , 'True'   ).all
+
+            unless @featured_custom_items
+              logger.warn "@@featured_items NO ITEMS FOUND ON index ACTION !!!!"
+            else
+              logger.warn "@@featured_items.size: #{@featured_custom_items.size}"
+              #FMCache.write  new_designs_cache_string ,   @items
+            end
+
   end
+
+
+  # def new_and_featured_items
+  #   @new_designs   ||= FeaturedItem.limit(35).where("website_id = ? and carousel_name = ?",   @website.id, 'tshirts-new-1'  ).all
+  #
+  #   g = "g"
+  #
+  #   unless @new_designs
+  #     logger.warn "@new_designs NO ITEMS FOUND ON index ACTION !!!!"
+  #   else
+  #     logger.warn "@new_designs.size: #{@new_designs.size}"
+  #     #FMCache.write  new_designs_cache_string ,   @items
+  #   end
+  #
+  #   # @featured_items  ||= FeaturedItem.limit(35).where("website_id = ?",   @website.id )
+  #   # unless @featured_items
+  #   #   logger.warn "NO @featured_items FOUND ON index ACTION !!!!"
+  #   # else
+  #   #   logger.warn "@featured_items.size: #{@featured_items.size}"
+  #   #   #FMCache.write  new_designs_cache_string ,   @items
+  #   # end
+  # end
+
+
 
 
 

@@ -55,17 +55,33 @@
 
 
               <div data-role="collapsible"  class="main_menu_choices"   id="item_menu_choices" data-theme="b" data-icon="gear"  data-inset="true" >
-                                            <h3 style="width: 100%;">Items</h3>
+                                            <h3 style="width: 100%;">
+
+                                              <% if @website.name == "barber_store" %>
+                                                  View Stock Merchandise
+                                              <% else %>
+                                                  View Items
+                                              <% end %>
+
+                                            </h3>
                                             <div id="items_departments_list">
                                                                   <% if @singular_item_customer == true %>
                                                                                         <% @departments_to_show = @website.default_non_blank_item_departments %>
                                                                   <% else %>
                                                                                         <% @departments_to_show = @website.default_item_departments %>
                                                                   <% end %>
+
+                                                                 <% unless @incomplete_symbiont %>
+                                                                              <ul data-role="listview">
+                                                                                                 <li   class="scroll_li"> <a href="/search/scroll/all_items" data-transition="slide">Scroll all items</a></li>
+                                                                              </ul>
+                                                                 <% end %>
+
                                                                   <% @departments_to_show.each do |department| %>
                                                                                           <div data-role="collapsible"  class="department_collapsible  openMe"   id="department_collapsible_<%= department.id %>"   data-department_id="<%= department.id %>" >
                                                                                                             <h3><%= department.Name  %></h3>
-                                                                                                            <ul data-role="listview">
+                                                                                                            <ul data-role="listview" >
+
                                                                                                                                   <% item_department_categories = department.categories %>
                                                                                                                                   <% if  item_department_categories.size > 1 %>
                                                                                                                                                     <li   class="scroll_li"> <a href="/search/scroll/<%=  department.id  %>" data-transition="slide">scroll all</a></li>
@@ -86,16 +102,23 @@
 
 
               <div data-role="collapsible"  class="main_menu_choices openMe"   id="design_menu_choices" data-theme="b" data-icon="gear"  data-inset="true" >
-                                      <h3  style="width: 100%;">Designs</h3>
+                                      <h3  style="width: 100%;">
+                                                        <% if @website.name == "barber_store" %>
+                                                                                            View Stock Transfers
+                                                        <% else %>
+                                                                                            View Designs
+                                                         <% end %>
+                                      </h3>
                                       <div id="designs_departments_list">
-
-
                                                         <!--<div data-role="collapsible" >-->
                                                           <!--<h3>New designs, Sales and Specials</h3>-->
                                                         <ul data-role="listview">
-                                                                          <li data-icon="carat-r"><a href="/new_designs">New designs</a></li>
-                                                                        <% if @singular_item_customer == true %>
-                                                                                        <li data-icon="carat-r"><a href="/sale_designs">Sale designs</a></li>
+                                                                           <% unless @incomplete_symbiont %>
+                                                                                              <li   class="scroll_li"> <a href="/search/scroll/all_designs" data-transition="slide">Scroll all designs</a></li>
+                                                                                              <li data-icon="carat-r"><a href="/new_designs">New designs</a></li>
+                                                                                            <% if @singular_item_customer == true %>
+                                                                                                                       <li data-icon="carat-r"><a href="/sale_designs">Sale designs</a></li>
+                                                                                            <% end %>
                                                                         <% end %>
                                                         </ul>
                                                         <!--</div>-->

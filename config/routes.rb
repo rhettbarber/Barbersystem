@@ -3,6 +3,10 @@
 
 ThreeTwoThree::Application.routes.draw do
 
+
+  match "p/home", :to => 'page#show_page_on_index', :page_id  => 'new-home'
+
+
   resources :featured_items
 
 
@@ -19,6 +23,7 @@ ThreeTwoThree::Application.routes.draw do
   match 'quote_tender_entries/credit_card', :controller => 'quote_tender_entries', :action => 'credit_card'
   match 'quote_tender_entries/net_30', :controller => 'quote_tender_entries', :action => 'net_30'
   match 'quote_tender_entries/cod_money_order_cashiers_check', :controller => 'quote_tender_entries', :action => 'cod_money_order_cashiers_check'
+  match 'quote_tender_entries/cod_check', :controller => 'quote_tender_entries', :action => 'cod_check'
   match 'ship_tos/choose_ship_to', :controller => 'ship_tos', :action => 'choose_ship_to'
   match 'ship_tos/shipping_services', :controller => 'ship_tos', :action => 'shipping_services'
   match 'ship_tos/set_shipping_charge_on_order/:shipping_service_id', :controller => 'ship_tos', :action => 'set_shipping_charge_on_order'
@@ -171,7 +176,7 @@ ThreeTwoThree::Application.routes.draw do
   match "p/delete_static_page_cache/:page_id", :controller => "page", :action => "delete_static_page_cache"
 
 
-  match "index" => 'page#show_page_on_index', :page_id  => 'home-mobile'
+  match "index" => 'page#show_page_on_index', :page_id  => 'new-home'
 
 
   match "search/scroll/:department_id/:page", :controller => "search", :action => "scroll"
@@ -343,17 +348,20 @@ ThreeTwoThree::Application.routes.draw do
 
 
 
+  match "p/pages_navigation/:page_id", :controller => "page", :action => "pages_navigation"
 
-  match "p/pages_navigation/:page_id/:scope_by_page_id", :controller => "page", :action => "pages_navigation"
-  match "p/pages_navigation/:scope_by_page_id", :controller => "page", :action => "pages_navigation"
-  match "p/pages_navigation", :controller => "page", :action => "pages_navigation"
+
+
+  # match "p/pages_navigation/:page_id/:scope_by_page_id", :controller => "page", :action => "pages_navigation"
+  # match "p/pages_navigation/:scope_by_page_id", :controller => "page", :action => "pages_navigation"
+
 
   match 'p/shopping', :to => redirect("/store/category_items")
 
-  match "page/:page_id/:scope_by_page_id", :controller => "page", :action => "show_page_on_index"
+  # match "page/:page_id/:scope_by_page_id", :controller => "page", :action => "show_page_on_index"
   match "page/:page_id", :controller => "page", :action => "show_page_on_index"
 
-  match "p/:page_id/:scope_by_page_id", :controller => "page", :action => "show_page_on_index"
+  # match "p/:page_id/:scope_by_page_id", :controller => "page", :action => "show_page_on_index"
   match "p/:page_id", :controller => "page", :action => "show_page_on_index"
 
 
@@ -379,8 +387,16 @@ ThreeTwoThree::Application.routes.draw do
   match "/christian_store(/department/:department_id)(/category/:category_id)", :to => "browse#index"
   match "/christian_store(/department/:department_id)(/category/:category_id)", :to => "browse#index"
 
-  root :to => 'page#show_page_on_index', :page_id  => 'home-mobile'
 
+
+
+  root :to => 'page#show_page_on_index', :page_id  => 'new-home'
+
+  # match "*" , :controller => 'page', :action => 'show_page_on_index'  ,  :page_id  => 'new-home'
+
+  # match "*" , 'page/show_page_on_index/new-home'
+
+  match '*a', :to => 'page#show_page_on_index'
 
 end
 

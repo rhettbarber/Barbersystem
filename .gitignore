@@ -1,7 +1,7 @@
 */*
-!public/assets_development/
-!public/assets_staging/
-!public/assets_production/
+#!public/assets_development/
+#!public/assets_staging/
+#!public/assets_production/
 !app/*
 !doc/*
 !config/initializers/

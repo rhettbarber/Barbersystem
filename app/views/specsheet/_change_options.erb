@@ -5,7 +5,7 @@
               <p>Design options:</p>
 
 
-              <% if @back_design.applicable_crest_prints.size > 0  %>
+              <% if  @back_design and @back_design.applicable_crest_prints.size > 0  %>
                                 <a href="#"  data-role="button" data-icon="arrow-l" data-iconpos="left" data-theme="b"  onclick="$('#breast_prints_link').trigger('click');" >Change  small design (breast print)</a>
                <% end %>
 

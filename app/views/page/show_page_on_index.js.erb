@@ -5,9 +5,6 @@ console.log("leaving collapsible open!");
 
 $.mobile.loading('hide');
 
-//$('.revisions').html('<%#= escape_javascript(   render partial: "page/content"  ) %>').trigger('create');
-
-
 $(".page_content").remove();
 
 if ( $(".home-page-carousel-to-hide").length == 0 ) {
@@ -18,8 +15,7 @@ if ( $(".home-page-carousel-to-hide").length == 0 ) {
                         console.log("hide carousel");
 }
 
-
-
+console.log("@first_page: <%= @first_page.to_s  %>  ");
 
 <% if @first_page %>
                         $('#yield_content').prepend('<%= escape_javascript(   render partial: "page/content"  ) %>').trigger('create');
@@ -31,5 +27,14 @@ if ( $(".home-page-carousel-to-hide").length == 0 ) {
 console.log("begin resizable image maps");
 $('img[usemap]').rwdImageMaps();
 console.log("end resizable image maps");
+
+
+
+//console.log("####################### ---------   ################### " );
+//console.log("@page.id:  <%#= @page.id %> "  );
+//var    the_node_id = $('.jstree-node[data-page_id=<%= @page.id %>]').attr("id") ;
+// console.log("the_node_id: " + the_node_id );
+// console.log("####################### ---------   ################### " );
+
 
 console.log("end page\show_page_on_index.js.erb");

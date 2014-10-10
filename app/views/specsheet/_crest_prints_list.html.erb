@@ -31,7 +31,7 @@
 
                            <% @main_design.applicable_crest_prints.each do |item| %>
                                                <% @already_show_cp_item_ids.add( item.id ) %>
-                                               <% crest_image_url =  'http://cdn.dixieoutfitters.com/images/item_thumbnails/' +  item.ItemLookupCode + '.png'    %>
+                                               <% crest_image_url =  '/images/item_thumbnails/' +  item.ItemLookupCode + '.png'    %>
                                                <li class="item_choice" style="list-style-type: none;">
                                                                  <a href="#" class="acrest_print"  data-id="<%= item.id %>">
                                                                                    <%= image_tag( crest_image_url , :size => "100x100"   )%>
@@ -41,7 +41,7 @@
                            <% end %>
                            <li class="item_choice" style="list-style-type: none;">
                                              <a href="#" class="acrest_print"  data-id="0">
-                                                               <% crest_image_url =  'http://cdn.dixieoutfitters.com/images/item_thumbnails/no_crest.jpg'    %>
+                                                               <% crest_image_url =  '/images/item_thumbnails/no_crest.jpg'    %>
                                                                <%= image_tag( crest_image_url , :size => "100x100"   )%>
                                                                <h3> No crest print</h3>
                                              </a>

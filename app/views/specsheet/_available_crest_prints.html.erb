@@ -24,7 +24,7 @@
                                                                                         <% @main_design.applicable_crest_prints.sort_by{ |x| x.ItemLookupCode }.each do |item| %>
                                                                                             <%  @already_show_cp_item_ids.add?( item.id ) %>
                                                                                             <% @available_size += 1 %>
-                                                                                            <% crest_image_url =  'http://cdn.dixieoutfitters.com/images/item_thumbnails/' +  item.ItemLookupCode + '.png'    %>
+                                                                                            <% crest_image_url =  '/images/item_thumbnails/' +  item.ItemLookupCode + '.png'    %>
                                                                                             <% if default_crest_item_id == item.id %>
                                                                                                 <input  type="checkbox" id="<%= item.id %>" value="<%= item.id %>" name="<%= item.id %>"/>
                                                                                                 <label style="background-color: skyblue;" for="<%= item.id %>"><%= image_tag( crest_image_url , :size => "70x70"   )%> <%= item.ItemLookupCode %> - <%= item.Description %></label>

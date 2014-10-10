@@ -39,7 +39,30 @@
                                         url: "/c/p/<%=  params[:page_id] %>"  ,
                                         data: { first_page: 'true'  }
                         });
+
+
+
+
                         console.log( "end getInitialPage");
+    }
+
+
+
+
+    function getPageById( page_id  ) {
+        console.log("-------------begin getPageById")
+        $.mobile.loading('show');
+        $(".other_content").hide();
+
+        console.log("page_id: " + page_id  );
+
+        jQuery.ajax({
+            type: "GET",
+            dataType: 'script',
+            url: "/c/p/" +  page_id   ,
+            data: {   }
+        });
+        console.log("-------------end getPageById")
     }
 
 
@@ -133,14 +156,16 @@
 
 
 
-    <% if params[:scope_by_page_id]  %>
-                    var scope_by_id =    "<%= params[:scope_by_page_id]  %>"  ;
-  <% else %>
-                    var scope_by_id =    "0"  ;
-    <% end %>
 
 
     var page_id = null;
+
+    <% if @page %>
+                          var the_at_page = <%= @page.id %>  ;
+   <% else %>
+                        var the_at_page = 0  ;
+<% end %>
+
 
     $('#jstree').jstree({
 
@@ -158,9 +183,6 @@
                                                var url = "/p/pages_navigation/";
                                                 url = url + page_id;
 
-                                                if (scope_by_id != '0') {
-                                                    url = url + "/" + scope_by_id;
-                                                }
                                     return url;
                                 },
 
@@ -172,12 +194,15 @@
                                                   page_id  =   node.data.page_id  ;
                                             } else {
                                                     the_node_id  = node.id ;
-                                                      page_id  =  "0" ;
+
+                                                      page_id  =  the_at_page ;
+
                                             }
 
                                             return {
                                                 'id' : the_node_id ,
-                                                'page_id' :   page_id
+                                                'page_id' :   0,
+                                                'real_page_id' :   the_at_page
                                             };
 
                         }
@@ -216,7 +241,7 @@
 
 
 
-    <%   if ['/index', '/', '/p/home', '/p/home-mobile', '/p/home_mobile'].include?(request.path) %>
+    <%   if ['/index', '/', '/p/home', '/p/new-home', '/p/new-home'].include?(request.path) %>
 
 
 

@@ -61,11 +61,18 @@ end
  ############################################################################################################
   def new_designs
 
-               new_and_featured_items
+              @new_designs ||= Item.limit(55).order("DateCreated DESC").where("department_id in (?) and category_id NOT in (?)", @website.default_design_department_ids.split(/,/)  , @website.breast_print_category_ids      ).all
+
+
+              unless @new_designs
+                            logger.warn "NO ITEMS FOUND ON index ACTION !!!!"
+              else
+                            logger.warn "@new_designs.size: #{@new_designs.size}"
+                            #FMCache.write  new_designs_cache_string ,   @items
+              end
 
                 @items   = @new_designs
 
-      s = "s"
 
                 # #new_designs_cache_string = "records_" + @website.name +  "_new_designs_week_" +  Website.week_number
                 # #logger.debug "new_designs_cache_string: " + new_designs_cache_string

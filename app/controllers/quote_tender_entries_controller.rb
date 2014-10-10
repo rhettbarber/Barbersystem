@@ -1,7 +1,7 @@
 class QuoteTenderEntriesController < ApplicationController
 
 ssl_exceptions
-before_filter :initialize_variables, :only => [:index,:check,:credit_card]
+before_filter :initialize_variables, :only => [:index,:check,:credit_card, :net_30, :cod_money_order_cashiers_check, :cod_check]
 
   #after_filter :flash_to_json_header
 

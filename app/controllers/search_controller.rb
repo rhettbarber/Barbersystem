@@ -28,7 +28,7 @@ def scroll
                                                                         logger.debug("@product_search_results.inspect: " + @product_search_results.inspect )
                                                                          logger.debug "CACHE FOUND SCROLL"
                                                                          logger.debug "CACHE FOUND SCROLL"
-                                                                         @paginated_results  =  @product_search_results.to_a.paginate(:page => params[:page] || 1, :per_page => 6  )
+                                                                         @paginated_results  =  @product_search_results.to_a.paginate(:page => params[:page] || 1, :per_page => 8  )
                                                                          @designs = true
                                        else
 
@@ -147,11 +147,11 @@ def scroll
                                                                        FMCache.write  website_scroll_items_cache_string ,    @product_search_results
 
                                                                         if  params[:page]
-                                                                                            @paginated_results  =  @product_search_results.to_a.paginate(:page => params[:page], :per_page => 6  )
+                                                                                            @paginated_results  =  @product_search_results.to_a.paginate(:page => params[:page], :per_page => 8  )
                                                                                              g = "g"
                                                                         else
                                                                                             logger.debug "need_page_params"
-                                                                                            @paginated_results  =  @product_search_results.to_a.paginate(:page =>  1, :per_page => 6  )
+                                                                                            @paginated_results  =  @product_search_results.to_a.paginate(:page =>  1, :per_page => 8  )
                                                                           end
 
                                         end
@@ -171,41 +171,41 @@ def scroll
 ############################################################################################################
     def index
                                       website_search_items = false
-                                      logger.debug "BEGIN SEARCH INDEX  ##################################################################"
-                                      logger.debug "BEGIN SEARCH INDEX  ##################################################################"
-                                      logger.debug "BEGIN SEARCH INDEX  ##################################################################"
-                                      logger.debug "BEGIN SEARCH INDEX  ##################################################################"
-                                      logger.debug "BEGIN SEARCH INDEX  ##################################################################"
-                                      logger.debug "BEGIN SEARCH INDEX  ##################################################################"
+                                      logger.warn "BEGIN SEARCH INDEX  ##################################################################"
+                                      logger.warn "BEGIN SEARCH INDEX  ##################################################################"
+                                      logger.warn "BEGIN SEARCH INDEX  ##################################################################"
+                                      logger.warn "BEGIN SEARCH INDEX  ##################################################################"
+                                      logger.warn "BEGIN SEARCH INDEX  ##################################################################"
+                                      logger.warn "BEGIN SEARCH INDEX  ##################################################################"
                                       @search_string =  Slug.generate(params[:query])
-                                      logger.debug "search_string: " + @search_string.to_s
+                                      logger.warn "search_string: " + @search_string.to_s
                                       @search_type_name  = params[:search_type_name].to_s  || ""
-                                      logger.debug "@search_type_name ######################################################################"
-                                      @website_search_items_cache_string =      "search/variables_filtered_" + @search_type_name  +  "_"  + @website.name + "_" + @search_string.to_s + "_week_" + Website.week_number       unless @incomplete_symbiont
-                                      logger.debug "website_search_items_cache_string: " + @website_search_items_cache_string.to_s
+                                      logger.warn "@search_type_name ######################################################################"
+                                      @website_search_items_cache_string =      "search/variables_filtered_" + @search_type_name  +  "_"  + @website.name + "_" + @search_string.to_s + "_week_" + Website.week_number
+                                      logger.warn "website_search_items_cache_string: " + @website_search_items_cache_string.to_s
                                       @all_records_cache_string =           "search/variables_all_records_" + @search_type_name  +  "_"  + @search_string       + "_week_" + Website.week_number
                                       ListingMerchandise.new
                                       ListingDesign.new
                                       ListingRevision.new
                                       ListingGarment.new
-                                      website_search_items =  FMCache.read @website_search_items_cache_string
+                                      website_search_items =  FMCache.read @website_search_items_cache_string   unless @incomplete_symbiont
                                       if website_search_items   and website_search_items.class  != String
-                                                                  logger.debug "CACHE FOUND SEARCH"
-                                                                  logger.debug "CACHE FOUND SEARCH"
-                                                                  logger.debug "CACHE FOUND SEARCH"
-                                                                  logger.debug "CACHE FOUND SEARCH"
-                                                                  @paginated_results  =  website_search_items.to_a.paginate(:page => params[:page] || 1, :per_page => 6  )
+                                                                  logger.warn "CACHE FOUND SEARCH"
+                                                                  logger.warn "CACHE FOUND SEARCH"
+                                                                  logger.warn "CACHE FOUND SEARCH"
+                                                                  logger.warn "CACHE FOUND SEARCH"
+                                                                  @paginated_results  =  website_search_items.to_a.paginate(:page => params[:page] || 1, :per_page => 8  )
                                                                   @designs = true
                                       else
                                                                   if  params[:query]  and   params[:query] != ""
-                                                                                                       logger.debug "########### CACHE WAS NOT FOUND FOR website_search_items_cache_string  params[:search_type_name].to_s  +  @website.name + @search_string.to_s"
-                                                                                                       logger.debug "########### CACHE WAS NOT FOUND FOR website_search_items_cache_string  params[:search_type_name].to_s  +  @website.name + @search_string.to_s"
-                                                                                                       logger.debug "########### CACHE WAS NOT FOUND FOR website_search_items_cache_string  params[:search_type_name].to_s  +  @website.name + @search_string.to_s"
-                                                                                                       logger.debug "########### CACHE WAS NOT FOUND FOR website_search_items_cache_string  params[:search_type_name].to_s  +  @website.name + @search_string.to_s"
+                                                                                                       logger.warn "########### CACHE WAS NOT FOUND FOR website_search_items_cache_string  params[:search_type_name].to_s  +  @website.name + @search_string.to_s"
+                                                                                                       logger.warn "########### CACHE WAS NOT FOUND FOR website_search_items_cache_string  params[:search_type_name].to_s  +  @website.name + @search_string.to_s"
+                                                                                                       logger.warn "########### CACHE WAS NOT FOUND FOR website_search_items_cache_string  params[:search_type_name].to_s  +  @website.name + @search_string.to_s"
+                                                                                                       logger.warn "########### CACHE WAS NOT FOUND FOR website_search_items_cache_string  params[:search_type_name].to_s  +  @website.name + @search_string.to_s"
                                                                                                       @keywords   =  params[:query].split(" ").collect {|c| "#{c.downcase.gsub( "\'"  , "")}"}
                                                                                                       @keywords <<    params[:query].split(" ").collect {|c| "#{c.downcase.gsub( "\'"  , "")}l"          }
                                                                                                       @keywords = @keywords.flatten
-                                                                                                      logger.debug "@keywords: " +  @keywords.inspect
+                                                                                                      logger.warn "@keywords: " +  @keywords.inspect
                                                                                                       if params[:search_type_name]  ==   'search_heritage_news'
                                                                                                                     @initial_revisions = FullTextSearchPageRevision.search_articles_with_msfte(  :matches_any => @keywords,  :root_id => 2649    )  #, :per_page => 2, :page => 1  )
                                                                                                                       article_search
@@ -231,32 +231,32 @@ def scroll
                                                                                                                       error_out
                                                                                                       end
                                                                   else
-                                                                                                       logger.debug "NOT   params[:query] "
-                                                                                                       logger.debug "NOT   params[:query] "
-                                                                                                       logger.debug "NOT   params[:query] "
-                                                                                                       logger.debug "NOT   params[:query] "
-                                                                                                       logger.debug "NOT   params[:query] "
+                                                                                                       logger.warn "NOT   params[:query] "
+                                                                                                       logger.warn "NOT   params[:query] "
+                                                                                                       logger.warn "NOT   params[:query] "
+                                                                                                       logger.warn "NOT   params[:query] "
+                                                                                                       logger.warn "NOT   params[:query] "
                                                                   end
                                       end
 
                                     if request.xhr?
-                                                                       logger.debug "responding to ajax request.. using index.js.erb"
-                                                                       logger.debug "responding to ajax request.. using index.js.erb"
-                                                                       logger.debug "responding to ajax request.. using index.js.erb"
+                                                                       logger.warn "responding to ajax request.. using index.js.erb"
+                                                                       logger.warn "responding to ajax request.. using index.js.erb"
+                                                                       logger.warn "responding to ajax request.. using index.js.erb"
                                                                         render  "index.js.erb"
                                     else
-                                                                        logger.debug "responding to NON ajax request.. using index.erb"
-                                                                        logger.debug "responding to NON ajax request.. using index.erb"
-                                                                        logger.debug "responding to NON ajax request.. using index.erb"
-                                                                        logger.debug "responding to NON ajax request.. using index.erb"
-                                                                        logger.debug "responding to NON ajax request.. using index.erb"
+                                                                        logger.warn "responding to NON ajax request.. using index.erb"
+                                                                        logger.warn "responding to NON ajax request.. using index.erb"
+                                                                        logger.warn "responding to NON ajax request.. using index.erb"
+                                                                        logger.warn "responding to NON ajax request.. using index.erb"
+                                                                        logger.warn "responding to NON ajax request.. using index.erb"
                                                                         render "index.erb"
                                     end
-                                      logger.debug "END SEARCH INDEX  ##################################################################"
-                                      logger.debug "END SEARCH INDEX  ##################################################################"
-                                      logger.debug "END SEARCH INDEX  ##################################################################"
-                                      logger.debug "END SEARCH INDEX  ##################################################################"
-                                      logger.debug "END SEARCH INDEX  ##################################################################"
+                                      logger.warn "END SEARCH INDEX  ##################################################################"
+                                      logger.warn "END SEARCH INDEX  ##################################################################"
+                                      logger.warn "END SEARCH INDEX  ##################################################################"
+                                      logger.warn "END SEARCH INDEX  ##################################################################"
+                                      logger.warn "END SEARCH INDEX  ##################################################################"
 
     end
 ############################################################################################################
@@ -385,7 +385,7 @@ def scroll
                                                end
                                                logger.debug "website_search_items: " + @product_search_results.inspect
                                                FMCache.write  @website_search_items_cache_string ,    @product_search_results
-                                               @paginated_results  =  @product_search_results.to_a.paginate(:page => params[:page] || 1, :per_page => 6  )
+                                               @paginated_results  =  @product_search_results.to_a.paginate(:page => params[:page] || 1, :per_page => 8  )
                                                 logger.debug "END search_garments ########################################"
                                                 logger.debug "END search_garments ########################################"
                                                 logger.debug "END search_garments ########################################"

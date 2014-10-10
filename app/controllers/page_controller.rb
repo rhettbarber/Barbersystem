@@ -40,25 +40,6 @@ caches_page :show_page_on_index   #_page
 #################################################################################################################
 #################################################################################################################
 #################################################################################################################
-#################################################################################################################
-#################################################################################################################
-#################################################################################################################
-#################################################################################################################
-#################################################################################################################
-#################################################################################################################
-#################################################################################################################
-#################################################################################################################
-#################################################################################################################
-#################################################################################################################
-#################################################################################################################
-#################################################################################################################
-#################################################################################################################
-#################################################################################################################
-#################################################################################################################
-#################################################################################################################
-#################################################################################################################
-#################################################################################################################
-#################################################################################################################
 #caches_public_page :index
 #caches_page :recently_added_pages
 #caches_page :recently_added_email
@@ -290,160 +271,72 @@ end
 
   def show_page_on_index
 
+                                              logger.debug("SORRY.. FRAGMENT NOT FOUND")
+                                              logger.debug("SORRY.. FRAGMENT NOT FOUND")
+                                              logger.debug("SORRY.. FRAGMENT NOT FOUND")
+                                              logger.debug("SORRY.. FRAGMENT NOT FOUND")
+                                              logger.debug("SORRY.. FRAGMENT NOT FOUND")
+                                              find_page_and_revision
+                                            logger.debug "@revision: " + @revision.inspect
 
-    new_and_featured_items
 
-
-    if params[:first_page] == 'true'
-          @first_page = 'true'
-          #firsstt
-   else
-             # not_firstt
-    end
-
-    #baddd
-              #initialize_variables_except_store
-              #if admin?
-              #        @pages_content_fragment_name =    "page/admin_content/"     + @website.name     +   "_page_id_" + params[:page_id].to_s  + "_scope_by_page_id_"  +   params[:scope_by_page_id].to_s  +  "_week_" + Website.week_number
-              #else
-              #        @pages_content_fragment_name =    "page/content/"     + @website.name     +   "_page_id_" + params[:page_id].to_s  + "_scope_by_page_id_"  +   params[:scope_by_page_id].to_s  +  "_week_" + Website.week_number
-              #end
-              #  if admin? == false  and read_fragment(@pages_content_fragment_name )
-              #                     logger.debug("EXCELLENT.. SKIPPING ACTION BECAUSE OF READ FRAGMENT")
-              #                     logger.debug("EXCELLENT.. SKIPPING ACTION BECAUSE OF READ FRAGMENT")
-              #                     logger.debug("EXCELLENT.. SKIPPING ACTION BECAUSE OF READ FRAGMENT")
-              #                     logger.debug("EXCELLENT.. SKIPPING ACTION BECAUSE OF READ FRAGMENT")
-              #                     logger.debug("EXCELLENT.. SKIPPING ACTION BECAUSE OF READ FRAGMENT")
-              #                     logger.debug("EXCELLENT.. SKIPPING ACTION BECAUSE OF READ FRAGMENT")
-              #  else
-                                        logger.debug("SORRY.. FRAGMENT NOT FOUND")
-                                        logger.debug("SORRY.. FRAGMENT NOT FOUND")
-                                        logger.debug("SORRY.. FRAGMENT NOT FOUND")
-                                        logger.debug("SORRY.. FRAGMENT NOT FOUND")
-                                        logger.debug("SORRY.. FRAGMENT NOT FOUND")
-                                        find_page_and_revision
-                                      logger.debug "@revision: " + @revision.inspect
-                  #end
+                                            if @page and @page.slug == 'new-home'
+                                                               logger.debug "page is  new-home"
+                                                               @first_page = true
+                                                               new_and_featured_items
+                                            else
+                                                              @first_page = false
+                                                              logger.debug "page is not new-home"
+                                              end
+                                             logger.warn "##################################"
+                                             logger.warn "@first_page : " + @first_page.to_s
+                                              logger.warn "##################################"
   end
 #################################################################################################################
+
+
+
+#################################################################################################################
   def pages_navigation
-
-     logger.debug "--------####____________############"
-     logger.debug "--------####____________############"
-     logger.debug "--------####____________############"
-     logger.debug "begin pages_navigation"
-     # EXAMPLE LINK
-     # EXAMPLE LINK
-     # EXAMPLE LINK
-     # EXAMPLE LINK
-    # http://192.168.0.125:2001/p/index/4637
-
-
-   @scope_by_page_id = params[:scope_by_page_id]
-
-    @page_id =  params[:page_id]   || '0'
-    #current_website
-    #@pages_navigation_list_fragment_name =       "page/page_navigation_list/"     + @website.name     +   "_page_id_" + @page_id.to_s  +  "_week_" + Website.week_number    + "_scope_page_id_" + @scope_by_page_id.to_s
-        #if read_fragment(@pages_navigation_list_fragment_name )
-        #            logger.debug("EXCELLENT.. SKIPPING ACTION BECAUSE OF READ FRAGMENT")
-        #else
+                   logger.debug "--------####____________############"
+                   logger.debug "--------####____________############"
+                   logger.debug "--------####____________############"
+                   logger.debug "begin pages_navigation"
+                  @page_id =  params[:page_id]   || '0'
 
                     logger.debug("SORRY.. FRAGMENT NOT FOUND")
-                    #initialize_variables_except_store
                   @skipped_page_ids = [ 13018, 12098, 2648, 4727, 4742,4740,4673,4728,4567,4677,10754 , 9152, 8656,12960,8655,6536,12829  ]   # this started out to eliminate a few from mobile that were needed on legacy.. need something different now.. is showing pages with no published revisions
                     if !params[:page_id]   or  params[:page_id] == "0"
-                                              logger.debug "ACCESSING ROOT PAGES///"
-                                              logger.debug "ACCESSING ROOT PAGES///"
-                                              logger.debug "ACCESSING ROOT PAGES///"
-                                              list_string    =  ""
-                                              if  @scope_by_page_id and  @scope_by_page_id != "0"
-                                                                  logger.debug "@scope_by_page_id"
-                                                                  logger.debug "@scope_by_page_id"
-                                                                  logger.debug "@scope_by_page_id"
-                                                                  logger.debug "@scope_by_page_id"
-                                                                  logger.debug "@scope_by_page_id"
-                                                                  logger.debug "@scope_by_page_id"
+                                            if params[:real_page_id]
+                                                                                             #  http://192.168.0.125:2000/p/pages_navigation/0?id=%23&page_id=0&real_page_id=13106
+                                                                                            logger.debug "ACCESSING DIRECTLY ACCESS PAGE-SHOW FULL MENU RECURSIVELY FROM FINAL CHILD///"
+                                                                                            logger.debug "ACCESSING DIRECTLY ACCESS PAGE-SHOW FULL MENU RECURSIVELY FROM FINAL CHILD///"
+                                                                                            logger.debug "ACCESSING DIRECTLY ACCESS PAGE-SHOW FULL MENU RECURSIVELY FROM FINAL CHILD///"
+                                                                                            root_pages = Page.find_by_sql(["SELECT DISTINCT(p.name),p.id,  p.parent_id, p.slug, p.page_type_id, p.position from pages p LEFT JOIN revisions r ON p.id = r.page_id WHERE p.parent_id is null AND p.website_id = ? AND p.page_type_id = ? AND r.published = ? ORDER BY p.name",@website.id , 1, true   ])
+                                                                                            final_child =   Page.find  params[:real_page_id]
+                                                                                            @page =    final_child
 
-                                                                  #list_string    +=   "<ul><li>"
+                                                                                            list_string =   Page.traverse_directory( root_pages, @skipped_page_ids, final_child )
+                                            else
+                                                                                                logger.debug "ACCESSING ROOT PAGES///"
+                                                                                                logger.debug "ACCESSING ROOT PAGES///"
+                                                                                                logger.debug "ACCESSING ROOT PAGES///"
+                                                                                                list_string    =  ""
+                                                                                                root_pages = Page.find_by_sql(["SELECT DISTINCT(p.name),p.id,  p.parent_id, p.slug, p.page_type_id, p.position from pages p LEFT JOIN revisions r ON p.id = r.page_id WHERE p.parent_id is null AND p.website_id = ? AND p.page_type_id = ? AND r.published = ? ORDER BY p.name",@website.id , 1, true   ])
+                                                                                                 root_pages.each do |the_page|
+                                                                                                            if  @skipped_page_ids.include? the_page.id
+                                                                                                                      logger.debug "skipped page due to id"
+                                                                                                            else
+                                                                                                                        if the_page.children == []
+                                                                                                                                     list_string    +=       "<li data-type='page'  data-slug='#{the_page.slug}' data-page_id='#{the_page.id}'>#{the_page.name}</li>"
+                                                                                                                        else
 
-                                                                    #the_page = Page.find @scope_by_page_id
-
-                                                                  if @scope_by_page_id.to_i > 0
-                                                                            the_page = Page.find(  @scope_by_page_id )
-                                                                            logger.debug "looking for page via id"
-                                                                  else
-                                                                            the_page  = Page.where(  "slug = ? ",@scope_by_page_id ).first
-                                                                             logger.debug "no page_id found"
-                                                                  end
-
-
-
-                                                                    @root_page_name = the_page.name
-                                                                    if the_page.children == []
-                                                                                   list_string    +=       "<li data-type='page'  data-page_id='#{the_page.id}'>#{the_page.name}</li>"
-                                                                    else
-
-                                                                      list_string    +=   "<li class='jstree-open jstree-clicked' data-page_id='#{the_page.id}'><a href='#' class='jstree-clicked'>#{the_page.name}</a><ul>"
-
-                                                                      the_page.children.sort_by{ |x|  x.name }.each do |child|
-                                                                                    unless  @skipped_page_ids.include? child.id
-                                                                                                    if child.children == []
-                                                                                                      list_string    +=       "<li  data-type='page' data-page_id='#{child.id}'>#{child.name}</li>"
-                                                                                                    else
-                                                                                                      list_string    +=       "<li  data-type='folder'  data-page_id='#{child.id}' class='jstree-closed'>#{child.name}</li>"
-                                                                                                    end
-                                                                                      end
-                                                                      end
-
-                                                                      #list_string    +=     "<li data-type='page' data-page_id='#{child.id}'>#{child.name}</li>"
-
-
-                                                                      list_string    +=   "</ul></li>"
-
-
-                                                                                    
-                                                                                    #good
-                                                                                    #list_string    +=       "<li><a href='#' data-type='folder' data-page_id='#{the_page.id}' class='jstree-closed'>#{the_page.name}</a></li>"
-
-                                                                                    #  #list_string +=  "<li class='jstree-closed'>#{the_page.name}</li>"
-                                                                                    # list_string += "<ul>"
-                                                                                    #the_page.children.sort_by{ |x|  x.name }.each do |child|
-                                                                                    #  if child.children == []
-                                                                                    #    list_string    +=       "<li  data-type='page' data-page_id='#{child.id}'  data-jstree='{'icon':'glyphicon glyphicon-leaf'}>#{child.name}</li>"
-                                                                                    #  else
-                                                                                    #    list_string    +=       "<li  data-type='folder'  data-page_id='#{child.id}' class='jstree-closed'>#{child.name}</li>"
-                                                                                    #  end
-                                                                                    #end
-                                                                                    #list_string    +=  "</ul>"
-                                                                    end
-                                              else
-                                                                     logger.debug "NOT @scope_by_page_id"
-                                                                     logger.debug "NOT @scope_by_page_id"
-                                                                     logger.debug "NOT @scope_by_page_id"
-                                                                     logger.debug "NOT @scope_by_page_id"
-                                                                     logger.debug "NOT @scope_by_page_id"
-                                                                     logger.debug "NOT @scope_by_page_id"
-
-                                                                     #list_string    +=   "<ul><li>"
-
-                                                                     root_pages = Page.find_by_sql(["SELECT DISTINCT(p.name),p.id,  p.parent_id, p.slug, p.page_type_id, p.position from pages p LEFT JOIN revisions r ON p.id = r.page_id WHERE p.parent_id is null AND p.website_id = ? AND p.page_type_id = ? AND r.published = ? ORDER BY p.name",@website.id , 1, true   ])
-
-                                                                     root_pages.each do |the_page|
-                                                                                if  @skipped_page_ids.include? the_page.id
-                                                                                          logger.debug "skipped page due to id"
-                                                                                else
-                                                                                            if the_page.children == []
-                                                                                                         list_string    +=       "<li data-type='page'  data-page_id='#{the_page.id}'>#{the_page.name}</li>"
-                                                                                            else
-
-                                                                                                         list_string    +=       "<li data-type='folder' data-page_id='#{the_page.id}' class='jstree-closed'>#{the_page.name}</li>"
-                                                                                            end
-                                                                                end
-                                                                     end
-
-                                                                     list_string    +=   "</ul></li>"
-
-                                              end
+                                                                                                                                     list_string    +=       "<li data-type='folder' data-slug='#{the_page.slug}'  data-page_id='#{the_page.id}' class='jstree-closed'>#{the_page.name}</li>"
+                                                                                                                        end
+                                                                                                            end
+                                                                                                 end
+                                                                                                 list_string    +=   "</ul></li>"
+                                            end
                     else
                                               logger.debug "ACCESSING SUB PAGES///"
                                               logger.debug "ACCESSING SUB PAGES///"
@@ -454,43 +347,24 @@ end
                                                           unless  @skipped_page_ids.include? child.id
                                                                              if child.children == []
                                                                                             logger.debug "child.children empty "
-                                                                                            list_string    +=       "<li  data-type='page' data-page_id='#{child.id}'  data-jstree='{'icon':'glyphicon glyphicon-leaf'}>#{child.name}</li>"
+                                                                                            list_string    +=       "<li  data-type='page' data-slug='#{child.slug}'  data-page_id='#{child.id}'  data-jstree='{'icon':'glyphicon glyphicon-leaf'}>#{child.name}</li>"
                                                                              else
                                                                                             logger.debug "child.name: " + child.name
-                                                                                            list_string    +=       "<li  data-type='folder'  data-page_id='#{child.id}' class='jstree-closed'>#{child.name}</li>"
+                                                                                            list_string    +=       "<li  data-type='folder'  data-slug='#{child.slug}'  data-page_id='#{child.id}' class='jstree-closed'>#{child.name}</li>"
                                                                              end
                                                              end
                                                end
                                                list_string    +=  "</ul>"
-                                               #render :text => list_string
                                                 @list_string = list_string
                      end
-                                    @list_string = list_string
-      #end
-     logger.debug "--------####____________############"
-     logger.debug "--------####____________############"
-     logger.debug "--------####____________############"
-      render :partial => 'page/pages_navigation_list', :content_type => 'text/html'
-
-
-    #if request.xhr?
-    #          # respond to Ajax request
-    #          render  "pages_navigation.js.erb"
-    #else
-    #          # respond to normal request
-    #          render "pages_navigation.erb"
-    #end
-
-   #render :partial => 'page/pages_navigation_list', :content_type => 'text/html'
-         #if request.xhr?
-         #  # respond to Ajax request
-         #  render  "pages_navigation.js.erb"
-         #else
-         #  # respond to normal request
-         #  render "pages_navigation.erb"
-         #end
+                    @list_string = list_string
+                   logger.debug "--------####____________############"
+                   logger.debug "--------####____________############"
+                   logger.debug "--------####____________############"
+                    render :partial => 'page/pages_navigation_list', :content_type => 'text/html'
   end
-#################################################################################################################
+##################################################################################################################################################################################################################################
+
 #################################################################################################################
   def recently_added_pages
                     Revision.new
@@ -1216,5 +1090,204 @@ end
 #	#	expire_fragment(%r{/views/#{@website.name}/user_type_id/3/contextual_navigation_tree/customer_type/.*/root_id/2649.*})
 #	#	redirect_to :action => 'show', :id => 'heritage-news'
 #end
-  
+
+
+#
+#   def pages_navigation_before_with_scope_without_direct_entry
+#
+#     logger.debug "--------####____________############"
+#     logger.debug "--------####____________############"
+#     logger.debug "--------####____________############"
+#     logger.debug "begin pages_navigation"
+#     # EXAMPLE LINK
+#     # EXAMPLE LINK
+#     # EXAMPLE LINK
+#     # EXAMPLE LINK
+#     # http://192.168.0.125:2001/p/index/4637
+#
+#
+#     @scope_by_page_id = params[:scope_by_page_id]
+#
+#     @page_id =  params[:page_id]   || '0'
+#     #current_website
+#     #@pages_navigation_list_fragment_name =       "page/page_navigation_list/"     + @website.name     +   "_page_id_" + @page_id.to_s  +  "_week_" + Website.week_number    + "_scope_page_id_" + @scope_by_page_id.to_s
+#     #if read_fragment(@pages_navigation_list_fragment_name )
+#     #            logger.debug("EXCELLENT.. SKIPPING ACTION BECAUSE OF READ FRAGMENT")
+#     #else
+#
+#     logger.debug("SORRY.. FRAGMENT NOT FOUND")
+#     #initialize_variables_except_store
+#     @skipped_page_ids = [ 13018, 12098, 2648, 4727, 4742,4740,4673,4728,4567,4677,10754 , 9152, 8656,12960,8655,6536,12829  ]   # this started out to eliminate a few from mobile that were needed on legacy.. need something different now.. is showing pages with no published revisions
+#     if !params[:page_id]   or  params[:page_id] == "0"
+#       logger.debug "ACCESSING ROOT PAGES///"
+#       logger.debug "ACCESSING ROOT PAGES///"
+#       logger.debug "ACCESSING ROOT PAGES///"
+#       list_string    =  ""
+#       if  @scope_by_page_id and  @scope_by_page_id != "0"
+#         logger.debug "@scope_by_page_id"
+#         logger.debug "@scope_by_page_id"
+#         logger.debug "@scope_by_page_id"
+#         logger.debug "@scope_by_page_id"
+#         logger.debug "@scope_by_page_id"
+#         logger.debug "@scope_by_page_id"
+#
+#         #list_string    +=   "<ul><li>"
+#
+#         #the_page = Page.find @scope_by_page_id
+#
+#         if @scope_by_page_id.to_i > 0
+#           the_page = Page.find(  @scope_by_page_id )
+#           logger.debug "looking for page via id"
+#         else
+#           the_page  = Page.where(  "slug = ? ",@scope_by_page_id ).first
+#           logger.debug "no page_id found"
+#         end
+#
+#
+#
+#         @root_page_name = the_page.name
+#         if the_page.children == []
+#           list_string    +=       "<li data-type='page' data-slug='#{the_page.slug}' data-page_id='#{the_page.id}'>#{the_page.name}</li>"
+#         else
+#
+#           list_string    +=   "<li class='jstree-open jstree-clicked'  data-slug='#{the_page.slug}'  data-page_id='#{the_page.id}'><a href='#' class='jstree-clicked'>#{the_page.name}</a><ul>"
+#
+#           the_page.children.sort_by{ |x|  x.name }.each do |child|
+#             unless  @skipped_page_ids.include? child.id
+#               if child.children == []
+#                 list_string    +=       "<li  data-type='page'   data-slug='#{child.slug}' data-page_id='#{child.id}'>#{child.name}</li>"
+#               else
+#                 list_string    +=       "<li  data-type='folder'  data-slug='#{child.slug}' data-page_id='#{child.id}' class='jstree-closed'>#{child.name}</li>"
+#               end
+#             end
+#           end
+#
+#           #list_string    +=     "<li data-type='page' data-page_id='#{child.id}'>#{child.name}</li>"
+#
+#
+#           list_string    +=   "</ul></li>"
+#
+#
+#
+#           #good
+#           #list_string    +=       "<li><a href='#' data-type='folder' data-page_id='#{the_page.id}' class='jstree-closed'>#{the_page.name}</a></li>"
+#
+#           #  #list_string +=  "<li class='jstree-closed'>#{the_page.name}</li>"
+#           # list_string += "<ul>"
+#           #the_page.children.sort_by{ |x|  x.name }.each do |child|
+#           #  if child.children == []
+#           #    list_string    +=       "<li  data-type='page' data-page_id='#{child.id}'  data-jstree='{'icon':'glyphicon glyphicon-leaf'}>#{child.name}</li>"
+#           #  else
+#           #    list_string    +=       "<li  data-type='folder'  data-page_id='#{child.id}' class='jstree-closed'>#{child.name}</li>"
+#           #  end
+#           #end
+#           #list_string    +=  "</ul>"
+#         end
+#       else
+#         logger.debug "NOT @scope_by_page_id"
+#         logger.debug "NOT @scope_by_page_id"
+#         logger.debug "NOT @scope_by_page_id"
+#         logger.debug "NOT @scope_by_page_id"
+#         logger.debug "NOT @scope_by_page_id"
+#         logger.debug "NOT @scope_by_page_id"
+#
+#         #list_string    +=   "<ul><li>"
+#
+#         root_pages = Page.find_by_sql(["SELECT DISTINCT(p.name),p.id,  p.parent_id, p.slug, p.page_type_id, p.position from pages p LEFT JOIN revisions r ON p.id = r.page_id WHERE p.parent_id is null AND p.website_id = ? AND p.page_type_id = ? AND r.published = ? ORDER BY p.name",@website.id , 1, true   ])
+#
+#         root_pages.each do |the_page|
+#           if  @skipped_page_ids.include? the_page.id
+#             logger.debug "skipped page due to id"
+#           else
+#             if the_page.children == []
+#               list_string    +=       "<li data-type='page'  data-slug='#{the_page.slug}' data-page_id='#{the_page.id}'>#{the_page.name}</li>"
+#             else
+#
+#               list_string    +=       "<li data-type='folder' data-slug='#{the_page.slug}'  data-page_id='#{the_page.id}' class='jstree-closed'>#{the_page.name}</li>"
+#             end
+#           end
+#         end
+#
+#         list_string    +=   "</ul></li>"
+#
+#       end
+#     else
+#       logger.debug "ACCESSING SUB PAGES///"
+#       logger.debug "ACCESSING SUB PAGES///"
+#       logger.debug "ACCESSING SUB PAGES///"
+#       root = Page.find  params[:page_id]
+#       list_string = "<ul>"
+#       root.children.sort_by{ |x|  x.name }.each do |child|
+#         unless  @skipped_page_ids.include? child.id
+#           if child.children == []
+#             logger.debug "child.children empty "
+#             list_string    +=       "<li  data-type='page' data-slug='#{child.slug}'  data-page_id='#{child.id}'  data-jstree='{'icon':'glyphicon glyphicon-leaf'}>#{child.name}</li>"
+#           else
+#             logger.debug "child.name: " + child.name
+#             list_string    +=       "<li  data-type='folder'  data-slug='#{child.slug}'  data-page_id='#{child.id}' class='jstree-closed'>#{child.name}</li>"
+#           end
+#         end
+#       end
+#       list_string    +=  "</ul>"
+#       #render :text => list_string
+#       @list_string = list_string
+#     end
+#     @list_string = list_string
+#     #end
+#     logger.debug "--------####____________############"
+#     logger.debug "--------####____________############"
+#     logger.debug "--------####____________############"
+#     render :partial => 'page/pages_navigation_list', :content_type => 'text/html'
+#
+#
+#     #if request.xhr?
+#     #          # respond to Ajax request
+#     #          render  "pages_navigation.js.erb"
+#     #else
+#     #          # respond to normal request
+#     #          render "pages_navigation.erb"
+#     #end
+#
+#     #render :partial => 'page/pages_navigation_list', :content_type => 'text/html'
+#     #if request.xhr?
+#     #  # respond to Ajax request
+#     #  render  "pages_navigation.js.erb"
+#     #else
+#     #  # respond to normal request
+#     #  render "pages_navigation.erb"
+#     #end
+#   end
+# #################################################################################################################
+
+
+# if    ['/index', '/', '/p/home', '/p/new-home', 'p/index', 'p/', '/c/p/home',  '/c/p/new-home'].include?(request.path)
+#                 if params[:first_page] == 'true'
+#                               @first_page = 'true'
+#                                new_and_featured_items
+#
+#                else
+#                  logger.debug("request.path: " + request.path )
+#                end
+# else
+#               logger.debug("request.path: " + request.path )
+#
+#   end
+
+#initialize_variables_except_store
+#if admin?
+#        @pages_content_fragment_name =    "page/admin_content/"     + @website.name     +   "_page_id_" + params[:page_id].to_s  + "_scope_by_page_id_"  +   params[:scope_by_page_id].to_s  +  "_week_" + Website.week_number
+#else
+#        @pages_content_fragment_name =    "page/content/"     + @website.name     +   "_page_id_" + params[:page_id].to_s  + "_scope_by_page_id_"  +   params[:scope_by_page_id].to_s  +  "_week_" + Website.week_number
+#end
+#  if admin? == false  and read_fragment(@pages_content_fragment_name )
+#                     logger.debug("EXCELLENT.. SKIPPING ACTION BECAUSE OF READ FRAGMENT")
+#                     logger.debug("EXCELLENT.. SKIPPING ACTION BECAUSE OF READ FRAGMENT")
+#                     logger.debug("EXCELLENT.. SKIPPING ACTION BECAUSE OF READ FRAGMENT")
+#                     logger.debug("EXCELLENT.. SKIPPING ACTION BECAUSE OF READ FRAGMENT")
+#                     logger.debug("EXCELLENT.. SKIPPING ACTION BECAUSE OF READ FRAGMENT")
+#                     logger.debug("EXCELLENT.. SKIPPING ACTION BECAUSE OF READ FRAGMENT")
+#  else
+
+
+
 end
