@@ -282,13 +282,15 @@ end
 
                                             if @page and @page.slug == 'new-home'
                                                                logger.debug "page is  new-home"
-                                                               @first_page = 'true'
+                                                               @first_page = true
                                                                new_and_featured_items
                                             else
+                                                              @first_page = false
                                                               logger.debug "page is not new-home"
                                               end
-
-
+                                             logger.warn "##################################"
+                                             logger.warn "@first_page : " + @first_page.to_s
+                                              logger.warn "##################################"
   end
 #################################################################################################################
 

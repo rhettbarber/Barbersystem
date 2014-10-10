@@ -15,6 +15,7 @@ if ( $(".home-page-carousel-to-hide").length == 0 ) {
                         console.log("hide carousel");
 }
 
+console.log("@first_page: <%= @first_page.to_s  %>  ");
 
 <% if @first_page %>
                         $('#yield_content').prepend('<%= escape_javascript(   render partial: "page/content"  ) %>').trigger('create');
