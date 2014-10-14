@@ -1,0 +1,93 @@
+<style type="text/css">
+
+
+   .ui-listview .ui-li-has-thumb > img:first-child, .ui-listview .ui-li-has-thumb > .ui-btn > img:first-child, .ui-listview .ui-li-has-thumb .ui-li-thumb {
+       max-height: 150px;
+       max-width: 150px;
+   }
+
+   .ui-listview > .ui-li-has-thumb > .ui-btn, .ui-listview > .ui-li-static.ui-li-has-thumb {
+        padding-left:150px;
+   }
+
+   .ui-listview >  li h2 {
+          margin-left: 10px  ;
+          margin-right: 10px  ;
+          margin-bottom: 0px  ;
+          margin-top: 0px  ;
+       white-space: normal;
+   }
+
+   .ui-listview > .ui-li-static, .ui-listview > .ui-li-divider, .ui-listview > li > a.ui-btn {
+       padding: 60px;;
+   }
+
+
+</style>
+
+
+
+
+
+<img alt="" class="float_100" src="http://cdn.dixieoutfitters.com/images/carousel/featured-items-list.gif" />       <br>   <br>
+<%#= @featured_items.size %>
+<ul data-role="listview" data-inset="true">
+              <% @featured_items.each do |featured_item| %>
+                          <li>
+                                    <a href="<%= featured_item.list_url %>">
+                                            <%=  image_tag  "http://cdn.dixieoutfitters.com" + featured_item.image_name %>
+                                            <h2><%= featured_item.description %></h2>
+                                            <!--<p><%#= featured_item.verbiage %></p>-->
+                                    </a>
+                          </li>
+              <% end %>
+</ul>
+
+
+
+
+
+
+
+<% if @old_list %>
+
+
+    <h1>Featured Items List</h1>
+
+    <table>
+      <tr>
+        <th>Image</th>
+        <th>Description</th>
+        <th>Verbiage</th>
+        <th>Url</th>
+        <th>OnClick</th>
+        <th>Image name</th>
+        <th>Active</th>
+        <th>Carousel name</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <% @featured_items.each do |featured_item| %>
+          <tr>
+            <td><%=  image_tag  "http://cdn.dixieoutfitters.com" + featured_item.image_name, :size => "100x100" %> </td>
+            <td><%= featured_item.description %></td>
+            <td><%= featured_item.verbiage %></td>
+            <td><%= featured_item.url %></td>
+            <td><%= featured_item.onclick %></td>
+            <td><%= featured_item.image_name %></td>
+            <td><%= featured_item.active %></td>
+            <td><%= featured_item.carousel_name %></td>
+            <td><%= link_to 'Show', featured_item %></td>
+            <td><%= link_to 'Edit', edit_featured_item_path(featured_item) %></td>
+            <td><%= link_to 'Destroy', featured_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+      <% end %>
+    </table>
+
+    <br />
+
+<%= link_to 'New Featured item', new_featured_item_path %>
+
+<% end %>

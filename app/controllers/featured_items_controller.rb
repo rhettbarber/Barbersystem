@@ -1,7 +1,17 @@
 class FeaturedItemsController < ApplicationController
   before_filter  :initialize_variables
-  before_filter :redirect_unless_admin
+  before_filter :redirect_unless_admin ,:except => :list
   skip_before_filter :verify_authenticity_token , :only => :destroy
+
+  def list
+    @featured_items = FeaturedItem.where("website_id = ? and list = ?", @website.id , true  ). all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @featured_items }
+    end
+  end
+
 
   def index
     @featured_items = FeaturedItem.where("website_id = ?", @website.id ). all

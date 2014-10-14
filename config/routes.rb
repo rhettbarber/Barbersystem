@@ -6,6 +6,8 @@ ThreeTwoThree::Application.routes.draw do
 
   match "p/home", :to => 'page#show_page_on_index', :page_id  => 'new-home'
 
+  match "featured_items/list", :to => 'featured_items#list'
+
 
   resources :featured_items
 

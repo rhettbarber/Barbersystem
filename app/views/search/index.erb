@@ -48,7 +48,9 @@
     </div>
     <div class="ui-body ui-body-a">
       <ul data-role="listview">
-        <li data-icon="search"><a href="#"   id="search_garments"  class="search_button ui-btn ui-btn-b">Search Garments</a></li>
+       <% unless @website.name == "barber_store" %>
+                         <li data-icon="search"><a href="#"   id="search_garments"  class="search_button ui-btn ui-btn-b">Search Garments</a></li>
+        <% end %>
         <li data-icon="search"><a href="#"   id="search_merchandise"  class="search_button ui-btn ui-btn-b">Search Merchandise</a></li>
         <li data-icon="search"><a href="#"   id="search_designs"  class="search_button ui-btn ui-btn-b">Search Designs</a></li>
       </ul>
