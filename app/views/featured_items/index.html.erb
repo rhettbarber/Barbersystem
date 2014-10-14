@@ -5,9 +5,7 @@
   <tr>
     <th>Image</th>
     <th>Description</th>
-    <th>Url</th>
-    <th>OnClick</th>
-    <th>Image name</th>
+    <th>Verbiage</th>
     <th>Active</th>
     <th>Carousel name</th>
     <th></th>
@@ -19,9 +17,7 @@
   <tr>
     <td><%=  image_tag  "http://cdn.dixieoutfitters.com" + featured_item.image_name, :size => "100x100" %> </td>
     <td><%= featured_item.description %></td>
-    <td><%= featured_item.url %></td>
-    <td><%= featured_item.onclick %></td>
-    <td><%= featured_item.image_name %></td>
+    <td><%= featured_item.verbiage %></td>
     <td><%= featured_item.active %></td>
     <td><%= featured_item.carousel_name %></td>
     <td><%= link_to 'Show', featured_item %></td>

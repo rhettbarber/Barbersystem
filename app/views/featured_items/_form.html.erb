@@ -16,6 +16,10 @@
     <%= f.text_area :description %>
   </div>
   <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :verbiage %>
+  </div>
+  <div class="field">
     <%= f.label :url %><br />
     <%= f.text_area :url %>
   </div>
@@ -31,6 +35,11 @@
     <%= f.label :active %><br />
     <%= f.check_box :active %>
   </div>
+    <div class="field">
+      <%= f.label :list %><br />
+      <%= f.check_box :list %>
+    </div>
+
   <div class="field">
     <%= f.label :carousel_name %><br />
     <%= f.text_field :carousel_name %>
