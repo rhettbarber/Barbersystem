@@ -1,10 +1,12 @@
 console.log("begin page\show_page_on_index.js.erb");
-console.log("begin page\show_page_on_index----v1");
 
 console.log("leaving collapsible open!");
 //$('#article_subjects').collapsible( "option", "collapsed", true);
 
 $.mobile.loading('hide');
+
+//$('.revisions').html('<%#= escape_javascript(   render partial: "page/content"  ) %>').trigger('create');
+
 
 $(".page_content").remove();
 
@@ -23,19 +25,6 @@ console.log("@first_page: <%= @first_page.to_s  %>  ");
 <% else %>
                         $('#yield_content').append('<%= escape_javascript(   render partial: "page/content"  ) %>').trigger('create');
 <% end %>
-
-
-console.log("begin resizable image maps");
-$('img[usemap]').rwdImageMaps();
-console.log("end resizable image maps");
-
-
-
-//console.log("####################### ---------   ################### " );
-//console.log("@page.id:  <%#= @page.id %> "  );
-//var    the_node_id = $('.jstree-node[data-page_id=<%#= @page.id %>]').attr("id") ;
-// console.log("the_node_id: " + the_node_id );
-// console.log("####################### ---------   ################### " );
 
 
 console.log("end page\show_page_on_index.js.erb");
