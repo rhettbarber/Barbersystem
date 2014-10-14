@@ -1,6 +1,6 @@
 class FeaturedItemsController < ApplicationController
   before_filter  :initialize_variables
-  before_filter :redirect_unless_admin
+  before_filter :redirect_unless_admin ,:except => :list
   skip_before_filter :verify_authenticity_token , :only => :destroy
 
   def list

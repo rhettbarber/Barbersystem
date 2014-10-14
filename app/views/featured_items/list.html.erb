@@ -34,7 +34,7 @@
 <ul data-role="listview" data-inset="true">
               <% @featured_items.each do |featured_item| %>
                           <li>
-                                    <a href="<%= featured_item.url %>">
+                                    <a href="<%= featured_item.list_url %>">
                                             <%=  image_tag  "http://cdn.dixieoutfitters.com" + featured_item.image_name %>
                                             <h2><%= featured_item.description %></h2>
                                             <!--<p><%#= featured_item.verbiage %></p>-->
