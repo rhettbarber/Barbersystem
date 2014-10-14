@@ -22,13 +22,13 @@ GEM
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.2.1)
-    active_shipping (0.12.0)
-      active_utils (~> 2.1.1)
+    active_shipping (0.12.4)
+      active_utils (~> 2.2.0)
       activesupport (>= 2.3.5)
       builder
       i18n
       json (>= 1.5.1)
-    active_utils (2.1.1)
+    active_utils (2.2.2)
       activesupport (>= 2.3.11)
       i18n
     activemodel (3.2.18)
@@ -54,16 +54,16 @@ GEM
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
-    coffee-script (2.2.0)
+    coffee-script (2.3.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.7.0)
+    coffee-script-source (1.7.1)
     daemons (1.1.9)
     erubis (2.7.0)
     eventmachine (1.0.3-x86-mingw32)
     execjs (2.0.2)
     hike (1.2.3)
-    i18n (0.6.9)
+    i18n (0.6.11)
     journey (1.0.4)
     json (1.8.1)
     mail (2.5.4)
@@ -75,7 +75,7 @@ GEM
     multi_json (1.10.1)
     nokogiri (1.6.2.1-x86-mingw32)
       mini_portile (= 0.6.0)
-    polyglot (0.3.4)
+    polyglot (0.3.5)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -101,7 +101,7 @@ GEM
     rake (10.3.2)
     rdoc (3.12.2)
       json (~> 1.4)
-    sass (3.3.7)
+    sass (3.3.10)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -122,11 +122,11 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.39)
-    uglifier (2.5.0)
+    tzinfo (0.3.40)
+    uglifier (2.5.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    will_paginate (3.0.5)
+    will_paginate (3.0.7)
 
 PLATFORMS
   x86-mingw32
@@ -138,6 +138,7 @@ DEPENDENCIES
   bartt-ssl_requirement (~> 1.4.0)
   cacheable_flash!
   coffee-rails (~> 3.2.1)
+  execjs (= 2.0.2)
   memcache-client
   nokogiri
   rails (= 3.2.18)

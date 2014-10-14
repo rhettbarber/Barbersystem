@@ -1,0 +1,39 @@
+REBASING:
+http://stackoverflow.com/questions/6199889/rebasing-remote-branches-in-git
+
+Rebase all changes to root.. squash all except first..
+git rebase --root -i
+
+once local rebase looks good, force update on origin... only when no one else works on it.
+git push origin master -f
+
+-----------------------------------------------
+http://stackoverflow.com/questions/1657017/squash-all-commits-into-a-single-commit-in-git
+CLEAN UP ORIGIN MASTER:
+if all you want to do is squash all of your commits down to the root commit, then while
+
+git rebase --interactive --root
+can work, it's impractical for a large number of commits (for example, hundreds of commits), because the rebase operation will probably run very slowly to generate the interactive rebase editor commit list, as well as run the rebase itself.
+
+A quicker solution in such a case is to simply use a mixed or soft reset to the root commit <root>:
+
+git branch master
+
+git reset --soft <root>
+git commit --amend
+
+# Verify that the new amended root is no different
+# from the previous branch state
+git diff beforeReset
+
+--------------------------------------------------------------------------------------------------------------
+git reset --soft 153ebe530c189eba98e04af0f9d7cb062ca921b3
+git commit --amend
+-----------------------------------------------
+https://www.atlassian.com/git/tutorial/rewriting-git-history#!commit-amend
+http://danlimerick.wordpress.com/2012/03/05/a-few-tips-on-git-reset/
+http://stackoverflow.com/questions/134882/undoing-a-git-rebase
+-----------------------------------------------
+Throw away local commits in git
+If your excess commits are only visible to you, you can just do git reset --hard origin/master to move back to where the origin is.
+Doing a git revert makes new commits to remove old commits in a way that keeps everyone's history sane.
