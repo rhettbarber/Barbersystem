@@ -2,11 +2,11 @@
   <div class="featured-designs-carousel-image-container">
 
                                   <% if item.onclick and item.onclick  != "" %>
-                                                     <a href="#" onclick="<%= item.onclick %>"><img src="http://cdn.dixieoutfitters.com/<%= item.image_name %>" />  </a>
-                                 <% elsif  item.carousel_url  %>
-                                                  <a href="<%= item.carousel_url %>"><img src="http://cdn.dixieoutfitters.com/<%= item.image_name %>" />  </a>
+                                                     <a class="onclick_link"  href="#" onclick="<%= item.onclick %>"><img src="http://cdn.dixieoutfitters.com/<%= item.image_name %>" />  </a>
+                                 <% elsif  item.carousel_url and item.carousel_url  != ""   %>
+                                                  <a  class="carousel_url_link"  href="<%= item.carousel_url %>"><img src="http://cdn.dixieoutfitters.com/<%= item.image_name %>" />  </a>
                                 <% else %>
-                                                    <a href="/featured_items/list"><img src="http://cdn.dixieoutfitters.com/<%= item.image_name %>" />  </a>
+                                                    <a  class="list_url_link"   href="/featured_items/list"><img src="http://cdn.dixieoutfitters.com/<%= item.image_name %>" />  </a>
                                <% end %>
   </div>
 

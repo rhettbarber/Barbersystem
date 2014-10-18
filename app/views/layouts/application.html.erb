@@ -57,7 +57,7 @@
 
                                                                                                                                               <%= yield %>
 
-                                                                                                                                             <%   if ['/index', '/', '/p/home', '/p/new-home', '/p/new-home'].include?(request.path) %>
+                                                                                                                                             <%   if ['/index', '/', '/p/home', '/p/new-home', '/p/new-home'].include?(request.path)  or params[:promo]%>
                                                                                                                                                                     <%= render "page/home_page_carousels" %>
                                                                                                                                              <% end %>
                                                                                                 </span>

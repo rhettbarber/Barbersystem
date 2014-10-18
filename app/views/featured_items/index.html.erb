@@ -15,7 +15,7 @@
 
 <% @featured_items.each do |featured_item| %>
   <tr>
-    <td><%=  image_tag  "http://cdn.dixieoutfitters.com" + featured_item.image_name, :size => "100x100" %> </td>
+    <td><a href="<%= featured_item.list_url %>"><%=  image_tag  "http://cdn.dixieoutfitters.com" + featured_item.image_name, :size => "100x100" %></a> </td>
     <td><%= featured_item.description %></td>
     <td><%= featured_item.verbiage %></td>
     <td><%= featured_item.active %></td>
