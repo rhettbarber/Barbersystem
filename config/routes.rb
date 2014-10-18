@@ -390,7 +390,7 @@ ThreeTwoThree::Application.routes.draw do
   match "/christian_store(/department/:department_id)(/category/:category_id)", :to => "browse#index"
 
 
-
+  match "/promo/:promo", :controller => "page", :action => "show_page_on_index"   , :page_id  => 'new-home'
 
   root :to => 'page#show_page_on_index', :page_id  => 'new-home'
 
