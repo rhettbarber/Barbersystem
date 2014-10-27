@@ -109,7 +109,7 @@ PriceLevel:<%= @customer.PriceLevel if @customer %>  <br>
                                                        </div>
 
                                                            <%  if controller.action_name == 'index'  and  @purchase %>
-                                                                 <span id="update_quantities">  <%= submit_tag "Update Quantities"  %> </span>
+                                                                 <span id="update_quantities">  <%= submit_tag "Update Quantities" , :style => "background:green;"  %> </span>
                                                            <% end %>
 
                                                             <%  unless @incomplete_symbiont or @purchase.has_on_hold_entries?  %>
