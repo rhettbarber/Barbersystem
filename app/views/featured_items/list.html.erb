@@ -18,7 +18,7 @@
        white-space: normal;
    }
 
-   .ui-listview > .ui-li-static, .ui-listview > .ui-li-divider, .ui-listview > li > a.ui-btn {
+  .list-view  >  li > a.ui-btn {
        padding: 60px;;
    }
 
@@ -31,7 +31,7 @@
 
 <img alt="" class="float_100" src="http://cdn.dixieoutfitters.com/images/carousel/featured-items-list.gif" />       <br>   <br>
 <%#= @featured_items.size %>
-<ul data-role="listview" data-inset="true">
+<ul data-role="listview" data-inset="true" class="list-view">
               <% @featured_items.each do |featured_item| %>
                           <li>
                                     <a href="<%= featured_item.list_url %>">
