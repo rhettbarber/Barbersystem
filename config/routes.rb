@@ -4,6 +4,9 @@
 ThreeTwoThree::Application.routes.draw do
 
 
+  match "promo/:promo", :to => redirect("/p/new-home")
+
+
   match "p/home", :to => 'page#show_page_on_index', :page_id  => 'new-home'
 
   match "featured_items/list", :to => 'featured_items#list'
@@ -390,7 +393,6 @@ ThreeTwoThree::Application.routes.draw do
   match "/christian_store(/department/:department_id)(/category/:category_id)", :to => "browse#index"
 
 
-  match "/promo/:promo", :controller => "page", :action => "show_page_on_index"   , :page_id  => 'new-home'
 
   root :to => 'page#show_page_on_index', :page_id  => 'new-home'
 

@@ -1,0 +1,1193 @@
+
+ <div data-dom-cache="false" class="specsheet_index ui-page ui-page-theme-a ui-page-header-fixed" id="specsheet_index" data-role="page" data-url="specsheet_index" tabindex="0" style="padding-top: 56px; min-height: 1065px;">
+
+               <!--   #######################  BEGIN  PANELS   ####################### -->
+ <!--   #######################  BEGIN  PANELS   ####################### -->
+ <!--   #######################  BEGIN  PANELS   ####################### -->
+ <!--   #######################  BEGIN  PANELS   ####################### -->
+ <!--   #######################  BEGIN  PANELS   ####################### -->
+     <!--   #######################  BEGIN ARTICLES  PANEL   ####################### -->
+ <!--   #######################  BEGIN ARTICLES  PANEL   ####################### -->
+ <!--   #######################  BEGIN ARTICLES  PANEL   ####################### -->
+ <!--   #######################  BEGIN ARTICLES  PANEL   ####################### -->
+ <!--   #######################  BEGIN ARTICLES  PANEL   ####################### -->
+ <div data-theme="b" data-display="push" data-position="left" id="pages_panel" data-role="panel" class="ui-panel ui-panel-position-left ui-panel-display-push ui-panel-closed ui-body-b ui-panel-animate">
+   <div class="ui-panel-inner">
+
+                         <ul data-role="listview" class="ui-listview">
+
+                           <li "="" data-icon="back" class="ui-first-child"><a data-rel="close" href="#" class="ui-btn ui-btn-icon-right ui-icon-back">Close</a></li>
+
+                           <li class="ui-li-static ui-body-inherit">
+   <form>
+     <div class="ui-input-search ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear"><input type="text" data-type="search" value="" id="search-1" name="search-1"><a title="Clear text" class="ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all ui-input-clear-hidden" href="#">Clear text</a></div>   <span class="ui-icon ui-icon-search ui-icon-shadow">&nbsp;</span>
+   </form>
+ </li>
+
+                           <li data-icon="gear"><a href="/account" class="ui-btn ui-btn-icon-right ui-icon-gear">Account</a></li>
+                           <li data-icon="gear"><a href="/cart" class="ui-btn ui-btn-icon-right ui-icon-gear">Your Cart</a></li>
+
+                               <li><a href="/index" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Home</a> </li>
+                               <li><a href="/p/catalog" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Catalog</a> </li>
+                               <li><a href="/p/shopping" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Shopping</a> </li>
+                               <li><a href="/p/mission" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Mission</a> </li>
+                               <li><a href="/p/resources" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Resources</a> </li>
+                               <li><a href="/p/heritage-news" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Heritage News</a> </li>
+                               <li><a href="/p/interesting-email" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Interesting Email</a> </li>
+                               <li><a href="/p/southern-history" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Southern History</a> </li>
+                               <li class="ui-last-child"><a href="/p/recently-added" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Recently Added</a> </li>
+                         </ul>
+
+   </div>
+ </div>
+ <!--   #######################  END ARTICLES  PANEL   ####################### -->
+ <!--   #######################  END ARTICLES  PANEL   ####################### -->
+ <!--   #######################  END ARTICLES  PANEL   ####################### -->
+ <!--   #######################  END ARTICLES  PANEL   ####################### -->
+ <!--   #######################  END ARTICLES  PANEL   ####################### -->
+
+     <!--   #######################  BEGIN DESIGNS  PANEL   ####################### -->
+ <!--   #######################  BEGIN DESIGNS  PANEL   ####################### -->
+ <!--   #######################  BEGIN DESIGNS  PANEL   ####################### -->
+ <!--   #######################  BEGIN DESIGNS  PANEL   ####################### -->
+ <!--   #######################  BEGIN DESIGNS  PANEL   ####################### -->
+ <div data-theme="b" data-display="push" data-position="left" id="designs_panel" data-role="panel" class="left-panel ui-panel ui-panel-position-left ui-panel-display-push ui-body-b ui-panel-animate ui-panel-closed">
+   <div class="ui-panel-inner">
+     <ul id="designs_listview" data-role="listview" class="ui-listview">
+
+
+       <li class="ui-first-child" data-icon="back"><a class="ui-btn ui-btn-icon-right ui-icon-back" data-rel="close" href="#">Close</a></li>
+
+       <li class="ui-li-static ui-body-inherit">
+         <form method="get" action="/search/search/items" id="items_search">
+           <label style="display: none;" for="query">Items search:</label>
+           <div class="ui-input-search ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear"><input type="text" data-type="search" value="" placeholder="Designs" id="query" name="query"><a title="Clear text" class="ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all ui-input-clear-hidden" href="#">Clear text</a></div>   <span class="ui-icon ui-icon-search ui-icon-shadow">&nbsp;</span>
+         </form>
+       </li>
+
+                       <div id="design_departments_collapsible_set" class="department_collapsible_set ui-collapsible-set ui-group-theme-inherit ui-corner-all" data-department_id="12" data-role="collapsible-set" style="display: none;">
+                                     <div data-role="collapsible" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-themed-content ui-collapsible-collapsed ui-first-child ui-last-child"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a class="ui-collapsible-heading-toggle ui-btn ui-icon-plus ui-btn-icon-left ui-btn-inherit" href="#">Dixie Baby<span class="ui-collapsible-heading-status"> click to expand contents</span></a></h3><div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+
+                                                   <ul data-role="listview" class="ui-listview">
+                                                                                 <li data-category_id="55" class="category_li ui-first-child" style="display: none;"> <a data-transition="slide" href="/store/category_items/12/55" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> dixie baby</a></li>
+                                                                                 <li data-category_id="56" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/12/56" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> dixie baby rhinestone designs</a></li>
+                                                                                 <li data-category_id="28" class="category_li ui-last-child" style="display: none;"> <a data-transition="slide" href="/store/category_items/12/28" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> embroidered logos</a></li>
+                                                   </ul>
+                                     </div></div>
+                       </div>
+
+                       <div id="design_departments_collapsible_set" class="department_collapsible_set ui-collapsible-set ui-group-theme-inherit ui-corner-all" data-department_id="19" data-role="collapsible-set">
+                                     <div data-role="collapsible" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-themed-content ui-collapsible-collapsed ui-first-child ui-last-child"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a class="ui-collapsible-heading-toggle ui-btn ui-icon-plus ui-btn-icon-left ui-btn-inherit" href="#">Dixie Boys<span class="ui-collapsible-heading-status"> click to expand contents</span></a></h3><div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+
+                                                   <ul data-role="listview" class="ui-listview">
+                                                                                 <li data-category_id="58" class="category_li ui-first-child ui-last-child"> <a data-transition="slide" href="/store/category_items/19/58" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> dixie boys</a></li>
+                                                   </ul>
+                                     </div></div>
+                       </div>
+
+                       <div id="design_departments_collapsible_set" class="department_collapsible_set ui-collapsible-set ui-group-theme-inherit ui-corner-all" data-department_id="11" data-role="collapsible-set">
+                                     <div data-role="collapsible" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-themed-content ui-collapsible-collapsed ui-first-child ui-last-child"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a class="ui-collapsible-heading-toggle ui-btn ui-icon-plus ui-btn-icon-left ui-btn-inherit" href="#">Dixie Girls<span class="ui-collapsible-heading-status"> click to expand contents</span></a></h3><div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+
+                                                   <ul data-role="listview" class="ui-listview">
+                                                                                 <li data-category_id="17" class="category_li ui-first-child" style="display: none;"> <a data-transition="slide" href="/store/category_items/11/17" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> beach bag designs</a></li>
+                                                                                 <li data-category_id="630" class="category_li"> <a data-transition="slide" href="/store/category_items/11/630" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> birds</a></li>
+                                                                                 <li data-category_id="27" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/11/27" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> butt prints</a></li>
+                                                                                 <li data-category_id="631" class="category_li"> <a data-transition="slide" href="/store/category_items/11/631" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> cowgirl</a></li>
+                                                                                 <li data-category_id="633" class="category_li"> <a data-transition="slide" href="/store/category_items/11/633" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> deer</a></li>
+                                                                                 <li data-category_id="638" class="category_li"> <a data-transition="slide" href="/store/category_items/11/638" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> dg - assorted</a></li>
+                                                                                 <li data-category_id="676" class="category_li"> <a data-transition="slide" href="/store/category_items/11/676" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> dixie girls culture</a></li>
+                                                                                 <li data-category_id="632" class="category_li"> <a data-transition="slide" href="/store/category_items/11/632" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> dogs</a></li>
+                                                                                 <li data-category_id="29" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/11/29" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> embroidered logos</a></li>
+                                                                                 <li data-category_id="67" class="category_li"> <a data-transition="slide" href="/store/category_items/11/67" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> farm</a></li>
+                                                                                 <li data-category_id="634" class="category_li"> <a data-transition="slide" href="/store/category_items/11/634" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> fish</a></li>
+                                                                                 <li data-category_id="635" class="category_li"> <a data-transition="slide" href="/store/category_items/11/635" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> flirtatious</a></li>
+                                                                                 <li data-category_id="833" class="category_li"> <a data-transition="slide" href="/store/category_items/11/833" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> glitter designs</a></li>
+                                                                                 <li data-category_id="636" class="category_li"> <a data-transition="slide" href="/store/category_items/11/636" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> horses</a></li>
+                                                                                 <li data-category_id="91" class="category_li"> <a data-transition="slide" href="/store/category_items/11/91" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> kittens</a></li>
+                                                                                 <li data-category_id="467" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/11/467" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> patches</a></li>
+                                                                                 <li data-category_id="127" class="category_li"> <a data-transition="slide" href="/store/category_items/11/127" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> rhinestones - Large</a></li>
+                                                                                 <li data-category_id="125" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/11/125" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> rhinestones - Small</a></li>
+                                                                                 <li data-category_id="128" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/11/128" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> rhinestones size h</a></li>
+                                                                                 <li data-category_id="142" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/11/142" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> sports</a></li>
+                                                                                 <li data-category_id="637" class="category_li"> <a data-transition="slide" href="/store/category_items/11/637" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> teddy bears</a></li>
+                                                                                 <li data-category_id="465" class="category_li"> <a data-transition="slide" href="/store/category_items/11/465" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> vehicles</a></li>
+                                                                                 <li data-category_id="170" class="category_li ui-last-child"> <a data-transition="slide" href="/store/category_items/11/170" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> youth</a></li>
+                                                   </ul>
+                                     </div></div>
+                       </div>
+
+                       <div id="design_departments_collapsible_set" class="department_collapsible_set ui-collapsible-set ui-group-theme-inherit ui-corner-all" data-department_id="10" data-role="collapsible-set">
+                                     <div data-role="collapsible" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-themed-content ui-collapsible-collapsed ui-first-child ui-last-child"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a class="ui-collapsible-heading-toggle ui-btn ui-icon-plus ui-btn-icon-left ui-btn-inherit" href="#">Dixie Outfitters<span class="ui-collapsible-heading-status"> click to expand contents</span></a></h3><div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+
+                                                   <ul data-role="listview" class="ui-listview">
+                                                                                 <li data-category_id="18" class="category_li ui-first-child"> <a data-transition="slide" href="/store/category_items/10/18" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> bear</a></li>
+                                                                                 <li data-category_id="21" class="category_li"> <a data-transition="slide" href="/store/category_items/10/21" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> biker </a></li>
+                                                                                 <li data-category_id="23" class="category_li"> <a data-transition="slide" href="/store/category_items/10/23" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> boar</a></li>
+                                                                                 <li data-category_id="45" class="category_li"> <a data-transition="slide" href="/store/category_items/10/45" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> confederate</a></li>
+                                                                                 <li data-category_id="52" class="category_li"> <a data-transition="slide" href="/store/category_items/10/52" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> deer</a></li>
+                                                                                 <li data-category_id="54" class="category_li"> <a data-transition="slide" href="/store/category_items/10/54" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> diverse</a></li>
+                                                                                 <li data-category_id="59" class="category_li"> <a data-transition="slide" href="/store/category_items/10/59" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> dog tee designs</a></li>
+                                                                                 <li data-category_id="25" class="category_li"> <a data-transition="slide" href="/store/category_items/10/25" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> dog-bulldog</a></li>
+                                                                                 <li data-category_id="47" class="category_li"> <a data-transition="slide" href="/store/category_items/10/47" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> dog-coon dog</a></li>
+                                                                                 <li data-category_id="64" class="category_li"> <a data-transition="slide" href="/store/category_items/10/64" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> dog-duck dog</a></li>
+                                                                                 <li data-category_id="82" class="category_li"> <a data-transition="slide" href="/store/category_items/10/82" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> dog-guard dog</a></li>
+                                                                                 <li data-category_id="89" class="category_li"> <a data-transition="slide" href="/store/category_items/10/89" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> dog-hunting dog</a></li>
+                                                                                 <li data-category_id="150" class="category_li"> <a data-transition="slide" href="/store/category_items/10/150" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> dog-toy dog</a></li>
+                                                                                 <li data-category_id="62" class="category_li"> <a data-transition="slide" href="/store/category_items/10/62" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> dogs</a></li>
+                                                                                 <li data-category_id="639" class="category_li"> <a data-transition="slide" href="/store/category_items/10/639" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> ducks</a></li>
+                                                                                 <li data-category_id="30" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/10/30" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> embroidered logos</a></li>
+                                                                                 <li data-category_id="68" class="category_li"> <a data-transition="slide" href="/store/category_items/10/68" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> farm</a></li>
+                                                                                 <li data-category_id="70" class="category_li"> <a data-transition="slide" href="/store/category_items/10/70" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> fish</a></li>
+                                                                                 <li data-category_id="84" class="category_li"> <a data-transition="slide" href="/store/category_items/10/84" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> horse</a></li>
+                                                                                 <li data-category_id="108" class="category_li"> <a data-transition="slide" href="/store/category_items/10/108" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> modern heros</a></li>
+                                                                                 <li data-category_id="110" class="category_li"> <a data-transition="slide" href="/store/category_items/10/110" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> mule</a></li>
+                                                                                 <li data-category_id="114" class="category_li"> <a data-transition="slide" href="/store/category_items/10/114" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> occupation</a></li>
+                                                                                 <li data-category_id="466" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/10/466" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> patches</a></li>
+                                                                                 <li data-category_id="116" class="category_li"> <a data-transition="slide" href="/store/category_items/10/116" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> politically correct</a></li>
+                                                                                 <li data-category_id="120" class="category_li"> <a data-transition="slide" href="/store/category_items/10/120" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> raccoon</a></li>
+                                                                                 <li data-category_id="123" class="category_li"> <a data-transition="slide" href="/store/category_items/10/123" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> reveal</a></li>
+                                                                                 <li data-category_id="129" class="category_li"> <a data-transition="slide" href="/store/category_items/10/129" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> rodeo</a></li>
+                                                                                 <li data-category_id="130" class="category_li"> <a data-transition="slide" href="/store/category_items/10/130" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> school protest</a></li>
+                                                                                 <li data-category_id="131" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/10/131" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> small youth designs</a></li>
+                                                                                 <li data-category_id="136" class="category_li"> <a data-transition="slide" href="/store/category_items/10/136" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> southern</a></li>
+                                                                                 <li data-category_id="31" class="category_li"> <a data-transition="slide" href="/store/category_items/10/31" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> southern christian</a></li>
+                                                                                 <li data-category_id="162" class="category_li"> <a data-transition="slide" href="/store/category_items/10/162" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> southern wildlife</a></li>
+                                                                                 <li data-category_id="143" class="category_li"> <a data-transition="slide" href="/store/category_items/10/143" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> sports</a></li>
+                                                                                 <li data-category_id="144" class="category_li"> <a data-transition="slide" href="/store/category_items/10/144" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> sports baseball</a></li>
+                                                                                 <li data-category_id="147" class="category_li"> <a data-transition="slide" href="/store/category_items/10/147" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> sports-football</a></li>
+                                                                                 <li data-category_id="148" class="category_li"> <a data-transition="slide" href="/store/category_items/10/148" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> sports-softball</a></li>
+                                                                                 <li data-category_id="640" class="category_li"> <a data-transition="slide" href="/store/category_items/10/640" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> turkey</a></li>
+                                                                                 <li data-category_id="152" class="category_li"> <a data-transition="slide" href="/store/category_items/10/152" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> vehicle</a></li>
+                                                                                 <li data-category_id="153" class="category_li"> <a data-transition="slide" href="/store/category_items/10/153" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> vehicle car</a></li>
+                                                                                 <li data-category_id="154" class="category_li"> <a data-transition="slide" href="/store/category_items/10/154" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> vehicle-atv</a></li>
+                                                                                 <li data-category_id="156" class="category_li"> <a data-transition="slide" href="/store/category_items/10/156" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> vehicle-motorcycle</a></li>
+                                                                                 <li data-category_id="157" class="category_li"> <a data-transition="slide" href="/store/category_items/10/157" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> vehicle-tractor</a></li>
+                                                                                 <li data-category_id="159" class="category_li ui-last-child"> <a data-transition="slide" href="/store/category_items/10/159" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> vehicle-truck</a></li>
+                                                   </ul>
+                                     </div></div>
+                       </div>
+
+                       <div id="design_departments_collapsible_set" class="department_collapsible_set ui-collapsible-set ui-group-theme-inherit ui-corner-all" data-department_id="24" data-role="collapsible-set">
+                                     <div data-role="collapsible" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-themed-content ui-collapsible-collapsed ui-first-child ui-last-child"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a class="ui-collapsible-heading-toggle ui-btn ui-icon-plus ui-btn-icon-left ui-btn-inherit" href="#">Southern Heritage Dixie<span class="ui-collapsible-heading-status"> click to expand contents</span></a></h3><div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+
+                                                   <ul data-role="listview" class="ui-listview">
+                                                                                 <li data-category_id="97" class="category_li ui-first-child"> <a data-transition="slide" href="/store/category_items/24/97" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> confederate battles</a></li>
+                                                                                 <li data-category_id="100" class="category_li"> <a data-transition="slide" href="/store/category_items/24/100" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> confederate generals</a></li>
+                                                                                 <li data-category_id="102" class="category_li"> <a data-transition="slide" href="/store/category_items/24/102" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> confederate women</a></li>
+                                                                                 <li data-category_id="96" class="category_li"> <a data-transition="slide" href="/store/category_items/24/96" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> legends of confederacy</a></li>
+                                                                                 <li data-category_id="98" class="category_li"> <a data-transition="slide" href="/store/category_items/24/98" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> nathan b. forrest</a></li>
+                                                                                 <li data-category_id="101" class="category_li"> <a data-transition="slide" href="/store/category_items/24/101" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> robert e. lee</a></li>
+                                                                                 <li data-category_id="99" class="category_li ui-last-child"> <a data-transition="slide" href="/store/category_items/24/99" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> stonewall jackson</a></li>
+                                                   </ul>
+                                     </div></div>
+                       </div>
+
+                       <div id="design_departments_collapsible_set" class="department_collapsible_set ui-collapsible-set ui-group-theme-inherit ui-corner-all" data-department_id="53" data-role="collapsible-set">
+                                     <div data-role="collapsible" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-themed-content ui-collapsible-collapsed ui-first-child ui-last-child"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a class="ui-collapsible-heading-toggle ui-btn ui-icon-plus ui-btn-icon-left ui-btn-inherit" href="#">Straight From The South<span class="ui-collapsible-heading-status"> click to expand contents</span></a></h3><div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+
+                                                   <ul data-role="listview" class="ui-listview">
+                                                                                 <li data-category_id="801" class="category_li ui-first-child ui-last-child"> <a data-transition="slide" href="/store/category_items/53/801" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Straight From The South</a></li>
+                                                   </ul>
+                                     </div></div>
+                       </div>
+
+             <li style="display:none;" class="symbiote_designs_menu_options"><a style="white-space:normal;" data-role="button" href="#items_panel" data-icon="arrow-r" class="ui-link ui-btn ui-icon-arrow-r ui-btn-icon-left ui-shadow ui-corner-all" role="button"> You have already chosen a design. Please choose a item to complete it.</a></li>
+              <li style="display: none;" class="symbiote_items_menu_options ui-last-child"><a style="white-space:normal;" href="/cart/delete_incomplete_symbiote" class="ui-btn ui-btn-icon-right ui-icon-carat-r">or Delete chosen design  from cart</a></li>
+     </ul>
+   </div>
+ </div>
+ <!--   #######################  END DESIGNS  PANEL   ####################### -->
+ <!--   #######################  END DESIGNS  PANEL   ####################### -->
+ <!--   #######################  END DESIGNS  PANEL   ####################### -->
+ <!--   #######################  END DESIGNS  PANEL   ####################### -->
+ <!--   #######################  END DESIGNS  PANEL   ####################### -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     <!--   #######################  BEGIN itemS  PANEL   ####################### -->
+ <!--   #######################  BEGIN itemS  PANEL   ####################### -->
+ <!--   #######################  BEGIN itemS  PANEL   ####################### -->
+ <!--   #######################  BEGIN itemS  PANEL   ####################### -->
+ <!--   #######################  BEGIN itemS  PANEL   ####################### -->
+ <div data-theme="b" data-display="push" data-position="left" id="items_panel" data-role="panel" class="left-panel ui-panel ui-panel-position-left ui-panel-display-push ui-body-b ui-panel-animate ui-panel-closed">
+   <div class="ui-panel-inner">
+     <ul id="items_listview" data-role="listview" class="ui-listview">
+
+
+       <li class="ui-first-child" data-icon="back"><a class="ui-btn ui-btn-icon-right ui-icon-back" data-rel="close" href="#">Close</a></li>
+
+       <li class="ui-li-static ui-body-inherit">
+         <form method="get" action="/search/search/items" id="items_search">
+           <label style="display: none;" for="query">Items search:</label>
+           <div class="ui-input-search ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear"><input type="text" data-type="search" value="" placeholder="Items" id="query" name="query"><a title="Clear text" class="ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all ui-input-clear-hidden" href="#">Clear text</a></div>   <span class="ui-icon ui-icon-search ui-icon-shadow">&nbsp;</span>
+         </form>
+       </li>
+
+                       <div id="item_departments_collapsible_set" class="department_collapsible_set ui-collapsible-set ui-group-theme-inherit ui-corner-all" data-department_id="35" data-role="collapsible-set" style="display: none;">
+                                     <div data-role="collapsible" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-themed-content ui-collapsible-collapsed ui-first-child ui-last-child"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a class="ui-collapsible-heading-toggle ui-btn ui-icon-plus ui-btn-icon-left ui-btn-inherit" href="#">Dixie All Over Shirts<span class="ui-collapsible-heading-status"> click to expand contents</span></a></h3><div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+
+                                                   <ul data-role="listview" class="ui-listview">
+                                                                                                             <li data-category_id="760" class="category_li ui-first-child" style="display: none;"> <a data-transition="slide" href="/store/category_items/35/760" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Christian</a></li>
+
+                                                                                                             <li data-category_id="672" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/35/672" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Dixie</a></li>
+
+                                                                                                             <li data-category_id="674" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/35/674" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Dixie Girls</a></li>
+
+                                                                                                             <li data-category_id="821" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/35/821" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Jesse Ray</a></li>
+
+                                                                                                             <li data-category_id="673" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/35/673" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Legends Of The Confederacy</a></li>
+
+                                                                                                             <li data-category_id="748" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/35/748" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Lexington, VA - Flag</a></li>
+
+                                                                                                             <li data-category_id="888" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/35/888" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Modern Day Heroes</a></li>
+
+                                                                                                             <li data-category_id="780" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/35/780" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Reidsville Confederate</a></li>
+
+                                                                                                             <li data-category_id="762" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/35/762" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Restore Pelham Chapel's Flags</a></li>
+
+                                                                                                             <li data-category_id="889" class="category_li ui-last-child" style="display: none;"> <a data-transition="slide" href="/store/category_items/35/889" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> S.H.P.G</a></li>
+
+                                                   </ul>
+                                     </div></div>
+                       </div>
+                       <div id="item_departments_collapsible_set" class="department_collapsible_set ui-collapsible-set ui-group-theme-inherit ui-corner-all" data-department_id="22" data-role="collapsible-set" style="display: none;">
+                                     <div data-role="collapsible" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-themed-content ui-collapsible-collapsed ui-first-child ui-last-child"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a class="ui-collapsible-heading-toggle ui-btn ui-icon-plus ui-btn-icon-left ui-btn-inherit" href="#">Dixie Merchandise<span class="ui-collapsible-heading-status"> click to expand contents</span></a></h3><div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+
+                                                   <ul data-role="listview" class="ui-listview">
+                                                                                                             <li data-category_id="514" class="category_li ui-first-child" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/514" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> 16" Stickers - Dixie</a></li>
+
+                                                                                                             <li data-category_id="304" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/304" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> 5"x5" Window Stickers - Dixie</a></li>
+
+                                                                                                             <li data-category_id="460" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/460" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Beanies</a></li>
+
+                                                                                                             <li data-category_id="294" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/294" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Blankets Afghans</a></li>
+
+                                                                                                             <li data-category_id="764" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/764" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Bottle Coozies</a></li>
+
+                                                                                                             <li data-category_id="297" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/297" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Bumper Stickers - Dixie</a></li>
+
+                                                                                                             <li data-category_id="438" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/438" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Caps</a></li>
+
+                                                                                                             <li data-category_id="422" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/422" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Car Tags Aluminum - Dixie</a></li>
+
+                                                                                                             <li data-category_id="842" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/842" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Car Tags Aluminum SFTS</a></li>
+
+                                                                                                             <li data-category_id="293" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/293" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Car Tags Mirrored - Dixie</a></li>
+
+                                                                                                             <li data-category_id="778" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/778" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Cell Phone Carrier</a></li>
+
+                                                                                                             <li data-category_id="602" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/602" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Checkbooks - Dixie</a></li>
+
+                                                                                                             <li data-category_id="594" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/594" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Clearance Items - Dixie</a></li>
+
+                                                                                                             <li data-category_id="423" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/423" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Collapsible Coozies - Dixie</a></li>
+
+                                                                                                             <li data-category_id="479" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/479" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Customer Tributes</a></li>
+
+                                                                                                             <li data-category_id="355" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/355" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Dog Tags - Dixie</a></li>
+
+                                                                                                             <li data-category_id="308" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/308" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Dog Tees - Dixie</a></li>
+
+                                                                                                             <li data-category_id="554" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/554" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Embroidered Caps - Dixie</a></li>
+
+                                                                                                             <li data-category_id="644" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/644" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Fine Art Prints</a></li>
+
+                                                                                                             <li data-category_id="424" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/424" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Leather Belts - Dixie</a></li>
+
+                                                                                                             <li data-category_id="295" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/295" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Metal Signs - Dixie</a></li>
+
+                                                                                                             <li data-category_id="755" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/755" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Mossy Oak Merchandise - Dixie</a></li>
+
+                                                                                                             <li data-category_id="316" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/316" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Mouse Pads - Dixie</a></li>
+
+                                                                                                             <li data-category_id="303" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/303" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Mugs - Dixie</a></li>
+
+                                                                                                             <li data-category_id="298" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/298" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Pewter</a></li>
+
+                                                                                                             <li data-category_id="839" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/839" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Poster Backgrounds - Dixie</a></li>
+
+                                                                                                             <li data-category_id="486" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/486" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Rear Window Murals - Dixie</a></li>
+
+                                                                                                             <li data-category_id="887" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/887" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Rebel Stickers</a></li>
+
+                                                                                                             <li data-category_id="498" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/498" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Reveal The Truth T-Shirts</a></li>
+
+                                                                                                             <li data-category_id="350" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/350" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Sandstone Coasters - Dixie</a></li>
+
+                                                                                                             <li data-category_id="497" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/497" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> School Protest T-Shirts</a></li>
+
+                                                                                                             <li data-category_id="774" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/774" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Shade Keepers</a></li>
+
+                                                                                                             <li data-category_id="772" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/772" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Sherpa Throws</a></li>
+
+                                                                                                             <li data-category_id="446" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/446" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Socks</a></li>
+
+                                                                                                             <li data-category_id="300" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/300" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Southern Books</a></li>
+
+                                                                                                             <li data-category_id="578" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/578" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Southern Heritage 411</a></li>
+
+                                                                                                             <li data-category_id="302" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/302" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Stuffed Babies</a></li>
+
+                                                                                                             <li data-category_id="556" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/556" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Tote Bags</a></li>
+
+                                                                                                             <li data-category_id="804" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/804" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Wall Art - Christian</a></li>
+
+                                                                                                             <li data-category_id="791" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/791" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Wall Art - Confederate Heritag</a></li>
+
+                                                                                                             <li data-category_id="794" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/794" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Wall Art - Dixie Girls</a></li>
+
+                                                                                                             <li data-category_id="822" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/822" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Wall Art - Jesse Ray</a></li>
+
+                                                                                                             <li data-category_id="793" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/793" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Wall Art - Outdoor Life</a></li>
+
+                                                                                                             <li data-category_id="792" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/792" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Wall Art - Southern Life</a></li>
+
+                                                                                                             <li data-category_id="816" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/816" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Wall Art - Straight From South</a></li>
+
+                                                                                                             <li data-category_id="603" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/603" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Wallets - Bi-Fold - Dixie</a></li>
+
+                                                                                                             <li data-category_id="604" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/604" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Wallets - Tri-Fold - Dixie</a></li>
+
+                                                                                                             <li data-category_id="301" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/301" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Windshield Decals - Dixie</a></li>
+
+                                                                                                             <li data-category_id="598" class="category_li ui-last-child" style="display: none;"> <a data-transition="slide" href="/store/category_items/22/598" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Wristbands - Dixie</a></li>
+
+                                                   </ul>
+                                     </div></div>
+                       </div>
+                       <div id="item_departments_collapsible_set" class="department_collapsible_set ui-collapsible-set ui-group-theme-inherit ui-corner-all" data-department_id="7" data-role="collapsible-set" style="display: none;">
+                                     <div data-role="collapsible" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-themed-content ui-collapsible-collapsed ui-first-child ui-last-child"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a class="ui-collapsible-heading-toggle ui-btn ui-icon-plus ui-btn-icon-left ui-btn-inherit" href="#">Infant<span class="ui-collapsible-heading-status"> click to expand contents</span></a></h3><div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+
+                                                   <ul data-role="listview" class="ui-listview">
+                                                                                                             <li data-category_id="220" class="category_li ui-first-child" style="display: none;"> <a data-transition="slide" href="/store/category_items/7/220" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Beanies &amp; Caps</a></li>
+
+                                                                                                             <li data-category_id="546" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/7/546" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Long Sleeve T's</a></li>
+
+                                                                                                             <li data-category_id="547" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/7/547" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Onesies, Rompers &amp; Sleepers</a></li>
+
+                                                                                                             <li data-category_id="364" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/7/364" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Reversible Bibs</a></li>
+
+                                                                                                             <li data-category_id="545" class="category_li ui-last-child" style="display: none;"> <a data-transition="slide" href="/store/category_items/7/545" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Short Sleeve T's</a></li>
+
+                                                   </ul>
+                                     </div></div>
+                       </div>
+                       <div id="item_departments_collapsible_set" class="department_collapsible_set ui-collapsible-set ui-group-theme-inherit ui-corner-all" data-department_id="4" data-role="collapsible-set" style="display: none;">
+                                     <div data-role="collapsible" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-themed-content ui-collapsible-collapsed ui-first-child ui-last-child"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a class="ui-collapsible-heading-toggle ui-btn ui-icon-plus ui-btn-icon-left ui-btn-inherit" href="#">Junior Girl<span class="ui-collapsible-heading-status"> click to expand contents</span></a></h3><div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+
+                                                   <ul data-role="listview" class="ui-listview">
+                                                                                                             <li data-category_id="286" class="category_li ui-first-child" style="display: none;"> <a data-transition="slide" href="/store/category_items/4/286" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Front Print Garments</a></li>
+
+                                                                                                             <li data-category_id="759" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/4/759" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Hooded Sweatshirts</a></li>
+
+                                                                                                             <li data-category_id="219" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/4/219" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Junior's Jeans</a></li>
+
+                                                                                                             <li data-category_id="204" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/4/204" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Long Sleeve T's</a></li>
+
+                                                                                                             <li data-category_id="379" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/4/379" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Outerwear</a></li>
+
+                                                                                                             <li data-category_id="523" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/4/523" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Pants</a></li>
+
+                                                                                                             <li data-category_id="522" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/4/522" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Short Sleeve T's</a></li>
+
+                                                                                                             <li data-category_id="217" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/4/217" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Shorts</a></li>
+
+                                                                                                             <li data-category_id="524" class="category_li ui-last-child" style="display: none;"> <a data-transition="slide" href="/store/category_items/4/524" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Tank Tops</a></li>
+
+                                                   </ul>
+                                     </div></div>
+                       </div>
+                       <div id="item_departments_collapsible_set" class="department_collapsible_set ui-collapsible-set ui-group-theme-inherit ui-corner-all" data-department_id="2" data-role="collapsible-set" style="display: none;">
+                                     <div data-role="collapsible" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-themed-content ui-collapsible-collapsed ui-first-child ui-last-child"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a class="ui-collapsible-heading-toggle ui-btn ui-icon-plus ui-btn-icon-left ui-btn-inherit" href="#">Men<span class="ui-collapsible-heading-status"> click to expand contents</span></a></h3><div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+
+                                                   <ul data-role="listview" class="ui-listview">
+                                                                                                             <li data-category_id="232" class="category_li ui-first-child" style="display: none;"> <a data-transition="slide" href="/store/category_items/2/232" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Cap Styles</a></li>
+
+                                                                                                             <li data-category_id="769" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/2/769" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Flap Beanies</a></li>
+
+                                                                                                             <li data-category_id="201" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/2/201" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Hooded Sweatshirts</a></li>
+
+                                                                                                             <li data-category_id="507" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/2/507" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Long Sleeve T's</a></li>
+
+                                                                                                             <li data-category_id="377" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/2/377" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Outerwear</a></li>
+
+                                                                                                             <li data-category_id="211" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/2/211" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Pants</a></li>
+
+                                                                                                             <li data-category_id="491" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/2/491" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Short Sleeve T's</a></li>
+
+                                                                                                             <li data-category_id="826" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/2/826" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Sweatshirts</a></li>
+
+                                                                                                             <li data-category_id="516" class="category_li ui-last-child" style="display: none;"> <a data-transition="slide" href="/store/category_items/2/516" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Tank Tops</a></li>
+
+                                                   </ul>
+                                     </div></div>
+                       </div>
+                       <div id="item_departments_collapsible_set" class="department_collapsible_set ui-collapsible-set ui-group-theme-inherit ui-corner-all" data-department_id="8" data-role="collapsible-set" style="display: none;">
+                                     <div data-role="collapsible" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-themed-content ui-collapsible-collapsed ui-first-child ui-last-child"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a class="ui-collapsible-heading-toggle ui-btn ui-icon-plus ui-btn-icon-left ui-btn-inherit" href="#">Toddler<span class="ui-collapsible-heading-status"> click to expand contents</span></a></h3><div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+
+                                                   <ul data-role="listview" class="ui-listview">
+                                                                                                             <li data-category_id="542" class="category_li ui-first-child" style="display: none;"> <a data-transition="slide" href="/store/category_items/8/542" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Long Sleeve T's</a></li>
+
+                                                                                                             <li data-category_id="541" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/8/541" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Short Sleeve T's</a></li>
+
+                                                                                                             <li data-category_id="208" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/8/208" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Sweatshirts</a></li>
+
+                                                                                                             <li data-category_id="544" class="category_li ui-last-child" style="display: none;"> <a data-transition="slide" href="/store/category_items/8/544" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Tank Tops</a></li>
+
+                                                   </ul>
+                                     </div></div>
+                       </div>
+                       <div id="item_departments_collapsible_set" class="department_collapsible_set ui-collapsible-set ui-group-theme-inherit ui-corner-all" data-department_id="3" data-role="collapsible-set" style="display: none;">
+                                     <div data-role="collapsible" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-themed-content ui-collapsible-collapsed ui-first-child ui-last-child"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a class="ui-collapsible-heading-toggle ui-btn ui-icon-plus ui-btn-icon-left ui-btn-inherit" href="#">Women<span class="ui-collapsible-heading-status"> click to expand contents</span></a></h3><div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+
+                                                   <ul data-role="listview" class="ui-listview">
+                                                                                                             <li data-category_id="284" class="category_li ui-first-child" style="display: none;"> <a data-transition="slide" href="/store/category_items/3/284" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Beach Tote Bags</a></li>
+
+                                                                                                             <li data-category_id="758" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/3/758" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Beachcomber Bag</a></li>
+
+                                                                                                             <li data-category_id="233" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/3/233" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Cap Styles</a></li>
+
+                                                                                                             <li data-category_id="770" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/3/770" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Flap Beanies</a></li>
+
+                                                                                                             <li data-category_id="280" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/3/280" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Front Print Garments</a></li>
+
+                                                                                                             <li data-category_id="203" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/3/203" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Hooded Sweatshirts</a></li>
+
+                                                                                                             <li data-category_id="508" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/3/508" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Long Sleeve T's</a></li>
+
+                                                                                                             <li data-category_id="378" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/3/378" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Outerwear</a></li>
+
+                                                                                                             <li data-category_id="215" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/3/215" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Pants</a></li>
+
+                                                                                                             <li data-category_id="492" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/3/492" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Short Sleeve T's</a></li>
+
+                                                                                                             <li data-category_id="517" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/3/517" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Shorts</a></li>
+
+                                                                                                             <li data-category_id="827" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/3/827" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Sweatshirts</a></li>
+
+                                                                                                             <li data-category_id="518" class="category_li ui-last-child" style="display: none;"> <a data-transition="slide" href="/store/category_items/3/518" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Tank Tops</a></li>
+
+                                                   </ul>
+                                     </div></div>
+                       </div>
+                       <div id="item_departments_collapsible_set" class="department_collapsible_set ui-collapsible-set ui-group-theme-inherit ui-corner-all" data-department_id="9" data-role="collapsible-set" style="display: none;">
+                                     <div data-role="collapsible" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-themed-content ui-collapsible-collapsed ui-first-child ui-last-child"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a class="ui-collapsible-heading-toggle ui-btn ui-icon-plus ui-btn-icon-left ui-btn-inherit" href="#">Youth Boy<span class="ui-collapsible-heading-status"> click to expand contents</span></a></h3><div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+
+                                                   <ul data-role="listview" class="ui-listview">
+                                                                                                             <li data-category_id="528" class="category_li ui-first-child" style="display: none;"> <a data-transition="slide" href="/store/category_items/9/528" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Hooded Sweatshirts</a></li>
+
+                                                                                                             <li data-category_id="536" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/9/536" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Long Sleeve T's</a></li>
+
+                                                                                                             <li data-category_id="380" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/9/380" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Outerwear</a></li>
+
+                                                                                                             <li data-category_id="462" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/9/462" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Pants</a></li>
+
+                                                                                                             <li data-category_id="527" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/9/527" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Short Sleeve T's</a></li>
+
+                                                                                                             <li data-category_id="828" class="category_li ui-last-child" style="display: none;"> <a data-transition="slide" href="/store/category_items/9/828" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Sweatshirts</a></li>
+
+                                                   </ul>
+                                     </div></div>
+                       </div>
+                       <div id="item_departments_collapsible_set" class="department_collapsible_set ui-collapsible-set ui-group-theme-inherit ui-corner-all" data-department_id="6" data-role="collapsible-set" style="display: none;">
+                                     <div data-role="collapsible" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-themed-content ui-collapsible-collapsed ui-first-child ui-last-child"><h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed"><a class="ui-collapsible-heading-toggle ui-btn ui-icon-plus ui-btn-icon-left ui-btn-inherit" href="#">Youth Girl<span class="ui-collapsible-heading-status"> click to expand contents</span></a></h3><div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
+
+                                                   <ul data-role="listview" class="ui-listview">
+                                                                                                             <li data-category_id="685" class="category_li ui-first-child" style="display: none;"> <a data-transition="slide" href="/store/category_items/6/685" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Hooded Sweatshirts</a></li>
+
+                                                                                                             <li data-category_id="539" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/6/539" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Long Sleeve T's</a></li>
+
+                                                                                                             <li data-category_id="381" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/6/381" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Outerwear</a></li>
+
+                                                                                                             <li data-category_id="288" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/6/288" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Pants</a></li>
+
+                                                                                                             <li data-category_id="526" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/6/526" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Short Sleeve T's</a></li>
+
+                                                                                                             <li data-category_id="538" class="category_li" style="display: none;"> <a data-transition="slide" href="/store/category_items/6/538" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Shorts</a></li>
+
+                                                                                                             <li data-category_id="829" class="category_li ui-last-child" style="display: none;"> <a data-transition="slide" href="/store/category_items/6/829" class="ui-btn ui-btn-icon-right ui-icon-carat-r"> Sweatshirts</a></li>
+
+                                                   </ul>
+                                     </div></div>
+                       </div>
+
+
+       <li style="display: none;" class="symbiote_items_menu_options"><a style="white-space:normal;" data-role="button" href="#designs_panel" data-icon="arrow-r" class="ui-link ui-btn ui-icon-arrow-r ui-btn-icon-left ui-shadow ui-corner-all" role="button"> You have already chosen a item. Please choose a design  to complete it.</a></li>
+       <li style="white-space: normal; display: none;" class="symbiote_items_menu_options ui-last-child"><a style="white-space:normal;" href="/cart/delete_incomplete_symbiote" class="ui-btn ui-btn-icon-right ui-icon-carat-r">or Delete chosen item from cart</a></li>
+
+     </ul>
+   </div>
+ </div>
+ <!--   #######################  END itemS  PANEL   ####################### -->
+ <!--   #######################  END itemS  PANEL   ####################### -->
+ <!--   #######################  END itemS  PANEL   ####################### -->
+ <!--   #######################  END itemS  PANEL   ####################### -->
+ <!--   #######################  END itemS  PANEL   ####################### -->
+ <!--   #######################  END  PANELS   ####################### -->
+ <!--   #######################  END  PANELS   ####################### -->
+ <!--   #######################  END  PANELS   ####################### -->
+ <!--   #######################  END  PANELS   ####################### -->
+ <!--   #######################  END  PANELS   ####################### -->
+
+
+               <!--   #######################  BEGIN  HEADER  ####################### -->
+ <!--   #######################  BEGIN  HEADER  ####################### -->
+ <!--   #######################  BEGIN  HEADER  ####################### -->
+ <!--   #######################  BEGIN  HEADER  ####################### -->
+ <!--   #######################  BEGIN  HEADER  ####################### -->
+ <div data-theme="b" data-position="fixed" data-id="barbersystem_header" data-role="header" role="banner" class="ui-header ui-header-fixed slidedown ui-bar-b ui-panel-fixed-toolbar">
+
+   <div data-role="navbar" class="ui-navbar" role="navigation">
+     <ul class="ui-grid-c">
+       <li class="ui-block-a"><a href="/" class="ui-link ui-btn"> <img style="height:35px;" src="/images/icons/dixieoutfitters-logo.png" id="dixie_logo" alt="Dixieoutfitters-logo"> </a></li>
+       <li class="ui-block-b"><a href="#items_panel" class="ui-link ui-btn">Items</a></li>
+       <li class="ui-block-c"><a href="#designs_panel" class="ui-link ui-btn">Designs</a></li>
+       <li class="ui-block-d"><a href="#pages_panel" class="ui-link ui-btn">Menu</a></li>
+
+     </ul>
+   </div><!-- /navbar -->
+ </div><!-- /header -->
+ <!--   #######################  END  HEADER  ####################### -->
+ <!--   #######################  END  HEADER  ####################### -->
+ <!--   #######################  END  HEADER  ####################### -->
+ <!--   #######################  END  HEADER  ####################### -->
+ <!--   #######################  END  HEADER  ####################### -->
+
+
+               <!--   #######################  BEGIN  CONTENT  ####################### -->
+               <!--   #######################  BEGIN  CONTENT  ####################### -->
+               <!--   #######################  BEGIN  CONTENT  ####################### -->
+               <!--   #######################  BEGIN  CONTENT  ####################### -->
+               <!--   #######################  BEGIN  CONTENT  ####################### -->
+               <div class="ui-panel-wrapper"><div data-theme="a" data-role="content" class="ui-content ui-body-a" role="main">
+
+                             <script src="/assets/repeated/initiate_functions.js"></script>
+
+
+
+                             <div style="margin-left:auto;margin-right:auto;" id="the_yield">
+                                               <div class="show_specsheet" style="margin-left: auto; margin-right: auto;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <span id="specsheet"><span id="specsheet">
+
+ <div id="specsheet_table_css">
+
+
+
+
+
+
+    <!--[if lt IE 8]><style>
+  .design_span span {
+      display: inline-block;
+      height: 100%;
+  }
+ </style><![endif]-->
+
+
+ <style>
+     .specsheet_table_container {
+         background-color: yellow;
+         width: 850px ;
+         position: relative;
+     }
+
+     #specsheet_table {
+         background: url(/images/item_specsheets/11094_cardinal.jpg) no-repeat right;
+         height:328px;
+         width:425px;
+         float:left;
+     }
+
+     #specsheet_table_front {
+         background: url(/images/item_specsheets/11094_cardinal.jpg) no-repeat left;
+         height:328px;
+         width:425px;
+         float:left;
+     }
+
+     #back_design_td {
+         width: 425px;
+         height:328px;
+         overflow:hidden;
+     }
+
+     .specsheet_table_sizer {
+         width: ;
+
+     }
+     /*   ---------- Media queries for mobile go here -------------    */
+     /*   ---------- Media queries for mobile go here -------------    */
+     /*   ---------- Media queries for mobile go here -------------    */
+     @media (max-width: 700px) {
+
+         .specsheet_table_container {
+             left:-63px;
+          }
+
+
+         #specsheet_table {
+             float:none;
+         }
+
+         #specsheet_table_front {
+             float:none;
+         }
+
+         .specsheet_table_sizer {
+             width:300px;
+             overflow: hidden;
+         }
+
+    }
+
+ </style>
+  </div>
+
+
+
+
+
+   <table style="margin-left:auto;margin-right:auto;">
+
+     <tbody>
+             <tr>
+                     <td>
+                             <div class="specsheet_table_sizer">
+                                         <div class="specsheet_table_container">
+                                                             <div id="specsheet_table" class="drag">
+
+                                                              </div>
+
+
+                                                             <div id="specsheet_table_front" class="drag">
+
+                                                              </div>
+                                          </div>
+                               </div>
+                     </td>
+             </tr>
+     </tbody>
+
+   </table>
+ </span></span>
+
+
+  <style type="text/css">
+
+
+
+
+
+  </style>
+
+
+
+
+
+
+
+
+
+
+
+ <style type="text/css">
+     .specsheet-choices-table  {
+         /*background-color: #c0c0c0;*/
+         float: left;
+     }
+
+     @media ( max-width: 700px ) {
+         .choice {
+             width:96%;
+         }
+     }
+
+     @media ( min-width: 700px ) {
+         /* Show the table header rows and set all cells to display: table-cell */
+         .specsheet-choices-table td,
+         .specsheet-choices-table th,
+         .specsheet-choices-table tbody th,
+         .specsheet-choices-table tbody td,
+         .specsheet-choices-table thead td,
+         .specsheet-choices-table thead th {
+             display: table-cell;
+             margin: 0;
+         }
+         /* Hide the labels in each cell */
+         .specsheet-choices-table td .ui-table-cell-label,
+         .specsheet-choices-table th .ui-table-cell-label {
+             display: none;
+         }
+
+         .specsheet-choices-table td {
+             /*background-color: blue;*/
+         }
+
+         .specsheet-choices-table  {
+             /*background-color: darkgray;*/
+             width:850px;
+         }
+
+         .back_button {width:80px;}
+         .breast_button_choice {width: 136px;}
+     }
+ </style>
+
+
+ <form method="post" action="/cart/add_to_cart" accept-charset="UTF-8"><div style="margin:0;padding:0;display:inline"><input type="hidden" value="✓" name="utf8"><input type="hidden" value="put" name="_method"><input type="hidden" value="MT/QCqqQRT2xHDeLwy6kV/XpL34jJNi0jb2aYj25gi4=" name="authenticity_token"></div>
+     <table class="specsheet-choices-table ui-table ui-table-reflow" data-role="table">
+       <thead>
+       <tr>
+         <th data-colstart="1"> </th>
+             <th data-colstart="2"> </th>
+         <th data-colstart="3"> </th>
+       </tr>
+       </thead>
+       <tbody>
+       <tr>
+         <td class="back_button choice"><b class="ui-table-cell-label"> </b><a class="ui-btn" href="javascript:history.back()">Back</a></td>
+
+             <td class="dimension_selector choice"><b class="ui-table-cell-label"> </b> <div class="ui-select"><div id="item_class_component_item_id-button" class="ui-btn ui-icon-carat-d ui-btn-icon-right ui-corner-all ui-shadow"><span>Cardinal X-Large</span><select name="item_class_component[item_id]" id="item_class_component_item_id"><option selected="selected" value="15590">Black Large</option>
+ <option value="15584">Black Medium</option>
+ <option value="15578">Black Small</option>
+ <option value="15596">Black X-Large</option>
+ <option value="15602">Black XX-Large</option>
+ <option value="15597">Cardinal X-Large</option>
+ <option value="15603">Cardinal XX-Large</option>
+ <option value="15592">Chocolate Large</option>
+ <option value="15586">Chocolate Medium</option>
+ <option value="15580">Chocolate Small</option>
+ <option value="15598">Chocolate X-Large</option>
+ <option value="15604">Chocolate XX-Large</option>
+ <option value="15589">Forest Green Large</option>
+ <option value="15583">Forest Green Medium</option>
+ <option value="15577">Forest Green Small</option>
+ <option value="15595">Forest Green X-Large</option>
+ <option value="15593">Indigo Large</option>
+ <option value="15587">Indigo Medium</option>
+ <option value="15581">Indigo Small</option>
+ <option value="15599">Indigo X-Large</option>
+ <option value="15605">Indigo XX-Large</option>
+ <option value="15594">Navy Large</option>
+ <option value="15588">Navy Medium</option>
+ <option value="15582">Navy Small</option>
+ <option value="15600">Navy X-Large</option>
+ <option value="15606">Navy XX-Large</option></select></div></div></td>
+
+         <td class="choose_button choice"><b class="ui-table-cell-label"> </b>
+           <input type="hidden" value="2" name="department_id" id="department_id">
+
+
+
+
+
+           <input type="hidden" name="breast_print_value" id="breast_print_value" value="BP021">
+           <input type="hidden" value="false" name="show_wide_specsheet" id="show_wide_specsheet">
+           <div class="ui-btn ui-input-btn ui-corner-all ui-shadow ui-focus">Choose<input type="submit" value="Choose" name="commit"></div>
+
+
+
+         </td>
+       </tr>
+       </tbody>
+     </table>
+ </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <style type="text/css">
+     .specsheet-details-table {float: left;}
+
+     @media ( min-width: 40em ) {
+         /* Show the table header rows and set all cells to display: table-cell */
+         .specsheet-details-table td,
+         .specsheet-details-table th,
+         .specsheet-details-table tbody th,
+         .specsheet-details-table tbody td,
+         .specsheet-details-table thead td,
+         .specsheet-details-table thead th {
+             display: table-cell;
+             margin: 0;
+         }
+         /* Hide the labels in each cell */
+         .specsheet-details-table td .ui-table-cell-label,
+         .specsheet-details-table th .ui-table-cell-label {
+             display: none;
+         }
+     }
+ </style>
+
+
+
+
+
+
+ <table class="specsheet-details-table ui-table ui-table-reflow" data-role="table">
+   <thead>
+   <tr>
+     <th data-colstart="1">Item Code</th>
+     <th data-colstart="2">Item Description</th>
+     <th data-colstart="3"></th>
+     <th data-colstart="4"></th>
+     <th data-colstart="5">Your Price</th>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+     <td id="item_itemlookupcode">11094XLCA</td>
+     <td id="item_description">Ultra Cotton Heathered Ringer</td>
+     <td id="design_itemlookupcode"></td>
+     <td id="design_description"></td>
+     <td id="your_unit_price">$18.69</td>
+   </tr>
+   </tbody>
+ </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <style type="text/css">
+     #administer_size_and_position_back {
+             float:left;
+             display:table;width:400px;text-align:center;
+     }
+
+     #administer_size_and_position_front {
+             float:left;
+             display:table;width:400px;text-align:center;
+     }
+     #back_slider {
+              /*display: none;*/
+     }
+     #front_slider {
+              /*display: none;*/
+     }
+         .specsheet_admin {
+             border-top:15px solid;
+             display: none;
+         }
+  </style>
+
+
+
+
+ <div class="specsheet_admin" style="display: none;">
+
+     @back_advanced_combination.id: 211<br>
+     @back_advanced_combination.number_of_sides:2<br>
+     @back_advanced_combination.specsheet_type_id:2<br>
+
+ <div style="width: 850px;display: inline-block;" id="size_and_position_container">
+                     <div id="administer_size_and_position_back">
+                                   <div style="width:300px;float:left;">Back:</div>
+                                   <div style="width:150px;float:left;">Specsheet type: <div class="ui-select"><div id="specsheet_type_id-button" class="ui-btn ui-icon-carat-d ui-btn-icon-right ui-corner-all ui-shadow"><span>Latest</span><select name="specsheet_type_id" id="specsheet_type_id"><option value="1">Legacy</option>
+ <option selected="selected" value="2">Latest</option></select></div></div></div>
+                                   <div style="width:150px;float:left;"># Sides: <div class="ui-select"><div id="back_design_number_of_sides-button" class="ui-btn ui-icon-carat-d ui-btn-icon-right ui-corner-all ui-shadow"><span>Two</span><select name="back_design_number_of_sides" id="back_design_number_of_sides"><option value="1">One</option>
+ <option selected="selected" value="2">Two</option></select></div></div></div>
+                                   <div style="width:150px;float:left;">Default: <div class="ui-select"><div id="back_design_default_side-button" class="ui-btn ui-icon-carat-d ui-btn-icon-right ui-corner-all ui-shadow"><span>Back</span><select name="back_design_default_side" id="back_design_default_side"><option value="back">Back</option>
+ <option value="front">Front</option></select></div></div></div>
+                                   <input type="hidden" value="211" name="back_advanced_combination_id" id="back_advanced_combination_id">
+
+                                   <div style="width:300px;display: inline-block;float:left;">
+                                             <label style="display: none;" for="back_slider" id="back_slider-label">Input slider:</label>
+                                             <div id="div-back_slider"> <div class="ui-slider"><input type="number" data-type="range" max="25" min="-25" value="0" id="back_slider" name="back_slider" class="ui-shadow-inset ui-body-inherit ui-corner-all ui-slider-input"><div role="application" class="ui-slider-track ui-shadow-inset ui-bar-inherit ui-corner-all"><a href="#" class="ui-slider-handle ui-btn ui-shadow" role="slider" aria-valuemin="-25" aria-valuemax="25" aria-valuenow="0" aria-valuetext="0" title="0" aria-labelledby="back_slider-label" style="left: 50%;"></a></div></div> </div>
+                                              <a class="ui-btn" id="submit_size_and_position_back" href="#">Submit</a>
+                                     </div>
+                     </div>
+
+
+
+ </div>
+
+
+
+
+  <script type="text/javascript">
+      $('#div-back_slider').on( "change", function(){
+          var back_slider_value =   $("#back_slider").val() ;
+          scaleBack( back_slider_value );
+      })
+
+      $('#div-front_slider').on( "change", function(){
+          var front_slider_value =   $("#front_slider").val() ;
+          scaleFront( front_slider_value );
+      })
+
+ //     watchForDragging() ;
+  </script>
+
+
+
+ </div>
+ <a onclick="$('.specsheet_admin').toggle();" href="#" class="ui-link">a</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                               </div>
+                             </div>
+               </div></div>
+               <!--   #######################  END CONTENT    ####################### -->
+               <!--   #######################  END CONTENT    ####################### -->
+               <!--   #######################  END CONTENT    ####################### -->
+               <!--   #######################  END CONTENT    ####################### -->
+               <!--   #######################  END CONTENT    ####################### -->
+
+               <!--   #######################  BEGIN  FOOTER  ####################### -->
+ <!--   #######################  BEGIN  FOOTER  ####################### -->
+ <!--   #######################  BEGIN  FOOTER  ####################### -->
+ <!--   #######################  BEGIN  FOOTER  ####################### -->
+ <!--   #######################  BEGIN  FOOTER  ####################### -->
+
+
+ <!--   #######################  END  FOOTER  ####################### -->
+ <!--   #######################  END  FOOTER  ####################### -->
+ <!--   #######################  END  FOOTER  ####################### -->
+ <!--   #######################  END  FOOTER  ####################### -->
+ <!--   #######################  END  FOOTER  ####################### -->
+ </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DEVELOPMENT SERVER  IN PRODUCTION ENVIRONMENT:
+actionmailer 3.2.16
+actionpack 3.2.16
+activemodel 3.2.16
+activerecord 3.2.16
+activerecord-sqlserver-adapter 3.2.12
+activeresource 3.2.16
+activesupport 3.2.16
+arel 3.0.3
+bartt-ssl_requirement 1.4.2
+builder 3.0.4
+bundler 1.0.22
+coffee-rails 3.2.2
+coffee-script 2.2.0
+coffee-script-source 1.6.3
+erubis 2.7.0
+execjs 2.0.2
+hike 1.2.3
+i18n 0.6.9
+journey 1.0.4
+json 1.8.1
+mail 2.5.4
+memcache-client 1.8.5
+mime-types 1.25.1
+mini_portile 0.5.2
+multi_json 1.8.2
+nokogiri 1.6.0
+polyglot 0.3.3
+rack 1.4.5
+rack-cache 1.2
+rack-ssl 1.3.3
+rack-test 0.6.2
+rails 3.2.16
+railties 3.2.16
+rake 10.1.0
+rdoc 3.12.2
+sass 3.2.12
+sass-rails 3.2.6
+sprockets 2.2.2
+thor 0.18.1
+tilt 1.4.1
+tiny_tds 0.6.1
+treetop 1.4.15
+tzinfo 0.3.38
+uglifier 2.3.2
+will_paginate 3.0.5
+
+
+
+PRODUCTION SERVER IN PRODUCTION ENVIRONMENT:
+actionmailer 3.2.16
+actionpack 3.2.16
+activemodel 3.2.16
+activerecord 3.2.16
+activerecord-sqlserver-adapter 3.2.12
+activeresource 3.2.16
+activesupport 3.2.16
+arel 3.0.3
+bartt-ssl_requirement 1.4.2
+builder 3.0.4
+bundler 1.0.22
+coffee-rails 3.2.2
+coffee-script 2.2.0
+coffee-script-source 1.6.3
+daemons 1.1.5
+erubis 2.7.0
+eventmachine 1.0.0.beta.4.1
+execjs 2.0.2
+hike 1.2.3
+i18n 0.6.9
+journey 1.0.4
+json 1.8.1
+mail 2.5.4
+memcache-client 1.8.5
+mime-types 1.25.1
+mini_portile 0.5.2
+multi_json 1.8.2
+nokogiri 1.6.0
+polyglot 0.3.3
+rack 1.4.5
+rack-cache 1.2
+rack-ssl 1.3.3
+rack-test 0.6.2
+rails 3.2.16
+railties 3.2.16
+rake 10.1.0
+rdoc 3.12.2
+sass 3.2.12
+sass-rails 3.2.6
+sprockets 2.2.2
+thin 1.2.7
+thor 0.18.1
+tilt 1.4.1
+tiny_tds 0.6.1
+treetop 1.4.15
+tzinfo 0.3.38
+uglifier 2.3.2
+will_paginate 3.0.5
