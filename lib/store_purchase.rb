@@ -32,7 +32,7 @@ def startup_purchase
                                  unless session[:user_session_purchase_id_set] == true
 #                                        startup_user_session_deprecated
                                                        if logged_in?
-                                                                    if current_user
+                                                                    if @user
                                                                                 ###########################################################################
                                                                                 ###########################################################################
                                                                                 ###########################################################################
@@ -56,7 +56,7 @@ def startup_purchase
                                                                                         @user_session.user_id =  current_user.id
                                                                                         @user_session.save
                                                                                         delete_user_session_cache
-                                                                             end
+                                                                    end
                                                        end
                                                        startup_user_session
                                                       @user_session.purchase_id = @purchase.id
@@ -71,6 +71,8 @@ def startup_purchase
 
     find_ship_to
           
+		logger.warn "######################################################"
+		logger.warn "-------------------------------------@purchase:  " + @purchase.inspect
 		logger.debug "-------------------------------------begin lib/store_purchase/startup_purchase"
 end
 ############################################################################################################

@@ -1563,7 +1563,7 @@ def unit_quantity_and_permanent_savings(customer=0,quantity=1)
         else
           permanent_discounted_savings = 0
         end
-        discounted_price =    self.unit_quantity_tier_discount_price(customer,quantity)  -     permanent_discounted_savings
+        discounted_price =    self.unit_quantity_tier_discount_price(customer,quantity).to_f  -     permanent_discounted_savings.to_f
         unit_quantity_and_permanent_savings = self.full_unit_price(customer)  - discounted_price
    else
         unit_quantity_and_permanent_savings = 0
@@ -1572,7 +1572,7 @@ def unit_quantity_and_permanent_savings(customer=0,quantity=1)
 end
 
 def unit_quantity_tier_discount_savings(customer=0,quantity=1)
-             unit_quantity_tier_discount_savings = self.full_unit_price(customer)   -     self.unit_quantity_tier_discount_price(customer,quantity)
+             unit_quantity_tier_discount_savings = self.full_unit_price(customer).to_f   -     self.unit_quantity_tier_discount_price(customer,quantity).to_f
              unit_quantity_tier_discount_savings 
 end
 
