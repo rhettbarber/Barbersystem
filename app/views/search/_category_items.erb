@@ -4,8 +4,8 @@
     <% if item %>
         <% if item.category_name %>
                                     <li class="sale_type_<%= item.SaleType %>">
-                                      <a href="/specsheet/<%= item.id %>/<%= item.department_id  %>/<%= item.category_id  %>">
-                                                    <div style="min-height: 300px;">
+
+                                                    <div style="min-height: 300px;text-align: center;">
 
                                                                     <% if item.PictureName.include? ".jpg" or  item.PictureName.include? ".png" %>
                                                                                                         <img src="<%=     "http://cdn.dixieoutfitters.com/images/item_thumbnails/" + item.PictureName.gsub(".png", ".jpg")    %>" class="ui-li-thumb" style="display:inline;max-height: 250px;"><br>
@@ -13,11 +13,12 @@
                                                                                                         <img src="<%=     "http://cdn.dixieoutfitters.com/images/item_thumbnails/" + item.PictureName + '.jpg'    %>" class="ui-li-thumb" style="display:inline;max-height: 250px;"><br>
                                                                     <% end %>
 
-
-                                                                  <%= item.category_name %>
-                                                                  <%= item.ItemLookupCode %>  <%#= item.item_class_number %>
+                                                                  <a  data-role="button"   href="/specsheet/<%= item.id %>/<%= item.department_id  %>/<%= item.category_id  %>">
+                                                                              <%= item.category_name %>
+                                                                              <%= item.ItemLookupCode %>
+                                                                 </a>
                                                     </div>
-                                      </a>
+
                                       <span  style="display:none;" class="sale_label_<%= item.SaleType %>">Sale item!</span>
                                     </li>
         <% end %>
