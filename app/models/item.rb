@@ -1517,20 +1517,20 @@ end
 #########################################################################################################
 ####### PRICING / TOTALS AREA
 def symbiont_your_unit_price(opposite,customer=0,quantity=1)   
-        self.your_unit_price(customer,quantity) + opposite.your_unit_price(customer,quantity)
+        self.your_unit_price(customer,quantity).to_f + opposite.your_unit_price(customer,quantity).to_f
 end
 
 def your_unit_price(customer=0,quantity=1)
         if customer != 0
                   if quantity != 0
-                           up = full_unit_price(customer)  -  unit_quantity_and_permanent_savings(customer,quantity)
+                           up = full_unit_price(customer).to_f  -  unit_quantity_and_permanent_savings(customer,quantity).to_f
                            return sprintf("%.2f", up).to_f
                   else
                            0
                   end
         else
               if quantity != 0
-                         up = full_unit_price(customer) - unit_quantity_tier_discount_savings(customer,quantity)
+                         up = full_unit_price(customer).to_f - unit_quantity_tier_discount_savings(customer,quantity).to_f
                			 return sprintf("%.2f", up).to_f
                else
                          0
@@ -1556,7 +1556,7 @@ def unit_quantity_and_permanent_savings(customer=0,quantity=1)
   if  quantity
         if customer 
             if self.department_is_permanent_or_volume_discountable == true  
-                    permanent_discounted_savings =   self.unit_quantity_tier_discount_price(customer,quantity)  *   customer.permanent_discount_multiple ##real error here
+                    permanent_discounted_savings =   self.unit_quantity_tier_discount_price(customer,quantity).to_f  *   customer.permanent_discount_multiple.to_f    ##real error here
             else
                   permanent_discounted_savings = 0
             end
@@ -1564,7 +1564,7 @@ def unit_quantity_and_permanent_savings(customer=0,quantity=1)
           permanent_discounted_savings = 0
         end
         discounted_price =    self.unit_quantity_tier_discount_price(customer,quantity).to_f  -     permanent_discounted_savings.to_f
-        unit_quantity_and_permanent_savings = self.full_unit_price(customer)  - discounted_price
+        unit_quantity_and_permanent_savings = self.full_unit_price(customer).to_f  - discounted_price.to_f
    else
         unit_quantity_and_permanent_savings = 0
    end 
