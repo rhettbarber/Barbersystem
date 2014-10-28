@@ -1,6 +1,31 @@
 console.log("-----BEGIN file sitewide_functions.js") ;
 
 
+function searchShowSymbiont() {
+    console.log("begin searchShowSymbiont");
+    var activePage =   $.mobile.activePage;
+    $(".the_choices").show();
+    if ( activePage)  {
+                                if ( isSymbiontInProgress() == true  ) {
+                                                        console.log("cookie already exists!");
+                                                        console.log("cookie value: " + $.cookie('barber_preferences') );
+                                                        var  cookie_content = jQuery.parseJSON( $.cookie('barber_preferences') ) ;
+                                                        console.log("cookie_content.ItemLookupCode: " +  cookie_content.ItemLookupCode    );
+
+                                                        activePage.find(".the_choices").append( "<img  src='" +  cookie_content.image_url  + "'  class='toggle_item_buttons'  alt='" +   cookie_content.ItemLookupCode  + "'>" );
+                                                        activePage.find( ".the_choices").append(  " <h2>" +   cookie_content.ItemLookupCode  + "</h2><p>"+ cookie_content.Description +  " "   +  cookie_content.Dimensions + "</p>" );
+                                } else {
+                                                        console.log("########################");
+                                                        console.log("cookie found with no symbiont in progress");
+                                }
+                    } else {
+                                    console.log("activePage not defined");
+                    }
+                    console.log("end searchShowSymbiont");
+}
+
+
+
 function add_to_cart_purchases_entry_change(  thing_to_change  )  {
             if (  thing_to_change == "item") {
                                  console.log("Change submit value to add_to_cart_purchases_entry_change_item_keep_design");
@@ -437,6 +462,7 @@ function performSearch(e) {
                                             if  ( e_target  == "search_garments"  ||    e_target  == "search_merchandise" ) {
                                                                     console.log("clicked button search_garments or search_merchandise");
                                                                     $(".design_choices").show();
+                                                                      searchShowSymbiont() ;
                                             } else {
                                                             console.log("clicked button which contains applicable opposite.. posting search");
                                                              postSearch(e);
@@ -447,6 +473,7 @@ function performSearch(e) {
                                         if  ( e_target  == "search_designs" ) {
                                                         console.log("clicked button search_designs.. already have a design.. show choices");
                                                         $(".item_choices").show();
+                                                        searchShowSymbiont() ;
                                         } else {
                                                         console.log("clicked button which contains applicable opposite.. posting search");
                                                         postSearch(e);

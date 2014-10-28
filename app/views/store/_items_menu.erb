@@ -52,9 +52,10 @@
               </span>
 
 
-
-            <a href="/search"   data-role="button" data-icon="search" data-iconpos="left" data-theme="a" >Search</a>
-
+            <% dont_show_items = ["/search"] %>
+            <% unless dont_show_items.include?( request.path  ) %>
+                                <a href="/search"   data-role="button" data-icon="search" data-iconpos="left" data-theme="a" >Search</a>
+            <% end %>
               <div data-role="collapsible"  class="main_menu_choices"   id="item_menu_choices" data-theme="b" data-icon="gear"  data-inset="true" >
                                             <h3 style="width: 100%;">
 

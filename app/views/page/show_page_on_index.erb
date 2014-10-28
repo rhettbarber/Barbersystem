@@ -66,6 +66,8 @@
     }
 
 
+
+
  function getPage( data ) {
                          console.log("-------------begin getPage")
                          $.mobile.loading('show');
@@ -77,14 +79,16 @@
                         var page_url  =  "/p/" +  the_data_node
 
                         //       OPEN PAGE WITHOUT AJAX
-                        //                         window.location =  page_url;
 
-                         jQuery.ajax({
-                                         type: "GET",
-                                         dataType: 'script',
-                                         url: "/c/p/" +  data.node.data.page_id  ,
-                                         data: {   }
-                         });
+                         console.log(" OPEN PAGE WITHOUT AJAX " );
+                         window.location =  page_url;
+
+//                         jQuery.ajax({
+//                                         type: "GET",
+//                                         dataType: 'script',
+//                                         url: "/c/p/" +  data.node.data.page_id  ,
+//                                         data: {   }
+//                         });
                         console.log("-------------end getPage")
  }
 
