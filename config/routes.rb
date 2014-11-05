@@ -388,9 +388,9 @@ ThreeTwoThree::Application.routes.draw do
 
   resources  :page
 
-  match "/christian_store/category_browser(/department/:department_id)(/category/:category_id)", :to => "browse#index"
-  match "/christian_store(/department/:department_id)(/category/:category_id)", :to => "browse#index"
-  match "/christian_store(/department/:department_id)(/category/:category_id)", :to => "browse#index"
+  # match "/christian_store/category_browser(/department/:department_id)(/category/:category_id)", :to => "browse#index"
+  # match "/christian_store(/department/:department_id)(/category/:category_id)", :to => "browse#index"
+  # match "/christian_store(/department/:department_id)(/category/:category_id)", :to => "browse#index"
 
 
 

@@ -139,45 +139,49 @@ end
 end
 ################################################################################################################
   def checkout_receipt
-          logger.warn "@purchase.id : #{@purchase.id}"
-          prepare_purchase_totals(@purchase)
-          prepare_checkout_variables
-          logger.warn('BEGIN PURCHASE TOTAL')
-          logger.warn(@purchase.subtotal_after_all_discounts)
-          logger.warn('END PURCHASE TOTAL')
-          begin
-                  send_affiliate_emails
-          rescue
-                  logger.warn "send_affiliate_emails delivery error!"
-          end
+        if @purchase
+                logger.warn "@purchase.id : #{@purchase.id}"
+                prepare_purchase_totals(@purchase)
+                prepare_checkout_variables
+                logger.warn('BEGIN PURCHASE TOTAL')
+                logger.warn(@purchase.subtotal_after_all_discounts)
+                logger.warn('END PURCHASE TOTAL')
+                begin
+                        send_affiliate_emails
+                rescue
+                        logger.warn "send_affiliate_emails delivery error!"
+                end
 
-          begin
-                    UserNotifier.deliver_purchase_confirmation(@user, @website, @purchase, @customer )
-          rescue
-                   logger.warn "UserNotifier delivery failure"
-          end
+                begin
+                          UserNotifier.deliver_purchase_confirmation(@user, @website, @purchase, @customer )
+                rescue
+                         logger.warn "UserNotifier delivery failure"
+                end
 
-          discount_savings = @purchase.discount_savings
-          if discount_savings > 0
-            @discount_savings = @purchase.add_discount_item(discount_savings)
-                    logger.debug "----------------------------------discount given-amt: #{discount_savings}"
-          else
-                     logger.debug "-------------------------------------discount not given."
-          end
+                discount_savings = @purchase.discount_savings
+                if discount_savings > 0
+                  @discount_savings = @purchase.add_discount_item(discount_savings)
+                          logger.debug "----------------------------------discount given-amt: #{discount_savings}"
+                else
+                           logger.debug "-------------------------------------discount not given."
+                end
 
-          online_discount_savings = @purchase.online_discount_savings
-          if online_discount_savings > 0
-                  @online_discount_item = @purchase.add_online_discount_item(online_discount_savings)
-                   logger.debug "-------------------------------------online discount given-amt: #{online_discount_savings}"
-          else
-                  logger.debug "-------------------------------------online discount not given."
-          end
+                online_discount_savings = @purchase.online_discount_savings
+                if online_discount_savings > 0
+                        @online_discount_item = @purchase.add_online_discount_item(online_discount_savings)
+                         logger.debug "-------------------------------------online discount given-amt: #{online_discount_savings}"
+                else
+                        logger.debug "-------------------------------------online discount not given."
+                end
 
-          @purchase_cod_charge = 8.5 if [12,14].include?(@purchase.quote_tender_entry.tender.id)
-          if @purchase_cod_charge
-                @cod_item  =  @purchase.add_cod_item
-          end
-          delete_purchase_session
+                @purchase_cod_charge = 8.5 if [12,14].include?(@purchase.quote_tender_entry.tender.id)
+                if @purchase_cod_charge
+                      @cod_item  =  @purchase.add_cod_item
+                end
+                delete_purchase_session
+        else
+                   redirect_to  '/'
+        end
   end
 ################################################################################################################
 def complete_order
