@@ -1,0 +1,56 @@
+<style type="text/css">
+               .ui-listview .ui-li-has-thumb > img:first-child, .ui-listview .ui-li-has-thumb > .ui-btn > img:first-child, .ui-listview .ui-li-has-thumb .ui-li-thumb {
+                   max-height: 150px;
+                   max-width: 150px;
+               }
+
+               .ui-listview > .ui-li-has-thumb > .ui-btn, .ui-listview > .ui-li-static.ui-li-has-thumb {
+                    padding-left:150px;
+               }
+
+               .ui-listview >  li h2 {
+                      margin-left: 10px  ;
+                      margin-right: 10px  ;
+                      margin-bottom: 0px  ;
+                      margin-top: 0px  ;
+                   white-space: normal;
+               }
+
+              .list-view  >  li > a.ui-btn {
+                   padding: 60px;;
+               }
+</style>
+
+<img alt="" class="float_100" src="http://cdn.dixieoutfitters.com/images/carousel/featured-items-list.gif" />       <br>   <br>
+<ul data-role="listview" data-inset="true" class="list-view">
+  <% if admin? %>
+                      <li style="text-align: center;">Use specsheet administration panel  to add a new featured item.</li>
+                      <li> <%= link_to  "Show all features" , "/features" %></li>
+  <% end %>
+  <% @features.each do |feature| %>
+
+                      <% if feature.image_name and  feature.image_name  != ""  %>
+                                                 <% the_image_name = feature.image_name  %>
+                      <% else %>
+                                                <% the_image_name = "/images/item_thumbnails/" +  feature.items.first.PictureName  %>
+                      <% end %>
+
+
+                      <% if admin? %>
+                                                          <li>
+                                                                            <a href="<%= feature.list_url.to_s %>">
+                                                                                              <%= image_tag  the_image_name  %>
+                                                                                              <h2><%= feature.description %></h2>
+                                                                            </a>
+                                                                            <%= link_to 'Edit', "/features/" +  feature.id.to_s +  "/edit/" +   feature.items.first.id.to_s   , "data-icon" => "gear"   %>
+                                                          </li>
+                      <% else %>
+                                                          <li>
+                                                            <a href="<%= feature.list_url.to_s %>">
+                                                                                             <%= image_tag  the_image_name  %>
+                                                                                            <h2> <%= feature.description %></h2>
+                                                            </a>
+                                                          </li>
+                      <% end %>
+  <% end %>
+</ul>

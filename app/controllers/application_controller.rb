@@ -30,35 +30,40 @@ class ApplicationController < ActionController::Base
   before_filter :before_filter
   after_filter :after_filter
 
+def no_item_menu
+             @no_item_menu = true
+end
+
+
   def new_and_featured_items
-            @featured_new_designs   ||= FeaturedItem.limit(35).where("website_id = ? and carousel_name = ? and active = ?",   @website.id, 'tshirts-new-1' , 'True'   ).all
+           #  @featured_new_designs   ||= FeaturedItem.limit(35).where("website_id = ? and carousel_name = ? and active = ?",   @website.id, 'tshirts-new-1' , 'True'   ).all
+           #
+           #  unless @featured_new_designs
+           #    logger.warn "@new_designs NO ITEMS FOUND ON index ACTION !!!!"
+           #  else
+           #    logger.warn "@new_designs.size: #{@featured_new_designs.size}"
+           #    #FMCache.write  new_designs_cache_string ,   @items
+           #  end
+           #
+           # @featured_items   ||= FeaturedItem.limit(35).where("website_id = ? and carousel_name = ?  and active = ?",   @website.id, 'home-featured-1' , 'True'   ).all
+           #
+           #  unless @featured_items
+           #    logger.warn "@@featured_items NO ITEMS FOUND ON index ACTION !!!!"
+           #  else
+           #    logger.warn "@@featured_items.size: #{@featured_items.size}"
+           #    #FMCache.write  new_designs_cache_string ,   @items
+           #  end
 
-            unless @featured_new_designs
-              logger.warn "@new_designs NO ITEMS FOUND ON index ACTION !!!!"
-            else
-              logger.warn "@new_designs.size: #{@featured_new_designs.size}"
-              #FMCache.write  new_designs_cache_string ,   @items
-            end
-
-           @featured_items   ||= FeaturedItem.limit(35).where("website_id = ? and carousel_name = ?  and active = ?",   @website.id, 'home-featured-1' , 'True'   ).all
-
-            unless @featured_items
-              logger.warn "@@featured_items NO ITEMS FOUND ON index ACTION !!!!"
-            else
-              logger.warn "@@featured_items.size: #{@featured_items.size}"
-              #FMCache.write  new_designs_cache_string ,   @items
-            end
 
 
-
-            @featured_custom_items   ||= FeaturedItem.limit(35).where("website_id = ? and carousel_name = ? and active = ?",   @website.id, 'home-custom-1' , 'True'   ).all
-
-            unless @featured_custom_items
-              logger.warn "@@featured_items NO ITEMS FOUND ON index ACTION !!!!"
-            else
-              logger.warn "@@featured_items.size: #{@featured_custom_items.size}"
-              #FMCache.write  new_designs_cache_string ,   @items
-            end
+            # @featured_custom_items   ||= FeaturedItem.limit(35).where("website_id = ? and carousel_name = ? and active = ?",   @website.id, 'home-custom-1' , 'True'   ).all
+            #
+            # unless @featured_custom_items
+            #   logger.warn "@@featured_items NO ITEMS FOUND ON index ACTION !!!!"
+            # else
+            #   logger.warn "@@featured_items.size: #{@featured_custom_items.size}"
+            #   #FMCache.write  new_designs_cache_string ,   @items
+            # end
 
   end
 

@@ -58,7 +58,8 @@
                                                                                                                                               <%= yield %>
 
                                                                                                                                              <%   if ['/index', '/', '/p/home', '/p/new-home', '/p/new-home'].include?(request.path)  or params[:promo]%>
-                                                                                                                                                                    <%= render "page/home_page_carousels" %>
+                                                                                                                                                                                    <%= render "page/home_page_carousels", :feature_name =>  @website.name + "_home_featured_designs" %>
+                                                                                                                                                                                    <%= render "page/home_page_carousels", :feature_name => @website.name + "_home_featured_items" %>
                                                                                                                                              <% end %>
                                                                                                 </span>
 

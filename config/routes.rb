@@ -4,6 +4,20 @@
 ThreeTwoThree::Application.routes.draw do
 
 
+  match 'features/list/:name' , :controller => 'features', :action => 'list'
+  match 'features/:id/destroy/:item_id' , :controller => 'features', :action => 'destroy'
+  match 'features/create/' , :controller => 'features', :action => 'create'
+  match 'features/update/' , :controller => 'features', :action => 'update'
+  match 'features/:id/show/:item_id' , :controller => 'features', :action => 'show'
+  match 'features/new/:item_id' , :controller => 'features', :action => 'new'
+  match 'features/:id/edit/:item_id' , :controller => 'features', :action => 'edit'
+
+  match 'features/:item_id' , :controller => 'features', :action => 'index'
+  match 'features' , :controller => 'features', :action => 'index'
+
+  # resources :features
+
+
   match "promo/:promo", :to => redirect("/p/new-home")
 
 
