@@ -5,6 +5,9 @@ class Item < ActiveRecord::Base
 
 attr_accessible :id, :ItemLookupCode  # :description, :created_at, :updated_at, :customer, :work_order_id, :total_column
 
+has_many :item_features
+has_many :features, :through => :item_features
+
 has_many :item_sales
 has_many :customer_item_sales_by_years
 has_many :crest_prints

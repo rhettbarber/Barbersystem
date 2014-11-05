@@ -11,7 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 
 //= require jquery-1.11.1.min
-//= require jquery.mobile-1.4.3.min.js
+//= require jquery.mobile-1.4.5.min.js
 //= require flash
 //= require jquery_scroll_stop.js
 //= require jquery.cookie.js

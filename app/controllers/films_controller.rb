@@ -92,22 +92,6 @@ skip_before_filter :verify_authenticity_token, :only => [:camerasnap, :camerasna
                               end
             end
            render :action => "index"
-            #respond_to do |format|
-            #          format.js do
-            #                  render :update do  |page|
-            #                                     page.replace_html 'search_results',   :partial => "films/list"
-            #                                     page.hide 'progress_bar_container'
-            #                  end
-            #          end
-            #end
-            #respond_to do |format|
-            #      format.js { render :layout=>false }
-            #  end
-      
-            #render(:update) { |page|
-            #                   page.replace_html 'search_results',   :partial => "films/list"
-            #                   page.hide 'progress_bar_container'
-            # }
              logger.debug "ending search"
   end
 

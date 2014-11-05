@@ -54,7 +54,7 @@
     <td><%= film.total_column %></td>
     <td><%= film.id %></td>
     <td>
-                   <%= image_tag('http://cdn.dixieoutfitters.net/film_images/' + film.id.to_s  + '.jpg'  , :id => "film_thumbnail_" + film.id.to_s , :class => "film_thumbnail" , :onclick => "resizeThumbnail(  'film_thumbnail_' +  #{film.id.to_s}    );")   %>
+                   <%= image_tag('http://barber.barberandcompany.netdna-cdn.com/film_images/' + film.id.to_s  + '.jpg'  , :id => "film_thumbnail_" + film.id.to_s , :class => "film_thumbnail" , :onclick => "resizeThumbnail(  'film_thumbnail_' +  #{film.id.to_s}    );")   %>
 
                     <%= link_to 'Edit', edit_film_path(film) + '#film_id=' + film.id.to_s  %>
     

@@ -28,11 +28,6 @@ def add_to_cart
                     logger.debug "begin add_to_cart"
                     if params[:purchases_entry_id] == nil
                                        logger.debug "NO PURCHASES_ENTRY_ID"
-                                       logger.debug "NO PURCHASES_ENTRY_ID"
-                                       logger.debug "NO PURCHASES_ENTRY_ID"
-                                       logger.debug "NO PURCHASES_ENTRY_ID"
-                                       logger.debug "NO PURCHASES_ENTRY_ID"
-                                       logger.debug "NO PURCHASES_ENTRY_ID"
                                       find_item(params)
                                       if @item
                                                               if params[:purchases_entries]
@@ -106,13 +101,6 @@ def add_to_cart
                                                         redirect_to  :controller => 'cart',  :action => 'index'
                                       end
                     else
-                                     logger.debug "PURCHASES_ENTRY_ID FOUND"
-                                     logger.debug "PURCHASES_ENTRY_ID FOUND"
-                                     logger.debug "PURCHASES_ENTRY_ID FOUND"
-                                     logger.debug "PURCHASES_ENTRY_ID FOUND"
-                                     logger.debug "PURCHASES_ENTRY_ID FOUND"
-                                     logger.debug "PURCHASES_ENTRY_ID FOUND"
-                                     logger.debug "PURCHASES_ENTRY_ID FOUND"
                                      logger.debug "PURCHASES_ENTRY_ID FOUND"
                                      logger.debug("params[:commit].downcase:  " + params[:commit].downcase  )
                                      logger.debug( "params[:design_id] :" + params[:design_id] )
