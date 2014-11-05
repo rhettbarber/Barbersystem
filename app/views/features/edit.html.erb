@@ -1,0 +1,8 @@
+<h1>Editing feature</h1>
+
+<%= render 'update_form' %>
+
+
+
+<%= link_to  'show'  , "/features/"  + @feature.id.to_s + "/show/" + params[:item_id]  , "data-role" => "button"  %>
+<%= link_to  "back" , "/features/"  + params[:item_id]  , "data-role" => "button"   %>

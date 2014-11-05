@@ -1,0 +1,5 @@
+<p>New feature for <%= @item.ItemLookupCode %> - <%= @item.Description  %> of category:  <%= @item.category.Name  %> </p>
+
+<%= render 'form' %>
+
+<%= link_to  "back" , "/features/"  + params[:item_id]  , "data-role" => "button"   %>

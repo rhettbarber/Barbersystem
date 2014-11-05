@@ -1,0 +1,49 @@
+
+ <% the_image_name = @feature.feature_image_name  %>
+<p><%= image_tag  the_image_name  %></p>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @feature.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @feature.description %>
+</p>
+
+<p>
+  <b>Verbiage:</b>
+  <%= @feature.verbiage %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @feature.price %>
+</p>
+
+<p>
+  <b>List url:</b>
+  <%= @feature.list_url %>
+</p>
+
+<p>
+  <b>Carousel url:</b>
+  <%= @feature.carousel_url %>
+</p>
+
+<p>
+  <b>Onclick:</b>
+  <%= @feature.onclick %>
+</p>
+
+<p>
+  <b>Image name:</b>
+  <%= @feature.image_name %>
+</p>
+
+<%= link_to 'Destroy',  "/features/" + @feature.id.to_s +  "/destroy/" +   params[:item_id]  , "data-role" => "button" , data: { confirm: 'Are you sure?' }   %>
+<%= link_to 'Edit',  "/features/" + @feature.id.to_s +  "/edit/" +  params[:item_id]  , "data-role" => "button"   %>
+<%= link_to  "Back to list" , "/features/"  + params[:item_id]  , "data-role" => "button"  %>

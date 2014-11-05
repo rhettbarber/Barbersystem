@@ -1,0 +1,108 @@
+
+<% if @item %>
+
+                                <div data-role="header">
+                                  <h1>Listing features for <%= @item.ItemLookupCode %> - <%= @item.Description  %></h1>
+                                  <p style="text-align: center;"><%= image_tag "/images/item_thumbnails/" + @item.PictureName.gsub(".jpg", "").gsub(".png", "") + ".jpg", :size => "100x100" %></p>
+                                </div>
+
+                                <div data-role="content">
+                                <ul data-role="listview">
+                                                <li> <%= link_to  "Show all features" , "/features" %></li>
+                                                 <li><%= link_to 'New feature', :controller => "features", :action => "new", :item_id => params[:item_id] %></li>
+                                                <% @features.each do |feature| %>
+                                                                    <li>
+                                                                                      <%= link_to feature.name , "/features/"  + feature.id.to_s + "/show/" + params[:item_id]   %>
+                                                                                      <%= link_to 'Edit',  feature.id.to_s +  "/edit/" +  params[:item_id]  , "data-icon" => "gear"   %>
+                                                                    </li>
+                                                <% end %>
+
+                                 </ul>
+                                </div>
+
+<% else %>
+
+                                <div data-role="header">
+                                  <h1>Listing all unique  Feature names</h1>
+                                </div>
+
+                                <div data-role="content">
+                                <ul data-role="listview">
+                                                <% @features.each do |feature| %>
+                                                                    <li>
+                                                                                      <%= link_to feature[0]   , "/features/list/" + feature[0]     %>
+                                                                                      <%= link_to 'Edit',  'test'   , "data-icon" => "gear"   %>
+                                                                    </li>
+                                                <% end %>
+
+                                 </ul>
+                                </div>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <% if @before %>
+<table>
+  <tr>
+    <th>ItemLookupCode</th>
+    <th>Description</th>
+    <th>Verbiage</th>
+    <th>Price</th>
+    <th>List url</th>
+    <th>Carousel url</th>
+    <th>Onclick</th>
+    <th>Image name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @features.each do |feature| %>
+  <tr>
+    <td><%= feature.items.first.ItemLookupCode %></td>
+    <td><%= feature.name %></td>
+    <td><%= feature.description %></td>
+    <td><%= feature.verbiage %></td>
+    <td><%= feature.price %></td>
+    <td><%= feature.list_url %></td>
+    <td><%= feature.carousel_url %></td>
+    <td><%= feature.onclick %></td>
+    <td><%= feature.image_name %></td>
+    <td><%= link_to 'Show', feature %></td>
+    <td><%= link_to 'Edit', edit_feature_path(feature) %></td>
+    <td><%= link_to 'Destroy', feature, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Feature', :controller => "features", :action => "new", :item_id => params[:item_id] %>
+
+<% end %>
