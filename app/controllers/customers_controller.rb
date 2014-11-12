@@ -73,7 +73,20 @@ def new
 end
 ##################################################################################################################
 def edit
-@customer =  @user.customer
+  user_customer   =  @user.customer
+  @customer =  user_customer
+  logger.warn "##############################################"
+  logger.warn "---------------------------------------------"
+  logger.warn "##############################################"
+  logger.warn "##############################################"
+  logger.warn "##############################################"
+  logger.warn "##############################################"
+  logger.warn "@user.customer.inspect: " + user_customer.inspect
+  logger.warn "##############################################"
+  logger.warn "##############################################"
+  logger.warn "##############################################"
+  logger.warn "---------------------------------------------"
+  logger.warn "##############################################"
 end
 ##################################################################################################################
 def create
@@ -162,62 +175,82 @@ def create
                                              @flash_messages << "Billing Saved-"
                                             #session[:customer_id]  = current_user.customer_id
                                           @user.customer_id = @customer.id
-                                          @user.save
-                                           session[:customer_id] = @user.customer_id
-                                          delete_user_cache
-                                           if params[:use_billing_for_shipping] == "1"
-                                                    @ship_to = ShipTo.new
-                                                    @ship_to.Address = @customer.Address
-                                                    @ship_to.Address2 = @customer.Address2
-                                                    @ship_to.City = @customer.City
-                                                    @ship_to.Company = @customer.Company
-                                                    @ship_to.Country = @customer.Country
-                                                    @ship_to.Name = @customer.FirstName + ' ' + @customer.LastName
-                                                    @ship_to.State = @customer.State
-                                                    @ship_to.Zip = @customer.Zip
-                                                    @ship_to.store_id = @customer.store_id
-                                                    @ship_to.EmailAddress = @customer.EmailAddress
-                                                    @ship_to.PhoneNumber = @customer.PhoneNumber
-                                                    @ship_to.FaxNumber = @customer.FaxNumber
-                                                    @ship_to.customer_id = @customer.id
-                                                    if @ship_to.save
-                                                          @flash_messages << "-ShipTo Saved-"
-                                                          if @purchase
-                                                                @purchase.ship_to_id = @ship_to.id
-                                                                if @purchase.save
-                                                                  @flash_messages << "-ShipTo-on-purchase-saved"
-                                                                end
-                                                          end
-                                                    end
+                                          if @user.save
+                                                  logger.warn "#########################################"
+                                                  logger.warn "#########################################"
+                                                  logger.warn "#########################################"
+                                                  logger.warn "@user.save successful!!!!"
+                                                  logger.warn "@customer.inspect: " + @customer.inspect
+                                                  logger.warn "@user.inspect: " + @user.inspect
+                                                  logger.warn "#########################################"
+                                                  logger.warn "#########################################"
+                                                  logger.warn "#########################################"
+                                                  session[:customer_id] = @user.customer_id
+                                                  delete_user_cache
+                                                   if params[:use_billing_for_shipping] == "1"
+                                                            @ship_to = ShipTo.new
+                                                            @ship_to.Address = @customer.Address
+                                                            @ship_to.Address2 = @customer.Address2
+                                                            @ship_to.City = @customer.City
+                                                            @ship_to.Company = @customer.Company
+                                                            @ship_to.Country = @customer.Country
+                                                            @ship_to.Name = @customer.FirstName + ' ' + @customer.LastName
+                                                            @ship_to.State = @customer.State
+                                                            @ship_to.Zip = @customer.Zip
+                                                            @ship_to.store_id = @customer.store_id
+                                                            @ship_to.EmailAddress = @customer.EmailAddress
+                                                            @ship_to.PhoneNumber = @customer.PhoneNumber
+                                                            @ship_to.FaxNumber = @customer.FaxNumber
+                                                            @ship_to.customer_id = @customer.id
+                                                            if @ship_to.save
+                                                                  @flash_messages << "-ShipTo Saved-"
+                                                                  if @purchase
+                                                                        @purchase.ship_to_id = @ship_to.id
+                                                                        if @purchase.save
+                                                                          @flash_messages << "-ShipTo-on-purchase-saved"
+                                                                        end
+                                                                  end
+                                                            end
 
-                                           end
-                                           if @purchase
-                                                  @purchase.customer_id = @customer.id
-                                                   if @purchase.save
-                                                                   logger.warn "@purchase.save"
-                                                                   logger.warn "@purchase.save"
-                                                                   logger.warn "@purchase.save"
-                                                                   logger.warn "@purchase.save"
-                                                                  delete_purchase_cache
-                                                                    @flash_messages << "-Customer-on-purchase-saved"
                                                    end
-                                           end
+                                                   if @purchase
+                                                          @purchase.customer_id = @customer.id
+                                                           if @purchase.save
+                                                                           logger.warn "@purchase.save"
+                                                                           logger.warn "@purchase.save"
+                                                                           logger.warn "@purchase.save"
+                                                                           logger.warn "@purchase.save"
+                                                                           delete_purchase_cache
+                                                                           @flash_messages << "-Customer-on-purchase-saved"
+                                                           end
+                                                   end
 
-                                          flash[:notice] = @flash_messages
-                                                 #if session['return-to']
-                                                 #                 redirect_to session['return-to']
-                                                 #                 session['return-to'] = nil
-                                                 # else
-                                                 #
-                                                  #              redirect_to :controller => 'account' ,:action => "index"
-                                                 # end
-                                                    logger.warn "next_checkout_step"
-                                                    logger.warn "next_checkout_step"
-                                                    logger.warn "next_checkout_step"
-                                                    logger.warn "next_checkout_step"
-                                                    logger.warn "next_checkout_step"
-                                                    logger.warn "next_checkout_step"
-                                                  redirect_to :controller => 'cart' , :action => "next_checkout_step"
+                                                  flash[:notice] = @flash_messages
+                                                         #if session['return-to']
+                                                         #                 redirect_to session['return-to']
+                                                         #                 session['return-to'] = nil
+                                                         # else
+                                                         #
+                                                          #              redirect_to :controller => 'account' ,:action => "index"
+                                                         # end
+                                                            logger.warn "next_checkout_step"
+                                                            logger.warn "next_checkout_step"
+                                                            logger.warn "next_checkout_step"
+                                                            logger.warn "next_checkout_step"
+                                                            logger.warn "next_checkout_step"
+                                                            logger.warn "next_checkout_step"
+                                                          redirect_to :controller => 'cart' , :action => "next_checkout_step"
+                                          else
+                                                        logger.warn "#########################################"
+                                                        logger.warn "#########################################"
+                                                        logger.warn "#########################################"
+                                                        logger.warn "@user.save unsuccessful!!!!"
+                                                        logger.warn "@customer.inspect: " + @customer.inspect
+                                                        logger.warn "@user.inspect: " + @user.inspect
+                                                        logger.warn "#########################################"
+                                                        logger.warn "#########################################"
+                                                        logger.warn "#########################################"
+                                          end
                          else
                                           logger.warn "@customer did not save"
                                           logger.warn "@customer did not save"
