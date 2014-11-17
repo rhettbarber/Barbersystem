@@ -9,7 +9,8 @@ skip_before_filter :verify_authenticity_token, :only => [:destroy]
 
 ############################################################################################################
   def update
-    @ship_to =  @user.customer.ship_tos.find(params[:id])
+    user_customer   =  @user.customer
+    @ship_to =  user_customer.ship_tos.find(params[:id])
     @purchase.reset_shipping_service_id
     respond_to do |format|
     	 @ship_to.Country =  'United States' #params[:USPSCountries][:Country][0..19]
@@ -77,6 +78,7 @@ def set_shipping_charge_on_order
 end
 ############################################################################################################
 def choose_ship_to
+              user_customer   =  @user.customer
                 if params[:ship_to_id]
                 			logger.warn "@purchase.frozen?-----------: #{@purchase.frozen?}"
                              @ship_to =  @customer.ship_tos.find(params[:ship_to_id])
@@ -91,8 +93,8 @@ def choose_ship_to
                                            redirect_to(:action => 'edit' ,:id => params[:ship_to_id] )
                             end
                 else
-                        if @user.customer.ship_tos.count == 1
-                                     @purchase.ship_to  = @user.customer.ship_tos.first
+                        if user_customer.ship_tos.count == 1
+                                     @purchase.ship_to  = user_customer.ship_tos.first
                                      @purchase.save
                                       redirect_to(:controller => 'cart', :action => 'next_checkout_step' )
                         else	       
@@ -129,8 +131,9 @@ end
 end
 ############################################################################################################
   def show
+    user_customer   =  @user.customer
     if params[:id]
-            @ship_to =  @user.customer.ship_tos.find(params[:id])
+            @ship_to =  user_customer.ship_tos.find(params[:id])
     else
             @ship_to =  @purchase.ship_to
     end
@@ -164,7 +167,8 @@ end
   def create
 #    @ship_to.customer_id = @customer.id THINK ERROR WAS HERE. POSTING TO WRONG PEOPLES RECORDS
 #  	debugger
-    @ship_to = @user.customer.ship_tos.new(params[:ship_to])
+    user_customer   =  @user.customer
+    @ship_to = user_customer.ship_tos.new(params[:ship_to])
     @ship_to.Country = 'United States' #params[:USPSCountries][:Country][0..19]
     @ship_to.store_id = 1
     @ship_to.EmailAddress = @user.email
