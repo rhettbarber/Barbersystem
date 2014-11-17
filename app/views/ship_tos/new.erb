@@ -7,37 +7,37 @@
 <%= form_for(:ship_to, :url => ship_tos_path) do |f| %>
     <p>
       <label for="Company">Company (optional)</label>
-      <input data-clear-btn="true" name="ship_to[Company]" id="Company" value="">
+      <input data-clear-btn="true" name="ship_to[Company]" id="Company" value="<%= params[:ship_to][:Company] if params[:ship_to] %>">
     </p>
 
     <p>
       <label for="Name">Name</label>
-      <input data-clear-btn="true" name="ship_to[Name]" id="Name_Req" value="">
+      <input data-clear-btn="true" name="ship_to[Name]" id="Name_Req" value="<%= params[:ship_to][:Name] if params[:ship_to] %>">
     </p>
 
     <p>
       <label for="Address">Address</label>
-      <input data-clear-btn="true" name="ship_to[Address]" id="Address_Req" value="">
+      <input data-clear-btn="true" name="ship_to[Address]" id="Address_Req" value="<%= params[:ship_to][:Address] if params[:ship_to] %>">
     </p>
 
     <p>
       <label for="Address2">Address2 (optional)</label>
-      <input data-clear-btn="true" name="ship_to[Address2]" id="Address2" value="">
+      <input data-clear-btn="true" name="ship_to[Address2]" id="Address2" value="<%= params[:ship_to][:Address2] if params[:ship_to] %>">
     </p>
 
     <p>
       <label for="City">City </label>
-      <input data-clear-btn="true" name="ship_to[City]" id="City_Req" value="">
+      <input data-clear-btn="true" name="ship_to[City]" id="City_Req" value="<%= params[:ship_to][:City] if params[:ship_to] %>">
     </p>
 
     <p>
       <label for="State">State </label>
-      <input data-clear-btn="true" name="ship_to[State]" id="State_Req" value="">
+      <input data-clear-btn="true" name="ship_to[State]" id="State_Req" value="<%= params[:ship_to][:State] if params[:ship_to] %>">
     </p>
 
     <p>
       <label for="Zip">Zip</label>
-      <input type="number" data-clear-btn="true" name="ship_to[Zip]" id="Zip_Req" value="">
+      <input type="number" data-clear-btn="true" name="ship_to[Zip]" id="Zip_Req" value="<%= params[:ship_to][:Zip] if params[:ship_to] %>">
     </p>
 
   
@@ -45,12 +45,12 @@
 
     <p>
       <label for="PhoneNumber">PhoneNumber</label>
-      <input type="tel" data-clear-btn="true" name="ship_to[PhoneNumber]" id="PhoneNumber_Req" value="">
+      <input type="tel" data-clear-btn="true" name="ship_to[PhoneNumber]" id="PhoneNumber_Req" value="<%= params[:ship_to][:PhoneNumber] if params[:ship_to] %>">
     </p>
 
     <p>
       <label for="FaxNumber">FaxNumber (optional)</label>
-      <input type="tel" data-clear-btn="true" name="ship_to[FaxNumber]" id="FaxNumber_Req" value="">
+      <input type="tel" data-clear-btn="true" name="ship_to[FaxNumber]" id="FaxNumber_Req" value="<%= params[:ship_to][:FaxNumber] if params[:ship_to] %>">
     </p>
 
 

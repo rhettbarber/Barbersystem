@@ -11,49 +11,49 @@
 
       <p>
         <label for="Company">Company (optional)</label>
-        <input data-clear-btn="true" name="customer[Company]" id="Company_Req" value="">
+        <input data-clear-btn="true" name="customer[Company]" id="Company_Req" value="<%= params[:customer][:Company] if params[:customer] %>">
       </p>
 
       <p>
         <label for="FirstName">FirstName</label>
-        <input data-clear-btn="true" name="customer[FirstName]" id="FirstName_Req" value="">
+        <input data-clear-btn="true" name="customer[FirstName]" id="FirstName_Req" value="<%= params[:customer][:FirstName] if params[:customer] %>">
       </p>
 
       <p>
         <label for="LastName">LastName</label>
-        <input data-clear-btn="true" name="customer[LastName]" id="LastName_Req" value="">
+        <input data-clear-btn="true" name="customer[LastName]" id="LastName_Req" value="<%= params[:customer][:LastName] if params[:customer] %>">
       </p>
 
       <p>
         <label for="Address">Address</label>
-        <input data-clear-btn="true" name="customer[Address]" id="Address_Req" value="">
+        <input data-clear-btn="true" name="customer[Address]" id="Address_Req" value="<%= params[:customer][:Address] if params[:customer] %>">
       </p>
 
       <p>
         <label for="Address2">Address2 (optional)</label>
-        <input data-clear-btn="true" name="customer[Address2]" id="Address2" value="">
+        <input data-clear-btn="true" name="customer[Address2]" id="Address2" value="<%= params[:customer][:Address2] if params[:customer] %>">
       </p>
 
       <p>
         <label for="City">City </label>
-        <input data-clear-btn="true" name="customer[City]" id="City_Req" value="">
+        <input data-clear-btn="true" name="customer[City]" id="City_Req" value="<%= params[:customer][:City] if params[:customer] %>">
       </p>
 
       <p>
         <label for="State">State </label>
-        <input data-clear-btn="true" name="customer[State]" id="State_Req" value="">
+        <input data-clear-btn="true" name="customer[State]" id="State_Req" value="<%= params[:customer][:State] if params[:customer] %>">
       </p>
 
 
       <p>
       <label for="Zip">Zip</label>
-      <input type="number" data-clear-btn="true" name="customer[Zip]" id="Zip_Req" value="">
+      <input type="number" data-clear-btn="true" name="customer[Zip]" id="Zip_Req" value="<%= params[:customer][:Zip] if params[:customer] %>">
       </p>
 
 
       <p>
         <label for="TaxNumber">TaxNumber (optional)</label>
-        <input type="number" data-clear-btn="true" name="customer[TaxNumber]" id="TaxNumber_Req" value="">
+        <input type="number" data-clear-btn="true" name="customer[TaxNumber]" id="TaxNumber_Req" value="<%= params[:customer][:TaxNumber] if params[:customer] %>">
       </p>
 
         <%= hidden_field_tag("Country", "United States" )  %>
@@ -67,12 +67,12 @@
 
       <p>
         <label for="FaxNumber">FaxNumber (optional)</label>
-        <input type="tel" data-clear-btn="true" name="customer[FaxNumber]" id="FaxNumber_Req" value="">
+        <input type="tel" data-clear-btn="true" name="customer[FaxNumber]" id="FaxNumber_Req" value="<%= params[:customer][:FaxNumber] if params[:customer] %>">
       </p>
 
       <p>
         <label for="PhoneNumber">PhoneNumber</label>
-        <input type="tel" data-clear-btn="true" name="customer[PhoneNumber]" id="PhoneNumber_Req" value="">
+        <input type="tel" data-clear-btn="true" name="customer[PhoneNumber]" id="PhoneNumber_Req" value="<%= params[:customer][:PhoneNumber] if params[:customer] %>">
       </p>
 
 

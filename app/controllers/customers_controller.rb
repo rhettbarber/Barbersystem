@@ -256,10 +256,11 @@ def create
                                           logger.warn "@customer did not save"
                                           logger.warn "@customer did not save"
                                           logger.warn "@customer did not save"
-                                           respond_to do |format|
-                                                format.html { render :action => "new" }
-                                                format.xml  { render :xml => @customer.errors.to_xml }
-                                            end
+                                          render :new  , :params => @customer
+                                           # respond_to do |format|
+                                           #       redirect_to( params.merge(:action => 'new'))
+                                           #      format.xml  { render :xml => @customer.errors.to_xml }
+                                           #  end
                             end
   else
                       logger.warn "@customer not valid"
@@ -268,10 +269,11 @@ def create
                       logger.warn "@customer not valid"
                       logger.warn "@customer not valid"
                       logger.warn "@customer not valid"
-	                     respond_to do |format|
-	                          format.html { render :action => "new" }
-	                          format.xml  { render :xml => @customer.errors.to_xml }
-	                      end
+                      render :new  , :params => @customer
+	                     # respond_to do |format|
+                        #      redirect_to( params.merge(:action => 'new'))
+	                     #      format.xml  { render :xml => @customer.errors.to_xml }
+	                     #  end
 	      end
 end
 ##################################################################################################################

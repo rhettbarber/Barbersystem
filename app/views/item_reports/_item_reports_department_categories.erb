@@ -1,10 +1,79 @@
-		<div class="item_reports_department_header">     
-				<strong> Department: <%=  department.Name.capitalize  %></strong>
-		</div>
-		
-<%  @categories = Category.find( :all, :conditions => ["department_id = ?",department    ], :order => "Name ASC")   %>
-        <% for category  in  @categories  %>            
-											<%= render(:partial => "item_reports/item_reports_category",:locals => { :category => category, :department => department } ) %>
+
+         <% @categories_this_page = Set.new   %>
+
+        <%  @categories = Category.find( :all, :conditions => ["department_id = ?",department    ], :order => "Name ASC")   %>
+
+      size: <%= @categories.size %><br>
+
+        <%   @items.in_groups_of(30) do |slice|  %>
+                                        <div class="gallery">
+
+
+                                                              <div class="item_reports_department_header">
+                                                                                <strong> Department: <%=  item.department.Name.capitalize  %></strong>
+
+
+                                                              </div>
+
+                                                                <% slice.each do |item| -%>
+                                                                                            <% @categories_this_page.add( item.category)    %>
+                                                                                            <% item.ItemLookupCode %>
+                                                                  <% end %>
+
+
+                                                                  <div class="item_reports_categories_footer">
+                                                                                <strong> Categories:
+                                                                                  <%  @categories_this_page.each do  |this_pages_category|  %>
+
+                                                                                      <%= this_pages_category.Name.capitalize %>,
+                                                                                  <% end %>
+                                                                                </strong>
+                                                                  </div>
+
+
+                                         </div>
+
 			<% end %>
-			
-			
+
+
+
+
+
+   <% if @oldd %>
+             <% @categories_this_page = Set.new   %>
+
+             <%  @categories = Category.find( :all, :conditions => ["department_id = ?",department    ], :order => "Name ASC")   %>
+
+             size: <%= @categories.size %><br>
+
+             <%   @categories.each_slice(30) do |slice|  %>
+                 <div class="gallery">
+
+
+                   <div class="item_reports_department_header">
+                     <strong> Department: <%=  department.Name.capitalize  %></strong>
+                   </div>
+
+                   <% slice.each do |category| -%>
+                       <% @categories_this_page.add( category)    %>
+                       <%= render(:partial => "item_reports/item_reports_category",:locals => { :category => category, :department => department } ) %>
+                   <% end %>
+
+
+                   <div class="item_reports_categories_footer">
+                     <strong> Categories:
+                       <%  @categories_this_page.each do  |this_pages_category|  %>
+
+                           <%= this_pages_category.Name.capitalize %>,
+                       <% end %>
+                     </strong>
+                   </div>
+
+
+                 </div>
+
+             <% end %>
+
+
+
+         <% end %>
