@@ -2,15 +2,14 @@
 <% if feature.image_name and  feature.image_name  != ""  %>
                 <% the_image_name = feature.image_name  %>
 <% else %>
-                 <% the_image_name = "/images/item_thumbnails/" +  feature.items.first.PictureName  %>
+                 <% the_image_name = "/images/item_thumbnails/" +  feature.items.first.PictureName if feature.items.first %>
 <% end %>
 
-
+<% if  the_image_name %>
 <div class="carousel_feature_container">
   <div class="featured-designs-carousel-image-container" style="text-align: center;">
 
-
-                                  <% if feature.onclick and feature.onclick  != "" %>
+                             <% if feature.onclick and feature.onclick  != "" %>
                                                      <a class="onclick_link"  href="#" onclick="<%= feature.onclick %>"><img src="http://cdn.dixieoutfitters.com/<%= the_image_name %>" />  <%= feature.description %> </a>
                                  <% elsif  feature.carousel_url and feature.carousel_url  != ""   %>
                                                   <a  class="carousel_url_link"  href="<%= feature.carousel_url %>"><img src="http://cdn.dixieoutfitters.com/<%= the_image_name %>" /> <%= feature.description %>  </a>
@@ -22,3 +21,4 @@
 
   <!--<div class="carousel_link_container_100"><a data-role="button" data-theme="b" href="/store/new_designs">Shop New Designs </a></div>-->
 </div>
+<% end %>

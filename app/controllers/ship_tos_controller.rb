@@ -2,7 +2,7 @@ class ShipTosController < ApplicationController
 ssl_exceptions
 before_filter  :initialize_variables
 before_filter :user_with_customer?
-before_filter  :redirect_unless_purchase_in_progress ,:redirect_if_incomplete_symbiont,  :only => [ :shipping_services, :show_chosen, :index, :new ,:show ]
+before_filter  :redirect_unless_purchase_in_progress ,:redirect_if_incomplete_symbiont,  :only => [ :shipping_services, :show_chosen, :index, :new ,:show, :edit ]
 
 skip_before_filter :verify_authenticity_token, :only => [:destroy]
 
@@ -145,7 +145,20 @@ end
   end
 ############################################################################################################
   def edit
-    @ship_to =  @user.customer.ship_tos.find(params[:id])
+    user_customer   =  @user.customer
+    logger.warn "##############################################"
+    logger.warn "---------------------------------------------"
+    logger.warn "##############################################"
+    logger.warn "##############################################"
+    logger.warn "##############################################"
+    logger.warn "##############################################"
+    logger.warn "@user.customer.inspect: " + user_customer.inspect
+    logger.warn "##############################################"
+    logger.warn "##############################################"
+    logger.warn "##############################################"
+    logger.warn "---------------------------------------------"
+    logger.warn "##############################################"
+    @ship_to =  user_customer.ship_tos.find(params[:id])
   end
 ############################################################################################################
   def create
