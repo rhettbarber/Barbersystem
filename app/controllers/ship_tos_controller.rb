@@ -166,7 +166,8 @@ end
 #  	debugger
     @ship_to = @user.customer.ship_tos.new(params[:ship_to])
     @ship_to.Country = 'United States' #params[:USPSCountries][:Country][0..19]
-    @ship_to.store_id = 1  
+    @ship_to.store_id = 1
+    @ship_to.EmailAddress = @user.email
     respond_to do |format|
       if @ship_to.save
       	delete_customer_cache

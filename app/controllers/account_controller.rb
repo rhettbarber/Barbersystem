@@ -147,7 +147,7 @@ end
                                                   startup_user
                                                   startup_customer
                                                   startup_purchase
-                                                  configure_last_purchase
+                                                  configure_last_purchase  if @customer and @purchase
                                                   startup_user_session
                                                   @user_session.user_id =  current_user.id
                                                   if @purchase
