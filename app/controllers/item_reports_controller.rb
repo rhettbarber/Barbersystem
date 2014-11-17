@@ -1,9 +1,9 @@
 class ItemReportsController < ApplicationController
-
+  before_filter  :initialize_variables_except_store
 #ssl_exceptions
-before_filter :redirect_unless_admin,:except => [:designs_numerically,:designs_by_department]
+before_filter :redirect_unless_admin #,:except => [:designs_numerically,:designs_by_department]
 #before_filter :rhett   #,:only => [:designs_numerically,:designs_by_department]
-
+  before_filter :no_item_menu
 #layout "pricelist"
 
 def rhett
@@ -36,12 +36,19 @@ end
 
 
 def designs_by_department
-                 if  params[:department_ids] 
-                        @departments = Department.find(:all, :conditions => ["department_id in (?)", params[:department_ids]   ])
-                 else
-                        @departments = @website.default_design_departments             
-                 end
-                render(:partial => "item_reports/items_by_browse",:layout => 'printable' )
+                 # if  params[:department_ids]
+                 #                @departments = Department.find(:all, :conditions => ["department_id in (?)", params[:department_ids]   ])
+                 # else
+                 #               # @departments = @website.default_design_departments
+                 #               #  @departments = Department.limit(2).order("departments.Name ASC").where( "id in (?)",  @website.default_design_department_ids.split(/,/)   ).to_set
+                 # end
+        @original_items = Item.limit(400).joins(:department, :category, :category_class).order("departments.Name ASC,  categories.Name ASC").where( "items.department_id in (?)",  @website.default_design_department_ids.split(/,/)   ).all
+
+         @items = Set.new
+          @original_items.each do |item|
+                    @items.add( item) if item.department and item.category  and item.category_class
+          end
+
 end
 
 
