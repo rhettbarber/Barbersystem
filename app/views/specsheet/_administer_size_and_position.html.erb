@@ -46,7 +46,7 @@
                                    # sides:<%=  @item_advanced_combination.number_of_sides    %><br>
                                    default_side:<%=  @item_advanced_combination.default_side    %><br>
                                  </div>
-                                  <div style="float:left;"> <%= select_tag( :item_specsheet_type_id,  options_for_select([['Legacy specsheet', '1'], ['Latest specsheet', '2']],  @item_advanced_combination.specsheet_type_id )  ) %></div>
+                                  <div style="float:left;"> <%= select_tag( :item_specsheet_type_id,  options_for_select([['Legacy specsheet', '1'], ['Latest specsheet', '2'], ['Designer specsheet', '3']],  @item_advanced_combination.specsheet_type_id )  ) %></div>
                                   <div style="float:left;"> <%= select_tag( :item_number_of_sides,  options_for_select([['One side', 1 ], ['Two sides', 2 ]],  @item_advanced_combination.number_of_sides   )  ) %></div>
                                   <div style="float:left;"> <%= select_tag( :item_default_side,  options_for_select([['Default on back', 'back'], ['Default on front', 'front']] ,@item_advanced_combination.default_side   )  ) %></div>
                                   <%= hidden_field_tag 'item_advanced_combination_id', @item_advanced_combination.id   if @item_advanced_combination  %>
@@ -94,7 +94,7 @@
                                         <div style="float:left;"> <%= select_tag( :front_design_default_side,  options_for_select([['Default on front', 'front'], ['Default on front', 'front']] ,@front_advanced_combination.default_side   )  ) %></div>
 
                         <% end %>
-                        <%= hidden_field_tag 'front_advanced_combination_id', @front_advanced_combination.id   if @front_advanced_combination  %>
+                        <%= hidden_field_tag 'back_advanced_combination_id', @front_advanced_combination.id   if @front_advanced_combination  %>
                         <div style="width:300px;display: inline-block;">
                           <label for="front_slider" style="display: none;">Input slider:</label>
                           <div id="div-front_slider"> <input type="range" name="front_slider" id="front_slider" value="0" min="-40" max="40" /> </div>

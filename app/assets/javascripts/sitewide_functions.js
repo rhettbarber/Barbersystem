@@ -899,7 +899,7 @@ function change_specsheet() {
                         type: "GET",
                         dataType: 'script',
                         url: "/specsheet/update_specsheet",
-                        data: { item_id:  $('#item_class_component_item_id').val()  , side:  $('#side').val()  , design_id:  $('#design_id').val()   , show_wide_specsheet:  $('#show_wide_specsheet').val()  , department_id:  $('#department_id').val() , purchases_entry_id:  $('#purchases_entry_id').val(), crest_id: $('#crest_id').val()  }
+                        data: { item_id:  $('#item_class_component_item_id').val()  , side:  $('#side').val()  , designer_item_status:  $('#designer_item_status').val() , design_id:  $('#design_id').val()   , show_wide_specsheet:  $('#show_wide_specsheet').val()  , department_id:  $('#department_id').val() , purchases_entry_id:  $('#purchases_entry_id').val(), crest_id: $('#crest_id').val()  }
             });
 }
 

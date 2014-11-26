@@ -90,7 +90,21 @@ end
   # end
 
 
+  def at_sublimation
+                  # logger.debug "@category.Name: " + @category.Name
+                  # logger.debug "@category.Name: " + @category.category_class.name
 
+                                if   @parameter_item and @parameter_item_name  == "sublimation_shirts"
+                                                @sublimation = true
+                               elsif  @parameter_item and @parameter_item_name  == "huge_front"
+                                               @sublimation = true
+                                  elsif     params[:designer_item_status].to_s  == '1'
+                                              @sublimation = true
+                                  else
+                                               @sublimation = false
+                                  end
+                logger.debug "@sublimation.inspect: " +  @sublimation.inspect
+  end
 
 
 
@@ -99,18 +113,21 @@ end
                 # BEGIN @side code - NOTE OVERRIDE
                 # BEGIN @side code - NOTE OVERRIDE
                 # BEGIN @side code - NOTE OVERRIDE
-                if @purchases_entry and @purchases_entry.Comment.size > 1
-                              @side = @purchases_entry.Comment.split("_")[0]
-                end
-                # PARAMS OVERRIDE PURCHASES_ENTRY COMMENT ABOVE
-                if params[:side] == 'front'
-                            @side = 'front'
-                elsif params[:side] == 'back'
-                            @side = 'back'
-                end
+                if @sublimation
+                              @side = 'front'
+                else
+                              if @purchases_entry and @purchases_entry.Comment.size > 1
+                                            @side = @purchases_entry.Comment.split("_")[0]
+                              end
+                              # PARAMS OVERRIDE PURCHASES_ENTRY COMMENT ABOVE
+                              if params[:side] == 'front'
+                                          @side = 'front'
+                              elsif params[:side] == 'back'
+                                          @side = 'back'
+                              end
 
-                @side ||= 'back'
-
+                              @side ||= 'back'
+                 end
                 # END  @side code - NOTE OVERRIDE
   end
   ###########################################################################################################

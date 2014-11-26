@@ -67,12 +67,10 @@
                             <% end  %>
 
 
-                            <%   if  @required_form_elements.include?('icc_collection_select' ) %>
-                                                      <% logger.debug "@selected_item_id: " + @selected_item_id.to_s %>
-                                                      <select name="item_class_component[item_id]" id="item_class_component_item_id"  data-native-menu="false">
-                                                                 <%=   options_for_select( @item_class_components.collect {|p| [ p.dimensions , p.item_id ] } ,  @selected_item_id.to_s  )      %>
-                                                      </select>
-                            <% end %>
+                            <%= render "specsheet/icc_collection_select" %>
+
+
+
 <% end %>
 
 <!--  end  form /cart/add_to_cart --><!--  end  form /cart/add_to_cart --><!--  end  form /cart/add_to_cart --><!--  end  form /cart/add_to_cart --><!--  end  form /cart/add_to_cart --><!--  end  form /cart/add_to_cart --><!--  end  form /cart/add_to_cart --><!--  end  form /cart/add_to_cart -->

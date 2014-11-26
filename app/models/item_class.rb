@@ -7,6 +7,49 @@ class ItemClass < ActiveRecord::Base
              #.includes(:item).where( "items.Inactive = ? and items.WebItem = ?", false, true )
 
 
+  def self.sublimation_garment_item_classes
+                    the_item_classes =   ItemClass.order("Description ASC").where("category_id = ?",  927   ).all
+
+  end
+
+
+
+  def  self.sublimation_garment_components_in_class( item_class_id )
+                    all_component_ids = []
+                    ic =    ItemClass.where("id = ?",  item_class_id   ).first
+                    Item.unscoped do
+                            for component in   ic.item_class_components
+                                        if component.item
+                                                  c = "cc"
+                                                  all_component_ids << component.id   # if component.item.Inactive == false  && component.item.WebItem == true
+                                        end
+                            end
+                    end
+                     the_components =    ItemClassComponent.order( "Detail2 ASC, Detail1 ASC").where("id in (?)" , all_component_ids ).all
+    g = "g"
+                    return the_components
+  end
+
+
+
+
+def  self.sublimation_garment_components
+                      all_component_ids = []
+                      the_item_classes = self.sublimation_garment_item_classes
+                      the_item_classes.each do |ic|
+                                            for component in   ic.item_class_components
+                                                        if component.item
+                                                                    all_component_ids << component.id    if component.item.Inactive == false  && component.item.WebItem == true
+                                                        end
+                                            end
+                       end
+                    return    ItemClassComponent.order( "Detail2 ASC, Detail1 ASC").where("id in (?)" , all_component_ids )
+end
+
+
+
+
+
  def all_active_components
                      all_component_ids = []
            for component in  self.item_class_components

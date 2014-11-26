@@ -3,66 +3,140 @@ class SpecsheetController < ApplicationController
  #caches_action :index , :cache_path => Proc.new{ 'action/' + @specsheet_fragment_name }
 
 
-          # when purchases_entry exists... set item back to 0 to make incomplete symbiote.
-def choose_a_different_shirt_style
 
-end
+    # SUBLIMATION EXAMPLE URL
+    #  http://192.168.0.125:1000/specsheet/28172/2/491?designer_item_status=1&side=front&crest_id=0
 
 
- def update_crest_prints_list
-                   @main_design = Item.find params[:main_design_id]
 
-                    if params[:item_ids_to_remove]
-                                category_id = params[:category_id]
-                                params[:item_ids_to_remove].split(",").each do |item_id|
-                                               logger.debug "category_id: " + category_id  + "  item_id: " + item_id
-                                               new_crest_print =  CrestPrint.where(:item_id =>  item_id , :category_id => category_id  ).destroy_all
-                                end
-                    end
 
-                    if params[:item_ids]
-                                category_id = params[:category_id]
-                                params[:item_ids].split(",").each do |item_id|
-                                               logger.debug "category_id: " + category_id  + "  item_id: " + item_id
-                                               new_crest_print =  CrestPrint.find_or_create_by_item_id_and_category_id( item_id , category_id )
-                                end
-                    end
+ def update_sublimation_garments
+   logger.debug "-------------------------------------begin update_sublimation_garments: #{controller_name}"
+   logger.debug "-------------------------------------params: #{params}"
+   @filterProducts = true
+   # @products = Product.where(company_id: params[:company_id]).order(:name)
 
-                  if params[:item_id_to_default]
-                          category_id = params[:category_id]
-                          item_id = params[:item_id_to_default]
+   # @sublimation_item_class_components = ItemClass.sublimation_garment_components_in_class(params[:item_class_id])
+   @sublimation_item_class_components = ItemClass.sublimation_garment_components_in_class( params[:sublimation_item_class_id] )
 
-                          CrestPrint.update_all ['default_crest = ?',0 ], ['category_id = ?', category_id ]
-
-                          crest_print =  CrestPrint.where(:item_id =>  item_id , :category_id => category_id  ).first
-                          crest_print.default_crest = 1
-                          crest_print.save
-                  end
-
-                 render layout: false
  end
 
+###########################################################################################################
+  def update_specsheet
+    logger.debug "-------------------------------------begin update_specsheet: #{controller_name}"
+    logger.debug "-------------------------------------params: #{params}"
 
- def admin_crest_prints_list
-               #session[:show_admin] = true
-               @main_design = Item.find params[:main_design_id]
-               #Item.unscoped do
-               #  @main_design_applicable_front_designs_ids =  @main_design.applicable_crest_print_ids
-               #end
-               render :layout =>  'dialog'
- end
+    at_sublimation
+
+    @item = Item.find(params[:item_id])
+    @purchases_entry = PurchasesEntry.find(params[:purchases_entry_id]) if params[:purchases_entry_id]
 
 
-   def crest_prints_list
-               #session[:show_admin] = true
-               @main_design = Item.find params[:main_design_id]
-               #Item.unscoped do
-               #  @main_design_applicable_front_designs_ids =  @main_design.applicable_crest_print_ids
-               #end
-               render :layout =>  'dialog'
-   end
 
-############################################################################################################
+    at_side
+
+    if  @purchases_entry && @incomplete_symbiont == true
+      params[:department_id] = @item.default_master_department_id  #new to correct bad department code error
+    end
+    if Item.exists?(params[:design_id])
+      @design = Item.find(params[:design_id])
+    end
+    @department = Department.find(params[:department_id])
+    if  params[:show_wide_specsheet]
+      if @item and !@design and params[:show_wide_specsheet] # == 'true'
+        @show_wide_specsheet = false
+        if @item.item_class_component
+          #if @item.item_class_component.item_class.wide_specsheet == 1
+          #   odddd
+          #  @show_wide_specsheet = true
+          #end
+          #if @show_wide_specsheet == true
+          #         bbb
+          #         @specsheet_image =  @item.image_url( @department  , 'item_specsheets/', @design, '0' ).gsub('.png', '_wide.png' )
+          #else
+
+          #<% @product_background_image_name =  '/images/item_specsheets/' + @item.PictureName.gsub(".jpg", "")  + '.jpg' %>
+          @specsheet_image =   '/images/item_specsheets/' + @item.PictureName.gsub(".jpg", "")  + '.jpg'
+          #@specsheet_image = @item.image_url(  @department,'item_specsheets/', @design, '0' )
+          #end
+        else
+          #dddd
+          @specsheet_image = @item.image_url(  @department,'item_specsheets/', @design, '0' )
+        end
+      else
+        @specsheet_image = @item.image_url(  @department,'item_specsheets/', @design, '0' )
+      end
+    else
+      no_show_wide_specsheet_param
+      @specsheet_image = @item.image_url(  @department,'item_specsheets/', @design, '0' )
+    end
+    if @item #&& @design.nil?
+      if @item.category.category_class.item_type == 'master'
+        @your_unit_price = @item.your_unit_price(@customer_array,1).to_f + 0.01
+      else
+        @your_unit_price = @item.your_unit_price(@customer_array,1)
+      end
+    end
+    prepare_combination_variables(@item,@design)  if @item && @design
+  end
+
+  ############################################################################################################
+  def view_details_purchases_entry_and_not_incomplete_symbiont
+    logger.debug "begin specsheet view_details_purchases_entry_and_not_incomplete_symbiont"
+    logger.debug "ssees-------------------------------------@purchases_entry.symbiotic_item: #{@purchases_entry.symbiotic_item}"
+    logger.debug "asdww-------------------------------------@singular_item_customer: #{@singular_item_customer}"
+    if @purchases_entry.symbiotic_item == true &&  @singular_item_customer == false
+                      logger.debug "vvsa-------------------------------------purchase-with-complete-symbiont"
+
+                     if  @purchases_entry.slave_of_symbiont_pair.item.category.category_class.name == 'huge_front'
+                                @sublimation = true
+                      end
+
+                      if params[:item_class_component_item_id]
+                                    @selected_item_id  =  params[:item_class_component_item_id]
+                                    @item =  Item.find  params[:item_class_component_item_id]
+                      else
+                                    @selected_item_id  =  @purchases_entry.master_of_symbiont_pair.item_id
+                                    @item = @purchases_entry.master_of_symbiont_pair.item
+                      end
+
+
+                      #@item = @purchases_entry.master_of_symbiont_pair.item
+                      @design = @purchases_entry.slave_of_symbiont_pair.item
+                      logger.debug "sssd-------------------------------------@item.id: #{@item.id}" if @item
+                      logger.debug "seesa-------------------------------------@design.id: #{@design.id}" if @design
+
+
+
+                      @item_class_components =  @purchases_entry.slave_of_symbiont_pair.slaves_item_class_components_decision
+                      @department  =  Department.find(@purchases_entry.master_department_id)
+                      @required_form_elements << 'hidden_department_id_field'
+                      @required_form_elements << 'button_change_size_or_color'
+                      @required_form_elements << 'icc_collection_select'  if   @item_class_components
+                      @required_form_elements << 'hidden_item_id_field' unless @item_class_components
+                      #@selected_item_id  =  @purchases_entry.master_of_symbiont_pair.item_id if @item.item_class_component
+                      #>>>>>>>>>>>>>>>>>>>> OUTPUT>>>>>>>>>> :item_id => item_id  ## from collection select or hidden field if unavailable
+    else
+                    @item = @purchases_entry.item   ### just added form elements as needed #########################################################################
+                    @item_class_components = @item.item_class_component.item_class.all_active_components if @item.item_class_component
+                    @department  =  Department.find(@purchases_entry.item.default_master_department_id)
+                    @required_form_elements << 'hidden_department_id_field'
+                    @required_form_elements << 'button_change_size_or_color'
+                    @required_form_elements << 'icc_collection_select'  if   @item_class_components
+                    @required_form_elements << 'hidden_item_id_field' unless @item_class_components
+
+                    #@selected_item_id  =  @purchases_entry.item_id if @item.item_class_component
+
+                    if params[:item_class_component_item_id]
+                                  @selected_item_id  =  params[:item_class_component_item_id]
+                    else
+                                  @selected_item_id  =  @purchase.master.item_id
+                    end
+      #>>>>>>>>>>>>>>>>>>>> OUTPUT>>>>>>>>>> :item_id => item_id  ## from collection select if available otherwise hidden field
+    end
+  end
+###########################################################################################################
+
  def index
             #	begin
             #@crest_print =  CrestPrint.where(:item_id =>  params[:crest_id]  ).first
@@ -81,7 +155,24 @@ end
                                  @parameter_design = Item.find(params[:design_id]) if params[:design_id]
                                  @parameter_item = Item.find(params[:item_id]) if params[:item_id]
                                  @parameter_item_type = @parameter_item.category.category_class.item_type  if @parameter_item
+                                 @parameter_item_name = @parameter_item.category.category_class.name  if @parameter_item
                                  @required_form_elements = [ ]
+
+
+                                at_sublimation
+
+                                if @sublimation and   params[:purchases_entry_id]
+                                          if @parameter_item  and @parameter_item_name  == "huge_front"
+                                                              @parameter_design = @parameter_item
+                                                              @parameter_item    = ItemClass.sublimation_garment_components.first.item
+                                          end
+                                else
+                                            if @parameter_item  and @parameter_item_name  == "huge_front"
+                                                              @parameter_design = @parameter_item
+                                                              @parameter_item    = ItemClass.sublimation_garment_components.first.item
+                                            end
+                                end
+
 
 
                                  at_side
@@ -130,57 +221,66 @@ end
              end
  end
 ############################################################################################################
+# when purchases_entry exists... set item back to 0 to make incomplete symbiote.
+  def choose_a_different_shirt_style
+
+  end
+
+
+  def update_crest_prints_list
+    @main_design = Item.find params[:main_design_id]
+
+    if params[:item_ids_to_remove]
+      category_id = params[:category_id]
+      params[:item_ids_to_remove].split(",").each do |item_id|
+        logger.debug "category_id: " + category_id  + "  item_id: " + item_id
+        new_crest_print =  CrestPrint.where(:item_id =>  item_id , :category_id => category_id  ).destroy_all
+      end
+    end
+
+    if params[:item_ids]
+      category_id = params[:category_id]
+      params[:item_ids].split(",").each do |item_id|
+        logger.debug "category_id: " + category_id  + "  item_id: " + item_id
+        new_crest_print =  CrestPrint.find_or_create_by_item_id_and_category_id( item_id , category_id )
+      end
+    end
+
+    if params[:item_id_to_default]
+      category_id = params[:category_id]
+      item_id = params[:item_id_to_default]
+
+      CrestPrint.update_all ['default_crest = ?',0 ], ['category_id = ?', category_id ]
+
+      crest_print =  CrestPrint.where(:item_id =>  item_id , :category_id => category_id  ).first
+      crest_print.default_crest = 1
+      crest_print.save
+    end
+
+    render layout: false
+  end
+
+
+  def admin_crest_prints_list
+    #session[:show_admin] = true
+    @main_design = Item.find params[:main_design_id]
+    #Item.unscoped do
+    #  @main_design_applicable_front_designs_ids =  @main_design.applicable_crest_print_ids
+    #end
+    render :layout =>  'dialog'
+  end
+
+
+  def crest_prints_list
+    #session[:show_admin] = true
+    @main_design = Item.find params[:main_design_id]
+    #Item.unscoped do
+    #  @main_design_applicable_front_designs_ids =  @main_design.applicable_crest_print_ids
+    #end
+    render :layout =>  'dialog'
+  end
+
 ############################################################################################################
- def view_details_purchases_entry_and_not_incomplete_symbiont
-             logger.debug "begin specsheet view_details_purchases_entry_and_not_incomplete_symbiont"
-             logger.debug "ssees-------------------------------------@purchases_entry.symbiotic_item: #{@purchases_entry.symbiotic_item}"
-             logger.debug "asdww-------------------------------------@singular_item_customer: #{@singular_item_customer}"
-             if @purchases_entry.symbiotic_item == true &&  @singular_item_customer == false
-                           logger.debug "vvsa-------------------------------------purchase-with-complete-symbiont"
-
-                           if params[:item_class_component_item_id]
-                                     @selected_item_id  =  params[:item_class_component_item_id]
-                                     @item =  Item.find  params[:item_class_component_item_id]
-                           else
-                                     @selected_item_id  =  @purchases_entry.master_of_symbiont_pair.item_id
-                                     @item = @purchases_entry.master_of_symbiont_pair.item
-                           end
-
-
-                           #@item = @purchases_entry.master_of_symbiont_pair.item
-                           @design = @purchases_entry.slave_of_symbiont_pair.item
-                           logger.debug "sssd-------------------------------------@item.id: #{@item.id}" if @item
-                           logger.debug "seesa-------------------------------------@design.id: #{@design.id}" if @design
-
-
-
-                           @item_class_components =  @purchases_entry.slave_of_symbiont_pair.slaves_item_class_components_decision
-                           @department  =  Department.find(@purchases_entry.master_department_id)
-                           @required_form_elements << 'hidden_department_id_field'
-                           @required_form_elements << 'button_change_size_or_color'
-                           @required_form_elements << 'icc_collection_select'  if   @item_class_components
-                           @required_form_elements << 'hidden_item_id_field' unless @item_class_components
-                           #@selected_item_id  =  @purchases_entry.master_of_symbiont_pair.item_id if @item.item_class_component
-                           #>>>>>>>>>>>>>>>>>>>> OUTPUT>>>>>>>>>> :item_id => item_id  ## from collection select or hidden field if unavailable
-             else
-                           @item = @purchases_entry.item   ### just added form elements as needed #########################################################################
-                           @item_class_components = @item.item_class_component.item_class.all_active_components if @item.item_class_component
-                           @department  =  Department.find(@purchases_entry.item.default_master_department_id)
-                           @required_form_elements << 'hidden_department_id_field'
-                           @required_form_elements << 'button_change_size_or_color'
-                           @required_form_elements << 'icc_collection_select'  if   @item_class_components
-                           @required_form_elements << 'hidden_item_id_field' unless @item_class_components
-
-                           #@selected_item_id  =  @purchases_entry.item_id if @item.item_class_component
-
-                           if params[:item_class_component_item_id]
-                             @selected_item_id  =  params[:item_class_component_item_id]
-                           else
-                             @selected_item_id  =  @purchase.master.item_id
-                           end
-                           #>>>>>>>>>>>>>>>>>>>> OUTPUT>>>>>>>>>> :item_id => item_id  ## from collection select if available otherwise hidden field
-             end
- end
 ############################################################################################################
  def view_details_purchases_entry_and_incomplete_symbiont
                    logger.debug "begin specsheet view_details_purchases_entry_and_incomplete_symbiont"
@@ -443,58 +543,12 @@ end
    return @preload_images_array =      '\'' +    @preload_images_array.to_s +  '\''
  end
 ###########################################################################################################
-###########################################################################################################
- def update_specsheet
-       logger.debug "-------------------------------------begin update_specsheet: #{controller_name}"
-       logger.debug "-------------------------------------params: #{params}"
-       @item = Item.find(params[:item_id])
-       @purchases_entry = PurchasesEntry.find(params[:purchases_entry_id]) if params[:purchases_entry_id]
 
-       at_side
 
-       if  @purchases_entry && @incomplete_symbiont == true
-                 params[:department_id] = @item.default_master_department_id  #new to correct bad department code error
-       end
-       if Item.exists?(params[:design_id])
-                  @design = Item.find(params[:design_id])
-       end
-       @department = Department.find(params[:department_id])
-       if  params[:show_wide_specsheet]
-                           if @item and !@design and params[:show_wide_specsheet] # == 'true'
-                                             @show_wide_specsheet = false
-                                             if @item.item_class_component
-                                                               #if @item.item_class_component.item_class.wide_specsheet == 1
-                                                               #   odddd
-                                                               #  @show_wide_specsheet = true
-                                                               #end
-                                                               #if @show_wide_specsheet == true
-                                                               #         bbb
-                                                               #         @specsheet_image =  @item.image_url( @department  , 'item_specsheets/', @design, '0' ).gsub('.png', '_wide.png' )
-                                                               #else
 
-                                                                          #<% @product_background_image_name =  '/images/item_specsheets/' + @item.PictureName.gsub(".jpg", "")  + '.jpg' %>
-                                                                          @specsheet_image =   '/images/item_specsheets/' + @item.PictureName.gsub(".jpg", "")  + '.jpg'
-                                                                          #@specsheet_image = @item.image_url(  @department,'item_specsheets/', @design, '0' )
-                                                               #end
-                                             else
-                                                                #dddd
-                                                                @specsheet_image = @item.image_url(  @department,'item_specsheets/', @design, '0' )
-                                             end
-                           else
-                                            @specsheet_image = @item.image_url(  @department,'item_specsheets/', @design, '0' )
-                           end
-       else
-                          no_show_wide_specsheet_param
-                          @specsheet_image = @item.image_url(  @department,'item_specsheets/', @design, '0' )
-       end
-       if @item #&& @design.nil?
-         if @item.category.category_class.item_type == 'master'
-           @your_unit_price = @item.your_unit_price(@customer_array,1).to_f + 0.01
-         else
-           @your_unit_price = @item.your_unit_price(@customer_array,1)
-         end
-       end
-       prepare_combination_variables(@item,@design)  if @item && @design
-   end
+
+
+
+
 
 end
