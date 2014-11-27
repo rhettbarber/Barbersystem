@@ -1,0 +1,43 @@
+console.log("begin  specsheet/update_specsheet.js.erb");
+
+
+<% if @filterProducts  %>
+//                   console.log("@sublimation_item_class_components.inspect: <%#= @sublimation_item_class_components.inspect %> ");
+                      var replace_string = "<select name='item_class_component[item_id]' id='item_class_component_item_id'  data-native-menu='false'><%= escape_javascript options_for_select( @sublimation_item_class_components.collect {|p| [ p.dimensions , p.item_id ] }   )  %></select>"
+                    console.log(replace_string);
+                    $('#item_class_component_select').html(replace_string);
+                    $("#item_class_component_item_id").selectmenu();
+
+
+
+
+//                    // Grab a select field
+//                    var el = $('#item_class_component_item_id');
+//                    // Select the relevant option, de-select any others
+//                    el.val('<%#= @sublimation_item_class_components.first.item_id  %>').attr('selected', true).siblings('option').removeAttr('selected');
+//                    // jQM refresh
+//                    el.selectmenu("refresh", true);
+
+                    $("#designer_item_status").val("1");
+                    $("#side").val("front");
+                    $("#crest_id").val("");
+
+                    change_specsheet();
+
+                    watchForDimesionChange();
+<% else %>
+//                        not @filterProducts
+//                        not @filterProducts
+<% end %>
+
+console.log("closing loader");
+$.mobile.loading('hide');
+
+console.log("end  specsheet/update_specsheet.js.erb");
+
+
+
+
+
+
+

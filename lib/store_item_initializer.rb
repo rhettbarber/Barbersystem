@@ -209,8 +209,8 @@ def startup_browsing_category
 				if  params[:category_id]
 						@category = Caching::MemoryCache.instance.read 'category_' + params[:category_id]  unless cache_on? == false
 						if !@category
-							 @category ||= Category.includes(:category_class).find( params[:category_id] )
-							 Caching::MemoryCache.instance.write 'category_' + params[:category_id] , @category, :expires_in => 227.minutes  unless cache_on? == false
+                     @category ||= Category.includes(:category_class).find( params[:category_id] )
+                     Caching::MemoryCache.instance.write 'category_' + params[:category_id] , @category, :expires_in => 227.minutes  unless cache_on? == false
 						end	
 				end
 				logger.debug "END --------------------------------lib/store_item_initializer/startup_browsing_category"

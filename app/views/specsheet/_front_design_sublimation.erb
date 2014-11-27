@@ -1,0 +1,27 @@
+
+<div class="drag"  id="specsheet_table_front" style="overflow: hidden;">
+
+                <%=  image_tag @product_background_image_name ,:style => "position:relative; top:0;left:0;z-index:1;" -%>
+
+
+                <div style="margin:0px; padding: 0px;min-width:425px;text-align:center;
+                                        position: absolute;
+                                        left:<%=   @front_advanced_combination ? @front_advanced_combination.front_left : "0"   %>;
+                                        top:<%=   @front_advanced_combination ? @front_advanced_combination.front_top  : "0" %>;
+                                        width:<%= @front_advanced_combination ? @front_advanced_combination.front_width : "100"  %>;
+
+                                "   id="front_design_td">
+
+                                  <span>  </span>
+                                  <img src="<%= @front_design_image_name   %>"
+                                       id="front_design_image"
+                                       class="front_design_image drag"
+                                       alt="<%= @front_design_image_name %>"
+                                       style=" position: relative;
+                                               display:inline-block;
+                                               top:40px;
+                                               width:220px;
+                                       " />
+                </div>
+
+</div>

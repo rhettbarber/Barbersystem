@@ -1,0 +1,173 @@
+<!--table_at_item_and_design_two_sides_latest-->
+<% if @show_admin %><div class="specsheet_admin"> table_at_item_and_design_two_sides_latest</div> <% end %>
+
+<div  id="specsheet_table_css">
+<%  @back_design = @design %>
+<%
+    #@items_front =         @back_design.applicable_crest_prints
+    #@front_design =  @items_front.first
+    if @breast_print
+            @front_advanced_combination = AdvancedCombination.find_or_create_combo( @item, @breast_print)
+            @front_design_image_name =    '/images/item_specsheets/' + @breast_print_name
+      #@front_design_image_name =  '/images/item_specsheets/' +  @front_design.ItemLookupCode + '.png'
+    #else
+    #        @front_design_name = Util::Slug.generate(@back_design.department.Name) + '.png'
+    #        @front_design_image_name      =   '/images/item_specsheets/' + @front_design_name
+    end
+        if @back_design
+          @back_advanced_combination = AdvancedCombination.find_or_create_combo( @item, @back_design)
+          s = "s"
+        end
+
+%>
+
+
+<% @product_background_image_name =  '/images/item_specsheets/' + @item.PictureName.gsub(".png", "").gsub(".jpg", "")  + '.png' %>
+
+
+
+<%   @back_design_image_name     =    '/images/item_specsheets/' + @back_design.PictureName        %>
+
+
+      <!--[if lt IE 8]><style>
+    .design_span span {
+        display: inline-block;
+        height: 100%;
+    }
+</style><![endif]-->
+
+
+<style>
+  img {
+      max-width: none;
+  }
+
+    .specsheet_table_container {
+        /*background-color: yellow;*/
+        width: 850px ;
+        position: relative;
+    }
+
+    #specsheet_table {
+        /*background: url(<%#=  @product_background_image_name  -%>) no-repeat right;*/
+        height:328px;
+        width:425px;
+        float:left;
+    }
+
+    #specsheet_table_front {
+        /*background: url(<%#=  @product_background_image_name  -%>) no-repeat left;*/
+        height:328px;
+        width:425px;
+        float:left;
+    }
+
+    #back_design_td {
+        width: 425px;
+        height:328px;
+        overflow:hidden;
+    }
+
+    .specsheet_table_sizer {
+        width: <%= @specsheet_table_sizer_width %>;
+
+    }
+    /*   ---------- Media queries for mobile go here -------------    */
+    /*   ---------- Media queries for mobile go here -------------    */
+    /*   ---------- Media queries for mobile go here -------------    */
+    @media (max-width: 800px) {
+
+        .specsheet_table_container {
+            left:-63px;
+         }
+
+
+        #specsheet_table {
+            float:none;
+            overflow: hidden;
+        }
+
+        #specsheet_table_front {
+            float:none;
+            overflow: hidden;
+        }
+
+        .specsheet_table_sizer {
+            width:300px;
+            overflow: hidden;
+        }
+
+   }
+
+</style>
+
+ </div>
+
+<% g = "g" %>
+
+
+<%  if @back_advanced_combination and @back_advanced_combination.default_side == 'front' %>
+                        <% if  params[:side] == 'back'  %>
+                                                 <% logger.debug "params[:side] is back" %>
+                        <% else %>
+                                                <% logger.debug "params[:side] is not back" %>
+                                                <% @side = 'front' %>
+                         <% end %>
+<% end  %>
+
+<%  if  @side  == 'front' %>
+                                <%#= hidden_field_tag "what_side", "front"    MOVED INSIDE FORM  %>
+
+                                <%  @temp_front_design_image_name = @front_design_image_name    %>
+                                <%  @front_design_image_name = @back_design_image_name    %>
+                                <%  @back_design_image_name = @temp_front_design_image_name   %>
+
+                                <%  @temp_back_advanced_combination = @back_advanced_combination    %>
+                                <%  @temp_front_advanced_combination = @front_advanced_combination    %>
+
+                                <%  @back_advanced_combination = @temp_front_advanced_combination    %>
+                                <%  @front_advanced_combination = @temp_back_advanced_combination    %>
+<% else %>
+                                 <%#= hidden_field_tag "what_side", "back"   MOVED INSIDE FORM %>
+<% end %>
+
+
+
+  <table style="margin-left:auto;margin-right:auto;background-color: white;">
+
+    <tbody>
+            <tr>
+                    <td>
+                            <div class="specsheet_table_sizer">
+                                        <div class="specsheet_table_container">
+
+                                                                                              <%= render :partial => "specsheet/front_design_sublimation" %>
+                                                                                              <%= render :partial => "specsheet/back_design_sublimation" %>
+
+                                         </div>
+                              </div>
+                    </td>
+            </tr>
+    </tbody>
+
+  </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -7,19 +7,24 @@
 
   <% if @item_advanced_combination %>
              <% if @item  && @design  %>
-                                  <% if @item_advanced_combination.specsheet_type_id  == 1 %>
-                                                                                    <% if @item_advanced_combination.number_of_sides ==  1 %>
-                                                                                                             <%= render(:partial => 'specsheet/table_at_item_and_design_one_side_legacy')     %>
-                                                                                     <% else %>
-                                                                                                               <%= render(:partial => 'specsheet/table_at_item_and_design_two_sides_legacy')     %>
-                                                                                       <% end %>
-                                   <% else %>
-                                                                                      <% if @item_advanced_combination.number_of_sides ==  1 %>
-                                                                                                                            <%= render(:partial => 'specsheet/table_at_item_and_design_one_side_latest')     %>
-                                                                                       <% else %>
-                                                                                                                            <%= render(:partial => 'specsheet/table_at_item_and_design_two_sides_latest')     %>
-                                                                                       <% end %>
+                                    <% if @sublimation %>
+                                                                       <%= render(:partial => 'specsheet/table_sublimation')     %>
+                                     <% else %>
+                                                                 <% if @item_advanced_combination.specsheet_type_id  == 1   %>
+                                                                                                                <% if @item_advanced_combination.number_of_sides ==  1 %>
+                                                                                                                                         <%= render(:partial => 'specsheet/table_at_item_and_design_one_side_legacy')     %>
+                                                                                                                 <% else %>
+                                                                                                                                           <%= render(:partial => 'specsheet/table_at_item_and_design_two_sides_legacy')     %>
+                                                                                                                   <% end %>
+                                                               <% else %>
+                                                                                                                  <% if @item_advanced_combination.number_of_sides ==  1 %>
+                                                                                                                                                        <%= render(:partial => 'specsheet/table_at_item_and_design_one_side_latest')     %>
+                                                                                                                   <% else %>
+                                                                                                                                                        <%= render(:partial => 'specsheet/table_at_item_and_design_two_sides_latest')     %>
+                                                                                                                   <% end %>
+                                                                <% end %>
                                     <% end %>
+
              <% else %>
                                   <% if @item_advanced_combination.specsheet_type_id  == 1 %>
                                                                                     <% if @item_advanced_combination.number_of_sides ==  1 %>

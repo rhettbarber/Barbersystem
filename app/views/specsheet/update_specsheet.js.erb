@@ -2,7 +2,25 @@ console.log("begin  specsheet/update_specsheet.js.erb");
 
 console.log("@side: " + "<%= @side.to_s %>" );
 
+
+console.log("@item.id: <%= @item.id %>")
+console.log("@item.PictureName: <%= @item.PictureName %>")
+
 $("#specsheet").html(  '<%= escape_javascript( render :partial => "specsheet/specsheet_image" ) %>' );
+
+
+<%  if @back_advanced_combination  %>
+               console.log("updating @back_advanced_combination.id: <%= @back_advanced_combination.id  %>");
+             $('#back_advanced_combination_id').val( "<%= @back_advanced_combination.id  %>" );
+
+
+<% end %>
+
+<%  if @front_advanced_combination  %>
+            console.log("updating @front_advanced_combination.id: <%= @front_advanced_combination.id  %>");
+            $('#front_advanced_combination_id').val( "<%= @front_advanced_combination.id  %>" );
+<% end %>
+
 
 
 <% if @item %>
@@ -23,6 +41,20 @@ $("#specsheet").html(  '<%= escape_javascript( render :partial => "specsheet/spe
 <% end  unless  @your_unit_price == 0.01 %>
 
 watchForDimesionChange();
+
+
+$('#div-back_slider').on( "change", function(){
+    var back_slider_value =   $("#back_slider").val() ;
+    scaleBack( back_slider_value );
+})
+
+$('#div-front_slider').on( "change", function(){
+    var front_slider_value =   $("#front_slider").val() ;
+    scaleFront( front_slider_value );
+})
+
+
+
 
 
  console.log("closing loader");

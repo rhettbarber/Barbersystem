@@ -4,7 +4,7 @@
 ThreeTwoThree::Application.routes.draw do
 
   match "item_reports/designs_by_department", :controller => 'item_reports', :action => 'designs_by_department'
-  #
+   match 'features/carousel/:feature_name' , :controller => 'features', :action => 'carousel'
   match 'features/list/:name' , :controller => 'features', :action => 'list'
   match 'features/:id/destroy/:item_id' , :controller => 'features', :action => 'destroy'
   match 'features/create/' , :controller => 'features', :action => 'create'
