@@ -133,19 +133,20 @@ def find_customer
 
      if session[:customer_id]
                     logger.warn " session customer_id exists"
-                 if  no_cache_controllers.include? controller_name
-                                   logger.warn "excluded this controller from caching customer"
-                 else
-                                  logger.warn "attempting to read customer cacher"
-                                  @customer = Caching::MemoryCache.instance.read  request.session_options[:id].to_s +  '_customer_' + session[:customer_id].to_s   unless cache_on? == false
-                 end
-                    if @customer
-                                  logger.warn "@customer found via cache"
-                    else
-                                       logger.warn "@customer was not found with cache --attempting to find via activerecord- "
-                                     @customer = Customer.find session[:customer_id]   if session[:customer_id]
-                                       logger.warn "@customer found via activerecord- " if @customer
-                   end
+                    @customer = Customer.find session[:customer_id]   if session[:customer_id]
+                 # if  no_cache_controllers.include? controller_name
+                 #                   logger.warn "excluded this controller from caching customer"
+                 # else
+                 #                  logger.warn "attempting to read customer cacher"
+                 #                  @customer = Caching::MemoryCache.instance.read  request.session_options[:id].to_s +  '_customer_' + session[:customer_id].to_s   unless cache_on? == false
+                 # end
+                 #    if @customer
+                 #                  logger.warn "@customer found via cache"
+                 #    else
+                 #                       logger.warn "@customer was not found with cache --attempting to find via activerecord- "
+                 #                     @customer = Customer.find session[:customer_id]   if session[:customer_id]
+                 #                       logger.warn "@customer found via activerecord- " if @customer
+                 #   end
 
    end
   s = "S"

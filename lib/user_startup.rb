@@ -34,31 +34,31 @@ end
 ############################################################################################################
 def find_user
             logger.debug "BEGIN ------------------------------lib/startup_user/find_user"
-           if session[:user_id]
-                    @user = Caching::MemoryCache.instance.read request.session_options[:id]  + '_user_' + session[:user_id].to_s unless cache_on? == false
-           else
-                    logger.debug "session[:user_id] @user not found using cache- "
-           end
-            if @user
-                                 logger.debug "@user has been found by cache "
-            else
+           # if session[:user_id]
+           #          @user = Caching::MemoryCache.instance.read request.session_options[:id]  + '_user_' + session[:user_id].to_s unless cache_on? == false
+           # else
+           #          logger.debug "session[:user_id] @user not found using cache- "
+           # end
+           #  if @user
+           #                       logger.debug "@user has been found by cache "
+           #  else
                                   if current_user and current_user != :false
-                                    logger.debug "current_user.inspect: " + current_user.inspect
+                                               logger.debug "current_user.inspect: " + current_user.inspect
 
                                               if User.exists?(:id => current_user.id   )
                                                         @user ||= User.find(current_user.id )
                                                          session[:user_id] = @user.id
-                                                         if @user
-                                                              Caching::MemoryCache.instance.write request.session_options[:id]  + '_user_' + session[:user_id].to_s, @user unless  cache_on? == false
-                                                         end
+                                                         # if @user
+                                                         #      Caching::MemoryCache.instance.write request.session_options[:id]  + '_user_' + session[:user_id].to_s, @user unless  cache_on? == false
+                                                         # end
                                               else
                                                   logger.debug "FALSE ON User.exists?(:id => current_user.id   )"
                                               end
                                   else
                                       logger.debug "FALSE ON  != :false -- current_user.inspect: " + current_user.inspect
                                   end
-            end
-            g = "g"
+            # end
+            # g = "g"
  	logger.debug "END --------------------------------lib/startup_user/find_user"
 end	
 ############################################################################################################ 

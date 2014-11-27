@@ -168,7 +168,7 @@ end
 #    @ship_to.customer_id = @customer.id THINK ERROR WAS HERE. POSTING TO WRONG PEOPLES RECORDS
 #  	debugger
     user_customer   =  @user.customer
-    @ship_to = user_customer.ship_tos.new(params[:ship_to])
+    @ship_to = @user.customer.ship_tos.new(params[:ship_to])
     @ship_to.Country = 'United States' #params[:USPSCountries][:Country][0..19]
     @ship_to.store_id = 1
     @ship_to.EmailAddress = @user.email
