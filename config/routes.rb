@@ -14,7 +14,6 @@ ThreeTwoThree::Application.routes.draw do
   match 'features/:id/show/:item_id' , :controller => 'features', :action => 'show'
   match 'features/new/:item_id' , :controller => 'features', :action => 'new'
   match 'features/:id/edit/:item_id' , :controller => 'features', :action => 'edit'
-
   match 'features/:item_id' , :controller => 'features', :action => 'index'
   match 'features' , :controller => 'features', :action => 'index'
 
@@ -173,16 +172,38 @@ ThreeTwoThree::Application.routes.draw do
            ###################################################   END WEBSITE ROUTING CONSTRAINT
            ###################################################   END WEBSITE ROUTING CONSTRAINT
 
+  # match "specsheet/admin_crest_prints_list/:main_design_id", :controller => "specsheet", :action => "admin_crest_prints_list"
+  # match "specsheet/update_crest_prints_list", :controller => "specsheet", :action => "update_crest_prints_list"
+  # match "specsheet/crest_prints_list/:main_design_id", :controller => "specsheet", :action => "crest_prints_list"
+  # match "specsheet/update_specsheet", :controller => "specsheet", :action => "update_specsheet"
+  # match 'view_details/:item_id/:department_id' => 'specsheet#index'
+  # match 'view_details'  => 'specsheet#index'
+  # match 'specsheet/:item_id/:department_id/:category_id' => 'specsheet#index'
+  # match 'specsheet/:item_id' => 'specsheet#index'
+  # match 'specsheet' => 'specsheet#index'
 
 
 
 
+
+
+  match "specsheet/admin_crest_prints_list/:main_design_id", :controller => "specsheet", :action => "admin_crest_prints_list"
+  match "specsheet/update_crest_prints_list", :controller => "specsheet", :action => "update_crest_prints_list"
+  match "specsheet/crest_prints_list/:main_design_id", :controller => "specsheet", :action => "crest_prints_list"
+  match "specsheet/update_specsheet", :controller => "specsheet", :action => "update_specsheet"
+  match "specsheet/update_sublimation_garments", :controller => "specsheet", :action => "update_sublimation_garments"
   match 'store/close_window/' => 'store#close_window'
 
 
+  match 'specsheet/item/:item_id/design/:design_id' => 'specsheet#index'
+  match 'specsheet/:item_id' => 'specsheet#index'
+  match 'specsheet/:item_id/:department_id/:category_id' => 'specsheet#index'
 
-    # http://192.168.0.125:2001/s/54/2/4378
-  match 's/:item_id/:department_id/:design_id' => 'specsheet#index'
+  match 'view_details/:item_id/:department_id' => 'specsheet#index'
+  match 'view_details'  => 'specsheet#index'
+  #
+  #
+
 
 
 
@@ -191,28 +212,19 @@ ThreeTwoThree::Application.routes.draw do
 
 
 
-
-
+  # match 'specsheet/:item_id/:department_id/:design_id' => 'specsheet#index'
+  # match 'view_details/:item_id/:department_id' => 'specsheet#index'
+  # match 'view_details'  => 'specsheet#index'
+  # match 'specsheet' => 'specsheet#index'
 
 
   match "p/delete_static_page_cache/:page_id", :controller => "page", :action => "delete_static_page_cache"
-
-
   match "index" => 'page#show_page_on_index', :page_id  => 'new-home'
 
 
   match "search/scroll/:department_id/:page", :controller => "search", :action => "scroll"
   match "search/scroll/:department_id", :controller => "search", :action => "scroll"
   match "search/scroll", :controller => "search", :action => "scroll"
-  match "specsheet/admin_crest_prints_list/:main_design_id", :controller => "specsheet", :action => "admin_crest_prints_list"
-  match "specsheet/update_crest_prints_list", :controller => "specsheet", :action => "update_crest_prints_list"
-  match "specsheet/crest_prints_list/:main_design_id", :controller => "specsheet", :action => "crest_prints_list"
-  match "specsheet/update_specsheet", :controller => "specsheet", :action => "update_specsheet"
-  match 'view_details/:item_id/:department_id' => 'specsheet#index'
-  match 'view_details'  => 'specsheet#index'
-  match 'specsheet/:item_id/:department_id/:category_id' => 'specsheet#index'
-  match 'specsheet/:item_id' => 'specsheet#index'
-  match 'specsheet' => 'specsheet#index'
   match 'store/category_items_menu' => 'store#category_items_menu'
   match 'store/department_category_list/:department_id/item_type/:item_type/show/:show' => 'store#department_category_list'
   match 'store/ajax_browse' => 'store#ajax_browse'
@@ -225,6 +237,7 @@ ThreeTwoThree::Application.routes.draw do
   match 'store/category_items/:department_id' => 'store#category_items'
   match 'store/category_items/' => 'store#category_items'
   match 'store/departments_containing_categories' => 'store#departments_containing_categories'
+  match 'store/enlarge/:item_id' => 'store#enlarge'
   match 'store/select_category/:department_id' => 'store#select_category'
   match 'store/select_department' => 'store#select_department'
   match 'store/index' => 'store#category_items'
