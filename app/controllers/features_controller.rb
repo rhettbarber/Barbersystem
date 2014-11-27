@@ -1,7 +1,7 @@
 class FeaturesController < ApplicationController
   before_filter  :initialize_variables
   before_filter :no_item_menu
-  before_filter :redirect_unless_admin , :except => [:list,:carousel]
+  before_filter :redirect_unless_admin , :except => [:list,:carousel ]
 
   def list
     @features = Feature.where("name = ?",  params[:name])
