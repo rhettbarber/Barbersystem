@@ -307,7 +307,7 @@ end
                     logger.debug("SORRY.. FRAGMENT NOT FOUND")
                   @skipped_page_ids = [ 13018, 12098, 2648, 4727, 4742,4740,4673,4728,4567,4677,10754 , 9152, 8656,12960,8655,6536,12829  ]   # this started out to eliminate a few from mobile that were needed on legacy.. need something different now.. is showing pages with no published revisions
                     if !params[:page_id]   or  params[:page_id] == "0"
-                                            if params[:real_page_id]
+                                            if params[:real_page_id]  and  params[:real_page_id] != "0"
                                                                                              #  http://192.168.0.125:2000/p/pages_navigation/0?id=%23&page_id=0&real_page_id=13106
                                                                                             logger.debug "ACCESSING DIRECTLY ACCESS PAGE-SHOW FULL MENU RECURSIVELY FROM FINAL CHILD///"
                                                                                             logger.debug "ACCESSING DIRECTLY ACCESS PAGE-SHOW FULL MENU RECURSIVELY FROM FINAL CHILD///"
