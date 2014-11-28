@@ -4,7 +4,7 @@
 ThreeTwoThree::Application.routes.draw do
 
   match "item_reports/designs_by_department", :controller => 'item_reports', :action => 'designs_by_department'
-   match 'features/carousel/:feature_name' , :controller => 'features', :action => 'carousel'
+  match 'features/carousel/:feature_name' , :controller => 'features', :action => 'carousel'
   match 'features/list/:name' , :controller => 'features', :action => 'list'
   match 'features/:id/destroy/:item_id' , :controller => 'features', :action => 'destroy'
   match 'features/create/' , :controller => 'features', :action => 'create'
@@ -164,11 +164,21 @@ ThreeTwoThree::Application.routes.draw do
     #resources :advanced_combinations,:websites,:test, :item_manager, :item_reports, :designer, :record_groups, :advancements,:item_sales_reports, :breast_prints, :clone_item_types,:clone_item_requests, :category_classes, :categories
     #resources  :categories, :items, :custom_items ,:combinations, :users, :department_browser, :reports
   end
-           ###################################################   END WEBSITE ROUTING CONSTRAINT
-           ###################################################   END WEBSITE ROUTING CONSTRAINT
-           ###################################################   END WEBSITE ROUTING CONSTRAINT
-           ###################################################   END WEBSITE ROUTING CONSTRAINT
-           ###################################################   END WEBSITE ROUTING CONSTRAINT
+  ###################################################   END WEBSITE ROUTING CONSTRAINT
+  ###################################################   END WEBSITE ROUTING CONSTRAINT
+  ###################################################   END WEBSITE ROUTING CONSTRAINT
+  ###################################################   END WEBSITE ROUTING CONSTRAINT
+  ###################################################   END WEBSITE ROUTING CONSTRAINT
+
+  # match "specsheet/admin_crest_prints_list/:main_design_id", :controller => "specsheet", :action => "admin_crest_prints_list"
+  # match "specsheet/update_crest_prints_list", :controller => "specsheet", :action => "update_crest_prints_list"
+  # match "specsheet/crest_prints_list/:main_design_id", :controller => "specsheet", :action => "crest_prints_list"
+  # match "specsheet/update_specsheet", :controller => "specsheet", :action => "update_specsheet"
+  # match 'view_details/:item_id/:department_id' => 'specsheet#index'
+  # match 'view_details'  => 'specsheet#index'
+  # match 'specsheet/:item_id/:department_id/:category_id' => 'specsheet#index'
+  # match 'specsheet/:item_id' => 'specsheet#index'
+  # match 'specsheet' => 'specsheet#index'
 
   # match "specsheet/admin_crest_prints_list/:main_design_id", :controller => "specsheet", :action => "admin_crest_prints_list"
   # match "specsheet/update_crest_prints_list", :controller => "specsheet", :action => "update_crest_prints_list"
