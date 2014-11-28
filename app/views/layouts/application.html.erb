@@ -58,7 +58,11 @@
                                                                                                                                               <%= yield %>
 
                                                                                                                                              <%   if ['/index', '/', '/p/home', '/p/new-home', '/p/new-home'].include?(request.path)  or params[:promo]%>
-                                                                                                                                                                                    <%= render "page/home_page_carousels", :feature_name =>  @website.name + "_home_featured_designs" %>
+                                                                                                                                                                                 <% if @website.name == "dixie_store" %>
+                                                                                                                                                                                                <%= render "page/home_page_carousels", :feature_name =>  "huge_front" %>
+                                                                                                                                                                                 <% else %>
+                                                                                                                                                                                                <%= render "page/home_page_carousels", :feature_name =>  @website.name + "_home_featured_designs" %>
+                                                                                                                                                                                 <% end %>
                                                                                                                                                                                     <%= render "page/home_page_carousels", :feature_name => @website.name + "_home_featured_items" %>
                                                                                                                                              <% end %>
                                                                                                 </span>
