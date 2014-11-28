@@ -9,19 +9,16 @@
 
 <%# logger.debug "flash.inspect: " + flash.inspect  %>
 
-<%  if  referring_action  == "cart" %>
-                                 <% logger.debug "referring_action == cart" %>
-                                 <% @collapsed = " data-collapsed=false "         %>
-<% else %>
-                                 <% logger.debug "referring_action != cart" %>
-  <% end %>
+
+ <% @collapsed = " data-collapsed=true "         %>
+
 
 <%# @collapsed = " data-collapsed=false "         %>
 
 
 <div data-role="collapsible"<%= @collapsed %>>
 
-  <h3>Quick Cart</h3>
+  <h3>Add by Part Code</h3>
 
   <div class="quick_cart_container">
 
