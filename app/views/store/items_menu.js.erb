@@ -22,6 +22,17 @@ console.log("###############################")
 console.log("singular_item_customer.val: " + $("#singular_item_customer").val() );
 displaySaleTags($("#singular_item_customer").val() );
 
+   if (  $("#singular_item_customer").val() == 'true' ) {
+                         console.log("singular item customer! Show wholesale_message class ")  ;
+                          $(".wholesale_message").show();
+                          $(".retail_message").hide();
+   } else {
+                           $(".wholesale_message").hide();
+                           $(".retail_message").show();
+   }
+
+
+
 console.log("###############################");
 console.log("###############################");
 console.log("###############################");

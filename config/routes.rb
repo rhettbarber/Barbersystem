@@ -3,6 +3,10 @@
 
 ThreeTwoThree::Application.routes.draw do
 
+
+  match '/your_purchases_this_year' , :controller => 'customer_item_sales_by_years', :action => 'your_purchases_this_year'
+
+
   match "item_reports/designs_by_department", :controller => 'item_reports', :action => 'designs_by_department'
   match 'features/carousel/:feature_name' , :controller => 'features', :action => 'carousel'
   match 'features/list/:name' , :controller => 'features', :action => 'list'
@@ -57,6 +61,7 @@ ThreeTwoThree::Application.routes.draw do
   ###################################################   BEGIN  WEBSITE ROUTING CONSTRAINT
   ###################################################   BEGIN  WEBSITE ROUTING CONSTRAINT
   constraints(WebsiteRoutingConstraint) do
+
 
     match '/customer_item_sales_by_years' , :controller => 'customer_item_sales_by_years', :action => 'index'
     resources :item_sales

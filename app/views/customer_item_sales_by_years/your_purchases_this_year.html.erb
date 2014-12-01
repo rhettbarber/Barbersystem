@@ -1,0 +1,64 @@
+     <style type="text/css">
+                  .listview_span {
+                                 min-width: 10%;
+                                overflow: hidden;
+                  }
+             .left_floater {
+                 float:left;
+                 padding-left: 10px;;
+             }
+
+     </style>
+
+
+
+
+     <div class="ui-bar ui-bar-a">
+       <h3>Showing your  item purchases for this year:</h3>
+       <p>This report can be found under "Menu" as "Your hot items" </p>
+     </div>
+
+
+        <% if @selected_customer and @show_me  %>
+                         <div class="ui-bar ui-bar-a">
+                                       <h3>Showing your  item purchases for this year:</h3>
+                                       <p>AccountNumber: <%= @selected_customer.AccountNumber %> </p>
+                                       <p>Company: <%= @selected_customer.Company %> </p>
+                                       <p>Name:<%= @selected_customer.FirstName %> <%= @selected_customer.LastName %> </p>
+                         </div>
+       <% end %>
+
+
+      <% if @customer_item_sales_by_years and  @customer_item_sales_by_years.size > 0 %>
+    <ul data-role="listview">
+              <% @customer_item_sales_by_years.each do |customer_item_sales_by_year| %>
+                                 <%  if customer_item_sales_by_year.item and  customer_item_sales_by_year.item.category %>
+                                                      <li>
+                                                                       <a href="/specsheet/<%= customer_item_sales_by_year.item.id %>/<%= customer_item_sales_by_year.item.department_id  %>/<%= customer_item_sales_by_year.item.category_id  %>">
+                                                                                            <div class="left_floater" style="max-width: 140px;max-height:140px;overflow: hidden;">
+                                                                                                            <%  if customer_item_sales_by_year.item %>
+
+                                                                                                                                  <img src="<%= "/images/item_thumbnails/" + customer_item_sales_by_year.item.PictureName.gsub(".png","").gsub(".jpg","")   + ".jpg"  %>" class="ui-li-thumb"  style="max-height:200px;position:relative;">
+                                                                                                            <% end %>
+                                                                                           </div>
+                                                                                          <div class="listview_span left_floater" style="color: red;"> <%= customer_item_sales_by_year.sum_of_quantity.to_i  %>   </div>
+                                                                                         <div class="listview_span left_floater"><%= customer_item_sales_by_year.item.ItemLookupCode %> &nbsp; - &nbsp; <%= customer_item_sales_by_year.item.Description   %>  </div>
+                                                                                            <div class="listview_span left_floater"> <%= customer_item_sales_by_year.item.category.Name %> </div>
+
+
+
+                                                                       </a>
+                                                      </li>
+                                 <% end %>
+              <% end %>
+    </ul>
+      <% else %>
+
+        <h2>   No sales this year.                 </h2>
+      <% end %>
+
+
+
+
+
+

@@ -1,6 +1,30 @@
 class CustomerItemSalesByYearsController < ApplicationController
 
-  before_filter :redirect_unless_admin   , :initialize_variables
+  before_filter  :initialize_variables
+  before_filter :redirect_unless_admin , :except => [:your_purchases_this_year]
+
+
+
+
+def your_purchases_this_year
+              # @selected_customer =   Customer.where("AccountNumber = ?", "9410"  ).first   # @customer
+              # @selected_customer =   Customer.where("AccountNumber = ?", "mob2656"  ).first   # @customer
+              @selected_customer =    @customer
+                      if @selected_customer
+                                @selected_customer_id =  @selected_customer.id
+                                @selected_year  = Time.now.year
+
+                                @customer_item_sales_by_years = CustomerItemSalesByYear.where("customer_id = ? and sale_year = ?", @selected_customer_id  , @selected_year   ).order("sum_of_quantity DESC")
+                      end
+
+            respond_to do |format|
+                      format.html # index.html.erb
+                      format.json { render json: @customer_item_sales_by_years }
+            end
+end
+
+
+
 
 
   def index
@@ -11,7 +35,6 @@ class CustomerItemSalesByYearsController < ApplicationController
     if  params[:account_number]
                    @selected_customer =   Customer.where("AccountNumber = ?",  params[:account_number]  ).first
                    if @selected_customer
-                                  @selected_customer =   Customer.where("AccountNumber = ?",  params[:account_number]  ).first
                                   @selected_customer_id =  @selected_customer.id
                                   @selected_year  = Time.now.year
 

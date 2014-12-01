@@ -6,6 +6,9 @@
 
                     <p style="text-align: center;">Welcome <%= h @user.email  %> </p>
 
+                       <%#=  link_to "Items you have purchased this year", "/your_purchases_this_year" , :class =>  'ui-btn' %>
+
+
                        <% if admin? %>
                                                      <p style="text-align: center;">You are an admin.</p>
 

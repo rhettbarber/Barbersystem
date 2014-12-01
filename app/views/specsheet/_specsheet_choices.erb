@@ -1,5 +1,18 @@
 <!-- begin  form /cart/add_to_cart --><!-- begin  form /cart/add_to_cart --><!-- begin  form /cart/add_to_cart --><!-- begin  form /cart/add_to_cart --><!-- begin  form /cart/add_to_cart --><!-- begin  form /cart/add_to_cart -->
 
+
+<% if @sublimation %>
+
+    <div class="ui-bar ui-bar-a wholesale_message" style="display: none;">
+                  <h3>Oversize Sublimation Transfers</h3>
+                  <p>Heat  press must be capable of pressing 15" x 19". Requires white/light colored garment with  at least 50% polyester content.</p>
+    </div>
+
+
+ <% end %>
+
+
+
 <%=  form_tag( '/cart/add_to_cart' , :method => :put )  do %>
                             <!--hidden submit_tag referenced by javascripts from popups,etc.--><!--hidden submit_tag referenced by javascripts from popups,etc.--><!--hidden submit_tag referenced by javascripts from popups,etc.--><!--hidden submit_tag referenced by javascripts from popups,etc.--><!--hidden submit_tag referenced by javascripts from popups,etc.-->
                             <%=  submit_tag 'special_submit' , :id => "special_submit" , :style=> "display:none;",     data: { role: "none"}      %>

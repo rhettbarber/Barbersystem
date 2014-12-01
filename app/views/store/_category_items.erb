@@ -1,10 +1,17 @@
-
+    <style type="text/css">
+      .wholesale_message {
+          display: none;;
+      }
+    </style>
 
 
 
 <% if @category and @category.id == 928  %>
 
-
+                        <div class="ui-bar ui-bar-a wholesale_message">
+                          <h3>Oversize Sublimation Transfers</h3>
+                          <p>Heat  press must be capable of pressing 15" x 19". Requires white/light colored garment with  at least 50% polyester content.</p>
+                        </div>
 
                         <% @items.sort_by{|a| a.ItemLookupCode   }.each do |item| -%>
                             <% if item %>
@@ -18,7 +25,11 @@
                                                                                                                       <%#= item.PictureName %>
                                                                                                                     </div>
                                                                                                                 <a href="/store/enlarge/<%= item.id %>" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-rel="dialog" data-transition="pop"> Enlarge</a>
-                                                                                                              <a  class="ui-shadow ui-btn ui-corner-all ui-btn-inline"    href="/specsheet/<%= item.id %>/<%= @department.id %>/<%=  params[:category_id]  %>"> View on garment </a>
+
+                                                                                                              <a  class="ui-shadow ui-btn ui-corner-all ui-btn-inline retail_message"    href="/specsheet/<%= item.id %>/<%= @department.id %>/<%=  params[:category_id]  %>"> View on garment  </a>
+                                                                                                              <a  class="ui-shadow ui-btn ui-corner-all ui-btn-inline wholesale_message"    href="/specsheet/<%= item.id %>/<%= @department.id %>/<%=  params[:category_id]  %>"> View transfer  </a>
+
+
 
                                                                                            </div>
                                                                         </li>

@@ -36,20 +36,22 @@
       <% if @customer_item_sales_by_years and  @customer_item_sales_by_years.size > 0 %>
     <ul data-role="listview">
               <% @customer_item_sales_by_years.each do |customer_item_sales_by_year| %>
-                                 <%  if customer_item_sales_by_year.item %>
+                                 <%  if customer_item_sales_by_year.item and  customer_item_sales_by_year.item.category %>
                                                       <li>
-                                                                       <a href="#">
-                                                                                            <div class="left_floater" style="max-width: 140px;max-height:140px;overflow: hidden;">
-                                                                                                            <%  if customer_item_sales_by_year.item %>
+                                                        <a href="/specsheet/<%= customer_item_sales_by_year.item.id %>/<%= customer_item_sales_by_year.item.department_id  %>/<%= customer_item_sales_by_year.item.category_id  %>">
+                                                          <div class="left_floater" style="max-width: 140px;max-height:140px;overflow: hidden;">
+                                                            <%  if customer_item_sales_by_year.item %>
 
-                                                                                                                                  <img src="<%= "/images/item_thumbnails/" + customer_item_sales_by_year.item.PictureName.gsub(".png","").gsub(".jpg","")   + ".jpg"  %>" class="ui-li-thumb"  style="max-height:200px;position:relative;">
-                                                                                                            <% end %>
-                                                                                           </div>
-                                                                                            <div class="listview_span left_floater"> <%= customer_item_sales_by_year.item.category.Name %> </div>
-                                                                                            <div class="listview_span left_floater"><%= customer_item_sales_by_year.item.ItemLookupCode %> </div>
-                                                                                            <div class="listview_span left_floater"><%= customer_item_sales_by_year.item.Description   %>  </div>
-                                                                                            <div class="listview_span left_floater"> <%= customer_item_sales_by_year.sum_of_quantity %>   </div>
-                                                                       </a>
+                                                                <img src="<%= "/images/item_thumbnails/" + customer_item_sales_by_year.item.PictureName.gsub(".png","").gsub(".jpg","")   + ".jpg"  %>" class="ui-li-thumb"  style="max-height:200px;position:relative;">
+                                                            <% end %>
+                                                          </div>
+                                                          <div class="listview_span left_floater" style="color: red;"> <%= customer_item_sales_by_year.sum_of_quantity.to_i  %>   </div>
+                                                          <div class="listview_span left_floater"><%= customer_item_sales_by_year.item.ItemLookupCode %> &nbsp; - &nbsp; <%= customer_item_sales_by_year.item.Description   %>  </div>
+                                                          <div class="listview_span left_floater"> <%= customer_item_sales_by_year.item.category.Name %> </div>
+
+
+
+                                                        </a>
                                                       </li>
                                  <% end %>
               <% end %>
