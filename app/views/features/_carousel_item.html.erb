@@ -6,7 +6,7 @@
 <% end %>
 
 <% if  the_image_name %>
-<div class="carousel_feature_container" style="position: relative;height: 240px;">
+<div class="carousel_feature_container">
 
 
                              <% if feature.onclick and feature.onclick  != "" %>
@@ -17,7 +17,7 @@
 
 
                                          <div class="featured-designs-carousel-image-container"> <a  class="carousel_url_link"  href="<%= feature.carousel_url %>"><img  src="http://cdn.dixieoutfitters.com/<%= the_image_name %> " />   </a> </div>
-                                         <div  style="max-width:240px;min-height: 40px;text-align: center;">  <a  class="carousel_url_link"  href="<%= feature.carousel_url %>"> <%= feature.description %>  </a> </div>
+                                         <div  class="carousel_link_container">  <a  class="carousel_url_link"  href="<%= feature.carousel_url %>"> <%= feature.description %>  </a> </div>
 
 
 
