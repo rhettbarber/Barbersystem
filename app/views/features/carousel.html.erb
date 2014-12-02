@@ -26,7 +26,7 @@
                       <% if admin? %>
                                                           <li>
                                                                             <a href="<%= feature.list_url.to_s %>">
-                                                                                              <%= image_tag  the_image_name  %>
+                                                                                              <%#= image_tag  the_image_name  %>
                                                                                               <h2><%= feature.description %></h2>
                                                                             </a>
                                                                             <%= link_to 'Edit', "/features/" +  feature.id.to_s +  "/edit/" +   feature.items.first.id.to_s   , "data-icon" => "gear"   %>
