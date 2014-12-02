@@ -6,39 +6,31 @@
 
 
 
-
-
-
-
-
-
-
-<% if params[:list] == "1" %>
-
 <style type="text/css">
-               .ui-listview .ui-li-has-thumb > img:first-child, .ui-listview .ui-li-has-thumb > .ui-btn > img:first-child, .ui-listview .ui-li-has-thumb .ui-li-thumb {
-                   max-height: 150px;
-                   max-width: 150px;
-               }
+               /*.ui-listview .ui-li-has-thumb > img:first-child, .ui-listview .ui-li-has-thumb > .ui-btn > img:first-child, .ui-listview .ui-li-has-thumb .ui-li-thumb {*/
+                   /*max-height: 150px;*/
+                   /*max-width: 150px;*/
+               /*}*/
 
-               .ui-listview > .ui-li-has-thumb > .ui-btn, .ui-listview > .ui-li-static.ui-li-has-thumb {
-                    padding-left:150px;
-               }
+               /*.ui-listview > .ui-li-has-thumb > .ui-btn, .ui-listview > .ui-li-static.ui-li-has-thumb {*/
+                    /*padding-left:150px;*/
+               /*}*/
 
-               .ui-listview >  li h2 {
-                      margin-left: 10px  ;
-                      margin-right: 10px  ;
-                      margin-bottom: 0px  ;
-                      margin-top: 0px  ;
-                   white-space: normal;
-               }
+               /*.ui-listview >  li h2 {*/
+                      /*margin-left: 10px  ;*/
+                      /*margin-right: 10px  ;*/
+                      /*margin-bottom: 0px  ;*/
+                      /*margin-top: 0px  ;*/
+                   /*white-space: normal;*/
+               /*}*/
 
-              .list-view  >  li > a.ui-btn {
-                   padding: 60px;;
-               }
+              /*.list-view  >  li > a.ui-btn {*/
+                   /*padding: 60px;;*/
+               /*}*/
 </style>
 
-<img alt="" class="float_100" src="http://cdn.dixieoutfitters.com/images/carousel/featured-items-list.gif" />       <br>   <br>
+<img alt="" class="float_100" src="http://cdn.dixieoutfitters.com/images/carousel/featured-items-list.gif" />    <br style="clear:left;"/>
+
 <ul data-role="listview" data-inset="true" class="list-view">
   <% if admin? %>
                       <li style="text-align: center;">Use specsheet administration panel  to add a new featured item.</li>
@@ -46,11 +38,11 @@
   <% end %>
   <% @features.each do |feature| %>
 
-                      <% if feature.image_name and  feature.image_name  != ""  %>
-                                                 <% the_image_name = feature.image_name  %>
-                      <% else %>
-                                                <% the_image_name = "/images/item_thumbnails/" +  feature.items.first.PictureName  %>
-                      <% end %>
+                      <%# if feature.image_name and  feature.image_name  != ""  %>
+                                                 <%# the_image_name = feature.image_name  %>
+                      <%# else %>
+                                                <%# the_image_name = "/images/item_thumbnails/" +  feature.items.first.PictureName  %>
+                      <%# end %>
 
 
                       <% if admin? %>
@@ -64,11 +56,10 @@
                       <% else %>
                                                           <li>
                                                             <a href="<%= feature.list_url.to_s %>">
-                                                                                             <%= image_tag  the_image_name  %>
-                                                                                            <h2> <%= feature.description %></h2>
+                                                                                             <%#= image_tag  the_image_name  %>
+                                                                                             <%= feature.description %>
                                                             </a>
                                                           </li>
                       <% end %>
   <% end %>
 </ul>
-<% end %>

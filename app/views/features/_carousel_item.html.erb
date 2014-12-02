@@ -6,18 +6,28 @@
 <% end %>
 
 <% if  the_image_name %>
-<div class="carousel_feature_container">
-  <div class="featured-designs-carousel-image-container" style="text-align: center;">
+<div class="carousel_feature_container" style="position: relative;height: 240px;">
+
 
                              <% if feature.onclick and feature.onclick  != "" %>
                                                      <a class="onclick_link"  href="#" onclick="<%= feature.onclick %>"><img src="http://cdn.dixieoutfitters.com/<%= the_image_name %>" />  <%= feature.description %> </a>
                                  <% elsif  feature.carousel_url and feature.carousel_url  != ""   %>
-                                                  <a  class="carousel_url_link"  href="<%= feature.carousel_url %>"><img src="http://cdn.dixieoutfitters.com/<%= the_image_name %>" /> <%= feature.description %>  </a>
+
+
+
+
+                                         <div class="featured-designs-carousel-image-container"> <a  class="carousel_url_link"  href="<%= feature.carousel_url %>"><img  src="http://cdn.dixieoutfitters.com/<%= the_image_name %> " />   </a> </div>
+                                         <div  style="max-width:240px;min-height: 40px;text-align: center;">  <a  class="carousel_url_link"  href="<%= feature.carousel_url %>"> <%= feature.description %>  </a> </div>
+
+
+
+
+
                                 <% else %>
                                                     <a  class="list_url_link"   href="/features/list/<%= feature_name %>"><img src="http://cdn.dixieoutfitters.com/<%= the_image_name %>" /> <%= feature.description %>  </a>
                                <% end %>
 
-  </div>
+
 
   <!--<div class="carousel_link_container_100"><a data-role="button" data-theme="b" href="/store/new_designs">Shop New Designs </a></div>-->
 </div>

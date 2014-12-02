@@ -1,6 +1,6 @@
     <style type="text/css">
       .wholesale_message {
-          display: none;;
+          display: none;
       }
     </style>
 
@@ -58,7 +58,7 @@
                                                                                                                                                                                                                                         <a href="/specsheet/<%= item.id %>/<%= @department.id %>/<%=  params[:category_id]  %>">
                                                                                                                                                                                                                                           <div style="width: 240px;height:240px;overflow: hidden;">
                                                                                                                                                                                                                                                                 <%#  @back_advanced_combination = AdvancedCombination.find_or_create_combo( item, '0' )  %>
-                                                                                                                                                                                                                                                                <img src="<%=  item.image_url( @department, 'item_thumbnails/','x'  ).gsub(".png", ".jpg") %>" class="ui-li-thumb"  style="height:200px;position:relative;">
+                                                                                                                                                                                                                                                                <img src="<%=  item.image_url( @department, 'item_thumbnails/','x'  ).gsub(".png", ".jpg") %>" class="ui-li-thumb"  style="max-height:200px;position:relative;">
                                                                                                                                                                                                                                                                 <!--<%#  if @back_advanced_combination.specsheet_type_id == 1 or  @back_advanced_combination.specsheet_type_id == nil  %>-->
                                                                                                                                                                                                                                                                 <!--<img src="<%#=   "/images/item_thumbnails/" + item.PictureName.gsub(".png","").gsub(".jpg","") + ".jpg"   %>" class="ui-li-thumb"  style="height:200px;position:relative;left:-112px;">-->
                                                                                                                                                                                                                                                                 <!--<%# else %>-->

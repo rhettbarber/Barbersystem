@@ -3,7 +3,7 @@
 
                                 <div data-role="header">
                                   <h1>Listing features for <%= @item.ItemLookupCode %> - <%= @item.Description  %></h1>
-                                  <p style="text-align: center;"><%= image_tag "/images/item_thumbnails/" + @item.PictureName.gsub(".jpg", "").gsub(".png", "") + ".jpg", :size => "100x100" %></p>
+                                  <p style="text-align: center;"><%= image_tag "/images/item_thumbnails/" + @item.PictureName.gsub(".jpg", "").gsub(".png", "") + ".jpg" %></p>
                                 </div>
 
                                 <div data-role="content">
@@ -41,68 +41,3 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <% if @before %>
-<table>
-  <tr>
-    <th>ItemLookupCode</th>
-    <th>Description</th>
-    <th>Verbiage</th>
-    <th>Price</th>
-    <th>List url</th>
-    <th>Carousel url</th>
-    <th>Onclick</th>
-    <th>Image name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @features.each do |feature| %>
-  <tr>
-    <td><%= feature.items.first.ItemLookupCode %></td>
-    <td><%= feature.name %></td>
-    <td><%= feature.description %></td>
-    <td><%= feature.verbiage %></td>
-    <td><%= feature.price %></td>
-    <td><%= feature.list_url %></td>
-    <td><%= feature.carousel_url %></td>
-    <td><%= feature.onclick %></td>
-    <td><%= feature.image_name %></td>
-    <td><%= link_to 'Show', feature %></td>
-    <td><%= link_to 'Edit', edit_feature_path(feature) %></td>
-    <td><%= link_to 'Destroy', feature, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Feature', :controller => "features", :action => "new", :item_id => params[:item_id] %>
-
-<% end %>
