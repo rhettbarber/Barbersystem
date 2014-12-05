@@ -8,12 +8,19 @@
                   <p>Heat  press must be capable of pressing 15" x 19". Requires white/light colored garment with  at least 50% polyester content.</p>
     </div>
 
-
  <% end %>
 
 
 
 <%=  form_tag( '/cart/add_to_cart' , :method => :put )  do %>
+
+                        <% if @sublimation %>
+                                                <%=  hidden_field_tag "sublimation",  "subl"  %>
+                        <% else %>
+                                                <%=  hidden_field_tag "sublimation",  "plas"  %>
+                        <% end %>
+
+
                             <!--hidden submit_tag referenced by javascripts from popups,etc.--><!--hidden submit_tag referenced by javascripts from popups,etc.--><!--hidden submit_tag referenced by javascripts from popups,etc.--><!--hidden submit_tag referenced by javascripts from popups,etc.--><!--hidden submit_tag referenced by javascripts from popups,etc.-->
                             <%=  submit_tag 'special_submit' , :id => "special_submit" , :style=> "display:none;",     data: { role: "none"}      %>
                             <!--hidden links mostly clicked by javascripts from popups--><!--hidden links mostly clicked by javascripts from popups--><!--hidden links mostly clicked by javascripts from popups--><!--hidden links mostly clicked by javascripts from popups--><!--hidden links mostly clicked by javascripts from popups-->
@@ -87,4 +94,6 @@
 <% end %>
 
 <!--  end  form /cart/add_to_cart --><!--  end  form /cart/add_to_cart --><!--  end  form /cart/add_to_cart --><!--  end  form /cart/add_to_cart --><!--  end  form /cart/add_to_cart --><!--  end  form /cart/add_to_cart --><!--  end  form /cart/add_to_cart --><!--  end  form /cart/add_to_cart -->
+
+
 

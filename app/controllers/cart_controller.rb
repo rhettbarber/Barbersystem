@@ -239,12 +239,20 @@ end
     else
       pe_crest =  "0"
     end
+
     if params[:side] and   params[:side] != ""
       pe_side =   params[:side].to_s[0..5]
     else
       pe_side =  "back"
     end
-    @pe_comment =   pe_side  +  "_" +  pe_crest
+
+    if params[:sublimation] and   params[:sublimation] != ""
+      pe_sublimation =  params[:sublimation].to_s[0..5]
+    else
+      pe_sublimation =  "0"
+    end
+
+    @pe_comment =   pe_side  +  "_" +  pe_crest  +  "_" +  pe_sublimation
   end
 ############################################################################################################
   def add_to_cart_singular_item_customer
