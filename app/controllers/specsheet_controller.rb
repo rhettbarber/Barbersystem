@@ -109,7 +109,11 @@ class SpecsheetController < ApplicationController
 
 
                       @item_class_components =  @purchases_entry.slave_of_symbiont_pair.slaves_item_class_components_decision
-                      @department  =  Department.find(@purchases_entry.master_department_id)
+                       if @purchases_entry.master_department_id.to_s  == "0"
+                                # @department  =  Department.find(  @purchases_entry.master_of_symbiont_pair.item.department_id )
+                      else
+                                @department  =  Department.find(@purchases_entry.master_department_id  )
+                      end
                       @required_form_elements << 'hidden_department_id_field'
                       @required_form_elements << 'button_change_size_or_color'
                       @required_form_elements << 'icc_collection_select'  if   @item_class_components
