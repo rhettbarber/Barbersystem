@@ -1,0 +1,43 @@
+<div data-role="header">
+  <h1> Sublimation order # <%= @sublimation_entry.id %> details </h1>
+</div>
+ <br>
+
+<ul data-role="listview" data-inset="false">
+
+  <li data-role="list-divider"> Options</li>
+  <li><%= link_to  "Back to Orders list" , "/image_manager"  %></li>
+  <li><%= link_to  "Print entire order" , "/image_manager/print_order"   , data: { confirm: 'Are you sure this order is ready to print?' }  %> </li>
+  <li data-role="list-divider"> </li>
+</ul>
+      <br>
+
+  <ul data-role="listview" data-inset="false" data-filter="true" >
+
+                    <li data-role="list-divider"> All Over T's</li>
+                    <% @sublimation_entries.where("name = ?", "all_over_item").each do |entry| %>
+                                            <li>
+                                              <a href="<%=  "/image_manager/order_details/" + entry.purchase_id.to_s   %>">
+                                                <%= image_tag   "http://dixieoutfitters.com/images/item_thumbnails/" +  entry.PictureName  %>
+                                                <h2> <%= entry.Description %></h2>
+                                              </a>
+                                              <%= link_to 'Edit',   "/print"   , "data-icon" => "gear"   %>
+                                            </li>
+                    <% end %>
+
+                    <li data-role="list-divider"> Huge front designs</li>
+                    <% @sublimation_entries.where("name = ?", "huge_front").each do |entry| %>
+                        <li>
+                          <a href="<%=  "/image_manager/order_details/" + entry.purchase_id.to_s   %>">
+                            <%= image_tag   "http://dixieoutfitters.com/images/item_thumbnails/" +  entry.PictureName  %>
+                            <h2> <%= entry.Description %></h2>
+                          </a>
+                          <%= link_to 'Edit',   "/print"   , "data-icon" => "gear"   %>
+                        </li>
+                    <% end %>
+
+
+  </ul>
+
+
+
