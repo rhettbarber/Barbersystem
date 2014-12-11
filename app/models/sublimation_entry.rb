@@ -30,8 +30,8 @@ end
 end
 
 
-def hot_folder_url_front
-             return    "W:\\\\SUBLIMATION_HOT_FOLDER_REVIEW\\" +      self.purchase_id.to_s   + "-" + self.id.to_s  + "-" +    self.all_over_root_filename    + "-0.jpg"
+def hot_folder_url_front(iteration_number=1)
+             return    "W:\\\\SUBLIMATION_HOT_FOLDER_REVIEW\\" +      self.purchase_id.to_s   + "-" + self.id.to_s  + "-" +    self.all_over_root_filename      + "-0.jpg"
 end
 
 def hot_folder_url_back

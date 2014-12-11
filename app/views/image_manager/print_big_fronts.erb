@@ -1,14 +1,12 @@
 
-                    <% @montage_strings.each do |entry| %>
-                                            <li>
-
-                                                <%=  entry   %>
-
-
-                                            </li>
+                    <% @images_to_layout.each do |entry| %>
+                                            <li>  <%=  entry   %></li>
                     <% end %>
-
-
+                     <br>
+                    montage_string
+                    <% @montage_string.each do |entry| %>
+                        <li>  <%=  entry   %></li>
+                    <% end %>
 
 
        <% if @listview %>

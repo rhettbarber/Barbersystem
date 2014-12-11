@@ -57,19 +57,28 @@ class ImageManagerController < ApplicationController
                 logger.debug "5555555555555555555555555555555555"
                 logger.debug "5555555555555555555555555555555555"
                 @sublimation_entries = SublimationEntry.where( "purchase_id = ? and name = ?",  params[:purchase_id], "huge_front" )
-                @montage_strings = Set.new
-                @sublimation_entries.each do |pe|
-                  # logger.debug "pe.id: " + pe.id.to_s
-
-                  @montage_string_front  = "montage  -border 0 -geometry 3800x  -rotate 90 -density 200 " + pe.file_url_front + " " +  pe.hot_folder_url_front
-                  @montage_strings.add(@montage_string_front)
-                  # logger.debug "montage_string_front: " + @montage_string_front
-
-                  @montage_string_back  = "montage  -border 0 -geometry 3800x  -rotate 90  -density 200 " + pe.file_url_back + " " +  pe.hot_folder_url_back
-                  @montage_strings.add(@montage_string_back)
-                  # logger.debug "montage_string_back: " + @montage_string_back
+                @images_to_layout = []
+                @sublimation_entries.each do |the_pe|
+                                                 quantity_on_order =    the_pe.QuantityOnOrder.to_i
+                                                   if quantity_on_order  > 1
+                                                                           logger.debug "quantity_on_order > 1"
+                                                                           logger.debug "quantity_on_order: " + quantity_on_order.to_s
+                                                                           quantity_on_order.times do |pe|
+                                                                                      @images_to_layout <<   the_pe.file_url_front
+                                                                           end
+                                                   else
+                                                                                      logger.debug "quantity_on_order NOT > 1"
+                                                                                      @images_to_layout <<   the_pe.file_url_front
+                                                   end
 
                 end
+                @montage_string =  []
+                iteration_number = 0.0
+                @images_to_layout.in_groups_of(2).each do |the_pe|
+                                  iteration_number += 1
+                                  @montage_string   <<   "montage  -border 0 -geometry 3800x  -rotate 90 -density 200 " +  the_pe[0].to_s  + " "  + the_pe[1].to_s  + " "  +   "W:\\\\SUBLIMATION_HOT_FOLDER_REVIEW\\PURCHASE-" + params[:purchase_id] + "-"  + iteration_number.to_s + '.jpg'
+                end
+                 logger.debug "montage_string_back: " + @montage_strings.inspect
                 logger.debug "5555555555555555555555555555555555"
                 logger.debug "5555555555555555555555555555555555"
                 logger.debug "5555555555555555555555555555555555"
@@ -77,6 +86,47 @@ class ImageManagerController < ApplicationController
 
 
 
+  def print_big_fronts_before
+    # system( 'convert W:\AUTOMATION_DATABASE\AUTOMATED_ITEM_SPECSHEETS\\'  + oj.filename + '  -geometry 75 W:\AUTOMATION_DATABASE\FINISHED_WEBSITE_ITEM_THUMBNAILS\\' +  oj.filename )
+    # montage   -border 0 -geometry 7600x  -density 200 * final.jpg
+    logger.debug "5555555555555555555555555555555555"
+    logger.debug "5555555555555555555555555555555555"
+    logger.debug "5555555555555555555555555555555555"
+    @sublimation_entries = SublimationEntry.where( "purchase_id = ? and name = ?",  params[:purchase_id], "huge_front" )
+    @montage_strings = []
+    @sublimation_entries.each do |the_pe|
+
+      quantity_on_order =    the_pe.QuantityOnOrder.to_i
+
+
+      if quantity_on_order  > 1
+        logger.debug "quantity_on_order > 1"
+        logger.debug "quantity_on_order: " + quantity_on_order.to_s
+        times_to_reiterate_float =    quantity_on_order  / 2
+        logger.debug "times_to_reiterate_float: " + times_to_reiterate_float.to_s
+        iteration_number = 0.0
+        times_to_reiterate_float.times do |pe|
+          iteration_number += 1
+          @montage_string_front  = "montage  -border 0 -geometry 3800x  -rotate 90 -density 200 " +  the_pe.file_url_front + " "  + the_pe.file_url_front + " " +  the_pe.hot_folder_url_front(iteration_number)
+          @montage_strings <<  @montage_string_front
+        end
+        if iteration_number <  quantity_on_order
+          @montage_string_front  = "montage  -border 0 -geometry 3800x  -rotate 90 -density 200 " + the_pe.file_url_front + " " +  the_pe.hot_folder_url_front
+          @montage_strings_to_append  <<  @montage_string_front
+        end
+      else
+        logger.debug "quantity_on_order NOT > 1"
+        @montage_string_front  = "montage  -border 0 -geometry 3800x  -rotate 90 -density 200 " + the_pe.file_url_front + " " +  the_pe.hot_folder_url_front
+        @montage_strings_to_append <<  @montage_string_front
+      end
+
+
+    end
+    logger.debug "montage_string_back: " + @montage_strings.inspect
+    logger.debug "5555555555555555555555555555555555"
+    logger.debug "5555555555555555555555555555555555"
+    logger.debug "5555555555555555555555555555555555"
+  end
 
 
 
