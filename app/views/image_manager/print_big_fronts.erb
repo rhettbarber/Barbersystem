@@ -1,0 +1,43 @@
+
+                    <% @images_to_layout.each do |entry| %>
+                                            <li>  <%=  entry   %></li>
+                    <% end %>
+                     <br>
+                    montage_string
+                    <% @montage_string.each do |entry| %>
+                        <li>  <%=  entry   %></li>
+                    <% end %>
+
+
+       <% if @listview %>
+
+    <div data-role="header">
+      <h1>aa</h1>
+    </div>
+    <br>
+
+    <ul data-role="listview" data-inset="false">
+
+      <li data-role="list-divider"> Options</li>
+      <li><%= link_to  "Back to Orders list" , "/image_manager"  %></li>
+
+      <li data-role="list-divider"> </li>
+    </ul>
+    <br>
+
+    <ul data-role="listview" data-inset="false" data-filter="true" >
+
+      <li data-role="list-divider"> All Over T's</li>
+      <% @montage_strings.each do |entry| %>
+          <li>
+            <a href="#">
+              <%=  entry   %>
+            </a>
+            <%= link_to 'Edit',   "/print"   , "data-icon" => "gear"   %>
+          </li>
+      <% end %>
+
+
+    </ul>
+
+<% end %>

@@ -1,22 +1,46 @@
-<%= render :partial => 'image_manager/items_filter'  %>
-
-
 <h1>Image Manager </h1>
-<p>This tool works with ImageMagick:</p>
+<p>Listing unfulfilled purchases with sublimation on order:</p>
 
 
-<h2><%=   link_to "Find No Images Available", "/image_manager?types_to_view=no_images_available" %> |
-<%=   link_to "Find Green Severity", "/image_manager?types_to_view=green_severity" %> |
-<%=   link_to "Find Orange Severity", "/image_manager?types_to_view=orange_severity" %> |
-</h2>
 
-<% if @divide %>
-<h2><%=   link_to "Designs", "/image_manager?types_to_view=no_images_available" %> |
-<%=   link_to "Items", "/image_manager?types_to_view=green_severity" %> |
-<%=   link_to "All Over Shirts", "/image_manager?types_to_view=orange_severity" %> |
-</h2>
-<% end  %>
+<div data-role="header">
+  <h1> Listing <%= @sublimation_entries.size %>  unfulfilled sublimation orders </h1>
+  <p style="text-align: center;">Please click on order below for details</p>
+</div>
+
+<div data-role="content">
+  <ul data-role="listview" data-filter="true" data-filter-placeholder="Search Orders">
+    <% @sublimation_entries.each do |entry| %>
+
+                                <li>
+                                  <%= link_to entry.purchase_id.to_s + " " + entry.Company.to_s + " " + entry.FirstName.to_s + " " + entry.LastName.to_s     , "/image_manager/order_details/" + entry.purchase_id.to_s     %>
+                                  <%= link_to 'Edit',   "/print"   , "data-icon" => "gear"   %>
+                                </li>
+
+    <% end %>
+
+  </ul>
+</div>
 
 
-<%= render :partial => 'image_manager/image_manager_table'  %>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @osss %>
+
+<li> <%= link_to  "Show all features" , "/features" %></li>
+<li><%= link_to 'New feature', :controller => "features", :action => "new", :item_id => params[:item_id] %></li>
+
+<% end %>

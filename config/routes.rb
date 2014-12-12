@@ -1,7 +1,21 @@
 #require 'website_routing_constraint.rb'
 
 
+
+
+
+
 ThreeTwoThree::Application.routes.draw do
+
+
+
+
+
+
+  match '/image_manager/print_big_fronts/:purchase_id' , :controller => 'image_manager', :action => 'print_big_fronts'
+  match '/image_manager/print_all_over_ts/:purchase_id' , :controller => 'image_manager', :action => 'print_all_over_ts'
+  match '/image_manager/order_details/:purchase_id' , :controller => 'image_manager', :action => 'order_details'
+  match '/image_manager' , :controller => 'image_manager', :action => 'index'
 
 
   match '/your_purchases_this_year' , :controller => 'customer_item_sales_by_years', :action => 'your_purchases_this_year'
