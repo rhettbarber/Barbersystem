@@ -1,0 +1,24 @@
+<ul data-role="listview">
+  <li> <%= link_to  "Back to image manager main menu" , "/image_manager" %></li>
+  <li> <%= link_to  "Show missing JPG" , "/image_manager/missing_sublimation_images" %></li>
+</ul>
+<br>
+
+<h1>Image Manager - (Reload page sparingly-uses a lot of processor!) </h1>
+
+<div data-role="header">
+  <h1> Listing <%= @missing_images.size %>  missing of <%= @original_items.size %> total  psd  images </h1>
+  <p style="text-align: center;">W:\\AUTOMATION_DATABASE\ORIGINAL_PSD\</p>
+</div>
+
+<div data-role="content">
+          <ul data-role="listview" data-filter="true" data-filter-placeholder="Search Missing Images">
+                <% @missing_images.each do |entry| %>
+                                <li>
+                                       <% if entry.category and entry.category.category_class %>
+                                                    <%= link_to entry.category.category_class.name  + '-' +  entry.ItemLookupCode + '.psd'     , "#"     %>
+                                      <% end %>
+                                </li>
+                <% end %>
+          </ul>
+</div>

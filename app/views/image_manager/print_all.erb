@@ -1,0 +1,25 @@
+<ul data-role="listview" data-inset="false">
+  <li data-role="list-divider"> Options</li>
+  <li><%= link_to  "Back to Main Orders list" , "/image_manager"  %></li>
+  <li><%= link_to  "Back to Order Details" , "/image_manager/order_details/" + params[:purchase_id]  %></li>
+</ul>
+<br>  <br>
+
+
+                    <% @all_over_ts_montage.each do |entry| %>
+                                            <li> <%=  entry   %> </li>
+                    <% end %>
+                    <br><br>
+
+
+                    <% @big_fronts_montage.each do |entry| %>
+                        <li> <%=  entry   %> </li>
+                    <% end %>
+
+<br>  <br>
+
+Big front images to layout : <br>
+<% @big_front_images_to_layout.each do |entry| %>
+    <li>  <%=  entry   %></li>
+<% end %>
+<br>

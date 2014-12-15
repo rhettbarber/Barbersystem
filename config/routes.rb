@@ -1,17 +1,11 @@
 #require 'website_routing_constraint.rb'
-
-
-
-
-
-
 ThreeTwoThree::Application.routes.draw do
 
 
 
-
-
-
+  match '/image_manager/missing_psd_images' , :controller => 'image_manager', :action => 'missing_psd_images'
+  match '/image_manager/missing_sublimation_images' , :controller => 'image_manager', :action => 'missing_sublimation_images'
+  match '/image_manager/print_all/:purchase_id' , :controller => 'image_manager', :action => 'print_all'
   match '/image_manager/print_big_fronts/:purchase_id' , :controller => 'image_manager', :action => 'print_big_fronts'
   match '/image_manager/print_all_over_ts/:purchase_id' , :controller => 'image_manager', :action => 'print_all_over_ts'
   match '/image_manager/order_details/:purchase_id' , :controller => 'image_manager', :action => 'order_details'
@@ -23,6 +17,7 @@ ThreeTwoThree::Application.routes.draw do
 
 
   match "item_reports/designs_by_department", :controller => 'item_reports', :action => 'designs_by_department'
+  match 'features/carousel_department/:department_id' , :controller => 'features', :action => 'carousel_department'
   match 'features/carousel/:feature_name' , :controller => 'features', :action => 'carousel'
   match 'features/list/:name' , :controller => 'features', :action => 'list'
   match 'features/:id/destroy/:item_id' , :controller => 'features', :action => 'destroy'

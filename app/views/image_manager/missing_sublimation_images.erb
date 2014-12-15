@@ -1,0 +1,18 @@
+<h1>Image Manager - (Reload page sparingly-uses a lot of processor!) </h1>
+
+<div data-role="header">
+  <h1> Listing <%= @missing_images.size %>  missing sublimation images </h1>
+  <p style="text-align: center;">W:\\AUTOMATION_DATABASE\ORIGINAL_JPG\</p>
+</div>
+
+<div data-role="content">
+          <ul data-role="listview" data-filter="true" data-filter-placeholder="Search Missing Images">
+                <% @missing_images.each do |entry| %>
+                                <li>
+                                       <% if entry.category and entry.category.category_class %>
+                                                    <%= link_to entry.category.category_class.name  + '-' +  entry.ItemLookupCode + '.jpg'     , "#"     %>
+                                      <% end %>
+                                </li>
+                <% end %>
+          </ul>
+</div>

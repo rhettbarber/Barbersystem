@@ -1,0 +1,29 @@
+
+<% @department = Department.find( params[:department_id]) %>
+
+<% @category_first_items = Set.new %>
+<% @department.categories.each do |category| %>
+                    <% @category_first_items.add( category.items.first )   %>
+<% end %>
+
+
+
+<img alt="" style="max-width: 100%;" src="http://cdn.dixieoutfitters.com/images/carousel/featured-items-list.gif" />    <br style="clear:left;"/>
+
+<% if params[:header] == 'true' %>
+                <img alt="" class="float_100" src="http://cdn.dixieoutfitters.com/images/features/headers/<%= @department.Name  %>.jpg" />   <br>
+<% else %>
+                <div style="width: 100%;text-align: center;font-size: 40px;font-weight: bolder;"><%= @department.Name %></div>
+<% end %>
+
+<%= render "features/department_carousel", :feature_name =>   "department_" + params[:department_id]%>
+
+
+<img alt="" class="float_100" src="http://cdn.dixieoutfitters.com/images/features/headers/featured-categories.gif" />    <br style="clear:left;"/>
+
+
+<ul data-role="listview" data-inset="true" class="list-view">
+                  <% @category_first_items.each do |item| %>
+                                                                          <li>   <a href="/store/category_items/<%= item.department_id.to_s %>/<%= item.category_id.to_s %>"> <%= item.category.Name %> </a></li>
+                  <% end %>
+</ul>

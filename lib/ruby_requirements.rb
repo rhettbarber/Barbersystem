@@ -29,6 +29,8 @@ module RubyRequirements
 require 'fileutils'
 require 'pathname'
 
+require 'core_ext/string'
+
 
 
 

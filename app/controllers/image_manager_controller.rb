@@ -8,6 +8,80 @@ class ImageManagerController < ApplicationController
  # changed category class id of all in department 35 from 31 to 69
 
 
+  def missing_psd_images
+            # @original_items = Item.limit(400).joins(:department, :category, :category_class).where( "category_classes.name in (?)",    ['all_over_item',   'huge_front'      ]     ).all
+            @original_items = Item.limit(4000).joins(:department, :category, :category_class).order("category_classes.name, items.ItemLookupCode ASC").where( "items.WebItem = ? and Inactive = ?  and category_classes.item_type = ?",  true, false, "slave"     ).all
+            logger.debug "5555555555555555555554444444444444444444444"
+            logger.debug "5555555555555555555554444444444444444444444"
+            logger.debug "5555555555555555555554444444444444444444444"
+            @missing_images = Set.new
+            @original_items.each do |the_item|
+                          # @items.add( item) if item.department and item.category  and item.category_class
+
+                          the_item_file_url =  "W:\\\\AUTOMATION_DATABASE\\ORIGINAL_PSD\\"  +  the_item.ItemLookupCode + ".psd"
+
+                          logger.debug "the_item_file_url: " +  the_item_file_url
+
+                          if File.file?( the_item_file_url  )
+                                     logger.debug "file did  exist"
+                          else
+                                      logger.debug "file did not exist"
+                                      @missing_images.add( the_item )
+                          end
+            end
+            logger.debug "5555555555555555555554444444444444444444444"
+            logger.debug "5555555555555555555554444444444444444444444"
+            logger.debug "5555555555555555555554444444444444444444444"
+  end
+
+
+
+
+def missing_sublimation_images
+                # @original_items = Item.limit(400).joins(:department, :category, :category_class).where( "category_classes.name in (?)",    ['all_over_item',   'huge_front'      ]     ).all
+              @original_items = Item.limit(4000).joins(:department, :category, :category_class).order("category_classes.name, items.ItemLookupCode ASC").where( "items.WebItem = ? and Inactive = ?  and category_classes.item_type = ?",  true, false, "slave"     ).all
+               logger.debug "5555555555555555555554444444444444444444444"
+               logger.debug "5555555555555555555554444444444444444444444"
+               logger.debug "5555555555555555555554444444444444444444444"
+                @missing_images = Set.new
+                @original_items.each do |the_item|
+                                       # @items.add( item) if item.department and item.category  and item.category_class
+
+                                        the_item_file_url =  "W:\\\\AUTOMATION_DATABASE\\ORIGINAL_PNG\\"  +  the_item.ItemLookupCode + ".png"
+
+                                       logger.debug "the_item_file_url: " +  the_item_file_url
+
+                                        if File.file?( the_item_file_url  )
+                                                              logger.debug "file did  exist"
+                                        else
+                                                               logger.debug "file did not exist"
+                                                               @missing_images.add( the_item )
+                                         end
+                end
+              logger.debug "5555555555555555555554444444444444444444444"
+              logger.debug "5555555555555555555554444444444444444444444"
+              logger.debug "5555555555555555555554444444444444444444444"
+end
+
+
+
+
+
+
+
+
+
+  
+  
+ def print_all
+                 print_all_over_ts
+                 print_big_fronts
+end
+  
+  
+  
+  
+  
 
 
     def index
@@ -31,18 +105,23 @@ class ImageManagerController < ApplicationController
                         logger.debug "5555555555555555555555555555555555"
                         logger.debug "5555555555555555555555555555555555"
                         @sublimation_entries = SublimationEntry.where( "purchase_id = ? and name = ?",  params[:purchase_id], "all_over_item" )
-                        @montage_strings = Set.new
+                        @all_over_ts_montage = Set.new
                         @sublimation_entries.each do |pe|
-                                    # logger.debug "pe.id: " + pe.id.to_s
 
-                                   @montage_string_front  = "montage  -border 0 -geometry 7600x  -density 200 " + pe.file_url_front + " " +  pe.hot_folder_url_front
-                                    @montage_strings.add(@montage_string_front)
-                                   # logger.debug "montage_string_front: " + @montage_string_front
+                                    sublimation_width_string  =    pe.subl_dimensions.split("_").first
+                                     if sublimation_width_string.is_number?
+                                            sublimation_width   =       sublimation_width_string
+                                     end
 
-                                   @montage_string_back  = "montage  -border 0 -geometry 7600x  -density 200 " + pe.file_url_back + " " +  pe.hot_folder_url_back
-                                    @montage_strings.add(@montage_string_back)
-                                   # logger.debug "montage_string_back: " + @montage_string_back
+                                    if  sublimation_width
+                                           @montage_string_front  = "montage  -border 0 -geometry " +   sublimation_width   + "x  -density 200 " + pe.file_url_front + " " +  pe.hot_folder_url_front
+                                            @all_over_ts_montage.add(@montage_string_front)
 
+                                           @montage_string_back  = "montage  -border 0 -geometry " +  sublimation_width  + "x  -density 200 " + pe.file_url_back + " " +  pe.hot_folder_url_back
+                                            @all_over_ts_montage.add(@montage_string_back)
+                                    else
+                                                  "GARMENT missing Opacity_Sub-Dimension data.  ItemLookupCode:"   +  pe.ItemLookupcode
+                                      end
                         end
                         logger.debug "5555555555555555555555555555555555"
                         logger.debug "5555555555555555555555555555555555"
@@ -57,32 +136,197 @@ class ImageManagerController < ApplicationController
                 logger.debug "5555555555555555555555555555555555"
                 logger.debug "5555555555555555555555555555555555"
                 @sublimation_entries = SublimationEntry.where( "purchase_id = ? and name = ?",  params[:purchase_id], "huge_front" )
-                @images_to_layout = []
+                @big_front_images_to_layout = []
                 @sublimation_entries.each do |the_pe|
-                                                 quantity_on_order =    the_pe.QuantityOnOrder.to_i
+                                            logger.debug "##################################"
+                                              logger.debug "the_pe.id.to_s: " + the_pe.id.to_s
+                                              logger.debug "##################################"
+                                              logger.debug "##################################"
+
+
+                                                quantity_on_order =    the_pe.QuantityOnOrder.to_i
                                                    if quantity_on_order  > 1
                                                                            logger.debug "quantity_on_order > 1"
                                                                            logger.debug "quantity_on_order: " + quantity_on_order.to_s
                                                                            quantity_on_order.times do |pe|
-                                                                                      @images_to_layout <<   the_pe.file_url_front
+                                                                                      @big_front_images_to_layout <<   the_pe
                                                                            end
                                                    else
                                                                                       logger.debug "quantity_on_order NOT > 1"
-                                                                                      @images_to_layout <<   the_pe.file_url_front
+                                                                                      @big_front_images_to_layout <<   the_pe
                                                    end
 
                 end
-                @montage_string =  []
+                @big_fronts_montage =  []
                 iteration_number = 0.0
-                @images_to_layout.in_groups_of(2).each do |the_pe|
+                @big_front_images_to_layout.in_groups_of(2).each do |the_pe|
                                   iteration_number += 1
-                                  @montage_string   <<   "montage  -border 0 -geometry 3800x  -rotate 90 -density 200 " +  the_pe[0].to_s  + " "  + the_pe[1].to_s  + " "  +   "W:\\\\SUBLIMATION_HOT_FOLDER_REVIEW\\PURCHASE-" + params[:purchase_id] + "-"  + iteration_number.to_s + '.jpg'
+
+                                  the_file_1 =   the_pe[0].to_s
+                                  the_file_1_name  =   the_pe[0].file_url_front
+                                  the_file_1_id  =   the_pe[0].id.to_s
+                                  the_file_1_width  =   the_pe[0].big_front_width
+                                  logger.debug "##################################"
+                                  logger.debug "the_file_1: " +  the_file_1.inspect
+
+                                  if  the_pe[1]
+                                        the_file_2 =   the_pe[1].to_s
+                                        the_file_2_name  =   the_pe[1].file_url_front
+                                        the_file_2_id  =   the_pe[1].id.to_s
+                                        the_file_2_width  =   the_pe[1].big_front_width
+                                 end
+
+                                  logger.debug "the_file_2: " +  the_file_2.inspect
+                                  logger.debug "##################################"
+                                  the_output_filename =   "W:\\\\SUBLIMATION_HOT_FOLDER_REVIEW\\PURCHASE-" + params[:purchase_id] + "-"  + iteration_number.to_s + '.jpg'
+
+                                 if the_file_2
+                                            @big_fronts_montage   <<  "convert " + the_file_1_name  + " -flatten -flop -density 200 -rotate 90 -units PixelsPerInch -resize  "  + the_file_1_width +   " - | convert " + the_file_2_name + " -flatten -flop  -rotate 90 -density 200 -units PixelsPerInch -resize "  + the_file_2_width +   " - +append " + the_output_filename
+                                 else
+                                            @big_fronts_montage   <<  "convert " + the_file_1_name  + " -flatten -flop  -density 200 -rotate 90 -units PixelsPerInch -resize  "  + the_file_1_width   + " " +  the_output_filename
+                                 end
+
                 end
-                 logger.debug "montage_string_back: " + @montage_strings.inspect
+                 logger.debug "montage_string_back: " + @big_fronts_montages.inspect
                 logger.debug "5555555555555555555555555555555555"
                 logger.debug "5555555555555555555555555555555555"
                 logger.debug "5555555555555555555555555555555555"
   end
+
+  def print_big_fronts_before
+                # system( 'convert W:\AUTOMATION_DATABASE\AUTOMATED_ITEM_SPECSHEETS\\'  + oj.filename + '  -geometry 75 W:\AUTOMATION_DATABASE\FINISHED_WEBSITE_ITEM_THUMBNAILS\\' +  oj.filename )
+                # montage   -border 0 -geometry 7600x  -density 200 * final.jpg
+                logger.debug "5555555555555555555555555555555555"
+                logger.debug "5555555555555555555555555555555555"
+                logger.debug "5555555555555555555555555555555555"
+                @sublimation_entries = SublimationEntry.where( "purchase_id = ? and name = ?",  params[:purchase_id], "huge_front" )
+                @big_front_images_to_layout = []
+                @sublimation_entries.each do |the_pe|
+
+                                            logger.debug "##################################"
+                                            logger.debug "##################################"
+                                            logger.debug "  the_pe.PriceLevel: " +   the_pe.PriceLevel.to_s
+                                            if    ["0", "1"].include?  the_pe.PriceLevel.to_s
+                                                        logger.debug "##################################"
+                                                        logger.debug "Customer has 0,1 PriceLevel. Check Opposite for dimension"
+                                                        the_real_pe = PurchasesEntry.find(the_pe.id)
+                                                        the_master_pe = the_real_pe.master_of_symbiont_pair
+                                            else
+                                                            logger.debug "##################################"
+                                                            logger.debug "Customer has singular type PriceLevel. Do not  Check Opposite for dimension"
+
+                                             end
+                                            if the_master_pe
+                                                          logger.debug "##################################"
+                                                          logger.debug "the_master_pe.id: " + the_master_pe.id.to_s
+                                                          sublimation_width_string  =    the_master_pe.item.SubDescription3     #.split("_").second
+                                                          if sublimation_width_string and sublimation_width_string.is_number?
+                                                            sublimation_width   =       sublimation_width_string
+                                                          end
+                                            else
+                                                            sublimation_width_string  =    the_pe.subl_dimensions.split("_").first
+                                                            if sublimation_width_string and sublimation_width_string.is_number?
+                                                                      sublimation_width   =       sublimation_width_string
+                                                            end
+                                             end
+
+                                              logger.debug "the_pe.id.to_s: " + the_pe.id.to_s
+                                              logger.debug "sublimation_width: " + sublimation_width.to_s
+                                              logger.debug "##################################"
+                                              logger.debug "##################################"
+
+
+                                                quantity_on_order =    the_pe.QuantityOnOrder.to_i
+                                                   if quantity_on_order  > 1
+                                                                           logger.debug "quantity_on_order > 1"
+                                                                           logger.debug "quantity_on_order: " + quantity_on_order.to_s
+                                                                           quantity_on_order.times do |pe|
+                                                                                      @big_front_images_to_layout <<   the_pe.file_url_front + "_" +  the_pe.id.to_s  + "_" +  sublimation_width
+                                                                           end
+                                                   else
+                                                                                      logger.debug "quantity_on_order NOT > 1"
+                                                                                      @big_front_images_to_layout <<   the_pe.file_url_front + "_" +   the_pe.id.to_s   + "_" +  sublimation_width
+                                                   end
+
+                end
+                @big_fronts_montage =  []
+                iteration_number = 0.0
+                @big_front_images_to_layout.in_groups_of(2).each do |the_pe|
+                                  iteration_number += 1
+                                  # @big_fronts_montage   <<   "montage  -border 0 -geometry 3800x  -rotate 90 -density 200 " +  the_pe[0].to_s  + " "  + the_pe[1].to_s  + " "  +   "W:\\\\SUBLIMATION_HOT_FOLDER_REVIEW\\PURCHASE-" + params[:purchase_id] + "-"  + iteration_number.to_s + '.jpg'
+                                  # @big_fronts_montage   <<   "montage  -border 0 -geometry 3800x  -rotate 90 -density 200 " + the_file_1  + " "  + the_file_2  + " "  +     the_output_filename
+
+                                  the_file_1 =   the_pe[0].to_s
+                                  the_file_1_name  =   the_pe[0].to_s.split("_").first
+                                  the_file_1_id  =   the_pe[0].to_s.split("_").second
+                                  the_file_1_width  =   the_pe[0].to_s.split("_").last
+
+                                  the_file_2 =   the_pe[1].to_s
+                                  the_file_2_name  =   the_pe[1].to_s.split("_").first
+                                  the_file_2_id  =   the_pe[1].to_s.split("_").second
+                                  the_file_2_width  =   the_pe[1].to_s.split("_").last
+
+                                 the_output_filename =   "W:\\\\SUBLIMATION_HOT_FOLDER_REVIEW\\PURCHASE-" + params[:purchase_id] + "-"  + iteration_number.to_s + '.jpg'
+
+                                  logger.debug "##################################"
+                                  logger.debug "the_file_1: " +  the_file_1.inspect
+                                  logger.debug "the_file_2: " +  the_file_2.inspect
+                                  logger.debug "##################################"
+
+
+                                 if the_file_2 and the_file_2 != ""
+                                            @big_fronts_montage   <<  "convert " + the_file_1_name  + " -flatten -density 200 -rotate 90 -units PixelsPerInch -resize  "  + the_file_1_width +   " - | convert " + the_file_2_name + " -flatten -rotate 90 -density 200 -units PixelsPerInch -resize "  + the_file_2_width +   " - +append " + the_output_filename
+                                 else
+                                            @big_fronts_montage   <<  "convert " + the_file_1_name  + " -flatten -density 200 -rotate 90 -units PixelsPerInch -resize  "  + the_file_1_width   + " " +  the_output_filename
+                                 end
+
+                end
+                 logger.debug "montage_string_back: " + @big_fronts_montages.inspect
+                logger.debug "5555555555555555555555555555555555"
+                logger.debug "5555555555555555555555555555555555"
+                logger.debug "5555555555555555555555555555555555"
+  end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
