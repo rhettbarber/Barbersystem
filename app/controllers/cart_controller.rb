@@ -406,7 +406,7 @@ end
 
 ###########################################################################################################
 def add_to_cart_singular_designer
-  great_working_correctly
+  # great_working_correctly
 							logger.debug "begin add_to_cart_singular_designer-------------------------------------------------@item.id: #{@item.id}"
               # item is a garment in the category_class.name of 'all_over_item'
 							@purchases_entry = PurchasesEntry.add_singular_designer_item(@purchase,@item,@quantity,0, @pe_comment  )
