@@ -1014,7 +1014,7 @@ end
 #############################################################################################################################
 def has_exactly_one_opposite_category_with_one_item_class
     logger.debug "BEGIN item.has_exactly_one_opposite_category_with_one_item_class"
-		#begin
+		begin
 			all_opposite_category_ids = self.category.category_class.opposite_category_ids.split(/,/)
 			if all_opposite_category_ids.size == 1 and all_opposite_category_ids != ['0']
 							different_class_ids = Set.new
@@ -1033,9 +1033,9 @@ def has_exactly_one_opposite_category_with_one_item_class
 			else
 				return false
 			end
-		#rescue
-		#	false
-		#end
+		rescue
+			false
+		end
     logger.debug "END item.has_exactly_one_opposite_category_with_one_item_class"
 end
 #############################################################################################################################
