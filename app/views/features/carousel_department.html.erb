@@ -11,7 +11,7 @@
 <img alt="" style="max-width: 100%;" src="http://cdn.dixieoutfitters.com/images/carousel/featured-items-list.gif" />    <br style="clear:left;"/>
 
 <% if params[:header] == 'true' %>
-                <img alt="" class="float_100" src="http://cdn.dixieoutfitters.com/images/features/headers/<%= @department.Name  %>.jpg" />   <br>
+                <img alt="" class="float_100" src="http://cdn.dixieoutfitters.com/images/features/headers/<%= Slug.generate( @department.Name )  %>.jpg" />   <br>
 <% else %>
                 <div style="width: 100%;text-align: center;font-size: 40px;font-weight: bolder;"><%= @department.Name %></div>
 <% end %>
