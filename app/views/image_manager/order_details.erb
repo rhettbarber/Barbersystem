@@ -1,5 +1,6 @@
 <div data-role="header">
-  <h1> Sublimation order # <%= @sublimation_entry.id %> details </h1>
+  <h1> Sublimation order # <%= @sublimation_entry.purchase_id %> details </h1>
+  <h2> Number of individual designs: <%= @sublimation_entries.size %>  </h2>
 </div>
  <br>
 
@@ -19,18 +20,18 @@
                                             <li>
                                               <a href="#">
                                                 <%= image_tag   "http://dixieoutfitters.com/images/item_thumbnails/" +  entry.PictureName  %>
-                                                <h2> <%= entry.QuantityOnOrder %> - <%= entry.Description %></h2>
+                                                <h2>  <%= entry.ItemLookupCode %> - <%= entry.QuantityOnOrder %> - <%= entry.Description %></h2>
                                               </a>
                                               <%= link_to 'Edit',   "#"   , "data-icon" => "gear"   %>
                                             </li>
                     <% end %>
 
                     <li data-role="list-divider"> Huge front designs</li>
-                    <% @sublimation_entries.where("name = ?", "huge_front").each do |entry| %>
+                    <% @sublimation_entries.order("ItemLookupCode ASC").where("name = ?", "huge_front").each do |entry| %>
                         <li>
                           <a href="#">
                             <%= image_tag   "http://dixieoutfitters.com/images/item_thumbnails/" +  entry.PictureName  %>
-                            <h2>  <%= entry.QuantityOnOrder %> -  <%= entry.Description %></h2>
+                            <h2>  <%= entry.ItemLookupCode %> -  <%= entry.QuantityOnOrder %> -  <%= entry.Description %></h2>
                           </a>
                           <%= link_to 'Edit',   "#"   , "data-icon" => "gear"   %>
                         </li>

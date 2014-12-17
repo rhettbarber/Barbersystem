@@ -4,8 +4,11 @@ class ImageManagerController < ApplicationController
   before_filter  :initialize_variables
   before_filter :no_item_menu
 
+  @@OUTPUT_LOCATION  = "L:\\\\REVIEW\\"
 
- # changed category class id of all in department 35 from 31 to 69
+
+
+      # changed category class id of all in department 35 from 31 to 69
 
 
   def missing_psd_images
@@ -166,24 +169,35 @@ end
                                   the_file_1_name  =   the_pe[0].file_url_front
                                   the_file_1_id  =   the_pe[0].id.to_s
                                   the_file_1_width  =   the_pe[0].big_front_width
+                                  the_file_1_purchase_id  =   the_pe[0].purchase_id
                                   logger.debug "##################################"
-                                  logger.debug "the_file_1: " +  the_file_1.inspect
+
 
                                   if  the_pe[1]
                                         the_file_2 =   the_pe[1].to_s
                                         the_file_2_name  =   the_pe[1].file_url_front
                                         the_file_2_id  =   the_pe[1].id.to_s
                                         the_file_2_width  =   the_pe[1].big_front_width
-                                 end
+                                        the_file_2_purchase_id  =   the_pe[1].purchase_id
 
-                                  logger.debug "the_file_2: " +  the_file_2.inspect
+                                  end
+                                  
+                                  logger.debug "the_file_1: " +  the_file_1.to_s
+                                  logger.debug "the_file_1_name: " +  the_file_1_name.to_s
+                                  logger.debug "the_file_1_id: " +  the_file_1_id.to_s
+                                  logger.debug "the_file_1_width: " +  the_file_1_width.to_s  
+                                  
+                                  logger.debug "the_file_2: " +  the_file_2.to_s
+                                  logger.debug "the_file_2_name: " +  the_file_2_name.to_s
+                                  logger.debug "the_file_2_id: " +  the_file_2_id.to_s
+                                  logger.debug "the_file_2_width: " +  the_file_2_width.to_s
                                   logger.debug "##################################"
-                                  the_output_filename =   "W:\\\\SUBLIMATION_HOT_FOLDER_REVIEW\\PURCHASE-" + params[:purchase_id] + "-"  + iteration_number.to_s + '.jpg'
+                                  the_output_filename =    @@OUTPUT_LOCATION + "PURCHASE-" + params[:purchase_id] + "-"  + iteration_number.to_s + '.jpg'
 
                                  if the_file_2
-                                            @big_fronts_montage   <<  "convert " + the_file_1_name  + " -flatten -flop -density 200 -rotate 90 -units PixelsPerInch -resize  "  + the_file_1_width +   " - | convert " + the_file_2_name + " -flatten -flop  -rotate 90 -density 200 -units PixelsPerInch -resize "  + the_file_2_width +   " - +append " + the_output_filename
+                                            @big_fronts_montage   <<  "convert " + the_file_1_name  + " -flatten -flop -density 200 -rotate 90 -units PixelsPerInch -resize  "  + the_file_1_width +   "  -bordercolor white  -border 50x50 - | convert " + the_file_2_name + " -flatten -flop  -rotate 90 -density 200 -units PixelsPerInch -resize "  + the_file_2_width +   "   -bordercolor white -border 50x50  - +append " + the_output_filename
                                  else
-                                            @big_fronts_montage   <<  "convert " + the_file_1_name  + " -flatten -flop  -density 200 -rotate 90 -units PixelsPerInch -resize  "  + the_file_1_width   + " " +  the_output_filename
+                                            @big_fronts_montage   <<  "convert " + the_file_1_name  + " -flatten -flop  -density 200 -rotate 90 -units PixelsPerInch -resize  "  + the_file_1_width   + "   -bordercolor white  -border 50x50  " +  the_output_filename
                                  end
 
                 end
