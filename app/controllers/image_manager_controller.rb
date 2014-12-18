@@ -4,9 +4,6 @@ class ImageManagerController < ApplicationController
   before_filter  :initialize_variables
   before_filter :no_item_menu
 
-  @@OUTPUT_LOCATION  = "L:\\\\REVIEW\\"
-
-
 
       # changed category class id of all in department 35 from 31 to 69
 
@@ -108,23 +105,36 @@ end
                         logger.debug "5555555555555555555555555555555555"
                         logger.debug "5555555555555555555555555555555555"
                         @sublimation_entries = SublimationEntry.where( "purchase_id = ? and name = ?",  params[:purchase_id], "all_over_item" )
-                        @all_over_ts_montage = Set.new
-                        @sublimation_entries.each do |pe|
+                        @all_over_ts_montage =  []
+                        iteration_number = 0.0
+                        @sublimation_entries.each do | pe |
 
-                                    sublimation_width_string  =    pe.subl_dimensions.split("_").first
+                                    sublimation_width_string  =    pe.SubDescription3.split("_").first
                                      if sublimation_width_string.is_number?
-                                            sublimation_width   =       sublimation_width_string
+                                               sublimation_width   =       sublimation_width_string
                                      end
 
-                                    if  sublimation_width
-                                           @montage_string_front  = "montage  -border 0 -geometry " +   sublimation_width   + "x  -density 200 " + pe.file_url_front + " " +  pe.hot_folder_url_front
-                                            @all_over_ts_montage.add(@montage_string_front)
+                                      if  sublimation_width    and sublimation_width != 0
+                                                                quantity_on_order =    pe.QuantityOnOrder.to_i
+                                                                if quantity_on_order  > 0
+                                                                              logger.debug "quantity_on_order > 1"
+                                                                              logger.debug "quantity_on_order: " + quantity_on_order.to_s
+                                                                              quantity_on_order.times do |this_time|
 
-                                           @montage_string_back  = "montage  -border 0 -geometry " +  sublimation_width  + "x  -density 200 " + pe.file_url_back + " " +  pe.hot_folder_url_back
-                                            @all_over_ts_montage.add(@montage_string_back)
-                                    else
-                                                  "GARMENT missing Opacity_Sub-Dimension data.  ItemLookupCode:"   +  pe.ItemLookupcode
-                                      end
+                                                                                                 iteration_number += 1
+                                                                                                 @montage_string_front  = "convert  -border 0 -geometry " +   sublimation_width   + "x  -density 200 " + pe.file_url_front + " -  | convert label:" + pe.label + " - -append " +     pe.hot_folder_url_front(iteration_number)
+                                                                                                  @all_over_ts_montage <<  @montage_string_front
+
+                                                                                                 @montage_string_back  = "convert  -border 0 -geometry " +   sublimation_width   + "x  -density 200 " + pe.file_url_back + " -  | convert label:" + pe.label + " - -append " +     pe.hot_folder_url_back(iteration_number)
+                                                                                                 @all_over_ts_montage <<   @montage_string_back
+                                                                              end
+                                                                else
+                                                                                 logger.debug "quantity on order is not greater than zero"
+                                                                  end
+
+                                      else
+                                                        @all_over_ts_montage  <<   "GARMENT missing Opacity_Sub-Dimension data.  ItemLookupCode:"   +  pe.ItemLookupcode
+                                        end
                         end
                         logger.debug "5555555555555555555555555555555555"
                         logger.debug "5555555555555555555555555555555555"
@@ -358,24 +368,24 @@ end
 
 
       if quantity_on_order  > 1
-        logger.debug "quantity_on_order > 1"
-        logger.debug "quantity_on_order: " + quantity_on_order.to_s
-        times_to_reiterate_float =    quantity_on_order  / 2
-        logger.debug "times_to_reiterate_float: " + times_to_reiterate_float.to_s
-        iteration_number = 0.0
-        times_to_reiterate_float.times do |pe|
-          iteration_number += 1
-          @montage_string_front  = "montage  -border 0 -geometry 3800x  -rotate 90 -density 200 " +  the_pe.file_url_front + " "  + the_pe.file_url_front + " " +  the_pe.hot_folder_url_front(iteration_number)
-          @montage_strings <<  @montage_string_front
-        end
-        if iteration_number <  quantity_on_order
-          @montage_string_front  = "montage  -border 0 -geometry 3800x  -rotate 90 -density 200 " + the_pe.file_url_front + " " +  the_pe.hot_folder_url_front
-          @montage_strings_to_append  <<  @montage_string_front
-        end
+                            logger.debug "quantity_on_order > 1"
+                            logger.debug "quantity_on_order: " + quantity_on_order.to_s
+                            times_to_reiterate_float =    quantity_on_order  / 2
+                            logger.debug "times_to_reiterate_float: " + times_to_reiterate_float.to_s
+                            iteration_number = 0.0
+                            times_to_reiterate_float.times do |pe|
+                                          iteration_number += 1
+                                          @montage_string_front  = "montage  -border 0 -geometry 3800x  -rotate 90 -density 200 " +  the_pe.file_url_front + " "  + the_pe.file_url_front + " " +  the_pe.hot_folder_url_front(iteration_number)
+                                          @montage_strings <<  @montage_string_front
+                            end
+                            if iteration_number <  quantity_on_order
+                                          @montage_string_front  = "montage  -border 0 -geometry 3800x  -rotate 90 -density 200 " + the_pe.file_url_front + " " +  the_pe.hot_folder_url_front(iteration_number)
+                                          @montge_strings_to_append  <<  @montage_string_front
+                            end
       else
-        logger.debug "quantity_on_order NOT > 1"
-        @montage_string_front  = "montage  -border 0 -geometry 3800x  -rotate 90 -density 200 " + the_pe.file_url_front + " " +  the_pe.hot_folder_url_front
-        @montage_strings_to_append <<  @montage_string_front
+                              logger.debug "quantity_on_order NOT > 1"
+                              @montage_string_front  = "montage  -border 0 -geometry 3800x  -rotate 90 -density 200 " + the_pe.file_url_front + " " +  the_pe.hot_folder_url_front
+                              @montage_strings_to_append <<  @montage_string_front
       end
 
 
