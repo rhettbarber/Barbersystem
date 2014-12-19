@@ -18,6 +18,42 @@ class PurchasesEntry < ActiveRecord::Base
 
 
 
+  def override_quantity_discount?
+            if self.Comment.include? 'sublim9'
+                       return    true
+
+            elsif self.Comment.include? "sublim12"
+                       return    true
+
+            elsif self.Comment.include?  "sublim14"
+                       return    true
+            elsif self.Comment.include?  "sublimfull"
+                       return    true
+            else
+                        return     false
+             end
+end
+
+
+  def overriden_quantity_discount_id
+            if self.Comment.include? 'sublim9'
+                    return  22651
+            elsif self.Comment.include? 'sublim12'
+                         return   22652
+           elsif self.Comment.include? 'sublim14'
+                         return   22650
+            elsif self.Comment.include? 'sublimfull'
+                        return  22649
+            else
+                            wrong_wrong
+             end
+end
+
+
+
+
+
+
 
 def overdue
           #logger.debug "due_date: " + self.due_date.to_s
@@ -325,7 +361,6 @@ def self.add_singular_item(purchase,item,quantity,department, comment )
                                               purchases_entry.PriceSource = 1
                                               purchases_entry.discount_reason_code_id = 0
                                               purchases_entry.return_reason_code_id = 0
-                                              purchases_entry.FullPrice = item.full_unit_price
                                               purchases_entry.item_id =  item.id
                                               purchases_entry.purchase_id = purchase.id
                                               purchases_entry.store_id = 7
@@ -335,7 +370,8 @@ def self.add_singular_item(purchase,item,quantity,department, comment )
                                               purchases_entry.Price = item.Price
                                               purchases_entry.Taxable = 1
                                               purchases_entry.LastUpdated = Time.now      
-                                              purchases_entry.symbiote_purchases_entry_id = 0                                                                   
+                                              purchases_entry.symbiote_purchases_entry_id = 0
+                                              purchases_entry.FullPrice = item.full_unit_price( purchases_entry)
                                               purchases_entry.save
                                               purchases_entry
 end
@@ -371,12 +407,12 @@ def full_extended_price(customer=0,item=0)
       if item.class != Item
           item = Item.find(item)
       end
-             item.full_unit_price(customer) *  self.QuantityOnOrder
+             item.full_unit_price(customer, self) *  self.QuantityOnOrder
 end
 
 def your_extended_price(customer=0,quantity=0,item=0)
 	begin
-      yep = item.unit_quantity_tier_discount_price(customer,quantity)  *  self.QuantityOnOrder
+      yep = item.unit_quantity_tier_discount_price(customer,quantity,self)  *  self.QuantityOnOrder
       return yep.to_f
  	rescue
  		return 0

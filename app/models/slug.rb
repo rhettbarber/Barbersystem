@@ -15,7 +15,15 @@ class Slug
                            ""
             end
   end
-  
+
+    def self.generate_keep_zero(string)
+          if string
+                        trim(string.gsub(/[^a-z0-9]+/i, '-').downcase)
+          else
+                           ""
+            end
+  end
+
   def self.trim(string)
     while string[string.length - 1, string.length] == '-'
       string = string.chop

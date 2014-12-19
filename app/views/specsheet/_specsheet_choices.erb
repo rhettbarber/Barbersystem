@@ -14,11 +14,9 @@
 
 <%=  form_tag( '/cart/add_to_cart' , :method => :put )  do %>
 
-                        <% if @sublimation %>
-                                                <%=  hidden_field_tag "sublimation",  "subl"  %>
-                        <% else %>
-                                                <%=  hidden_field_tag "sublimation",  "plas"  %>
-                        <% end %>
+
+
+                         <%= render "specsheet/transfer_type_select" %>
 
 
                             <!--hidden submit_tag referenced by javascripts from popups,etc.--><!--hidden submit_tag referenced by javascripts from popups,etc.--><!--hidden submit_tag referenced by javascripts from popups,etc.--><!--hidden submit_tag referenced by javascripts from popups,etc.--><!--hidden submit_tag referenced by javascripts from popups,etc.-->

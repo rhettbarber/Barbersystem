@@ -246,13 +246,13 @@ end
       pe_side =  "back"
     end
 
-    if params[:sublimation] and   params[:sublimation] != ""
-      pe_sublimation =  params[:sublimation].to_s[0..5]
+    if params[:transfer_type] and   params[:transfer_type] != ""
+      pe_transfer_type =  params[:transfer_type][:id].to_s[0..8]
     else
-      pe_sublimation =  "0"
+      pe_transfer_type =  "0"
     end
 
-    @pe_comment =   pe_side  +  "_" +  pe_crest  +  "_" +  pe_sublimation
+    @pe_comment =   pe_side  +  "_" +  pe_crest  +  "_" +  pe_transfer_type
   end
 ############################################################################################################
   def add_to_cart_singular_item_customer

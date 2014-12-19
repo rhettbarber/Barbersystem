@@ -48,7 +48,8 @@ class SublimationEntry  < ActiveRecord::Base
 
 
   def label
-              if    ["0", "1"].include?   self.PriceLevel.to_s
+             logger.debug "self.PriceLevel.to_s: " +  self.PriceLevel.to_s
+              if    ["0", "1", ""].include?   self.PriceLevel.to_s
                             logger.debug "##################################"
                             logger.debug "Customer has 0,1 PriceLevel. Check Opposite for dimension"
                             the_real_pe = PurchasesEntry.find(self.id)
@@ -62,14 +63,15 @@ class SublimationEntry  < ActiveRecord::Base
               if the_master_pe
                             logger.debug " the_master_pe ##################################"
                             logger.debug "the_master_pe.id: " + the_master_pe.id.to_s
-                            label_string  =    Slug.generate(   the_master_pe.ItemLookupCode + "_" +  the_master_pe.Description  )
+                            label_string  =    Slug.generate_keep_zero(  the_master_pe.purchase_id.to_s  + "_"  +   the_master_pe.ItemLookupCode + "_" +  the_master_pe.Description  )
               else
                             logger.debug " NOT the_master_pe ##################################"
-                            label_string  =  Slug.generate(   self.ItemLookupCode + "_" +  self.Description )
+                            label_string  =  Slug.generate_keep_zero(   self.ItemLookupCode + "_" +  self.Description )
                             logger.debug "##################################"
                             logger.debug "sublimation_entry.id: " + self.id.to_s
                             logger.debug "label_string: " + label_string.to_s
               end
+              logger.debug "label_string: " + label_string.to_s
               return label_string
 
   end

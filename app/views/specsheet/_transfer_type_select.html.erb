@@ -1,0 +1,143 @@
+<script type="text/javascript">
+                    function changeTransferType() {
+                                     alert("transfer type changed") ;
+                                    //        jQuery.ajax({
+                                    //            type: "GET",
+                                    //            dataType: 'script',
+                                    //            url: "/specsheet/update_sublimation_garments",
+                                    //            data: {   sublimation_item_class_id:  $('#sublimation_item_class_id').val()   }
+                                    //        });
+                        }
+</script>
+
+
+<% if @sublimation %>
+                                <%=  hidden_field_tag "transfer_type_id",  "sublimfull"  %>
+<% else %>
+                                <select name="transfer_type[id]" id="transfer_type_id"  data-native-menu="false" onchange="changeTransferType();">
+                                                            <% @transfer_types = [
+                                                             {"name"=>"SilkScreen Transfer 12\"x12\"", "id"=>"plas"},
+                                                             {"name"=>"Sublimation Transfer 9\"x9\"", "id"=>"sublim9"} ,
+                                                             {"name"=>"Sublimation Transfer 12\"x12\"", "id"=>"sublim12"} ,
+                                                             {"name"=>"Sublimation Transfer 14\"x14\"", "id"=>"sublim14"}
+                                                            ]
+                                               %>
+
+                                                            <% @selected_id = '001' %>
+
+                                                             <%=  options_for_select(@transfer_types.collect {|p| [ p['name'], p['id'] ] })     %>
+                                </select>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if@junk %>
+
+                <% if @sublimation  %>
+                                <script type="text/javascript">
+
+                                               function sendFilterForm() {
+                                                       jQuery.ajax({
+                                                                   type: "GET",
+                                                                   dataType: 'script',
+                                                                   url: "/specsheet/update_sublimation_garments",
+                                                                   data: {   sublimation_item_class_id:  $('#sublimation_item_class_id').val()   }
+                                                       });
+                                               }
+
+                                </script>
+                                 <br>
+
+                                <% @sublimation_item_classes = ItemClass.sublimation_garment_item_classes     %>
+                                <% @sublimation_item_class_components = ItemClass.sublimation_garment_components     %>
+
+
+
+
+                                <% if @selected_item_id  %>
+                                                        <% logger.debug "already at @selected_item_id" %>
+                                <% else %>
+                                                     <% if @item %>
+                                                                                <%  @selected_item_id = @item.id %>
+                                                      <% elsif params[:item_id]  %>
+                                                                                 <%  @selected_item_id = params[:item_id]  %>
+                                                      <% end %>
+                                <% end %>
+
+                                <% if @selected_item_id %>
+                                                        <% selected_item = Item.find( @selected_item_id) %>
+                                                    <% @selected_item_class_id = selected_item.item_class_component.item_class_id if selected_item.item_class_component  %>
+                                <% end %>
+                <% end %>
+
+                 <%   if  @required_form_elements.include?('icc_collection_select' ) %>
+
+
+                                         <%= form_tag("filter", :id => "filter_form", :method => "post") do %>
+
+
+
+                                                                     <% if @sublimation %>
+                                                                                                           <%=  hidden_field_tag "designer_item_status",  "1"  %>
+                                                                                                         <select name="sublimation_item_class[id]" id="sublimation_item_class_id"  data-native-menu="false" onchange="sendFilterForm();">
+                                                                                                           <%=   options_for_select( @sublimation_item_classes.collect {|p| [ p.Description , p.id ] } , @selected_item_class_id   )      %>
+                                                                                                         </select>
+
+                                                                     <% else %>
+                                                                                                        <%=  hidden_field_tag "designer_item_status",  "0"  %>
+                                                                     <% end %>
+
+                                                                 <%# logger.debug "@selected_item_id: " + @selected_item_id.to_s %>
+                                                                    <div id="item_class_component_select">
+                                                                                                             <select name="item_class_component[item_id]" id="item_class_component_item_id"  data-native-menu="false">
+                                                                                                               <%=   options_for_select( @item_class_components.collect {|p| [ p.dimensions , p.item_id ] } ,  @selected_item_id.to_s  )      %>
+                                                                                                             </select>
+                                                                    </div>
+                                         <% end %>
+
+                 <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+                <%   if  @zzzz %>
+                         <%= form_tag("filter", :id => "filter_form", :method => "post") do %>
+
+                                                                            <select name="sublimation_item_class[id]" id="sublimation_item_class_id"  data-native-menu="false" onchange="sendFilterForm();">
+                                                                              <%=   options_for_select( @sublimation_item_classes.collect {|p| [ p.Description , p.id ] }   )      %>
+                                                                            </select>
+
+
+                                                                                            <div id="sublimation_item_class_component_select">
+                                                                                                        <% logger.debug "@selected_item_id: " + @selected_item_id.to_s %>
+                                                                                                        <select name="sublimation_item_class_component[item_id]" id="sublimation_item_class_component_item_id"  data-native-menu="false">
+                                                                                                          <%=   options_for_select( @sublimation_item_class_components.collect {|p| [ p.dimensions , p.item_id ] } ,  @selected_item_id.to_s  )      %>
+                                                                                                        </select>
+                                                                                            </div>
+                         <% end %>
+                <% end %>
+
+<% end %>
+
+
+
+
