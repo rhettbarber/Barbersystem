@@ -374,7 +374,6 @@ end
                                               purchases_entry_slave.discount_reason_code_id = 0
                                               purchases_entry_slave.return_reason_code_id = 0
                                               purchases_entry_slave.PriceSource = 1
-                                              purchases_entry_slave.FullPrice = item.full_unit_price
                                               purchases_entry_slave.item_id =  item.id
                                               purchases_entry_slave.purchase_id = id
                                               purchases_entry_slave.store_id = 7
@@ -385,7 +384,8 @@ end
                                               purchases_entry_slave.Price = item.Price
                                               purchases_entry_slave.Taxable = 1
                                               purchases_entry_slave.LastUpdated = Time.now      
-                                              purchases_entry_slave.symbiote_purchases_entry_id = 0                                                                   
+                                              purchases_entry_slave.symbiote_purchases_entry_id = 0
+                                             purchases_entry_slave.FullPrice = item.full_unit_price(purchases_entry_slave)
                                               purchases_entry_slave.save
                                                   purchases_entry_master =  PurchasesEntry.new
                                                   purchases_entry_master.on_hold  = hold_status

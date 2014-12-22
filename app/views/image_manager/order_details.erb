@@ -38,6 +38,21 @@
                     <% end %>
 
 
+                <li data-role="list-divider"> Regular transfers as sublimation </li>
+                <% @sublimation_entries.order("ItemLookupCode ASC").where("name not in (?)",[ "huge_front", "all_over_item"] ).each do |entry| %>
+                    <li>
+                      <a href="#">
+                        <%= image_tag   "http://dixieoutfitters.com/images/item_thumbnails/" +  entry.PictureName  %>
+                        <h2>  <%= entry.ItemLookupCode %> -  <%= entry.QuantityOnOrder %> -  <%= entry.Description %></h2>
+                      </a>
+                      <%= link_to 'Edit',   "#"   , "data-icon" => "gear"   %>
+                    </li>
+                <% end %>
+
+
+
+
+
   </ul>
 
 

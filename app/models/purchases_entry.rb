@@ -18,16 +18,34 @@ class PurchasesEntry < ActiveRecord::Base
 
 
 
+def transfer_type_name
+        if self.Comment.to_s.include? 'sublim9'
+              return    "Sublimation transfer size 9\"x9\""
+        elsif self.Comment.to_s.include? "sublim12"
+              return    "Sublimation transfer size 12\"x12\""
+        elsif self.Comment.to_s.include?  "sublim14"
+                 return    "Sublimation transfer size 14\"x14\""
+        elsif self.Comment.to_s.include?  "sublimfull"
+                return    "Sublimation transfer size 15\"x19\""
+        else
+               return    ""
+        end
+end
+
+
+
+
   def override_quantity_discount?
-            if self.Comment.include? 'sublim9'
+
+            if self.Comment.to_s.include? 'sublim9'
                        return    true
 
-            elsif self.Comment.include? "sublim12"
+            elsif self.Comment.to_s.include? "sublim12"
                        return    true
 
-            elsif self.Comment.include?  "sublim14"
+            elsif self.Comment.to_s.include?  "sublim14"
                        return    true
-            elsif self.Comment.include?  "sublimfull"
+            elsif self.Comment.to_s.include?  "sublimfull"
                        return    true
             else
                         return     false

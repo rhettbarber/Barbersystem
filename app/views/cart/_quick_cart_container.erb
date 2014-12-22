@@ -48,6 +48,9 @@
                     <label for="purchases_entries_QuantityOnOrder"  style="display:none;">Quantity:</label>
                     <input type="text" name="purchases_entries[QuantityOnOrder]" id="purchases_entries_QuantityOnOrder" placeholder="Quantity: (Optional)" value="">
 
+                    <%= render "specsheet/transfer_type_select" %>
+
+
                     <label for="quick_add_submit" style="display:none;">Send:</label>
                     <button class="ui-shadow ui-btn ui-corner-all" type="submit" id="quick_add_submit">Submit</button>
     <%  end  -%>

@@ -780,16 +780,17 @@ def ensure_positive_quantity(quantity)
 end
 ###########################################################################################################
 def fails_membership_requirement?(item)
-    if @customer_array.CustomText4  != 'DO'   &&   item.department.license_required == true   &&   @customer_array.PriceLevel == 2
-                       if @customer
-                              flash[:notice] = "This item requires dixie outfitters license. Call 1-866-916-5866 for details"
-                        else
-                              flash[:notice] = "Please log in. This item requires that you are logged in and have a dixie outfitters license. Call 1-866-916-5866 for info if you do not have one."
-                        end
-           true
-    else
-            false
-    end
+    false
+    # if @customer_array.CustomText4  != 'DO'   &&   item.department.license_required == true   &&   @customer_array.PriceLevel == 2
+    #                    if @customer
+    #                           flash[:notice] = "This item requires dixie outfitters license. Call 1-866-916-5866 for details"
+    #                     else
+    #                           flash[:notice] = "Please log in. This item requires that you are logged in and have a dixie outfitters license. Call 1-866-916-5866 for info if you do not have one."
+    #                     end
+    #        true
+    # else
+    #         false
+    # end
 end
 ############################################################################################################
 def purchase_in_progress?

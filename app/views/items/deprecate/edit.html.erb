@@ -1,9 +1,0 @@
-<h1>Editing item</h1>
-<%= link_to("Item Manager", :controller => 'item_manager', :action => 'index', :itemlookupcode => @item.ItemLookupCode    ) %><br/><br/>
-
-
-<%= image_tag("/images/designer_item_thumbnails/" + @item.ItemLookupCode + '.png', :size => "120x120" ) %>
-<%= render 'form' %>
-
-<%= link_to 'Show', @item %> |
-<%= link_to 'Back', items_path %>

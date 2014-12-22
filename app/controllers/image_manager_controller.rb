@@ -66,11 +66,12 @@ end
  def print_all
                  print_all_over_ts
                  print_big_fronts
+                 print_regular_transfers
 end
   
 
     def index
-                @sublimation_entries = SublimationEntry.group("purchase_id, FirstName,LastName, Company").select("purchase_id, FirstName,LastName, Company").all        #order("purchase_id")
+                @sublimation_entries = SublimationEntry.group("purchase_id,FirstName, LastName, Company").select("purchase_id, FirstName,LastName, Company").all        #order("purchase_id")
       s =  "s"
     end
 
@@ -89,10 +90,10 @@ end
                         logger.debug "5555555555555555555555555555555555"
                         logger.debug "5555555555555555555555555555555555"
                         logger.debug "5555555555555555555555555555555555"
-                        @sublimation_entries = SublimationEntry.where( "purchase_id = ? and name = ?",  params[:purchase_id], "all_over_item" )
+                        @all_over_sublimation_entries = SublimationEntry.where( "purchase_id = ? and name = ?",  params[:purchase_id], "all_over_item" )
                         @all_over_ts_montage =  []
                         iteration_number = 0.0
-                        @sublimation_entries.each do | pe |
+                        @all_over_sublimation_entries.each do | pe |
 
                                     sublimation_width_string  =    pe.SubDescription3.split("_").first
                                      if sublimation_width_string.is_number?
@@ -127,15 +128,117 @@ end
   end
 
 
+
+
+  def print_regular_transfers
+    # system( 'convert W:\AUTOMATION_DATABASE\AUTOMATED_ITEM_SPECSHEETS\\'  + oj.filename + '  -geometry 75 W:\AUTOMATION_DATABASE\FINISHED_WEBSITE_ITEM_THUMBNAILS\\' +  oj.filename )
+    # montage   -border 0 -geometry 7600x  -density 200 * final.jpg
+    logger.debug "5555555555555555555555555555555555"
+    logger.debug "5555555555555555555555555555555555"
+    logger.debug "5555555555555555555555555555555555"
+    @regular_transfer_sublimation_entries = SublimationEntry.where("purchase_id = ? and name not in (?)", params[:purchase_id], [ "huge_front", "all_over_item"] )
+    @regular_transfer_images_to_layout = []
+    @regular_transfer_sublimation_entries.each do |the_pe|
+      logger.debug "##################################"
+      logger.debug "the_pe.id.to_s: " + the_pe.id.to_s
+      logger.debug "##################################"
+      logger.debug "##################################"
+
+
+      quantity_on_order =    the_pe.QuantityOnOrder.to_i
+      if quantity_on_order  > 1
+        logger.debug "quantity_on_order > 1"
+        logger.debug "quantity_on_order: " + quantity_on_order.to_s
+        quantity_on_order.times do |pe|
+          @regular_transfer_images_to_layout <<   the_pe
+        end
+      else
+        logger.debug "quantity_on_order NOT > 1"
+        @regular_transfer_images_to_layout <<   the_pe
+      end
+
+    end
+    @regular_transfers_montage =  []
+    iteration_number = 0.0
+    @regular_transfer_images_to_layout.in_groups_of(3).each do |the_pe|
+      iteration_number += 1
+
+      the_file_1 =   the_pe[0].to_s
+      the_file_1_name  =   the_pe[0].file_url_front
+      the_file_1_id  =   the_pe[0].id.to_s
+      the_file_1_width  =   the_pe[0].regular_transfer_width
+      the_file_1_purchase_id  =   the_pe[0].purchase_id
+      the_file_1_label = the_pe[0].label
+      logger.debug "##################################"
+
+
+      if  the_pe[1]
+        the_file_2 =   the_pe[1].to_s
+        the_file_2_name  =   the_pe[1].file_url_front
+        the_file_2_id  =   the_pe[1].id.to_s
+        the_file_2_width  =   the_pe[1].regular_transfer_width
+        the_file_2_purchase_id  =   the_pe[1].purchase_id
+        the_file_2_label = the_pe[1].label
+      end
+      
+      if  the_pe[2]
+        the_file_3 =   the_pe[2].to_s
+        the_file_3_name  =   the_pe[2].file_url_front
+        the_file_3_id  =   the_pe[2].id.to_s
+        the_file_3_width  =   the_pe[2].regular_transfer_width
+        the_file_3_purchase_id  =   the_pe[2].purchase_id
+        the_file_3_label = the_pe[2].label
+      end
+
+      logger.debug "the_file_1: " +  the_file_1.to_s
+      logger.debug "the_file_1_name: " +  the_file_1_name.to_s
+      logger.debug "the_file_1_id: " +  the_file_1_id.to_s
+      logger.debug "the_file_1_width: " +  the_file_1_width.to_s
+
+      logger.debug "the_file_2: " +  the_file_2.to_s
+      logger.debug "the_file_2_name: " +  the_file_2_name.to_s
+      logger.debug "the_file_2_id: " +  the_file_2_id.to_s
+      logger.debug "the_file_2_width: " +  the_file_2_width.to_s
+      
+      logger.debug "the_file_3: " +  the_file_3.to_s
+      logger.debug "the_file_3_name: " +  the_file_3_name.to_s
+      logger.debug "the_file_3_id: " +  the_file_3_id.to_s
+      logger.debug "the_file_3_width: " +  the_file_3_width.to_s
+
+      logger.debug "##################################"
+      the_output_filename =    @@OUTPUT_LOCATION + "PURCHASE-" + params[:purchase_id] + "-"   + iteration_number.to_s + '.jpg'
+
+
+
+      if the_file_3
+                    @regular_transfers_montage   <<    "convert " + the_file_1_name + " -density 200 -units PixelsPerInch -resize " + the_file_1_width + " -rotate -90 -flop -bordercolor White  -border 50x50  -fill white  -undercolor black -gravity South   -background White  -splice 0x80 -annotate +0+10 " + the_file_1_label + "  - | convert " + the_file_2_name + " -density 200 -units PixelsPerInch -resize " + the_file_2_width + " -rotate -90 -flop -bordercolor White  -border 50x50 -fill white  -undercolor black -gravity South  -splice 0x80 -annotate +0+10 " + the_file_2_label + " - +append  - | convert " + the_file_3_name + " -density 200 -units PixelsPerInch -resize " + the_file_3_width + " -rotate -90 -flop -bordercolor White  -border 50x50 -fill white  -undercolor black -gravity South  -splice 0x80 -annotate +0+10 " + the_file_3_label + " - +append "  + the_output_filename
+      elsif the_file_2
+                    @regular_transfers_montage   <<    "convert " + the_file_1_name + " -density 200 -units PixelsPerInch -resize " + the_file_1_width + " -rotate -90 -flop -bordercolor White  -border 50x50  -fill white  -undercolor black -gravity South   -background White  -splice 0x80 -annotate +0+10 " + the_file_1_label + "  - | convert " + the_file_2_name + " -density 200 -units PixelsPerInch -resize " + the_file_2_width + " -rotate -90 -flop -bordercolor White  -border 50x50 -fill white  -undercolor black -gravity South  -splice 0x80 -annotate +0+10 " + the_file_2_label + " - +append "  + the_output_filename
+      else
+                   @regular_transfers_montage   <<    "convert " + the_file_1_name + " -density 200 -units PixelsPerInch -resize " + the_file_1_width + " -rotate -90 -flop -bordercolor White  -border 50x50  -fill white  -undercolor black -gravity South   -background White  -splice 0x80 -annotate +0+10 " + the_file_1_label +  " " + the_output_filename
+      end
+
+
+    end
+    logger.debug "montage_string_back: " + @regular_transfers_montages.inspect
+    logger.debug "5555555555555555555555555555555555"
+    logger.debug "5555555555555555555555555555555555"
+    logger.debug "5555555555555555555555555555555555"
+  end
+
+
+
+
+
   def print_big_fronts
                 # system( 'convert W:\AUTOMATION_DATABASE\AUTOMATED_ITEM_SPECSHEETS\\'  + oj.filename + '  -geometry 75 W:\AUTOMATION_DATABASE\FINISHED_WEBSITE_ITEM_THUMBNAILS\\' +  oj.filename )
                 # montage   -border 0 -geometry 7600x  -density 200 * final.jpg
                 logger.debug "5555555555555555555555555555555555"
                 logger.debug "5555555555555555555555555555555555"
                 logger.debug "5555555555555555555555555555555555"
-                @sublimation_entries = SublimationEntry.where( "purchase_id = ? and name = ?",  params[:purchase_id], "huge_front" )
+                @big_fronts_sublimation_entries = SublimationEntry.where( "purchase_id = ? and name = ?",  params[:purchase_id], "huge_front" )
                 @big_front_images_to_layout = []
-                @sublimation_entries.each do |the_pe|
+                @big_fronts_sublimation_entries.each do |the_pe|
                                             logger.debug "##################################"
                                               logger.debug "the_pe.id.to_s: " + the_pe.id.to_s
                                               logger.debug "##################################"

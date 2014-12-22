@@ -33,7 +33,7 @@
 
   </th>
   <th><%= item.ItemLookupCode %></th>
-  <td><%= item.Description %></td>
+  <td><%= item.Description %>-  <%= purchases_entry.transfer_type_name %> </td>
   <td> <%#= 'Dimensions:' if item.dimensions != '' %> <%= item.dimensions %></td>
   <td><%=  number_to_currency(item.full_unit_price(@customer_array,purchases_entry))  %></td>
   <td><%= number_to_currency(  item.unit_quantity_tier_discount_price(@customer_array, quantity,purchases_entry))   %></td>
