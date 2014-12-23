@@ -7,6 +7,30 @@ after_filter :reset_incomplete_symbiont_status_found  # , :only =>  [ :add_to_ca
 ### SERIALIZE DETAILS: http://ar.rubyonrails.org/classes/ActiveRecord/Base.html
 ### SERIALIZE DETAILS: http://ar.rubyonrails.org/classes/ActiveRecord/Base.html
 
+
+ def  trying_to_sublimate_wrong_class?
+
+           if params[:transfer_type] and     params[:transfer_type][:id]
+                          sublimation_transfer_type =         params[:transfer_type][:id].include? "sublim"
+          end
+
+
+           if  sublimation_transfer_type
+                                            if @item.category and @item.category.category_class
+                                                                  @the_category_class_id =  @item.category.category_class_id.to_s
+                                            end
+                                            if @@sublimation_standard_category_class_ids.include?   @the_category_class_id
+                                                                              false
+
+                                            else
+                                                                             flash[:notice] = "This item is not available as sublimation. Call 1-866-916-5866 for details"
+                                                                                 true
+                                            end
+             end
+ end
+
+
+
 def add_to_cart
   pe_comment
   if wholesale_only_website_logged_in_retail?
@@ -36,7 +60,7 @@ def add_to_cart
                                                                            ensure_positive_quantity('1')
                                                               end
                                                               start_purchase unless @purchase
-                                                              if fails_membership_requirement?(@item)
+                                                              if fails_membership_requirement?(@item)  or  trying_to_sublimate_wrong_class?
                                                                                       redirect_to  :controller => 'cart', :action => 'index'
                                                               else
                                                                                     if @singular_item_customer == true   ################################ (wholesale pricelevel B and C customers)

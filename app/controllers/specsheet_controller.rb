@@ -134,7 +134,7 @@ class SpecsheetController < ApplicationController
                     if params[:item_class_component_item_id]
                                   @selected_item_id  =  params[:item_class_component_item_id]
                     else
-                                  @selected_item_id  =  @purchase.master.item_id
+                                  @selected_item_id  =  @purchase.master.item_id    unless @singular_item_customer
                     end
       #>>>>>>>>>>>>>>>>>>>> OUTPUT>>>>>>>>>> :item_id => item_id  ## from collection select if available otherwise hidden field
     end

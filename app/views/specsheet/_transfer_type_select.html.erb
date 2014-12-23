@@ -1,37 +1,49 @@
 
 
-<script type="text/javascript">
-                    function changeTransferType() {
-//                                     alert("transfer type changed") ;
-                                    //        jQuery.ajax({
-                                    //            type: "GET",
-                                    //            dataType: 'script',
-                                    //            url: "/specsheet/update_sublimation_garments",
-                                    //            data: {   sublimation_item_class_id:  $('#sublimation_item_class_id').val()   }
-                                    //        });
-                        }
-</script>
+<% if @item and @item.category and @item.category.category_class %>
+                 <% @the_category_class_id =  @item.category.category_class_id.to_s  %>
+   <% end %>
+
+       <% logger.debug "NOW NOW NOW"  %>
+
+       <% logger.debug "@the_category_class_id: " + @the_category_class_id.to_s  %>
 
 
-<% if @sublimation %>
-                                <%=  hidden_field_tag "transfer_type_id",  "sublimfull"  %>
-<% else %>
-                                <select name="transfer_type[id]" id="transfer_type_id"  data-native-menu="false" onchange="changeTransferType();">
-                                                            <% @transfer_types = [
-                                                             {"name"=>"SilkScreen Transfer 12\"x12\"", "id"=>"plas"},
-                                                             {"name"=>"Sublimation Transfer 9\"x9\"", "id"=>"sublim9"} ,
-                                                             {"name"=>"Sublimation Transfer 12\"x12\"", "id"=>"sublim12"} ,
-                                                             {"name"=>"Sublimation Transfer 14\"x14\"", "id"=>"sublim14"}
-                                                            ]
-                                               %>
+   <%   if ['/cart'].include?(request.path)  or     @@sublimation_standard_category_class_ids.include?   @the_category_class_id    %>
 
-                                                            <% @selected_id = '001' %>
+                <script type="text/javascript">
+                                    function changeTransferType() {
+                //                                     alert("transfer type changed") ;
+                                                    //        jQuery.ajax({
+                                                    //            type: "GET",
+                                                    //            dataType: 'script',
+                                                    //            url: "/specsheet/update_sublimation_garments",
+                                                    //            data: {   sublimation_item_class_id:  $('#sublimation_item_class_id').val()   }
+                                                    //        });
+                                        }
+                </script>
 
-                                                             <%=  options_for_select(@transfer_types.collect {|p| [ p['name'], p['id'] ] })     %>
-                                </select>
+
+                <% if @sublimation %>
+                                                <%=  hidden_field_tag "transfer_type_id",  "sublimfull"  %>
+                <% else %>
+
+                                                                    <select name="transfer_type[id]" id="transfer_type_id"  data-native-menu="false" onchange="changeTransferType();">
+                                                                                                <% @transfer_types = [
+                                                                                                 {"name"=>"SilkScreen Transfer 12\"x12\"", "id"=>"plas"},
+                                                                                                 {"name"=>"Sublimation Transfer 9\"x9\"", "id"=>"sublim9"} ,
+                                                                                                 {"name"=>"Sublimation Transfer 12\"x12\"", "id"=>"sublim12"} ,
+                                                                                                 {"name"=>"Sublimation Transfer 14\"x14\"", "id"=>"sublim14"}
+                                                                                                ]
+                                                                                   %>
+
+                                                                                                <% @selected_id = '001' %>
+
+                                                                                                 <%=  options_for_select(@transfer_types.collect {|p| [ p['name'], p['id'] ] })     %>
+                                                                    </select>
+
+                <% end %>
 <% end %>
-
-
 
 
 

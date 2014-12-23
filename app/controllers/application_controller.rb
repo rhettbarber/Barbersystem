@@ -30,7 +30,10 @@ class ApplicationController < ActionController::Base
   before_filter :before_filter
   after_filter :after_filter
 
-def no_item_menu
+  @@sublimation_standard_category_class_ids = ["26", "27"]
+
+
+  def no_item_menu
              @no_item_menu = true
 end
 
