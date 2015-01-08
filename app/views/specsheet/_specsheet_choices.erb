@@ -14,7 +14,7 @@
 
 <%=  form_tag( '/cart/add_to_cart' , :method => :put )  do %>
 
-
+                         <%= render :partial => "specsheet_quantity_on_order" %>
 
                          <%= render "specsheet/transfer_type_select" %>
 

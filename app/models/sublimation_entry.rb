@@ -1,8 +1,46 @@
 class SublimationEntry  < ActiveRecord::Base
 
 
+def is_custom_sublimation?
+          if self.name == "sublimation_shirts"
+                    if self.Comment.to_s.include? 'sublim'
+                                   true
+                    else
+                                  false
+                     end
+          else
+                               false
+            end
+end
 
- def regular_transfer_width
+
+
+def transfer_type_name
+  if self.Comment.to_s.include? 'sublim9'
+    return    "sublim9"
+  elsif self.Comment.to_s.include? "sublim12"
+    return    "sublim12"
+  elsif self.Comment.to_s.include?  "sublim14"
+    return    "sublim14"
+  elsif self.Comment.to_s.include?  "sublimfull"
+    return    "sublimfull"
+  elsif self.Comment.to_s.include?  "sublimaot"
+    return    "sublimaot"
+  else
+    return    ""
+  end
+end
+
+
+
+def sublimation_transfer_width
+             return  '1000'
+end
+
+
+
+
+  def regular_transfer_width
               logger.debug "##################################"
               logger.debug "begin sublimation_entry.regular_transfer_width"
               logger.debug "  the_pe.PriceLevel: " +   self.PriceLevel.to_s
@@ -142,25 +180,40 @@ end
 
 
 
- def file_url_back
-               if self.name == "all_over_item"
-                          return         "W:\\\\AUTOMATION_DATABASE\\PRODUCTION_FILES\\ALL-OVER-T\\"  +  self.all_over_root_filename   + "-1.jpg"
-               else
-                             return      "W:\\\\AUTOMATION_DATABASE\\ORIGINAL_JPG\\"  +  self.itemlookupcode_root_filename + ".jpg"
-                 end
- end
+
+def comment_custom_filename
+                  sublimation_width_string  =    self.Comment.split("_").second.gsub(".jpg","").gsub(".png", "")
+                  # if sublimation_width_string and sublimation_width_string.is_number?
+                  #             sublimation_width   =       sublimation_width_string
+                  # else
+                  #             sublimation_width     = 'no_comment_size'
+                  # end
+                  return sublimation_width_string
+end
+
+
 
 
 
  def file_url_front
              if self.name == "all_over_item"
-                              return       "W:\\\\AUTOMATION_DATABASE\\PRODUCTION_FILES\\ALL-OVER-T\\"  +  self.all_over_root_filename       + "-0.jpg"
+                                       return       "W:\\\\AUTOMATION_DATABASE\\PRODUCTION_FILES\\ALL-OVER-T\\"  +  self.all_over_root_filename       + "-0.jpg"
+             elsif  self.name == "sublimation_shirts"
+                                      return       "W:\\\\AUTOMATION_DATABASE\\PRODUCTION_FILES\\ALL-OVER-T-CUSTOM-AUTOMATED\\"  +  self.comment_custom_filename + "-0.jpg"
              else
-                                return      "W:\\\\AUTOMATION_DATABASE\\ORIGINAL_JPG\\"  + self.itemlookupcode_root_filename   + ".jpg"
+                                       return      "W:\\\\AUTOMATION_DATABASE\\ORIGINAL_JPG\\"  + self.itemlookupcode_root_filename   + ".jpg"
              end
 end
 
-
+def file_url_back
+              if self.name == "all_over_item"
+                         return         "W:\\\\AUTOMATION_DATABASE\\PRODUCTION_FILES\\ALL-OVER-T\\"  +  self.all_over_root_filename   + "-1.jpg"
+              elsif  self.name == "sublimation_shirts"
+                          return       "W:\\\\AUTOMATION_DATABASE\\PRODUCTION_FILES\\ALL-OVER-T-CUSTOM-AUTOMATED\\"  +  self.comment_custom_filename  + "-1.jpg"
+              else
+                           return      "W:\\\\AUTOMATION_DATABASE\\ORIGINAL_JPG\\"  +  self.itemlookupcode_root_filename + ".jpg"
+              end
+end
 
 
 def hot_folder_url_front(iteration_number=1)

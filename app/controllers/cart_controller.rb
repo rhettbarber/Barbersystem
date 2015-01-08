@@ -8,6 +8,14 @@ after_filter :reset_incomplete_symbiont_status_found  # , :only =>  [ :add_to_ca
 ### SERIALIZE DETAILS: http://ar.rubyonrails.org/classes/ActiveRecord/Base.html
 
 
+
+
+
+
+
+
+
+
  def  trying_to_sublimate_wrong_class?
 
            if params[:transfer_type] and     params[:transfer_type][:id]
@@ -127,8 +135,8 @@ def add_to_cart
                     else
                                      logger.debug "PURCHASES_ENTRY_ID FOUND"
                                      logger.debug("params[:commit].downcase:  " + params[:commit].downcase  )
-                                     logger.debug( "params[:design_id] :" + params[:design_id] )
-                                     logger.debug( "params[:item_id] :" + params[:item_id] )
+                                     logger.debug( "params[:design_id] :" + params[:design_id].to_s  )
+                                     logger.debug( "params[:item_id] :" + params[:item_id].to_s )
                                      logger.debug( "params[:item_class_component] :" + params[:item_class_component].inspect  )
                                      if params[:commit].downcase  == "add_to_cart_purchases_entry_change_design_keep_item"
                                                          @add_to_cart_purchases_entry_change_design_keep_item = true
@@ -156,7 +164,7 @@ end
                         the_item = Item.find( the_item_id )
 
                         the_design_id = params[:design_id]
-                        the_design  = Item.find( the_design_id )
+                        the_design  = Item.find( the_design_id )   if params[:design_id]
 
                          logger.debug "@add_to_cart_purchases_entry_change_design_keep_item: "  +  @add_to_cart_purchases_entry_change_design_keep_item.to_s
                          logger.debug "@add_to_cart_purchases_entry_change_item_keep_design: "  +  @add_to_cart_purchases_entry_change_item_keep_design.to_s
@@ -171,7 +179,7 @@ end
                                       logger.debug "no the_design"
                          end
 
-                        if purchases_entry.symbiotic_item == true
+                        if purchases_entry.symbiotic_item == true and !@singular_item_customer
                                             purchases_entry_slave = purchases_entry.slave_of_symbiont_pair
                                             purchases_entry_master  = purchases_entry.master_of_symbiont_pair
                                              if @add_to_cart_purchases_entry_change_design_keep_item and the_item
@@ -226,6 +234,7 @@ end
                                                logger.debug "purchases_entry.symbiotic_item IS NOT true"
                                                purchases_entry.item_id =the_item_id
                                                 purchases_entry.Description =Slug.generate( purchases_entry.item.Description )
+
                                                 purchases_entry.save
                         end
                         logger.debug "####### -####### -####### -####### -####### - #######"
@@ -442,7 +451,7 @@ def find_item(params)
            the_item_id = params[:item_id] || params[:design_id]
 
         	departments_to_search = @website.default_all_department_ids + [ '1', '5' ]
-           if params[:purchases_entries]
+           if params[:purchases_entries] and params[:purchases_entries].size  > 1
                                    logger.debug "params[:purchases_entries]: #{params[:purchases_entries]}"
                                     ilc  =   params[:purchases_entries][:ItemLookupCode]
                                     ################## need to scope this find to website  ??

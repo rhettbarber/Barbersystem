@@ -52,6 +52,16 @@ default_scope  :conditions => { :WebItem =>  true, :Inactive => false  }
     return true
   end
 
+  def default_quantity
+          if self.category and self.category.category_class  and self.category.category_class.item_type == 'slave'
+                   return 12
+          else
+                  return 1
+          end
+
+  end
+
+
 
 
 

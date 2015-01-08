@@ -4,33 +4,120 @@
   <li><%= link_to  "Back to Order Details" , "/image_manager/order_details/" + params[:purchase_id]  %></li>
 </ul>
 <br>  <br>
+                    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -<br>
+                    <%= @all_over_sublimation_entries.size %> normal All Over  images to layout : <br>
+                    <% @all_over_sublimation_entries.each do |entry| %>
+                                 <li>  <%=  entry.ItemLookupCode + " - " +  entry.Comment  %> </li>
+                    <% end %>
+                    <br>
 
+                    <%= @all_all_over_sublimation_entries.size %> All All Over  images to layout : <br>
+                    <% @all_all_over_sublimation_entries.each do |entry| %>
+                                 <li>  <%=  entry.ItemLookupCode + " - " +  entry.Comment  %> </li>
+                    <% end %>
+
+                   <br>
+                    Total number to print:  <%=  @all_over_ts_montage.size %> <br>
+                    <br>
 
                     <% @all_over_ts_montage.each do |entry| %>
                                             <li> <%=  entry   %> </li>
                     <% end %>
+                    REM "All done"
+                    <br><br>
+                    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -<br>
+
                     <br><br>
 
+
+                    <%= @regular_transfer_sublimation_entries.size %> normal  Regular transfer images to layout : <br>
+                    <% @regular_transfer_sublimation_entries.each do |entry| %>
+                        <li>  <%=  entry.ItemLookupCode + " - " +  entry.Comment  %> </li>
+                    <% end if @regular_transfer_images_to_layout %>
+                    <br>
+                    <br>
+
+
+                    <%= @all_all_regular_transfer_sublimation_entries.size %> All Regular transfer images to layout : <br>
+                    <% @all_all_regular_transfer_images_to_layout.each do |entry| %>
+                        <li>  <%=  entry.ItemLookupCode + " - " +  entry.Comment  %> </li>
+                    <% end if @all_all_regular_transfer_images_to_layout %>
+                    <br>
+
+                    Total number to print:  <%=  @regular_transfer_images_to_layout.size %> <br>
 
                     <% @regular_transfers_montage.each do |entry| %>
                         <li> <%=  entry   %> </li>
                     <% end %>
-                        <br><br>
 
-                    <% @big_fronts_montage.each do |entry| %>
+                      REM "All done"
+-<br>-<br>
+                    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -<br>
+                    <%= @full_front_sublimation_entries.size %> normal Full front  images to layout : <br>
+                    <% @full_front_sublimation_entries.each do |entry| %>
+                        <li>  <%=  entry.ItemLookupCode + " - " +  entry.Comment  %> </li>
+                    <% end %>
+                    <br>
+                    
+                    <%= @all_full_front_sublimation_entries.size %> All Full front  images to layout : <br>
+                    <% @all_full_front_sublimation_entries.each do |entry| %>
+                        <li>  <%=  entry.ItemLookupCode + " - " +  entry.Comment  %> </li>
+                    <% end %>
+                    
+                    <br>
+                    Total number to print:  <%=  @all_full_front_sublimation_entries.size %> <br>
+                    <br>
+                    
+                    <% @full_fronts_montage.each do |entry| %>
+                        <li> <%=  entry   %> </li>
+                    <% end %>
+                    REM "All done"
+                    <br><br>
+                    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -<br>
+
+
+
+
+
+
+
+          <% if @timeee %>
+
+
+
+
+                     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -<br>
+
+
+
+
+
+                    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -<br>
+                    <%= @full_front_sublimation_entries.size %> Big front images to layout : <br>
+                    <% @full_front_images_to_layout.each do |entry| %>
+                                    <li>  <%=  entry.ItemLookupCode + " - " +  entry.Comment  %> </li>
+                    <% end %>
+                    <br>
+
+
+                    <% @full_fronts_montage.each do |entry| %>
                         <li> <%=  entry   %> </li>
                     <% end %>
 
                     <br>  <br>
 
-<%= @regular_transfer_sublimation_entries.size %> Regular transfer images to layout : <br>
-<% @regular_transfer_images_to_layout.each do |entry| %>
-    <li>  <%=  entry.ItemLookupCode + " - " +  entry.Comment  %> </li>
-<% end %>
-<br>
 
-Big front images to layout : <br>
-<% @big_front_images_to_layout.each do |entry| %>
-    <li>  <%=  entry   %></li>
-<% end %>
-<br>
+                        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -<br>
+                        <%= @custom_sublimation_entries.size %> Custom images to layout : <br>
+                        <% @custom_sublimation_entries.each do |entry| %>
+                            <li>  <%=  entry.transfer_type_name + " - " +  entry.ItemLookupCode + " - " +  entry.Comment  %> </li>
+                        <% end %>
+                        <br>
+
+
+                        <% @full_fronts_montage.each do |entry| %>
+                            <li> <%=  entry   %> </li>
+                        <% end %>
+
+                        <br>  <br>
+               <% end %>

@@ -17,20 +17,26 @@ class PurchasesEntry < ActiveRecord::Base
     #end
 
 
+    #### DUPLICATE FUNCTION FROM sublimation_entry.rb
+    #### DUPLICATE FUNCTION FROM sublimation_entry.rb
+    #### DUPLICATE FUNCTION FROM sublimation_entry.rb
+    #### DUPLICATE FUNCTION FROM sublimation_entry.rb
+    def transfer_type_name
+      if self.Comment.to_s.include? 'sublim9'
+        return    "Sublimation transfer size 9\"x9\""
+      elsif self.Comment.to_s.include? "sublim12"
+        return    "Sublimation transfer size 12\"x12\""
+      elsif self.Comment.to_s.include?  "sublim14"
+        return    "Sublimation transfer size 14\"x14\""
+      elsif self.Comment.to_s.include?  "sublimfull"
+        return    "Sublimation transfer size 15\"x19\""
+      elsif self.Comment.to_s.include?  "sublimaot"
+        return    "Sublimation All Over T"
+      else
+        return    ""
+      end
+    end
 
-def transfer_type_name
-        if self.Comment.to_s.include? 'sublim9'
-              return    "Sublimation transfer size 9\"x9\""
-        elsif self.Comment.to_s.include? "sublim12"
-              return    "Sublimation transfer size 12\"x12\""
-        elsif self.Comment.to_s.include?  "sublim14"
-                 return    "Sublimation transfer size 14\"x14\""
-        elsif self.Comment.to_s.include?  "sublimfull"
-                return    "Sublimation transfer size 15\"x19\""
-        else
-               return    ""
-        end
-end
 
 
 

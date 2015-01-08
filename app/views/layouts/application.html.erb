@@ -42,7 +42,7 @@
                                     <div id="the_yield" style="margin-left:auto;margin-right:auto;overflow:hidden;">
 
                                                                              <div class="<%=  @show_class %> yield">
-                                                                                                 <% if request.protocol == "https://" %>
+                                                                                                 <% if request.protocol == "https://" or Rails.env == "development" %>
                                                                                                             <%= javascript_include_tag  "/assets/non_compiled_assets/initiate_functions.js" %>
                                                                                                  <% else %>
                                                                                                             <%= javascript_include_tag  "http://cdn.dixieoutfitters.com/assets/non_compiled_assets/initiate_functions.js" %>

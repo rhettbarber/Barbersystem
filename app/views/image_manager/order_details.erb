@@ -11,48 +11,60 @@
   <li><%= link_to  "Print entire order" , "/image_manager/print_all/" +  params[:purchase_id]  , data: { confirm: 'Are you sure this order is ready to print?' }  %> </li>
   <li data-role="list-divider"> </li>
 </ul>
-      <br>
+<br>
 
   <ul data-role="listview" data-inset="false" data-filter="true" >
 
-                    <li data-role="list-divider"> All Over T's</li>
-                    <% @sublimation_entries.where("name = ?", "all_over_item").each do |entry| %>
-                                            <li>
-                                              <a href="#">
-                                                <%= image_tag   "http://dixieoutfitters.com/images/item_thumbnails/" +  entry.PictureName  %>
-                                                <h2>  <%= entry.ItemLookupCode %> - <%= entry.QuantityOnOrder %> - <%= entry.Description %></h2>
-                                              </a>
-                                              <%= link_to 'Edit',   "#"   , "data-icon" => "gear"   %>
-                                            </li>
-                    <% end %>
-
-                    <li data-role="list-divider"> Huge front designs</li>
-                    <% @sublimation_entries.order("ItemLookupCode ASC").where("name = ?", "huge_front").each do |entry| %>
-                        <li>
-                          <a href="#">
-                            <%= image_tag   "http://dixieoutfitters.com/images/item_thumbnails/" +  entry.PictureName  %>
-                            <h2>  <%= entry.ItemLookupCode %> -  <%= entry.QuantityOnOrder %> -  <%= entry.Description %></h2>
-                          </a>
-                          <%= link_to 'Edit',   "#"   , "data-icon" => "gear"   %>
-                        </li>
-                    <% end %>
+                                <li data-role="list-divider"><%= @all_over_sublimation_entries.size %> All Over T's</li>
+                                <% @all_over_sublimation_entries.each do |entry| %>
+                                                        <li>
+                                                          <a href="#">
+                                                            <%= image_tag   "http://dixieoutfitters.com/images/item_thumbnails/" +  entry.PictureName  %>
+                                                            <h2>  <%= entry.ItemLookupCode %> - <%= entry.QuantityOnOrder %> - <%= entry.Description %></h2>
+                                                          </a>
+                                                          <%= link_to 'Edit',   "#"   , "data-icon" => "gear"   %>
+                                                        </li>
+                                <% end if @all_over_sublimation_entries%>
 
 
-                <li data-role="list-divider"> Regular transfers as sublimation </li>
-                <% @sublimation_entries.order("ItemLookupCode ASC").where("name not in (?)",[ "huge_front", "all_over_item"] ).each do |entry| %>
-                    <li>
-                      <a href="#">
-                        <%= image_tag   "http://dixieoutfitters.com/images/item_thumbnails/" +  entry.PictureName  %>
-                        <h2>  <%= entry.ItemLookupCode %> -  <%= entry.QuantityOnOrder %> -  <%= entry.Description %></h2>
-                      </a>
-                      <%= link_to 'Edit',   "#"   , "data-icon" => "gear"   %>
-                    </li>
-                <% end %>
+                                 <li data-role="list-divider"><%= @full_front_sublimation_entries.size %>  Huge front designs</li>
+                                  <% @full_front_sublimation_entries.each do |entry| %>
+                                                <li>
+                                                          <a href="#">
+                                                                    <%= image_tag   "http://dixieoutfitters.com/images/item_thumbnails/" +  entry.PictureName  %>
+                                                                    <h2>  <%= entry.ItemLookupCode %> -  <%= entry.QuantityOnOrder %> -  <%= entry.Description %></h2>
+                                                          </a>
+                                                          <%= link_to 'Edit',   "#"   , "data-icon" => "gear"   %>
+                                                 </li>
+                                    <% end if @full_front_sublimation_entries %>
+
+
+                                 <li data-role="list-divider"> <%= @regular_transfer_sublimation_entries.size %>  Regular transfers as sublimation </li>
+                                 <% @regular_transfer_sublimation_entries.each do |entry| %>
+                                                <li>
+                                                              <a href="#">
+                                                                        <%= image_tag   "http://dixieoutfitters.com/images/item_thumbnails/" +  entry.PictureName  %>
+                                                                        <h2>  <%= entry.ItemLookupCode %> -  <%= entry.QuantityOnOrder %> -  <%= entry.Description %>
+                                                                          - <%= entry.Comment %>
+                                                                        </h2>
+                                                              </a>
+                                                              <%= link_to 'Edit',   "#"   , "data-icon" => "gear"   %>
+                                                </li>
+                                  <% end if @regular_transfer_sublimation_entries%>
 
 
 
-
-
+                                   <li data-role="list-divider"><%= @custom_sublimation_entries.size %>  Custom sublimation  jobs </li>
+                                 <% @custom_sublimation_entries.each do |entry| %>
+                                                    <li>
+                                                                      <a href="#">
+                                                                                        <%= image_tag   "http://dixieoutfitters.com/images/item_thumbnails/custom.gif" %>
+                                                                                        <h2>  <%= entry.ItemLookupCode %> -  <%= entry.QuantityOnOrder %> -  <%= entry.Description %>
+                                                                                          - <%= entry.Comment %></h2>
+                                                                      </a>
+                                                                        <%= link_to 'Edit',   "#"   , "data-icon" => "gear"   %>
+                                                    </li>
+                                   <% end if @custom_sublimation_entries %>
   </ul>
 
 

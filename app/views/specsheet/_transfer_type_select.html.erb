@@ -1,4 +1,6 @@
 
+<%   @@sublimation_standard_category_class_ids = ["26", "27"] %>
+
 
 <% if @item and @item.category and @item.category.category_class %>
                  <% @the_category_class_id =  @item.category.category_class_id.to_s  %>
@@ -11,35 +13,30 @@
 
    <%   if ['/cart'].include?(request.path)  or     @@sublimation_standard_category_class_ids.include?   @the_category_class_id    %>
 
-                <script type="text/javascript">
-                                    function changeTransferType() {
-                //                                     alert("transfer type changed") ;
-                                                    //        jQuery.ajax({
-                                                    //            type: "GET",
-                                                    //            dataType: 'script',
-                                                    //            url: "/specsheet/update_sublimation_garments",
-                                                    //            data: {   sublimation_item_class_id:  $('#sublimation_item_class_id').val()   }
-                                                    //        });
-                                        }
-                </script>
+
 
 
                 <% if @sublimation %>
                                                 <%=  hidden_field_tag "transfer_type_id",  "sublimfull"  %>
                 <% else %>
 
-                                                                    <select name="transfer_type[id]" id="transfer_type_id"  data-native-menu="false" onchange="changeTransferType();">
-                                                                                                <% @transfer_types = [
-                                                                                                 {"name"=>"SilkScreen Transfer 12\"x12\"", "id"=>"plas"},
-                                                                                                 {"name"=>"Sublimation Transfer 9\"x9\"", "id"=>"sublim9"} ,
-                                                                                                 {"name"=>"Sublimation Transfer 12\"x12\"", "id"=>"sublim12"} ,
-                                                                                                 {"name"=>"Sublimation Transfer 14\"x14\"", "id"=>"sublim14"}
-                                                                                                ]
-                                                                                   %>
+                                                                    <select name="transfer_type[id]" id="transfer_type_id"  data-native-menu="false">
+
+
+                                                                                                                  <%= options_for_select(
+                                                                                  [
+                                                                                          [ "SilkScreen Transfer 12\"x12\"", "plas" , {:'data-price-1' => 121}, {:'data-price-2' => 122}, {:'data-price-3' => 123}, {:'data-price-4' => 124}     ],
+                                                                                          [ "Sublimation Transfer 9\"x9\"", "sublim9", {:'data-price-1' => 91}, {:'data-price-2' => 92}, {:'data-price-3' => 93}, {:'data-price-4' => 94}     ],
+                                                                                          [ "Sublimation Transfer 12\"x12\"", "sublim12" , {:'data-price-1' => 1121}, {:'data-price-2' => 1122}, {:'data-price-3' => 1123}, {:'data-price-4' => 1123}     ],
+                                                                                          [ "Sublimation Transfer 14\"x14\"",  "sublim14" , {:'data-price-1' => 141}, {:'data-price-2' => 142}, {:'data-price-3' => 143}, {:'data-price-4' => 144}     ]
+
+                                                                                  ] ) %>
+
+
 
                                                                                                 <% @selected_id = '001' %>
 
-                                                                                                 <%=  options_for_select(@transfer_types.collect {|p| [ p['name'], p['id'] ] })     %>
+
                                                                     </select>
 
                 <% end %>
@@ -47,9 +44,13 @@
 
 
 
+<%# @transfer_types = [
+                                                                                                 {"name"=>"SilkScreen Transfer 12\"x12\"", "id"=>"plas", "data-price" =>  "1212"  },
+                                                                                                 {"name"=>"Sublimation Transfer 9\"x9\"", "id"=>"sublim9", "data-price" =>  "9999" } ,
+                                                                                                 {"name"=>"Sublimation Transfer 12\"x12\"", "id"=>"sublim12", "data-price" =>  "1211" } ,
+                                                                                                 {"name"=>"Sublimation Transfer 14\"x14\"", "id"=>"sublim14", "data-price" =>  "141414" }
+                                                                                                ]
+%>
 
 
-
-
-
-
+<%#=  options_for_select(@transfer_types.collect {|p| [ p['name'], p['id'] ] })     %>

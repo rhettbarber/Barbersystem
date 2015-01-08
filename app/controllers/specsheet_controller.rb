@@ -498,17 +498,24 @@ class SpecsheetController < ApplicationController
 ############################################################################################################
  def view_details_your_unit_price
    if @item && @design.nil?
-     if @item.category.category_class.item_type == 'master' &&  @singular_item_customer == false
-       @your_unit_price = @item.your_unit_price(@customer_array,1) + 0.01
-     else
-       @your_unit_price = @item.your_unit_price(@customer_array,1)
-     end
+               if @item.category.category_class.item_type == 'master' &&  @singular_item_customer == false
+                          @your_unit_price = @item.your_unit_price(@customer_array,1) + 0.01
+               else
+                          @default_quantity = @item.default_quantity
+                          @your_unit_price = @item.your_unit_price(@customer_array, 13   )
+
+                          @your_unit_price1 = @item.your_unit_price(@customer_array,1)
+                          @your_unit_price2 = @item.your_unit_price(@customer_array,13 )
+                          @your_unit_price3 = @item.your_unit_price(@customer_array,101)
+                          @your_unit_price4 = @item.your_unit_price(@customer_array,301)
+               end
    else
-     @your_unit_price = @item.your_unit_price(@customer_array,1) if @item
+              @your_unit_price = @item.your_unit_price(@customer_array,1) if @item
    end
-   @your_unit_price = @item.symbiont_your_unit_price(@design,@customer_array,1) if  @item && @design
-
-
+   if  @item && @design
+          @your_unit_price = @item.symbiont_your_unit_price(@design,@customer_array,1)
+ end
+                 s = "s"
  end
 ############################################################################################################
  def setup_auto_opposites_status
