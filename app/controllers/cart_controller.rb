@@ -213,6 +213,10 @@ end
                                                                                      logger.debug "add_to_cart_purchases_entry update item class component"
                                                                                     if the_item
                                                                                                       purchases_entry_master.item_id = the_item_id
+                                                                                                     if  params[:purchases_entries] and    params[:purchases_entries][:QuantityOnOrder]
+                                                                                                                  purchases_entry_master.QuantityOnOrder = params[:purchases_entries][:QuantityOnOrder].to_i
+                                                                                                                  purchases_entry_slave.QuantityOnOrder = params[:purchases_entries][:QuantityOnOrder].to_i
+                                                                                                       end
                                                                                                       purchases_entry_master.ItemLookupCode = the_item.ItemLookupCode
                                                                                                       purchases_entry_master.Description =Slug.generate( the_item.Description )
                                                                                                       purchases_entry_slave.Comment = @pe_comment
@@ -222,6 +226,9 @@ end
                                                                                     end
                                                                                     if the_design
                                                                                                              purchases_entry_slave.item_id = the_design_id
+                                                                                                             if  params[:purchases_entries] and    params[:purchases_entries][:QuantityOnOrder]
+                                                                                                                          purchases_entry_slave.QuantityOnOrder = params[:purchases_entries][:QuantityOnOrder].to_i
+                                                                                                             end
                                                                                                              purchases_entry_slave.Description = Slug.generate( the_design.Description )
                                                                                                              purchases_entry_slave.ItemLookupCode =  the_design.ItemLookupCode
                                                                                     else
@@ -233,8 +240,11 @@ end
                         else
                                                logger.debug "purchases_entry.symbiotic_item IS NOT true"
                                                purchases_entry.item_id =the_item_id
+                                               if  params[:purchases_entries] and    params[:purchases_entries][:QuantityOnOrder]
+                                                           purchases_entry.QuantityOnOrder = params[:purchases_entries][:QuantityOnOrder].to_i
+                                               end
                                                 purchases_entry.Description =Slug.generate( purchases_entry.item.Description )
-
+                                               purchases_entry.Comment = @pe_comment
                                                 purchases_entry.save
                         end
                         logger.debug "####### -####### -####### -####### -####### - #######"
@@ -286,6 +296,7 @@ end
     end
 
     @pe_comment =   pe_side  +  "_" +  pe_crest  +  "_" +  pe_transfer_type
+    logger.debug "@pe_comment: " + @pe_comment
   end
 ############################################################################################################
   def add_to_cart_singular_item_customer

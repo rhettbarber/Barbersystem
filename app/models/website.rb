@@ -1,7 +1,10 @@
 class Website < ActiveRecord::Base
 #require 'lazyeval'
 
-  has_many  :hidden_website_categories
+  attr_accessible :name, :title, :default_item_department_ids, :default_design_department_ids, :domain, :phone, :meta_description, :meta_keywords, :allowed_admin_ips, :allowed_cashiers, :store_website, :catalog_item_id, :tracking_number
+
+
+      has_many  :hidden_website_categories
 	has_many  :user_authorities
 	has_many   :pages
 		has_many :purchases

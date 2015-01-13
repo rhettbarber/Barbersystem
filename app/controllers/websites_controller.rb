@@ -1,10 +1,11 @@
 class WebsitesController < ApplicationController
-  #layout 'none'
+   #layout 'none'
   #caches_action :show, :cache_path =>  "/test/cool"   #=> Proc.new{ "/products/#{admin?}" }
 
 
 before_filter :initialize_variables
 before_filter :redirect_unless_admin
+before_filter :no_item_menu
 #ssl_exceptions
 
 
@@ -91,7 +92,7 @@ before_filter :redirect_unless_admin
   # PUT /websites/1.xml
   def update
     @website = Website.find(params[:id])
-     @website.accessible = :all if admin?
+     # @website.accessible = :all if admin?
     respond_to do |format|
       if @website.update_attributes(params[:website])
         format.html { redirect_to(@website, :notice => 'Website was successfully updated.') }

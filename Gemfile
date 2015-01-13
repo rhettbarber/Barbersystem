@@ -28,6 +28,7 @@ source 'https://rubygems.org'
 
 #gem 'acts_as_tree_with_dotted_ids' , :git => "https://github.com/xavier/acts-as-tree-with-dotted-ids"  # , :platforms => :ruby
 
+# gem 'pry'
 gem 'execjs', '2.0.2'
 gem 'alchemist'
 gem 'active_shipping'
@@ -42,8 +43,14 @@ gem 'nokogiri'
 
 gem 'cacheable_flash'  , :git => "https://github.com/rhettbarber/cacheable-flash.git"
 
-# Gems used only for assets and not required
-# in production environments by default.
+#group :development, :test do
+#        gem 'rspec-rails'
+        # rails g rspec:install
+
+       # gem 'capybara'
+#  end
+
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'

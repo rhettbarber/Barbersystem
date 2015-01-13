@@ -3,6 +3,7 @@ ThreeTwoThree::Application.routes.draw do
 
 
 
+
   match '/image_manager/missing_psd_images' , :controller => 'image_manager', :action => 'missing_psd_images'
   match '/image_manager/missing_sublimation_images' , :controller => 'image_manager', :action => 'missing_sublimation_images'
   match '/image_manager/print_all/:purchase_id' , :controller => 'image_manager', :action => 'print_all'
@@ -75,7 +76,8 @@ ThreeTwoThree::Application.routes.draw do
     match "catalog", :controller => 'item_reports', :action => 'designs_by_department'
 
     match '/customer_item_sales_by_years' , :controller => 'customer_item_sales_by_years', :action => 'index'
-    resources :item_sales
+
+    resources :item_sales,:websites
 
     #match 'breast_prints/ajax_breast_prints_list', :controller => 'breast_prints', :action => 'ajax_breast_prints_list'
     #match "cache/delete_opposites_cache_for_a_category", :controller => 'cache', :action => 'delete_opposites_cache_for_a_category'

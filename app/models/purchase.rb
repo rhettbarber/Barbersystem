@@ -156,10 +156,10 @@ def discount_name
 			if self.customer.CurrentDiscount > 0
 				"Permanent"
 			else
-				"Volume"
+				""
 			end
 	else
-		"None"
+		""
 	end
 end
 ########################################################################################################
@@ -433,7 +433,6 @@ def new_master_symbiote(item,quantity,department,hold_status )
                                               purchases_entry_master.return_reason_code_id = 0
                                               purchases_entry_master.SalesRepID = 0
                                               purchases_entry_master.PriceSource = 1
-                                              purchases_entry_master.FullPrice = item.full_unit_price
                                               purchases_entry_master.item_id =  item.id
                                               purchases_entry_master.purchase_id = id
                                               purchases_entry_master.store_id = 7
@@ -444,7 +443,8 @@ def new_master_symbiote(item,quantity,department,hold_status )
                                               purchases_entry_master.Price = item.Price
                                               purchases_entry_master.Taxable = 1
                                               purchases_entry_master.LastUpdated = Time.now      
-                                              purchases_entry_master.symbiote_purchases_entry_id = 0                                                                   
+                                              purchases_entry_master.symbiote_purchases_entry_id = 0
+                                             purchases_entry_master.FullPrice = item.full_unit_price(purchases_entry_master)
                                               purchases_entry_master.save
                                                   purchases_entry_slave =  PurchasesEntry.new
                                                   purchases_entry_slave.ItemLookupCode  = 0
@@ -754,29 +754,30 @@ def discount_percentage
 end	
 ########################################################################################################
  def volume_discount_multiple
-                                      unless self == nil
-                                                          if self.subtotal_volume_and_permanent_discountable_only_items.between?(0,49)
-                                                            volume_discount_multiple = 0.to_f
-                                                         elsif self.subtotal_volume_and_permanent_discountable_only_items.between?(50,99)
-                                                            volume_discount_multiple = '.05'.to_f
-                                                          elsif self.subtotal_volume_and_permanent_discountable_only_items.between?(101,249) 
-                                                            volume_discount_multiple = '.1'.to_f
-                                                          elsif self.subtotal_volume_and_permanent_discountable_only_items.between?(250,499)
-                                                            volume_discount_multiple = '.15'.to_f
-                                                          elsif self.subtotal_volume_and_permanent_discountable_only_items.between?(500,999)
-                                                            volume_discount_multiple = '.2'.to_f
-                                                          elsif self.subtotal_volume_and_permanent_discountable_only_items.between?(1000,2499)
-                                                            volume_discount_multiple = '.25'.to_f
-                                                          elsif self.subtotal_volume_and_permanent_discountable_only_items.between?(2500,4999)
-                                                            volume_discount_multiple = '.3'.to_f
-                                                          elsif self.subtotal_volume_and_permanent_discountable_only_items.between?(5000,7500)
-                                                            volume_discount_multiple = '.35'.to_f
-                                                          else
-                                                            volume_discount_multiple = 0.to_f
-                                                            end
-                                           else
-                                           volume_discount_multiple = 0.to_f
-                                           end
+                    return 0.to_f
+                                      # unless self == nil
+                                      #                     if self.subtotal_volume_and_permanent_discountable_only_items.between?(0,49)
+                                      #                       volume_discount_multiple = 0.to_f
+                                      #                    elsif self.subtotal_volume_and_permanent_discountable_only_items.between?(50,99)
+                                      #                       volume_discount_multiple = '.05'.to_f
+                                      #                     elsif self.subtotal_volume_and_permanent_discountable_only_items.between?(101,249)
+                                      #                       volume_discount_multiple = '.1'.to_f
+                                      #                     elsif self.subtotal_volume_and_permanent_discountable_only_items.between?(250,499)
+                                      #                       volume_discount_multiple = '.15'.to_f
+                                      #                     elsif self.subtotal_volume_and_permanent_discountable_only_items.between?(500,999)
+                                      #                       volume_discount_multiple = '.2'.to_f
+                                      #                     elsif self.subtotal_volume_and_permanent_discountable_only_items.between?(1000,2499)
+                                      #                       volume_discount_multiple = '.25'.to_f
+                                      #                     elsif self.subtotal_volume_and_permanent_discountable_only_items.between?(2500,4999)
+                                      #                       volume_discount_multiple = '.3'.to_f
+                                      #                     elsif self.subtotal_volume_and_permanent_discountable_only_items.between?(5000,7500)
+                                      #                       volume_discount_multiple = '.35'.to_f
+                                      #                     else
+                                      #                       volume_discount_multiple = 0.to_f
+                                      #                       end
+                                      #      else
+                                      #      volume_discount_multiple = 0.to_f
+                                      #      end
 end    
 ########################################################################################################        
 def slave_entries_discount_amount

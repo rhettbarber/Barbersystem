@@ -51,7 +51,7 @@
 
   </td>
   <td> <%#= 'Dimensions:' if item.dimensions != '' %> <%= item.dimensions %></td>
-  <td><%  if purchases_entry.complete_symbiont  %><%=   number_to_currency(purchases_entry.symbiont_full_unit_price)  %><% end %></td>
+  <td><%  if purchases_entry.complete_symbiont  %><%=   number_to_currency(purchases_entry.symbiont_full_unit_price( @customer_array , purchases_entry ) )  %><% end %></td>
   <td> <strong>   <%  if purchases_entry.complete_symbiont  %><%= number_to_currency(purchases_entry.symbiont_full_extended_price) %>  <% end %></strong></td>
 </tr>
 
@@ -63,99 +63,4 @@
 
 
 
-
-
-
-
-
-
-<% if @ssss %>
-<%=  fields_for "purchase[purchases_entry_attributes][]" , purchases_entry do |p|  %>
-
-			<% if purchases_entry.item_id  == 0 or  purchases_entry.item_id  == '0'  %>
-
-			<% else %>
-
-						<% item =  Item.find(purchases_entry.item_id)  %>
-						<% quantity = purchases_entry.QuantityOnOrder %>
-							      <tr id="<%= 'purchases_entry_' + purchases_entry.id.to_s %>">
-                                            <%  if @show_delete %>
-                                                    <td  class="purchases_entry_delete">
-                                                                        <%=  link_to(image_tag("/images/buttons/delete.gif",:border => 0),  { :action => "delete_symbiont_purchases_entry",:purchases_entry_id => purchases_entry.id  }) unless controller.controller_name == 'purchases'  %>
-                                                    </td>
-                                             <% end %>
-							                <td  class="purchases_entry_master_image">
-																<%=   link_to(image_tag(  item.image_url( purchases_entry.master_department_id  ,'item_thumbnails/','x') ,:size => "80x80",  :border => 0), { :controller => "cart", :action => "enlarge_cart_image",		:purchases_entry_id => purchases_entry.id  }, :popup => ['new_window_name', 'height=700,width=800'])   %>
-							        		</td>
-							                <td  class="purchases_entry_slave_image">
-												   <%  if purchases_entry.opposite_entry != '0'  %>
-												   				<%  if purchases_entry.opposite_entry.item %>
-							                                    <%=   image_tag( '/images/item_thumbnails/' + purchases_entry.opposite_entry.item.PictureName ,:style => "max-height:100px;max-width:100px;",  :border => 0)    %>
-										        				<% end %>
-													<%  end  %>
-							        		</td>
-							                <td  class="purchases_entry_quantity">
-
-
-													<% unless controller.controller_name == 'purchases'  %>
-															  <%= p.hidden_field :id  ,:index => nil%>
- 															<%= p.text_field :QuantityOnOrder ,:index => nil ,:size => 2 , :value => number_with_precision(purchases_entry.QuantityOnOrder,:precision => 0 )   %>
-								            		<%  else  %>
-																	<%=  quantity   %>
-													<%  end  %>
-
-
-										    </td>
-
-							                <td  class="purchases_entry_itemlookupcode"><%= item.ItemLookupCode %></td>
-							              <td  class="purchases_entry_symbiont_description">
-							              	<%  if purchases_entry.opposite_entry != '0'  %>
-
-
-							              	<div style="float:left;width:240px;">
-									              	Design:<%= purchases_entry.opposite_entry.ItemLookupCode  %>
-																	<%= purchases_entry.opposite_entry.Description  %><br />
-																	Printed on: <%= purchases_entry.ItemLookupCode  %>
-																	<%= purchases_entry.Description  %><br />
-																	Dimensions: <%= item.dimensions %><br />
-															</div>
-
-							              				<% if  purchases_entry.complete_symbiont %>
-							              								<% design_item = Item.find purchases_entry.opposite_entry.item_id %>
-                                                                                <% if @recommend %>
-                                                                                <div style="float:left;">
-                                                                                        <%= render :partial => "purchases_entries/purchases_entry_recommend",:locals => {:item => design_item } %>
-                                                                                </div>
-                                                                                <% end %>
-																				<%= link_to image_tag('/images/buttons/view_combination.gif', :border => 0), :controller  => "specsheet", :purchases_entry_id => purchases_entry.id  unless controller.controller_name == 'purchases' %>
-															<% else %>
-
-							              					<%= link_to image_tag('/images/buttons/choose_decoration.gif', :border => 0) ,:controller => 'browse'   %>
-
-															<% end %>
-
-
-
-											<%  end  %>
-
-										   </td>
-										<td  class="purchases_entry_full_unit_price">
-												<div  id="full_unit_price_<%= purchases_entry.id %>">
-													<%  if purchases_entry.complete_symbiont  %>
-											  				<%= number_to_currency(purchases_entry.symbiont_full_unit_price)   %>
-													<%  end  %>
-											  </div>
-										</td>
-									    <td  class="purchases_entry_full_extended_price">
-											<div  id="full_extended_price_<%= purchases_entry.id %>">
-													<%  if purchases_entry.complete_symbiont  %>
-															<%=  number_to_currency(purchases_entry.symbiont_full_extended_price)  %>
-													<%  end  %>
-											</div>
-										</td>
-							      </tr>
-			<%  end  %>
-
-<%  end  %>
- <% end %>
 

@@ -7,6 +7,10 @@ has_one :item
 
 
 
+
+
+
+
 def Price1_profit_margin 
 		cost =  self.item.Cost
 		 profit = self.Price1 - cost

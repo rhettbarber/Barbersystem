@@ -1,55 +1,38 @@
 
+
 <%   if @default_quantity %>
-
-                <script type="text/javascript">
-
-
-                    function changeTransferType() {
-                //                                                alert("great");
-                //                                                console.log("changeTransferType");
-                //
-                        var the_price =   0.0;
-                        var the_quantity =    $("#purchases_entries_QuantityOnOrder").val()  ;
-                        if ( the_quantity < 12  ||   the_quantity == "") {
-                            the_price =   $("#transfer_type_id option:selected").data("price-1");
-                        } else if ( the_quantity >= 12  &&  the_quantity <= 99 ) {
-                            the_price =   $("#transfer_type_id option:selected").data("price-2");
-                        } else if ( the_quantity > 99 && the_quantity <= 299 ) {
-                            the_price =   $("#transfer_type_id option:selected").data("price-3");
-                        } else if ( the_quantity > 299 ) {
-                            the_price =   $("#transfer_type_id option:selected").data("price-4");
-                        } else  {
-                            the_price = $("#transfer_type_id option:selected").data("price-1");
-                        }
-
-                        $("#your_unit_price").html(  String( the_price )  )  ;
-
-                //                                                   $("#your_unit_price").html( "<b class='ui-table-cell-label'>Your Price</b>" + the_price )  ;
-
-
-                //                                                    var the_price =   $("#transfer_type_id option:selected").data("price");
-                //                                                     alert("the_price: " + the_price ) ;
-
-                        //        jQuery.ajax({
-                        //            type: "GET",
-                        //            dataType: 'script',
-                        //            url: "/specsheet/update_sublimation_garments",
-                        //            data: {   sublimation_item_class_id:  $('#sublimation_item_class_id').val()   }
-                        //        });
-                    }
-                </script>
-
-
-
-                <% if @default_quantity and @default_quantity > 1 %>
+                <% if @default_quantity and @default_quantity > 1   %>
                                         <label for="purchases_entries_QuantityOnOrder"  style="display:none;">Quantity:</label>
-                                        <input type="text" name="purchases_entries[QuantityOnOrder]" id="purchases_entries_QuantityOnOrder" placeholder="Quantity: <%=  @default_quantity.to_s  %>" value="<%=  @default_quantity.to_s  %>">
+                                        <input type="text" name="purchases_entries[QuantityOnOrder]" id="purchases_entries_QuantityOnOrder" placeholder="Quantity: <%=  @default_quantity.to_i.to_s  %>" value="<%=  @default_quantity.to_i.to_s  %>">
                 <% else%>
                                     <label for="purchases_entries_QuantityOnOrder"  style="display:none;">Quantity:</label>
                                     <input type="text" name="purchases_entries[QuantityOnOrder]" id="purchases_entries_QuantityOnOrder" placeholder="Quantity: 1" value="1">
                 <% end %>
+  <% else %>
 
+                 <% badd_no_default_quantity %>
 
   <% end %>
 
 
+
+
+<% @debugging_price = false %>
+<% if @debugging_price %>
+
+    <br>
+    ----------------       <br>
+    <% logger.debug "HERE HERE HERE HERE HERE" %>
+
+    @default_quantity.to_s :<%=    @default_quantity.to_s  %> <br>
+    @item.your_unit_price(@customer_array, <%=    @default_quantity  %>   ) :<%=    @item.your_unit_price(@customer_array,     @default_quantity     )   %> <br>
+    @item.quantity_discount.to_yaml :<%=    @item.quantity_discount.to_yaml    %> <br>
+
+
+    @item.your_unit_price(@customer_array, <%=    @default_quantity  %>, "sublim9"   ) :<%=    @item.your_unit_price(@customer_array, @default_quantity , "sublim9"     )   %> <br>
+
+    <% logger.debug "HERE HERE HERE HERE HERE" %>
+    --------------     <br>
+    <br>
+
+<% end %>

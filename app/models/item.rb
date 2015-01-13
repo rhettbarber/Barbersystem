@@ -62,17 +62,29 @@ default_scope  :conditions => { :WebItem =>  true, :Inactive => false  }
   end
 
 
+  def self.string_overriden_quantity_discount_id( transfer_type_string )
+    if transfer_type_string.include? 'sublim9'
+      return  22651
+    elsif transfer_type_string.include? 'sublim12'
+      return   22652
+    elsif transfer_type_string.include? 'sublim14'
+      return   22650
+    elsif transfer_type_string.include? 'sublimfull'
+      return  22649
+    else
+      wrong_wrong
+    end
+  end
 
 
-
-  def unit_quantity_tier_discount_price(customer=0,quantity=1, the_purchases_entry)
+  def unit_quantity_tier_discount_price(customer=0,quantity=1, the_price_override=0)
               ############################################################################################################
               ############################################################################################################
-          logger.debug " the_purchases_entry.kind_of?(PurchasesEntry): " +  the_purchases_entry.kind_of?(PurchasesEntry).to_s
+          logger.debug " the_price_override.kind_of?(PurchasesEntry): " +  the_price_override.kind_of?(PurchasesEntry).to_s
+          logger.debug " the_price_override.kind_of?(String): " +  the_price_override.kind_of?(String).to_s
 
-              if        the_purchases_entry.kind_of?(PurchasesEntry)   and  the_purchases_entry.override_quantity_discount?
-
-                                        the_override_quantity_discount_id =  the_purchases_entry.overriden_quantity_discount_id
+              if        the_price_override.kind_of?(String)
+                                        the_override_quantity_discount_id =  Item.string_overriden_quantity_discount_id  the_price_override
                                       overridden_quantity_discount = QuantityDiscount.find the_override_quantity_discount_id
 
                                       if  overridden_quantity_discount.use_pre_tier_price(quantity)
@@ -87,7 +99,22 @@ default_scope  :conditions => { :WebItem =>  true, :Inactive => false  }
                                         unit_quantity_tier_discount_price = overridden_quantity_discount.Price4B
                                       end
 
-              else
+              elsif      the_price_override.kind_of?(PurchasesEntry)   and  the_price_override.override_quantity_discount?
+                                    the_override_quantity_discount_id =  the_price_override.overriden_quantity_discount_id
+                                    overridden_quantity_discount = QuantityDiscount.find the_override_quantity_discount_id
+
+                                    if  overridden_quantity_discount.use_pre_tier_price(quantity)
+                                              unit_quantity_tier_discount_price = overridden_quantity_discount.PriceB
+                                    elsif overridden_quantity_discount.use_price_1(quantity)
+                                               unit_quantity_tier_discount_price = overridden_quantity_discount.Price1B
+                                    elsif overridden_quantity_discount.use_price_2(quantity)
+                                               unit_quantity_tier_discount_price = overridden_quantity_discount.Price2B
+                                    elsif overridden_quantity_discount.use_price_3(quantity)
+                                                unit_quantity_tier_discount_price = overridden_quantity_discount.Price3B
+                                    elsif overridden_quantity_discount.use_price_4(quantity)
+                                                unit_quantity_tier_discount_price = overridden_quantity_discount.Price4B
+                                    end
+                else
                               if   customer.class != Customer
                                               ss= 'ss'
                                               if customer == 2000
@@ -138,6 +165,14 @@ default_scope  :conditions => { :WebItem =>  true, :Inactive => false  }
                                                                           if  self.quantity_discount.use_pre_tier_price(quantity)
                                                                             unit_quantity_tier_discount_price = self.PriceB
                                                                           elsif self.quantity_discount.use_price_1(quantity)
+
+                                                                           logger.debug "item.id: " + self.id.to_s
+                                                                           logger.debug "quantity.to_s: " + quantity.to_s
+                                                                           logger.debug "item.quantity_discount.inspect: " + self.quantity_discount.inspect
+                                                                           logger.debug "self.quantity_discount.Price1B.to_s: " + self.quantity_discount.Price1B.to_s
+                                                                           logger.debug " ----------------------------------: " + self.quantity_discount.Price1B.to_s
+
+
                                                                             unit_quantity_tier_discount_price = self.quantity_discount.Price1B
                                                                           elsif self.quantity_discount.use_price_2(quantity)
                                                                             unit_quantity_tier_discount_price = self.quantity_discount.Price2B
@@ -1656,7 +1691,7 @@ def symbiont_your_unit_price(opposite,customer=0,quantity=1)
         self.your_unit_price(customer,quantity).to_f + opposite.your_unit_price(customer,quantity).to_f
 end
 
-def your_unit_price(customer=0,quantity=1,the_purchases_entry)
+def your_unit_price(customer=0,quantity=1,the_purchases_entry=false)
         if customer != 0
                   if quantity != 0
                            up = full_unit_price(customer,the_purchases_entry).to_f  -  unit_quantity_and_permanent_savings(customer,quantity,the_purchases_entry).to_f
@@ -1712,100 +1747,6 @@ def unit_quantity_tier_discount_savings(customer=0,quantity=1, the_purchases_ent
              unit_quantity_tier_discount_savings 
 end
 
-def unit_quantity_tier_discount_price_orig(customer=0,quantity=1)
-                                                       ############################################################################################################   
-                                    if   customer.class != Customer
-                                                                   ss= 'ss'
-                                                                    if customer == 2000
-                                                                                          if  self.quantity_discount.use_pre_tier_price(quantity)
-                                                                                                  unit_quantity_tier_discount_price = self.PriceB
-                                                                                          elsif self.quantity_discount.use_price_1(quantity)
-                                                                                                  unit_quantity_tier_discount_price = self.quantity_discount.Price1B
-                                                                                          elsif self.quantity_discount.use_price_2(quantity)
-                                                                                                  unit_quantity_tier_discount_price = self.quantity_discount.Price2B
-                                                                                          elsif self.quantity_discount.use_price_3(quantity)
-                                                                                                  unit_quantity_tier_discount_price = self.quantity_discount.Price3B
-                                                                                          elsif self.quantity_discount.use_price_4(quantity)
-                                                                                                  unit_quantity_tier_discount_price = self.quantity_discount.Price4B                                          
-                                                                                          end 
-                                                                                           
-                                                                    else
-                                                                                                  unit_quantity_tier_discount_price = self.Price
-                                                                  end
-                                    else
-                                                      if customer.PriceLevel == 0
-                                                                         if  self.quantity_discount         
-                                                                                                  unit_quantity_tier_discount_price = self.Price
-                                                                          else
-                                                                                    unit_quantity_tier_discount_price =  self.Price
-                                                                          end
-                                                      #BEGIN PREPRINT CUSTOMER  ---         
-                                                      elsif customer.PriceLevel == 1
-                                                                         if  self.quantity_discount                   
-                                                                                           if  self.quantity_discount.use_pre_tier_price(quantity)
-                                                                                                  unit_quantity_tier_discount_price = self.PriceA
-                                                                                          elsif self.quantity_discount.use_price_1(quantity)
-                                                                                                  unit_quantity_tier_discount_price = self.quantity_discount.Price1A
-                                                                                          elsif self.quantity_discount.use_price_2(quantity)
-                                                                                                  unit_quantity_tier_discount_price = self.quantity_discount.Price2A
-                                                                                          elsif self.quantity_discount.use_price_3(quantity)
-                                                                                                  unit_quantity_tier_discount_price = self.quantity_discount.Price3A
-                                                                                          elsif self.quantity_discount.use_price_4(quantity)
-                                                                                                  unit_quantity_tier_discount_price = self.quantity_discount.Price4A                                          
-                                                                                          end 
-                                                                            else
-                                                                                     unit_quantity_tier_discount_price =  self.PriceA
-                                                                            end
-                                                      #END PREPRINT CUSTOMER  ---  
-                                                      #
-                                                      #BEGIN BLANK CUSTOMER  ---         
-                                                      elsif customer.PriceLevel == 2
-                                                                          if  self.quantity_discount 
-                                                                                           if  self.quantity_discount.use_pre_tier_price(quantity)
-                                                                                                  unit_quantity_tier_discount_price = self.PriceB
-                                                                                          elsif self.quantity_discount.use_price_1(quantity)
-                                                                                                  unit_quantity_tier_discount_price = self.quantity_discount.Price1B
-                                                                                          elsif self.quantity_discount.use_price_2(quantity)
-                                                                                                  unit_quantity_tier_discount_price = self.quantity_discount.Price2B
-                                                                                          elsif self.quantity_discount.use_price_3(quantity)
-                                                                                                  unit_quantity_tier_discount_price = self.quantity_discount.Price3B
-                                                                                          elsif self.quantity_discount.use_price_4(quantity)
-                                                                                                  unit_quantity_tier_discount_price = self.quantity_discount.Price4B                                          
-                                                                                          end 
-                                                                           else
-                                                                                    unit_quantity_tier_discount_price =  self.PriceB
-                                                                            end
-                                                      #END BLANK CUSTOMER  ---  
-                                                      #
-                                                      #BEGIN FRANCHISE CUSTOMER  ---         
-                                                      elsif customer.PriceLevel == 3
-                                                                           if  self.quantity_discount 
-                                                                                           if  self.quantity_discount.use_pre_tier_price(quantity)
-                                                                                                  unit_quantity_tier_discount_price = self.PriceC
-                                                                                          elsif self.quantity_discount.use_price_1(quantity)
-                                                                                                  unit_quantity_tier_discount_price = self.quantity_discount.Price1C
-                                                                                          elsif self.quantity_discount.use_price_2(quantity)
-                                                                                                  unit_quantity_tier_discount_price = self.quantity_discount.Price2C
-                                                                                          elsif self.quantity_discount.use_price_3(quantity)
-                                                                                                  unit_quantity_tier_discount_price = self.quantity_discount.Price3C
-                                                                                          elsif self.quantity_discount.use_price_4(quantity)
-                                                                                                  unit_quantity_tier_discount_price = self.quantity_discount.Price4C                                          
-                                                                                          end 
-                                                                           else
-                                                                                    unit_quantity_tier_discount_price =  self.PriceC
-                                                                            end
-                                                      #END BLANK CUSTOMER  ---                                                             
-                                                      #                                                           
-                                                      #
-                                                      #                                                         
-                                                      else
-                                                          unit_quantity_tier_discount_price =   unit_quantity_tier_discount_price = self.Price
-                                                      end
-                                         end              
-                                                      unit_quantity_tier_discount_price
-  return 1.01
-                                                      
-end
 ########################################################################################################
 ####### TESTING/REQUIREMENTS AREA
 def design_decides_opposites_department

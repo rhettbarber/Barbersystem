@@ -85,8 +85,10 @@ class SpecsheetController < ApplicationController
     logger.debug "begin specsheet view_details_purchases_entry_and_not_incomplete_symbiont"
     logger.debug "ssees-------------------------------------@purchases_entry.symbiotic_item: #{@purchases_entry.symbiotic_item}"
     logger.debug "asdww-------------------------------------@singular_item_customer: #{@singular_item_customer}"
+    @default_quantity = @purchases_entry.QuantityOnOrder
     if @purchases_entry.symbiotic_item == true &&  @singular_item_customer == false
                       logger.debug "vvsa-------------------------------------purchase-with-complete-symbiont"
+
 
                      if  @purchases_entry.slave_of_symbiont_pair.item.category.category_class.name == 'huge_front'
                                 @sublimation = true
@@ -362,6 +364,7 @@ class SpecsheetController < ApplicationController
  def view_details_no_purchases_entry_and_incomplete_symbiont
            logger.debug "begin specsheet view_details_no_purchases_entry_and_incomplete_symbiont"
            @master_purchases_entry = @purchase.master
+           @default_quantity = @master_purchases_entry.QuantityOnOrder
            if @purchase.symbiote_type == 'master' && @parameter_item
                              if @parameter_item.category.category_class.item_type == 'slave'
                                             logger.debug "@parameter_item.category.category_class.item_type == slave"
@@ -419,6 +422,7 @@ class SpecsheetController < ApplicationController
                                                        @department = Department.find(@slaves_master_department_decision ) if @department
                                                      end
                                          end
+
                                          @required_form_elements << 'button_choose_this_item'
                                          @required_form_elements << 'icc_collection_select'   if @item_class_components
                                          #     @required_form_elements << 'hidden_item_id_field'
@@ -437,7 +441,8 @@ class SpecsheetController < ApplicationController
 #  http://192.168.0.125:2001/specsheet?department_id=2&item_class_component_item_id=54&crest_id=22753&design_id=4378&item_id=54
 #  http://192.168.0.125:2001/specsheet?department_id=2&item_class_component_item_id=54&crest_id=22753&design_id=4378&item_id=54
  def view_details_parameter_item_and_parameter_design_and_no_incomplete_symbiont
-                   logger.debug "VIEW_DETAILS-SINGULAR-------------------------@parameter_item && @incomplete_symbiont == false"
+                   logger.debug "BEGIN------------------------view_details_parameter_item_and_parameter_design_and_no_incomplete_symbiont"
+                   logger.debug "VIEW_DETAILS-SINGULAR-------------------------@parameter_item && @parameter_design && @incomplete_symbiont == false"
                  #A. item getting item and item_class_component info if applicable
 
                  if  @singular_item_customer == true
@@ -446,6 +451,7 @@ class SpecsheetController < ApplicationController
                             @design = @parameter_design
                               @item = @parameter_item
                  end
+                @default_quantity ||=  @item.default_quantity
                  @selected_item_id  =  @parameter_item.id    if @item
                  @item_class_components = @item.item_class_component.item_class.all_valid_components  if @item and   @item.item_class_component
                  @required_form_elements << 'hidden_item_id_field'   if @item unless @item_class_components
@@ -467,13 +473,16 @@ class SpecsheetController < ApplicationController
                                    end
                  end
                  logger.debug "VIEW_DETAILS-SINGULAR DEPARMENT-------------------------#{@department.id}" if @department
+                   logger.debug "END ------------------------view_details_parameter_item_and_parameter_design_and_no_incomplete_symbiont"
  end
 ############################################################################################################
  def view_details_parameter_item_and_no_incomplete_symbiont
                  #SINGULAR||||||||||||||||||||||||||||||||||||||||||
+                 logger.debug "BEGIN-------------------------view_details_parameter_item_and_no_incomplete_symbiont"
                  logger.debug "VIEW_DETAILS-SINGULAR-------------------------@parameter_item && @incomplete_symbiont == false"
                  #A. item getting item and item_class_component info if applicable
                  @item = @parameter_item
+                 @default_quantity ||=  1
                  @selected_item_id  =  @parameter_item.id
                  @item_class_components = @item.item_class_component.item_class.all_valid_components  unless  @item.item_class_component.nil?
                  @required_form_elements << 'hidden_item_id_field'   if @item unless @item_class_components
@@ -494,15 +503,17 @@ class SpecsheetController < ApplicationController
                                    end
                  end
                  logger.debug "VIEW_DETAILS-SINGULAR DEPARMENT-------------------------#{@department.id}" if @department
+                 logger.debug "END-------------------------view_details_parameter_item_and_no_incomplete_symbiont"
  end
 ############################################################################################################
  def view_details_your_unit_price
+   logger.debug "@customer_array.inspect: " + @customer_array.inspect
    if @item && @design.nil?
                if @item.category.category_class.item_type == 'master' &&  @singular_item_customer == false
                           @your_unit_price = @item.your_unit_price(@customer_array,1) + 0.01
                else
-                          @default_quantity = @item.default_quantity
-                          @your_unit_price = @item.your_unit_price(@customer_array, 13   )
+                          @default_quantity ||=  @item.default_quantity
+                          @your_unit_price = @item.your_unit_price(@customer_array,  @default_quantity   )
 
                           @your_unit_price1 = @item.your_unit_price(@customer_array,1)
                           @your_unit_price2 = @item.your_unit_price(@customer_array,13 )

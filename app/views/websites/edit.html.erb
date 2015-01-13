@@ -1,9 +1,24 @@
 <h1>Editing website</h1>
 
 <%= form_for(@website) do |f| %>
-  <%= f.error_messages %>
 
-  <p>
+
+    <% if @website.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@website.errors.count, "error") %> prohibited this feature from being saved:</h2>
+
+          <ul>
+            <% @website.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+
+
+
+    <p>
     <%= f.label :id %><br />
     <%=  @website.id %>
   </p>

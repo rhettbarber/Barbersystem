@@ -21,6 +21,24 @@ class PurchasesEntry < ActiveRecord::Base
     #### DUPLICATE FUNCTION FROM sublimation_entry.rb
     #### DUPLICATE FUNCTION FROM sublimation_entry.rb
     #### DUPLICATE FUNCTION FROM sublimation_entry.rb
+    def transfer_type
+      if self.Comment.to_s.include? 'sublim9'
+        return     'sublim9'
+      elsif self.Comment.to_s.include? "sublim12"
+        return   'sublim12'
+      elsif self.Comment.to_s.include?  "sublim14"
+        return     'sublim14'
+      elsif self.Comment.to_s.include?  "sublimfull"
+        return    'sublimfull'
+      elsif self.Comment.to_s.include?  "sublimaot"
+        return     'sublimaot'
+      else
+        return   false
+      end
+    end
+
+
+
     def transfer_type_name
       if self.Comment.to_s.include? 'sublim9'
         return    "Sublimation transfer size 9\"x9\""
@@ -41,7 +59,7 @@ class PurchasesEntry < ActiveRecord::Base
 
 
 
-  def override_quantity_discount?
+    def override_quantity_discount?
 
             if self.Comment.to_s.include? 'sublim9'
                        return    true
@@ -60,17 +78,7 @@ end
 
 
   def overriden_quantity_discount_id
-            if self.Comment.include? 'sublim9'
-                    return  22651
-            elsif self.Comment.include? 'sublim12'
-                         return   22652
-           elsif self.Comment.include? 'sublim14'
-                         return   22650
-            elsif self.Comment.include? 'sublimfull'
-                        return  22649
-            else
-                            wrong_wrong
-             end
+            Item.string_overriden_quantity_discount_id   self.Comment
 end
 
 
@@ -203,8 +211,8 @@ end
 
 
 
- def  symbiont_full_unit_price
-        self.item.full_unit_price + self.opposite_entry.item.full_unit_price
+ def  symbiont_full_unit_price(customer, the_purchases_entry)
+        self.item.full_unit_price(customer, the_purchases_entry) + self.opposite_entry.item.full_unit_price(customer, the_purchases_entry)
  end
    
  def  symbiont_full_extended_price
