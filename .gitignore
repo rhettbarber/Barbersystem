@@ -4,7 +4,7 @@
 #!public/assets_production/
 !app/*
 !doc/*
-!config/initializers/
+!config/*
 !config/routes.rb
 !lib/*
 #!instructions/*
@@ -13,7 +13,7 @@
 !test/*
 !/vendor/*
 
-
+*.yml
 
 #################
 ## Eclipse

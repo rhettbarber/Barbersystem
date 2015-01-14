@@ -1,3 +1,5 @@
+  # Test message
+
 # mklink /D public "Z:\Rhett Barber\Rails\two_point_three\public"
 
 #  BEGIN MAJOR SETUP ERRORS AND  FIXES GO HERE
@@ -60,15 +62,6 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-
-
-
-
-
-
-
-
-
 
 
 
