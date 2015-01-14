@@ -3,8 +3,7 @@ ThreeTwoThree::Application.routes.draw do
 
 
 
-
-  match '/custom' ,  to: redirect(  'http://barberandcompany.espwebsite.com')
+  match '/custom' => redirect(  'http://barberandcompany.espwebsite.com'), :as => :custom
 
   match '/image_manager/missing_psd_images' , :controller => 'image_manager', :action => 'missing_psd_images'
   match '/image_manager/missing_sublimation_images' , :controller => 'image_manager', :action => 'missing_sublimation_images'
