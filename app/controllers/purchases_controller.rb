@@ -158,13 +158,13 @@ end
                          logger.warn "UserNotifier delivery failure"
                 end
 
-                discount_savings = @purchase.discount_savings
-                if discount_savings > 0
-                  @discount_savings = @purchase.add_discount_item(discount_savings)
-                          logger.debug "----------------------------------discount given-amt: #{discount_savings}"
-                else
-                           logger.debug "-------------------------------------discount not given."
-                end
+                # discount_savings = @purchase.discount_savings
+                # if discount_savings > 0
+                #   @discount_savings = @purchase.add_discount_item(discount_savings)
+                #           logger.debug "----------------------------------discount given-amt: #{discount_savings}"
+                # else
+                #            logger.debug "-------------------------------------discount not given."
+                # end
 
                 online_discount_savings = @purchase.online_discount_savings
                 if online_discount_savings > 0
