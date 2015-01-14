@@ -5,7 +5,6 @@
 !app/*
 !doc/*
 !config/*
-!config/routes.rb
 !lib/*
 #!instructions/*
 !non_ruby_source/*
