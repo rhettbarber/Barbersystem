@@ -126,7 +126,7 @@ def all_over_ts_commands
                 logger.debug "@all_over_sublimation_entries: " + @all_over_sublimation_entries.inspect
                 logger.debug "@@additional_all_over_sublimation_entries: " +  @additional_all_over_sublimation_entries.inspect
                 @all_over_sublimation_entries.each do |an_entry|
-                  @all_all_over_transfer_sublimation_entries.add   an_entry
+                    @all_all_over_sublimation_entries.add   an_entry
                 end
                 @all_all_over_sublimation_entries.merge   @additional_all_over_sublimation_entries
                 @all_all_over_sublimation_entries.delete_if { | i |  i.class != SublimationEntry     }
