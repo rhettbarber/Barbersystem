@@ -482,7 +482,7 @@ class SpecsheetController < ApplicationController
                  logger.debug "VIEW_DETAILS-SINGULAR-------------------------@parameter_item && @incomplete_symbiont == false"
                  #A. item getting item and item_class_component info if applicable
                  @item = @parameter_item
-                 @default_quantity ||=  1
+                 @default_quantity ||=  @item.default_quantity( @customer_array.PriceLevel)
                  @selected_item_id  =  @parameter_item.id
                  @item_class_components = @item.item_class_component.item_class.all_valid_components  unless  @item.item_class_component.nil?
                  @required_form_elements << 'hidden_item_id_field'   if @item unless @item_class_components

@@ -42,7 +42,8 @@ def designs_by_department
                  #               # @departments = @website.default_design_departments
                  #               #  @departments = Department.limit(2).order("departments.Name ASC").where( "id in (?)",  @website.default_design_department_ids.split(/,/)   ).to_set
                  # end
-        @original_items = Item.limit(400).joins(:department, :category, :category_class).order("departments.Name ASC,  categories.Name ASC").where( "items.department_id in (?)",  @website.default_design_department_ids.split(/,/)   ).all
+        # @original_items = Item.limit(400).joins(:department, :category, :category_class).order("departments.Name ASC,  categories.Name ASC").where( "items.department_id in (?)",  @website.default_design_department_ids.split(/,/)   ).all
+        @original_items = Item.joins(:department, :category, :category_class).order("departments.Name ASC,  categories.Name ASC").where( "items.department_id in (?)",  @website.default_design_department_ids.split(/,/)   ).all
 
          @items = Set.new
           @original_items.each do |item|
