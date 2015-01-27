@@ -7,8 +7,17 @@ console.log("-----BEGIN file initiate_functions.js");
 
 
 function changeTransferType() {
+                    console.log("begin changeTransferType") ;
                     var the_price =   0.0;
-                    var the_quantity =    $("#purchases_entries_QuantityOnOrder").val()   ;
+                    if ( $(".sublimation_only").size() > 0  &&  $("#transfer_type_id option:selected").val() ==  'plas' ) {
+                                    console.log("selected type value is plas, and sublimation_only design, set quantity to 300") ;
+                                    var the_quantity = 300 ;
+                                     $("#purchases_entries_QuantityOnOrder").val( 300 )
+                    } else {
+                                console.log("selected type value is not plas,or not a sublimation_only design set quantity by  quantity field value") ;
+                                var the_quantity =    $("#purchases_entries_QuantityOnOrder").val()   ;
+                    }
+
                    console.log("the_quantity: " + the_quantity );
                     if ( the_quantity < 12  ||   the_quantity == "") {
                                         console.log("price-1");
@@ -27,6 +36,8 @@ function changeTransferType() {
                                         the_price = $("#transfer_type_id option:selected").data("price-1");
                     }
                     console.log("the_price: " + the_price  ) ;
+
+
                       if (the_price == '0.01') {
                                         console.log("Price is a penny... do not update.") ;
                       } else {
@@ -39,6 +50,7 @@ function changeTransferType() {
                                             console.log("selected type value is NOT plas") ;
                                              $(".sublimation_transfer_message").show();
                     }
+                    console.log("end changeTransferType") ;
 }
 
 
@@ -153,7 +165,7 @@ $(".application").on('pageshow', function(event){
                                    }  else if  ( $( e.target ).attr("href") == "#designs_panel" ) {
                                                          console.log("#designs_panel clicked.. time");
                                                          $("#design_menu_choices").collapsible("expand");
-                                                            $.mobile.silentScroll( $("#design_menu_choices").get(0).offsetTop);
+                                                            $.mobile.silentScroll( $("#design_menu_choicequantitiess").get(0).offsetTop);
                                    }
 
 
@@ -202,8 +214,50 @@ $(".application").on('pageshow', function(event){
               $('body').on('click', '.publish_button',  deletePageCache  );
 
 
+
+                    $('.update_QuantityOnOrder').keyup(function(event) {
+                            console.log("############################");
+                            console.log("begin update_QuantityOnOrder");
+                            console.log("begin update_QuantityOnOrder");
+
+
+
+                            //if ( e &&  e.target.attr("data-transfer_type") == "sublimation_only" &&  e.target.value < 300) {
+                            if(event.handled !== true) {
+                                        //if ( event && event.target.value < 300 && event.target.attr("data-transfer_type") && event.target.attr("data-transfer_type") == "sublimation_only") {
+                                        var pe_message_to_show ="#purchases_entry_id_" +  $(event.target).attr("data-purchases_entry_id") + "_message";
+                                        console.log( "pe_message_to_show: " + pe_message_to_show );
+
+                                        if ( event && event.target.value < 300 && $(event.target).attr("data-transfer_type") && $(event.target).attr("data-transfer_type") == "sublimation_only" ) {
+                                            console.log( "purchases_entry_id: " +  $(event.target).attr("data-purchases_entry_id") );
+                                            console.log("this item requires a minimum of 300 pcs for silkscreen.");
+                                            $(event.target).css({'background-color' : 'pink'});
+
+                                            $(pe_message_to_show).show();
+
+                                            $("#update_quantities").hide();
+                                        } else {
+                                            console.log("No quantity minimum rules apply");
+                                            $("#update_quantities").show();
+                                            $(event.target).css({'background-color' : 'white'});
+                                            $(pe_message_to_show).hide();
+                                        }
+
+                                        event.handled = true;
+                            }
+                             console.log("end update_QuantityOnOrder");
+                             console.log("end update_QuantityOnOrder");
+                             console.log("end update_QuantityOnOrder");
+                             console.log("############################");
+
+
+                    }).click(function() {
+                            // do something
+                    });
+
+
               $('input').focus(function() {
-                                    $("#update_quantities").show();
+                                    //$("#update_quantities").show();
                                     // do something
               }).click(function() {
                                         // do something

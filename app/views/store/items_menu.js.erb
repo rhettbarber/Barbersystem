@@ -23,10 +23,16 @@ console.log("singular_item_customer.val: " + $("#singular_item_customer").val() 
 displaySaleTags($("#singular_item_customer").val() );
 
    if (  $("#singular_item_customer").val() == 'true' ) {
-                         console.log("singular item customer! Show wholesale_message class ")  ;
+                         console.log("singular item customer! Show wholesale_message class, show sublimation_only, show not_sublimation ")  ;
+                            $(".sublimation_only").show();
+                            $(".not_sublimation").show();
+
                           $(".wholesale_message").show();
                           $(".retail_message").hide();
    } else {
+                            console.log("not singular item customer! show not_sublimation ")  ;
+                           $(".not_sublimation").show();
+
                            $(".wholesale_message").hide();
                            $(".retail_message").show();
    }

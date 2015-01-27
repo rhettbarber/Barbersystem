@@ -7,6 +7,7 @@ ThreeTwoThree::Application.configure do
 
   # Rails.application.config.assets.manifest = File.join(Rails.public_path, config.assets.prefix)
 
+  config.watchable_dirs['lib'] = [:rb]
 
   config.action_controller.page_cache_extension  = true
 

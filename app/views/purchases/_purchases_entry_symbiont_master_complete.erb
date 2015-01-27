@@ -9,7 +9,7 @@
             <% unless controller.controller_name == 'purchases'  %>
                              <%=  fields_for "purchase[purchases_entry_attributes][]" , purchases_entry do |p|  %>
                                         <%= p.hidden_field :id  ,:index => nil%>
-                                        <%= p.text_field :QuantityOnOrder ,:index => nil ,:size => 2 , :value => number_with_precision(purchases_entry.QuantityOnOrder,:precision => 0 )   %>
+                                        <%= p.text_field :QuantityOnOrder ,:index => nil ,:size => 2 , :class => "update_QuantityOnOrder", :value => number_with_precision(purchases_entry.QuantityOnOrder,:precision => 0 )   %>
                             <% end %>
             <%  else  %>
                             <%=  quantity   %>

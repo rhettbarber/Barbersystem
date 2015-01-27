@@ -29,7 +29,7 @@ source 'https://rubygems.org'
 
 
 #gem 'acts_as_tree_with_dotted_ids' , :git => "https://github.com/xavier/acts-as-tree-with-dotted-ids"  # , :platforms => :ruby
-
+gem 'passenger' , :platform => :ruby  # makes this gem only install on *nix
 # gem 'pry'
 gem 'execjs', '2.0.2'
 gem 'alchemist'

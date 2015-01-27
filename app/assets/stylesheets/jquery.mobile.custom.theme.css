@@ -43,7 +43,7 @@
 }
 
 .ui-icon-loading{
-    background:url(/images/indicators/ajax-loader.gif);
+    background:url(/assets/images/indicators/ajax-loader.gif);
 }
 
 .show > .ui-listview {

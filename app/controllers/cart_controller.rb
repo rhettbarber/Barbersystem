@@ -304,6 +304,13 @@ end
     if @item.category.category_class.item_type  == 'master'
       @department = params[:department_id]
       @department = @item.default_master_department_id  if !@department
+      if @quantity < 300 and @item.sublimation_status == "sublimation_only"
+          # gooddd
+          @quantity = 300
+      else
+
+        # baddd
+      end
       @purchases_entry = PurchasesEntry.add_singular_item(@purchase,@item,@quantity,@department, @pe_comment  )
     else
       @purchases_entry = PurchasesEntry.add_singular_item(@purchase,@item,@quantity,0,  @pe_comment  )

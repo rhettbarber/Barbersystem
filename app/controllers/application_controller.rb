@@ -214,7 +214,7 @@ end
   end
 ###########################################################################################################
   def before_filter
-    $request = request
+    # $request = request
     #CUSTOM_LOGGER.error("##############################")
     #CUSTOM_LOGGER.error("##############################")
     #CUSTOM_LOGGER.info("info from custom logger before_filter")

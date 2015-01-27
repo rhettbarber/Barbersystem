@@ -3,7 +3,7 @@
 <% item =  Item.find(purchases_entry.item_id)  %>
 <% quantity = purchases_entry.QuantityOnOrder %>
 
-
+<tr style="display:none;" id="purchases_entry_id_<%= purchases_entry.id %>_message"><td colspan="40" style="text-align: center; background-color:red;color:white;">This item has a minimum of 300 pcs </td></tr>
 <tr class="<%= cycle('even', 'odd') -%>">
   <th>
     <% if @show_pe_type %>
@@ -13,7 +13,7 @@
     <% unless controller.controller_name == 'purchases'  %>
         <%=  fields_for "purchase[purchases_entry_attributes][]" , purchases_entry do |p|  %>
             <%= p.hidden_field :id  ,:index => nil%>
-            <%= p.text_field :QuantityOnOrder ,:index => nil ,:size => 2 , :value => number_with_precision(purchases_entry.QuantityOnOrder,:precision => 0 )   %>
+            <%= p.text_field :QuantityOnOrder ,:index => nil ,:size => 2, :class => "update_QuantityOnOrder" ,'data-purchases_entry_id'=> purchases_entry.id  , 'data-transfer_type'=> "sublimation_only" ,   :value => number_with_precision(purchases_entry.QuantityOnOrder,:precision => 0 )   %>
         <% end %>
     <%  else  %>
         <%=  quantity   %>

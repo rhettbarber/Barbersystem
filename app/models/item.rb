@@ -48,6 +48,16 @@ cattr_reader :per_page
 default_scope  :conditions => { :WebItem =>  true, :Inactive => false  }
 
 
+def sublimation_status
+      if self.SubDescription1.downcase.include? "sublimation_only"
+              return "sublimation_only"
+      else
+              return "not_sublimation"
+      end
+end
+
+
+
   def is_sublimation?
     return true
   end
@@ -1342,12 +1352,16 @@ def image_url(department,directory='thumbnails/',design='_back',item_prefix_over
 
                   image_url = image_url.gsub("/images//images", "/images")
 
-                  if   $request.protocol == 'https://'
-                                       image_url = image_url.gsub( "/images", "https://dixieoutfitters.com/images")
-                  else
-                                        image_url = image_url.gsub( "/images", "http://cdn.dixieoutfitters.com/images")
-                  end
 
+                  if $request
+                        if   $request.protocol == 'https://'
+                                              image_url = image_url.gsub( "/images", "https://dixieoutfitters.com/images")
+                        else
+                                              image_url = image_url.gsub( "/images", "http://cdn.dixieoutfitters.com/images")
+                        end
+                  else
+                                image_url = image_url.gsub( "/images", "https://dixieoutfitters.com/images")
+                  end
 
             return image_url
               #rescue

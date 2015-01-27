@@ -421,16 +421,14 @@ ThreeTwoThree::Application.routes.draw do
   match 'p/shopping', :to => redirect("/store/category_items")
 
   # match "page/:page_id/:scope_by_page_id", :controller => "page", :action => "show_page_on_index"
-  match "page/:page_id", :controller => "page", :action => "show_page_on_index"
-
   # match "p/:page_id/:scope_by_page_id", :controller => "page", :action => "show_page_on_index"
+
+  match "page/:page_id", :controller => "page", :action => "show_page_on_index"
   match "p/:page_id", :controller => "page", :action => "show_page_on_index"
-
-
   match "c/p/:page_id", :controller => "page", :action => "show_page_on_index"
   match "c/p/", :controller => "page", :action => "show_page_on_index"
-
   match "p/", :controller => "page", :action => "show_page_on_index"
+
   match 'page/recently-added', :controller => 'page', :action => 'recently_added_pages'
 
 
@@ -457,7 +455,7 @@ ThreeTwoThree::Application.routes.draw do
 
   # match "*" , 'page/show_page_on_index/new-home'
 
-  match '*a', :to => 'page#show_page_on_index'
+  # match '*a', :to => 'page#show_page_on_index'
 
 end
 

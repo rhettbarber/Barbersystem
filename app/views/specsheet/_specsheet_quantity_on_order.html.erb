@@ -1,8 +1,8 @@
 
-
+<div class="ui-field-contain">
 <%   if @default_quantity %>
                 <% if @default_quantity and @default_quantity > 1   %>
-                                        <label for="purchases_entries_QuantityOnOrder"  style="display:none;">Quantity:</label>
+                                        <label for="purchases_entries_QuantityOnOrder">Quantity:</label>
                                         <input type="text" name="purchases_entries[QuantityOnOrder]" id="purchases_entries_QuantityOnOrder" placeholder="Quantity: <%=  @default_quantity.to_i.to_s  %>" value="<%=  @default_quantity.to_i.to_s  %>">
                 <% else%>
                                     <label for="purchases_entries_QuantityOnOrder"  style="display:none;">Quantity:</label>
@@ -13,7 +13,7 @@
                  <% badd_no_default_quantity %>
 
   <% end %>
-
+</div>
 
 
 
