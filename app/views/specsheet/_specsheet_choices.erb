@@ -60,34 +60,32 @@
 
                             <%   if  @required_form_elements.include?('button_change_size_or_color') %>
                                                   <!--  purchases entry based --><!--  purchases entry based --><!--  purchases entry based --><!--  purchases entry based --><!--  purchases entry based --><!--  purchases entry based --><!--  purchases entry based --><!--  purchases entry based --><!--  purchases entry based --><!--  purchases entry based --><!--  purchases entry based -->
-                                                   <%=  submit_tag 'Update',  data: { role: "button", theme:'b' }   %>
+                                                   <%=  submit_tag 'Update', :class => "choose_button",  data: { role: "button", theme:'b' }   %>
                                                     <%= render :partial => "change_options" %>
                             <% end %>
 
 
                             <% if params[:item_id] and params[:design_id] and   @required_form_elements.include?('button_choose')   %>
                                                   <!--   @item and @design  parameters based combination  --><!--   @item and @design  parameters based combination  --><!--   @item and @design  parameters based combination  --><!--   @item and @design  parameters based combination  --><!--   @item and @design  parameters based combination  -->
-                                                   <%=  submit_tag 'Choose', data: { role: "button", theme:'b' }      %>
+                                                   <%=  submit_tag 'Choose', :class => "choose_button", data: { role: "button", theme:'b' }      %>
 
                                                    <%= render :partial => "change_options" %>
 
                             <% else %>
                                                       <%  if  @required_form_elements.include?('button_choose') %>
                                                                                         <!--   singular item or item without combination shown   -->  <!--   singular item or item without combination shown   -->  <!--   singular item or item without combination shown   -->  <!--   singular item or item without combination shown   -->  <!--   singular item or item without combination shown   -->
-                                                                                        <%=  submit_tag 'Choose', data: { role: "button", theme:'b' }    if  @required_form_elements.include?('button_choose')     %>
+                                                                                        <%=  submit_tag 'Choose', :class => "choose_button" , data: { role: "button", theme:'b' }    if  @required_form_elements.include?('button_choose')     %>
                                                      <% end %>
                             <% end %>
 
 
                             <% if  @required_form_elements.include?('button_update_this_item')  %>
                                                     <!--    @purchases_entry with incomplete symbiont   --> <!--    @purchases_entry with incomplete symbiont   --> <!--    @purchases_entry with incomplete symbiont   --> <!--    @purchases_entry with incomplete symbiont   --> <!--    @purchases_entry with incomplete symbiont   --> <!--    @purchases_entry with incomplete symbiont   -->
-                                                    <%=  submit_tag 'Update Item', data: { role: "button", theme:'b' }     %>
+                                                    <%=  submit_tag 'Update Item', :class => "choose_button" , data: { role: "button", theme:'b' }     %>
                             <% end  %>
 
 
                             <%= render "specsheet/icc_collection_select" %>
-
-
 
 <% end %>
 

@@ -8,7 +8,7 @@ module LogSystem
   end
 ############################################################################################################
 def before_log
-        logger.debug "NOTE: RAILS.cache remembers error like undefined class/module UserSession and must be restarted or that variable cleared. Very confusing error."
+        logger.debug "NOTE: RAILS.cache undefined class/module UserSession and must be restarted or that variable cleared. Very confusing"
         logger.debug "BEGIN ---------------------------lib/log_system/before_log"
         logger.debug "-------------------------------------Rails.cache: #{Rails.cache}"
         logger.debug "-------------------------------------ENV[RAILS_ENV]: #{ENV["RAILS_ENV"]}"

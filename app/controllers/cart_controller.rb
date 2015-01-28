@@ -302,18 +302,17 @@ end
   def add_to_cart_singular_item_customer
     logger.debug "begin add_to_cart_singular_item_customer-------------------------------------------------@item.id: #{@item.id}"
     if @item.category.category_class.item_type  == 'master'
-      @department = params[:department_id]
-      @department = @item.default_master_department_id  if !@department
-      if @quantity < 300 and @item.sublimation_status == "sublimation_only"
-          # gooddd
-          @quantity = 300
-      else
-
-        # baddd
-      end
-      @purchases_entry = PurchasesEntry.add_singular_item(@purchase,@item,@quantity,@department, @pe_comment  )
+                @department = params[:department_id]
+                @department = @item.default_master_department_id  if !@department
+                @purchases_entry = PurchasesEntry.add_singular_item(@purchase,@item,@quantity,@department, @pe_comment  )
     else
-      @purchases_entry = PurchasesEntry.add_singular_item(@purchase,@item,@quantity,0,  @pe_comment  )
+              if @quantity < 300 and @item.sublimation_status == "sublimation_only" and params[:transfer_type] and params[:transfer_type][:id] == "plas"
+                      logger.debug "sublimation_only: quantity less than 300 and sublimation_only, set quantity to 300"
+                      @quantity = 300
+              else
+                      logger.debug "sublimation_only: quantity satisfies requirements"
+              end
+              @purchases_entry = PurchasesEntry.add_singular_item(@purchase,@item,@quantity,0,  @pe_comment  )
     end
     redirect_to  :controller => 'cart',  :action => 'index'
   end
