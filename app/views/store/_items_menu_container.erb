@@ -12,6 +12,12 @@
                                                                   </div>
                                             </div>
                                             <%= render "layout_elements/breadcrumb"   %>
+                                             <% if @singular_item_customer == true %>
+                                                         <!--<a href="/store/sublimation_explaination" class="ui-btn" data-transition="pop">All transfers also available as Sublimation. </a>-->
+                                                            <div class="ui-bar ui-bar-a plas_transfer_message">
+                                                                            <p>All transfers now available as Sublimation.</p>
+                                                            </div>
+                                             <% end %>
                 <% end %>
 
 <% end %>

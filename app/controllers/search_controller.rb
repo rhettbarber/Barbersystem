@@ -90,54 +90,58 @@ def scroll
                                                                           already_seen_item_item_class = Set.new
                                                                           @all_items_in_department.each do |ar|
                                                                                         if ar.id
-                                                                                                    logger.debug   "------------------------------"+ ar.item_class_number
-                                                                                                    if  website_search_item_ids.split(',').include?( ar.id.to_s  )
-                                                                                                                if already_seen_item_picturenames.include?( ar.PictureName.to_s  )
-                                                                                                                                    logger.debug "SKIPPING ITEM because already used this picturname: " +  ar.PictureName.to_s
-                                                                                                                else
-                                                                                                                                      if already_seen_item_item_class.include?( ar.item_class_number  )
-                                                                                                                                                                                         logger.warn "SKIPPING ITEM already seen item already_seen_item_item_class."   +  ar.item_class_number
-                                                                                                                                      else
-                                                                                                                                                                                          #logger.warn "BEGIN ADDING_ITEM ###############################..."
-                                                                                                                                                                                          #logger.warn "PictureName: " + ar.PictureName    + "_Description: "  +  ar.Description
-                                                                                                                                                                                          #@product_search_results.add ar
-                                                                                                                                                                                          #already_seen_item_picturenames .add  ar.PictureName.to_s
-                                                                                                                                                                                          #already_seen_item_item_class .add  ar.item_class_number
-                                                                                                                                                                                          #logger.warn "END ADDING_ITEM  ###############################..."
-
-                                                                                                                                                                                          #if @incomplete_symbiont and  @purchase_symbiote_item.category.category_class.opposite_category_ids.include?( ar.category_id.to_s  )
-                                                                                                                                                                                          #                     logger.warn "BEGIN ADDING_ITEM ###############################..."
-                                                                                                                                                                                          #                      logger.warn "1234 adding this record.."
-                                                                                                                                                                                          #                      @product_search_results.add ar
-                                                                                                                                                                                          #                      already_seen_item_picturenames .add  ar.PictureName.to_s
-                                                                                                                                                                                          #                      already_seen_item_item_class .add  ar.item_class_number
-                                                                                                                                                                                          #                      logger.warn "END ADDING_ITEM  ###############################..."
-                                                                                                                                                                                          #else
-                                                                                                                                                                                          #                      logger.debug "1234  skiipped because not applicable opposite"
-                                                                                                                                                                                          #end
-                                                                                                                                                                                          if @incomplete_symbiont
-                                                                                                                                                                                                              if @purchase_symbiote_item.category.category_class.opposite_category_ids.include?( ar.category_id.to_s  )
-                                                                                                                                                                                                                                logger.warn "1234 adding this record.."
-                                                                                                                                                                                                                                @product_search_results.add ar
-                                                                                                                                                                                                                                already_seen_item_picturenames .add  ar.PictureName.to_s
-                                                                                                                                                                                                                                already_seen_item_item_class .add  ar.item_class_number
-                                                                                                                                                                                                              else
-                                                                                                                                                                                                                               logger.debug "1234  skiipped because it is not a compatible opposite"
-                                                                                                                                                                                                              end
-                                                                                                                                                                                          else
-                                                                                                                                                                                                              logger.warn "not @incomplete_symbiont.."
-                                                                                                                                                                                                              logger.warn "1234 adding this record.."
-                                                                                                                                                                                                              @product_search_results.add ar
-                                                                                                                                                                                                              already_seen_item_picturenames .add  ar.PictureName.to_s
-                                                                                                                                                                                                              already_seen_item_item_class .add  ar.item_class_number
-                                                                                                                                                                                            end
-
-
-                                                                                                                                      end
-                                                                                                                end
+                                                                                                    if  ar.sublimation_status == 'sublimation_only' and @customer_array.PriceLevel < 2
+                                                                                                                logger.warn "123456  sublimation_only and not wholesale customer"
                                                                                                     else
-                                                                                                               logger.warn "1234 skipped this item..not in website_search_item_ids.."
-                                                                                                    end
+                                                                                                                  logger.debug   "------------------------------"+ ar.item_class_number
+                                                                                                                  if  website_search_item_ids.split(',').include?( ar.id.to_s  )
+                                                                                                                              if already_seen_item_picturenames.include?( ar.PictureName.to_s  )
+                                                                                                                                                  logger.debug "SKIPPING ITEM because already used this picturname: " +  ar.PictureName.to_s
+                                                                                                                              else
+                                                                                                                                                    if already_seen_item_item_class.include?( ar.item_class_number  )
+                                                                                                                                                                                                       logger.warn "SKIPPING ITEM already seen item already_seen_item_item_class."   +  ar.item_class_number
+                                                                                                                                                    else
+                                                                                                                                                                                                        #logger.warn "BEGIN ADDING_ITEM ###############################..."
+                                                                                                                                                                                                        #logger.warn "PictureName: " + ar.PictureName    + "_Description: "  +  ar.Description
+                                                                                                                                                                                                        #@product_search_results.add ar
+                                                                                                                                                                                                        #already_seen_item_picturenames .add  ar.PictureName.to_s
+                                                                                                                                                                                                        #already_seen_item_item_class .add  ar.item_class_number
+                                                                                                                                                                                                        #logger.warn "END ADDING_ITEM  ###############################..."
+
+                                                                                                                                                                                                        #if @incomplete_symbiont and  @purchase_symbiote_item.category.category_class.opposite_category_ids.include?( ar.category_id.to_s  )
+                                                                                                                                                                                                        #                     logger.warn "BEGIN ADDING_ITEM ###############################..."
+                                                                                                                                                                                                        #                      logger.warn "1234 adding this record.."
+                                                                                                                                                                                                        #                      @product_search_results.add ar
+                                                                                                                                                                                                        #                      already_seen_item_picturenames .add  ar.PictureName.to_s
+                                                                                                                                                                                                        #                      already_seen_item_item_class .add  ar.item_class_number
+                                                                                                                                                                                                        #                      logger.warn "END ADDING_ITEM  ###############################..."
+                                                                                                                                                                                                        #else
+                                                                                                                                                                                                        #                      logger.debug "1234  skiipped because not applicable opposite"
+                                                                                                                                                                                                        #end
+                                                                                                                                                                                                        if @incomplete_symbiont
+                                                                                                                                                                                                                            if @purchase_symbiote_item.category.category_class.opposite_category_ids.include?( ar.category_id.to_s  )
+                                                                                                                                                                                                                                              logger.warn "1234 adding this record.."
+                                                                                                                                                                                                                                              @product_search_results.add ar
+                                                                                                                                                                                                                                              already_seen_item_picturenames .add  ar.PictureName.to_s
+                                                                                                                                                                                                                                              already_seen_item_item_class .add  ar.item_class_number
+                                                                                                                                                                                                                            else
+                                                                                                                                                                                                                                             logger.debug "1234  skiipped because it is not a compatible opposite"
+                                                                                                                                                                                                                            end
+                                                                                                                                                                                                        else
+                                                                                                                                                                                                                            logger.warn "not @incomplete_symbiont.."
+                                                                                                                                                                                                                            logger.warn "1234 adding this record.."
+                                                                                                                                                                                                                            @product_search_results.add ar
+                                                                                                                                                                                                                            already_seen_item_picturenames .add  ar.PictureName.to_s
+                                                                                                                                                                                                                            already_seen_item_item_class .add  ar.item_class_number
+                                                                                                                                                                                                          end
+
+
+                                                                                                                                                    end
+                                                                                                                              end
+                                                                                                                  else
+                                                                                                                             logger.warn "1234 skipped this item..not in website_search_item_ids.."
+                                                                                                                  end
+                                                                                                     end
                                                                                         else
                                                                                                    logger.warn "1234 not ar"
                                                                                         end
@@ -261,43 +265,10 @@ def scroll
     end
 ############################################################################################################
   def article_search
-                                          logger.debug "BEGIN article_search ########################################"
-                                      logger.debug "@initial_revisions: " + @initial_revisions.size.to_s
-                                      #@initial_revisions = ListingRevision.find_with_msfte :matches_any => @keywords
-                                      #@page_ids = Set.new
-                                    #  if @show_reordered
-                                    #                        @revisions_with_rank = Set.new
-                                    #                        @keywords   =  params[:query].gsub(" ", "+").split("+").collect {|c| "#{c.downcase}"}
-                                    #                        @initial_revisions.each do |revision|
-                                    #                                    @page_ids.add  revision.page_id
-                                    #                                    unless @page_ids.include?(  revision.page_id )
-                                    #                                                        revision_words_string = revision.id.to_s + ' ' +  ActionView::Base.full_sanitizer.sanitize(revision.content.to_s)  #  +  revision.page.name.to_s + ' ' + revision.page.slug.to_s     + ' '
-                                    #                                                        revision_words_array  = revision_words_string.split.collect {|c| "#{c.downcase}"}
-                                    #                                                        revision_words_set = revision_words_array.flatten.to_set
-                                    #                                                        @keywords_set      = @keywords.to_set
-                                    #                                                        word_count = 0
-                                    #                                                        @keywords.each do  |kw|
-                                    #                                                                  matching_words = @keywords_set.intersection(revision_words_set)
-                                    #                                                                  g = "g"
-                                    #                                                                  if matching_words.size > 0
-                                    #                                                                    logger.debug "matching_words: " + matching_words.inspect
-                                    #                                                                  else
-                                    #                                                                    logger.debug "matching_words - revision_words_set because none match: " + revision_words_set.inspect
-                                    #                                                                  end
-                                    #                                                                  word_count = matching_words.size.to_i
-                                    #                                                        end
-                                    #                                                        revision.total_column = word_count
-                                    #                                                        @revisions_with_rank.add revision # if revision.total_column != 0
-                                    #                                     end
-                                    #                        end
-                                    #                        #g = "g"
-                                    #                        @all_records =   @revisions_with_rank.to_a.sort_by {|a| a.total_column}.reverse  #@initial_revisions   #@revisions_with_rank.sort_by {|a| a.total_column}.reverse
-                                    #else
-                                    #              @all_records =   @initial_revisions
-                                    #end
-
+                                    logger.debug "BEGIN article_search ########################################"
+                                    logger.debug "@initial_revisions: " + @initial_revisions.size.to_s
                                     @all_records =   @initial_revisions
-                                      logger.debug "@revisions.size: " + @revisions.size.to_s   if @revisions
+                                    logger.debug "@revisions.size: " + @revisions.size.to_s   if @revisions
 
                                       #@paged_revisions  = WillPaginate::Collection.create(  params[:page] || 1, 2, @revisions.size) do |pager|
                                       #  pager.replace(@revisions)
@@ -319,15 +290,14 @@ def scroll
   end
 ############################################################################################################
  def products_search
-                                               logger.debug "BEGIN search_garments ########################################"
-                                               logger.debug "BEGIN search_garments ########################################"
-                                               logger.debug "BEGIN search_garments ########################################"
-                                               logger.debug "BEGIN search_garments ########################################"
-                                               logger.debug "BEGIN search_garments ########################################"
+                                                logger.debug "BEGIN products_search ########################################"
+                                               logger.debug "BEGIN products_search ########################################"
+                                               logger.debug "BEGIN products_search ########################################"
+                                               logger.debug "BEGIN products_search ########################################"
+                                               logger.debug "BEGIN products_search ########################################"
+
                                                logger.debug "############## @incomplete_symbiont : " + @incomplete_symbiont.to_s
-                                               logger.debug "############## @incomplete_symbiont : " + @incomplete_symbiont.to_s
-                                               logger.debug "############## @incomplete_symbiont : " + @incomplete_symbiont.to_s
-                                               logger.debug "############## @incomplete_symbiont : " + @incomplete_symbiont.to_s
+
                                                logger.debug "---------------------------------------------------------------"
                                                logger.debug "@initial_items.inspect: " + @initial_items.inspect.to_s
                                                logger.debug "@initial_items.size.to_s: " + @initial_items.size.to_s
@@ -350,38 +320,43 @@ def scroll
                                                already_seen_item_picturenames = Set.new
                                                already_seen_item_item_class = Set.new
                                                @all_records.each do |ar|
-                                                 if ar.id
-                                                               if  website_search_item_ids.split(',').include?( ar.id.to_s  )
-                                                                           if already_seen_item_picturenames.include?( ar.PictureName.to_s  )
-                                                                                       logger.debug "1234  skiipped because already used this picturname"
-                                                                           else
-                                                                                       if already_seen_item_item_class.include?(  ar.item_class_number  )
-                                                                                                 logger.warn "1234 skipping already seen item already_seen_item_item_class."
-                                                                                       else
-                                                                                                      if @incomplete_symbiont
-                                                                                                                      if @purchase_symbiote_item.category.category_class.opposite_category_ids.include?( ar.category_id.to_s  )
-                                                                                                                                 logger.warn "1234 adding this record.."
-                                                                                                                                 @product_search_results.add ar
-                                                                                                                                 already_seen_item_picturenames .add  ar.PictureName.to_s
-                                                                                                                                 already_seen_item_item_class .add  ar.item_class_number
+                                                         if ar.id
+                                                                      if  ar.sublimation_status == 'sublimation_only' and @customer_array.PriceLevel < 2
+                                                                            logger.warn "123456  sublimation_only and not wholesale customer"
+                                                                      else
+                                                                               if  website_search_item_ids.split(',').include?( ar.id.to_s  )
+                                                                                           if already_seen_item_picturenames.include?( ar.PictureName.to_s  )
+                                                                                                       logger.debug "1234  skiipped because already used this picturname"
+                                                                                           else
+                                                                                                       if already_seen_item_item_class.include?(  ar.item_class_number  )
+                                                                                                                 logger.warn "1234 skipping already seen item already_seen_item_item_class."
+                                                                                                       else
+                                                                                                                      if @incomplete_symbiont
+                                                                                                                                      if @purchase_symbiote_item.category.category_class.opposite_category_ids.include?( ar.category_id.to_s  )
+                                                                                                                                                 logger.warn "1234 adding this record.."
+                                                                                                                                                 @product_search_results.add ar
+                                                                                                                                                 already_seen_item_picturenames .add  ar.PictureName.to_s
+                                                                                                                                                 already_seen_item_item_class .add  ar.item_class_number
+                                                                                                                                      else
+                                                                                                                                                    logger.debug "1234  skiipped because it is not a compatible opposite"
+                                                                                                                                       end
                                                                                                                       else
-                                                                                                                                    logger.debug "1234  skiipped because it is not a compatible opposite"
+                                                                                                                                              logger.warn "not @incomplete_symbiont.."
+                                                                                                                                              logger.warn "1234 adding this record.."
+                                                                                                                                              @product_search_results.add ar
+                                                                                                                                              already_seen_item_picturenames .add  ar.PictureName.to_s
+                                                                                                                                              already_seen_item_item_class .add  ar.item_class_number
                                                                                                                        end
-                                                                                                      else
-                                                                                                                              logger.warn "not @incomplete_symbiont.."
-                                                                                                                              logger.warn "1234 adding this record.."
-                                                                                                                              @product_search_results.add ar
-                                                                                                                              already_seen_item_picturenames .add  ar.PictureName.to_s
-                                                                                                                              already_seen_item_item_class .add  ar.item_class_number
                                                                                                        end
-                                                                                       end
-                                                                           end
-                                                               else
-                                                                          logger.warn "1234 skipped this item..not in website_search_item_ids.."
-                                                               end
-                                                 else
-                                                               logger.warn "1234 not ar"
-                                                 end
+                                                                                           end
+                                                                               else
+                                                                                          logger.warn "1234 skipped this item..not in website_search_item_ids.."
+                                                                               end
+                                                                       end
+                                                         else
+                                                                               logger.warn "1234 not ar"
+                                                          end
+
                                                end
                                                logger.debug "website_search_items: " + @product_search_results.inspect
                                                FMCache.write  @website_search_items_cache_string ,    @product_search_results

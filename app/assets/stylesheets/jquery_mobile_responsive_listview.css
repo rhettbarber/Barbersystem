@@ -26,7 +26,7 @@
     .responsive_listview_grid .ui-listview li {
         float: left;
         width: 295px;
-        min-height:255px;
+        min-height:272px;
         margin: .5625em 1.2%;
     }
 

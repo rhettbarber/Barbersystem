@@ -1,11 +1,13 @@
 
+<div style="width:100%;background-color: red; color:white;text-align:center;padding:10px;display:none;" id="minimum_quantity_message">This item has a minimum of 300 pcs </div>
+
 <div class="ui-field-contain">
 <%   if @default_quantity %>
                 <% if @default_quantity and @default_quantity > 1   %>
                                         <label for="purchases_entries_QuantityOnOrder">Quantity:</label>
                                         <input type="text" name="purchases_entries[QuantityOnOrder]" id="purchases_entries_QuantityOnOrder" placeholder="Quantity: <%=  @default_quantity.to_i.to_s  %>" value="<%=  @default_quantity.to_i.to_s  %>">
                 <% else%>
-                                    <label for="purchases_entries_QuantityOnOrder"  style="display:none;">Quantity:</label>
+                                    <label for="purchases_entries_QuantityOnOrder">Quantity:</label>
                                     <input type="text" name="purchases_entries[QuantityOnOrder]" id="purchases_entries_QuantityOnOrder" placeholder="Quantity: 1" value="1">
                 <% end %>
   <% else %>

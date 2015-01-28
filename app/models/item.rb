@@ -47,7 +47,11 @@ cattr_reader :per_page
 #scope :unique_and_one_of_item_class_in_departments, joins(:item_class) & Item.with_no_item_class_in_departments
 default_scope  :conditions => { :WebItem =>  true, :Inactive => false  }
 
-
+### this method also exists in listing_designs... take heed!
+### this method also exists in listing_designs... take heed!
+### this method also exists in listing_designs... take heed!
+### this method also exists in listing_designs... take heed!
+### this method also exists in listing_designs... take heed!
 def sublimation_status
       if self.SubDescription1.downcase.include? "sublimation_only"
               return "sublimation_only"

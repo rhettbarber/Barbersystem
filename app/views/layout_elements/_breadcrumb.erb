@@ -1,19 +1,28 @@
-<div style="width: 100%;text-align: center;">
-                  <!--<div class="ui-bar ui-bar-a">-->
-                  <!--Please choose a shirt or item below to complete your design:<br>-->
+<style type="text/css">
 
-                    <div data-role="controlgroup breadcrumb-control" data-type="horizontal"  data-mini="true">
-                                      <% if @department %>
+    .ui-block-department {
+        width: 50% !important;
+        float: left;
+    }
+    .ui-block-category {
+        width: 50% !important;
+        float: left;
+    }
 
-                                                 <!--<a class="ui-btn ui-corner-all ui-icon-home ui-btn-icon-left"  href="/"> Home</a>-->
+</style>
 
-                                                 <a  class="ui-btn ui-corner-all ui-icon-carat-r ui-btn-icon-up"   href="#" onclick="expandCollapsibleDepartment( <%= @department.id %>)">  <%= @department.Name.camelize.possessive %> department</a>
-                                    <% end %>
 
-                                      <% if @category %>
-                                                <a  class="ui-btn ui-disabled"   href="#"> <%= @category.Name.camelize %></a>
-                                      <% end %>
-                    </div>
 
-                  <!--</div>-->
+<div class="ui-grid-a" style="width:100% !important;">
+  <% if @department %>
+      <div class="ui-block-department">
+        <a data-role="button" href="#" onclick="expandCollapsibleDepartment( <%= @department.id %>)">  <%= @department.Name.camelize.possessive %></a>
+      </div>
+  <% end %>
+
+  <% if @category %>
+      <div class="ui-block-category">
+        <a data-role="button" href="#" class="ui-disabled"> <%= @category.Name.camelize %></a>
+      </div>
+  <% end %>
 </div>

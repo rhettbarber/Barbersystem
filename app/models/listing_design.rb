@@ -20,6 +20,18 @@ class ListingDesign  < ActiveRecord::Base
   #
   #
   #
+
+  def sublimation_status
+    if self.SubDescription1.downcase.include? "sublimation_only"
+      return "sublimation_only"
+    else
+      return "not_sublimation"
+    end
+  end
+
+
+
+
   def item_class_number
     a = StringScanner.new(self.PictureName)
     if a.nil?

@@ -272,6 +272,7 @@ ThreeTwoThree::Application.routes.draw do
   match 'store/jquery_data' => 'store#jquery_data'
   match 'store/design' => 'store#design'
   match 'store/merchandise' => 'store#merchandise'
+  match 'store/sublimation_explaination' => 'store#sublimation_explaination'
   match 'store/modal' => 'store#modal'
   match 'store/grid' => 'store#grid'
   match 'store/item' => 'store#item'

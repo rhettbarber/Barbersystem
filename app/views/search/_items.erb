@@ -1,5 +1,14 @@
+<style type="text/css">
 
-<!--@paginated_results.size: <%#= @paginated_results.size%> <br>-->
+    .sublimation_only {
+        background-color:blue;
+        color:white;
+        display:inherit;
+        text-align:center;
+        min-height:21px;
+    }
+
+</style>
 
 
 <% @paginated_results.each do |item| %>
@@ -10,11 +19,11 @@
 
 
                                              <% if @search_type_name == "search_garments" %>
-                                                                                                     <img src="/images/item_thumbnails/<%=   item.PictureName.gsub(".jpg", "").gsub(".png", "") + '.jpg'  %>" class="ui-li-thumb" style="display:inline;max-height:200px;">  <br>
+                                                                                                     <img src="http://cdn.dixieoutfitters.com/images/item_thumbnails/<%=   item.PictureName.gsub(".jpg", "").gsub(".png", "") + '.jpg'  %>" class="ui-li-thumb" style="display:inline;max-height:200px;">  <br>
 
                                               <% else %>
 
-                                                                                                     <img src="/images/item_thumbnails/<%=   item.PictureName.gsub(".png", ".jpg")  %>" class="ui-li-thumb" style="display:inline;max-height:200px;"> <br>
+                                                                                                     <img src="http://cdn.dixieoutfitters.com//images/item_thumbnails/<%=   item.PictureName.gsub(".png", ".jpg")  %>" class="ui-li-thumb" style="display:inline;max-height:200px;"> <br>
                                              <% end %>
 
                                               <a  data-role="button"  href="/specsheet/<%= item.id %>">
@@ -22,6 +31,9 @@
                                                              <%= item.search_results_set %><br>
                                                           <%= item.ItemLookupCode %>
                                               </a>
+                                              <% if item.sublimation_status == "sublimation_only" %>
+                                                                <span class="sublimation_only">Silkscreen 300pc min.</span>
+                                              <% end %>
                             </div>
 
     </li>

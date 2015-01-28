@@ -31,7 +31,7 @@
 
                                     <% if  [ 2, 3].include?(@customer_array.PriceLevel) %>
                                                     <div class="ui-field-contain">
-                                                            <label for="transfer_type_id">Transfer type:</label>
+                                                            <label for="transfer_type_id">Choose Type:</label>
                                                             <select name="transfer_type[id]" id="transfer_type_id"  data-native-menu="false">
                                                                     <% if @purchases_entry and @purchases_entry.transfer_type  %>
                                                                                                         <% @selected_id =  @purchases_entry.transfer_type   %>

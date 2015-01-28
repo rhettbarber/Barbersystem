@@ -11,11 +11,18 @@ function changeTransferType() {
                     var the_price =   0.0;
                     if ( $(".sublimation_only").size() > 0  &&  $("#transfer_type_id option:selected").val() ==  'plas' ) {
                                     console.log("selected type value is plas, and sublimation_only design, set quantity to 300") ;
-                                    var the_quantity = 300 ;
-                                     $("#purchases_entries_QuantityOnOrder").val( 300 )
+                                            if ( $("#purchases_entries_QuantityOnOrder").val()   < 300 ) {
+                                                var the_quantity = 300;
+                                                $("#minimum_quantity_message").show();
+                                                //$("#purchases_entries_QuantityOnOrder").val( 300 )
+                                            } else {
+                                                         $("#minimum_quantity_message").hide()
+                                            }
+
                     } else {
                                 console.log("selected type value is not plas,or not a sublimation_only design set quantity by  quantity field value") ;
                                 var the_quantity =    $("#purchases_entries_QuantityOnOrder").val()   ;
+                                $("#minimum_quantity_message").hide()
                     }
 
                    console.log("the_quantity: " + the_quantity );
@@ -46,9 +53,11 @@ function changeTransferType() {
                     if ( $("#transfer_type_id option:selected").val() ==  'plas') {
                                            console.log("selected type value is plas") ;
                                             $(".sublimation_transfer_message").hide();
+                                             $(".plas_transfer_message").show();
                     }  else {
                                             console.log("selected type value is NOT plas") ;
                                              $(".sublimation_transfer_message").show();
+                                             $(".plas_transfer_message").hide();
                     }
                     console.log("end changeTransferType") ;
 }

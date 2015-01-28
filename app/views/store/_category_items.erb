@@ -78,11 +78,11 @@
                                                                                                                                           </div>
                                                                                                                     </a>
                                                                                                                     <% if item.sublimation_status == "sublimation_only" %>
-                                                                                                                                <span class="sublimation_only">Sublimation item</span>
-                                                                                                                    <% end %>
-                                                                                                                     <span  style="display:none;" class="sale_label_<%= item.SaleType %>">Sale item!</span>
-
-                                                                                               <% else %>
+                                                                                                                                <span class="sublimation_only">Silkscreen 300pc min.</span>
+                                                                                                                    <% else %>
+                                                                                                                                    <span  style="display:none;" class="sale_label_<%= item.SaleType %>">Sale item!</span>
+                                                                                                                     <% end %>
+                                                                                                 <% else %>
                                                                                                                      <a href="/specsheet/<%= item.id %>">
                                                                                                                                             <div class="sale_type_<%= item.SaleType %>">
                                                                                                                                                                 <img src="<%=   item.image_url( @department, 'item_thumbnails/','x'  ).gsub(".png", ".jpg")  %>" class="ui-li-thumb" style="display:inline;max-height: 200px;"><br>
