@@ -4,8 +4,6 @@ console.log("-----BEGIN file initiate_functions.js");
 
 
 
-
-
 function changeTransferType() {
                     console.log("begin changeTransferType") ;
                     var the_price =   0.0;
