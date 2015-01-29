@@ -2,9 +2,17 @@ ThreeTwoThree::Application.configure do
 
 
    config.assets.precompile += ['initiate_functions.js']
-
-
    config.assets.enabled = true
+
+   config.action_controller.asset_host = Proc.new { |source, request|
+       if   request.protocol == 'https://'
+
+       else
+             if source =~ /\b(.png|.jpg|.gif)\b/i
+                    config.action_controller.asset_host = "http://cdn.dixieoutfitters.com"
+             end
+       end
+   }
 
    # Rails.configuration.use_individual_assets_without_sprocket  = :false
 
