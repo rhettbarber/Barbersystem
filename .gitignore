@@ -12,6 +12,7 @@
 !test/*
 !/vendor/*
 
+Gemfile.lock
 *.yml
 
 #################
