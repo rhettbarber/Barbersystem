@@ -1,11 +1,3 @@
-GIT
-  remote: https://github.com/rhettbarber/cacheable-flash.git
-  revision: ca93536a5050e20a6034d6fe06fdead55a886022
-  specs:
-    cacheable_flash (0.3.3)
-      json
-      stackable_flash (>= 0.0.7)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -51,6 +43,9 @@ GEM
     arel (3.0.3)
     bartt-ssl_requirement (1.4.2)
     builder (3.0.4)
+    cacheable_flash (0.3.3)
+      json
+      stackable_flash (>= 0.0.7)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -136,13 +131,15 @@ DEPENDENCIES
   activerecord-sqlserver-adapter
   alchemist
   bartt-ssl_requirement (~> 1.4.0)
-  cacheable_flash!
+  cacheable_flash (= 0.3.3)
   coffee-rails (~> 3.2.1)
   execjs (= 2.0.2)
   memcache-client
   nokogiri
+  passenger
   rails (= 3.2.19)
   sass-rails (~> 3.2.3)
+  therubyracer
   thin
   tiny_tds (= 0.6.1)
   uglifier (>= 1.0.3)
