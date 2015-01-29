@@ -1,4 +1,4 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
+// This is a manifest file that'll be compiled into initiate_functions.js, which will include all the files
 // listed below.
 //
 // Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
@@ -10,15 +10,6 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 
-//= require jquery-1.11.1.min
-//= require jquery.mobile-1.4.5.min
-//= require flash
-//= require jquery_scroll_stop
-//= require jquery.cookie
-//= require sitewide_functions
-//= require hide_fixed_toolbars
-//= require rails
-//= require jstree.min
-//= require slick
-//= require store_administration
+//= require initiate_functions_main
+
 

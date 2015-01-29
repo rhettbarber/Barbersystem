@@ -1,8 +1,12 @@
 ThreeTwoThree::Application.configure do
 
 
+   config.assets.precompile += ['initiate_functions.js']
 
-  Rails.configuration.use_individual_assets_without_sprocket  = :false
+
+   config.assets.enabled = true
+
+   # Rails.configuration.use_individual_assets_without_sprocket  = :false
 
   #Rails.application.config.assets.prefix = "assets_production"
 
@@ -43,23 +47,23 @@ ThreeTwoThree::Application.configure do
 
 
  #TURN ON FOR REAL PRODUCTION
- config.action_controller.asset_host = Proc.new { |source, request|
-    #$stdout.puts "Protocol:  " + request.protocol
-    #$stdout.puts "\n"
-    if   request.protocol == 'https://'
-                            # 				$stdout.puts "protocol_is_https   "
-                            #config.action_controller.asset_host = "https://dixieoutfitters.barberandcompany.netdna-cdn.com"
-    else
-                            #				$stdout.puts "protocol_is_ NOT https   "
-                            config.action_controller.asset_host = "http://cdn.dixieoutfitters.com"
-    end
-
-    #$stdout.puts "\n"
-    #$stdout.puts "request.media_type: " + request.media_type
-    #$stdout.puts "\n"
-    #$stdout.puts "request.format:  " + request.format
-    #$stdout.puts "\n"
- }
+ # config.action_controller.asset_host = Proc.new { |source, request|
+ #    #$stdout.puts "Protocol:  " + request.protocol
+ #    #$stdout.puts "\n"
+ #    if   request.protocol == 'https://'
+ #                            # 				$stdout.puts "protocol_is_https   "
+ #                            #config.action_controller.asset_host = "https://dixieoutfitters.barberandcompany.netdna-cdn.com"
+ #    else
+ #                            #				$stdout.puts "protocol_is_ NOT https   "
+ #                            config.action_controller.asset_host = "http://cdn.dixieoutfitters.com"
+ #    end
+ #
+ #    #$stdout.puts "\n"
+ #    #$stdout.puts "request.media_type: " + request.media_type
+ #    #$stdout.puts "\n"
+ #    #$stdout.puts "request.format:  " + request.format
+ #    #$stdout.puts "\n"
+ # }
 
 
 

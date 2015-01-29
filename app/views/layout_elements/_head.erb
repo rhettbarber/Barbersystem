@@ -6,9 +6,9 @@
                       <%= render(:partial => "layout_elements/title") %>
 
                       <% if request.protocol == "https://" %>
-                                    <%= javascript_include_tag   "/assets_production/non_compiled_assets/remove_console.js"  if Rails.env.production? %>
+                                    <%= javascript_include_tag   "/assets/non_compiled_assets/remove_console.js"  if Rails.env.production? %>
                       <% else %>
-                                    <%= javascript_include_tag    "http://cdn.dixieoutfitters.com/assets_production/non_compiled_assets/remove_console.js"  if Rails.env.production? %>
+                                    <%= javascript_include_tag    "http://cdn.dixieoutfitters.com/assets/non_compiled_assets/remove_console.js"  if Rails.env.production? %>
                       <% end %>
 
                       <%= stylesheet_link_tag    "application", :media => "all" %>
