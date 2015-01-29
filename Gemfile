@@ -44,7 +44,7 @@ gem 'bartt-ssl_requirement', '~>1.4.0', :require => 'ssl_requirement'
 gem 'nokogiri'
 
 gem 'therubyracer' , :platform => :ruby  # makes this gem only install on *nix
-gem 'cacheable_flash'  , '0.3.3' # :git => "https://github.com/rhettbarber/cacheable-flash.git"
+gem 'cacheable_flash'  , :git => "https://github.com/rhettbarber/cacheable-flash.git"
 
 #group :development, :test do
 #        gem 'rspec-rails'

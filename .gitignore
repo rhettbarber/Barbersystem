@@ -1,8 +1,5 @@
 */*
 !public/assets/
-#!public/assets_development/
-#!public/assets_staging/
-#!public/assets_production/
 !app/*
 !doc/*
 !config/*
@@ -14,6 +11,7 @@
 !/vendor/*
 
 *.yml
+Gemfile
 Gemfile.lock
 #################
 ## Eclipse
