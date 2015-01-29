@@ -4,9 +4,9 @@ ThreeTwoThree::Application.configure do
 
   Rails.configuration.use_individual_assets_without_sprocket  = :false
 
-  Rails.application.config.assets.prefix = "assets_production"
+  #Rails.application.config.assets.prefix = "assets_production"
 
-  Rails.application.config.assets.manifest = File.join(Rails.public_path, config.assets.prefix)
+  #Rails.application.config.assets.manifest = File.join(Rails.public_path, config.assets.prefix)
 
   config.action_controller.page_cache_extension  = true
 
