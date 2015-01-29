@@ -60,6 +60,13 @@ def sublimation_status
       end
 end
 
+  def minimum_quantity_message
+          if sublimation_status == "sublimation_only"
+                  return " - 300 min"
+          else
+                  return ""
+            end
+  end
 
 
   def is_sublimation?

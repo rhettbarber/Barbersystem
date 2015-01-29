@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% if admin? %>
+      <!--  show admin information -->
+      <!--  current_layout: <%= current_layout  %>  -->
+      <!--  request.fullpath: <%=  request.fullpath  %>  -->
+  <% end %>
+
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title> Catalog</title>
+
+
+</head>
+<body class="printable">
+            <div id="the_yield" style="margin-left:auto;margin-right:auto;">
+              <div class="show">
+                <%= yield %>
+              </div>
+            </div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

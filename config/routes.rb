@@ -3,6 +3,10 @@ ThreeTwoThree::Application.routes.draw do
 
 
 
+  resources :catalogs
+  match '/catalogs/show_catalog/:id' , :controller => 'catalogs', :action => 'show_catalog'
+
+
   match '/custom' => redirect(  'http://barberandcompany.espwebsite.com'), :as => :custom
 
   match '/image_manager/missing_psd_images' , :controller => 'image_manager', :action => 'missing_psd_images'
