@@ -8,7 +8,7 @@
     #@front_design =  @items_front.first
     if @breast_print
             @front_advanced_combination = AdvancedCombination.find_or_create_combo( @item, @breast_print)
-            @front_design_image_name =    '/images/item_specsheets/' + @breast_print_name
+            @front_design_image_name =   image_url '/images/item_specsheets/' + @breast_print_name
       #@front_design_image_name =  '/images/item_specsheets/' +  @front_design.ItemLookupCode + '.png'
     #else
     #        @front_design_name = Util::Slug.generate(@back_design.department.Name) + '.png'
@@ -23,8 +23,8 @@
 
 
 
-<% @product_background_image_name =  '/images/item_specsheets/' + @item.PictureName.gsub(".png", "").gsub(".jpg", "")  + '.jpg' %>
-<%   @back_design_image_name     =    '/images/item_specsheets/' + @back_design.PictureName        %>
+<% @product_background_image_name =  image_url '/images/item_specsheets/' + @item.PictureName.gsub(".png", "").gsub(".jpg", "")  + '.jpg' %>
+<%   @back_design_image_name     =    image_url '/images/item_specsheets/' + @back_design.PictureName        %>
 
 
       <!--[if lt IE 8]><style>

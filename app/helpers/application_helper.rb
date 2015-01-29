@@ -1,6 +1,9 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
+  def image_url(source)
+    URI.join(root_url, image_path(source))
+  end
 
 #  alias_method :rails_javascript_include_tag, :javascript_include_tag
 #
