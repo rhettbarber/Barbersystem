@@ -11,6 +11,7 @@
 
 
 <%  if  ['/cart'].include?(request.path)  %>
+             <% if  [ 2, 3].include?(@customer_array.PriceLevel) %>
                         <select name="transfer_type[id]" id="transfer_type_id"  data-native-menu="false" onchange="changeTransferType();">
                                                                             <% @transfer_types = [
                                                       {"name"=>"SilkScreen Transfer 12\"x12\"", "id"=>"plas"},
@@ -24,6 +25,7 @@
 
                                               <%=  options_for_select(@transfer_types.collect {|p| [ p['name'], p['id'] ] })     %>
                         </select>
+            <% end %>
      <%  elsif  @@sublimation_standard_category_class_ids.include?   @the_category_class_id    %>
                         <% if @sublimation %>
                                     <%=  hidden_field_tag "transfer_type_id",  "sublimfull"  %>
