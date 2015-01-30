@@ -1,8 +1,8 @@
 ThreeTwoThree::Application.configure do
 
+  config.assets.enabled = true
+  config.assets.precompile += ['initiate_functions.js', 'application.js']
 
-   config.assets.precompile += ['initiate_functions.js']
-   config.assets.enabled = true
 
    config.action_controller.asset_host = Proc.new { |source, request|
        if   request.protocol == 'https://'
