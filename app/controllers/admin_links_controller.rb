@@ -1,8 +1,6 @@
 class AdminLinksController < ApplicationController
 before_filter :redirect_unless_admin
 
-
-
   def index
     @admin_links = AdminLink.all
 
