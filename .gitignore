@@ -1,7 +1,8 @@
 */*
-#!public/assets_development/
-#!public/assets_staging/
-#!public/assets_production/
+!public/assets/
+!public/assets_development/
+!public/assets_staging/
+!public/assets_production/
 !app/*
 !doc/*
 !config/*
