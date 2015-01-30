@@ -11,6 +11,8 @@
 !/vendor/*
 
 *.yml
+!manifest.yml
+
 Gemfile
 Gemfile.lock
 #################
@@ -106,7 +108,7 @@ ipch/
 *.vsp
 *.vspx
 
-# Guidance Automation Toolkit
+# Guidanc e Automation Toolkit
 *.gpState
 
 # ReSharper is a .NET coding add-in
