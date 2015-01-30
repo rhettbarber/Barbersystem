@@ -24,9 +24,9 @@
 
 
 
-<% @product_background_image_name =  '/images/item_specsheets/' + @item.PictureName.gsub(".jpg", "")  + '.jpg' %>
-<%  @front_design_image_name      =   '/images/item_specsheets/' + @front_design_name     %>
-<%   @back_design_image_name     =    '/images/item_specsheets/' + @back_design.PictureName        %>
+<% @product_background_image_name =  image_url  '/images/item_specsheets/' + @item.PictureName.gsub(".jpg", "")  + '.jpg' %>
+<%  @front_design_image_name      =  image_url '/images/item_specsheets/' + @front_design_name     %>
+<%   @back_design_image_name     =  image_url   '/images/item_specsheets/' + @back_design.PictureName        %>
 
 
 
@@ -46,14 +46,14 @@
     }
 
     #specsheet_table {
-        background: url(<%=  @product_background_image_name  -%>) no-repeat right;
+        background: url(<%= @product_background_image_name  -%>) no-repeat right;
         height:328px;
         width:425px;
         float:left;
     }
 
     #specsheet_table_front {
-        background: url(<%=  @product_background_image_name  -%>) no-repeat left;
+        background: url(<%= @product_background_image_name  -%>) no-repeat left;
         height:328px;
         width:425px;
         float:left;

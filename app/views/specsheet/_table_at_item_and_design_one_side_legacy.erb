@@ -66,7 +66,7 @@
 
   <table id="specsheet_table" cellpadding="0" border="0">
     <td>
-      <img src="/images/item_specsheets/<%= @design.PictureName %>"
+      <img src="<%= image_url '/images/item_specsheets/' +  @design.PictureName %>"
            alt="<%= @design.PictureName %>"
            style=" position: relative;
                    height:<%=   @combination_height     %>px;
@@ -76,7 +76,7 @@
     </td>
     <% if @breast_print == true %>
         <td>
-          <img src="/images/breast_prints/<%=  @breast_print_name   %>"
+          <img src="<%= image_url '/images/breast_prints/' +  @breast_print_name   %>"
                alt="<%= @breast_print_name %>"
                id ="front_design_image"
                style=" position: relative;
