@@ -10,6 +10,7 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 
+//= require remove_console
 //= require jquery-1.11.1.min
 //= require jquery.mobile-1.4.5.min
 //= require flash

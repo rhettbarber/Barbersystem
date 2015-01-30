@@ -5,12 +5,6 @@
                       <%= render(:partial => "layout_elements/shared_meta") %>
                       <%= render(:partial => "layout_elements/title") %>
 
-                      <% if request.protocol == "https://" %>
-                                    <%= javascript_include_tag   "/assets/non_compiled_assets/remove_console.js"  if Rails.env.production? %>
-                      <% else %>
-                                    <%= javascript_include_tag    "http://cdn.dixieoutfitters.com/assets/non_compiled_assets/remove_console.js"  if Rails.env.production? %>
-                      <% end %>
-
                       <%= stylesheet_link_tag    "application", :media => "all" %>
                       <%= javascript_include_tag    "application" %>
 
