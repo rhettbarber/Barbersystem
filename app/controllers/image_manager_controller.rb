@@ -34,7 +34,7 @@ class ImageManagerController < ApplicationController
   end
 
 def missing_sublimation_images
-              @original_items = Item.limit(4000).joins(:department, :category, :category_class).order("category_classes.name, items.ItemLookupCode ASC").where( "items.WebItem = ? and Inactive = ?  and category_classes.id in (?)",  true, false,@@sublimation_standard_category_class_ids     ).all
+              @original_items = Item.limit(4000).joins(:department, :category, :category_class).order(" items.ItemLookupCode ASC").where( "items.WebItem = ? and Inactive = ?  and category_classes.id in (?)",  true, false,@@sublimation_standard_category_class_ids     ).all
                logger.debug "5555555555555555555554444444444444444444444"
                logger.debug "5555555555555555555554444444444444444444444"
                logger.debug "5555555555555555555554444444444444444444444"
