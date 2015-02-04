@@ -9,7 +9,7 @@ class ImageManagerController < ApplicationController
 
 
   def missing_psd_images
-            @original_items = Item.limit(4000).joins(:department, :category, :category_class).order("category_classes.name, items.ItemLookupCode ASC").where( "items.WebItem = ? and Inactive = ?  and category_classes.item_type = ?",  true, false, "slave"     ).all
+            @original_items = Item.limit(4000).joins(:department, :category, :category_class).order("category_classes.name, items.ItemLookupCode ASC").where( "items.WebItem = ? and Inactive = ?  and category_classes.id in (?)",  true, false,  @@sublimation_standard_category_class_ids     ).all
             logger.debug "5555555555555555555554444444444444444444444"
             logger.debug "5555555555555555555554444444444444444444444"
             logger.debug "5555555555555555555554444444444444444444444"
@@ -34,13 +34,13 @@ class ImageManagerController < ApplicationController
   end
 
 def missing_sublimation_images
-              @original_items = Item.limit(4000).joins(:department, :category, :category_class).order("category_classes.name, items.ItemLookupCode ASC").where( "items.WebItem = ? and Inactive = ?  and category_classes.item_type = ?",  true, false, "slave"     ).all
+              @original_items = Item.limit(4000).joins(:department, :category, :category_class).order(" items.ItemLookupCode ASC").where( "items.WebItem = ? and Inactive = ?  and category_classes.id in (?)",  true, false,@@sublimation_standard_category_class_ids     ).all
                logger.debug "5555555555555555555554444444444444444444444"
                logger.debug "5555555555555555555554444444444444444444444"
                logger.debug "5555555555555555555554444444444444444444444"
                 @missing_images = Set.new
                 @original_items.each do |the_item|
-                                        the_item_file_url =  "W:\\\\AUTOMATION_DATABASE\\ORIGINAL_PNG\\"  +  the_item.ItemLookupCode + ".png"
+                                        the_item_file_url =  "W:\\\\AUTOMATION_DATABASE\\ORIGINAL_JPG\\"  +  the_item.ItemLookupCode + ".jpg"
                                        logger.debug "the_item_file_url: " +  the_item_file_url
                                         if File.file?( the_item_file_url  )
                                                               logger.debug "file did  exist"
