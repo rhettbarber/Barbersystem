@@ -123,20 +123,20 @@ $(".application").on('pageshow', function(event){
                 //                loadjscssfile("/assets/non_compiled_assets/temporary.css", "css") ////dynamically load and add this .css file
 
 
-                if ( $.cookie('barber_admin' )  &&   $.cookie('barber_admin') != undefined   ) {
-                                         console.log("#####################################");
-                                         console.log("#####################################");
-                                         console.log("#####################################");
-                                         console.log("#####################################");
-                                         console.log("#####################################");
-                                         console.log("#####################################");
-                                         console.log("load store_administration.js");
-                                         console.log("barber_admin cookie found");
-                                        loadjscssfile("/assets/non_compiled_assets/store_administration.js", "js");
-                                        console.log("load store_administration.js");
-                }  else {
-                                        console.log("no barber_admin cookie found");
-                }
+                //if ( $.cookie('barber_admin' )  &&   $.cookie('barber_admin') != undefined   ) {
+                //                         console.log("#####################################");
+                //                         console.log("#####################################");
+                //                         console.log("#####################################");
+                //                         console.log("#####################################");
+                //                         console.log("#####################################");
+                //                         console.log("#####################################");
+                //                         console.log("load store_administration.js");
+                //                         console.log("barber_admin cookie found");
+                //                        loadjscssfile("/assets/non_compiled_assets/store_administration.js", "js");
+                //                        console.log("load store_administration.js");
+                //}  else {
+                //                        console.log("no barber_admin cookie found");
+                //}
 
 
                 console.log("--BEGIN EVENT-------------------------------------------------------------");

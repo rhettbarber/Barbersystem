@@ -6,7 +6,9 @@ def current_website
       logger.debug "BEGIN ------------------------------ website_startup/current_website "
       session[:activate]  = 1
       if request.session_options[:id] == nil
-        session_options_id_is_nil
+              session_options_id_is_nil_check_authenticity_token
+              # /apps/Barbersystem/config/initializers/session_store.rb
+              # ActiveRecord::SessionStore::Session.attr_accessible :data, :session_id
       end
         if 	session[:server_port] == request.server_port
                       @website = Caching::MemoryCache.instance.read  request.session_options[:id] + '_website'  unless cache_on? == false

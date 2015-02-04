@@ -17,6 +17,15 @@ class ListingAll  < ActiveRecord::Base
   # WHERE     (dbo.Item.WebItem = 1) AND (dbo.Item.Inactive = 0) AND (dbo.Category.web_category = '1')
 
 
+  def sublimation_status
+    if self.SubDescription1.downcase.include? "sublimation_only"
+      return "sublimation_only"
+    else
+      return "not_sublimation"
+    end
+  end
+
+
   def description_before_color_and_size
     description_before = StringScanner.new(self.Description)
     if description_before.exist?(/["\\"]/)
