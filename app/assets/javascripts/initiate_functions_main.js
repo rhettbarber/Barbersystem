@@ -9,14 +9,16 @@ function changeTransferType() {
                     var the_price =   0.0;
                     if ( $(".sublimation_only").size() > 0  &&  $("#transfer_type_id option:selected").val() ==  'plas' ) {
                                             console.log("selected type value is plas, and sublimation_only design") ;
-                                            if ( $("#purchases_entries_QuantityOnOrder").val()   < 300 ) {
+                                            if ( $("#purchases_entries_QuantityOnOrder").val() < 300 ) {
                                                              console.log("quantity entered is less than 300, give warning, hide choose button") ;
                                                             //var the_quantity = 300;
                                                             $("#minimum_quantity_message").show();
                                                              $('.choose_button').button('disable');
                                             } else {
+                                                        console.log("quantity entered is greater than or equal to than 300, give warning, hide choose button") ;
                                                          $("#minimum_quantity_message").hide();
                                                          $('.choose_button').button('enable');
+                                                           var the_quantity =    $("#purchases_entries_QuantityOnOrder").val();
                                             }
 
                     } else {
