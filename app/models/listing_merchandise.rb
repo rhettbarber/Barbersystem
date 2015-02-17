@@ -10,6 +10,13 @@ class ListingMerchandise  < ActiveRecord::Base
 #SELECT     id, Description, ItemLookupCode,  COALESCE (CAST( id AS varchar(MAX)), '')  + ' ' +  ItemLookupCode  + ' ' +  COALESCE (CAST( Notes AS varchar(MAX)), '')  + ' ' +  COALESCE (CAST( Description AS varchar(MAX)), '')   + ' ' +  COALESCE (CAST( ExtendedDescription AS varchar(MAX)), '')  AS items_combined
 #FROM         dbo.item
 
+  def sublimation_status
+    if self.SubDescription1.downcase.include? "sublimation_only"
+      return "sublimation_only"
+    else
+      return "not_sublimation"
+    end
+  end
 
 
   def item_class_number
