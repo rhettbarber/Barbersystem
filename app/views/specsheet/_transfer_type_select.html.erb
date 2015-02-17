@@ -1,5 +1,5 @@
 
-<%   @@sublimation_standard_category_class_ids = ["26", "27","15"] %>
+<%#   @sublimation_standard_category_class_ids = ["26", "27","15", "79"] %>
 
 
 <% if @item and @item.category and @item.category.category_class %>
@@ -24,16 +24,16 @@
 
                                               <%=  options_for_select(@transfer_types.collect {|p| [ p['name'], p['id'] ] })     %>
                         </select>
-     <%  elsif  @@sublimation_standard_category_class_ids.include?   @the_category_class_id    %>
-                        <% if @sublimation %>
-                                    <%=  hidden_field_tag "transfer_type_id",  "sublimfull"  %>
-                        <% else %>
+     <%  elsif  @sublimation_standard_category_class_ids.include?   @the_category_class_id    %>
 
                                     <% if  [ 2, 3].include?(@customer_array.PriceLevel) %>
                                                     <div class="ui-field-contain">
                                                             <label for="transfer_type_id">Choose Type:</label>
                                                             <select name="transfer_type[id]" id="transfer_type_id"  data-native-menu="false">
-                                                                    <% if @purchases_entry and @purchases_entry.transfer_type  %>
+
+                                                                    <% if @sublimation  %>
+                                                                                                        <% @selected_id =   'sublim14'  %>
+                                                                    <% elsif @purchases_entry and @purchases_entry.transfer_type  %>
                                                                                                         <% @selected_id =  @purchases_entry.transfer_type   %>
                                                                     <% else %>
                                                                                         <% if @item and @item.sublimation_status == "sublimation_only" %>
@@ -63,15 +63,18 @@
                                                     <div class="ui-bar ui-bar-a sublimation_transfer_message" style="display: none;">
                                                                       <p>Sublimation Transfers require white/light colored garment with  at least 50% polyester content.</p>
                                                     </div>
-                                     <% else %>
-                                                    <div style="display: none;">
-                                                                      <select name="transfer_type[id]" id="transfer_type_id"  data-native-menu="true" >
-                                                                                        <%= options_for_select(  [  [ "SilkScreen Transfer 12\"x12\"", "plas" , {:'data-price-1' => @item.your_unit_price(@customer_array, 1   )}, {:'data-price-2' => @item.your_unit_price(@customer_array, 13   ) }, {:'data-price-3' => @item.your_unit_price(@customer_array, 102   )}, {:'data-price-4' => @item.your_unit_price(@customer_array, 302   ) }  ]   ]   ) %>
-                                                                      </select>
-                                                    </div>
+                                    <% else %>
+                                                <% if @sublimation %>
+                                                                <%=  hidden_field_tag "transfer_type_id",  "sublimfull"  %>
 
-                                     <% end %>
-                        <% end %>
+                                                 <% else %>
+                                                                <div style="display: none;">
+                                                                                  <select name="transfer_type[id]" id="transfer_type_id"  data-native-menu="true" >
+                                                                                                    <%= options_for_select(  [  [ "SilkScreen Transfer 12\"x12\"", "plas" , {:'data-price-1' => @item.your_unit_price(@customer_array, 1   )}, {:'data-price-2' => @item.your_unit_price(@customer_array, 13   ) }, {:'data-price-3' => @item.your_unit_price(@customer_array, 102   )}, {:'data-price-4' => @item.your_unit_price(@customer_array, 302   ) }  ]   ]   ) %>
+                                                                                  </select>
+                                                                </div>
+                                                 <% end %>
+                                    <% end %>
 <% else %>
                          <div style="display: none;">
                                     <select name="transfer_type[id]" id="transfer_type_id"  data-native-menu="true" >

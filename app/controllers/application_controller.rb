@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   before_filter :before_filter
   after_filter :after_filter
 
-  @@sublimation_standard_category_class_ids = ["26", "27"]
+
 
 
   def no_item_menu
@@ -214,6 +214,7 @@ end
   end
 ###########################################################################################################
   def before_filter
+    @sublimation_standard_category_class_ids = ["26", "27","15", "79"]
     # $request = request
     #CUSTOM_LOGGER.error("##############################")
     #CUSTOM_LOGGER.error("##############################")

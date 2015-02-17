@@ -22,7 +22,8 @@ function changeTransferType() {
                     } else {
                                 console.log("selected type value is not plas,or not a sublimation_only design set quantity by  quantity field value") ;
                                 var the_quantity =    $("#purchases_entries_QuantityOnOrder").val()   ;
-                                $("#minimum_quantity_message").hide()
+                                $("#minimum_quantity_message").hide()  ;
+                                $('.choose_button').button('enable');
                     }
 
                    console.log("the_quantity: " + the_quantity );
@@ -236,8 +237,12 @@ $(".application").on('pageshow', function(event){
                                         //if ( event && event.target.value < 300 && event.target.attr("data-transfer_type") && event.target.attr("data-transfer_type") == "sublimation_only") {
                                         var pe_message_to_show ="#purchases_entry_id_" +  $(event.target).attr("data-purchases_entry_id") + "_message";
                                         console.log( "pe_message_to_show: " + pe_message_to_show );
+                                        console.log("##-#############333444");
+                                       console.log("$(event.target).attr(data-item_sublimation_status): " + $(event.target).attr("data-item_sublimation_status") )
+                                       console.log("$(event.target).attr(data-sublimation_purchases_entry): " + $(event.target).attr("data-sublimation_purchases_entry") )
+                                        console.log("##-#############333444");
 
-                                        if ( event && event.target.value < 300 && $(event.target).attr("data-transfer_type") && $(event.target).attr("data-transfer_type") == "sublimation_only" ) {
+                                        if ( event && event.target.value < 300 && $(event.target).attr("data-sublimation_purchases_entry") && $(event.target).attr("data-sublimation_purchases_entry") != "true"  && $(event.target).attr("data-item_sublimation_status")  && $(event.target).attr("data-item_sublimation_status") == "sublimation_only" ) {
                                             console.log( "purchases_entry_id: " +  $(event.target).attr("data-purchases_entry_id") );
                                             console.log("this item requires a minimum of 300 pcs for silkscreen.");
                                             $(event.target).css({'background-color' : 'pink'});
