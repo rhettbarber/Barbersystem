@@ -54,7 +54,10 @@
 
             <% dont_show_items = ["/search"] %>
             <% unless dont_show_items.include?( request.path  ) %>
-                                <a href="/search"   data-role="button" data-icon="search" data-iconpos="left" data-theme="a" >Search</a>
+                             <div class="ui-grid-a">
+                                     <div class="ui-block-a"><a class ="ui-btn"  href="javascript:history.back()">Back</a></div>
+                                     <div class="ui-block-b"><a href="/search"   data-role="button" data-icon="search" data-iconpos="left" data-theme="a" >Search</a> </div>
+                             </div>
             <% end %>
               <div data-role="collapsible"  class="main_menu_choices"   id="item_menu_choices" data-theme="b" data-icon="gear"  data-inset="true" >
                                             <h3 style="width: 100%;">
@@ -147,7 +150,6 @@
 
 
 
- <a class ="ui-btn"  href="javascript:history.back()">Back</a>
 
 <%# end %>
 

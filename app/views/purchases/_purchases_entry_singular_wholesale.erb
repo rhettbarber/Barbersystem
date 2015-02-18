@@ -37,10 +37,15 @@
             <% if purchases_entry.sublimation_purchases_entry? %>
                     <span style="color:#002a83;"><%= purchases_entry.transfer_type_name %></span>
             <% else %>
-                     <span style="color:#aa9600;"><%= purchases_entry.transfer_type_name %></span>
+                         <% if purchases_entry.item.sublimation_status == "sublimation_only" %>
+                                     <span style="color:#339b68;">Also available as sublimation at any quantity. </span>
+                                    <!--<span style="color:#aa9600;"><%= purchases_entry.transfer_type_name %></span>-->
+                         <% else %>
+
+                        <% end %>
             <% end %>
 
-             <%= link_to "Details", {:controller  => "specsheet", :purchases_entry_id => purchases_entry.id }, :class => "ui-btn" unless controller.controller_name == 'purchases' %>
+             <%= link_to "Edit", {:controller  => "specsheet", :purchases_entry_id => purchases_entry.id }, :class => "ui-btn" unless controller.controller_name == 'purchases' %>
   </td>
   <td> <%#= 'Dimensions:' if item.dimensions != '' %> <%= item.dimensions %></td>
   <td><%=  number_to_currency(item.full_unit_price(@customer_array,purchases_entry))  %></td>
