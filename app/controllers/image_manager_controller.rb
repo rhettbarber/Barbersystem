@@ -64,7 +64,8 @@ end
     @sublimation_entries = SublimationEntry.where( "purchase_id = ?",  params[:purchase_id] )
     @sublimation_entry =   @sublimation_entries.all.first
     @all_over_sublimation_entries = SublimationEntry.where( "purchase_id = ? and name = ?",  params[:purchase_id], "all_over_item" ).all
-    @regular_transfer_sublimation_entries = SublimationEntry.order("ItemLookupCode ASC").where("purchase_id = ? and name not in (?)", params[:purchase_id], [ "huge_front", "all_over_item","sublimation_shirts"] ).all
+    # @regular_transfer_sublimation_entries = SublimationEntry.order("ItemLookupCode ASC").where("purchase_id = ? and name not in (?)", params[:purchase_id], [ "huge_front", "all_over_item","sublimation_shirts"] ).all
+    @regular_transfer_sublimation_entries = SublimationEntry.order("ItemLookupCode ASC").where("purchase_id = ? and name not in (?)", params[:purchase_id], [  "all_over_item","sublimation_shirts"] ).all
     @full_front_sublimation_entries = SublimationEntry.order("ItemLookupCode ASC").where( "purchase_id = ? and name = ?",  params[:purchase_id], "huge_front" ).all
     @custom_sublimation_entries = SublimationEntry.order("ItemLookupCode ASC").where("purchase_id = ? and name= ?",  params[:purchase_id] , "sublimation_shirts"  ).all
   end

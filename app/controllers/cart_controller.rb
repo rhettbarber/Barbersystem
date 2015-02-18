@@ -27,7 +27,7 @@ after_filter :reset_incomplete_symbiont_status_found  # , :only =>  [ :add_to_ca
                                             if @item.category and @item.category.category_class
                                                                   @the_category_class_id =  @item.category.category_class_id.to_s
                                             end
-                                            if @@sublimation_standard_category_class_ids.include?   @the_category_class_id
+                                            if @sublimation_standard_category_class_ids.include?   @the_category_class_id
                                                                               false
 
                                             else
@@ -306,6 +306,7 @@ end
                 @department = @item.default_master_department_id  if !@department
                 @purchases_entry = PurchasesEntry.add_singular_item(@purchase,@item,@quantity,@department, @pe_comment  )
     else
+             s = "s"
               if @quantity < 300 and @item.sublimation_status == "sublimation_only" and params[:transfer_type] and params[:transfer_type][:id] == "plas"
                       logger.debug "sublimation_only: quantity less than 300 and sublimation_only, set quantity to 300"
                       @quantity = 300

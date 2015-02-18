@@ -31,9 +31,11 @@ class PurchasesEntry < ActiveRecord::Base
       elsif self.Comment.to_s.include?  "sublimfull"
         return    'sublimfull'
       elsif self.Comment.to_s.include?  "sublimaot"
-        return     'sublimaot'
+        return
+      elsif self.Comment.to_s.include?  "plas"
+        return     'plas'
       else
-        return   false
+        return   'unk'
       end
     end
 
@@ -56,25 +58,26 @@ class PurchasesEntry < ActiveRecord::Base
     end
 
 
+    def sublimation_purchases_entry?
+            if self.Comment.to_s.include? 'sublim9'
+              return    true
 
+            elsif self.Comment.to_s.include? "sublim12"
+              return    true
+
+            elsif self.Comment.to_s.include?  "sublim14"
+              return    true
+            elsif self.Comment.to_s.include?  "sublimfull"
+              return    true
+            else
+              return     false
+            end
+    end
 
 
     def override_quantity_discount?
-
-            if self.Comment.to_s.include? 'sublim9'
-                       return    true
-
-            elsif self.Comment.to_s.include? "sublim12"
-                       return    true
-
-            elsif self.Comment.to_s.include?  "sublim14"
-                       return    true
-            elsif self.Comment.to_s.include?  "sublimfull"
-                       return    true
-            else
-                        return     false
-             end
-end
+            sublimation_purchases_entry?
+    end
 
 
   def overriden_quantity_discount_id

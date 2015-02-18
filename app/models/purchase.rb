@@ -316,7 +316,7 @@ def new_combo_symbiont(item, design, quantity, department_id, pe_item_comment, p
                                               purchases_entry_slave.discount_reason_code_id = 0
                                               purchases_entry_slave.return_reason_code_id = 0
                                               purchases_entry_slave.PriceSource = 1
-                                              purchases_entry_slave.FullPrice = item.full_unit_price
+                                              purchases_entry_slave.FullPrice = item.full_unit_price(purchases_entry_slave)
                                               purchases_entry_slave.item_id =  item.id
                                               purchases_entry_slave.purchase_id = id
                                               purchases_entry_slave.store_id = 7
@@ -340,7 +340,7 @@ def new_combo_symbiont(item, design, quantity, department_id, pe_item_comment, p
                                                   purchases_entry_master.PriceSource = 1
                                                   purchases_entry_master.discount_reason_code_id = 0
                                               	  purchases_entry_master.return_reason_code_id = 0
-                                                  purchases_entry_master.FullPrice =  design.full_unit_price
+                                                  purchases_entry_master.FullPrice =  design.full_unit_price(purchases_entry_master)
                                                   purchases_entry_master.item_id =  design.id
                                                   purchases_entry_master.purchase_id = id
                                                   purchases_entry_master.store_id = 7

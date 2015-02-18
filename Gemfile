@@ -34,15 +34,14 @@ gem 'passenger' , :platform => :ruby  # makes this gem only install on *nix
 gem 'execjs', '2.0.2'
 gem 'alchemist'
 gem 'active_shipping'
-gem 'eventmachine', '1.0.3'
-gem 'thin', '1.6.2'
+gem 'thin'
 gem 'rails', '3.2.19'
 gem 'tiny_tds' , '0.6.1'
 gem 'activerecord-sqlserver-adapter'
 gem 'will_paginate'
 gem 'memcache-client'
 gem 'bartt-ssl_requirement', '~>1.4.0', :require => 'ssl_requirement'
-# gem 'nokogiri'
+gem 'nokogiri'
 
 gem 'therubyracer' , :platform => :ruby  # makes this gem only install on *nix
 gem 'cacheable_flash'  , :git => "https://github.com/rhettbarber/cacheable-flash.git"

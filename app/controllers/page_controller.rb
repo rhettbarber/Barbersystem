@@ -12,6 +12,11 @@ class PageController < ApplicationController
   #before_filter :redirect_unless_admin , :except => [ :search_articles, :resources, :not_found, :true_history_on_hawthorne,  :page_banner_popup, :expire_contextual_navigation_tree, :show, :page_search, :index,:recently_added_news,  :recently_added_email ,  :recently_added_pages, :search ]
   #before_filter :find_latest_revision_ids , :only => [  :page_search, :recently_added_pages ]
 
+ def test
+   no_item_menu
+ end
+
+
 
 #scope_controller_model :page, :conditions => { :website => Proc.new { |c| c.send(:current_website) } }
 #scope_controller_model :page, :conditions => { :website => Proc.new { |c| c.send(:current_website) } }, :except => :true_history_on_hawthorne

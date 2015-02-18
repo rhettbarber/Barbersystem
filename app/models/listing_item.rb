@@ -13,6 +13,10 @@ logger=$stdout
 #SELECT     id, Description, ItemLookupCode,  COALESCE (CAST( id AS varchar(MAX)), '')  + ' ' +  ItemLookupCode  + ' ' +  COALESCE (CAST( Notes AS varchar(MAX)), '')  + ' ' +  COALESCE (CAST( Description AS varchar(MAX)), '')   + ' ' +  COALESCE (CAST( ExtendedDescription AS varchar(MAX)), '')  AS items_combined
 #FROM         dbo.item
 
+
+
+
+
 def number_only
 			no = self.ItemLookupCode[/\d+/]
 			if no.nil?
