@@ -1,11 +1,12 @@
 <h1>Listing catalogs</h1>
+<h2>Categories are listed in the order of the category ids you given</h2>
 
 <table>
   <tr>
     <th>Name</th>
     <th>Description</th>
     <th>Category ids</th>
-    <th></th>
+    <th>category ids with header</th>
     <th></th>
     <th></th>
   </tr>
@@ -15,6 +16,7 @@
     <td><%= catalog.name %></td>
     <td><%= catalog.description %></td>
     <td><%= catalog.category_ids %></td>
+    <td><%= catalog.category_ids_with_header %></td>
     <td><%= link_to 'Show catalog', "/catalogs/show_catalog/" + catalog.id.to_s  %></td>
     <td><%= link_to 'Edit', edit_catalog_path(catalog) %></td>
     <td><%= link_to 'Destroy', catalog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
