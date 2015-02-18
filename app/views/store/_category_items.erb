@@ -14,6 +14,10 @@
 
 <% if @category and @category.id == 928  %>
 
+        <div class="ui-bar ui-bar-a wholesale_message">
+              <h3>Oversize Sublimation Transfers</h3>
+              <p>Requires white/light colored garment with  at least 50% polyester content.</p>
+        </div>
 
         <% @items.sort_by{|a| a.ItemLookupCode   }.each do |item| -%>
             <% if item %>
