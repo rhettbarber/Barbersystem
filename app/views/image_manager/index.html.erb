@@ -10,19 +10,21 @@
 
 
 <div data-role="header">
-  <h1> Listing <%= @sublimation_entries.size %>  unfulfilled sublimation orders </h1>
+  <!--<h1> Listing <%#= @sublimation_entries.size %>  unfulfilled sublimation orders </h1>-->
   <p style="text-align: center;">Please click on order below for details</p>
 </div>
 
 <div data-role="content">
   <ul data-role="listview" data-filter="true" data-filter-placeholder="Search Orders">
+    <% @se_already_seen = Set.new %>
     <% @sublimation_entries.each do |entry| %>
-
+                <% unless @se_already_seen.include?  entry.purchase_id   %>
                                 <li>
                                   <%= link_to entry.purchase_id.to_s + " " + entry.Company.to_s + " " + entry.FirstName.to_s + " " + entry.LastName.to_s     , "/image_manager/order_details/" + entry.purchase_id.to_s     %>
                                   <%= link_to 'Edit',   "/print"   , "data-icon" => "gear"   %>
                                 </li>
-
+                                 <% @se_already_seen.add  entry.purchase_id   %>
+                <% end %>
     <% end %>
 
   </ul>

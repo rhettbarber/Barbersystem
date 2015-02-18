@@ -15,6 +15,11 @@
   <%= @catalog.category_ids %>
 </p>
 
+<p>
+  <b>Category ids:</b>
+  <%= @catalog.category_ids_with_header %>
+</p>
+
 
 <%= link_to 'Edit', edit_catalog_path(@catalog) %> |
 <%= link_to 'Back', catalogs_path %>
