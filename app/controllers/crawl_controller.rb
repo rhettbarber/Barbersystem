@@ -1,8 +1,8 @@
 class CrawlController < ApplicationController
   before_filter :redirect_unless_admin
 
-  require 'nokogiri'
-  require 'open-uri'
+  # require 'nokogiri'
+  # require 'open-uri'
 
 
 
