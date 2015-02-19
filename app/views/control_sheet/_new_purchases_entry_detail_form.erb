@@ -1,0 +1,69 @@
+<%
+              @detail_types  = [
+                         ["Full Front", 1 ],
+                         ["Full Back",  2 ],
+                         ["Left Breast", 3 ],
+                         ["Right Breast",  4 ],
+                         ["Left Sleeve",  5 ],
+                         ["Right Sleeve", 6 ],
+                         ["Cap", 7 ],
+                         ["Other",  8 ]
+
+               ]
+
+              @production_machines  = [
+                         ["Sakuri", 1 ],
+                         ["Gauntlet",  2 ],
+                         ["Rolland", 3 ],
+                         ["Mutoh",  4 ],
+                         ["Laser",  5 ],
+                         ["Sublim Laser", 6 ],
+                         ["Cap", 7 ],
+                         ["Other",  8 ]
+
+               ]
+
+              @artists  = [
+                         ["Vanessa", 1 ],
+                         ["Jodi",  2 ],
+                         ["Wesley", 3 ],
+                         ["Micheal",  4 ],
+                         ["Lissa",  5 ],
+                         ["Dewey", 6 ],
+                         ["Rhett", 7 ],
+                         ["Other",  8 ]
+
+               ]
+
+
+              %>
+
+<tr><td style="height: 60px;width: 850px;background-color: blue;color: white;text-align: center;">Create New Entry </td></tr>
+<% form_for(@purchases_entry_detail) do |f| %>
+<tr>
+                 <td>
+                                  <div style="width: 420px;height: 150px;float: left;">
+                                                          <div style="width:420px;height: 50px;float: left;">
+                                                                                     Due Date:  <%=  f.calendar_date_select :art_due_date  , :popup => :force  , :size => 22 %> &nbsp;
+                                                                                    Rush?<%= f.check_box :rush_charge %>
+                                                          </div>
+                                                           <div style="width:420px;height: 50px;float: left;">
+                                                                                    Machine: <%= f.select  "machine_id",   options_for_select(  @production_machines,  '1'   )     %>  &nbsp;
+                                                                                   Type:    <%= f.select  "detail_type_id",   options_for_select(  @detail_types,   '1'    )     %>
+                                                            </div>
+                                                            <div style="width:420px;height: 50px;float: left;">
+                                                                                    Artist: <%= f.select  "artist_customer_id",   options_for_select(  @artists,  '1'    )     %> &nbsp;
+                                                                                    Similar Art?<%= f.check_box :similar_artwork_done %>
+                                                                                    Film #:<%= f.text_field :film_number, :size => 15 %>
+                                                             </div>
+
+                                  </div>
+
+                                   <div style="width:420px;background-color: #fafad2;height: 150px;float:left;">
+                                                                    <%= f.text_area :detail_description, :rows => 7, :cols => 52 %>
+                                   </div>
+
+                 </td>
+ </tr>
+   <tr><td><%= f.submit 'Create' %></td></tr>
+    <% end %>

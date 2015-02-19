@@ -1,0 +1,21 @@
+<div id="search_form" style="text-align: center;width: 850px;margin: 10px;">
+    <% form_tag(  "/control_sheet/search") do %>
+
+                <%= text_field_tag("query", params[:query], :autocomplete => "off", :size => 33 ) %>
+                <%= submit_tag "Search" , :onclick => "$('spinner').show();$('layout').hide();"  %>
+    <% end %>
+</div>
+
+
+
+
+
+
+
+<% if  @menu_search %>
+                      <select id="search_scope" name="search_scope" ><option value="Matches Any">Matches Any  - (Most Results)</option><option value="Matches All">Matches All -(Less Results)</option></select>
+                    <select name="search_type_name">
+                      <option value="products" selected="selected"> Products </option>
+                      <option value="articles"> Articles </option>
+                    </select>
+    <% end  %>

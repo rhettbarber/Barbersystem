@@ -1,0 +1,217 @@
+<% if request.server_name == "192.168.0.125"  -%>
+        <%   site_name = request.protocol   +   request.server_name  +  ':'  +  request.server_port.to_s     -%>
+<% else -%>
+        <%  site_name =   request.protocol   + @website.domain      -%>
+<% end -%>
+
+
+// function hideStatus() {
+//                     var status = qsBridge.FireEvent('HideWebStatus' ) ;
+// }
+
+
+
+function confirmWorkOrderDetailsStartup() {
+        var QSRules = qsBridge.RequestQSRules();
+         if (QSRules.Transaction) {
+                                        var order_id   = QSRules.Transaction.OrderID;
+                                         document.getElementById('order_id').innerHTML = order_id ;
+                                        if (QSRules.Transaction.Customer.Loaded){
+//                                                    alert(order_id);
+                                                     if (QSRules.Transaction.isOrder) {
+                                                                 document.getElementById('loaded_option').innerHTML = '<a href="#" onclick="proceedToWorkOrderDetails(  )">Proceed to Work Order Details</a>' ;
+                                                     } else {
+                                                         document.getElementById('loaded_option').innerHTML = '<a href="#" onclick="createTransaction()">Create new Custom Work Order Entry</a>' ;
+                                                      }
+                                          }  else  {
+                                                   document.getElementById('loaded_option').innerHTML = '<a href="#"  onclick="selectCustomerStep()">Please select a Customer before creating Work Order Details. </a>' ;
+                                          }
+         }  else {
+                             document.getElementById('loaded_option').innerHTML = '<a href="#"  onclick="selectCustomerStep()">Please select a Customer before creating Work Order Details 1. </a>' ;
+                            //document.getElementById('loaded_option').innerHTML = '<a href="#" onclick="createTransaction()">Create new Custom Work Order Entry</a>' ;
+         }
+ }
+
+
+function goToWorkOrderDetails( order_id  ) {
+                             hideAndShow()
+                             window.location =  '<%=  site_name    %>/control_sheet/work_order_details/'  +  order_id ;
+   }
+
+function proceedToWorkOrderDetails(  ) {
+//                qsBridge.FireEvent('HideWebStatus' ) ;
+                hideAndShow()
+                var QSRules = qsBridge.RequestQSRules();
+                var order_id =  QSRules.Transaction.OrderID;
+                var QSCancel = qsBridge.FireEvent('PostTransactionUnattended', 1 ) ;
+
+                window.location =  '<%=  site_name    %>/control_sheet/work_order_details/'  +  order_id ;
+   }
+
+function toWorkOrderDetails(the_pe_id, the_customer_id){
+                    hideAndShow()
+                    try {
+                                    qsBridge.FireEvent("SetCustomer", the_customer_id );
+                              }
+                     catch(err)
+                     {
+                     // error caught
+                     }
+                    window.location =  '<%=  site_name     %>/control_sheet/work_order_details?' + 'id=' + the_pe_id ;
+ }
+
+
+ function hideAndShow() {
+                    $('layout').hide();
+                    $('spinner').show();
+ }
+
+function createTransaction() {
+                     var QSRules = qsBridge.RequestQSRules();
+                     var order_id   = QSRules.Transaction.OrderID;
+                      if (QSRules.Transaction.IsOrder) {
+//                                        alert('already transaction');
+                      } else {
+                                    qsBridge.FireEvent("CreateWorkOrder") ;
+                                   // QSRules.Transaction.Entries.Add( 0, "CUSTOM WORK ORDER ENTRY", 0, 1, false, 0);
+                                     qsBridge.FireEvent("PerformAddItem", 0 , 'CUSTOM WORK ORDER ENTRY', 1, 1.00 , 0, 0, 0 ) ;
+                                    var post = QSRules.Transaction.Post();
+                                    var QSRules = qsBridge.RequestQSRules();
+                                    var order_id   = QSRules.Transaction.OrderID;
+//                                    alert("new transaction.OrderID: " + order_id  );
+                                      confirmWorkOrderDetailsStartup()
+                      }
+}
+
+
+
+// addSelectOption
+// Add the single select option to the selection list with the id specified
+function addSelectOption(selectId, value, display) {
+        if (display == null) {
+            display = value;
+        }
+        var anOption = document.createElement('option');
+        anOption.value = value;
+        anOption.innerHTML = display;
+        document.getElementById(selectId).appendChild(anOption);
+        return anOption;
+}
+
+// removeSelectOption
+// Remove the option with the specified value from the list of options
+// in the selection list with the id specified
+function removeSelectOption(selectId, value) {
+                var select = document.getElementById(selectId);
+                var kids = select.childNodes;
+                var numkids = kids.length;
+                for (var i = 0; i < numkids; i++) {
+                        if (kids[i].value == value) {
+                                select.removeChild(kids[i]);
+                                break;
+                        }
+                }
+}
+
+function closedStatusSelections( the_value ) {
+                 if ( the_value == 'all') {
+                     addSelectOption('closed_status', '1', 'Closed'  )
+                     addSelectOption('closed_status', 'all', 'Open and Closed'  )
+                 } else if ( the_value == "none") {
+                 } else {
+                     removeSelectOption('closed_status', '1'  )
+                     removeSelectOption('closed_status', 'all'  )
+                 }
+}
+
+function ConfirmControlSheetIndexStartup()
+ {
+         try {
+             hideAndShow()
+         }
+         catch(err)
+          {
+              window.location =  '<%=  site_name     %>/control_sheet/index' ;
+           }
+
+         try {
+                     var QSRules = qsBridge.RequestQSRules();
+                       if (QSRules.Transaction.Customer.Loaded)
+                        {
+
+                                window.location =  '<%=  site_name     %>/control_sheet/index?' + 'customer_id=' + QSRules.Transaction.Customer.ID ;
+
+                            }
+                        else
+                        {
+                             window.location =  '<%=  site_name     %>/control_sheet/index' ;
+                        }
+           }
+           catch(err)
+            {
+                window.location =  '<%=  site_name     %>/control_sheet/index' ;
+             }
+}
+
+
+function goBackToTransaction(transaction_id)
+        {
+                    //qsBridge.FireEvent("PerformAddItem",b,c,d,e,f,g,h);
+                    // qsBridge.FireEvent("PostTransactionUnattended", true);
+                    //QSRules.Transaction.Entries.Add(0, "CUSTOM WORK", 1, 0, false, 0);
+                    //qsBridge.FireEvent("ShowTransaction");
+                    // qsBridge.FireEvent("RefreshDisplay");
+                    //Public Function RecallTransaction(ByVal RecallType As recallEnum, ID As Long) As StatusCategoryEnum
+                    hideAndShow()
+                    var QSRules = qsBridge.RequestQSRules();
+                    var recall = QSRules.RecallTransaction(4,  transaction_id   );
+                    updateScreen();
+                    showScreen() ;
+         }
+
+function postTransaction()
+        {
+                                          var QSRules = qsBridge.RequestQSRules();
+                                         var post = QSRules.Transaction.Post();
+        }
+
+function updateScreen()
+           {
+                                qsBridge.FireEvent("RefreshDisplay");
+                                qsBridge.FireEvent("ShowTransaction")
+           }
+
+function showScreen()
+           {
+
+                                qsBridge.FireEvent("ShowTransaction") ;
+//                                 qsBridge.FireEvent("ShowWebStatus", true );
+                                     qsBridge.FireEvent("RefreshDisplay");
+
+           }
+
+
+    function unloadCustomerAndList() {
+                 qsBridge.FireEvent("SetCustomer", '0' );
+                hideAndShow()
+
+                window.location =  '<%=  site_name     %>/control_sheet'
+    }
+
+    function loadCustomer( customer_id ) {
+                qsBridge.FireEvent("SetCustomer", customer_id );
+    }
+
+function selectCustomerStep(  ) {
+//    alert('select_customer');
+           var customer_id =  qsBridge.FireEvent("SelectCustomer");
+
+         if (customer_id != 0) {
+                    qsBridge.FireEvent("SetCustomer", customer_id );
+                   confirmWorkOrderDetailsStartup( )
+
+         } else {
+                alert("No Customer chosen.");
+         }
+
+}

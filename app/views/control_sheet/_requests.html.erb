@@ -1,0 +1,177 @@
+
+
+<%=  render :partial => "menu" %>
+
+<%=  render :partial => "search" %>
+
+<table style="width: 850px;" cellpadding="0" cellspacing="0">
+
+              <tr>
+                        <td colspan="50" style="background-color: #808080;color:white;height:40px;text-align: center;">
+                                     <div style="width: 350px;height: 40px;float: left;background-color: #000000;">
+                                       <%=  render :partial => "control_sheet/filter_select_list" %>
+
+                                     </div>
+                                     <div style="width: 150px;height: 40px;float: left;background-color: #000000;">
+
+                                      </div>
+                                      <div style="width: 350px;height: 40px;text-align: right;float: left;background-color: #000000;">
+                                                 <%=  render :partial => "control_sheet/sort_select_list" %>
+                                      </div>
+                        </td>
+              </tr>
+               <tr>
+                        <td  colspan="50"  style="width: 850px;background-color: black;color:white;text-align: center;">
+                          <% if @overdue_status == 'art_overdue' %>
+                                           <%# don't show count because it is being filtered below and would be wrong at this point   %>
+                          <% else %>
+                                         <%= @purchases_entries.size %> Work order entries found
+                          <% end  %>
+                          <% if @customer %>  for <%=  @customer.combined_name    %> <% end  %>
+               </td>
+               </tr>
+             <tr>
+                       <th>Order #</th>
+                       <th> Request # </th>
+                       <th>PO  #</th>
+                       <th>Art Due</th>
+                       <th>Art Done</th>
+                       <th>Ship Due</th>
+                       <th>Short Description</th>
+             </tr>
+
+              <% @purchases_entry_ids = SortedSet.new  %>
+              <% @purchases_entries.each do |purchases_entry| %>
+                                                      <%    if  purchases_entry.art_overdue? %>
+                                                                        <%    art_overdue = true  %>
+                                                      <% else  %>
+                                                                        <%    art_overdue = false  %>
+                                                      <% end  %>
+                                                      <%  @show_record = true  %>
+                                                      <% if params[:overdue_status]  and   params[:overdue_status] == "art_overdue" %>
+                                                                        <%  @show_record = false  if art_overdue == false  %>
+                                                      <% end  %>
+                                                      <% if @show_record   %>
+                                                      <%# unless  @purchases_entry_ids.include?(purchases_entry.purchase_id) %>
+                                                       <tr>
+                                                                        <td  colspan="20" style="height: 20px;background-color: #696969;text-align: center;color:white;"><%  if @ranked_items %>Keywords Hit: <%=  purchases_entry.SubDescription3  %> <% end  %>
+                                                                        </td>
+                                                       </tr>
+                                                       <tr>
+                                                                        <td style="background-color: #e0ffff;">
+                                                                                    <%#  link_to   purchases_entry.purchase_id.to_s  , :controller => "control_sheet", :action => "work_order_details", :id =>   purchases_entry.purchase_id  , :onclick => 'alert("great");'      %>
+                                                                                     <a href="#" onclick="toWorkOrderDetails(<%= purchases_entry.purchase_id %>,<%= purchases_entry.customer_id %>)"><%=  purchases_entry.purchase_id.to_s    %></a>
+                                                                        </td>
+                                                                        <td style="background-color: #fafad2;width:70px;">
+                                                                                    <%#  link_to   purchases_entry.id.to_s  , :controller => "control_sheet", :action => "work_order_details", :id =>   purchases_entry.purchase_id  , :onclick => 'alert("great");'   %>
+                                                                                     <%#=  link_to   purchases_entry.id.to_s , '#' , :onclick => 'goToWorkOrderDetails("great");'      %>
+                                                                                       <a href="#" onclick="goToWorkOrderDetails(<%= purchases_entry.purchase_id %>, <%= purchases_entry.customer_id %>)"><%=    purchases_entry.id.to_s    %></a>
+                                                                        </td>
+                                                                        <td style="background-color: #d3d3d3;"><%=  purchases_entry.ReferenceNumber  %></td>
+                                                                        <td style="background-color: #faf0e6;">
+                                                                                                                                    <%    if  art_overdue  %>
+                                                                                                                                                  <%    @art_due_style = 'color:red;font-weight:bolder;'  %>
+                                                                                                                                    <% else  %>
+                                                                                                                                                  <%    @art_due_style = 'color:black;'  %>
+                                                                                                                                    <% end  %>
+                                                                                                                                     <span style="<%=    @art_due_style  %>"> <%=     purchases_entry.art_due_date.to_date if  purchases_entry.art_due_date  %></span>
+                                                                        </td>
+                                                                        <td style="background-color: #fafad2;">
+                                                                                                                                     <% if  purchases_entry.layered_art_exists?  %>
+                                                                                                                                                         <span style="color: green;"> Art Done</span>
+                                                                                                                                     <% else %>
+                                                                                                                                                        <span style="color: red;">No Art</span>
+                                                                                                                                      <% end  %>
+                                                                        </td>
+                                                                        <td style="background-color: #d3d3d3;">
+                                                                         <%    if  purchases_entry.ship_due_date and   purchases_entry.ship_due_date   <  Time.now %>
+                                                                                                                                     <%    @ship_due_style = 'color:red;font-weight:bolder;'  %>
+                                                                         <% else  %>
+                                                                                                                                    <%    @ship_due_style = 'color:black;'  %>
+                                                                          <% end  %>
+                                                                          <span style="<%=    @ship_due_style  %>"> <%=     purchases_entry.ship_due_date.to_date if  purchases_entry.ship_due_date  %></span>
+                                                                        </td>
+
+                                                                         <td style="width: 250px;background-color: #e0ffff;"><%=   purchases_entry.purchases_entries_Description  %></td>
+                                                        </tr>
+                                                        <% if @customer %>
+
+                                                        <% else  %>
+                                                       <tr>
+                                                                         <td colspan="22" style="background-color: #e6e6fa;height: 30px;text-align: center;">
+
+                                                                           <a href="#" onclick="loadCustomer(<%= purchases_entry.customer_id %>)"><%=   purchases_entry.combined_name     %></a>
+
+
+                                                                         </td>
+                                                           </tr>
+                                                      <% end  %>
+
+                                                      <tr>
+                                                                    <td colspan="22" style="background-color: #e6e6fa;height: 30px;"><%=   purchases_entry.detail_description     %> </td>
+                                                      </tr>
+                                                       <% if session[:show_filenames] %>
+                                                        <tr>
+                                                                        <td colspan="22" style="background-color: #e6e6fa;height: 60px;">
+                                                                         <% if  purchases_entry.art_supplied  == 1 %>
+                                                                                                         <% if  purchases_entry.supplied_art_exists?  %>
+                                                                                                                                         <% if purchases_entry.see_folder %>
+                                                                                                                                                          <span style="color: green;">Supplied  Art Folder Exists:   <%=   purchases_entry.supplied_art_filename    %>  </span>
+                                                                                                                                            <% else %>
+                                                                                                                                                          <span style="color: green;" >Supplied  Art File Exists:   <%=   purchases_entry.supplied_art_filename    %>  </span>
+                                                                                                                                           <% end  %>
+                                                                                                         <% else %>
+                                                                                                                                             <% if purchases_entry.see_folder %>
+                                                                                                                                                          <span style="color: red;"> Supplied Art Folder:    <%=   purchases_entry.supplied_art_filename    %>   </span>
+                                                                                                                                           <% else  %>
+                                                                                                                                                          <span style="color: red;"  onclick="window.prompt ('Copy to clipboard: Ctrl+C, Enter', '<%=   purchases_entry.supplied_art_filename.split('/').last    %>'   );"> Supplied Art File:    <%=   purchases_entry.supplied_art_filename    %>.( psd |  tif | eps | ai | jpg | jpeg | gif | pdf  )</span>
+                                                                                                                                          <% end %>
+                                                                                                         <% end  %>
+                                                                          <% end %>
+                                                                           <div style="width: 850px;background-color: #a9a9a9;height: 5px;"></div>
+                                                                          <% if purchases_entry.layered_art and  purchases_entry.layered_art > 0  %>
+                                                                                                        <% if  purchases_entry.layered_art_exists?  %>
+                                                                                                                                            <% if purchases_entry.see_folder %>
+                                                                                                                                                               <span style="color: green;"> Layered Art Folder Exists:   <%=   purchases_entry.layered_art_filename    %>  </span>
+                                                                                                                                            <% else %>
+                                                                                                                                                              <span style="color: green;"> Layered Art File Exists:   <%=   purchases_entry.layered_art_filename    %>  </span>
+                                                                                                                                           <% end  %>
+                                                                                                          <% else %>
+                                                                                                                                           <% if purchases_entry.see_folder %>
+                                                                                                                                                               <span style="color: red;"> Layered Art Folder:    <%=   purchases_entry.layered_art_filename    %> </span>
+                                                                                                                                            <% else  %>
+                                                                                                                                                               <span style="color: red;"   onclick="window.prompt ('Copy to clipboard: Ctrl+C, Enter', '<%=   purchases_entry.layered_art_filename.split('/').last    %>'   );"> Layered Art File:    <%=   purchases_entry.layered_art_filename    %>.( psd |  tif | eps | ai )</span>
+                                                                                                                                            <% end  %>
+                                                                                                          <% end  %>
+                                                                                                        <div style="width: 850px;background-color: #a9a9a9;height: 5px;"></div>
+                                                                           <% end  %>
+                                                                          <% if  purchases_entry.production_file_exists?  %>
+                                                                                                               <% if purchases_entry.see_folder %>
+                                                                                                                                          <span style="color: green;"> Production or Separation Folder Exists:   <%=   purchases_entry.production_filename    %>  </span>
+                                                                                                              <% else %>
+                                                                                                                                        <span style="color: green;"  onclick="window.prompt ('Copy to clipboard: Ctrl+C, Enter', '<%=   purchases_entry.production_filename.split('/').last    %>'   );"> Production or Separation File Exists:   <%=   purchases_entry.production_filename    %>  </span>
+                                                                                                             <% end  %>
+                                                                           <% else %>
+
+                                                                                                               <% if purchases_entry.see_folder %>
+                                                                                                                                <span style="color: red;">  Production or Separation Folder:    <%=   purchases_entry.production_filename    %> </span>
+                                                                                                               <% else  %>
+                                                                                                                               <span style="color: red;" onclick="window.prompt ('Copy to clipboard: Ctrl+C, Enter', '<%=   purchases_entry.production_filename.split('/').last    %>'   );"> Production or Separation Files:    <%=   purchases_entry.production_filename    %>.( psd |  tif | eps | ai |  jpg |  jpeg  )  </span>
+                                                                                                               <% end  %>
+
+                                                                           <% end  %>
+                                                                        </td>
+                                                         </tr>
+                                                        <% end  %>
+                                                       <%  @purchases_entry_ids.add(  purchases_entry.purchase_id)  %>
+                                                       <%#  end %>
+                                                       <% end  %>
+
+              <% end %>
+</table>
+<br>
+
+
+
+
+

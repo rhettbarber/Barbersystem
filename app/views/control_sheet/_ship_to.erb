@@ -1,0 +1,30 @@
+<div class="ship_tos">
+   <% if @ship_to %>
+              <% begin  %>
+                      <table>
+                                 <tr><td> <%=h @ship_to.Company %> </td></tr>
+                                 <tr><td> <%=h @ship_to.Name %> </td></tr>
+                                 <tr><td>Address: <%=h @ship_to.Address %></td></tr>
+                                 <% if  @ship_to.Address2  != ""   %>
+                                             <tr><td>Address2:<%=h @ship_to.Address2 %> </td></tr>
+                                <% end %>
+                                <tr><td> <%=h @ship_to.City %> , <%=h @ship_to.State  %> , <%=h @ship_to.Zip   %></td></tr>
+                                <% if  @ship_to.EmailAddress  %>
+                                             <tr><td> <%=h @ship_to.EmailAddress %></td></tr>
+                                 <% end %>
+                                <% if  @ship_to.PhoneNumber  %>
+                                                <tr><td> <%=h @ship_to.PhoneNumber %></td></tr>
+                                 <% end %>
+                                <% if  @ship_to.FaxNumber != ""  %>
+                                                <tr><td>Fax: <%=h @ship_to.FaxNumber %></td></tr>
+                                <% end %>
+                     </table>
+          <% rescue %>
+                            No Ship To.
+         <% end  %>
+  <% else %>
+                     No Ship To
+  <% end  %>
+  </div>
+
+

@@ -1,0 +1,27 @@
+<div class="customers">
+   <% if @customer %>
+  <table>
+ <tr><td> Account #: <%=h @customer.AccountNumber %></td><td> <%=h @customer.Company %> </td></tr>
+ <tr><td> <%=h @customer.FirstName %> <%=h @customer.LastName %></td></tr>
+ <tr><td>Address: <%=h @customer.Address %></td></tr>
+ <% if  @customer.Address2  != ""   %>
+             <tr><td>Address2:<%=h @customer.Address2 %> </td></tr>
+<% end %>
+<tr><td> <%=h @customer.City %> , <%=h @customer.State  %> , <%=h @customer.Zip   %></td></tr>
+<% if  @customer.EmailAddress  %>
+             <tr><td> <%=h @customer.EmailAddress %></td></tr>
+ <% end %>
+<% if  @customer.PhoneNumber  %>
+                <tr><td> <%=h @customer.PhoneNumber %></td></tr>
+ <% end %>
+<% if  @customer.FaxNumber != ""  %>
+                <tr><td>Fax: <%=h @customer.FaxNumber %></td></tr>
+<% end %>
+  </table>
+   <% else %>
+                     No Customer
+  <% end  %>
+  </div>
+
+
+

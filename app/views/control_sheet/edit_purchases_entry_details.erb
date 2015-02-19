@@ -1,0 +1,148 @@
+ <script type="text/javascript">
+     $("btnSignUp").disabled = true;
+     $("purchases_entry_Description").onkeyup = formValidation;
+     $("purchases_entry_QuantityOnOrder").onkeyup = formValidation;
+     $("purchases_entry_detail_art_due_date").onblur  = formValidation;
+     $("purchases_entry_detail_detail_description").onblur  = formValidation;
+     $('purchases_entry_detail_machine_id').onblur = machineSelected;
+     $('purchases_entry_detail_ink_changes_charge').onblur = machineSelected;
+
+     //-----------------------------------------------------------------------------------------
+
+     function formValidation() {
+                    if (  ($("purchases_entry_Description").value.length >= 3 ) &&  ($("purchases_entry_QuantityOnOrder").value.length >= 1 ) &&  ($("purchases_entry_QuantityOnOrder").value.length >= 1 ) &&  ($("purchases_entry_detail_detail_description").value.length >= 5  ) &&  ($("purchases_entry_detail_art_due_date").value.length >= 5  ) )   {
+                                         $("btnSignUp").disabled = false;
+                                }
+                    else  {
+                                        $("btnSignUp").disabled = true;
+                      }
+       }
+     //-----------------------------------------------------------------------------------------
+
+
+
+
+     function machineSelected() {
+
+     <% @clone_item_types = CloneItemType.find :all       %>
+     var clone_item_types = new Array();
+     <% for clone_item_type in @clone_item_types -%>
+       clone_item_types.push(new Array(<%= clone_item_type.machine_id %>, '<%=h clone_item_type.name %>', <%= clone_item_type.id %>));
+     <% end -%>
+
+       machine_id = $('purchases_entry_detail_machine_id').getValue();
+       options = $('purchases_entry_detail_detail_type_id').options;
+       options.length = 0;
+       clone_item_types.each(function(clone_item_type) {
+                 if (clone_item_type[0] == machine_id) {
+                        options[options.length] = new Option(clone_item_type[1], clone_item_type[2]);
+                 }
+       });
+       if (options.length == 0) {
+                 $('clone_item_type_field').hide();
+       } else {
+                $('clone_item_type_field').show();
+       }
+     }
+
+   //-----------------------------------------------------------------------------------------
+
+
+ </script>
+
+
+<div style="width: 850px;margin-left: auto;margin-right:auto;">
+
+
+<% form_for(@purchases_entry_detail, :url => { :controller => "control_sheet", :action => "update_purchases_entry_details" }   ) do |f| %>
+<%=  hidden_field_tag "purchase_id", @purchase.id    %>
+<%=  hidden_field_tag "purchases_entry_id", @purchases_entry.id if @purchases_entry   %>
+
+    <%=  hidden_field_tag "purchases_entry_detail_id", @purchases_entry_detail.id  if !@purchases_entry_detail.new_record?  %>
+
+<table>
+<tr>
+                <td  style="background-color: #d3d3d3;height: 25px;width: 850px;text-align: center;">
+                  Request #:
+                 <% if @purchases_entry_detail.new_record?  %>
+                                    Number will be given upon save.
+                 <% else %>
+                                 <%= @purchases_entry_detail.listing_purchases_entry_id  %>
+                <% end  %>
+                </td>
+</tr>
+<tr>
+               <% if @purchases_entry %>
+                                         <% @short_description =  @purchases_entry.Description %>
+                                        <% @quantity =  @purchases_entry.QuantityOnOrder  %>
+                                        <% @price =  @purchases_entry.Price  %>
+                                         <% @quantityrtd =  @purchases_entry.QuantityRTD   %>
+               <% else %>
+                                        <% @short_description =  "" %>
+                                         <% @quantity =  "" %>
+                                        <% @price =  0  %>
+                                        <% @quantityrtd = 0   %>
+                 <% end %>
+                <td colspan="20" style="background-color: #d3d3d3;height: 40px;width: 850px;text-align: center;">Short Description: <%=  text_field_tag "purchases_entry[Description]",     @short_description     , :size => "30",  :maxlength => 30  %>&nbsp; Quantity Received To Date: <%=  text_field_tag "purchases_entry[QuantityRTD]",    @quantityrtd.to_i  , :size => "10"  %>   </td>
+</tr>
+
+
+
+<tr>
+                 <td>
+                                  <div style="width: 420px;min-height: 310px;float: left;">
+                                                        <div style="width:420px;height: 50px;float: left;">
+                                                                                      Machine: <%= f.select  "machine_id",   options_for_select(    Machine.find(:all).collect {|a| [a.name, a.id]}    ,  @purchases_entry_detail.machine_id    )  , :prompt => "Select a Type"   %>  &nbsp;
+                                                                                      <span id="clone_item_type_field">
+                                                                                                    Type:    <% f.select  "detail_type_id",   options_for_select(    CloneItemType.find(:all).collect {|a| [a.name, a.id]} ,  @purchases_entry_detail.detail_type_id    )     %>
+                                                                                                  <%= f.collection_select :detail_type_id, CloneItemType.find(:all), :id, :name  %>
+                                                                                      </span>
+                                                        </div>
+                                                        <div style="width:420px;height: 50px;float: left;">
+                                                                                       Artist: <%= f.select  "artist_customer_id",   options_for_select(  Artist.find(:all).collect {|a| [a.name, a.id]} ,  @purchases_entry_detail.artist_customer_id    )     %> &nbsp;
+                                                                                       Similar Art?<%= f.check_box :similar_artwork_done %>
+                                                                                       Film #:<%= f.text_field :film_number, :size => 15 %>
+                                                        </div>
+                                                          <div style="width:420px;height: 50px;float: left;text-align: right;">
+                                                                                    Art Supplied?<%= f.check_box :art_supplied %>&nbsp;
+                                                            </div>
+                                                          <div style="width:420px;height: 50px;float: left;text-align: right;">
+                                                                                                                      Layered art wanted?<%= f.check_box :layered_art  %> &nbsp;  See Folder<%= f.check_box :see_folder  %> &nbsp;
+                                                           </div>
+                                                          <div style="width:420px;height: 50px;float: left;text-align: right;">
+                                                                                     Art Due Date:  <%=  f.calendar_date_select :art_due_date  , :popup => :force  , :size => 22  %> &nbsp;
+                                                          </div>
+                                                           <div style="width:420px;height: 50px;float: left;text-align: right;">
+
+                                                                                      Ship Due Date:  <%=  f.calendar_date_select :ship_due_date  , :popup => :force  , :size => 22  %> &nbsp;
+                                                          </div>
+
+
+
+                                  </div>
+
+                                   <div style="width:420px;height: 181px;float:left;">
+                                                                   Detailed Description: <%= f.text_area :detail_description, :rows => 8, :cols => 52 %>
+                                   </div>
+
+                                   <div style="width:420px;float:left;">
+                                                                                                     Colors and Mesh:  <%= f.text_area :colors, :rows =>3, :cols => 52 %>
+                                    </div>
+
+                 </td>
+ </tr>
+  <tr>
+                  <td colspan="20" style="background-color: #d3d3d3;height: 40px;width: 850px;text-align: center;">Rush Charge:<%= f.text_field :rush_charge , :size => 6  %> Art Charge: <%= f.text_field :art_charge, :size => 6 %>  Ink Changes Charge:<%= f.text_field :ink_changes_charge, :size => 6 %> &nbsp; </td>
+   </tr>
+  <tr>
+                  <td colspan="20" style="background-color: #d3d3d3;height: 40px;width: 850px;text-align: center;">      </td>
+   </tr>
+  <tr>
+                   <td colspan="20" style="background-color: #d3d3d3;height: 40px;width: 850px;text-align: center;">Quantity: <%=  text_field_tag "purchases_entry[QuantityOnOrder]",    @quantity.to_i  , :size => "10"  %> Price per piece: <%=  text_field_tag "purchases_entry[Price]",    @price.to_i  , :size => "10"  %>   </td>
+    </tr>
+</table>
+    <%=  submit_tag "Update" , :id => "btnSignUp" %>
+<% end  %>
+
+
+</div>

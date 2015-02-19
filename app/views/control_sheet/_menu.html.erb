@@ -1,0 +1,33 @@
+<div class="menu" style="text-align: center;">
+
+                 <% if @ss  %>
+                <a href="/purchases_entries/change_customer"  title="Type layout number." onclick="Modalbox.show(this.href, {title: this.title, evalScripts:true ,  params: {  purchases_entry_ids:  getCheckboxValues()   }  }); return false;"> Reports  </a>
+
+
+                           <% if session[:show_completed_work_orders]  %>
+                               <a href="/purchases_entries/dont_show_completed"> Don't Show Completed </a>
+                           <% else %>
+                               <a href="/purchases_entries/show_completed">Show Completed  </a>
+                           <% end %>
+                  <% end %>
+
+               <% if @customer %>
+                          <a href="#" onclick="unloadCustomerAndList()">  Show All Customers</a>
+                <% else %>
+
+                <% end %>
+
+                <% if @customer %>
+                             <% @customer_id = @customer.id %>
+                 <% end  %>
+
+                  <% if session[:show_filenames]  %>
+                                    <%=  link_to "Don't show Filenames", :controller => "control_sheet", :action => "dont_show_filenames", :overdue_status => @overdue_status, :closed_status => @closed_status, :customer_id => @customer_id  %>
+                  <% else %>
+                                      <%=  link_to "Show Filenames", :controller => "control_sheet", :action => "show_filenames", :overdue_status => @overdue_status, :closed_status => @closed_status, :customer_id => @customer_id  %>
+                  <% end %>
+
+
+
+                <%=  link_to "Control Panels", :controller => "control_panels"   %>
+</div>

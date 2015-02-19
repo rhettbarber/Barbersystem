@@ -1,0 +1,26 @@
+
+
+<%
+
+   @overdue_statuses  = [
+                          ["All", 'all' ],
+                          ["Art Overdue", 'art_overdue' ],
+                          ["Ship Overdue", 'ship_overdue']
+                ]
+
+   @closed_statuses  = [
+                           ["Open", '0'],
+                           ["Closed", '1' ],
+                           ["All Open and Closed", 'all' ]
+                ]
+
+             %>
+
+<% form_tag(  "/control_sheet/index") do %>
+    <%=  hidden_field_tag "customer_id", @customer.id  if @customer %>
+     <%= select_tag "overdue_status",   options_for_select(  @overdue_statuses,  @overdue_status    )  ,:onchange => "closedStatusSelections( this.value )"   %>
+    <%= select_tag "closed_status",   options_for_select(  @closed_statuses,  @closed_status    )     %>
+    <%= submit_tag "Filter" , :onclick => "$('spinner').show();$('layout').hide();" %>
+<% end %>
+
+

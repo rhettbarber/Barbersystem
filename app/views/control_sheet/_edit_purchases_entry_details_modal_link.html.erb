@@ -1,0 +1,21 @@
+<%  @button_name = "Edit"  %>
+
+<a href="/control_sheet/edit_purchases_entry_details"  class="padded_link hide_from_printout" title="Edit Work Order Details."
+   onclick="Modalbox.show(this.href, {title: this.title, evalScripts:true ,  width:900,
+           params: {
+                   <%  if purchases_entry  %>
+                             purchases_entry_id: <%=  purchases_entry.id %>      ,
+                               <%  if purchases_entry.purchases_entry_detail  %>
+                                                 purchases_entry_detail_id: '<%= purchases_entry.purchases_entry_detail.id%>' ,
+                               <% end %>
+                   <% else %>
+                                        <%  @button_name = "Create New Request"  %>
+                   <% end %>
+
+                           purchase_id: <%= @purchase.id %>   }
+              }); return false;">
+
+
+<%=  @button_name  %>
+
+</a>

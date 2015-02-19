@@ -1,0 +1,25 @@
+<%
+             @sort_types  = [
+                        ["Art Due", 'art_due_date' ],
+                        ["Ship Due", 'ship_due_date'],
+                        ["Request #", 'id' ],
+
+              ]
+
+             @sort_orders  = [
+                        ["Asc", 'asc' ],
+                        ["Desc", 'desc']
+              ]
+
+
+
+
+             %>
+
+<% form_tag(  "/control_sheet/index") do %>
+    <%=  hidden_field_tag "customer_id", @customer.id  if @customer %>
+     <%= select_tag "sort_type",   options_for_select(  @sort_types,   @sort_type    )     %>
+    <%= select_tag "sort_order",   options_for_select(  @sort_orders,  @sort_order    )     %>
+    <%= submit_tag "Sort" , :onclick => "$('spinner').show();$('layout').hide();" %>
+<% end %>
+

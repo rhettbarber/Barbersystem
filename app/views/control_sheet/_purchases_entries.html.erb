@@ -1,0 +1,247 @@
+ <div id="colors" style="width:850px;margin-left:auto;margin-right:auto;">
+
+ <div  id='spinner' style="display:none;width: 850px;text-align: center;"><%= image_tag "/images/search/ajax-spinner.gif" %> </div>
+
+ <div id="layout">
+
+<%=  javascript_include_tag :defaults %>
+
+<style type="text/css">
+  a {
+      text-decoration: none;
+  }
+ .hide_all {
+     width:850px;float:left;color:red;text-align: center;padding:10px;}
+
+  .menu {
+      width: 850px;
+      float: left;
+      height: 25px;
+      background-color: #00008b;
+      color:white;
+      padding:10px;
+  }
+  .menu a {
+      color:white;
+      padding:5px;
+  }
+.color_to_add {
+     float:left;
+     padding-left:10px;
+     padding-right:10px;
+    color:red;
+}
+.color_to_remove {
+     float:left;
+   padding-left:10px;
+   padding-right:10px;
+    color:green;
+}
+  .item_thumbnail {
+      width:120px;
+  }
+</style>
+
+<script type="text/javascript">
+  function addColor( the_color ) {
+              new Ajax.Updater('colors', '/purchases_entries/add_color' ,   {evalScripts:true, parameters:{ color: the_color ,   action: 'addColor'}} );
+  }
+  function removeColor( the_color ) {
+              new Ajax.Updater('colors', '/purchases_entries/remove_color' ,   {evalScripts:true, parameters:{ color: the_color ,   action: 'removeColor'}} );
+  }
+  function showAll(  ) {
+              new Ajax.Updater('colors', '/purchases_entries/show_all' ,   {evalScripts:true, parameters:{  action: 'showAll'}} );
+  }
+  function hideAll(  ) {
+              new Ajax.Updater('colors', '/purchases_entries/hide_all' ,   {evalScripts:true, parameters:{  action: 'hideAll'}} );
+  }
+  function startLayout( the_colors  ) {
+              new Ajax.Updater('colors', '/purchases_entries/start_layout' ,   {evalScripts:true, parameters:{ colors: the_colors ,  action: 'hideAll'}} );
+  }
+  function getCheckboxValues(   ) {
+var checkedList = [];
+$$('.checkboxes').each(function(ele){
+   if( $(ele).checked )
+   {
+       checkedList.push($(ele).value);
+   }
+})
+var checked_array =  checkedList;
+ return checked_array.join(',');;
+  }
+
+  function resizeThumbnail(  the_element_id   ) {
+            // alert('the_element_id: ' + the_element_id );
+             target = $(the_element_id);
+             if ( target.className ==  'item_thumbnail_large' )
+                  {
+                      target.className = 'item_thumbnail';
+                  }
+              else
+                  { target.className = 'item_thumbnail_large';  }
+
+
+  }
+</script>
+
+
+
+
+<%=  render :partial => "control_sheet_menu" %>
+
+<%   if session[:more_colors].empty? == true    %>
+                <div id="hide_all" class="hide_all">
+                Choose from the colors of a design (in blue) to see the other designs that could be put on the same layout.
+               </div>
+<% end  %>
+
+
+
+<%=  render :partial => "search_form" %>
+
+<table style="width: 850px;;">
+              <tr>
+                       <% if session[:show_thumbnails] %>
+                       <th>Thumbnail</th>
+                       <% end %>
+                        <th>Layout #</th>
+                        <th>PO #</th>
+                        <th>Item #</th>
+                        <th>Description</th>
+                        <th>Qty On Order</th>
+                        <th>Qty RTD</th>
+                         <th>Balance</th>
+                        <th>Due Date</th>
+              </tr>
+
+              <tr>
+                        <td colspan="50" style="background-color: black;color:white;height:40px;text-align: center;">
+                                    <%= @purchases_entries.size %> Work order entries found
+                        </td>
+              </tr>
+         <% @left_over_purchases_entries = Set.new %>
+          <% @purchases_entries.each do |purchases_entry| %>
+
+                                  <% if session[:sort_by_layouts] %>
+                                                      <% if @last_layout_id  %>
+                                                                       <%  if   purchases_entry.layout.nil? or  @last_layout_id == purchases_entry.layout.number    %>
+                                                                                             <% @new_layout_id = false %>
+                                                                       <% else  %>
+                                                                                            <% @new_layout_id = true %>
+                                                                       <% end  %>
+                                                        <% else  %>
+                                                                          <% b = "b" %>
+                                                                      <% @new_layout_id = true %>
+                                                       <% end  %>
+                                                        <% @last_layout_id = purchases_entry.layout.number if purchases_entry.layout %>
+                                                      <%  logger.debug "@last_layout_id: " +  @last_layout_id.to_s  %>
+                                                       <%  logger.debug "@purchases_entry.layout.number: " +  @purchases_entry.layout.number if @purchases_entry  %>
+                               <% end %>
+
+                              <%
+                                          test_colors =  purchases_entry.item.colors
+                                          chosen_colors =  session[:chosen_colors]
+                              %>
+
+                                <%# @also_found_with.add(test_colors) %>
+                              <%  if  purchases_entry.item.has_same_colors_but_introduces_none(chosen_colors)     %>
+
+                                                             <% if @new_layout_id  and  purchases_entry.layout %>
+                                                               <tr>
+                                                                         <td colspan="50" style="background-color: black;color:white;height:40px;text-align: center;">
+                                                                                               Layout #: <%=h purchases_entry.layout.number  %>
+                                                                         </td>
+                                                               </tr>
+                                                               <% end %>
+                                                              <tr>
+                                                             <% if session[:show_thumbnails] %>
+                                                                                <td  style="min-width: 120px;"> <%=  image_tag("/images/item_thumbnails/" +  purchases_entry.item.ItemLookupCode  + ".jpg"   , :id => "item_thumbnail_" + purchases_entry.id.to_s , :class => "item_thumbnail" , :onclick => "resizeThumbnail(  'item_thumbnail_' +  #{purchases_entry.id.to_s}    );")  %></td>
+                                                            <% end %>
+                                                            <td  id="<%= purchases_entry.id %>" style="width:100px;">
+                                                                            <% if  purchases_entry.layout and purchases_entry.layout.number  %>
+                                                                                         <%=  check_box_tag  'purchases_entry_id',  purchases_entry.id   ,   false, :class => "checkboxes" %>
+                                                                                        <%= link_to purchases_entry.layout.number, edit_layout_path(purchases_entry.layout)  %>
+
+                                                                                          <% if @modal_layout %>
+                                                                                                                  <a href="/purchases_entries/show_layout"  title="Define your layout." onclick="Modalbox.show(this.href, {title: this.title, evalScripts:true ,  params: {  id:  ( <%=   purchases_entry.layout.number  %>)   }  }); return false;"> <%=  purchases_entry.layout.number  %> </a>
+                                                                                            <% end %>
+
+                                                                             <% else %>
+                                                                                             <% if purchases_entry.balance_operator == "+" %>
+                                                                                                                <% color = "tan" %>
+                                                                                               <% else %>
+                                                                                                                <% color = " #87cefa" %>
+                                                                                              <% end %>
+                                                                                            <div style="background-color:<%= color %>;">
+                                                                                                         <%=  check_box_tag  'purchases_entry_id',  purchases_entry.id   ,   false, :class => "checkboxes" %>
+                                                                                            </div>
+                                                                             <% end %>
+
+                                                            </td>
+
+                                                            <td style="color: blue;"><%= purchases_entry.purchase.ReferenceNumber  %></td>
+                                                            <td><%=h purchases_entry.item.ItemLookupCode %></td>
+                                                            <td><%=h purchases_entry.item.Description %></td>
+                                                            <td><%=h purchases_entry.QuantityOnOrder %></td>
+                                                            <td style="text-align: center;"><%=h  purchases_entry.QuantityRTD   %></td>
+                                                            <td style="text-align: center;"><%=purchases_entry.balance_operator  %><%=h purchases_entry.balance  %></td>
+
+                                                               <% if purchases_entry.overdue %>
+                                                                             <% date_color = "red" %>
+                                                                <% else %>
+                                                                             <% date_color = "black" %>
+                                                                <% end %>
+                                                                <td style="color:<%= date_color %>;"><%=h  purchases_entry.due_date   %></td>
+                                                                <td><%= link_to 'Edit', edit_purchases_entry_path(purchases_entry) %></td>
+                                                          </tr>
+                                                          <tr>
+                                                                     <td colspan="10" style="text-align:center;color:blue;width:850px;;overflow:hidden;" onclick="$('spinner').show(), $('layout').hide()  ,startLayout('<%=    test_colors.to_a.join(",")%>')"> test<%=    test_colors.to_a.join(" , ")%></td>
+                                                           </tr>
+                                                           <tr><td style="height: 20px;background-color:lightgray;" colspan="10"></td></tr>
+
+                               <% end %>
+              <% end %>
+
+
+
+
+
+
+
+
+
+</table>
+
+
+<br />
+
+
+
+
+
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @show_form %>
+<%  form_for:customer, id  , :url => { :controller => "purchases_entries", :action => "add_color" } do |f|  %>
+            <span id="selected_colors">   <%= select_tag "color",   options_for_select(  @colors,  params[:color]    )     %></span>
+             <%= submit_tag('Add Color') %>
+<%  end  %>
+<br />    <br />
+ <% end  %>
