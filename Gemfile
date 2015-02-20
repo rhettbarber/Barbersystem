@@ -24,11 +24,10 @@
 #  END MAJOR SETUP ERRORS AND  FIXES GO HERE
 #  END MAJOR SETUP ERRORS AND  FIXES GO HERE
 #
-# test
 
 source 'https://rubygems.org'
 
-
+gem 'calendar_date_select', :git => 'http://github.com/paneq/calendar_date_select.git'
 #gem 'acts_as_tree_with_dotted_ids' , :git => "https://github.com/xavier/acts-as-tree-with-dotted-ids"  # , :platforms => :ruby
 gem 'passenger' , :platform => :ruby  # makes this gem only install on *nix
 # gem 'pry'

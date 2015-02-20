@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>PurchasesEntries: <%= controller.action_name %></title>
+
+  <%= stylesheet_link_tag  '/legacy_assets/scaffold'  ,:media => "all"  %>
+  <%= stylesheet_link_tag   '/legacy_assets/control_sheet'  ,:media => "all"  %>
+  <%=  javascript_include_tag  '/legacy_assets/prototype_fixed'  %>
+  <%=  javascript_include_tag '/legacy_assets/application' %>
+  <%=  javascript_include_tag '/legacy_assets/effects' %>
+  <%=  javascript_include_tag '/legacy_assets/controls' %>
+  <%=  javascript_include_tag '/legacy_assets/dragdrop' %>
+  <%= javascript_include_tag '/control_sheet/control_js' %>
+  <%= javascript_include_tag '/legacy_assets/modalbox'  %>
+  <%= javascript_include_tag '/legacy_assets/calendar_date_select/calendar_date_select'  %>
+  <%= stylesheet_link_tag   "/legacy_assets/modalbox" ,:media => "all" %>
+  <%= stylesheet_link_tag   "/legacy_assets/calendar_date_select/default"  %>
+
+
+
+  <OBJECT classid="clsid:44C4C3AC-D0F1-11D2-919D-006008C88FC3" height="0" id="qsBridge" style="LEFT: 0px; TOP: 0px" width="0"><PARAM NAME="_ExtentX" VALUE="26"><PARAM NAME="_ExtentY" VALUE="26"></OBJECT>
+
+</head>
+
+
+<% if action_name == "confirm_work_order_details" %>
+    <body style="width: 850px;margin-left: auto;margin-right: auto;" onload="confirmWorkOrderDetailsStartup()">
+<% elsif action_name == "index" %>
+    <body style="width: 850px;margin-left: auto;margin-right: auto;" onload=" closedStatusSelections( '<%= params[:overdue_status] ||  "none" %>' )">
+<% else  %>
+    <body style="width: 850px;margin-left: auto;margin-right: auto;">
+<% end %>
+
+
+<p style="color: green;text-align: center;" class="hide_from_printout"><%= flash[:notice] %></p>
+
+<div  id='spinner' style="display:none;width: 850px;text-align: center;"><%= image_tag "/images/search/ajax-spinner.gif" %> </div>
+
+<div id="layout"  style="width:850px;margin-left:auto;margin-right:auto;">
+  <%= yield %>
+</div>
+
+</body>
+</html>

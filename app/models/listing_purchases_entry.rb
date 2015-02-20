@@ -1,4 +1,7 @@
 class ListingPurchasesEntry < ActiveRecord::Base
+
+  set_primary_key "id"
+
   belongs_to :clone_item_type   , :foreign_key => "detail_type_id"
 belongs_to :purchase
 belongs_to :item
@@ -48,7 +51,7 @@ def supplied_art_filename
                   if see_folder
                                 return "Z://STORAGE_DISK_1/MAIN_FILES_STORAGE/CUSTOMER_SUPPLIED_DATABASE/" +  self.purchase_id.to_s  +  "-"  +   self.id.to_s   + "-" +   self.purchase.customer_slug  + '/'
                   else
-                               return "Z://STORAGE_DISK_1/MAIN_FILES_STORAGE/CUSTOMER_SUPPLIED_DATABASE/" +  self.purchase_id.to_s  +  "-"  +   self.id.to_s   + "-" +   self.purchase.customer_slug  +  "-"  +   Util::Slug.generate(  self.purchases_entries_Description   )
+                               return "Z://STORAGE_DISK_1/MAIN_FILES_STORAGE/CUSTOMER_SUPPLIED_DATABASE/" +  self.purchase_id.to_s  +  "-"  +   self.id.to_s   + "-" +   self.purchase.customer_slug  +  "-"  +   Slug.generate(  self.purchases_entries_Description   )
                     end
  end
 
@@ -56,7 +59,7 @@ def layered_art_filename
                       if see_folder
                                return "Z://STORAGE_DISK_1/MAIN_FILES_STORAGE/CUSTOM_DATABASE/" +  self.purchase_id.to_s  +  "-"  +   self.id.to_s   + "-" +   self.purchase.customer_slug        + '/'
                       else
-                              return "Z://STORAGE_DISK_1/MAIN_FILES_STORAGE/CUSTOM_DATABASE/" +  self.purchase_id.to_s  +  "-"  +   self.id.to_s   + "-" +   self.purchase.customer_slug  +  "-"  +   Util::Slug.generate(  self.purchases_entries_Description   )
+                              return "Z://STORAGE_DISK_1/MAIN_FILES_STORAGE/CUSTOM_DATABASE/" +  self.purchase_id.to_s  +  "-"  +   self.id.to_s   + "-" +   self.purchase.customer_slug  +  "-"  +   Slug.generate(  self.purchases_entries_Description   )
                         end
 end
 
@@ -66,7 +69,7 @@ def production_filename
                                               if  see_folder
                                                              return  'Y://AUTOMATION_DATABASE/CUSTOM_PRODUCTION_FILES/' + self.clone_item_type.name + '/'  +  self.purchase_id.to_s  +  "-"  +   self.id.to_s   + "-" +   self.purchase.customer_slug    + '/'
                                               else
-                                                             return  'Y://AUTOMATION_DATABASE/CUSTOM_PRODUCTION_FILES/' + self.clone_item_type.name + '/'  +  self.purchase_id.to_s  +  "-"  +   self.id.to_s   + "-" +   self.purchase.customer_slug  +  "-"  +   Util::Slug.generate(  self.purchases_entries_Description   )
+                                                             return  'Y://AUTOMATION_DATABASE/CUSTOM_PRODUCTION_FILES/' + self.clone_item_type.name + '/'  +  self.purchase_id.to_s  +  "-"  +   self.id.to_s   + "-" +   self.purchase.customer_slug  +  "-"  +   Slug.generate(  self.purchases_entries_Description   )
                                                 end
                               else
                                       return "NO TYPE"
@@ -719,7 +722,7 @@ end
                                                       self.item_id =  item.id
                                                       self.Cost = item.Cost
                                                       self.Comment = pe_comment
-                                                      self.Description =  Util::Slug.generate(item.Description)
+                                                      self.Description =  Slug.generate(item.Description)
                                                       self.Price = item.Price
                                                       self.LastUpdated = Time.now
                                                       self.save
@@ -816,7 +819,7 @@ end
                                                       purchases_entry.Cost = item.Cost
                                                       purchases_entry.Comment = 0
                                                       purchases_entry.commission_paid = 0
-                                                      purchases_entry.Description = Util::Slug.generate(item.Description)
+                                                      purchases_entry.Description = Slug.generate(item.Description)
                                                       purchases_entry.Price = item.Price
                                                       purchases_entry.Taxable = 1
                                                       purchases_entry.LastUpdated = Time.now

@@ -106,6 +106,47 @@ class Purchase < ActiveRecord::Base
 ########################################################################################################
 
 
+
+
+
+
+  def date_created
+                Date.parse(self.Time.to_s)
+end
+
+
+
+
+
+def customer_slug
+            customer = self.customer
+            if customer
+                    return Slug.generate( customer.FirstName + " " + customer.LastName + " " +  customer.Company   )
+            else
+                    return ""
+              end
+end
+
+
+
+
+def control_sheet_entries
+          conditions = ["purchase_id = ? and item_id = 25319", self.id     ]
+           return  ListingPurchasesEntry.find(:all, :conditions => conditions)
+end
+
+
+
+
+
+def overdue_purchases_entry_details
+  unfinished
+          conditions = ["listing_purchases_entry_id"]
+          PurchasesEntryDetail.find(:all, :conditions => conditions)
+end
+
+
+
 def affiliate_with_referer
 		if self.a_id != '0' 
 				cookie_trace = self.cookie_trace
@@ -512,18 +553,6 @@ def opposite_category_ids
 end
 ########################################################################################################
 def incomplete_symbiont
-         CUSTOM_LOGGER.error "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-         CUSTOM_LOGGER.error "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-         CUSTOM_LOGGER.error "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-         CUSTOM_LOGGER.error "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-         CUSTOM_LOGGER.error "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-         CUSTOM_LOGGER.error "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-         CUSTOM_LOGGER.error "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-         CUSTOM_LOGGER.error "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-         CUSTOM_LOGGER.error "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-         CUSTOM_LOGGER.error "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-         CUSTOM_LOGGER.error "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-         CUSTOM_LOGGER.error "begin incomplete_symbiont"
           if PurchasesEntry.exists?(:purchase_id  => self.id ,  :item_id =>   '0' , :on_hold => '0'  )
                  CUSTOM_LOGGER.error "PE Exists"
                   if self.customer

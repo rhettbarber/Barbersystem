@@ -4,6 +4,7 @@
    onclick="Modalbox.show(this.href, {title: this.title, evalScripts:true ,  width:900,
            params: {
                    <%  if purchases_entry  %>
+                            <% g = "g" %>
                              purchases_entry_id: <%=  purchases_entry.id %>      ,
                                <%  if purchases_entry.purchases_entry_detail  %>
                                                  purchases_entry_detail_id: '<%= purchases_entry.purchases_entry_detail.id%>' ,

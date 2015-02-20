@@ -1,7 +1,7 @@
 class StoreController < ApplicationController
 #before_filter :initialize_variables, :only => [ :ajax_browse, :browse, :design_department_select, :select_department ]
 #before_filter :browse_startup, :only => [  :browse ]
-before_filter  :initialize_variables  , :only => [ :sale_designs,  :new_designs, :category_items, :category_items_menu  ,:enlarge, :sublimation_explaination  ]
+before_filter  :initialize_variables  , :only => [ :sale_designs,  :new_designs, :category_items, :category_items_menu  ,:enlarge, :sublimation_explaination, :tshirtsinabox_redirect_choices  ]
 
 skip_before_filter :verify_authenticity_token  #, :only => [:update_specsheet,:update_advanced_combination ]
 #http://192.168.0.125:3006/store/specsheet?item_type=slave&item_id=3725&department_id=10#
@@ -9,11 +9,20 @@ skip_before_filter :verify_authenticity_token  #, :only => [:update_specsheet,:u
 
 layout 'application', :except => [ :items_menu    ]
 layout 'none', :only => [ :close_window   ]
-layout 'dialog', :only => [ :enlarge ,:sublimation_explaination  ]
+layout 'dialog', :only => [ :enlarge ,:sublimation_explaination , :tshirtsinabox_redirect_choices ]
 
 #caches_public_page :items_menu
 caches_public_page :category_items
 caches_public_page :category_items_menu
+
+
+
+
+
+def tshirtsinabox_redirect_choices
+  @close_button = true
+end
+
 
 def sublimation_explaination
   @close_button = true

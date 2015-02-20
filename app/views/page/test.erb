@@ -1,237 +1,337 @@
 
+<style  type="text/css">
+
+    .ui-btn {
+        margin:0px !important;
+    }
+
+    @media all and (max-width: 35em) {
+        .my-breakpoint .ui-block-a,
+        .my-breakpoint .ui-block-b,
+        .my-breakpoint .ui-block-c,
+        .my-breakpoint .ui-block-d,
+        .my-breakpoint .ui-block-e {
+            width: 100%;
+            float: none;
+        }
+
+    }
+</style>
+
+
 <img alt="" class="float_100" src="http://cdn.dixieoutfitters.com/images/home_page_images/home_mobile.jpg">
 
 <br>
 
-<ul data-role="listview">
 
-  <li   class="scroll_li"> <a href="/search/scroll/all_items" data-transition="slide">Join Mailing List</a></li>
-  <li   class="scroll_li"> <a href="/search/scroll/all_items" data-transition="slide">Heat Transfer Machines</a></li>
 
-</ul>
+  <!--<li   class="scroll_li"> <a href="/search/scroll/all_items" data-transition="slide">Join Mailing List</a></li>-->
+  <!--<li   class="scroll_li"> <a href="/search/scroll/all_items" data-transition="slide">Heat Transfer Machines</a></li>-->
+
+
+
+  <fieldset class="ui-grid-b my-breakpoint" style="display:inline-block;width:100%;">
+                    <div class="ui-block-a"><a href="/account" class="ui-btn">Log in</a></div>
+                    <div class="ui-block-b"><a href="/p/about-us" class="ui-btn">About Us</a></div>
+                    <div class="ui-block-c"><a href="/account/join" class="ui-btn">Join Mailing List</a></div>
+                    <div class="ui-block-a"><a href="/order_catalog" class="ui-btn">Order Catalog</a></div>
+                    <div class="ui-block-b"><a href="/p/5754" class="ui-btn">Transfer Machines</a></div>
+                    <div class="ui-block-c"><a href="/search/scroll/all_items" class="ui-btn">Track Order</a></div>
+                    <div class="ui-block-a"><a href="/order_catalog" class="ui-btn">Request Samples</a></div>
+                    <div class="ui-block-b"><a href="/p/5754" class="ui-btn">1-800-448-3061</a></div>
+                    <div class="ui-block-c"><a href="/search/scroll/all_items" class="ui-btn">Help</a></div>
+  </fieldset>
+
+
+
+<!--  ##############  BEGIN Stock Transfers  ######################  -->
+<!--  ##############  BEGIN Stock Transfers  ######################  -->
+<!--  ##############  BEGIN Stock Transfers  ######################  -->
+<!--  ##############  BEGIN Stock Transfers  ######################  -->
 
 <div data-role="collapsible"  class="main_menu_choices"   id="item_menu_choices" data-theme="b" data-icon="gear"  data-inset="true" >
-  <h3 style="width: 100%;">
+                  <h3 style="width: 100%;">Stock Transfers </h3>
+                  <div id="items_departments_list">
+                                    <ul data-role="listview" >
+                                                            <li   class="scroll_li"> <a href="/search/scroll/all_designs" data-transition="slide">Stock Transfers Information</a></li>
 
-       Transfers
+                                                          <div data-role="collapsible"  class="main_menu_choices openMe"   id="design_menu_choices" data-theme="a" data-icon="gear"  data-inset="true" >
+                                                                <h3  style="width: 100%;">Search </h3>
+                                                                <div id="designs_departments_list">
+                                                                              <% if params[:query] %>
+                                                                                  <input type="search" name="search_query" id="search_query"  value="<%= params[:query] %>" >   <span class="ui-icon ui-icon-search ui-icon-shadow">&nbsp;</span>
+                                                                              <% else %>
+                                                                                  <input type="search" name="search_query" id="search_query" placeholder="Enter keywords click search!">   <span class="ui-icon ui-icon-search ui-icon-shadow">&nbsp;</span>
+                                                                              <% end %>
+                                                                             <li data-icon="search"><a href="#"   id="search_designs"  class="search_button ui-btn ui-btn-b">Search Stock Transfers</a></li>
 
-  </h3>
-  <div id="items_departments_list">
+                                                                </div>
+                                                          </div>
+
+                                                            <div data-role="collapsible"  class="main_menu_choices openMe"   id="design_menu_choices" data-theme="a" data-icon="gear"  data-inset="true" >
+                                                                          <h3  style="width: 100%;">Shop by Brand </h3>
+                                                                          <div id="designs_departments_list">
+                                                                                        <ul data-role="listview">
+                                                                                                      <% unless @incomplete_symbiont %>
+                                                                                                                      <li   class="scroll_li"> <a href="/search/scroll/all_designs" data-transition="slide">Scroll all designs</a></li>
+                                                                                                                      <li data-icon="carat-r"><a href="/new_designs">New designs</a></li>
+                                                                                                                      <% if @singular_item_customer == true %>
+                                                                                                                                    <li data-icon="carat-r"><a href="/sale_designs">Sale designs</a></li>
+                                                                                                                      <% end %>
+                                                                                                      <% end %>
+                                                                                        </ul>
+                                                                            <% @categories_collection = Set.new %>
+                                                                                        <% @website.default_design_departments.each do |department| %>
+                                                                                                        <div data-role="collapsible"  class="department_collapsible"   id="department_collapsible_<%= department.id %>"   data-department_id="<%= department.id %>" >
+                                                                                                                  <h3><%= department.Name  %></h3>
+                                                                                                                   <ul data-role="listview">
+                                                                                                                            <% design_department_categories = department.categories %>
+                                                                                                                            <% if  design_department_categories.size > 1 %>
+                                                                                                                                            <li   class="scroll_li"> <a href="/search/scroll/<%=  department.id  %>" data-transition="slide">scroll all</a></li>
+                                                                                                                            <% end %>
+
+                                                                                                                            <% design_department_categories.where("web_category = 1 and visible = 1").sort_by{|a| a.Name}.each do |category| %>
+                                                                                                                                            <% @categories_collection.add(category) %>
+                                                                                                                                            <li   class="category_li"   data-category_id="<%= category.id %>"> <a href="/store/category_items/<%=  department.id  %>/<%= category.id %>" data-transition="slide"> <%= category.Name.downcase %></a></li>
+                                                                                                                            <% end %>
+                                                                                                                  </ul>
+                                                                                                        </div>
+                                                                                        <% end %>
+                                                                          </div>
+                                                            </div>
+
+
+                                                            <div data-role="collapsible"  class="main_menu_choices openMe"   id="design_menu_choices" data-theme="a" data-icon="gear"  data-inset="true" >
+                                                                          <h3  style="width: 100%;">Shop by Subject </h3>
+                                                                          <div id="designs_departments_list">
+                                                                                                            <ul data-role="listview">
+                                                                                                                          <% unless @incomplete_symbiont %>
+                                                                                                                                          <li   class="scroll_li"> <a href="/search/scroll/all_designs" data-transition="slide">Scroll all designs</a></li>
+                                                                                                                                          <li data-icon="carat-r"><a href="/new_designs">New designs</a></li>
+                                                                                                                                          <% if @singular_item_customer == true %>
+                                                                                                                                                        <li data-icon="carat-r"><a href="/sale_designs">Sale designs</a></li>
+                                                                                                                                          <% end %>
+                                                                                                                          <% end %>
+                                                                                                            </ul>
+
+
+                                                                                                           <ul data-role="listview">
+
+                                                                                                             <!--team_member_roles = project.team_memberships.select("roles.name").joins(:role).includes(:role, :member).order("roles.name").group_by(&:member_id).map do | key, memberships |-->
+                                                                                                             <!--{ :member => memberships.first.member, :roles => memberships.map {|membership| membership.role.name }.join(",")  }-->
+                                                                                                             <!--end-->
+
+
+
+                                                                                                                                    <% @categories_collection.sort_by{|a| a.Name}.each do |category| %>
+                                                                                                                                                    <li   class="category_li"   data-category_id="<%= category.id %>"> <a href="/store/category_items/<%=  category.department_id  %>/<%= category.id %>" data-transition="slide"> <%= category.Name.downcase %></a></li>
+                                                                                                                                    <% end %>
+                                                                                                                           </ul>
+
+                                                                          </div>
+                                                            </div>
+
+                                    </ul>
+                  </div>
+</div>
+
+<!--  ##############  END Stock Transfers  ######################  -->
+<!--  ##############  END Stock Transfers  ######################  -->
+<!--  ##############  END Stock Transfers  ######################  -->
+<!--  ##############  END Stock Transfers  ######################  -->
+
+<!--  ##############  BEGIN Custom Transfers  ######################  -->
+<!--  ##############  BEGIN Custom Transfers  ######################  -->
+<!--  ##############  BEGIN Custom Transfers  ######################  -->
+<!--  ##############  BEGIN Custom Transfers  ######################  -->
+
+<div data-role="collapsible"  class="main_menu_choices"   id="item_menu_choices" data-theme="b" data-icon="gear"  data-inset="true" >
+                  <h3 style="width: 100%;">Custom Transfers</h3>
+                  <div id="items_departments_list">
+                                    <ul data-role="listview">
+                                                      <div data-role="collapsible"  class="main_menu_choices openMe"   id="design_menu_choices" data-theme="a" data-icon="gear"  data-inset="true" >
+                                                                        <h3  style="width: 100%;">Custom Transfer Information</h3>
+                                                                        <div id="designs_departments_list">
+                                                                                          <ul data-role="listview">
+
+                                                                                                            <li   class="scroll_li"> <a href="/search/scroll/all_designs" data-transition="slide">About Custom transfers</a></li>
+                                                                                                            <li   class="scroll_li"> <a href="/search/scroll/all_designs" data-transition="slide">Custom sublimation transfer price list</a></li>
+                                                                                                            <li   class="scroll_li"> <a href="/search/scroll/all_designs" data-transition="slide">Custom foil transfer price list</a></li>
+                                                                                                            <li   class="scroll_li"> <a href="/search/scroll/all_designs" data-transition="slide">Custom silk-screen transfer  price list</a></li>
+                                                                                                            <li   class="scroll_li"> <a href="/search/scroll/all_designs" data-transition="slide">Custom glitter transfer  price list</a></li>
+                                                                                          </ul>
+                                                                        </div>
+                                                      </div>
+                                                      <li   class="scroll_li"> <a href="/search/scroll/all_designs" data-transition="slide">Custom transfer designer</a></li>
+                                    </ul>
+                  </div>
+</div>
+
+
+<!--  ##############  END Custom Transfers  ######################  -->
+<!--  ##############  END Custom Transfers  ######################  -->
+<!--  ##############  END Custom Transfers  ######################  -->
+<!--  ##############  END Custom Transfers  ######################  -->
+
+
+<!--  ##############  BEGIN Custom T-Shirts & Stock T-Shirts  ######################  -->
+<!--  ##############  BEGIN Custom T-Shirts & Stock T-Shirts  ######################  -->
+<!--  ##############  BEGIN Custom T-Shirts & Stock T-Shirts  ######################  -->
+<!--  ##############  BEGIN Custom T-Shirts & Stock T-Shirts  ######################  -->
+
+
+<div data-role="collapsible"  class="main_menu_choices"   id="item_menu_choices" data-theme="b" data-icon="gear"  data-inset="true" >
+                  <h3 style="width: 100%;">Custom T-Shirts & Stock T-Shirts</h3>
+                  <div id="items_departments_list">
+                                    <div style="font-weight: normal; text-align: center;width:100%;">
+                                                      <h2>Tshirts In A Box</h2>
+                                                      TshirtsInABox.com is a Barber and Company website specializing in custom and pre-printed tshirts. <br>
+                                                      <br>
+                                                      <br>
+                                                      <a href="http://tshirtsinabox.com"" data-rel="back" class="ui-btn" style="width: 80%;">I don't want to visit TshirtsInABox.com.</a>
+                                                      <a href="#" data-rel="back" class="ui-btn" style="width: 80%;">Ok, take me there.</a>
+                                    </div>
+                  </div>
+</div>
+<!--  ##############  END  Custom T-Shirts & Stock T-Shirts  ######################  -->
+<!--  ##############  END  Custom T-Shirts & Stock T-Shirts  ######################  -->
 
 
 
 
 
-        <div data-role="collapsible"  class="department_collapsible  openMe"   id="department_collapsible_"   data-department_id="" >
-          <h3>Shop Stock Transfers</h3>
-          <ul data-role="listview" >
 
 
+
+
+  <!--  ##############  BEGIN Stock Transfers  ######################  -->
+  <!--  ##############  BEGIN Stock Transfers  ######################  -->
+  <!--  ##############  BEGIN Stock Transfers  ######################  -->
+  <!--  ##############  BEGIN Stock Transfers  ######################  -->
+
+  <div data-role="collapsible"  class="main_menu_choices"   id="item_menu_choices" data-theme="b" data-icon="gear"  data-inset="true" >
+            <h3 style="width: 100%;">All Over T-Shirts & other Merchandise</h3>
+            <div id="items_departments_list">
+                          <ul data-role="listview" >
 
                                         <div data-role="collapsible"  class="main_menu_choices openMe"   id="design_menu_choices" data-theme="a" data-icon="gear"  data-inset="true" >
-                                          <h3  style="width: 100%;">
-                                                 Shop by Brand
-                                          </h3>
-                                          <div id="designs_departments_list">
-                                            <!--<div data-role="collapsible" >-->
-                                            <!--<h3>New designs, Sales and Specials</h3>-->
-                                            <ul data-role="listview">
-                                              <% unless @incomplete_symbiont %>
-                                                  <li   class="scroll_li"> <a href="/search/scroll/all_designs" data-transition="slide">Scroll all designs</a></li>
-                                                  <li data-icon="carat-r"><a href="/new_designs">New designs</a></li>
-                                                  <% if @singular_item_customer == true %>
-                                                      <li data-icon="carat-r"><a href="/sale_designs">Sale designs</a></li>
-                                                  <% end %>
-                                              <% end %>
-                                            </ul>
-                                            <!--</div>-->
+                                                          <h3  style="width: 100%;">Printed All Over Tshirts</h3>
+                                                          <div id="designs_departments_list">
+                                                                            <% @categories_collection = Set.new %>
+                                                                            <% @website.default_design_departments.each do |department| %>
+                                                                                                <div data-role="collapsible"  class="department_collapsible"   id="department_collapsible_<%= department.id %>"   data-department_id="<%= department.id %>" >
+                                                                                                                  <h3><%= department.Name  %></h3>
+                                                                                                                  <ul data-role="listview">
+                                                                                                                                <% design_department_categories = department.categories %>
+                                                                                                                                <% if  design_department_categories.size > 1 %>
+                                                                                                                                                <li   class="scroll_li"> <a href="/search/scroll/<%=  department.id  %>" data-transition="slide">scroll all</a></li>
+                                                                                                                                <% end %>
 
-
-                                            <% @website.default_design_departments.each do |department| %>
-                                                <div data-role="collapsible"  class="department_collapsible"   id="department_collapsible_<%= department.id %>"   data-department_id="<%= department.id %>" >
-                                                  <h3><%= department.Name  %></h3>
-                                                  <ul data-role="listview">
-
-                                                    <% design_department_categories = department.categories %>
-                                                    <% if  design_department_categories.size > 1 %>
-                                                        <li   class="scroll_li"> <a href="/search/scroll/<%=  department.id  %>" data-transition="slide">scroll all</a></li>
-                                                    <% end %>
-
-                                                    <% design_department_categories.where("web_category = 1 and visible = 1").sort_by{|a| a.Name}.each do |category| %>
-                                                        <li   class="category_li"   data-category_id="<%= category.id %>"> <a href="/store/category_items/<%=  department.id  %>/<%= category.id %>" data-transition="slide"> <%= category.Name.downcase %></a></li>
-                                                    <% end %>
-                                                  </ul>
-                                                </div>
-                                            <% end %>
-                                          </div>
+                                                                                                                                <% design_department_categories.where("web_category = 1 and visible = 1").sort_by{|a| a.Name}.each do |category| %>
+                                                                                                                                                <% @categories_collection.add(category) %>
+                                                                                                                                                <li   class="category_li"   data-category_id="<%= category.id %>"> <a href="/store/category_items/<%=  department.id  %>/<%= category.id %>" data-transition="slide"> <%= category.Name.downcase %></a></li>
+                                                                                                                                <% end %>
+                                                                                                                  </ul>
+                                                                                                </div>
+                                                                            <% end %>
+                                                          </div>
                                         </div>
 
 
+                                        <div data-role="collapsible"  class="main_menu_choices openMe"   id="design_menu_choices" data-theme="a" data-icon="gear"  data-inset="true" >
+                                                      <h3  style="width: 100%;">Merchandise</h3>
+                                                      <div id="designs_departments_list">
+                                                                        <ul data-role="listview">
 
 
+                                                                                          <div data-role="collapsible"  class="main_menu_choices openMe"   id="design_menu_choices" data-theme="a" data-icon="gear"  data-inset="true" >
+                                                                                                             <h3  style="width: 100%;">Search</h3>
+                                                                                                            <div id="designs_departments_list">
+                                                                                                                              <% if params[:query] %>
+                                                                                                                                                    <input type="search" name="search_query" id="search_query"  value="<%= params[:query] %>" >   <span class="ui-icon ui-icon-search ui-icon-shadow">&nbsp;</span>
+                                                                                                                              <% else %>
+                                                                                                                                                    <input type="search" name="search_query" id="search_query" placeholder="Enter keywords click search!">   <span class="ui-icon ui-icon-search ui-icon-shadow">&nbsp;</span>
+                                                                                                                              <% end %>
+                                                                                                                              <li data-icon="search"><a href="#"   id="search_designs"  class="search_button ui-btn ui-btn-b">Search Merchandise</a></li>
+                                                                                                              </div>
+                                                                                          </div>
 
 
+                                                                                          <div data-role="collapsible"  class="main_menu_choices openMe"   id="design_menu_choices" data-theme="a" data-icon="gear"  data-inset="true" >
+                                                                                                            <h3  style="width: 100%;">Shop by Brand </h3>
+                                                                                                            <div id="designs_departments_list">
+                                                                                                                              <ul data-role="listview">
+                                                                                                                                                <% unless @incomplete_symbiont %>
+                                                                                                                                                                    <li   class="scroll_li"> <a href="/search/scroll/all_designs" data-transition="slide">Scroll all designs</a></li>
+                                                                                                                                                                    <li data-icon="carat-r"><a href="/new_designs">New designs</a></li>
+                                                                                                                                                                    <% if @singular_item_customer == true %>
+                                                                                                                                                                                     <li data-icon="carat-r"><a href="/sale_designs">Sale designs</a></li>
+                                                                                                                                                                    <% end %>
+                                                                                                                                                <% end %>
+                                                                                                                              </ul>
+                                                                                                                              <% @categories_collection = Set.new %>
+                                                                                                                              <% @website.default_design_departments.each do |department| %>
+                                                                                                                                                  <div data-role="collapsible"  class="department_collapsible"   id="department_collapsible_<%= department.id %>"   data-department_id="<%= department.id %>" >
+                                                                                                                                                                    <h3><%= department.Name  %></h3>
+                                                                                                                                                                    <ul data-role="listview">
+                                                                                                                                                                                      <% design_department_categories = department.categories %>
+                                                                                                                                                                                      <% if  design_department_categories.size > 1 %>
+                                                                                                                                                                                                    <li   class="scroll_li"> <a href="/search/scroll/<%=  department.id  %>" data-transition="slide">scroll all</a></li>
+                                                                                                                                                                                      <% end %>
 
-            <!--<li   class="scroll_li"> <a href="/search/scroll/" data-transition="slide">Shop by Brand</a></li>-->
-
-
-
-
-
-
-
-
-                <!--<li   class="scroll_li"> <a href="/search/scroll/" data-transition="slide">Shop by Subject</a></li>-->
-
-
-
-                            <div data-role="collapsible"  class="main_menu_choices openMe"   id="design_menu_choices" data-theme="a" data-icon="gear"  data-inset="true" >
-                              <h3  style="width: 100%;">
-                                    Shop by Subject
-                              </h3>
-                              <div id="designs_departments_list">
-                                <!--<div data-role="collapsible" >-->
-                                <!--<h3>New designs, Sales and Specials</h3>-->
-                                <ul data-role="listview">
-                                  <% unless @incomplete_symbiont %>
-                                      <li   class="scroll_li"> <a href="/search/scroll/all_designs" data-transition="slide">Scroll all designs</a></li>
-                                      <li data-icon="carat-r"><a href="/new_designs">New designs</a></li>
-                                      <% if @singular_item_customer == true %>
-                                          <li data-icon="carat-r"><a href="/sale_designs">Sale designs</a></li>
-                                      <% end %>
-                                  <% end %>
-                                </ul>
-                                <!--</div>-->
-
-
-                                <% @website.default_design_departments.each do |department| %>
-                                    <div data-role="collapsible"  class="department_collapsible"   id="department_collapsible_<%= department.id %>"   data-department_id="<%= department.id %>" >
-                                      <h3><%= department.Name  %></h3>
-                                      <ul data-role="listview">
-
-                                        <% design_department_categories = department.categories %>
-                                        <% if  design_department_categories.size > 1 %>
-                                            <li   class="scroll_li"> <a href="/search/scroll/<%=  department.id  %>" data-transition="slide">scroll all</a></li>
-                                        <% end %>
-
-                                        <% design_department_categories.where("web_category = 1 and visible = 1").sort_by{|a| a.Name}.each do |category| %>
-                                            <li   class="category_li"   data-category_id="<%= category.id %>"> <a href="/store/category_items/<%=  department.id  %>/<%= category.id %>" data-transition="slide"> <%= category.Name.downcase %></a></li>
-                                        <% end %>
-                                      </ul>
-                                    </div>
-                                <% end %>
-                              </div>
-                            </div>
+                                                                                                                                                                                      <% design_department_categories.where("web_category = 1 and visible = 1").sort_by{|a| a.Name}.each do |category| %>
+                                                                                                                                                                                                          <% @categories_collection.add(category) %>
+                                                                                                                                                                                                          <li   class="category_li"   data-category_id="<%= category.id %>"> <a href="/store/category_items/<%=  department.id  %>/<%= category.id %>" data-transition="slide"> <%= category.Name.downcase %></a></li>
+                                                                                                                                                                                      <% end %>
+                                                                                                                                                                    </ul>
+                                                                                                                                                  </div>
+                                                                                                                              <% end %>
+                                                                                                            </div>
+                                                                                          </div>
 
 
+                                                                                          <div data-role="collapsible"  class="main_menu_choices openMe"   id="design_menu_choices" data-theme="a" data-icon="gear"  data-inset="true" >
+                                                                                                            <h3  style="width: 100%;">Shop by Subject </h3>
+                                                                                                            <div id="designs_departments_list">
+                                                                                                                              <ul data-role="listview">
+                                                                                                                                                <% unless @incomplete_symbiont %>
+                                                                                                                                                                    <li   class="scroll_li"> <a href="/search/scroll/all_designs" data-transition="slide">Scroll all designs</a></li>
+                                                                                                                                                                    <li data-icon="carat-r"><a href="/new_designs">New designs</a></li>
+                                                                                                                                                                    <% if @singular_item_customer == true %>
+                                                                                                                                                                                        <li data-icon="carat-r"><a href="/sale_designs">Sale designs</a></li>
+                                                                                                                                                                    <% end %>
+                                                                                                                                                <% end %>
 
-          </ul>
-        </div>
+                                                                                                                                                <!--team_member_roles = project.team_memberships.select("roles.name").joins(:role).includes(:role, :member).order("roles.name").group_by(&:member_id).map do | key, memberships |-->
+                                                                                                                                                <!--{ :member => memberships.first.member, :roles => memberships.map {|membership| membership.role.name }.join(",")  }-->
+                                                                                                                                                <!--end-->
 
+                                                                                                                                                <% @categories_collection.sort_by{|a| a.Name}.each do |category| %>
+                                                                                                                                                                    <li   class="category_li"   data-category_id="<%= category.id %>"> <a href="/store/category_items/<%=  category.department_id  %>/<%= category.id %>" data-transition="slide"> <%= category.Name.downcase %></a></li>
+                                                                                                                                                <% end %>
+                                                                                                                              </ul>
 
-
-        <div data-role="collapsible"  class="department_collapsible  openMe"   id="department_collapsible_"   data-department_id="" >
-          <h3>Custom Transfers</h3>
-          <ul data-role="listview">
-                <li   class="scroll_li"> <a href="/search/scroll/" data-transition="slide">About Custom Tranfers</a></li>
-                <li   class="scroll_li"> <a href="/search/scroll/" data-transition="slide">Sublimation Price list</a></li>
-                <li   class="scroll_li"> <a href="/search/scroll/" data-transition="slide">Foil Price List</a></li>
-                <li   class="scroll_li"> <a href="/search/scroll/" data-transition="slide">Silk-Screen Price List</a></li>
-                <li   class="scroll_li"> <a href="/search/scroll/" data-transition="slide">Glitter Transfer Price List</a></li>
-
-          </ul>
-        </div>
-
-
-
-
+                                                                                                            </div>
+                                                                                          </div>
+                                                                  </ul>
+                                                </div>
+                                          </div>
+                           </ul>
+              </div>
   </div>
+
+  <!--  ##############  END Stock Transfers  ######################  -->
+  <!--  ##############  END Stock Transfers  ######################  -->
+  <!--  ##############  END Stock Transfers  ######################  -->
+  <!--  ##############  END Stock Transfers  ######################  -->
+        <div style="width: 100%;display:inline-block;">
+          <%= render "page/home_page_carousels", :feature_name =>  @website.name + "_home_featured_designs" %>
+          <%#= render "page/home_page_carousels", :feature_name =>  @website.name + "_home_featured_designs" %>
+        </div>
+<div style="width: 100%;display:inline-block;background-color: white;">
+  <%= render "page/home_page_carousels", :feature_name =>  @website.name + "_home_featured_designs_bottom" %>
+  <%#= render "page/home_page_carousels", :feature_name =>  @website.name + "_home_featured_designs" %>
 </div>
 
 
-
-
-<div data-role="collapsible"  class="main_menu_choices"   id="item_menu_choices" data-theme="b" data-icon="gear"  data-inset="true" >
-  <h3 style="width: 100%;">
-
-        T-Shirts
-
-  </h3>
-  <div id="items_departments_list">
-    <% if @singular_item_customer == true %>
-        <% @departments_to_show = @website.default_non_blank_item_departments %>
-    <% else %>
-        <% @departments_to_show = @website.default_item_departments %>
-    <% end %>
-
-    <% unless @incomplete_symbiont %>
-        <ul data-role="listview">
-          <li   class="scroll_li"> <a href="/search/scroll/all_items" data-transition="slide">Scroll all items</a></li>
-        </ul>
-    <% end %>
-
-    <% @departments_to_show.each do |department| %>
-        <div data-role="collapsible"  class="department_collapsible  openMe"   id="department_collapsible_<%= department.id %>"   data-department_id="<%= department.id %>" >
-          <h3><%= department.Name  %></h3>
-          <ul data-role="listview" >
-
-            <% item_department_categories = department.categories %>
-            <% if  item_department_categories.size > 1 %>
-                <li   class="scroll_li"> <a href="/search/scroll/<%=  department.id  %>" data-transition="slide">scroll all</a></li>
-            <% end %>
-            <% item_department_categories.where("web_category = 1 and visible = 1").sort_by{|a| a.Name}.each do |category| %>
-                <li  class="category_li"  data-category_id="<%= category.id %>"> <a href="/store/category_items/<%=  department.id  %>/<%= category.id %>" data-transition="slide"> <%= category.Name.downcase %></a></li>
-
-            <% end %>
-          </ul>
-
-        </div>
-    <% end %>
-  </div>
-</div>
-
-
-
-
-
-
-<div data-role="collapsible"  class="main_menu_choices"   id="item_menu_choices" data-theme="b" data-icon="gear"  data-inset="true" >
-  <h3 style="width: 100%;">
-
-
-        Other Products
-
-
-  </h3>
-  <div id="items_departments_list">
-    <% if @singular_item_customer == true %>
-        <% @departments_to_show = @website.default_non_blank_item_departments %>
-    <% else %>
-        <% @departments_to_show = @website.default_item_departments %>
-    <% end %>
-
-    <% unless @incomplete_symbiont %>
-        <ul data-role="listview">
-          <li   class="scroll_li"> <a href="/search/scroll/all_items" data-transition="slide">Scroll all items</a></li>
-        </ul>
-    <% end %>
-
-    <% @departments_to_show.each do |department| %>
-        <div data-role="collapsible"  class="department_collapsible  openMe"   id="department_collapsible_<%= department.id %>"   data-department_id="<%= department.id %>" >
-          <h3><%= department.Name  %></h3>
-          <ul data-role="listview" >
-
-            <% item_department_categories = department.categories %>
-            <% if  item_department_categories.size > 1 %>
-                <li   class="scroll_li"> <a href="/search/scroll/<%=  department.id  %>" data-transition="slide">scroll all</a></li>
-            <% end %>
-            <% item_department_categories.where("web_category = 1 and visible = 1").sort_by{|a| a.Name}.each do |category| %>
-                <li  class="category_li"  data-category_id="<%= category.id %>"> <a href="/store/category_items/<%=  department.id  %>/<%= category.id %>" data-transition="slide"> <%= category.Name.downcase %></a></li>
-
-            <% end %>
-          </ul>
-
-        </div>
-    <% end %>
-  </div>
-</div>
+        <!--<li   class="scroll_li"> <a href="/search/scroll/all_items" data-transition="slide">Custom T-shirts and other products</a></li>-->

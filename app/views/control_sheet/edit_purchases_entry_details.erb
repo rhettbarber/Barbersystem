@@ -1,60 +1,8 @@
- <script type="text/javascript">
-     $("btnSignUp").disabled = true;
-     $("purchases_entry_Description").onkeyup = formValidation;
-     $("purchases_entry_QuantityOnOrder").onkeyup = formValidation;
-     $("purchases_entry_detail_art_due_date").onblur  = formValidation;
-     $("purchases_entry_detail_detail_description").onblur  = formValidation;
-     $('purchases_entry_detail_machine_id').onblur = machineSelected;
-     $('purchases_entry_detail_ink_changes_charge').onblur = machineSelected;
-
-     //-----------------------------------------------------------------------------------------
-
-     function formValidation() {
-                    if (  ($("purchases_entry_Description").value.length >= 3 ) &&  ($("purchases_entry_QuantityOnOrder").value.length >= 1 ) &&  ($("purchases_entry_QuantityOnOrder").value.length >= 1 ) &&  ($("purchases_entry_detail_detail_description").value.length >= 5  ) &&  ($("purchases_entry_detail_art_due_date").value.length >= 5  ) )   {
-                                         $("btnSignUp").disabled = false;
-                                }
-                    else  {
-                                        $("btnSignUp").disabled = true;
-                      }
-       }
-     //-----------------------------------------------------------------------------------------
-
-
-
-
-     function machineSelected() {
-
-     <% @clone_item_types = CloneItemType.find :all       %>
-     var clone_item_types = new Array();
-     <% for clone_item_type in @clone_item_types -%>
-       clone_item_types.push(new Array(<%= clone_item_type.machine_id %>, '<%=h clone_item_type.name %>', <%= clone_item_type.id %>));
-     <% end -%>
-
-       machine_id = $('purchases_entry_detail_machine_id').getValue();
-       options = $('purchases_entry_detail_detail_type_id').options;
-       options.length = 0;
-       clone_item_types.each(function(clone_item_type) {
-                 if (clone_item_type[0] == machine_id) {
-                        options[options.length] = new Option(clone_item_type[1], clone_item_type[2]);
-                 }
-       });
-       if (options.length == 0) {
-                 $('clone_item_type_field').hide();
-       } else {
-                $('clone_item_type_field').show();
-       }
-     }
-
-   //-----------------------------------------------------------------------------------------
-
-
- </script>
-
 
 <div style="width: 850px;margin-left: auto;margin-right:auto;">
 
 
-<% form_for(@purchases_entry_detail, :url => { :controller => "control_sheet", :action => "update_purchases_entry_details" }   ) do |f| %>
+<%= form_for(@purchases_entry_detail, :url => { :controller => "control_sheet", :action => "update_purchases_entry_details" }   ) do |f| %>
 <%=  hidden_field_tag "purchase_id", @purchase.id    %>
 <%=  hidden_field_tag "purchases_entry_id", @purchases_entry.id if @purchases_entry   %>
 
@@ -146,3 +94,56 @@
 
 
 </div>
+
+
+<script type="text/javascript">
+    $("btnSignUp").disabled = true;
+    $("purchases_entry_Description").onkeyup = formValidation;
+    $("purchases_entry_QuantityOnOrder").onkeyup = formValidation;
+    $("purchases_entry_detail_art_due_date").onblur  = formValidation;
+    $("purchases_entry_detail_detail_description").onblur  = formValidation;
+    $('purchases_entry_detail_machine_id').onblur = machineSelected;
+    $('purchases_entry_detail_ink_changes_charge').onblur = machineSelected;
+
+    //-----------------------------------------------------------------------------------------
+
+    function formValidation() {
+        if (  ($("purchases_entry_Description").value.length >= 3 ) &&  ($("purchases_entry_QuantityOnOrder").value.length >= 1 ) &&  ($("purchases_entry_QuantityOnOrder").value.length >= 1 ) &&  ($("purchases_entry_detail_detail_description").value.length >= 5  ) &&  ($("purchases_entry_detail_art_due_date").value.length >= 5  ) )   {
+            $("btnSignUp").disabled = false;
+        }
+        else  {
+            $("btnSignUp").disabled = true;
+        }
+    }
+    //-----------------------------------------------------------------------------------------
+
+
+
+
+    function machineSelected() {
+
+        <% @clone_item_types = CloneItemType.find :all       %>
+        var clone_item_types = new Array();
+        <% for clone_item_type in @clone_item_types -%>
+        clone_item_types.push(new Array(<%= clone_item_type.machine_id %>, '<%=h clone_item_type.name %>', <%= clone_item_type.id %>));
+        <% end -%>
+
+        machine_id = $('purchases_entry_detail_machine_id').getValue();
+        options = $('purchases_entry_detail_detail_type_id').options;
+        options.length = 0;
+        clone_item_types.each(function(clone_item_type) {
+            if (clone_item_type[0] == machine_id) {
+                options[options.length] = new Option(clone_item_type[1], clone_item_type[2]);
+            }
+        });
+        if (options.length == 0) {
+            $('clone_item_type_field').hide();
+        } else {
+            $('clone_item_type_field').show();
+        }
+    }
+
+    //-----------------------------------------------------------------------------------------
+
+
+</script>

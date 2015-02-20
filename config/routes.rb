@@ -1,6 +1,17 @@
 #require 'website_routing_constraint.rb'
 ThreeTwoThree::Application.routes.draw do
 
+  match "search/search_type_name/:search_type_name/query/:query", :controller => "search", :action => "index"
+
+
+
+
+  match "control_sheet/index", :controller => 'control_sheet', :action => 'index'
+  match "control_sheet/initiate_index", :controller => 'control_sheet', :action => 'index'
+  match "control_sheet/control_js", :controller => 'control_sheet', :action => 'control_js'
+  match "control_panels", :controller => 'control_panels', :action => 'index'
+  match "control_sheet/work_order_details", :controller => 'control_sheet', :action => 'work_order_details'
+  match "control_sheet/edit_purchases_entry_details", :controller => 'control_sheet', :action => 'edit_purchases_entry_details'
 
 
   resources :catalogs
@@ -77,6 +88,8 @@ ThreeTwoThree::Application.routes.draw do
   ###################################################   BEGIN  WEBSITE ROUTING CONSTRAINT
   ###################################################   BEGIN  WEBSITE ROUTING CONSTRAINT
   constraints(WebsiteRoutingConstraint) do
+
+
 
     match "catalog", :controller => 'item_reports', :action => 'designs_by_department'
 
@@ -255,6 +268,7 @@ ThreeTwoThree::Application.routes.draw do
 
   match "search/scroll/:department_id/:page", :controller => "search", :action => "scroll"
   match "search/scroll/:department_id", :controller => "search", :action => "scroll"
+
   match "search/scroll", :controller => "search", :action => "scroll"
   match 'store/category_items_menu' => 'store#category_items_menu'
   match 'store/department_category_list/:department_id/item_type/:item_type/show/:show' => 'store#department_category_list'
@@ -276,6 +290,7 @@ ThreeTwoThree::Application.routes.draw do
   match 'store/jquery_data' => 'store#jquery_data'
   match 'store/design' => 'store#design'
   match 'store/merchandise' => 'store#merchandise'
+  match 'store/tshirtsinabox_redirect_choices' => 'store#tshirtsinabox_redirect_choices'
   match 'store/sublimation_explaination' => 'store#sublimation_explaination'
   match 'store/modal' => 'store#modal'
   match 'store/grid' => 'store#grid'
@@ -323,6 +338,7 @@ ThreeTwoThree::Application.routes.draw do
   ############################################################################################
   ############################################################################################
   get "account/index"
+  get "account/join"
   get "account/login"
   get "account/logout"
   get "account/send_message_to_selected"

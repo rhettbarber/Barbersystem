@@ -2,7 +2,7 @@
 
 
 
-        <%  @features = Feature.where("name = ?",feature_name ).all  %>
+        <%  @features = Feature.where("name = ?",feature_name )  %>
 
 
         <div class="home-page-carousel">
@@ -16,8 +16,8 @@
                           }
 
                           .carousel_link_container {
+                                  max-width:240px;
                                   min-height: 40px;
-                                width:100%;
                                   text-align: center;
                           }
 
@@ -27,32 +27,25 @@
                                 display: block;
                                 margin-left: auto;
                                 margin-right:auto;
+                                max-height: 230px;
+                                max-width: 230px;
                             }
 
                             #featured-designs-carousel {
                                 background-image: url(http://cdn.dixieoutfitters.com/images/backgrounds_repeating/light-plaid.jpg);
-                                text-align: center;
                                 /*background-size: 100%;*/
                             }
 
 
                        .featured-designs-carousel-image-container {
-                           width: 100%; margin-left:auto;margin-right:auto; vertical-align: middle; text-align: center;;
+                           width: 230px; height: 230px; margin-left:auto;margin-right:auto; vertical-align: middle; text-align: center;display: table-cell;
                        }
 
                         </style>
 
 
 
-                                       <% if feature_name  == "barber_store_home_featured_designs"  %>
-                                                <div style="width:100%;height:40px;text-align: center;background-color: black;color:white;font-size:26px;font-family: initial;">
-                                                            FEATURED STOCK TRANSFERS
-                                                </div>
-                                        <% else %>
-                                                  <div style="width:100%;height:20px;text-align: center;background-color: black;color:white;font-size:26px;font-family: initial;">
-                                                  </div>
-                                        <% end %>
-                                         <!--<img alt=""  src="http://cdn.dixieoutfitters.com/images/features/headers/<%= feature_name %>.jpg" />   <br>-->
+                         <img alt="" class="float_100" src="http://cdn.dixieoutfitters.com/images/features/headers/<%= feature_name %>.jpg" />   <br>
 
 
 
@@ -69,10 +62,10 @@
                             $(document).ready(function(){
 
                                 $('#<%= feature_name %>').slick({
-//                                    lazyLoad: 'ondemand',
+                        //            lazyLoad: 'ondemand',
                                     autoplay: true,
                                     dots: true,
-                                    autoplaySpeed: 2000,
+                                    autoplaySpeed: 5000,
                                     speed: 300,
                                     slidesToShow: 3,
                                     slidesToScroll: 1,
@@ -82,7 +75,7 @@
                                         {
                                             breakpoint: 1024,
                                             settings: {
-                                                slidesToShow: 2,
+                                                slidesToShow: 3,
                                                 slidesToScroll: 1,
                                                 infinite: true,
                                                 dots: true

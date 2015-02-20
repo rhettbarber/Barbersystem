@@ -67,7 +67,7 @@
                             <% else %>
                                                       <%  if  @required_form_elements.include?('button_choose') %>
                                                                                         <!--   singular item or item without combination shown   -->  <!--   singular item or item without combination shown   -->  <!--   singular item or item without combination shown   -->  <!--   singular item or item without combination shown   -->  <!--   singular item or item without combination shown   -->
-                                                                                        <%=  submit_tag 'Choose', :class => "choose_button" , data: { role: "button", theme:'b' }    if  @required_form_elements.include?('button_choose')     %>
+                                                                                        <%=  submit_tag 'Add to Cart', :class => "choose_button" , data: { role: "button", theme:'b' }    if  @required_form_elements.include?('button_choose')     %>
                                                      <% end %>
                             <% end %>
 

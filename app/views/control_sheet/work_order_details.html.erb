@@ -64,7 +64,7 @@
                                                                         <div style="height:50px;background-color: #d3d3d3;width:130px;float:left;">Ink Changes Charge:<br><%=  number_to_currency purchases_entry.ink_changes_charge    %></div>
                                                                          <div style="height:50px;background-color: white;width:130px;float:left;">  Piece Price:<br>  <%=    number_to_currency( purchases_entry.per_piece)   %></div>
                                                                         <div style="height:50px;background-color: #d3d3d3;width:90px;float:left;">TotalPrice: <br><%=    number_to_currency(  purchases_entry.Price )   %></div>
-                                                                          <div style="height:50px;background-color: white;width:104px;float:left;"><% if   purchases_entry.rush_charge > 0    %> <span style="color: red;"> RUSH! <%= number_to_currency  purchases_entry.rush_charge   %>  </span><% end %></div>
+                                                                          <div style="height:50px;background-color: white;width:104px;float:left;"><% if   purchases_entry.rush_charge.to_i  > 0    %> <span style="color: red;"> RUSH! <%= number_to_currency  purchases_entry.rush_charge   %>  </span><% end %></div>
                                                                           <div style="height:50px;background-color: white;width:100px;float:left;"> <%  if  purchases_entry.art_due_date %>Art Due:<br>  <%=     purchases_entry.art_due_date.to_date   %>  <% end %></div>
                                                                           <div style="height:50px;background-color: #d3d3d3;width:100px;float:left;"><%  if  purchases_entry.ship_due_date %>Ship Due: <br> <%=     purchases_entry.ship_due_date.to_date   %><% end %></div>
                                                                 </td>
@@ -102,10 +102,12 @@
 
                                                                                    </div>
                                                                                     <div style="height:240px;background-color: #dda0dd;width:200px;float:left;text-align: center;">
-                                                                                                              <%   if purchases_entry.clone_item_type       %>
-                                                                                                                                    <%= image_tag( '/images/item_thumbnails/' + Item.find( purchases_entry.clone_item_type.original_item_id).PictureName,:size => "200x200" )  %>
-                                                                                                                                    <div style="height: 40px;background-color: black;color:white;font-size: 16px;"> <%=   purchases_entry.clone_item_type.name  %></div>
-                                                                                                                 <% end  %>
+                                                                                               <% Item.unscoped do %>
+                                                                                                                          <%   if purchases_entry.clone_item_type       %>
+                                                                                                                                                <%= image_tag( '/images/item_thumbnails/' + Item.find( purchases_entry.clone_item_type.original_item_id).PictureName,:size => "200x200" )  %>
+                                                                                                                                                <div style="height: 40px;background-color: black;color:white;font-size: 16px;"> <%=   purchases_entry.clone_item_type.name  %></div>
+                                                                                                                             <% end  %>
+                                                                                                <% end  %>
                                                                                      </div>
                                                                                     <div style="width:450px;height: 240px;float:left;">
                                                                                                                    <%= purchases_entry.detail_description  %>
