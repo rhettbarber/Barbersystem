@@ -80,7 +80,7 @@ params: <%=  params.inspect  %> <br />
 
 
 
- <%  form_for :commission_customer  , :url => "commission/report" do |f|  %>
+ <%=  form_for :commission_customer  , :url => "/commission/report" do |f|  %>
 
               <%
                @timeframes  = [
@@ -283,7 +283,7 @@ params: <%=  params.inspect  %> <br />
                                                 <td><%=h purchases_entry.Time  %>
                                                 </td>
                                                 <td><%=h purchases_entry.id %><br /><%= pe_sales_first_id   if pe_sales.first  %></td>
-                                                <td><%= image_tag "/images/item_thumbnails/" +  purchases_entry.PictureName, :size => '140x140' %></td>
+                                                <td><%= image_tag "/images/item_thumbnails/" +  purchases_entry.PictureName, :style => 'max-height:120px;max-width:120px;' %></td>
                                                 <td><%=h purchases_entry.ItemLookupCode %></td>
                                                 <td><%=h purchases_entry.Description %>
 
@@ -314,17 +314,17 @@ params: <%=  params.inspect  %> <br />
                                                            <% if @opposite_item  %>
                                                                                       <% if @pending_transaction   %>
                                                                                                          <%  @pending_total_price =    purchases_entry.Price + @opposite_item.Price *  both_discounts_multiplier   %>
-                                                                                                       $<%= number_with_precision(  @pending_total_price , 2 )      %>
+                                                                                                       $<%= number_with_precision(  @pending_total_price ,  :precision =>  2 )      %>
                                                                                                         <% @pending_extended_price=   @pending_total_price * purchases_entry.QuantityRTD.to_i    %>
                                                                                       <% else %>
                                                                                                         <%  if  purchases_entry.commission_paid == 1 %>
                                                                                                                                      <%  @paid_total_price =    purchases_entry.Price + @opposite_item.Price    *  both_discounts_multiplier   %>
-                                                                                                                                   $<%= number_with_precision(  @paid_total_price , 2 )      %>
+                                                                                                                                   $<%= number_with_precision(  @paid_total_price ,  :precision =>  2 )      %>
                                                                                                                                         <% @paid_extended_price=   @paid_total_price * purchases_entry.QuantityRTD.to_i    %>
                                                                                                                                          <% @purchases_entries_to_mark_unpaid.add?( purchases_entry.purchases_entry_id  )   %>
                                                                                                        <% else %>
                                                                                                                                      <%  @unpaid_total_price =    purchases_entry.Price + @opposite_item.Price   *  both_discounts_multiplier    %>
-                                                                                                                                    $<%= number_with_precision(  @unpaid_total_price , 2 )      %>
+                                                                                                                                    $<%= number_with_precision(  @unpaid_total_price ,  :precision =>  2 )      %>
                                                                                                                                         <% @unpaid_extended_price=   @unpaid_total_price * purchases_entry.QuantityRTD.to_i    %>
                                                                                                                                          <% @purchases_entries_to_pay.add?( purchases_entry.purchases_entry_id  )   %>
                                                                                                                                          <% @purchases_entries_to_pay.add?( @opposite_item.id  )   %>
@@ -335,17 +335,17 @@ params: <%=  params.inspect  %> <br />
                                                            <% else %>
                                                                                         <% if @pending_transaction  %>
                                                                                                         <%   @pending_total_price =    purchases_entry.Price  *  both_discounts_multiplier     %>
-                                                                                                        $<%= number_with_precision(  @pending_total_price , 2 )      %>
+                                                                                                        $<%= number_with_precision(  @pending_total_price ,  :precision =>  2 )      %>
                                                                                                           <% @pending_extended_price=   @pending_total_price * purchases_entry.QuantityRTD.to_i    %>
                                                                                        <% else %>
                                                                                                         <%  if  purchases_entry.commission_paid == 1 %>
                                                                                                                     <%   @paid_total_price =    purchases_entry.Price  *  both_discounts_multiplier     %>
-                                                                                                                    $<%= number_with_precision(  @paid_total_price , 2 )      %>
+                                                                                                                    $<%= number_with_precision(  @paid_total_price ,  :precision =>  2 )      %>
                                                                                                                     <% @paid_extended_price=   @paid_total_price * purchases_entry.QuantityRTD.to_i    %>
                                                                                                                         <% @purchases_entries_to_mark_unpaid.add?( purchases_entry.purchases_entry_id  )   %>
                                                                                                        <% else  %>
                                                                                                                     <%   @unpaid_total_price =    purchases_entry.Price   *  both_discounts_multiplier    %>
-                                                                                                                     <span class="unpaid_total_price"> $<%= number_with_precision(  @unpaid_total_price , 2 )      %> </span>
+                                                                                                                     <span class="unpaid_total_price"> $<%= number_with_precision(  @unpaid_total_price , :precision => 2 )      %> </span>
                                                                                                                     <% @unpaid_extended_price=   @unpaid_total_price * purchases_entry.QuantityRTD.to_i    %>
                                                                                                                      <% @purchases_entries_to_pay.add?( purchases_entry.purchases_entry_id  )   %>
                                                                                                         <% end %>
@@ -358,7 +358,7 @@ params: <%=  params.inspect  %> <br />
 
                                                 <td>
                                                   <span class="actual_extended_price"><% @actual_extended_price =    @paid_extended_price + @pending_extended_price +  @unpaid_extended_price       %> </span>
-                                                  $<%= number_with_precision(  @actual_extended_price    , 2 )      %>
+                                                  $<%= number_with_precision(  @actual_extended_price    ,  :precision =>  2 )      %>
                                                 </td>
 
                                                 <% if @opposite_item  %>
@@ -387,7 +387,7 @@ params: <%=  params.inspect  %> <br />
 
 
                                                 <td>        <% @actual_commission_amount =   @actual_extended_price  *   @commissioned_customer_percentage    %>
-                                                                 <%= @actual_commission_amount   %>
+                                                                 <%= number_with_precision( @actual_commission_amount    ,  :precision =>  4 )     %>
                                                 </td>
 
                       </tr>
@@ -602,7 +602,7 @@ params: <%=  params.inspect  %> <br />
 
 
 
-                                               <td> <%=   @summarized_hash_array_quantity[  sha[0] ]   %> </td>
+                                               <td> <%=   number_with_precision(  @summarized_hash_array_quantity[  sha[0] ] , :precision => 2 )  %> </td>
 
 
                                                <td>  <%=  sha[1]   %></td>
@@ -611,7 +611,7 @@ params: <%=  params.inspect  %> <br />
                                     <% @quantity_sum_total  += @summarized_hash_array_quantity[  sha[0] ]  %>
                 <% end if @summarized_hash_array  %>
                 <tr><td style="background-color: lightgray;height:1px;" colspan="3">.</td></tr>
-               <tr><td><span style="color:#730000;"> Sum Total (Including Pending): </span> </td><td> <span style="color:#730000;"><%=  @quantity_sum_total   %> </span></td><td> <span style="color:#730000;"><%=  @sum_total   %> </span></td></tr>
+               <tr><td><span style="color:#730000;"> Sum Total (Including Pending): </span> </td><td> <span style="color:#730000;"><%=  @quantity_sum_total   %> </span></td><td> <span style="color:#730000;"><%=  number_with_precision( @sum_total     ,  :precision =>  2 )     %> </span></td></tr>
 </table>
 
 <br>  <br>

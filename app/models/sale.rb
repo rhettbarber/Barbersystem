@@ -4,8 +4,6 @@ class Sale < ActiveRecord::Base
   belongs_to :purchases_entries_for_commission
 
 
-
-
   has_one :sales_by_affiliate
 
   belongs_to :purchase

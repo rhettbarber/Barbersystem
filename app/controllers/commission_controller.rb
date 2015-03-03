@@ -80,6 +80,10 @@ before_filter :redirect_unless_manager, :except => [:load_variables, :report , :
                                     @the_month =    params[:date][:month]
                                     @parsed_time_first_day = Time.parse(  @the_month +  "/1/" +  @the_year     )
                                     @last_day_of_month =     @parsed_time_first_day.end_of_month.day.to_s
+
+                                    xxxxxxxx
+                                    #http://stackoverflow.com/questions/800118/ruby-time-parse-gives-me-out-of-range-error
+
                                     @parsed_time_last_day = Time.parse(  @the_month +  "/" + @last_day_of_month + "/" +  @the_year     )
                                     logger.warn "@the_year: " + @the_year.to_s
                                     logger.warn "@the_month: " + @the_month.to_s

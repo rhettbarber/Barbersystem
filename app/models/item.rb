@@ -30,6 +30,7 @@ belongs_to :category
 belongs_to :quantity_discount
 has_one :customer_item
 has_many :purchases_entries
+has_many :purchases_for_commission
 
 attr_accessible :category_id    , :Notes , :ExtendedDescription, :PictureName, :Price, :PriceA, :PriceB, :PriceC, :Cost, :shipcost, :imagecost, :laborcost, :Notes
 cattr_accessor :commission_customer_id
