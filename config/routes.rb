@@ -1,6 +1,8 @@
 #require 'website_routing_constraint.rb'
 ThreeTwoThree::Application.routes.draw do
 
+#scope(:path => '/store') do
+
   match "search/search_type_name/:search_type_name/query/:query", :controller => "search", :action => "index"
 
 
@@ -471,13 +473,17 @@ ThreeTwoThree::Application.routes.draw do
 
 
 
-  root :to => 'page#show_page_on_index', :page_id  => 'new-home'
+  root :to => 'store#category_items'
 
-  # match "*" , :controller => 'page', :action => 'show_page_on_index'  ,  :page_id  => 'new-home'
+  # match "/" , :controller => 'store', :action => 'index' 
+  
+# match "*" , :controller => 'page', :action => 'show_page_on_index'  ,  :page_id  => 'new-home'
 
   # match "*" , 'page/show_page_on_index/new-home'
 
   # match '*a', :to => 'page#show_page_on_index'
+
+#end
 
 end
 
