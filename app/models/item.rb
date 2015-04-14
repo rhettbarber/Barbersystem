@@ -87,7 +87,7 @@ end
 
 
   def self.string_overriden_quantity_discount_id( transfer_type_string )
-     if @@NOT_PERMANENT_OR_VOLUME_DISCOUNTABLE_DEPARTMENT_IDS.include?( item.department_id )
+     if @@NOT_PERMANENT_OR_VOLUME_DISCOUNTABLE_DEPARTMENT_IDS.include?( self.department_id )
             if transfer_type_string.include? 'sublim9'
               return  22651
             elsif transfer_type_string.include? 'sublim12'
