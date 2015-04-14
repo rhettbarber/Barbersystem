@@ -5,4 +5,5 @@
 
 
 <%= link_to  'show'  , "/features/"  + @feature.id.to_s + "/show/" + params[:item_id]  , "data-role" => "button"  %>
+<%= link_to 'Destroy',  "/features/" + @feature.id.to_s +  "/destroy/" +   params[:item_id]  , "data-role" => "button" , data: { confirm: 'Are you sure?' }   %>
 <%= link_to  "back" , "/features/"  + params[:item_id]  , "data-role" => "button"   %>

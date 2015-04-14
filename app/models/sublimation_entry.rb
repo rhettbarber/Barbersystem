@@ -169,7 +169,9 @@ end
 
 
 def all_over_root_filename
-                   return       self.ItemLookupCode.gsub(/[^0-9\-]/, '')
+                    return       self.ItemLookupCode.gsub(/[^0-9\-]/, '')
+                   # return       self.ItemLookupCode.gsub(/[\x00\/\\:\*\?\"<>\|]/, '-')
+
 end
 
 
@@ -179,7 +181,9 @@ end
  end
 
 
-
+def itemlookupcode_cleaned_filename
+         return       self.ItemLookupCode.gsub(/[\x00\/\\:\*\?\"<>\|]/, '-')
+end
 
 def comment_custom_filename
                   sublimation_width_string  =    self.Comment.split("_").second.gsub(".jpg","").gsub(".png", "")
@@ -217,11 +221,11 @@ end
 
 
 def hot_folder_url_front(iteration_number=1)
-             return    @@OUTPUT_LOCATION +       self.purchase_id.to_s   + "-" + self.id.to_s  + "-" +    self.all_over_root_filename      + "-0-" + iteration_number.to_i.to_s  + ".jpg"
+             return    @@OUTPUT_LOCATION +       self.purchase_id.to_s   + "-" + self.id.to_s  + "-" + iteration_number.to_i.to_s  + '-' +   self.itemlookupcode_cleaned_filename      + "-front.jpg"
 end
 
 def hot_folder_url_back(iteration_number=1)
-             return    @@OUTPUT_LOCATION +      self.purchase_id.to_s   + "-" + self.id.to_s  + "-" +    self.all_over_root_filename     + "-1-" + iteration_number.to_i.to_s  + ".jpg"
+             return    @@OUTPUT_LOCATION +      self.purchase_id.to_s   + "-" + self.id.to_s  + "-"  + iteration_number.to_i.to_s  + '-' +   self.itemlookupcode_cleaned_filename     + "-back.jpg"
 end
 
 

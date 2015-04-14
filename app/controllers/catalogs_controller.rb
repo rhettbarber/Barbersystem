@@ -29,6 +29,43 @@ class CatalogsController < ApplicationController
 
 
 
+
+
+  def website_design_departments_catalog
+    # if  params[:department_ids]
+    #                @departments = Department.find(:all, :conditions => ["department_id in (?)", params[:department_ids]   ])
+    # else
+    #               # @departments = @website.default_design_departments
+    #               #  @departments = Department.limit(2).order("departments.Name ASC").where( "id in (?)",  @website.default_design_department_ids.split(/,/)   ).to_set
+    # end
+    # @original_items = Item.limit(400).joins(:department, :category, :category_class).order("departments.Name ASC,  categories.Name ASC").where( "items.department_id in (?)",  @website.default_design_department_ids.split(/,/)   ).all
+
+
+    if params[:type] == "merchandise"
+                  @original_items = Item.joins(:department, :category, :category_class).order("departments.Name ASC,  categories.Name ASC").where( "category_classes.search_results_set in (?) and departments.id not in (?) and categories.id not in (?)",    [ "merchandise"  ] ,  [ "42", "44","45","59","35", "28", "39", "37"  ] ,  [ "218", "219","220", "234",  "478", "239", "497","498", "628","629", "677", "929","926","578", "579" ,"595","576" ]    ).all
+      else
+                 @original_items = Item.joins(:department, :category, :category_class).order("departments.Name ASC,  categories.Name ASC").where( "items.department_id in (?)",  @website.default_design_department_ids.split(/,/)   ).all
+     end
+
+
+
+    @items = Set.new
+    already_seen_item_picturenames = Set.new
+    @original_items.each do |item|
+                if already_seen_item_picturenames.include?( item.PictureName.to_s  )
+                           logger.debug "SKIPPING ITEM because already used this picturname: " +  item.PictureName.to_s
+                else
+                      @items.add( item) if item.department and item.category  and item.category_class
+                      already_seen_item_picturenames.add(item.PictureName.to_s)
+                end
+    end
+
+  end
+
+
+
+
+
   def index
     @catalogs = Catalog.all
 

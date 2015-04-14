@@ -1,0 +1,138 @@
+     <style type="text/css">
+
+         .gallery {
+             /*border: #0000ff 1px solid;*/
+             display:table;
+             width:2550px;
+             height:3080px;
+             /*background-color: yellow;*/
+             overflow: hidden;
+         }
+
+         .items_category_container {
+             border: #0000ff 1px solid;
+         }
+
+         .item_reports_categories_footer{
+             display:inline-block;
+             background-color:#add8e6;
+             font-family:"Arial";
+             text-align: center;
+             font-size:50px;
+             width:2550px;
+             height:170px;
+         }
+
+        .items_container {
+              height: 2910px;
+            overflow: hidden;
+            display:table;
+        }
+
+         .item_specsheet_box {
+             page-break-inside: avoid;
+             display:inline-block;
+             width:500px;
+             height:530px;
+             font-family:"Arial";
+             text-align: center;
+             font-size:50px;;
+             overflow: hidden;
+         }
+
+         .item_specsheet_box img {
+             width:450px;
+             height:auto;
+             max-height:450px;
+         }
+
+       .categories_container {
+       }
+
+       .item_reports_categories_footer_categories{
+           width:2400px;
+           float: left;
+           height:170px;
+       }
+
+         .item_reports_categories_footer_pagenumber{
+             width:150px;
+             float: right;
+             font-family:"Arial Black";
+             text-align: center;
+             font-size:100px;
+             height:170px;
+         }
+
+     </style>
+
+
+
+  <div class="categories_container">
+                    <div class="gallery">  <%=  image_tag( "/images/automated-catalog/front-cover.jpg") %> </div>
+                    <div class="gallery">  <%=  image_tag( "/images/automated-catalog/inside-cover.jpg") %> </div>
+                     <% page_number  = 0 %>
+                    <%   @items.each_slice(30) do |slice|  %>
+                                            <% @categories_this_page = Set.new   %>
+                                            <% page_number  += 1  %>
+                                            <div class="gallery">
+                                                                                          <div class="items_container">
+                                                                                                                  <% slice.each do |item|   %>
+                                                                                                                                          <div class="item_specsheet_box">
+                                                                                                                                                    <% cat_array = [] %>
+                                                                                                                                                    <% @categories_this_page.add(  cat_array << [ item.department.Name.capitalize,  item.category.Name.capitalize ]  )    %>
+                                                                                                                                                    <%=  image_tag( item.image_url( item.department, 'item_thumbnails/','x'  ) ) %>
+                                                                                                                                                    <%=  item.ItemLookupCode   %> <%#=  item.department_id   %><%#=  item.category_id   %><br />
+                                                                                                                                          </div>
+                                                                                                                  <% end %>
+                                                                                          </div>
+                                                                                          <div class="item_reports_categories_footer">
+                                                                                                                        <div class="item_reports_categories_footer_categories">
+                                                                                                                                                    <% already_seen_departments = Set.new %>
+                                                                                                                                                    <% iterations = 0.0 %>
+
+                                                                                                                                                    <%  @categories_this_page.each do  |this_pages_category|  %>
+
+                                                                                                                                                                               <%  if this_pages_category %>
+
+
+                                                                                                                                                                                                  <% this_pages_category.each do |tpc| %>
+                                                                                                                                                                                                                                                 <% the_department =  tpc[0] %>
+                                                                                                                                                                                                                                                 <% the_category =   tpc[1] %>
+                                                                                                                                                                                                                                                <% if already_seen_departments.include?(the_department)   %>
+
+                                                                                                                                                                                                                                                                          , &nbsp;
+
+                                                                                                                                                                                                                                                                       <%=  the_category.gsub( the_department , "")   %>
+                                                                                                                                                                                                                                                 <% else %>
+                                                                                                                                                                                                                                                                        &nbsp;  &nbsp;  &nbsp;
+                                                                                                                                                                                                                                                                       <% already_seen_departments.add( the_department ) %>
+
+                                                                                                                                                                                                                                                                       <%    the_department_name_to_gsub =   "-"  + the_department   %>
+                                                                                                                                                                                                                                                                       <%    the_category_name_to_gsub =   "-"  + the_category   %>
+
+                                                                                                                                                                                                                                                                       <strong><%=  the_department  %></strong> <%=  the_category_name_to_gsub.gsub( the_department_name_to_gsub , "" )  %>
+                                                                                                                                                                                                                                                 <% end %>
+
+
+                                                                                                                                                                                                  <% end %>
+
+                                                                                                                                                                            <% end %>
+
+                                                                                                                                                    <% end %>
+                                                                                                                             </div>
+                                                                                                                            <div class="item_reports_categories_footer_pagenumber">
+                                                                                                                                                <%= page_number  %>
+                                                                                                                            </div>
+
+
+                                                                                            </div>
+                                            </div>
+                    <% end %>
+                    <div class="gallery">  <%=  image_tag( "/images/automated-catalog/custom-products.jpg") %> </div>
+                    <div class="gallery">  <%=  image_tag( "/images/automated-catalog/back-cover.jpg") %> </div>
+  </div>
+
+
+
+

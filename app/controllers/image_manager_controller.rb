@@ -144,10 +144,10 @@ def all_over_ts_commands
                                                                   quantity_on_order.times do |this_time|
 
                                                                                             iteration_number += 1
-                                                                                            @montage_string_front  = "convert  -border 0 -geometry " +   sublimation_width   + "x  -density 200 " + pe.file_url_front + " -fill white  -undercolor black -gravity South  -splice 0x80 -annotate +0+10 " + pe.label + " " +     pe.hot_folder_url_front(iteration_number)
+                                                                                            @montage_string_front  = "convert  -border 0 -geometry " +   sublimation_width   + "x  -density 200 " + pe.file_url_front + " -fill white  -undercolor black -gravity South  -splice 0x80 -annotate +0+10 " + pe.label + "   -gravity East -splice 25x0 "  +     pe.hot_folder_url_front(iteration_number)
                                                                                             @all_over_ts_montage <<  @montage_string_front
 
-                                                                                            @montage_string_back  = "convert  -border 0 -geometry " +   sublimation_width   + "x  -density 200 " + pe.file_url_back + " -fill white  -undercolor black -gravity South  -splice 0x80 -annotate +0+10 " + pe.label + " " +     pe.hot_folder_url_back(iteration_number)
+                                                                                            @montage_string_back  = "convert  -border 0 -geometry " +   sublimation_width   + "x  -density 200 " + pe.file_url_back + " -fill white  -undercolor black -gravity South  -splice 0x80 -annotate +0+10 " + pe.label + "   -gravity East -splice 25x0 " +     pe.hot_folder_url_back(iteration_number)
                                                                                             @all_over_ts_montage <<   @montage_string_back
                                                                   end
                                                 else
@@ -163,7 +163,7 @@ end
 
 
     def index
-                @sublimation_entries = SublimationEntry.limit(50).order("id desc").select("purchase_id, FirstName,LastName, Company").all
+                @sublimation_entries = SublimationEntry.limit( 20 ).order("id desc").select("purchase_id, FirstName,LastName, Company").all
     end
 
 

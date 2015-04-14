@@ -14,11 +14,12 @@ ThreeTwoThree::Application.routes.draw do
   match "control_sheet/edit_purchases_entry_details", :controller => 'control_sheet', :action => 'edit_purchases_entry_details'
 
 
+
+  match '/catalogs/website_design_departments_catalog' , :controller => 'catalogs', :action => 'website_design_departments_catalog'
   resources :catalogs
   match '/catalogs/show_catalog/:id' , :controller => 'catalogs', :action => 'show_catalog'
 
-
-  match '/custom' => redirect(  'http://barberandcompany.espwebsite.com'), :as => :custom
+  # match '/custom' => redirect(  'http://barberandcompany.espwebsite.com'), :as => :custom
 
   match '/image_manager/missing_psd_images' , :controller => 'image_manager', :action => 'missing_psd_images'
   match '/image_manager/missing_sublimation_images' , :controller => 'image_manager', :action => 'missing_sublimation_images'

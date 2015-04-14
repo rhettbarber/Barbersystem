@@ -28,21 +28,22 @@
                       <li> <%= link_to  "Show all features" , "/features" %></li>
   <% end %>
   <% @features.each do |feature| %>
-
-                      <% if feature.image_name and  feature.image_name  != ""  %>
+        <%   if feature.items and feature.items.first  %>
+                  <% if feature.image_name and  feature.image_name  != ""  %>
                                                  <% the_image_name = feature.image_name  %>
                       <% else %>
-                                                <% the_image_name = "/images/item_thumbnails/" +  feature.items.first.PictureName  %>
+                                                <% the_image_name = "/images/item_thumbnails/" +  feature.items.first.PictureName  if feature.items and feature.items.first %>
                       <% end %>
 
 
                       <% if admin? %>
                                                           <li>
-                                                                            <a href="<%= feature.list_url.to_s %>">
+
+                                                                            <a href="<%="/features/" +  feature.id.to_s +  "/edit/" +   feature.items.first.id.to_s  %>">
                                                                                               <%= image_tag  the_image_name  %>
                                                                                               <h2><%= feature.description %></h2>
                                                                             </a>
-                                                                            <%= link_to 'Edit', "/features/" +  feature.id.to_s +  "/edit/" +   feature.items.first.id.to_s   , "data-icon" => "gear"   %>
+                                                                            <%= link_to 'Edit', "/features/" +  feature.id.to_s +  "/edit/" +   feature.items.first.id.to_s   , "data-icon" => "gear"    %>
                                                           </li>
                       <% else %>
                                                           <li>
@@ -52,5 +53,6 @@
                                                             </a>
                                                           </li>
                       <% end %>
+        <% end %>
   <% end %>
 </ul>
