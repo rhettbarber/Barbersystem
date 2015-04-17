@@ -1,6 +1,7 @@
 <div class="checkout_review_options">
   <%= link_to( "Complete Order" , {:controller => 'purchases', :action => 'complete_order'} ,:class => 'remove_while_waiting' , :onclick => "$('#please_wait_message').show();$('.ui-btn, .remove_while_waiting').hide();" ,:data => {:theme => "e",  :role => "button" ,:ajax=> "false"} )   %>
-  <div id="please_wait_message" style="width: 100%;display:none;text-align:center;"><br><img  src="/images/buttons/please_wait.gif" alt="" />  </div>
+  <div id="please_wait_message" style="width: 100%;display:none;text-align:center;"><br><img  src="<%= asset_path '/images/buttons/please_wait.gif' %>" alt="" />  </div>
   <%= link_to( "Back to Cart" , {:controller => 'cart' }  ,:class => 'remove_while_waiting' ,:data => {:theme => "c",  :role => "button" ,:ajax=> "false"} )    %>
   <%= link_to( "Cancel Order" , {:controller => 'purchases', :action => 'cancel_order'} ,:class => 'remove_while_waiting' ,:data => {:theme => "c",  :role => "button" ,:ajax=> "false"} )   %>
 </div>
+

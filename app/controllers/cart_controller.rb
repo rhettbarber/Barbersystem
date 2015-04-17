@@ -406,7 +406,7 @@ end
     logger.debug "referring_action: "		+ referring_action
     if  referring_action.include?('cart')
       flash[:notice] = 'Your item was added, please complete it by choosing a design.' unless params[:on_hold]
-      flash[:notice] = 'Your item was added, please complete it by clicking "Complete Combination" and choosing a design, or you may add another item on hold.' if params[:on_hold]
+      flash[:notice] = 'Your item was added, please complete it by clicking Choose Design and choosing a design, or you may add another item on hold.' if params[:on_hold]
       redirect_to  :controller => 'cart',  :action => 'index'
     else
       redirect_to  :controller => 'store', :action => "category_items"
@@ -422,7 +422,7 @@ end
     @purchase.new_slave_symbiote(@item,@quantity, params[:on_hold])
     if  referring_action.include?('cart')
       flash[:notice] = 'Your design was added, please complete it by choosing a item' unless params[:on_hold]
-      flash[:notice] = 'Your design was added, please complete it by clicking "Complete Combination" and choosing a item, or you may add another item on hold.' if params[:on_hold]
+      flash[:notice] = 'Your design was added, please complete it by clicking Choose item and choosing a item, or you may add another item on hold.' if params[:on_hold]
       redirect_to  :controller => 'cart',  :action => 'index'
     else
       redirect_to  :controller => 'store',:action => "category_items"

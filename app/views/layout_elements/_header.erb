@@ -10,9 +10,9 @@
                         <ul>
                         <li>
                                                  <a href="/">
-                                                   
+
                                                    <% if request.protocol == "https://" %>
-                                                       <%= image_tag("/images/icons/" + @website.name + "-logo.png"    , :border => 0, :style => "max-height:100%;", :class => "home-icon", :title => "Home"  )  %>
+                                                       <%= image_tag("https://dixieoutfitters.com/images/icons/" + @website.name + "-logo.png"    , :border => 0, :style => "max-height:100%;", :class => "home-icon", :title => "Home"  )  %>
                                                    <% else %>
                                                        <%= image_tag("http://cdn.dixieoutfitters.com/images/icons/" + @website.name + "-logo.png"    , :border => 0, :style => "max-height:100%;", :class => "home-icon", :title => "Home"  )  %>
                                                    <% end %>
@@ -22,6 +22,9 @@
                                                   <!--Home-->
                                                  </a>
                         </li>
+                          <li>
+                            <a  data-iconpos="left"   data-role="button" href="/">Home</a>
+                          </li>
                         <li>
                                                  <a href="#pages_panel">Menu</a>
                         </li>

@@ -87,19 +87,19 @@ end
 
 
   def self.string_overriden_quantity_discount_id( transfer_type_string )
-     if @@NOT_PERMANENT_OR_VOLUME_DISCOUNTABLE_DEPARTMENT_IDS.include?( self.department_id )
-            if transfer_type_string.include? 'sublim9'
-              return  22651
-            elsif transfer_type_string.include? 'sublim12'
-              return   22652
-            elsif transfer_type_string.include? 'sublim14'
-              return   22650
-            elsif transfer_type_string.include? 'sublimfull'
-              return  22649
-            else
-              wrong_wrong
-            end
-     else
+     # if @@NOT_PERMANENT_OR_VOLUME_DISCOUNTABLE_DEPARTMENT_IDS.include?( self.department_id )
+     #        if transfer_type_string.include? 'sublim9'
+     #          return  22651
+     #        elsif transfer_type_string.include? 'sublim12'
+     #          return   22652
+     #        elsif transfer_type_string.include? 'sublim14'
+     #          return   22650
+     #        elsif transfer_type_string.include? 'sublimfull'
+     #          return  22649
+     #        else
+     #          wrong_wrong
+     #        end
+     # else
 
             if transfer_type_string.include? 'sublim9'
               return  22651
@@ -112,15 +112,15 @@ end
             else
               wrong_wrong
             end
-       end
+       # end
   end
 
 
   def unit_quantity_tier_discount_price(customer=0,quantity=1, the_price_override=0)
               ############################################################################################################
               ############################################################################################################
-          logger.debug " the_price_override.kind_of?(PurchasesEntry): " +  the_price_override.kind_of?(PurchasesEntry).to_s
-          logger.debug " the_price_override.kind_of?(String): " +  the_price_override.kind_of?(String).to_s
+          logger.warn " the_price_override.kind_of?(PurchasesEntry): " +  the_price_override.kind_of?(PurchasesEntry).to_s
+          logger.warn " the_price_override.kind_of?(String): " +  the_price_override.kind_of?(String).to_s
 
               if        the_price_override.kind_of?(String)
                                         the_override_quantity_discount_id =  Item.string_overriden_quantity_discount_id  the_price_override

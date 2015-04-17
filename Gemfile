@@ -1,5 +1,7 @@
   # Test message
 
+
+
 # mklink /D public "Z:\Rhett Barber\Rails\two_point_three\public"
 
 #  BEGIN MAJOR SETUP ERRORS AND  FIXES GO HERE
@@ -36,7 +38,7 @@ gem 'alchemist'
 gem 'active_shipping'
 gem 'thin'
 gem 'rails', '3.2.21'
-gem 'tiny_tds' , '0.6.1'
+gem 'tiny_tds' , '0.6.2'
 gem 'activerecord-sqlserver-adapter', '3.2.13'
 gem 'will_paginate'
 gem 'memcache-client'

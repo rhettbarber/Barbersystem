@@ -62,13 +62,15 @@ ThreeTwoThree::Application.configure do
   SslRequirement.disable_ssl_check = true
 
   config.action_controller.asset_host = Proc.new { |source, request|
-  if   request.protocol == 'https://'
-
-  else
-     if source =~ /\b(.png|.jpg|.gif)\b/i
-       config.action_controller.asset_host = "http://cdn.dixieoutfitters.com"
-     end
-  end
+    if   request.protocol == 'https://'
+      if source =~ /\b(.png|.jpg|.gif)\b/i
+        config.action_controller.asset_host = "https://dixieoutfitters.com"
+      end
+    else
+      if source =~ /\b(.png|.jpg|.gif)\b/i
+        config.action_controller.asset_host = "http://cdn.dixieoutfitters.com"
+      end
+    end
   }
 
 end
