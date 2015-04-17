@@ -5,7 +5,7 @@
 
 <% logger.warn "_shared_item/new_items is TRUE LOCATION " %>
 
-<% cache(@new_designs_cache_name ) do %>
+<%# cache(@new_designs_cache_name ) do %>
 
                     <%  if @items  %>
 
@@ -19,7 +19,7 @@
                                              no items found
                     <% end -%>
 
-<% end -%>
+<%# end -%>
 
 
 <% logger.debug "-------------------------------------end _shared_item/items " -%>

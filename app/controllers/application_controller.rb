@@ -31,6 +31,12 @@ class ApplicationController < ActionController::Base
   after_filter :after_filter
 
 
+  before_filter :beforeFilter
+
+  def beforeFilter
+    $request = request
+  end
+
 
 
   def no_item_menu

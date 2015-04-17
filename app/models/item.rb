@@ -1379,15 +1379,15 @@ def image_url(department,directory='thumbnails/',design='_back',item_prefix_over
                   image_url = image_url.gsub("/images//images", "/images")
 
 
-                  if $request
+                  # if $request
                         if   $request.protocol == 'https://'
                                               image_url = image_url.gsub( "/images", "https://dixieoutfitters.com/images")
                         else
                                               image_url = image_url.gsub( "/images", "http://cdn.dixieoutfitters.com/images")
                         end
-                  else
-                                image_url = image_url.gsub( "/images", "https://dixieoutfitters.com/images")
-                  end
+                  # else
+                  #               image_url = image_url.gsub( "/images", "https://dixieoutfitters.com/images")
+                  # end
 
             return image_url
               #rescue
