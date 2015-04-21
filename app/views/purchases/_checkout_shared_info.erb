@@ -73,7 +73,7 @@
 
 
 <% if controller.action_name == 'checkout_receipt' %>
-                <%= link_to "Back to Website",{ :controller => 'browse'}, :data => {:theme => "c",  :role => "button" ,:ajax=> "false"}  %>
+                <%= link_to "Back to Website",{ :controller => 'store'}, :data => {:theme => "c",  :role => "button" ,:ajax=> "false"}  %>
 <% else %>
                 <%= render :partial => 'checkout_review_options' %>
 <% end %>

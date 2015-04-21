@@ -79,6 +79,7 @@
                                                                                                                     <% if item.sublimation_status == "sublimation_only" %>
                                                                                                                                 <span class="sublimation_only">Silkscreen 300pc min.</span>
                                                                                                                     <% else %>
+                                                                                                                                      <!--<%=  item.sublimation_status.to_s  %>-->
                                                                                                                                     <span  style="display:none;" class="sale_label_<%= item.SaleType %>">Sale item!</span>
                                                                                                                      <% end %>
                                                                                                  <% else %>
@@ -88,6 +89,12 @@
                                                                                                                                                                 <%= item.ItemLookupCode %>
                                                                                                                                            </div>
                                                                                                                      </a>
+                                                                                                                    <% if item.sublimation_status == "sublimation_only" %>
+                                                                                                                        <span class="sublimation_only">Silkscreen 300pc min.</span>
+                                                                                                                    <% else %>
+                                                                                                                        <!--<%=  item.sublimation_status.to_s  %>-->
+                                                                                                                        <span  style="display:none;" class="sale_label_<%= item.SaleType %>">Sale item!</span>
+                                                                                                                    <% end %>
                                                                                                 <% end %>
 
                                                                                   </li>

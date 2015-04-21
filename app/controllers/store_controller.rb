@@ -12,8 +12,8 @@ layout 'none', :only => [ :close_window   ]
 layout 'dialog', :only => [ :enlarge ,:sublimation_explaination , :tshirtsinabox_redirect_choices ]
 
 #caches_public_page :items_menu
-caches_public_page :category_items
-caches_public_page :category_items_menu
+#caches_public_page :category_items
+#caches_public_page :category_items_menu
 
 
 

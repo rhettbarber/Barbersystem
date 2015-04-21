@@ -3,11 +3,6 @@ ThreeTwoThree::Application.routes.draw do
 
 #scope(:path => '/store') do
 
-  match "search/search_type_name/:search_type_name/query/:query", :controller => "search", :action => "index"
-
-
-
-
   match "control_sheet/index", :controller => 'control_sheet', :action => 'index'
   match "control_sheet/initiate_index", :controller => 'control_sheet', :action => 'index'
   match "control_sheet/control_js", :controller => 'control_sheet', :action => 'control_js'
@@ -77,10 +72,11 @@ ThreeTwoThree::Application.routes.draw do
   match 'quote_tender_entries/net_30', :controller => 'quote_tender_entries', :action => 'net_30'
   match 'quote_tender_entries/cod_money_order_cashiers_check', :controller => 'quote_tender_entries', :action => 'cod_money_order_cashiers_check'
   match 'quote_tender_entries/cod_check', :controller => 'quote_tender_entries', :action => 'cod_check'
+
+  match "search/search_type_name/:search_type_name/query/:query", :controller => "search", :action => "index"
   match 'ship_tos/choose_ship_to', :controller => 'ship_tos', :action => 'choose_ship_to'
   match 'ship_tos/shipping_services', :controller => 'ship_tos', :action => 'shipping_services'
   match 'ship_tos/set_shipping_charge_on_order/:shipping_service_id', :controller => 'ship_tos', :action => 'set_shipping_charge_on_order'
-
   match 'ship_tos/show_chosen', :controller => 'ship_tos', :action => 'show_chosen'
   resources   :ship_tos, :customers, :quote_tender_entries
 
@@ -406,55 +402,59 @@ ThreeTwoThree::Application.routes.draw do
   get "order_tracking/this_order"
   match "cache/delete_page_cache_and_return/:page_id", :controller=>"cache", :action=>"delete_page_cache_and_return"
 
+  ############################################################################################
+  ############################################################################################
+  ############################################################################################
+  ############################################################################################
+  ############################################################################################
+  ############################################################################################
 
 
 
-
-  match "page/test", :controller => "page", :action => "test"
-
-
-  match "page/delete/:page_id", :controller => "page", :action => "delete"
-
-  match "page/new/:parent_id", :controller => "page", :action => "new"
+  # match "page/test", :controller => "page", :action => "test"
   #
   #
-  #match "page/edit", :controller => "page", :action => "edit"
-  match "page/edit/:page_id", :controller => "page", :action => "edit"
-
-  resources :page
-
-
-  match "p/test", :controller => "page", :action => "test"
-  match "p/interesting-email", :controller => "page", :action => "recently_added_email"
-  match "p/heritage-news", :controller => "page", :action => "recently_added_news"
-  match "p/recently-added/:page", :controller => "page", :action => "recently_added_pages"
-  match "p/recently-added", :controller => "page", :action => "recently_added_pages"
-  match "p/resources", :controller => "page", :action => "resources"
-  match "page/news", :controller => "page", :action => "recently_added_news"
-
-
-
-  match "p/pages_navigation/:page_id", :controller => "page", :action => "pages_navigation"
-
-
-
-  # match "p/pages_navigation/:page_id/:scope_by_page_id", :controller => "page", :action => "pages_navigation"
-  # match "p/pages_navigation/:scope_by_page_id", :controller => "page", :action => "pages_navigation"
-
-
-  match 'p/shopping', :to => redirect("/store/category_items")
-
-  # match "page/:page_id/:scope_by_page_id", :controller => "page", :action => "show_page_on_index"
-  # match "p/:page_id/:scope_by_page_id", :controller => "page", :action => "show_page_on_index"
-
-  match "page/:page_id", :controller => "page", :action => "show_page_on_index"
-  match "p/:page_id", :controller => "page", :action => "show_page_on_index"
-  match "c/p/:page_id", :controller => "page", :action => "show_page_on_index"
-  match "c/p/", :controller => "page", :action => "show_page_on_index"
-  match "p/", :controller => "page", :action => "show_page_on_index"
-
-  match 'page/recently-added', :controller => 'page', :action => 'recently_added_pages'
-
+  # match "page/delete/:page_id", :controller => "page", :action => "delete"
+  #
+  # match "page/new/:parent_id", :controller => "page", :action => "new"
+  # #
+  # #
+  # #match "page/edit", :controller => "page", :action => "edit"
+  # match "page/edit/:page_id", :controller => "page", :action => "edit"
+  #
+  # resources :page
+  #
+  #
+  # match "p/test", :controller => "page", :action => "test"
+  # match "p/interesting-email", :controller => "page", :action => "recently_added_email"
+  # match "p/heritage-news", :controller => "page", :action => "recently_added_news"
+  # match "p/recently-added/:page", :controller => "page", :action => "recently_added_pages"
+  # match "p/recently-added", :controller => "page", :action => "recently_added_pages"
+  # match "p/resources", :controller => "page", :action => "resources"
+  # match "page/news", :controller => "page", :action => "recently_added_news"
+  #
+  #
+  #
+  # match "p/pages_navigation/:page_id", :controller => "page", :action => "pages_navigation"
+  #
+  #
+  #
+  # # match "p/pages_navigation/:page_id/:scope_by_page_id", :controller => "page", :action => "pages_navigation"
+  # # match "p/pages_navigation/:scope_by_page_id", :controller => "page", :action => "pages_navigation"
+  #
+  #
+  # match 'p/shopping', :to => redirect("/store/category_items")
+  #
+  # # match "page/:page_id/:scope_by_page_id", :controller => "page", :action => "show_page_on_index"
+  # # match "p/:page_id/:scope_by_page_id", :controller => "page", :action => "show_page_on_index"
+  #
+  # match "page/:page_id", :controller => "page", :action => "show_page_on_index"
+  # match "p/:page_id", :controller => "page", :action => "show_page_on_index"
+  # match "c/p/:page_id", :controller => "page", :action => "show_page_on_index"
+  # match "c/p/", :controller => "page", :action => "show_page_on_index"
+  # match "p/", :controller => "page", :action => "show_page_on_index"
+  #
+  # match 'page/recently-added', :controller => 'page', :action => 'recently_added_pages'
 
 
 
@@ -462,8 +462,11 @@ ThreeTwoThree::Application.routes.draw do
 
   ############################################################################################
   ############################################################################################
+  ############################################################################################
+  ############################################################################################
 
 
+   match "/store" , :controller => 'store', :action => 'index'
 
   resources  :page
 

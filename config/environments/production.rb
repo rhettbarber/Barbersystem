@@ -2,6 +2,7 @@ ThreeTwoThree::Application.configure do
 
 #  config.action_controller.relative_url_root = '/store'
 
+ # config.action_controller.page_cache_directory = Rails.root.to_s + "/public/apache_root"
 
   config.assets.enabled = true
   config.assets.precompile += ['initiate_functions.js', 'application.js']
