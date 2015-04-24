@@ -13,6 +13,8 @@
 *.yml
 !manifest.yml
 
+*.log
+
 Gemfile
 Gemfile.lock
 #################
