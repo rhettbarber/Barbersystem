@@ -13,7 +13,9 @@
 *.yml
 !manifest.yml
 
-Gemfile
+*.log
+
+#Gemfile
 Gemfile.lock
 #################
 ## Eclipse

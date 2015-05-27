@@ -141,45 +141,50 @@ end
                   logger.warn "##############  session['return-to'] : #{session['return-to']}  ################################"
                   @flash_messages = Array.new
                   return unless request.post?
-                  self.current_user = User.authenticate(params[:email], params[:password])
-                  if logged_in?
-                                  if current_user
-                                                  startup_user
-                                                  startup_customer
-                                                  startup_purchase
-                                                  configure_last_purchase  if @customer and @purchase
-                                                  startup_user_session
-                                                  @user_session.user_id =  current_user.id
-                                                  if @purchase
-                                                                  @user_session.purchase_id =  @purchase.id
-                                                  end
-                                                  @user_session.save
-                                                  delete_user_session_cache
-                                                  if admin?
-                                                    cookies[:barber_admin] = { :value => "barber_admin", :expires => 5.hours.from_now }
-                                                  end
-                                  end
-
-                                  if @logged_in_retail_on_barber == true
-                                                 redirect_to(:controller =>  "account",  :action => 'wholesale_only_website')  ;
-                                  elsif session['return-to'].nil?
-                                                redirect_to(:controller => 'store')
-                                  else
-                                                  redirect_to session['return-to']
-                                                  session['return-to'] = nil
-                                  end
-                                  @flash_messages  <<  "Logged in successfully"
-                                  flash[:notice] =   @flash_messages
-                                  cookies['barber_email'] = { :value => 'logged_in=yes',  :expires => 1.year.from_now }
+                  if params[:email] == 'rhett@barberandcompany.com' and request.remote_ip != '10.1.10.10'
+                            @flash_messages  <<  "Cannot log in from this ip"
+                            redirect_to(:controller =>  "account",  :action => 'login')  ;
                   else
-                                  add_security_warning(0.25)
-                                  logger.warn "------ DANGER -----------------------ADDING NEW WARN TIME FOR INCORRECT LOGIN "
-                                  logger.warn "------ DANGER -----------------------ADDING NEW WARN TIME FOR INCORRECT LOGIN "
-                                  logger.warn "------ DANGER -----------------------ADDING NEW WARN TIME FOR INCORRECT LOGIN "
-                                  logger.warn "------ DANGER -----------------------ADDING NEW WARN TIME FOR INCORRECT LOGIN "
-                                  flash[:notice] = 'Log in failed. If you have forgotten it, click forgot password link below'
-                                  @params_email =    params[:email] || ''
-                                  redirect_to(:controller => 'account' , :action => 'login', :email =>  @params_email  )
+                          self.current_user = User.authenticate(params[:email], params[:password])
+                          if logged_in?
+                                          if current_user
+                                                          startup_user
+                                                          startup_customer
+                                                          startup_purchase
+                                                          configure_last_purchase  if @customer and @purchase
+                                                          startup_user_session
+                                                          @user_session.user_id =  current_user.id
+                                                          if @purchase
+                                                                          @user_session.purchase_id =  @purchase.id
+                                                          end
+                                                          @user_session.save
+                                                          delete_user_session_cache
+                                                          if admin?
+                                                            cookies[:barber_admin] = { :value => "barber_admin", :expires => 5.hours.from_now }
+                                                          end
+                                          end
+
+                                          if @logged_in_retail_on_barber == true
+                                                         redirect_to(:controller =>  "account",  :action => 'wholesale_only_website')  ;
+                                          elsif session['return-to'].nil?
+                                                        redirect_to(:controller => 'store')
+                                          else
+                                                          redirect_to session['return-to']
+                                                          session['return-to'] = nil
+                                          end
+                                          @flash_messages  <<  "Logged in successfully"
+                                          flash[:notice] =   @flash_messages
+                                          cookies['barber_email'] = { :value => 'logged_in=yes',  :expires => 1.year.from_now }
+                          else
+                                          add_security_warning(0.25)
+                                          logger.warn "------ DANGER -----------------------ADDING NEW WARN TIME FOR INCORRECT LOGIN "
+                                          logger.warn "------ DANGER -----------------------ADDING NEW WARN TIME FOR INCORRECT LOGIN "
+                                          logger.warn "------ DANGER -----------------------ADDING NEW WARN TIME FOR INCORRECT LOGIN "
+                                          logger.warn "------ DANGER -----------------------ADDING NEW WARN TIME FOR INCORRECT LOGIN "
+                                          flash[:notice] = 'Log in failed. If you have forgotten it, click forgot password link below'
+                                          @params_email =    params[:email] || ''
+                                          redirect_to(:controller => 'account' , :action => 'login', :email =>  @params_email  )
+                          end
                   end
   end
 ######################################################################################################################################################
