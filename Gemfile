@@ -42,10 +42,11 @@ gem 'tiny_tds' , '0.6.2'
 gem 'activerecord-sqlserver-adapter', '3.2.13'
 gem 'will_paginate'
 gem 'memcache-client'
-# gem 'ssl_requirement'  , :git => "https://github.com/rhettbarber/ssl_requirement.git"#, :require => 'ssl_requirement'
-# gem 'bartt-ssl_requirement'  , '~>1.4.2', :require => 'ssl_requirement'
-gem 'bartt-ssl_requirement'  , '~>1.4.0', :require => 'ssl_requirement'
-#gem 'grosser-ssl_requirement',  :require => 'ssl_requirement'
+
+
+ gem 'bartt-ssl_requirement'  , '~>1.4.2', :require => 'ssl_requirement'
+
+
 gem 'nokogiri'
 
 gem 'therubyracer' , :platform => :ruby  # makes this gem only install on *nix

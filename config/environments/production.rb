@@ -126,8 +126,8 @@ ThreeTwoThree::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  config.cache_store = :file_store, "/tmp/cache"
-  SslRequirement.disable_ssl_check = false
+  #config.cache_store = :file_store, "/tmp/cache"
+  #SslRequirement.disable_ssl_check = false
 
 end
 

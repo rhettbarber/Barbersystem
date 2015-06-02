@@ -61,6 +61,7 @@ def add_to_cart
                     if params[:purchases_entry_id] == nil
                                        logger.debug "NO PURCHASES_ENTRY_ID"
                                       find_item(params)
+                                       s = "s"
                                       if @item
                                                               if params[:purchases_entries]
                                                                           ensure_positive_quantity(params[:purchases_entries][:QuantityOnOrder])
@@ -465,12 +466,12 @@ def add_to_cart_singular_designer
 end
 ###########################################################################################################
 def find_item(params)
-        	logger.debug "start find_item params: #{params}"
+        	logger.warn "start find_item params: #{params}"
            the_item_id = params[:item_id] || params[:design_id]
 
         	departments_to_search = @website.default_all_department_ids + [ '1', '5' ]
            if params[:purchases_entries] and params[:purchases_entries].size  > 1
-                                   logger.debug "params[:purchases_entries]: #{params[:purchases_entries]}"
+                                   logger.warn "params[:purchases_entries]: #{params[:purchases_entries]}"
                                     ilc  =   params[:purchases_entries][:ItemLookupCode]
                                     ################## need to scope this find to website  ??
                                     @item = Item.where(" ItemLookupCode LIKE ? and department_id in (?) ",  "#{ilc}%" , departments_to_search ).first
@@ -483,21 +484,21 @@ def find_item(params)
                                                       end
                                       end
             else
-                            logger.debug "NO params[:purchases_entries]"
+                            logger.warn "NO params[:purchases_entries]"
                             if params[:item_class_component]
-                                              logger.debug " params[:item_class_component][:item_id]: #{params[:item_class_component][:item_id]}"
+                                              logger.warn " params[:item_class_component][:item_id]: #{params[:item_class_component][:item_id]}"
                                               the_item_id  = params[:item_class_component][:item_id]  ## this stopped working
                                 end
                                 if params[:item]
-                                               logger.debug " params[:item][:id]: #{params[:item][:id]}"
+                                               logger.warn " params[:item][:id]: #{params[:item][:id]}"
                                                the_item_id = params[:item][:id]
                                 end
                                 @item = Item.where(  "id = ? ", the_item_id  ).first
             end
              if @item
-       				             logger.debug "end find_item @item: #{@item.id}"
+       				             logger.warn "end find_item @item: #{@item.id}"
        		 else
-       		 	             	 logger.debug "end find_item NO ITEM FOUND"
+       		 	             	 logger.warn "end find_item NO ITEM FOUND"
        		 end
 end
 ###########################################################################################################

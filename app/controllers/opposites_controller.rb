@@ -1,5 +1,5 @@
 class OppositesController < ApplicationController
-ssl_required :all
+#ssl_required :all
 
 
 

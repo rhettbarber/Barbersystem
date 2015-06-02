@@ -6,7 +6,8 @@ before_filter :user_with_customer? , :only => [:index, :newsletter_subscriber]
 after_filter :reset_incomplete_symbiont_status_found , :only =>  [ :login ]
 #before_filter :startup_user, :startup_customer
 
-ssl_exceptions
+ ssl_exceptions
+
 
 ######################################################################################################################################################
 def signup_action
@@ -138,7 +139,15 @@ end
   end
 ######################################################################################################################################################
   def login
-                  logger.warn "##############  session['return-to'] : #{session['return-to']}  ################################"
+                  logger.warn "#redirect_to#############  session['return-to'] : #{session['return-to']}  ################################"
+
+                  if params[:redirect_to]
+                    logger.warn "redirect_to paramter: " + params[:redirect_to].to_s
+                    session['return-to'] = params[:redirect_to]
+                  else
+                    logger.warn "no redirect_to paramter"
+                  end
+
                   @flash_messages = Array.new
                   return unless request.post?
                   if params[:email] == 'rhett@barberandcompany.com' and request.remote_ip != '10.1.10.10'
@@ -163,6 +172,7 @@ end
                                                             cookies[:barber_admin] = { :value => "barber_admin", :expires => 5.hours.from_now }
                                                           end
                                           end
+
 
                                           if @logged_in_retail_on_barber == true
                                                          redirect_to(:controller =>  "account",  :action => 'wholesale_only_website')  ;

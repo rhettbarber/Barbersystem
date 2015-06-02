@@ -3,6 +3,32 @@ ThreeTwoThree::Application.routes.draw do
 
 #scope(:path => '/store') do
 
+############################################################################################
+
+
+    get "account/index"
+    get "account/join"
+    get "account/login"
+    get "account/logout"
+    get "account/send_message_to_selected"
+    get "account/signup"
+    match  'account/signup_action', :controller => 'account', :action => 'signup_action'
+    match  'account/edit_password', :controller => 'account', :action => 'edit_password'
+    match "account/forgot_password", :controller => 'account', :action => 'forgot_password'
+    match "account/reset_password/:id", :controller => 'account', :action => 'reset_password'
+    match "account/reset_password", :controller => 'account', :action => 'reset_password'
+    match "account/reset_link_was_sent", :controller => 'account', :action => 'reset_link_was_sent'
+    match 'account/login', :controller => 'account', :action => 'login'
+    match 'account/newsletter_subscriber', :controller => 'account', :action => 'newsletter_subscriber'
+    match 'account/wholesale_only_website', :controller => 'account', :action => 'wholesale_only_website'
+    match  '/account', :controller => 'account', :action => 'index'
+
+
+  ############################################################################################
+
+
+
+
   match "control_sheet/index", :controller => 'control_sheet', :action => 'index'
   match "control_sheet/initiate_index", :controller => 'control_sheet', :action => 'index'
   match "control_sheet/control_js", :controller => 'control_sheet', :action => 'control_js'
@@ -334,24 +360,6 @@ ThreeTwoThree::Application.routes.draw do
   #
   #
   #end
-  ############################################################################################
-  ############################################################################################
-  get "account/index"
-  get "account/join"
-  get "account/login"
-  get "account/logout"
-  get "account/send_message_to_selected"
-  get "account/signup"
-  match  'account/signup_action', :controller => 'account', :action => 'signup_action'
-  match  'account/edit_password', :controller => 'account', :action => 'edit_password'
-  match "account/forgot_password", :controller => 'account', :action => 'forgot_password'
-  match "account/reset_password/:id", :controller => 'account', :action => 'reset_password'
-  match "account/reset_password", :controller => 'account', :action => 'reset_password'
-  match "account/reset_link_was_sent", :controller => 'account', :action => 'reset_link_was_sent'
-  match 'account/login', :controller => 'account', :action => 'login'
-  match 'account/newsletter_subscriber', :controller => 'account', :action => 'newsletter_subscriber'
-  match 'account/wholesale_only_website', :controller => 'account', :action => 'wholesale_only_website'
-  match  '/account', :controller => 'account', :action => 'index'
   match "add_to_cart", :controller => "cart", :action => 'add_to_cart'
   #match 'affiliates', :controller => 'affiliates', :action => 'index'
   #match "affiliates/compensation_report", :controller => "affiliates", :action => 'compensation_report'
