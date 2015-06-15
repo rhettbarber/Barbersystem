@@ -368,40 +368,39 @@ end
 
 
   def warn_caching
+        test_cache  =   Caching::MemoryCache.instance.read  'test_cache'
+        if test_cache
+                      logger.warn "TEST_CACHE READ SUCESS: " + test_cache
+                      logger.warn "TEST_CACHE READ SUCESS: " + test_cache
+                      logger.warn "TEST_CACHE READ SUCESS: " + test_cache
+                      logger.warn "TEST_CACHE READ SUCESS: " + test_cache
+        else
+                      logger.warn "FAILED TO READ TEST_CACHE: "
+                      logger.warn "FAILED TO READ TEST_CACHE: "
+                      logger.warn "FAILED TO READ TEST_CACHE: "
+                      logger.warn "FAILED TO READ TEST_CACHE: "
+                      logger.warn "FAILED TO READ TEST_CACHE: "
+                      logger.warn "FAILED TO READ TEST_CACHE: "
+                      logger.warn "FAILED TO READ TEST_CACHE: "
+                      logger.warn "FAILED TO READ TEST_CACHE: "
+                      Caching::MemoryCache.instance.write  'test_cache', "YES!!!"
+        end
 
 
+    logger.warn "request.remote_ip: " + request.remote_ip
 
-    test_cache  =   Caching::MemoryCache.instance.read  'test_cache'
-    if test_cache
-                  logger.warn "TEST_CACHE READ SUCESS: " + test_cache
-                  logger.warn "TEST_CACHE READ SUCESS: " + test_cache
-                  logger.warn "TEST_CACHE READ SUCESS: " + test_cache
-                  logger.warn "TEST_CACHE READ SUCESS: " + test_cache
-    else
-                  logger.warn "FAILED TO READ TEST_CACHE: "
-                  logger.warn "FAILED TO READ TEST_CACHE: "
-                  logger.warn "FAILED TO READ TEST_CACHE: "
-                  logger.warn "FAILED TO READ TEST_CACHE: "
-                  logger.warn "FAILED TO READ TEST_CACHE: "
-                  logger.warn "FAILED TO READ TEST_CACHE: "
-                  logger.warn "FAILED TO READ TEST_CACHE: "
-                  logger.warn "FAILED TO READ TEST_CACHE: "
-                  Caching::MemoryCache.instance.write  'test_cache', "YES!!!"
-    end
-
-
-
-
-logger.warn "request.remote_ip: " + request.remote_ip
-
-if request.remote_ip == "127.0.0.1"
-          logger.warn "###########################################################"
-          logger.warn "request.inspect: " + request.inspect
-          logger.warn "###########################################################"
-          #logger.warn "REQUEST.server_name == 127.0.0.1"
-          #logger.warn "REQUEST.server_name == 127.0.0.1"
-          bad_thin_error_server_name_for_page_cache_path
-    end
+    if request.remote_ip == "127.0.0.1"
+              logger.warn "###########################################################"
+              logger.warn "request.inspect: " + request.inspect
+              logger.warn "###########################################################"
+              #logger.warn "REQUEST.server_name == 127.0.0.1"
+              #logger.warn "REQUEST.server_name == 127.0.0.1"
+              if Rails.env == 'development'
+                      logger.warn "LOCAL REQUEST MADE..BUT ITS IN DEVELOPMENT"
+              else
+                      bad_thin_error_server_name_for_page_cache_path
+                end
+        end
   end
 
 

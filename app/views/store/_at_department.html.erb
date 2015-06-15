@@ -1,0 +1,75 @@
+
+<% logger.debug "--------browse CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 - " %>
+<% logger.debug "--------browse CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 - " %>
+<% logger.debug "--------browse CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 - " %>
+
+
+<% logger.debug "-------------------------------------begin _shared_department/department_categories " -%>
+<%
+   if @department
+     local_department_id = @department.id.to_s
+   else
+     local_department_id = '0'
+   end
+
+   if @purchase_symbiote_item_category_category_class_id
+     local_purchase_symbiote_item_category_category_class_id = @purchase_symbiote_item_category_category_class_id.to_s
+   else
+     local_purchase_symbiote_item_category_category_class_id = '0'
+   end
+-%>
+
+
+<% if @website.name == 'dixie_store' %>
+    <% if  @website.default_item_departments.include?( department ) %>
+        <%= image_tag( '/images/department_description_headers/' +  @website.name + '-' +  Util::Slug.generate(  department.Name )  + '.png')  unless @incomplete_symbiont %>
+    <% end  %>
+<% end  %>
+
+
+
+<% @purchase_opposite_category_ids = @purchase.opposite_category_ids if @purchase %>
+
+<% g = "g" %>
+
+<% if department.categories %>
+    <% department.categories.sort_by{|a| a.Name}.each do |category|  -%>
+        <% logger.debug "------------------------------------- for category  in  department.categories " -%>
+        <% if @purchase -%>
+            <% if @incomplete_symbiont  -%>
+                <% if !@purchase_opposite_category_ids.nil? -%>
+
+
+                    <% logger.debug "############################################################# BEGIN NOW " -%>
+
+                    <% logger.debug "------------------------------------- @purchase_opposite_category_ids: #{@purchase_opposite_category_ids} " -%>
+                    <% logger.debug "------------------------------------- category.id.to_s: #{category.id.to_s} " -%>
+                    <% logger.debug "------------------------------------- @purchase_opposite_category_ids.include?(category.id.to_s): #{@purchase_opposite_category_ids.include?(category.id.to_s)} " -%>
+                    <% if	@purchase_opposite_category_ids.include?(category.id.to_s) or @purchase_opposite_category_ids.include?(category.id)    -%>
+                        <%= render(:partial => "store/category",:locals => { :category => category, :department => department } ) -%>
+                    <% end -%>
+                    <% logger.debug "############################################################# END NOW " -%>
+
+
+
+
+
+
+                <% end -%>
+            <% elsif @incomplete_symbiont == false  -%>
+                <% logger.debug "------------------------------------- @incomplete_symbiont == false  " -%>
+                <%= render(:partial => "store/category",:locals => { :category => category, :department => department } ) -%>
+            <% end -%>
+        <% else -%>
+            <% logger.debug "------------------------------------- !@purchase " -%>
+            <%= render(:partial => "store/category",:locals => { :category => category, :department => department } ) -%>
+        <% end -%>
+    <% end -%>
+<% else -%>
+    <% logger.debug "-------------------------------------ERROR -  no department.categories " -%>
+<% end -%>
+<% logger.debug "-------------------------------------end _shared_department/department_categories " -%>
+
+<% logger.debug "--------browse CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 - " %>
+<% logger.debug "--------browse CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 - " %>
+<% logger.debug "--------browse CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 , CACHE AREA 1 - " %>

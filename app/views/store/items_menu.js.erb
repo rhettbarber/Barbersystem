@@ -55,7 +55,8 @@ var activePage =   $.mobile.activePage;
 buildFooterFromCookie(activePage);
 
 <% if params[:department_id] and  !request.referer.include? "view_details" and  !request.referer.include? "specsheet"  %>
-expandCollapsibleDepartment(   <%= params[:department_id] %>  )
+//expandCollapsibleDepartment(   <%#= params[:department_id] %>  )
+console.log("expandCollapsibleDepartment IS TURNED OFF !!!!!!!!!!!!!!!");
 <% else %>
 expandItemMenu();
 <% end %>

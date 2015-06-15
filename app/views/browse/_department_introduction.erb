@@ -1,6 +1,6 @@
 
 
-<div class="department_introduction" > 
+<div class="department_introduction" >
 
     <% if department.is_all_websites_department == true %>
                          <%= link_to(image_tag( '/images/departments/' + @website.name + '_' + department.Name + '.png'), :controller => 'browse', :department_id => department.id )   %>

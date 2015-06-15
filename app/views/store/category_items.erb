@@ -1,9 +1,57 @@
+<style type="text/css">
+    .department_introduction{
+        width: 300px;
+        float: left;
+        list-style: none;
+        text-align: center;
+        width:350px;
+    }
+    .category_box{
+        width: 300px;
+        float: left;
+        list-style: none;
+        text-align: center;
+        width:350px;
+    }
+</style>
 
 
-      <%  if @department and @category %>
+
+<%  if @department and @category %>
                                 <div role="main" class="ui-content responsive_listview_grid revisions">
                                                              <%= render :partial => "category_items" %>
                                   </div>
+    <% elsif  !@category  %>
+                                  <%
+                                     if params[:department_type]
+                                       department_type = params[:department_type]
+                                     else
+                                       department_type = '0'
+                                     end
+                                  %>
+
+                                <div role="main" class="ui-content responsive_listview_grid revisions">
+
+                                    <% if @department %>
+
+                                        <%=   render(:partial => "store/at_department",:locals => {:department => @department } )  %>
+                                    <% else %>
+                                        <% if  @department_introduction == true  %>
+                                            <%=  render(:partial => "store/departments_introduction",:locals => {:department_type => department_type } )  %>
+                                        <%  else  %>
+                                            <% if @incomplete_symbiont %>
+                                                <%# great %>
+                                                <%=  render(:partial => "store/categories_by_department",:locals => {:department_type => department_type } ) if @departments %>
+                                            <% else %>
+                                                <% bad %>
+                                                <%=  render(:partial => "store/departments_no_introduction",:locals => {:department_type => department_type } )  %>
+                                            <% end %>
+                                        <% end %>
+                                    <% end %>
+
+                                  </div>
+
+
     <% end %>
 
 

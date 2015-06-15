@@ -518,7 +518,7 @@ end
 
 #match 'designer_specsheet/ajax_administer_size_and_position' => 'designer_specsheet#ajax_administer_size_and_position'
 #match 'designer_specsheet/ajax_administer_breast_prints_list' => 'designer_specsheet#ajax_administer_breast_prints_list'
-#match 'designer_specsheet/ajax_administer_edit_item' => 'designer_specsheet#ajax_administer_edit_item'
+#match 'designer_specsheet/ajax_administer_edit_item' => 'designer_categories_containerspecsheet#ajax_administer_edit_item'
 #match 'designer_specsheet/ajax_change_product_choice' => 'designer_specsheet#ajax_change_product_choice'
 #match 'designer_specsheet/ajax_item_details' => 'designer_specsheet#ajax_item_details'
 #match 'designer_specsheet/ajax_item_update' => 'designer_specsheet#ajax_item_update'

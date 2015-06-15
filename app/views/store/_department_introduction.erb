@@ -1,0 +1,13 @@
+
+
+<li class="department_introduction">
+
+    <% if department.is_all_websites_department == true %>
+                         <%= link_to(image_tag( '/images/departments/' + @website.name + '_' + department.Name + '.png'), :controller => 'store', :department_id => department.id )   %>
+    <% else %>
+                        <%= link_to(image_tag( '/images/departments/' + department.Name + '.png'),{:controller => 'store', :department_id => department.id })   %>
+        <% end %>
+
+</li>
+
+

@@ -164,9 +164,9 @@
 																<% if !category.additives.nil? %>
 																				<% if category.visible == 1 %>
                                                                                                                                                                                 <% if @website.hidden_website_category_ids.include?(category.id)  %>
-                                                                                                                                                                                        <%= render :partial => "shared_category/category_li_website_hidden_root", :locals => {:category => category} if admin? %>
+                                                                                                                                                                                        <%= render :partial => "store/category_li_website_hidden_root", :locals => {:category => category} if admin? %>
                                                                                                                                                                                 <% else  %>
-                                                                                                                                                                                        <%= render :partial => "shared_category/category_li_root", :locals => {:category => category} %>
+                                                                                                                                                                                        <%= render :partial => "store/category_li_root", :locals => {:category => category} %>
                                                                                                                                                                                 <% end  %>
 
 																				<% else %>

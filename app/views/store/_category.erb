@@ -1,0 +1,68 @@
+<% logger.debug "-------------------------------------start store/category" %>
+<% logger.debug "---------------------------------@purchase_symbiote_item_type: #{@purchase_symbiote_item_type}" %>
+<% logger.debug "--------------------------------- @purchase_symbiote_item_shade: #{@purchase_symbiote_item_shade}" %>
+
+<% if category.visible == 1 or admin? == true %>
+					<% if @purchase_symbiote_item_type == "master" && @purchase_symbiote_item_shade == "colored" %>
+											<% logger.debug "---------------------------- @purchase_symbiote_item_type == master && @purchase_symbiote_item_shade == colored" %>
+											<% opaque_designs = [] %>
+											<%  category.items.each do |item| %>
+												<% opaque_designs << item if item.shade == "opaque" %>
+											<% end %>
+											<% if opaque_designs != [] %>
+																<% item = opaque_designs.first %>
+																<% logger.debug "------------------------------------- blocked transparent designs" %>
+																<% if item %>
+														  	 		<% logger.debug "-------------------------------------item from transparent blocked" %>
+												           			<%= render(:partial => "store/category_box",:locals => { :category => category, :department => department ,:item => item } ) %>
+																<% end %>
+											<% else  %>
+															<% logger.debug "-------------------------------------store/category_box_color_not_compatible" %>
+															<% logger.debug "-------------------------------------category.items.size: #{category.items.size}" %>
+															<% logger.debug "-------------------------------------category.Name: #{category.Name}" %>
+															<% if category.items %>
+																			<% if category.items.size > 0 %>
+																					<% item = category.items.first %>
+																					<%= render(:partial => "store/category_box_color_not_compatible",:locals => { :category => category, :department => department ,:item => item } )  %>
+																		<% end %>
+															<% end %>
+											<% end %>
+					<% else %>
+									<% logger.debug "---------------------------- this category is compatible with the symbiote" %>
+									<%  item = category.items.first if  category.items  %>
+									<% logger.debug "------------------------------------- did not block any items" %>   
+									<% logger.debug "-------------------------------------NOT item" %>
+
+
+<% begin %>
+									<% if  category.generic_counterpart   %>
+											<% if category.generic_counterpart.items.first %>
+													<% logger.debug "-------------------------------------category.generic_counterpart.items.first EXISTS" %>
+									 				<%  item = category.generic_counterpart.items.first      %>   
+									 		<% end %>
+									<% end %>
+<% rescue %>
+            MISSED
+<% end  %>
+									     
+						            <% if item %>
+													<% logger.debug "------------------------------------- category.generic_counterpart.items.first item" %>
+						              			<%= render(:partial => "store/category_box",:locals => { :category => category, :department => department ,:item => item } ) %>
+									  <% else  %>
+									  			 	 <% logger.debug "------------------------------------- no first item was found in this category or category.generic_counterpart" %>	
+									  			 	 <% logger.debug "------------------------------------- NOT category.generic_counterpart.items.first item" %>
+												 	 <%  item = category.additive_first_category.items.first     if category.additive_first_category      %>       
+								                   <% if item %>
+									 				 				<% logger.debug "------------------------------------- category.additive_first_category.items.first item" %>			 
+								                  				<%= render(:partial => "store/category_box",:locals => { :category => category, :department => department ,:item => item } ) %>
+													  <% else  %>
+														 			<% logger.debug "------------------------------------- category.additive_first_category.items.first item" %>	
+														 			<% logger.debug "------------------------------------- no first item was found in this category or additives category" %>			
+														 			 <!-- no first item was found in this category    -->
+													<% end %>
+													
+									<% end %>
+				<% end %>
+<% end %>
+
+<% logger.debug "-------------------------------------end store/category" %>

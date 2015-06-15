@@ -1,0 +1,82 @@
+
+<style type="text/css">
+  .clickable_department {
+      float: left; width: 200px;text-align: center;padding: 6px;
+  }
+  .clickable_department img {
+      width: 200px;
+  }
+</style>
+
+
+<% logger.debug "-------------------------------------begin shared_browse/categories_by_department " %>
+
+
+
+<% @departments.each do |department| %>
+
+     <div class="clickable_department" id="<%= department.id %>">
+
+                   <% if department.is_all_websites_department == true %>
+                       <%= link_to(image_tag( '/images/departments/' + @website.name + '_' + department.Name + '.png'),{ :controller => 'browse',  :action => 'index', :department_id => department.id })   %>
+                   <% else %>
+                       <%= link_to(image_tag( '/images/departments/' + department.Name + '.png'),{:controller => 'browse',  :action => 'index', :department_id => department.id })   %>
+                   <% end %>
+                    <br >                    <%= department.Name %>
+      </div>
+    <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% logger.debug "-------------------------------------end shared_browse/categories_by_department " %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @example %>
+
+		<%=  image_tag("/images/headers/shop_by_design.gif", :border => 0)  if @show_designs == true  %>
+		<%   @design_departments.each do |department|  %>
+				<%=  render(:partial => "browse/department_introduction", :locals => {:department => department } )  %>
+		<% end  if @show_designs == true %>
+
+		<%=  image_tag("/images/headers/shop_by_product.gif", :border => 0) if @show_items == true    %>
+		<% @item_departments.each do |department| %>
+				<%=  render(:partial => "browse/department_introduction", :locals => {:department => department } )  %>
+		<% end if @show_items == true  %>
+
+<% end %>

@@ -3,9 +3,9 @@
 
 <li class="category_box">
                 <%=    link_to(  item.category.Name.camelize,  :controller => "store", :action => 'index', :department_id =>  department.id  ,  :category_id => category.id  )  %> <br/>
-                <span class="category_box_more" style="color:red;">
-                             <%=    link_to(  "Click for More",  :controller => "store", :action => 'index' , :department_id =>  department.id  ,  :category_id => category.id  )  %>
-                 </span>
+                <!--<span class="category_box_more" style="color:red;">-->
+                             <!--<%#=    link_to(  "Click for More",  :controller => "store", :action => 'index' , :department_id =>  department.id  ,  :category_id => category.id  )  %>-->
+                 <!--</span>-->
 
            <% logger.debug "---------------item.category----------------------#{item.category}" %>
             <% logger.debug "-----------------item.category.category_class.item_type--------------------#{item.category.category_class.item_type}"  %>
