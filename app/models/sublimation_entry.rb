@@ -1,6 +1,18 @@
 class SublimationEntry  < ActiveRecord::Base
 
 
+ @@SOURCE_FOLDER =   "Z:\\\\"
+
+ @@SOURCE_FILE_EXTENSION   = ".jpg"
+
+ @@sublimation_standard_category_class_ids = ["26", "27","15"]
+
+ @@OUTPUT_LOCATION  = "Z:\\\\REVIEW\\"
+
+ @@OUTPUT_EXTENSION  = ".jpg"
+
+ @@ALL_OVER_SOURCE_LOCATION  = "Z:\\\\ALL-OVER-T-JPG\\"
+
 def is_custom_sublimation?
           if self.name == "sublimation_shirts"
                     if self.Comment.to_s.include? 'sublim'
@@ -154,7 +166,7 @@ end
                             label_string  =    Slug.generate_keep_zero(  the_master_pe.purchase_id.to_s  + "_"  +   the_master_pe.ItemLookupCode + "_" +  the_master_pe.Description  )
               else
                             logger.debug " NOT the_master_pe ##################################"
-                            label_string  =  Slug.generate_keep_zero(   self.ItemLookupCode + "_" +  self.Description )
+                            label_string  =  Slug.generate_keep_zero( self.purchase_id.to_s  + "_"  +  self.ItemLookupCode + "_" +  self.Description )
                             logger.debug "##################################"
                             logger.debug "sublimation_entry.id: " + self.id.to_s
                             logger.debug "label_string: " + label_string.to_s
@@ -192,36 +204,38 @@ def comment_custom_filename
 end
 
 
-
+ def complete_filename
+   Slug.generate_keep_zero self.ItemLookupCode
+ end
 
 
  def file_url_front
              if self.name == "all_over_item"
-                                       return       "W:\\\\AUTOMATION_DATABASE\\PRODUCTION_FILES\\ALL-OVER-T\\"  +  self.all_over_root_filename       + "-0.jpg"
+                                       return       @@ALL_OVER_SOURCE_LOCATION  +  self.all_over_root_filename       + "-0" + @@SOURCE_FILE_EXTENSION
              elsif  self.name == "sublimation_shirts"
-                                      return       "W:\\\\AUTOMATION_DATABASE\\PRODUCTION_FILES\\ALL-OVER-T-CUSTOM-AUTOMATED\\"  +  self.comment_custom_filename + "-0.jpg"
+                                      return       "Z:\\\\ALL-OVER-T-CUSTOM-AUTOMATED\\"  +  self.comment_custom_filename + "-0" + @@SOURCE_FILE_EXTENSION
              else
-                                       return      "W:\\\\AUTOMATION_DATABASE\\ORIGINAL_JPG\\"  + self.itemlookupcode_root_filename   + ".jpg"
+                                       return      "W:\\\\AUTOMATION_DATABASE\\ORIGINAL_JPG\\"  + self.itemlookupcode_root_filename   + "" + @@SOURCE_FILE_EXTENSION
              end
 end
 
 def file_url_back
               if self.name == "all_over_item"
-                         return         "W:\\\\AUTOMATION_DATABASE\\PRODUCTION_FILES\\ALL-OVER-T\\"  +  self.all_over_root_filename   + "-1.jpg"
+                         return         @@ALL_OVER_SOURCE_LOCATION  +  self.all_over_root_filename   + "-1" + @@SOURCE_FILE_EXTENSION
               elsif  self.name == "sublimation_shirts"
-                          return       "W:\\\\AUTOMATION_DATABASE\\PRODUCTION_FILES\\ALL-OVER-T-CUSTOM-AUTOMATED\\"  +  self.comment_custom_filename  + "-1.jpg"
+                          return       "Z:\\\\ALL-OVER-T-CUSTOM-AUTOMATED\\"  +  self.comment_custom_filename  + "-1" + @@SOURCE_FILE_EXTENSION
               else
-                           return      "W:\\\\AUTOMATION_DATABASE\\ORIGINAL_JPG\\"  +  self.itemlookupcode_root_filename + ".jpg"
+                           return      "W:\\\\AUTOMATION_DATABASE\\ORIGINAL_JPG\\"  +  self.itemlookupcode_root_filename + "" + @@SOURCE_FILE_EXTENSION
               end
 end
 
 
 def hot_folder_url_front(iteration_number=1)
-             return    @@OUTPUT_LOCATION +       self.purchase_id.to_s   + "-" + self.id.to_s  + "-" +    self.all_over_root_filename      + "-0-" + iteration_number.to_i.to_s  + ".jpg"
+             return    @@OUTPUT_LOCATION +       self.purchase_id.to_s   + "__" + self.id.to_s  + "__" +   complete_filename      + "-FRONT"  + @@OUTPUT_EXTENSION
 end
 
 def hot_folder_url_back(iteration_number=1)
-             return    @@OUTPUT_LOCATION +      self.purchase_id.to_s   + "-" + self.id.to_s  + "-" +    self.all_over_root_filename     + "-1-" + iteration_number.to_i.to_s  + ".jpg"
+             return    @@OUTPUT_LOCATION +      self.purchase_id.to_s   + "__" + self.id.to_s  + "__" +   complete_filename     + "-BACK"   + @@OUTPUT_EXTENSION
 end
 
 

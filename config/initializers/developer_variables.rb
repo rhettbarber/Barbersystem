@@ -1,6 +1,3 @@
-@@sublimation_standard_category_class_ids = ["26", "27","15"]
-
-@@OUTPUT_LOCATION  = "L:\\\\REVIEW\\"
 
 USE_FILES_FOR_RAILS_CACHE = true
 

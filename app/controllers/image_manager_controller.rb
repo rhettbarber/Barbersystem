@@ -54,6 +54,13 @@ def missing_sublimation_images
               logger.debug "5555555555555555555554444444444444444444444"
 end
 
+ def all_all_over_orders
+   @all_over_sublimation_entries = SublimationEntry.where( "purchase_id > ? and ReferenceNumber not like ?",   376438, 'unfinished_web' ).all
+   gather_additional_sublimation_entries
+   all_over_ts_commands
+end
+
+
  def print_all
                find_sublimation_entries
                gather_additional_sublimation_entries
@@ -131,6 +138,7 @@ def all_over_ts_commands
                 @all_all_over_sublimation_entries.merge   @additional_all_over_sublimation_entries
                 @all_all_over_sublimation_entries.delete_if { | i |  i.class != SublimationEntry     }
                 @all_all_over_sublimation_entries.each do | pe |
+                             begin
                                 sublimation_width_string  =    pe.SubDescription3.split("_").first
                                 logger.debug "sublimation_width_string: " + sublimation_width_string
                                 if sublimation_width_string.is_number?
@@ -144,16 +152,28 @@ def all_over_ts_commands
                                                                   quantity_on_order.times do |this_time|
 
                                                                                             iteration_number += 1
-                                                                                            @montage_string_front  = "convert  -border 0 -geometry " +   sublimation_width   + "x  -density 200 " + pe.file_url_front + " -fill white  -undercolor black -gravity South  -splice 0x80 -annotate +0+10 " + pe.label + " " +     pe.hot_folder_url_front(iteration_number)
-                                                                                            @all_over_ts_montage <<  @montage_string_front
 
-                                                                                            @montage_string_back  = "convert  -border 0 -geometry " +   sublimation_width   + "x  -density 200 " + pe.file_url_back + " -fill white  -undercolor black -gravity South  -splice 0x80 -annotate +0+10 " + pe.label + " " +     pe.hot_folder_url_back(iteration_number)
-                                                                                            @all_over_ts_montage <<   @montage_string_back
+                                                                                            if sublimation_width.to_i > 8401
+                                                                                                  @montage_string_front  = "gm convert -compress jpeg -border 0 -geometry " +   sublimation_width   + "x  -density 200 -rotate 90 " + pe.file_url_front + " -fill grey  -font Arial -pointsize 14 -gravity southeast -draw \"text 0,0 '" + pe.label + "-FRONT' \" " +     pe.hot_folder_url_front(iteration_number)
+                                                                                                  @all_over_ts_montage <<  @montage_string_front
+
+                                                                                                  @montage_string_back  = "gm convert -compress jpeg -border 0 -geometry " +   sublimation_width   + "x  -density 200 -rotate 90 " + pe.file_url_back + " -fill grey  -font Arial -pointsize 14 -gravity southeast -draw \"text 0,0 '" + pe.label + "-BACK' \" " +     pe.hot_folder_url_back(iteration_number)
+                                                                                                  @all_over_ts_montage <<   @montage_string_back
+                                                                                            else
+                                                                                                  @montage_string_front  = "gm convert -compress jpeg -border 0 -geometry " +   sublimation_width   + "  -density 200 " + pe.file_url_front + " -fill grey  -font Arial -pointsize 14 -gravity southeast -draw \"text 0,0 '" + pe.label + "-FRONT' \" " +     pe.hot_folder_url_front(iteration_number)
+                                                                                                  @all_over_ts_montage <<  @montage_string_front
+
+                                                                                                  @montage_string_back  = "gm convert -compress jpeg -border 0 -geometry " +   sublimation_width   + "  -density 200 " + pe.file_url_back + " -fill grey  -font Arial -pointsize 14 -gravity southeast -draw \"text 0,0 '" + pe.label + "-BACK' \" " +     pe.hot_folder_url_back(iteration_number)
+                                                                                                  @all_over_ts_montage <<   @montage_string_back
+                                                                                            end
                                                                   end
                                                 else
                                                                   logger.debug "quantity on order is not greater than zero"
                                                 end
                                 end
+                             rescue
+                                    logger.warn "rescued from image error item pe.ItemLookupCode: " + pe.ItemLookupCode
+                             end
                 end
                 logger.debug "END all_over_ts_commands"
                 logger.debug "END all_over_ts_commands"
@@ -163,7 +183,8 @@ end
 
 
     def index
-                @sublimation_entries = SublimationEntry.limit(50).order("id desc").select("purchase_id, FirstName,LastName, Company").all
+
+                @sublimation_entries = SublimationEntry.limit(3000).order("id desc").select("purchase_id, FirstName,LastName, Company").all
     end
 
 

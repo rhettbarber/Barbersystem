@@ -1,0 +1,30 @@
+<ul data-role="listview" data-inset="false">
+  <li data-role="list-divider"> Options</li>
+  <li><%= link_to  "Back to Main Orders list" , "/image_manager"  %></li>
+</ul>
+<br>  <br>
+                    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -<br>
+                    <%= @all_over_sublimation_entries.size %> normal All Over  images to layout : <br>
+                    <% @all_over_sublimation_entries.each do |entry| %>
+                                 <li>  <%=  entry.ItemLookupCode + " - " +  entry.Comment  %> </li>
+                    <% end %>
+                    <br>
+
+                    <%= @all_all_over_sublimation_entries.size %> All All Over  images to layout : <br>
+                    <% @all_all_over_sublimation_entries.each do |entry| %>
+                                 <li>  <%=  entry.ItemLookupCode + " - " +  entry.Comment  %> </li>
+                    <% end %>
+
+                   <br>
+                    Total number to print:  <%=  @all_over_ts_montage.size %> <br>
+                    <br>
+
+                    <% @all_over_ts_montage.each do |entry| %>
+                                            <li> <%=  entry   %> </li>
+                    <% end %>
+                    REM "All done"
+                    <br><br>
+                    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -<br>
+
+                    <br><br>
+
