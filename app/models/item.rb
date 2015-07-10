@@ -1752,7 +1752,7 @@ def your_unit_price(customer=0,quantity=1,the_purchases_entry=false)
         end
 end
 
-def  full_unit_price(customer=0, the_purchases_entry)
+def  full_unit_price(customer=0, the_purchases_entry=0)
         unit_quantity_tier_discount_price(customer,1, the_purchases_entry )
 end
 

@@ -400,7 +400,7 @@ if request.remote_ip == "127.0.0.1"
           logger.warn "###########################################################"
           #logger.warn "REQUEST.server_name == 127.0.0.1"
           #logger.warn "REQUEST.server_name == 127.0.0.1"
-          bad_thin_error_server_name_for_page_cache_path
+          # bad_thin_error_server_name_for_page_cache_path
     end
   end
 
