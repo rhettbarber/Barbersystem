@@ -7,11 +7,11 @@ class SublimationEntry  < ActiveRecord::Base
 
  @@sublimation_standard_category_class_ids = ["26", "27","15"]
 
- @@OUTPUT_LOCATION  = "Z:\\\\REVIEW\\"
+ @@OUTPUT_LOCATION  = "Z:\\\\PRODUCTION_SYSTEM\\REVIEW\\"
 
  @@OUTPUT_EXTENSION  = ".jpg"
 
- @@ALL_OVER_SOURCE_LOCATION  = "Z:\\\\ALL-OVER-T-JPG\\"
+ @@ALL_OVER_SOURCE_LOCATION  = "Z:\\\\PRODUCTION_SYSTEM\\ALL-OVER-T-JPG\\"
 
 def is_custom_sublimation?
           if self.name == "sublimation_shirts"
@@ -163,10 +163,10 @@ end
               if the_master_pe
                             logger.debug " the_master_pe ##################################"
                             logger.debug "the_master_pe.id: " + the_master_pe.id.to_s
-                            label_string  =    Slug.generate_keep_zero(  the_master_pe.purchase_id.to_s  + "_"  +   the_master_pe.ItemLookupCode + "_" +  the_master_pe.Description  )
+                            label_string  =    Slug.generate_keep_zero(  the_master_pe.purchase_id.to_s  + "_"  + type_of_shirt + "_" +  the_master_pe.ItemLookupCode + "_" +  the_master_pe.Description  )
               else
                             logger.debug " NOT the_master_pe ##################################"
-                            label_string  =  Slug.generate_keep_zero( self.purchase_id.to_s  + "_"  +  self.ItemLookupCode + "_" +  self.Description )
+                            label_string  =  Slug.generate_keep_zero( self.purchase_id.to_s  + "_"  + type_of_shirt + "_" + self.ItemLookupCode + "_" +  self.Description )
                             logger.debug "##################################"
                             logger.debug "sublimation_entry.id: " + self.id.to_s
                             logger.debug "label_string: " + label_string.to_s
@@ -208,6 +208,20 @@ end
    Slug.generate_keep_zero self.ItemLookupCode
  end
 
+ def type_of_shirt
+    new_line = self.ItemLookupCode.slice(self.ItemLookupCode.length - 1).downcase
+     g = "g"
+     if new_line == "p"
+          return "POLYESTER"
+     elsif new_line == 'c'
+          return "COTTON"
+     else
+          return 'UNKNOWN'
+     end
+ end
+
+
+
 
  def file_url_front
              if self.name == "all_over_item"
@@ -231,11 +245,11 @@ end
 
 
 def hot_folder_url_front(iteration_number=1)
-             return    @@OUTPUT_LOCATION +       self.purchase_id.to_s   + "__" + self.id.to_s  + "__" +   complete_filename      + "-FRONT"  + @@OUTPUT_EXTENSION
+             return    @@OUTPUT_LOCATION +       self.purchase_id.to_s   + "__" + self.id.to_s  + "__" + type_of_shirt + "__" +   self.ItemLookupCode      + "-FRONT-file#" + iteration_number.to_i.to_s + @@OUTPUT_EXTENSION
 end
 
 def hot_folder_url_back(iteration_number=1)
-             return    @@OUTPUT_LOCATION +      self.purchase_id.to_s   + "__" + self.id.to_s  + "__" +   complete_filename     + "-BACK"   + @@OUTPUT_EXTENSION
+             return    @@OUTPUT_LOCATION +      self.purchase_id.to_s   + "__" + self.id.to_s  + "__" + type_of_shirt + "__" +  self.ItemLookupCode     + "-BACK-file#" + iteration_number.to_i.to_s  + @@OUTPUT_EXTENSION
 end
 
 

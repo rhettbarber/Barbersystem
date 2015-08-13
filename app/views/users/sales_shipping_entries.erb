@@ -1,0 +1,55 @@
+
+
+<style type="text/css">
+    .modal-backdrop {
+        position: fixed;
+    }
+</style>
+
+<div style="border:solid black 1px;width:100%;height:160px;float:left;padding:5px;margin:5px;">
+
+	<div style="display:table;height:50px;width:100%;">
+		Search:	
+
+		<%=    text_field_tag  "sales_shipping_entries_keywords"  %>
+		<a data-theme="b" data-role="button" href="#" id="search_sales_shipping_entries">Search sales shipping entries</a>     You may search by email, Quote# or Transaction#
+
+	</div>
+
+
+</div>
+
+<div style="border:solid black 1px;float:left;padding:5px;margin:5px;width:100%;">
+	
+	<table>
+		<th>Quote #/Transaction # </th>
+		<th>SaleTime</th>
+		<th>Shipping Date Processed</th>
+        <th>ReferenceNumber </th>
+		<tbody id="sales_shipping_entries_rows">
+	
+	  			 <%= render :partial => "users/sales_shipping_entry", :collection => @sales_shipping_entries %>
+	  			 
+	
+	
+	
+		</tbody>
+		</table>
+
+
+</div>
+
+
+<script type="text/javascript"><!--
+$('#search_sales_shipping_entries').bind('click', function() {
+    $.ajax({
+        url: '/users/search_sales_shipping_entries',
+        type: 'post',
+        data: $('#sales_shipping_entries_keywords') ,
+        success: function(response)
+    {
+        $("#sales_shipping_entries_rows").html(response) ;
+    }
+    });
+});
+//--></script>

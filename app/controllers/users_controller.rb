@@ -2,8 +2,104 @@ class UsersController < ApplicationController
 #require 'csv'
 #before_filter :redirect_unless_admin
 ssl_exceptions
-before_filter :redirect_unless_cashier  # more harsh
+ before_filter :redirect_unless_cashier , :except => [:save_purchases_entries_detail, :purchases_entries_detail, :purchases_entries_with_details, :sales_shipping_entries, :search_sales_shipping_entries ]  # more harsh
+ # before_filter :redirect_unless_intranet, :only => [:sales_shipping_entries, :search_sales_shipping_entries ]  # more harsh
+  before_filter :redirect_unless_123, :only => [:save_purchases_entries_detail, :purchases_entries_detail, :purchases_entries_with_details, :sales_shipping_entries, :search_sales_shipping_entries ]  # more harsh
 cache_sweeper :user_sweeper
+
+  before_filter  :initialize_variables  , :only => [ :sales_shipping_entries, :purchases_entries_with_details]
+  layout 'latest_jquery_mobile', :only => [ :sales_shipping_entries, :purchases_entries_with_details   ]
+  skip_before_filter :verify_authenticity_token   , :only => [ :save_purchases_entries_detail, :sales_shipping_entries, :search_sales_shipping_entries   ]
+
+def  save_purchases_entries_detail
+    if  params[:purchases_entry_id]
+            @purchases_entry = PurchasesEntry.find params[:purchases_entry_id]
+            @purchases_entry_detail = @purchases_entry.purchases_entry_detail
+            logger.debug "params[:listing_purchases_entry_id]"
+            @s = "s"
+            if @purchases_entry_detail
+                  logger.debug "@purchases_entry_detail"
+                  logger.debug "@purchases_entry_detail.to_xml: " + @purchases_entry_detail.to_xml
+                  @s = "s"
+                  if @purchases_entry_detail.update_attributes(params[:purchases_entry_detail])
+                    flash[:notice] = "update saved"
+                  else
+                    flash[:notice] = "update failed"
+                  end
+            else
+                  logger.debug "NOT @purchases_entry_detail"
+                  @s = "s"
+                  @purchases_entry_detail  = PurchasesEntryDetail.new(params[:purchases_entry_detail])
+                  @purchases_entry_detail.purchase_id = params[:purchase_id]
+                  @purchases_entry_detail.listing_purchases_entry_id =  params[:purchases_entry_id]
+                  @purchases_entry_detail.holding_for_department_id =  params[:holding_for_department_id]
+                  @purchases_entry_detail.reason_for_holding =  params[:reason_for_holding]
+                  if @purchases_entry_detail.save
+                    flash[:notice] = "new entry saved"
+                  else
+                    flash[:notice] = "new entry failed"
+                  end
+             end
+    else
+      logger.debug "NO params[:purchases_entry_id]"
+    end
+    redirect_to :action => 'purchases_entries_with_details', :purchase_id => params[:purchase_id]
+end
+
+
+
+def  purchases_entries_detail
+  logger.debug "-------------------------------------begin users/purchases_entries_with_details"
+  @purchases_entry_detail = PurchasesEntriesWithDetail.where("listing_purchases_entry_id = ?", params[:purchases_entry_id] ).first #params[:listing_purchases_entry_id]).first
+ @s = "s"
+  render :partial => "users/purchases_entries_detail",:layout => false
+  # respond_to do |format|
+  #   format.html # index.html.erb
+  #   format.xml  { render :xml => @purchases_entry_detail }
+  # end
+  logger.debug "-------------------------------------end users/purchases_entries_with_details"
+end
+
+
+
+def  purchases_entries_with_details
+  logger.debug "-------------------------------------begin users/purchases_entries_with_details"
+  @purchases_entries_with_details = PurchasesEntriesWithDetail.order("purchase_id DESC").limit(200).where("purchase_id = ?", params[:purchase_id]).all
+
+  respond_to do |format|
+    format.html # index.html.erb
+    format.xml  { render :xml => @purchases_entries_with_details }
+  end
+  logger.debug "-------------------------------------end users/purchases_entries_with_details"
+end
+
+def  sales_shipping_entries
+  logger.debug "-------------------------------------begin users/index"
+  @sales_shipping_entries = SalesShippingEntry.order("purchase_id DESC").limit(200).all
+
+  respond_to do |format|
+    format.html # index.html.erb
+    format.xml  { render :xml => @sales_shipping_entries }
+  end
+  logger.debug "-------------------------------------end users/index"
+end
+
+
+
+################################################
+def search_sales_shipping_entries
+  keywords = params[:sales_shipping_entries_keywords]
+  conditions = ["TransactionNumber  LIKE ? or purchase_id LIKE ? or EmailAddress LIKE ?","%#{keywords}%" ,"%#{keywords}%" ,"%#{keywords}%" ]
+  @sales_shipping_entries = SalesShippingEntry.limit(20).where(conditions).all
+  if @sales_shipping_entries
+      render :partial => "users/sales_shipping_entry", :collection => @sales_shipping_entries, :spacer_template => "page_divider" ,:layout => 'none'
+  else
+      render :text => "No records found" ,:layout => 'none'
+   end
+  end
+################################################
+
+
 
 
   def edit_credit_card
@@ -209,6 +305,17 @@ def index
     logger.debug "-------------------------------------end users/index"
  end
 
+
+
+  ################################################
+  def find_sales_shipping_entries
+    ## UPDATE THIS TO MSFTE
+    keywords = params[:user_keywords]
+    conditions = ["email LIKE ? or FirstName LIKE ? or LastName LIKE ? or Company LIKE ? or AccountNumber LIKE ? or Zip LIKE ? or City LIKE ? or PhoneNumber LIKE ? or firstname_lastname LIKE ? or parsed_phonenumber  LIKE ?","%#{keywords}%" ,"%#{keywords}%" ,"%#{keywords}%","%#{keywords}%","%#{keywords}%","%#{keywords}%","%#{keywords}%","%#{keywords}%","%#{keywords}%","%#{keywords}%" ]
+    @users = User.find(:all ,:from => [:customers_users], :conditions => conditions, :limit => 50 )
+    render :partial => "users/user", :collection => @users, :spacer_template => "page_divider" ,:layout => 'none'
+  end
+  ################################################
 ################################################
 def find_user_via_form
     ## UPDATE THIS TO MSFTE

@@ -1,0 +1,119 @@
+
+
+<!-- Start of first page -->
+<div data-role="page" id="purchases_entries_with_details">
+
+  <script type="text/javascript">
+
+
+
+
+      function purchasesEntriesDetailsDialogContents(purchases_entry_detail_id)
+      {
+          console.log("begin purchasesEntriesDetailsDialogContents");
+
+          $.ajax({
+              type: "POST",
+              url:  "/users/purchases_entries_detail",
+              data: {
+                  purchases_entry_id:purchases_entry_detail_id ,
+                  other_param:""
+              },
+              success: function(msg){
+                  $("#dialog_content").html(msg).enhanceWithin();
+              }
+          });
+          console.log("end purchasesEntriesDetailsDialogContents");
+      }
+
+  </script>
+
+
+
+
+  <a href="/users/sales_shipping_entries">Back to shipping entries</a>    <br>
+    <br>
+    Number of entries:<%= @purchases_entries_with_details.size %>  <br>
+    Quote#: <%= @purchases_entries_with_details.first.purchase_id %><br>
+    Transaction#: <%= @purchases_entries_with_details.first.TransactionNumber %><br>
+    Company: <%= @purchases_entries_with_details.first.Company %><br>
+    FirstName: <%= @purchases_entries_with_details.first.FirstName %><br>
+    LastName: <%= @purchases_entries_with_details.first.LastName %><br>
+    shipping_service_name: <%= @purchases_entries_with_details.first.shipping_service_name %><br>
+    ShippingChargeOnOrder: <%= @purchases_entries_with_details.first.ShippingChargeOnOrder %><br>
+    Total: <%= @purchases_entries_with_details.first.Total %><br>
+    <br>
+     <table>
+       <tbody>
+         <tr>
+           <th>QuantityOnOrder</th>
+           <th>Price</th>
+           <!--<th>listing_purchases_entry_id</th>-->
+           <!--<th>purchases_entry_details_id</th>-->
+           <th>department</th>
+           <th>category</th>
+           <th>ItemLookupCode</th>
+           <th>Description</th>
+           <th>quantity_in_stock</th>
+           <th>quantity on order</th>
+           <th>holding</th>
+           <th>reason</th>
+         </tr>
+        <% @purchases_entries_with_details.each do |pe| %>
+           <% @td_class = cycle( 'td_odd', 'td_even') %>
+           <tr>
+                 <td class="<%= @td_class %>"><%= pe.QuantityOnOrder %></td>
+                 <td class="<%= @td_class %>">$<%= pe.Price %></td>
+                 <!--<td class="<%= @td_class %>"><%= pe.listing_purchases_entry_id %></td>-->
+                 <!--<td class="<%= @td_class %>"><%= pe.purchases_entry_details_id %></td>-->
+                 <td class="<%= @td_class %>"><%= pe.department_name %></td>
+                 <td class="<%= @td_class %>"><%= pe.category_name %></td>
+                 <td class="<%= @td_class %>"><%= pe.ItemLookupCode %></td>
+                 <td class="<%= @td_class %>"><%= pe.Description %></td>
+                 <td class="<%= @td_class %>"><%= pe.quantity_in_stock %></td>
+                 <td class="<%= @td_class %>"><%= pe.sum_quantity_left_on_order %></td>
+                 <td class="<%= @td_class %>">
+                   <% if pe.reason_for_holding %>
+                                   <% if pe.holding_for_department_id %>
+                                            <%=   HoldingForDepartment.find( pe.holding_for_department_id ).name    %>
+                                   <% else %>
+                                            Not assigned
+                                   <% end %>
+                   <% else %>
+                                    <% if pe.holding_for_department_id %>
+                                            <%=   HoldingForDepartment.find( pe.holding_for_department_id ).name    %>
+                                   <% else %>
+                                            Not on hold
+                                   <% end %>
+                   <% end %>
+                 </td>
+                 <td class="<%= @td_class %>">
+                   <% if pe.reason_for_holding %>
+                        <%= pe.reason_for_holding %>
+                   <% else %>
+                       No reason
+                   <% end %>
+                 </td>
+                 <td>
+                   <a href="#purchases_entry_detail" onclick="purchasesEntriesDetailsDialogContents(<%= pe.listing_purchases_entry_id %>);" class="ui-btn ui-btn-inline" data-transition="pop">Edit</a>
+                 </td>
+           </tr>
+        <% end %>
+       </tbody>
+    </table>
+</div><!-- /page -->
+
+<!-- Start of second page -->
+<div data-role="page" id="purchases_entry_detail" data-dialog="true">
+
+  <div data-role="header">
+    <h1>Edit Purchases Entry Details</h1>
+  </div><!-- /header -->
+
+  <div role="main" class="ui-content">
+        <div id="dialog_content">
+               Spinner goes here.
+         </div>
+  </div><!-- /content -->
+
+</div><!-- /page -->

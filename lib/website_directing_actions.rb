@@ -104,7 +104,7 @@ end
 def redirect_unless_intranet
             #if   logged_in? && current_user.user_type_id == 3
            store_location
-           if   intranet? or admin?
+           if   intranet? #or admin?
                          true
             else
                     flash[:notice] = "Please log in, zewd"
@@ -125,6 +125,19 @@ def redirect_unless_priviledged_ip
             end
 end      
 ############################################################################################################  
+def redirect_unless_123
+          store_location
+          local_ips = ["192.168.0.123", "192.168.0.116"]
+          if local_ips.include?(request.remote_ip)
+            logger.debug "intranet?==true"
+            true
+          else
+            logger.debug "intranet?==false"
+            false
+          end
+            logger.debug "SEE ME - SEE ME - SEE ME - SEE ME - SEE ME - SEE ME"
+end
+############################################################################################################
 def redirect_unless_cashier
           store_location
           logger.debug "SEE ME - SEE ME - SEE ME - SEE ME - SEE ME - SEE ME"
@@ -138,7 +151,7 @@ def redirect_unless_cashier
                         false
             end
             logger.debug "SEE ME - SEE ME - SEE ME - SEE ME - SEE ME - SEE ME"
-end      
+end
 ############################################################################################################ 
 def your_cart
   redirect_to(:controller => 'cart' , :action => 'index')

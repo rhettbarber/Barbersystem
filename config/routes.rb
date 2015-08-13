@@ -4,7 +4,13 @@ ThreeTwoThree::Application.routes.draw do
   match "search/search_type_name/:search_type_name/query/:query", :controller => "search", :action => "index"
 
 
+  match 'users/save_purchases_entries_detail', :controller => 'users', :action => 'save_purchases_entries_detail'
 
+  match 'users/purchases_entries_detail', :controller => 'users', :action => 'purchases_entries_detail'
+  match 'users/purchases_entries_with_details/:purchase_id', :controller => 'users', :action => 'purchases_entries_with_details'
+  match 'users/purchases_entries_with_details', :controller => 'users', :action => 'purchases_entries_with_details'
+  match 'users/sales_shipping_entries', :controller => 'users', :action => 'sales_shipping_entries'
+  match 'users/search_sales_shipping_entries', :controller => 'users', :action => 'search_sales_shipping_entries'
 
   match "control_sheet/index", :controller => 'control_sheet', :action => 'index'
   match "control_sheet/initiate_index", :controller => 'control_sheet', :action => 'index'
@@ -18,8 +24,9 @@ ThreeTwoThree::Application.routes.draw do
   match '/catalogs/show_catalog/:id' , :controller => 'catalogs', :action => 'show_catalog'
 
 
-  match '/custom' => redirect(  'http://barberandcompany.espwebsite.com'), :as => :custom
+  # match '/custom' => redirect(  'http://barberandcompany.espwebsite.com'), :as => :custom
 
+  match '/image_manager/all_all_over_orders' , :controller => 'image_manager', :action => 'all_all_over_orders'
   match '/image_manager/missing_psd_images' , :controller => 'image_manager', :action => 'missing_psd_images'
   match '/image_manager/missing_sublimation_images' , :controller => 'image_manager', :action => 'missing_sublimation_images'
   match '/image_manager/print_all/:purchase_id' , :controller => 'image_manager', :action => 'print_all'
@@ -89,7 +96,7 @@ ThreeTwoThree::Application.routes.draw do
   ###################################################   BEGIN  WEBSITE ROUTING CONSTRAINT
   constraints(WebsiteRoutingConstraint) do
 
-
+    match 'users/sales_shipping_entries', :controller => 'users', :action => 'sales_shipping_entries'
 
     match "catalog", :controller => 'item_reports', :action => 'designs_by_department'
 
@@ -130,6 +137,7 @@ ThreeTwoThree::Application.routes.draw do
     match "films/camerasnap", :controller => 'films', :action => 'camerasnap'
     match "films/camerasnap_update", :controller => 'films', :action => 'camerasnap_update'
     resources  :films
+
 
     #match  'javascripts/dynamic_department_categories.js', :controller => 'javascripts', :action => 'dynamic_department_categories'
     #match 'item_manager/ajax_choose_item_type' , :controller => 'item_manager', :action => 'ajax_choose_item_type'

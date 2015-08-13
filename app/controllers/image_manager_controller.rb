@@ -55,7 +55,7 @@ def missing_sublimation_images
 end
 
  def all_all_over_orders
-   @all_over_sublimation_entries = SublimationEntry.where( "purchase_id > ? and ReferenceNumber not like ?",   376438, 'unfinished_web' ).all
+   @all_over_sublimation_entries = SublimationEntry.all
    gather_additional_sublimation_entries
    all_over_ts_commands
 end
@@ -138,14 +138,22 @@ def all_over_ts_commands
                 @all_all_over_sublimation_entries.merge   @additional_all_over_sublimation_entries
                 @all_all_over_sublimation_entries.delete_if { | i |  i.class != SublimationEntry     }
                 @all_all_over_sublimation_entries.each do | pe |
-                             begin
+                              if  pe.TransactionNumber
+                                 quantity_on_order =    pe.QuantityRTD.to_i
+                              else
+                                 quantity_on_order =    pe.QuantityOnOrder.to_i
+                              end
+                              logger.debug "##################################"
+                              logger.debug "sublimation_entry purchase_id: " + pe.purchase_id.to_s
+                              logger.debug "quantity_on_order: " + quantity_on_order.to_s
+                              logger.debug "##################################"
+                              begin
                                 sublimation_width_string  =    pe.SubDescription3.split("_").first
                                 logger.debug "sublimation_width_string: " + sublimation_width_string
                                 if sublimation_width_string.is_number?
                                                 sublimation_width   =       sublimation_width_string
                                 end
                                 if  sublimation_width    and sublimation_width != 0
-                                                quantity_on_order =    pe.QuantityOnOrder.to_i
                                                 if quantity_on_order  > 0
                                                                   logger.debug "quantity_on_order > 1"
                                                                   logger.debug "quantity_on_order: " + quantity_on_order.to_s

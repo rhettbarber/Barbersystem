@@ -1,0 +1,72 @@
+<tr>
+  <td class="td_even">
+
+    <%= sales_shipping_entry.purchase_id %>
+
+
+  </td>
+  <td class="td_odd">
+    <%= sales_shipping_entry.Time %>
+  </td>
+
+  <td class="td_even">
+    <% if sales_shipping_entry.DateProcessed? %>
+           <span style="color: green;"> <%= sales_shipping_entry.DateProcessed %>   </span>
+    <% else %>
+           <span style="color: red;"> Not yet shipped </span>
+    <% end %>
+  </td>
+
+  <td class="td_even">
+    <%= sales_shipping_entry.ReferenceNumber %>
+  </td>
+
+  <td class="td_odd">
+    <a target="_blank" href="http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=<%= sales_shipping_entry.tracking_number %>">
+      <%= sales_shipping_entry.tracking_number %>
+    </a>
+  </td>
+
+</tr>
+
+<tr>
+    <td class="td_even">
+
+      <% if sales_shipping_entry.TransactionNumber? %>
+          <%=h sales_shipping_entry.TransactionNumber %>
+      <% else %>
+          Quote only
+      <% end %>
+
+    </td>
+    <td class="td_odd">
+    	<%= sales_shipping_entry.Company %>
+	 </td>
+    <td class="td_even">
+      <%= sales_shipping_entry.FirstName.to_s + " " + sales_shipping_entry.LastName.to_s  %>
+	 </td>
+
+	 
+    <td class="td_odd">
+               <%= sales_shipping_entry.EmailAddress %>
+	 </td>
+
+  <td class="td_even">
+
+  </td>
+
+  </tr>
+
+<tr>
+  <td style="background-color: #fefefe; text-align: left;" colspan="50" height="25">
+    <a href="/users/purchases_entries_with_details/<%= sales_shipping_entry.purchase_id %>"> Order Detail </a>  &nbsp;
+    <%  @purchases_entries_with_hold = PurchasesEntriesWithHold.where( "purchase_id = ?",  sales_shipping_entry.purchase_id ).first  %>
+    <% if @purchases_entries_with_hold.class == PurchasesEntriesWithHold  %>
+                 <span style="color: red;"> Items are on Hold. See details.  </span>
+    <% else %>
+                 Not showing a cause for hold
+    <% end %>
+    </td>
+</tr>
+
+<tr>   <td style="background-color: #d3d3d3;" colspan="50" height="25"> &nbsp; </td>   </tr>
