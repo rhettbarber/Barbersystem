@@ -1,36 +1,48 @@
 <tr>
-  <td class="td_even">
+  <td class="td_even 1">
 
     <%= sales_shipping_entry.purchase_id %>
 
 
   </td>
-  <td class="td_odd">
+  <td class="td_odd 2">
     <%= sales_shipping_entry.Time %>
   </td>
 
-  <td class="td_even">
+  <td class="td_even 3">
     <% if sales_shipping_entry.DateProcessed? %>
            <span style="color: green;"> <%= sales_shipping_entry.DateProcessed %>   </span>
     <% else %>
-           <span style="color: red;"> Not yet shipped </span>
+             <% if  sales_shipping_entry.tracking_number.to_s.size > 3 %>
+                        <span style="color: green;"> Shipped, but not yet dated. </span>
+            <% else %>
+                        <span style="color: red;"> Not yet shipped </span>
+            <% end %>
     <% end %>
   </td>
 
-  <td class="td_even">
-    <%= sales_shipping_entry.ReferenceNumber %>
+  <td class="td_even 4">
+    SPOT4
   </td>
 
-  <td class="td_odd">
-    <a target="_blank" href="http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=<%= sales_shipping_entry.tracking_number %>">
-      <%= sales_shipping_entry.tracking_number %>
-    </a>
+  <td class="td_odd 5">
+    <% s = "s" %>
+    <% if  sales_shipping_entry.tracking_number.to_s.starts_with? "1Z" %>
+            <a target="_blank" href="http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=<%= sales_shipping_entry.tracking_number %>">
+              <%= sales_shipping_entry.tracking_number %>
+            </a>
+    <% else %>
+        <a href="http://trkcnfrm1.smi.usps.com/PTSInternetWeb/InterLabelInquiry.do?origTrackNum={<%= sales_shipping_entry.tracking_number %>}"
+           target="_blank">
+          <%= sales_shipping_entry.tracking_number %>
+        </a>
+    <% end %>
   </td>
 
 </tr>
 
 <tr>
-    <td class="td_even">
+    <td class="td_even 6">
 
       <% if sales_shipping_entry.TransactionNumber? %>
           <%=h sales_shipping_entry.TransactionNumber %>
@@ -39,34 +51,46 @@
       <% end %>
 
     </td>
-    <td class="td_odd">
+    <td class="td_odd 7">
     	<%= sales_shipping_entry.Company %>
 	 </td>
-    <td class="td_even">
+    <td class="td_even 8">
       <%= sales_shipping_entry.FirstName.to_s + " " + sales_shipping_entry.LastName.to_s  %>
 	 </td>
 
 	 
-    <td class="td_odd">
+    <td class="td_odd 9">
                <%= sales_shipping_entry.EmailAddress %>
 	 </td>
 
-  <td class="td_even">
+  <td class="td_even 10">
 
   </td>
 
   </tr>
 
 <tr>
-  <td style="background-color: #fefefe; text-align: left;" colspan="50" height="25">
-    <a href="/users/purchases_entries_with_details/<%= sales_shipping_entry.purchase_id %>"> Order Detail </a>  &nbsp;
-    <%  @purchases_entries_with_hold = PurchasesEntriesWithHold.where( "purchase_id = ?",  sales_shipping_entry.purchase_id ).first  %>
-    <% if @purchases_entries_with_hold.class == PurchasesEntriesWithHold  %>
-                 <span style="color: red;"> Items are on Hold. See details.  </span>
-    <% else %>
-                 Not showing a cause for hold
-    <% end %>
+    <td class="11 td_odd" style="background-color: #fefefe; text-align: left;" colspan="50" height="25">
+            <%= sales_shipping_entry.Comment %> &nbsp; --- &nbsp;     <%= sales_shipping_entry.ReferenceNumber %>
     </td>
 </tr>
 
-<tr>   <td style="background-color: #d3d3d3;" colspan="50" height="25"> &nbsp; </td>   </tr>
+
+<tr>
+  <td class="11 " style="background-color: #fefefe; text-align: left;" colspan="50" height="25">
+    <% if sales_shipping_entry.ReferenceNumber.nil?  %>
+            No Order details --
+   <% else %>
+        <a href="/users/purchases_entries_with_details/<%= sales_shipping_entry.purchase_id %>"> Order Detail </a>  &nbsp;
+   <% end %>
+    <%  @purchases_entries_with_hold = PurchasesEntriesWithHold.where( "purchase_id = ?",  sales_shipping_entry.purchase_id ).first  %>
+    <% if @purchases_entries_with_hold.class == PurchasesEntriesWithHold  %>
+        <span style="color: red;"> Items are on Hold. See details.  </span>
+    <% else %>
+        Not showing a cause for hold
+    <% end %>
+  </td>
+</tr>
+
+
+<tr>   <td  class="12" style="background-color: #d3d3d3;" colspan="50" height="25"> &nbsp; </td>   </tr>

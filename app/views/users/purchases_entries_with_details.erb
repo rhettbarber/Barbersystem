@@ -34,7 +34,7 @@
   <a href="/users/sales_shipping_entries">Back to shipping entries</a>    <br>
     <br>
     Number of entries:<%= @purchases_entries_with_details.size %>  <br>
-    Quote#: <%= @purchases_entries_with_details.first.purchase_id %><br>
+    Quote#: <%= @purchases_entries_with_details.first.purchase_id.to_s %><br>
     Transaction#: <%= @purchases_entries_with_details.first.TransactionNumber %><br>
     Company: <%= @purchases_entries_with_details.first.Company %><br>
     FirstName: <%= @purchases_entries_with_details.first.FirstName %><br>
@@ -46,7 +46,7 @@
      <table>
        <tbody>
          <tr>
-           <th>QuantityOnOrder</th>
+           <th>Quantity</th>
            <th>Price</th>
            <!--<th>listing_purchases_entry_id</th>-->
            <!--<th>purchases_entry_details_id</th>-->
@@ -54,7 +54,7 @@
            <th>category</th>
            <th>ItemLookupCode</th>
            <th>Description</th>
-           <th>quantity_in_stock</th>
+           <th>in stock</th>
            <th>quantity on order</th>
            <th>holding</th>
            <th>reason</th>

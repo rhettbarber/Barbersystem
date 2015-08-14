@@ -75,7 +75,7 @@ end
 
 def  sales_shipping_entries
   logger.debug "-------------------------------------begin users/index"
-  @sales_shipping_entries = SalesShippingEntry.order("purchase_id DESC").limit(200).all
+  @sales_shipping_entries = SalesShippingEntry.order("purchase_id ASC").limit(200).all
 
   respond_to do |format|
     format.html # index.html.erb
