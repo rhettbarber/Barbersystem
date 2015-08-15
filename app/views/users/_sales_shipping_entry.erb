@@ -22,7 +22,9 @@
   </td>
 
   <td class="td_even 4">
-    SPOT4
+       <% if sales_shipping_entry.spot_id %>
+            SPOT# <%= sales_shipping_entry.spot_id %>
+       <% end %>
   </td>
 
   <td class="td_odd 5">
@@ -79,7 +81,7 @@
 <tr>
   <td class="11 " style="background-color: #fefefe; text-align: left;" colspan="50" height="25">
     <% if sales_shipping_entry.ReferenceNumber.nil?  %>
-            No Order details --
+             Has not been picked up, converted to sale. --  <a href="/users/purchases_entries_with_details/<%= sales_shipping_entry.purchase_id %>"> Order Detail? </a>  &nbsp;
    <% else %>
         <a href="/users/purchases_entries_with_details/<%= sales_shipping_entry.purchase_id %>"> Order Detail </a>  &nbsp;
    <% end %>

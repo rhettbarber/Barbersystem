@@ -6,9 +6,16 @@
     }
 </style>
 
-<div style="border:solid black 1px;width:100%;height:160px;float:left;padding:5px;margin:5px;">
+<a href="/users/sales_shipping_entries">Home</a>
+- <a href="/users/sales_shipping_entries?on_hold_purchases=1">On hold </a>
+- <a href="/users/on_hold_entries?type=out_of_stock_transfers">Out of stock transfers </a>
+- <a href="/users/on_hold_entries?type=out_of_stock_garments">Out of stock garments </a>
+- <a href="/users/on_hold_entries?type=out_of_stock_other">Out of stock other </a>
 
-	<div style="display:table;height:50px;width:100%;">
+
+<div style="border:solid black 1px;width:95%;height:160px;float:left;padding:5px;margin:5px;">
+
+	<div style="display:table;height:50px;width:95%;">
 		Search:	
 
 		<%=    text_field_tag  "sales_shipping_entries_keywords"  %>
@@ -19,7 +26,7 @@
 
 </div>
 
-<div style="border:solid black 1px;float:left;padding:5px;margin:5px;width:100%;">
+<div style="border:solid black 1px;float:left;padding:5px;margin:5px;width:95%;">
 	
 	<table>
 		<th>Quote #/Transaction # </th>

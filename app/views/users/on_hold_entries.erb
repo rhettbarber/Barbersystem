@@ -1,0 +1,115 @@
+
+
+<!-- Start of first page -->
+<div data-role="page" id="purchases_entries_with_details">
+
+  <script type="text/javascript">
+
+
+
+
+      function purchasesEntriesDetailsDialogContents(purchases_entry_detail_id)
+      {
+          console.log("begin purchasesEntriesDetailsDialogContents");
+
+          $.ajax({
+              type: "POST",
+              url:  "/users/purchases_entries_detail",
+              data: {
+                  purchases_entry_id:purchases_entry_detail_id ,
+                  other_param:""
+              },
+              success: function(msg){
+                  $("#dialog_content").html(msg).enhanceWithin();
+              }
+          });
+          console.log("end purchasesEntriesDetailsDialogContents");
+      }
+
+  </script>
+
+
+
+
+  <a href="/users/sales_shipping_entries">Back to main screen</a>    <br>
+  <br>
+  <h2><%= params[:type].humanize %></h2>
+
+  <br>
+  <table>
+    <tbody>
+    <tr>
+      <th>Quantity RTD</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <!--<th>listing_purchases_entry_id</th>-->
+      <!--<th>purchases_entry_details_id</th>-->
+      <th>department</th>
+      <th>category</th>
+      <th>ItemLookupCode</th>
+      <th>Description</th>
+      <th>in stock</th>
+      <th>quantity on order</th>
+      <th>holding</th>
+      <th>reason</th>
+    </tr>
+    <% @purchases_entries_with_details.each do |pe| %>
+        <% @td_class = cycle( 'td_odd', 'td_even') %>
+        <tr>
+          <td class="<%= @td_class %>"><%= pe.QuantityRTD %></td>
+          <td class="<%= @td_class %>"><%= pe.QuantityOnOrder %></td>
+          <td class="<%= @td_class %>">$<%= pe.Price %></td>
+          <!--<td class="<%= @td_class %>"><%= pe.listing_purchases_entry_id %></td>-->
+          <!--<td class="<%= @td_class %>"><%= pe.purchases_entry_details_id %></td>-->
+          <td class="<%= @td_class %>"><%= pe.department_name %></td>
+          <td class="<%= @td_class %>"><%= pe.category_name %></td>
+          <td class="<%= @td_class %>"><%= pe.ItemLookupCode %></td>
+          <td class="<%= @td_class %>"><%= pe.Description %></td>
+          <td class="<%= @td_class %>"><%= pe.quantity_in_stock %></td>
+          <td class="<%= @td_class %>"><%= pe.sum_quantity_left_on_order %></td>
+          <td class="<%= @td_class %>"> (<%=  pe.holding_for_department_id %>)
+            <% if pe.reason_for_holding %>
+                <% if pe.holding_for_department_id %>
+                    <%=   HoldingForDepartment.find( pe.holding_for_department_id ).name    %>
+                <% else %>
+                    Not assigned
+                <% end %>
+            <% else %>
+                <% if pe.holding_for_department_id %>
+                    <%=   HoldingForDepartment.find( pe.holding_for_department_id ).name    %>
+                <% else %>
+                    Not on hold
+                <% end %>
+            <% end %>
+          </td>
+          <td class="<%= @td_class %>">
+            <% if pe.reason_for_holding %>
+                <%= pe.reason_for_holding %>
+            <% else %>
+                No reason
+            <% end %>
+          </td>
+          <td>
+            <a href="#purchases_entry_detail" onclick="purchasesEntriesDetailsDialogContents(<%= pe.listing_purchases_entry_id %>);" class="ui-btn ui-btn-inline" data-transition="pop">Edit</a>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div><!-- /page -->
+
+<!-- Start of second page -->
+<div data-role="page" id="purchases_entry_detail" data-dialog="true">
+
+  <div data-role="header">
+    <h1>Edit Purchases Entry Details</h1>
+  </div><!-- /header -->
+
+  <div role="main" class="ui-content">
+    <div id="dialog_content">
+      <div style="width:100%;" class='container text-center' id='modal_spinner'> <img style="width:200px;" src='/assets/ajax-loader.gif' id='spinner' alt='Spinner'></div>
+
+    </div>
+  </div><!-- /content -->
+
+</div><!-- /page -->

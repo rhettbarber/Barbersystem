@@ -33,6 +33,13 @@
 
   <a href="/users/sales_shipping_entries">Back to shipping entries</a>    <br>
     <br>
+
+        <% if @purchases_entries_with_details.size > 1 %>
+                            Spot#:<%= @purchases_entries_with_details.first.spot_id %>
+        <% else %>
+                            Spot#: Must have more than one item on the order and some, but not all, entries must be on hold to get a spot.
+        <% end %>
+  <br>
     Number of entries:<%= @purchases_entries_with_details.size %>  <br>
     Quote#: <%= @purchases_entries_with_details.first.purchase_id.to_s %><br>
     Transaction#: <%= @purchases_entries_with_details.first.TransactionNumber %><br>
@@ -46,6 +53,7 @@
      <table>
        <tbody>
          <tr>
+           <th>Quantity RTD</th>
            <th>Quantity</th>
            <th>Price</th>
            <!--<th>listing_purchases_entry_id</th>-->
@@ -62,6 +70,7 @@
         <% @purchases_entries_with_details.each do |pe| %>
            <% @td_class = cycle( 'td_odd', 'td_even') %>
            <tr>
+                 <td class="<%= @td_class %>"><%= pe.QuantityRTD %></td>
                  <td class="<%= @td_class %>"><%= pe.QuantityOnOrder %></td>
                  <td class="<%= @td_class %>">$<%= pe.Price %></td>
                  <!--<td class="<%= @td_class %>"><%= pe.listing_purchases_entry_id %></td>-->
@@ -112,8 +121,9 @@
 
   <div role="main" class="ui-content">
         <div id="dialog_content">
-               Spinner goes here.
-         </div>
+          <div style="width:100%;" class='container text-center' id='modal_spinner'> <img style="width:200px;" src='/assets/ajax-loader.gif' id='spinner' alt='Spinner'></div>
+
+        </div>
   </div><!-- /content -->
 
 </div><!-- /page -->

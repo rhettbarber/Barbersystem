@@ -2,18 +2,78 @@ class UsersController < ApplicationController
 #require 'csv'
 #before_filter :redirect_unless_admin
 ssl_exceptions
- before_filter :redirect_unless_cashier , :except => [:save_purchases_entries_detail, :purchases_entries_detail, :purchases_entries_with_details, :sales_shipping_entries, :search_sales_shipping_entries ]  # more harsh
+ before_filter :redirect_unless_cashier , :except => [:on_hold_entries, :save_purchases_entries_detail, :purchases_entries_detail, :purchases_entries_with_details, :sales_shipping_entries, :search_sales_shipping_entries ]  # more harsh
  # before_filter :redirect_unless_intranet, :only => [:sales_shipping_entries, :search_sales_shipping_entries ]  # more harsh
-  before_filter :redirect_unless_123, :only => [:save_purchases_entries_detail, :purchases_entries_detail, :purchases_entries_with_details, :sales_shipping_entries, :search_sales_shipping_entries ]  # more harsh
+  before_filter :redirect_unless_123, :only => [:on_hold_entries, :save_purchases_entries_detail, :purchases_entries_detail, :purchases_entries_with_details, :sales_shipping_entries, :search_sales_shipping_entries ]  # more harsh
 cache_sweeper :user_sweeper
 
-  before_filter  :initialize_variables  , :only => [ :sales_shipping_entries, :purchases_entries_with_details]
-  layout 'latest_jquery_mobile', :only => [ :sales_shipping_entries, :purchases_entries_with_details   ]
-  skip_before_filter :verify_authenticity_token   , :only => [ :save_purchases_entries_detail, :sales_shipping_entries, :search_sales_shipping_entries   ]
+  before_filter  :initialize_variables  , :only => [ :on_hold_entries,:sales_shipping_entries, :purchases_entries_with_details]
+  layout 'latest_jquery_mobile', :only => [:on_hold_entries, :sales_shipping_entries, :purchases_entries_with_details   ]
+  skip_before_filter :verify_authenticity_token   , :only => [ :on_hold_entries, :save_purchases_entries_detail, :sales_shipping_entries, :search_sales_shipping_entries   ]
+
+def clear_spot
+  if @spot
+    @spot.purchase_id =  0
+    @spot.save
+  end
+end
+
+
+def purchases_entries_counts
+    @purchases_entries_count = PurchasesEntry.where("purchase_id = ?", @purchases_entry.purchase_id ).all.size
+    @purchases_entries_with_holds_count = PurchasesEntriesWithHold.where("purchase_id = ?", @purchases_entry.purchase_id ).all.size
+    @create_a_spot = false
+    if @purchases_entries_with_holds_count < @purchases_entries_count and @purchases_entries_count > 1
+          @create_a_spot = true
+    end
+end
+
+
+
+
+def find_spot
+  if @purchases_entry_detail.update_attributes(params[:purchases_entry_detail])
+        flash[:notice] = "update saved"
+        purchases_entries_counts
+
+        if !@purchases_entry_detail.holding_for_department_id.nil?  and @create_a_spot
+          @spot = Spot.where("purchase_id = ?", @purchases_entry.purchase_id ).first
+              if @spot
+                         # logger.debug "great_already_has_spot"
+              else
+
+                      @spot = Spot.where("purchase_id = ?", 0).first
+                      if @spot
+                                @spot.purchase_id =  @purchases_entry.purchase_id
+                                @spot.save
+                      else
+                                @spot_temp = SpotsForReplacements.all.first
+                                @spot = Spot.where("id = ?", @spot_temp.id).first   if @spot_temp
+                                if @spot
+                                          @spot.purchase_id =  @purchases_entry.purchase_id
+                                          @spot.save
+                                else
+                                          @spot = Spot.new
+                                          @spot.purchase_id =  @purchases_entry.purchase_id
+                                          @spot.save
+                                end
+                      end
+              end
+        else
+            @spot = Spot.where("purchase_id = ?", @purchases_entry.purchase_id ).first
+            clear_spot
+            logger.debug "TO GET A SPOT, THERE MUST BE MORE THAN ONE ENTRY, or pulldown was set to not on hold"
+        end
+  else
+    flash[:notice] = "update failed"
+  end
+end
+
 
 def  save_purchases_entries_detail
     if  params[:purchases_entry_id]
             @purchases_entry = PurchasesEntry.find params[:purchases_entry_id]
+            @s = "s"
             @purchases_entry_detail = @purchases_entry.purchases_entry_detail
             logger.debug "params[:listing_purchases_entry_id]"
             @s = "s"
@@ -23,6 +83,7 @@ def  save_purchases_entries_detail
                   @s = "s"
                   if @purchases_entry_detail.update_attributes(params[:purchases_entry_detail])
                     flash[:notice] = "update saved"
+                    find_spot
                   else
                     flash[:notice] = "update failed"
                   end
@@ -32,13 +93,16 @@ def  save_purchases_entries_detail
                   @purchases_entry_detail  = PurchasesEntryDetail.new(params[:purchases_entry_detail])
                   @purchases_entry_detail.purchase_id = params[:purchase_id]
                   @purchases_entry_detail.listing_purchases_entry_id =  params[:purchases_entry_id]
-                  @purchases_entry_detail.holding_for_department_id =  params[:holding_for_department_id]
-                  @purchases_entry_detail.reason_for_holding =  params[:reason_for_holding]
+                  # @purchases_entry_detail.holding_for_department_id =  params[:holding_for_department_id]
+                  # @purchases_entry_detail.reason_for_holding =  params[:reason_for_holding]
                   if @purchases_entry_detail.save
-                    flash[:notice] = "new entry saved"
+                              flash[:notice] = "new entry saved"
+
+                                find_spot
                   else
-                    flash[:notice] = "new entry failed"
+                           flash[:notice] = "new entry failed"
                   end
+
              end
     else
       logger.debug "NO params[:purchases_entry_id]"
@@ -64,7 +128,7 @@ end
 
 def  purchases_entries_with_details
   logger.debug "-------------------------------------begin users/purchases_entries_with_details"
-  @purchases_entries_with_details = PurchasesEntriesWithDetail.order("purchase_id DESC").limit(200).where("purchase_id = ?", params[:purchase_id]).all
+  @purchases_entries_with_details = PurchasesEntriesWithDetail.order("purchases_entry_id ASC").limit(200).where("purchase_id = ?", params[:purchase_id]).all
 
   respond_to do |format|
     format.html # index.html.erb
@@ -73,9 +137,29 @@ def  purchases_entries_with_details
   logger.debug "-------------------------------------end users/purchases_entries_with_details"
 end
 
+
+def on_hold_entries
+  if params[:type] == 'out_of_stock_transfers'
+    @purchases_entries_with_details = PurchasesEntriesWithDetail.order("purchase_id ASC").where("holding_for_department_id = ? and department_id in (?)", 1 , @website.default_design_department_ids.split(/,/)  ).limit(1000).all
+  elsif params[:type] == 'out_of_stock_garments'
+    @website_default_non_blank_item_department_ids = @website.default_non_blank_item_department_ids
+    @s = "s"
+    @purchases_entries_with_details = PurchasesEntriesWithDetail.order("purchase_id ASC").where("holding_for_department_id = ? and department_id in (?)", 1 , @website_default_non_blank_item_department_ids.join(",")   ).limit(1000).all
+  elsif params[:type] == 'out_of_stock_other'
+         @other_item_department_ids =  @website.default_item_department_ids.to_set.difference(@website.default_non_blank_item_department_ids.to_set )
+         @purchases_entries_with_details = PurchasesEntriesWithDetail.order("purchase_id ASC").where("holding_for_department_id = ? and department_id in (?)", 1 ,@other_item_department_ids.split(/,/)   ).limit(1000).all
+  end
+end
+
+
+
 def  sales_shipping_entries
   logger.debug "-------------------------------------begin users/index"
-  @sales_shipping_entries = SalesShippingEntry.order("purchase_id ASC").limit(200).all
+  if params[:on_hold_purchases]
+        @sales_shipping_entries = SalesShippingEntry.order("purchase_id ASC").where("spot_id > ?", 0 ).limit(1000).all
+  else
+      #@sales_shipping_entries = SalesShippingEntry.order("purchase_id ASC").limit(200).all
+  end
 
   respond_to do |format|
     format.html # index.html.erb
