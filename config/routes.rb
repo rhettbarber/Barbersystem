@@ -4,6 +4,10 @@ ThreeTwoThree::Application.routes.draw do
   match "search/search_type_name/:search_type_name/query/:query", :controller => "search", :action => "index"
 
 
+  match 'users/purchases_details/:purchase_id', :controller => 'users', :action => 'purchases_details'
+  match 'users/save_purchases_details', :controller => 'users', :action => 'save_purchases_details'
+
+  match 'users/orders_held_by_this_item/:item_id', :controller => 'users', :action => 'orders_held_by_this_item'
   match 'users/on_hold_entries', :controller => 'users', :action => 'on_hold_entries'
   match 'users/save_purchases_entries_detail', :controller => 'users', :action => 'save_purchases_entries_detail'
 

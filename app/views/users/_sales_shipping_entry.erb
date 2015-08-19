@@ -80,14 +80,45 @@
 
 <tr>
   <td class="11 " style="background-color: #fefefe; text-align: left;" colspan="50" height="25">
+    <%  @the_purchase_detail = PurchasesDetail.find_by_purchase_id   sales_shipping_entry.purchase_id %>
+
+    <% if  @the_purchase_detail and !@the_purchase_detail.purchase_status_id.nil?  and @the_purchase_detail.purchase_status_id > 0   %>
+             <%  @the_purchase_detail_status = PurchaseStatus.find   @the_purchase_detail.purchase_status_id  %>
+            <span style="color:red;">
+            <b> <%= @the_purchase_detail_status.name %>
+              - <%= @the_purchase_detail.notes %>
+            </b>
+            - StatusCreated:<%= @the_purchase_detail.created_at %>
+            - StatusUpdated: <%= @the_purchase_detail.updated_at %>
+                </span>
+    <% else %>
+           no purchase detail
+    <% end %>
+    <a href="/users/purchases_details/<%= sales_shipping_entry.purchase_id %>"> Order Wide Info </a>  &nbsp;
+
+
     <% if sales_shipping_entry.ReferenceNumber.nil?  %>
              Has not been picked up, converted to sale. --  <a href="/users/purchases_entries_with_details/<%= sales_shipping_entry.purchase_id %>"> Order Detail? </a>  &nbsp;
    <% else %>
-        <a href="/users/purchases_entries_with_details/<%= sales_shipping_entry.purchase_id %>"> Order Detail </a>  &nbsp;
+        <a href="/users/purchases_entries_with_details/<%= sales_shipping_entry.purchase_id %>"> Order Entries Detail </a>  &nbsp;
    <% end %>
     <%  @purchases_entries_with_hold = PurchasesEntriesWithHold.where( "purchase_id = ?",  sales_shipping_entry.purchase_id ).first  %>
     <% if @purchases_entries_with_hold.class == PurchasesEntriesWithHold  %>
-        <span style="color: red;"> Items are on Hold. See details.  </span>
+
+
+        <% if sales_shipping_entry.DateProcessed? %>
+            <span style="color: green;"> Shipped <%= sales_shipping_entry.DateProcessed %>   </span>
+        <% else %>
+            <% if  sales_shipping_entry.tracking_number.to_s.size > 3 %>
+                <span style="color: green;"> Shipped, but not yet dated. </span>
+            <% else %>
+                <span style="color: red;"> <span style="color: red;"> Items are on Hold. See details.  </span> </span>
+            <% end %>
+        <% end %>
+
+
+
+
     <% else %>
         Not showing a cause for hold
     <% end %>

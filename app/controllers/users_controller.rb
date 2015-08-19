@@ -2,14 +2,43 @@ class UsersController < ApplicationController
 #require 'csv'
 #before_filter :redirect_unless_admin
 ssl_exceptions
- before_filter :redirect_unless_cashier , :except => [:on_hold_entries, :save_purchases_entries_detail, :purchases_entries_detail, :purchases_entries_with_details, :sales_shipping_entries, :search_sales_shipping_entries ]  # more harsh
+ before_filter :redirect_unless_cashier , :except => [:save_purchases_details, :purchases_details, :on_hold_entries, :save_purchases_entries_detail, :purchases_entries_detail, :purchases_entries_with_details, :sales_shipping_entries, :search_sales_shipping_entries ]  # more harsh
  # before_filter :redirect_unless_intranet, :only => [:sales_shipping_entries, :search_sales_shipping_entries ]  # more harsh
-  before_filter :redirect_unless_123, :only => [:on_hold_entries, :save_purchases_entries_detail, :purchases_entries_detail, :purchases_entries_with_details, :sales_shipping_entries, :search_sales_shipping_entries ]  # more harsh
+  before_filter :redirect_unless_123, :only => [:purchases_details,:on_hold_entries, :save_purchases_entries_detail, :purchases_entries_detail, :purchases_entries_with_details, :sales_shipping_entries, :search_sales_shipping_entries ]  # more harsh
 cache_sweeper :user_sweeper
 
-  before_filter  :initialize_variables  , :only => [ :on_hold_entries,:sales_shipping_entries, :purchases_entries_with_details]
-  layout 'latest_jquery_mobile', :only => [:on_hold_entries, :sales_shipping_entries, :purchases_entries_with_details   ]
-  skip_before_filter :verify_authenticity_token   , :only => [ :on_hold_entries, :save_purchases_entries_detail, :sales_shipping_entries, :search_sales_shipping_entries   ]
+  before_filter  :initialize_variables  , :only => [:save_purchases_details,  :purchases_details, :on_hold_entries,:sales_shipping_entries, :purchases_entries_with_details]
+  layout 'latest_jquery_mobile', :only => [:save_purchases_details, :purchases_details,:on_hold_entries, :sales_shipping_entries, :purchases_entries_with_details   ]
+  skip_before_filter :verify_authenticity_token   , :only => [:save_purchases_details,  :purchases_details, :on_hold_entries, :save_purchases_entries_detail, :sales_shipping_entries, :search_sales_shipping_entries   ]
+
+
+def  save_purchases_details
+  @purchase = Purchase.find  params[:purchase_id]
+  @purchases_details = PurchasesDetail.find_or_create_by_purchase_id  params[:purchase_id]
+  @purchases_details.notes = params[:the_notes]
+  @purchases_details.purchase_status_id = params[:purchase_status_id]
+  if @purchase.Comment.start_with? "dec-"
+       logger.debug "already start with dec-"
+  else
+    @purchase.Comment =   'dec-' + @purchase.Comment
+    @purchase.save
+  end
+  @purchases_details.save
+  redirect_to :action => 'sales_shipping_entries'
+end
+
+
+
+
+
+
+def purchases_details
+      @purchase = Purchase.find  params[:purchase_id]
+      @purchases_details = PurchasesDetail.find_or_create_by_purchase_id  params[:purchase_id]
+
+end
+
+
 
 def clear_spot
   if @spot
@@ -137,19 +166,37 @@ def  purchases_entries_with_details
   logger.debug "-------------------------------------end users/purchases_entries_with_details"
 end
 
+def orders_held_by_this_item
+
+end
+
 
 def on_hold_entries
-  if params[:type] == 'out_of_stock_transfers'
-    @purchases_entries_with_details = PurchasesEntriesWithDetail.order("purchase_id ASC").where("holding_for_department_id = ? and department_id in (?)", 1 , @website.default_design_department_ids.split(/,/)  ).limit(1000).all
-  elsif params[:type] == 'out_of_stock_garments'
-    @website_default_non_blank_item_department_ids = @website.default_non_blank_item_department_ids
-    @s = "s"
-    @purchases_entries_with_details = PurchasesEntriesWithDetail.order("purchase_id ASC").where("holding_for_department_id = ? and department_id in (?)", 1 , @website_default_non_blank_item_department_ids.join(",")   ).limit(1000).all
-  elsif params[:type] == 'out_of_stock_other'
-         @other_item_department_ids =  @website.default_item_department_ids.to_set.difference(@website.default_non_blank_item_department_ids.to_set )
-         @purchases_entries_with_details = PurchasesEntriesWithDetail.order("purchase_id ASC").where("holding_for_department_id = ? and department_id in (?)", 1 ,@other_item_department_ids.split(/,/)   ).limit(1000).all
+      if params[:type] == 'out_of_stock_transfers'
+        @purchases_entries_with_details = PurchasesEntriesWithDetail.order("item_id ASC").where("holding_for_department_id = ? and department_id in (?)", 1 , @website.default_design_department_ids.split(/,/)  ).limit(1000).all
+      elsif params[:type] == 'out_of_stock_garments'
+            @website_default_blank_item_department_ids =  @website.default_blank_item_department_ids
+            @g = "g"
+            @purchases_entries_with_details = PurchasesEntriesWithDetail.order("item_id ASC").where("holding_for_department_id = ? and department_id in (?)", 1 , @website_default_blank_item_department_ids   ).limit(1000).all
+      elsif params[:type] == 'out_of_stock_other'
+             @other_item_department_ids =  @website.default_item_department_ids.split(",").to_set.difference(@website.default_blank_item_department_ids.to_set )
+             @s = "s"
+             @purchases_entries_with_details = PurchasesEntriesWithDetail.order("item_id ASC").where("holding_for_department_id = ? and department_id in (?)", 1 ,@other_item_department_ids   ).limit(1000).all
+      end
   end
-end
+
+# def on_hold_entries_old
+#   if params[:type] == 'out_of_stock_transfers'
+#     @purchases_entries_with_details = PurchasesEntriesWithDetail.order("purchase_id ASC").where("holding_for_department_id = ? and department_id in (?)", 1 , @website.default_design_department_ids.split(/,/)  ).limit(1000).all
+#   elsif params[:type] == 'out_of_stock_garments'
+#     @website_default_non_blank_item_department_ids = @website.default_item_department_ids.split(",").to_set.difference(@website.default_non_blank_item_department_ids.to_set )
+#     @s = "s"
+#     @purchases_entries_with_details = PurchasesEntriesWithDetail.order("purchase_id ASC").where("holding_for_department_id = ? and department_id in (?)", 1 , @website_default_non_blank_item_department_ids   ).limit(1000).all
+#   elsif params[:type] == 'out_of_stock_other'
+#          @other_item_department_ids =  @website.default_item_department_ids.to_set.difference(@website.default_non_blank_item_department_ids.to_set )
+#          @purchases_entries_with_details = PurchasesEntriesWithDetail.order("purchase_id ASC").where("holding_for_department_id = ? and department_id in (?)", 1 ,@other_item_department_ids.split(/,/)   ).limit(1000).all
+#   end
+# end
 
 
 
@@ -173,7 +220,7 @@ end
 ################################################
 def search_sales_shipping_entries
   keywords = params[:sales_shipping_entries_keywords]
-  conditions = ["TransactionNumber  LIKE ? or purchase_id LIKE ? or EmailAddress LIKE ?","%#{keywords}%" ,"%#{keywords}%" ,"%#{keywords}%" ]
+  conditions = ["TransactionNumber  LIKE ? or purchase_id LIKE ? or EmailAddress LIKE ? or AccountNumber LIKE ? or full_name LIKE ?","%#{keywords}%" ,"%#{keywords}%" ,"%#{keywords}%","%#{keywords}%" ,"%#{keywords}%" ]
   @sales_shipping_entries = SalesShippingEntry.limit(20).where(conditions).all
   if @sales_shipping_entries
       render :partial => "users/sales_shipping_entry", :collection => @sales_shipping_entries, :spacer_template => "page_divider" ,:layout => 'none'

@@ -204,6 +204,18 @@ def self.current_website(http_host)
 end
 
 
+  def default_blank_item_departments
+    return Department.order("Name  ASC").where("id  IN (?) ",   [1,2,3,4,5,6,7,8,9]   )
+  end
+
+
+  def default_blank_item_department_ids
+    default_blank_item_department_ids   = []
+    default_blank_item_departments.each do |department|
+      default_blank_item_department_ids <<     department.id
+    end
+    return default_blank_item_department_ids
+  end
 
 
   def default_non_blank_item_departments

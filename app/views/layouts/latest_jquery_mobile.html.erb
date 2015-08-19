@@ -8,6 +8,10 @@
 
 
   <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <!--<script src="/assets/jquery.filtertable.js"></script>-->
+
+    <link rel="stylesheet" href="/assets/jquery.dataTables.min.css" />
+  <script src="/assets/jquery.dataTables.min.js"></script>
 
   <script type="text/javascript">
 
@@ -19,7 +23,11 @@
       });
   </script>
 
-
+  <style>
+      .filter-table .quick { margin-left: 0.5em; font-size: 0.8em; text-decoration: none; }
+      .fitler-table .quick:hover { text-decoration: underline; }
+      td.alt { background-color: #ffc; background-color: rgba(255, 255, 0, 0.2); }
+  </style>
 
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
   <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
@@ -28,14 +36,14 @@
 
 
   <style type="text/css">
-      .td_even {
-          background-color:lightblue !important;
-          border: 1px dotted grey;
-      }
-      .td_odd {
-          background-color:lightblue !important;
-          border: 1px dotted grey;
-      }
+      /*.td_even {*/
+          /*background-color:lightblue !important;*/
+          /*border: 1px dotted grey;*/
+      /*}*/
+      /*.td_odd {*/
+          /*background-color:lightblue !important;*/
+          /*border: 1px dotted grey;*/
+      /*}*/
 
      body {
          font-size: 13px;
@@ -48,6 +56,23 @@
 
 
         <%= yield %>
+
+
+<script>
+//    $(document).ready(function() {
+//        $('table').filterTable(); // apply filterTable to all tables on this page
+//    });
+
+$(document).ready(function(){
+    $('#on_hold_entries').DataTable(
+            {
+                "pageLength": 150
+            }
+    );
+});
+
+
+</script>
 
 
 </html>

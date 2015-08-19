@@ -46,9 +46,25 @@
     Company: <%= @purchases_entries_with_details.first.Company %><br>
     FirstName: <%= @purchases_entries_with_details.first.FirstName %><br>
     LastName: <%= @purchases_entries_with_details.first.LastName %><br>
+  EmailAddress: <%= @purchases_entries_with_details.first.EmailAddress %><br>
+  PhoneNumber: <%= @purchases_entries_with_details.first.PhoneNumber %><br>
     shipping_service_name: <%= @purchases_entries_with_details.first.shipping_service_name %><br>
     ShippingChargeOnOrder: <%= @purchases_entries_with_details.first.ShippingChargeOnOrder %><br>
     Total: <%= @purchases_entries_with_details.first.Total %><br>
+
+
+  <a href="/users/purchases_details/<%= @purchases_entries_with_details.first.purchase_id.to_s %>"> Edit Order Wide Info </a>  &nbsp; <br>
+  <% if @purchases_entries_with_details.first.purchase_statuses_name %>
+        <span style="color:red;">
+          Order wide status name: <%= @purchases_entries_with_details.first.purchase_statuses_name %><br>
+          Order wide status notes: <%= @purchases_entries_with_details.first.purchases_details_notes %><br>
+          Order wide date updated: <%= @purchases_entries_with_details.first.purchases_details_updated_at %><br>
+          Order wide date created: <%= @purchases_entries_with_details.first.purchases_details_created_at %><br>
+          </span>
+  <% else %>
+              No order wide status exists.
+  <% end %>
+
     <br>
      <table>
        <tbody>
