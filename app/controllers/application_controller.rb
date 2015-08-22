@@ -24,14 +24,16 @@ class ApplicationController < ActionController::Base
   include RubyArray
   include WebsiteDirectingActions
 
-  helper_method  :current_layout, :controller_and_action_name, :referring_action, :show_admin?, :firebug, :user_can?, :strip_path_to_domain, :admin?, :developer?, :ssl_required?, :customer_retail?, :customer_wholesale?, :customer_franchise?, :customer_preprint?, :customer_transfer?,:admin?,:cashier?, :manager?,  :logged_in?, :current_log_position, :ssl_or_admin?
+  helper_method  :fulfillment_user?, :current_layout, :controller_and_action_name, :referring_action, :show_admin?, :firebug, :user_can?, :strip_path_to_domain, :admin?, :developer?, :ssl_required?, :customer_retail?, :customer_wholesale?, :customer_franchise?, :customer_preprint?, :customer_transfer?,:admin?,:cashier?, :manager?,  :logged_in?, :current_log_position, :ssl_or_admin?
 
   before_filter :at_guides , :params_to_session, :set_start_time
   before_filter :before_filter
   after_filter :after_filter
 
 
-
+  def fulfillment_user?
+       true
+  end
 
   def no_item_menu
              @no_item_menu = true

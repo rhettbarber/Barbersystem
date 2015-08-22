@@ -1,4 +1,4 @@
-
+<% @already_shipped = false %>
 
 <style type="text/css">
     .modal-backdrop {
@@ -34,8 +34,8 @@
 		<th>Shipping Date Processed</th>
         <th>ReferenceNumber </th>
 		<tbody id="sales_shipping_entries_rows">
-	
-	  			 <%= render :partial => "users/sales_shipping_entry", :collection => @sales_shipping_entries %>
+
+	  			 <%= render :partial => "users/sales_shipping_entry", :collection => @sales_shipping_entries, :already_shown_purchase_ids => @already_shown_purchase_ids %>
 	  			 
 	
 	

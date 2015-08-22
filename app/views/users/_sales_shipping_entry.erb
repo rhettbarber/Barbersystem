@@ -1,129 +1,176 @@
-<tr>
-  <td class="td_even 1">
 
-    <%= sales_shipping_entry.purchase_id %>
+<% if @already_shown_purchase_ids.include? sales_shipping_entry.purchase_id and @dont_show_duplicates %>
+           <!--Already shown purchase-->
 
+<% else %>
+                <% @already_shown_purchase_ids.add sales_shipping_entry.purchase_id  %>
 
-  </td>
-  <td class="td_odd 2">
-    <%= sales_shipping_entry.Time %>
-  </td>
+                <tr>
+                  <td class="td_even 1">
 
-  <td class="td_even 3">
-    <% if sales_shipping_entry.DateProcessed? %>
-           <span style="color: green;"> <%= sales_shipping_entry.DateProcessed %>   </span>
-    <% else %>
-             <% if  sales_shipping_entry.tracking_number.to_s.size > 3 %>
-                        <span style="color: green;"> Shipped, but not yet dated. </span>
-            <% else %>
-                        <span style="color: red;"> Not yet shipped </span>
-            <% end %>
-    <% end %>
-  </td>
-
-  <td class="td_even 4">
-       <% if sales_shipping_entry.spot_id %>
-            SPOT# <%= sales_shipping_entry.spot_id %>
-       <% end %>
-  </td>
-
-  <td class="td_odd 5">
-    <% s = "s" %>
-    <% if  sales_shipping_entry.tracking_number.to_s.starts_with? "1Z" %>
-            <a target="_blank" href="http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=<%= sales_shipping_entry.tracking_number %>">
-              <%= sales_shipping_entry.tracking_number %>
-            </a>
-    <% else %>
-        <a href="http://trkcnfrm1.smi.usps.com/PTSInternetWeb/InterLabelInquiry.do?origTrackNum={<%= sales_shipping_entry.tracking_number %>}"
-           target="_blank">
-          <%= sales_shipping_entry.tracking_number %>
-        </a>
-    <% end %>
-  </td>
-
-</tr>
-
-<tr>
-    <td class="td_even 6">
-
-      <% if sales_shipping_entry.TransactionNumber? %>
-          <%=h sales_shipping_entry.TransactionNumber %>
-      <% else %>
-          Quote only
-      <% end %>
-
-    </td>
-    <td class="td_odd 7">
-    	<%= sales_shipping_entry.Company %>
-	 </td>
-    <td class="td_even 8">
-      <%= sales_shipping_entry.FirstName.to_s + " " + sales_shipping_entry.LastName.to_s  %>
-	 </td>
-
-	 
-    <td class="td_odd 9">
-               <%= sales_shipping_entry.EmailAddress %>
-	 </td>
-
-  <td class="td_even 10">
-
-  </td>
-
-  </tr>
-
-<tr>
-    <td class="11 td_odd" style="background-color: #fefefe; text-align: left;" colspan="50" height="25">
-            <%= sales_shipping_entry.Comment %> &nbsp; --- &nbsp;     <%= sales_shipping_entry.ReferenceNumber %>
-    </td>
-</tr>
+                    <%= sales_shipping_entry.purchase_id %>
 
 
-<tr>
-  <td class="11 " style="background-color: #fefefe; text-align: left;" colspan="50" height="25">
-    <%  @the_purchase_detail = PurchasesDetail.find_by_purchase_id   sales_shipping_entry.purchase_id %>
+                  </td>
+                  <td class="td_odd 2">
+                    <%= sales_shipping_entry.Time %>
+                  </td>
 
-    <% if  @the_purchase_detail and !@the_purchase_detail.purchase_status_id.nil?  and @the_purchase_detail.purchase_status_id > 0   %>
-             <%  @the_purchase_detail_status = PurchaseStatus.find   @the_purchase_detail.purchase_status_id  %>
-            <span style="color:red;">
-            <b> <%= @the_purchase_detail_status.name %>
-              - <%= @the_purchase_detail.notes %>
-            </b>
-            - StatusCreated:<%= @the_purchase_detail.created_at %>
-            - StatusUpdated: <%= @the_purchase_detail.updated_at %>
-                </span>
-    <% else %>
-           no purchase detail
-    <% end %>
-    <a href="/users/purchases_details/<%= sales_shipping_entry.purchase_id %>"> Order Wide Info </a>  &nbsp;
+                  <td class="td_even 3">
+                    <% if sales_shipping_entry.DateProcessed? %>
+                           <span style="color: green;"> <%= sales_shipping_entry.DateProcessed %>   </span>
+                    <% else %>
+                             <% if  sales_shipping_entry.tracking_number.to_s.size > 3 %>
+                                        <span style="color: green;"> Shipped, but not yet dated. </span>
+                            <% else %>
+                                        <span style="color: red;"> Not yet shipped </span>
+                            <% end %>
+                    <% end %>
+                  </td>
+
+                  <td class="td_even 4">
+                       <% if sales_shipping_entry.spot_id %>
+                            SPOT# <%= sales_shipping_entry.spot_id %>
+                       <% end %>
+                  </td>
+
+                  <td class="td_odd 5">
+                    <% s = "s" %>
+                    <% if  sales_shipping_entry.tracking_number.to_s.starts_with? "1Z" %>
+                            <a target="_blank" href="http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=<%= sales_shipping_entry.tracking_number %>">
+                              <%= sales_shipping_entry.tracking_number %>
+                            </a>
+                    <% else %>
+                        <a href="http://trkcnfrm1.smi.usps.com/PTSInternetWeb/InterLabelInquiry.do?origTrackNum={<%= sales_shipping_entry.tracking_number %>}"
+                           target="_blank">
+                          <%= sales_shipping_entry.tracking_number %>
+                        </a>
+                    <% end %>
+                  </td>
+
+                </tr>
+
+                <tr>
+                    <td class="td_even 6">
+
+                      <% if sales_shipping_entry.TransactionNumber? %>
+                          <%=h sales_shipping_entry.TransactionNumber %>
+                      <% else %>
+                          Quote only
+                      <% end %>
+
+                    </td>
+                    <td class="td_odd 7">
+                        <%= sales_shipping_entry.Company %>
+                     </td>
+                    <td class="td_even 8">
+                      <%= sales_shipping_entry.FirstName.to_s + " " + sales_shipping_entry.LastName.to_s  %>
+                     </td>
 
 
-    <% if sales_shipping_entry.ReferenceNumber.nil?  %>
-             Has not been picked up, converted to sale. --  <a href="/users/purchases_entries_with_details/<%= sales_shipping_entry.purchase_id %>"> Order Detail? </a>  &nbsp;
-   <% else %>
-        <a href="/users/purchases_entries_with_details/<%= sales_shipping_entry.purchase_id %>"> Order Entries Detail </a>  &nbsp;
-   <% end %>
-    <%  @purchases_entries_with_hold = PurchasesEntriesWithHold.where( "purchase_id = ?",  sales_shipping_entry.purchase_id ).first  %>
-    <% if @purchases_entries_with_hold.class == PurchasesEntriesWithHold  %>
+                    <td class="td_odd 9">
+                               <%= sales_shipping_entry.EmailAddress %>
+                     </td>
+
+                  <td class="td_even 10">
+
+                  </td>
+
+                  </tr>
+
+                <tr>
+                    <td class="11 td_odd" style="background-color: #fefefe; text-align: left;" colspan="50" height="25">
+                            <%= sales_shipping_entry.Comment %> &nbsp; --- &nbsp;     <%= sales_shipping_entry.ReferenceNumber %>
+                    </td>
+                </tr>
 
 
-        <% if sales_shipping_entry.DateProcessed? %>
-            <span style="color: green;"> Shipped <%= sales_shipping_entry.DateProcessed %>   </span>
-        <% else %>
-            <% if  sales_shipping_entry.tracking_number.to_s.size > 3 %>
-                <span style="color: green;"> Shipped, but not yet dated. </span>
-            <% else %>
-                <span style="color: red;"> <span style="color: red;"> Items are on Hold. See details.  </span> </span>
-            <% end %>
-        <% end %>
+                <tr>
+                  <td class="11 " style="background-color: #fefefe; text-align: left;" colspan="50" height="25">
+
+                    <a href="/users/purchases_details/<%= sales_shipping_entry.purchase_id %>"> Order Wide Info </a>  &nbsp;
+
+
+                    <% if sales_shipping_entry.ReferenceNumber.nil?  %>
+                             Has not been picked up, converted to sale. --  <a href="/users/purchases_entries_with_details/<%= sales_shipping_entry.purchase_id %>"> Order Detail? </a>  &nbsp;
+                   <% else %>
+                        <a href="/users/purchases_entries_with_details/<%= sales_shipping_entry.purchase_id %>"> Order Entries Detail </a>  &nbsp;
+                   <% end %>
+                    <%  @purchases_entries_with_hold = PurchasesEntriesWithHold.where( "purchase_id = ?",  sales_shipping_entry.purchase_id ).first  %>
 
 
 
 
-    <% else %>
-        Not showing a cause for hold
-    <% end %>
-  </td>
-</tr>
+
+                    <% if @purchases_entries_with_hold.class == PurchasesEntriesWithHold  %>
+
+                        <% if sales_shipping_entry.DateProcessed? or  sales_shipping_entry.tracking_number.to_s.size > 3 %>
+                            <% @already_shipped = true %>
+                        <% else %>
+                            <% @already_shipped = false %>
+                        <% end %>
 
 
-<tr>   <td  class="12" style="background-color: #d3d3d3;" colspan="50" height="25"> &nbsp; </td>   </tr>
+
+
+
+
+                    <% else %>
+                                    No items on hold
+                    <% end %>
+
+                    <%  @the_purchase_detail = PurchasesDetail.find_by_purchase_id   sales_shipping_entry.purchase_id %>
+                    <% if  @the_purchase_detail and !@the_purchase_detail.purchase_status_id.nil?  and @the_purchase_detail.purchase_status_id > 0   %>
+                        <%  @the_purchase_detail_status = PurchaseStatus.find   @the_purchase_detail.purchase_status_id  %>
+                        <%  if @the_purchase_detail_status.name == "shipping in progress" %>
+                                                <span style="color:green;">
+                                                                    <b> Shipping in progress.
+                                                                    </b>
+                                                </span>
+                        <% else %>
+                                                <span style="color:red;">
+                                                                    <b> <%= @the_purchase_detail_status.name %>
+                                                                      - <%= @the_purchase_detail.notes %>
+                                                                    </b>
+                                                </span>
+                            - StatusCreated:<%= @the_purchase_detail.created_at %>
+                            - StatusUpdated: <%= @the_purchase_detail.updated_at %>
+                        <% end %>
+                    <% else %>
+                        no purchase detail
+                    <% end %>
+
+
+
+
+                    <% if @already_shipped  %>
+                                <% if sales_shipping_entry.DateProcessed %>
+                                    <span style="color: green;"> Shipped <%= sales_shipping_entry.DateProcessed %>   </span>
+                                <% end %>
+                                <% if  sales_shipping_entry.tracking_number.to_s.size > 3 %>
+                                    <span style="color: green;"> Shipped, but not yet dated. </span>
+                                <% else %>
+                                    <span style="color: red;"> Shipped.  </span>
+                                <% end %>
+                    <% else %>
+                                <% if @the_purchase_detail_status %>
+                                    <!--Shipping in progress-->
+                                <% else %>
+                                   <% if sales_shipping_entry.DateProcessed? or  sales_shipping_entry.tracking_number.to_s.size > 3  %>
+                                             Already shipped
+                                    <% else %>
+                                                 <span style="color: red;"> Items are on Hold. See details.  </span>
+                                    <% end %>
+                                <% end %>
+
+                    <% end %>
+
+
+
+
+                  </td>
+                </tr>
+
+
+                <tr>   <td  class="12" style="background-color: #d3d3d3;" colspan="50" height="25"> &nbsp; </td>   </tr>
+<% end %>

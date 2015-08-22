@@ -3,27 +3,36 @@
 StatusCreated: &nbsp;<%= @purchases_details.created_at %> <br><br>
 StatusUpdated &nbsp;<%= @purchases_details.updated_at %>  <br>  <br>
 
-<form action="/users/save_purchases_details" method="post" enctype="multipart/form-data">
-
-            <input type="hidden" name="purchase_id" value="<%= @purchases_details.purchase_id %>">
-            <label for="purchase_status_id"> Status:</label>
-            <select id="purchase_status_id" name="purchase_status_id">
-              <option value="" name="" >No status</option>
-              <% PurchaseStatus.all.each do |hfd| %>
-                  <option value="<%= hfd.id %>" name="<%= hfd.name %>" ><%= hfd.name %></option>
-              <% end %>
-            </select>
-
-            <span id="notes_container">
-            <label for="notes"> Notes about status:</label>
-            <textarea cols="10" rows="7" name="the_notes" id="the_notes"><%= @purchases_details.notes %></textarea>
-    </span>
 
 
-  <input type="submit" value="Submit">
-</form>
+<% if fulfillment_user? %>
+
+                <form action="/users/save_purchases_details" method="post" enctype="multipart/form-data">
+
+                            <input type="hidden" name="purchase_id" value="<%= @purchases_details.purchase_id %>">
+                            <label for="purchase_status_id"> Status:</label>
+                            <select id="purchase_status_id" name="purchase_status_id">
+                              <option value="" name="" >No status</option>
+                              <% PurchaseStatus.all.each do |hfd| %>
+                                  <option value="<%= hfd.id %>" name="<%= hfd.name %>" ><%= hfd.name %></option>
+                              <% end %>
+                            </select>
+
+                            <span id="notes_container">
+                            <label for="notes"> Notes about status:</label>
+                            <textarea cols="10" rows="7" name="the_notes" id="the_notes"><%= @purchases_details.notes %></textarea>
+                    </span>
 
 
+                  <input type="submit" value="Submit">
+                </form>
+
+ <% else %>
+
+                StatusUpdated &nbsp;<%= @purchases_details.name %>  <br>  <br>
+                StatusUpdated &nbsp;<%= @purchases_details.notes %>  <br>  <br>
+
+ <% end %>
 
 <%= link_to 'Back', "/users/sales_shipping_entries" %>
 

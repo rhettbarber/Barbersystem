@@ -17,12 +17,14 @@ def  save_purchases_details
   @purchases_details = PurchasesDetail.find_or_create_by_purchase_id  params[:purchase_id]
   @purchases_details.notes = params[:the_notes]
   @purchases_details.purchase_status_id = params[:purchase_status_id]
-  if @purchase.Comment.start_with? "dec-"
-       logger.debug "already start with dec-"
+  @declined_status_ids = ['1','2']
+  if @declined_status_ids.include? params[:purchase_status_id]
+        @purchase.Comment =   'dec-' + @purchase.Comment.gsub("appr-", "dec-").gsub("dec-", "")
+        @purchase.save
   else
-    @purchase.Comment =   'dec-' + @purchase.Comment
-    @purchase.save
+        @purchase.Comment =  @purchase.Comment.gsub("dec-", "")
   end
+  @purchase.save
   @purchases_details.save
   redirect_to :action => 'sales_shipping_entries'
 end
@@ -202,6 +204,7 @@ def on_hold_entries
 
 def  sales_shipping_entries
   logger.debug "-------------------------------------begin users/index"
+  @already_shown_purchase_ids = Set.new
   if params[:on_hold_purchases]
         @sales_shipping_entries = SalesShippingEntry.order("purchase_id ASC").where("spot_id > ?", 0 ).limit(1000).all
   else
@@ -219,6 +222,8 @@ end
 
 ################################################
 def search_sales_shipping_entries
+  @dont_show_duplicates = false
+  @already_shown_purchase_ids = Set.new
   keywords = params[:sales_shipping_entries_keywords]
   conditions = ["TransactionNumber  LIKE ? or purchase_id LIKE ? or EmailAddress LIKE ? or AccountNumber LIKE ? or full_name LIKE ?","%#{keywords}%" ,"%#{keywords}%" ,"%#{keywords}%","%#{keywords}%" ,"%#{keywords}%" ]
   @sales_shipping_entries = SalesShippingEntry.limit(20).where(conditions).all

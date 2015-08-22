@@ -1,71 +1,56 @@
-<script type="text/javascript">
-//    function savePurchasesEntriesDetails() {
-//        console.log("begin savePurchasesEntriesDetails");
-//
-//        $.ajax({
-//            type: "POST",
-//            url: "/users/save_purchases_entries_detail",
-//            data: {
-//                holding_for_department_id: $('#holding_for_department_id').val(),
-//                reason_for_holding:  $('#reason_for_holding').val()
-//            },
-//            success: function (msg) {
-//                $("#dialog_content").html(msg).enhanceWithin();
-//            }
-//        });
-//        console.log("end savePurchasesEntriesDetails");
-//    }
-//
-//    $( "#save_purchases_entries_details" ).on( "click", function() {
-//        savePurchasesEntriesDetails();
-//    });
-
-</script>
-
 <br>
 purchase_id: <%= @purchases_entry_detail.purchase_id %><br><br>
 purchases_entry_id: <%= @purchases_entry_detail.purchases_entry_id %><br><br>
 purchases_entry_details_id: <%= @purchases_entry_detail.purchases_entry_details_id %><br><br>
-ItemLookupCode: <%= @purchases_entry_detail.ItemLookupCode %><br><br>
+ItemLookupCode: <%= @purchases_entry_detailItemLookupCode %><br><br>
 Description: <%= @purchases_entry_detail.Description %><br><br>
 <br>
-<form action="/users/save_purchases_entries_detail" method="post" enctype="multipart/form-data">
-   <input type="hidden" name="purchases_entry_id" value="<%= @purchases_entry_detail.purchases_entry_id %>">
-   <input type="hidden" name="purchase_id" value="<%= @purchases_entry_detail.purchase_id %>">
-    <label for="holding_for_department_id"> Department responsible for delay:</label>
-    <select id="holding_for_department_id" name="purchases_entry_detail[holding_for_department_id]">
-    <option value="" name="" >Not on hold</option>
-    <% HoldingForDepartment.all.each do |hfd| %>
-           <option value="<%= hfd.id %>" name="<%= hfd.name %>" ><%= hfd.name %></option>
-    <% end %>
-    </select>
-    <span id="holding_for_department_id_container">
-            <label for="reason_for_holding"> Reason for delay:</label>
-            <textarea cols="10" rows="7" name="purchases_entry_detail[reason_for_holding]" id="reason_for_holding"><%= @purchases_entry_detail.reason_for_holding %></textarea>
-    </span>
-    <!--<a href="#" data-role="button"  data-theme="b" id="save_purchases_entries_details">Save</a>-->
-   <input type="submit" value="Submit">
-</form>
-
-<script type="text/javascript">
-
-    $('#holding_for_department_id').val( <%= @purchases_entry_detail.holding_for_department_id %>  );
-
-    if ($('#holding_for_department_id').val() == '') {
-        $('#holding_for_department_id_container').hide();
-    } else {
-        $('#holding_for_department_id_container').show()
-    }
 
 
+<%# if fulfillment_user? %>
+    Reason for Holding <%=  @purchases_entry_detail.holding_for_department_id %>   <br>
+            <form action="/users/save_purchases_entries_detail" method="post" enctype="multipart/form-data">
+               <input type="hidden" name="purchases_entry_id" value="<%= @purchases_entry_detail.purchases_entry_id %>">
+               <input type="hidden" name="purchase_id" value="<%= @purchases_entry_detail.purchase_id %>">
+                <label for="holding_for_department_id"> Department responsible for delay:</label>
+                <select id="holding_for_department_id" name="purchases_entry_detail[holding_for_department_id]">
+                <option value="" name="" >Not on hold</option>
+                <% HoldingForDepartment.all.each do |hfd| %>
+                       <option value="<%= hfd.id %>" name="<%= hfd.name %>" ><%= hfd.name %></option>
+                <% end %>
+                </select>
+                <span id="holding_for_department_id_container">
+                        <label for="reason_for_holding"> Reason for delay:</label>
+                        <textarea cols="10" rows="7" name="purchases_entry_detail[reason_for_holding]" id="reason_for_holding"><%= @purchases_entry_detail.reason_for_holding %></textarea>
+                </span>
+                <!--<a href="#" data-role="button"  data-theme="b" id="save_purchases_entries_details">Save</a>-->
+               <input type="submit" value="Submit">
+            </form>
 
-    $( "#holding_for_department_id" ).change(function() {
-            if ($('#holding_for_department_id').val() == '') {
-                 $('#holding_for_department_id_container').hide();
-            } else {
-                 $('#holding_for_department_id_container').show()
-            }
-    });
+            <script type="text/javascript">
+
+                $('#holding_for_department_id').val( <%= @purchases_entry_detail.holding_for_department_id %>  );
+
+                if ($('#holding_for_department_id').val() == '') {
+                    $('#holding_for_department_id_container').hide();
+                } else {
+                    $('#holding_for_department_id_container').show()
+                }
 
 
-</script>
+
+                $( "#holding_for_department_id" ).change(function() {
+                        if ($('#holding_for_department_id').val() == '') {
+                             $('#holding_for_department_id_container').hide();
+                        } else {
+                             $('#holding_for_department_id_container').show()
+                        }
+                });
+
+
+            </script>
+<%# else %>
+
+  <!--  Reason for Holding <%#= @purchases_entry_detail.reason_for_holding %>
+
+<%# end %>
