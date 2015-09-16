@@ -1,0 +1,20 @@
+Thank you for your purchase with <%= @website.title %>.
+
+This email is for your records. Your order number is: <%= @purchase.id %>.
+
+
+<% if @customer.PriceLevel == 0  %>
+    Please allow 7 to 10 working days for shipping.
+<% end %>
+
+
+Do not hesitate to call us with any questions at:
+<% if @website.phone %>
+    <%= @website.phone %>
+<% else %>
+    1-800-448-3061
+<% end %>
+
+Thank you for your business!
+
+Order tracking:  <%= @url %>

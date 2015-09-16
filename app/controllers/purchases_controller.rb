@@ -153,7 +153,12 @@ end
                 end
 
                 begin
-                          UserNotifier.deliver_purchase_confirmation(@user, @website, @purchase, @customer )
+                         # UserNotifier.deliver_purchase_confirmation(@user, @website, @purchase, @customer )
+
+
+                            UserMailer.purchase_confirmation(@user, @website, @purchase , @customer ).deliver
+
+
                 rescue
                          logger.warn "UserNotifier delivery failure"
                 end
