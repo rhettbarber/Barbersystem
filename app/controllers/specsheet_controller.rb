@@ -73,10 +73,8 @@ class SpecsheetController < ApplicationController
     if @item #&& @design.nil?
       if @item.category.category_class.item_type == 'master'
         @your_unit_price = @item.your_unit_price(@customer_array,1).to_f + 0.01
-        s = "s"
       else
         @your_unit_price = @item.your_unit_price(@customer_array,1)
-        s = "s"
       end
     end
     prepare_combination_variables(@item,@design)  if @item && @design
@@ -524,10 +522,8 @@ class SpecsheetController < ApplicationController
                end
    else
               @your_unit_price = @item.your_unit_price(@customer_array,1) if @item
-     ss = "ss"
    end
    if  @item && @design
-
           @your_unit_price = @item.symbiont_your_unit_price(@design,@customer_array,1)
  end
                  s = "s"

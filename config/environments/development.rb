@@ -59,7 +59,7 @@ ThreeTwoThree::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = false
 
-  # SslRequirement.disable_ssl_check = true
+   SslRequirement.disable_ssl_check = true
 
   config.action_controller.asset_host = Proc.new { |source, request|
     if   request.protocol == 'https://'

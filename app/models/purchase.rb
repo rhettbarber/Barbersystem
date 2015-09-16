@@ -826,6 +826,7 @@ end
                     		total +=   li.item.Weight * li.QuantityOnOrder
                     	end
                 end
+                   ss = "gg"
                     total  = total + 1 if total < 1
             return total
 end

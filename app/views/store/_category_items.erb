@@ -74,6 +74,12 @@
                                                                                                                                           <div>
                                                                                                                                                                 <img src="<%=   item.image_url( @department, 'item_thumbnails/','x'  ).gsub(".png", ".jpg")  %>" class="ui-li-thumb" style="display:inline;max-height: 200px;"><br>
                                                                                                                                                                 <%= item.ItemLookupCode %>
+
+                                                                                                                                                                <% if  params[:category_id]  and params[:category_id]  == '932' %>
+                                                                                                                                                                        <br><%= item.description_before_color_and_size  %>
+                                                                                                                                                                <% end %>
+
+
                                                                                                                                           </div>
                                                                                                                     </a>
                                                                                                                     <% if item.sublimation_status == "sublimation_only" %>

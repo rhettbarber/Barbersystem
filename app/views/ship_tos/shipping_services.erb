@@ -4,6 +4,7 @@
 
 <%= link_to  "Edit Zip Code: " + @purchase.ship_to.Zip ,{:controller => "ship_tos",:action => "index"}, {:class => "ui-btn"}  %>
 <!--3 or less:<%#  @purchase.three_or_less_shipping_allowed? %> <br>-->
+<% @ss = "ss" %>
 
 <ul data-role="listview">
           <li data-role="list-divider"><div style="width: 10%;float:left;">  <%= image_tag '/images/company_logos/ups_logo_small.jpg',:size => "20x20"  %></div><div style="width: 90%;float:left;">UPS Rates</div></li>

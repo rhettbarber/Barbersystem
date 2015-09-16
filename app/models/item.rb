@@ -175,7 +175,7 @@ end
                               else
                                               if customer.PriceLevel == 0
                                                             if  self.quantity_discount
-                                                                          unit_quantity_tier_discount_price = self.Price
+                                                                          unit_quantity_tier_discount_price = self.quantity_discount.Price1
                                                             else
                                                                           unit_quantity_tier_discount_price =  self.Price
                                                             end
@@ -1752,7 +1752,7 @@ def your_unit_price(customer=0,quantity=1,the_purchases_entry=false)
         end
 end
 
-def  full_unit_price(customer=0, the_purchases_entry)
+def  full_unit_price(customer=0, the_purchases_entry=0)
         unit_quantity_tier_discount_price(customer,1, the_purchases_entry )
 end
 

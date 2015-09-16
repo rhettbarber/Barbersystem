@@ -11,7 +11,10 @@ class ShipTo < ActiveRecord::Base
   validates_presence_of  :Address, :City, :Country, :Name, :PhoneNumber,:State, :Zip
   
   attr_accessible :Address, :Address2, :City, :Company, :Country, :FaxNumber, :Name, :PhoneNumber,:State, :Zip
- 
+
+cattr_accessor  :current_purchase_id
+
+
   def self.valid_attribute?(attr, value)
             mock = self.new(attr => value)
             if mock.valid?
@@ -61,7 +64,18 @@ def packages
           length = 7
           width = 7
           height =  1
-          weight =    self.purchase.total_weight
+
+          if ShipTo.current_purchase_id
+                 purchase = Purchase.find ShipTo.current_purchase_id
+          end
+
+         if purchase
+                 weight =    purchase.total_weight
+         else
+               weight =  1
+         end
+
+
           logger.debug "weight: " + weight.to_s
           #weight_in_grams = weight.lbs.to.grams.to_f
 

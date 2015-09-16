@@ -1,14 +1,6 @@
 class QuantityDiscount < ActiveRecord::Base
-
-
 attr_accessible :Description
 has_one :item
-
-
-
-
-
-
 
 
 def Price1_profit_margin 
@@ -16,7 +8,6 @@ def Price1_profit_margin
 		 profit = self.Price1 - cost
 		 margin = profit / cost * 100.0
 end
-
 
 
 def Price1A_profit_margin 
@@ -38,31 +29,22 @@ def Price1C_profit_margin
 		 profit = self.Price1C - cost
 		 margin = profit / cost * 100.0
 end
-
-
 #############################################################################################################################
 #############################################################################################################################
 #############################################################################################################################
 #############################################################################################################################
 #############################################################################################################################
-
-
-
-
-
 
 def use_pre_tier_price(quantity)
-    quantity0 = 0
-    quantity1 = self.Quantity1
-   if  quantity1 == 0
-          quantity1 = 5000
-    end
+     quantity0 = 0
+     quantity1 = self.Quantity1
+     if  quantity1 == 0
+             quantity1 = 5000
+      end
       use_pre_tier_price =  quantity.between?(quantity0,quantity1)
       use_pre_tier_price = false if quantity >= quantity1
       use_pre_tier_price
 end
-
-
 
 def use_price_1(quantity)
     quantity1 = self.Quantity1
@@ -76,8 +58,6 @@ def use_price_1(quantity)
       use_price_1
 end
 
-
-
 def use_price_2(quantity)
     quantity2 = self.Quantity2
     quantity3 = self.Quantity3
@@ -89,7 +69,6 @@ def use_price_2(quantity)
       use_price_2 = false if quantity2 == 0
       use_price_2
 end
-
 
 def use_price_3(quantity)
     quantity3 = self.Quantity3
@@ -103,7 +82,6 @@ def use_price_3(quantity)
       use_price_3
 end
 
-
 def use_price_4(quantity)
     quantity4 = self.Quantity4
     quantity5 = 5000
@@ -111,9 +89,6 @@ def use_price_4(quantity)
       use_price_4 = false if quantity4 == 0
       use_price_4
 end
-
-
-
 
 
 end

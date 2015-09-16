@@ -8,7 +8,6 @@ after_filter :reset_incomplete_symbiont_status_found , :only =>  [ :login ]
 
  ssl_exceptions
 
-
 ######################################################################################################################################################
 def signup_action
     unless User.exists?(:email => params[:user][:email])

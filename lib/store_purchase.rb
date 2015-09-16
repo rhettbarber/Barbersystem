@@ -22,6 +22,7 @@ def startup_purchase
                     end
                            if @purchase
                                     logger.debug "-------------------------------------@purchase.id " + @purchase.id.to_s
+                                    ShipTo.current_purchase_id = @purchase.id
                                     if  session[:affiliate_a_id]
                                                 unless session[:a_id_already_set]
                                                 @purchase.a_id = session[:affiliate_a_id]
