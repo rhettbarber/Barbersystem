@@ -91,7 +91,7 @@ def scroll
                                                                           @all_items_in_department.each do |ar|
                                                                                         if ar.id
                                                                                                     if  ar.sublimation_status == 'sublimation_only' and @customer_array.PriceLevel < 2
-                                                                                                                logger.warn "123456  sublimation_only and not wholesale customer"
+                                                                                                                logger.warn "123456 skipping  sublimation_only and not wholesale customer"
                                                                                                     else
                                                                                                                   logger.debug   "------------------------------"+ ar.item_class_number
                                                                                                                   if  website_search_item_ids.split(',').include?( ar.id.to_s  )
@@ -119,13 +119,16 @@ def scroll
                                                                                                                                                                                                         #                      logger.debug "1234  skiipped because not applicable opposite"
                                                                                                                                                                                                         #end
                                                                                                                                                                                                         if @incomplete_symbiont
-                                                                                                                                                                                                                            if @purchase_symbiote_item.category.category_class.opposite_category_ids.include?( ar.category_id.to_s  )
+                                                                                                                                                                                                                            if @purchase_symbiote_item.category.category_class.opposite_category_ids.split(',').include?( ar.category_id.to_s  )
                                                                                                                                                                                                                                               logger.warn "1234 adding this record.."
+                                                                                                                                                                                                                                              logger.warn "@purchase_symbiote_item.category.category_class.opposite_category_ids.include?( ar.category_id.to_s  )"
+                                                                                                                                                                                                                                              logger.warn "@purchase_symbiote_item.category.category_class.opposite_category_ids:" + @purchase_symbiote_item.category.category_class.opposite_category_ids.to_s
+                                                                                                                                                                                                                                              logger.warn "ar.category_id.to_s: " + ar.category_id.to_s
                                                                                                                                                                                                                                               @product_search_results.add ar
                                                                                                                                                                                                                                               already_seen_item_picturenames .add  ar.PictureName.to_s
                                                                                                                                                                                                                                               already_seen_item_item_class .add  ar.item_class_number
                                                                                                                                                                                                                             else
-                                                                                                                                                                                                                                             logger.debug "1234  skiipped because it is not a compatible opposite"
+                                                                                                                                                                                                                                             logger.debug "1234  skipping because it is not a compatible opposite"
                                                                                                                                                                                                                             end
                                                                                                                                                                                                         else
                                                                                                                                                                                                                             logger.warn "not @incomplete_symbiont.."
@@ -139,11 +142,11 @@ def scroll
                                                                                                                                                     end
                                                                                                                               end
                                                                                                                   else
-                                                                                                                             logger.warn "1234 skipped this item..not in website_search_item_ids.."
+                                                                                                                             logger.warn "1234 skipping this item..not in website_search_item_ids.."
                                                                                                                   end
                                                                                                      end
                                                                                         else
-                                                                                                   logger.warn "1234 not ar"
+                                                                                                   logger.warn "1234 skipping not ar"
                                                                                         end
                                                                           end
                                                                          logger.debug "@product_search_results.size: " +  @product_search_results.size.to_s
