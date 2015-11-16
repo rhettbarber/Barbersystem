@@ -12,7 +12,9 @@ class ListingGarment  < ActiveRecord::Base
 #SELECT     id, Description, ItemLookupCode,  COALESCE (CAST( id AS varchar(MAX)), '')  + ' ' +  ItemLookupCode  + ' ' +  COALESCE (CAST( Notes AS varchar(MAX)), '')  + ' ' +  COALESCE (CAST( Description AS varchar(MAX)), '')   + ' ' +  COALESCE (CAST( ExtendedDescription AS varchar(MAX)), '')  AS items_combined
 #FROM         dbo.item
 
-
+def sublimation_status
+        return 'non'
+end
 
   def self.search_designs_with_msfte(*args)
     options = self.options_from(args)
