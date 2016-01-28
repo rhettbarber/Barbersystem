@@ -32,11 +32,6 @@
                                         <li>USPS reported  <%=@purchase.ship_to.usps_rates%> </li>
           <% else %>
                                     <% @purchase.ship_to.usps_rates.each do |the_rate|  %>
-                                                              <% if the_rate.service_name.match(/(Gift Card Flat|Letter|Small Flat|Window Flat|Medium Flat|Large Flat|Day Flat|Padded Flat|Library|Media|Hold)/)   %>
-                                                                  <!--<li>-->
-                                                                  <!--<div style="width:100%;float:left;white-space: normal;"> <%#= the_rate.service_name %> - Filtered out</div>-->
-                                                                  <!--</li>-->
-                                                              <% else %>
 
                                                                                                                                                                   <li>
                                                                                                                                                                     <a href="/ship_tos/set_shipping_charge_on_order/<%=  the_rate.service_code %>">
@@ -46,7 +41,6 @@
                                                                                                                                                                       </div>
                                                                                                                                                                     </a>
                                                                                                                                                                   </li>
-                                                                <% end %>
                                       <% end %>
             <% end %>
 </ul>

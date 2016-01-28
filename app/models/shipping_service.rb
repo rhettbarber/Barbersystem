@@ -4,12 +4,13 @@ has_many :purchases
 
 has_many :viewable_purchases
 
-def self.available_service_codes_array
+def self.available_service_names
             codes_array = Set.new
             shipping_services = ShippingService.where("web_carrier_name != ? and CarrierID in (?) ",  '0', [3,4]  ).all
-            logger.warn "shipping_services: " + shipping_services.to_s
+            # logger.warn "shipping_services: " + shipping_services.to_s
             shipping_services.each do |ss|
-                          codes_array.add ss.Code
+                           logger.warn "shipping_services Code: " +  ss.web_name.to_s
+                          codes_array.add ss.web_name
             end
              return codes_array
 end

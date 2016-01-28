@@ -35,7 +35,7 @@ gem 'passenger' , :platform => :ruby  # makes this gem only install on *nix
 # gem 'pry'
 gem 'execjs', '2.0.2'
 gem 'alchemist'
-gem 'active_shipping' , '1.6.5' #, '0.12.5'
+gem 'active_shipping' , '0.12.5'
 gem 'thin'
 gem 'rails', '3.2.21'
 gem 'tiny_tds' , '0.6.2'

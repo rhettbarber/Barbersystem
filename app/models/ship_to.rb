@@ -87,16 +87,46 @@ end
 
 def get_rates_from_shipper(shipper)
         begin
-                    response = shipper.find_rates(origin, destination, packages)
+                     the_response =  shipper.find_rates(origin, destination, packages)
+                    logger.warn "###########################################"
+                    logger.warn "###########################################"
+                    # logger.warn "the_response.rates: " + the_response.rates.to_a.to_s
 
-                    the_response =       response.rates      #.select{|sss| ShippingService.available_service_codes_array.include?(sss.service_code)  }.sort_by(&:price)
+                    @response_service_names= Set.new
+                    the_response.rates.each do |the_rate|
+                          @response_service_names.add the_rate.service_name
+                    end
+                    @available_service_names =    ShippingService.available_service_names
+
+                   @available_services_to_show =  @response_service_names.intersection(@available_service_names)
+
+                    logger.warn "-----------$----------------$----------------$----------------$"
+                    logger.warn "-----------$----------------$----------------$----------------$"
+                    logger.warn "@available_service_names: " + @available_service_names.to_yaml
+                    logger.warn "@response_service_names: " + @response_service_names.to_yaml
+                    logger.warn "@available_services_to_show: " + @available_services_to_show.to_yaml
+                    logger.warn "-----------$----------------$----------------$----------------$"
+                    logger.warn "-----------$----------------$----------------$----------------$"
+
+                   # filtered_response = @available_services_to_show
+
+
+                  # filtered_response =       the_response.rates.select{|sss| @available_service_names_array.include?(sss.service_name)  }.sort_by(&:price)
+
+
+                     opposite_of_filtered_response =       the_response.rates.select{|sss| !@available_services_to_show.include?(sss.service_name)  }.sort_by(&:price)
+
+                     filtered_response =       the_response.rates.select{|sss| @available_services_to_show.include?(sss.service_name)  }.sort_by(&:price)
+
+                    logger.warn "opposite_of_filtered_response:: " + opposite_of_filtered_response.to_s
+
+                    logger.warn "filtered_response.rates: " + filtered_response.to_s
+
+                    @g = "g"
+
                     logger.warn "###########################################"
                     logger.warn "###########################################"
-                    logger.warn "ShippingService.available_service_codes_array: " + ShippingService.available_service_codes_array.to_s
-                    logger.warn "the_response: " + the_response.to_a.to_s
-                    logger.warn "###########################################"
-                    logger.warn "###########################################"
-                    return the_response
+                    return filtered_response
         rescue  Exception => e
                       logger.warn "SHIPPING API ERROR"
                       logger.warn "e.message: " +  e.message.to_s
