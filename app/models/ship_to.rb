@@ -1,6 +1,6 @@
 class ShipTo < ActiveRecord::Base
 
-@@HANDLING_CHARGE = 2.00
+@@HANDLING_CHARGE = 0.00
 
   belongs_to :customer
   has_one :purchase
@@ -79,7 +79,7 @@ def packages
           logger.debug "weight: " + weight.to_s
           #weight_in_grams = weight.lbs.to.grams.to_f
 
-          weight_in_grams = weight.to_f   *    453.592
+          weight_in_grams =  1  # weight.to_f   *    453.592
 
           logger.debug "weight_in_grams: " +  weight_in_grams.to_s
           package = ActiveMerchant::Shipping::Package.new( weight_in_grams    ,  [length, width, height] )
@@ -89,8 +89,14 @@ def get_rates_from_shipper(shipper)
         begin
                     response = shipper.find_rates(origin, destination, packages)
 
-                    response.rates.select{|sss| ShippingService.available_service_codes_array.include?(sss.service_code)  }.sort_by(&:price)
-
+                    the_response =       response.rates      #.select{|sss| ShippingService.available_service_codes_array.include?(sss.service_code)  }.sort_by(&:price)
+                    logger.warn "###########################################"
+                    logger.warn "###########################################"
+                    logger.warn "ShippingService.available_service_codes_array: " + ShippingService.available_service_codes_array.to_s
+                    logger.warn "the_response: " + the_response.to_a.to_s
+                    logger.warn "###########################################"
+                    logger.warn "###########################################"
+                    return the_response
         rescue  Exception => e
                       logger.warn "SHIPPING API ERROR"
                       logger.warn "e.message: " +  e.message.to_s
@@ -103,12 +109,14 @@ end
 
 def ups_rates
   ups = ActiveMerchant::Shipping::UPS.new(:login => 'rhettro', :password => 'onlineart', :key => '7C0F90B0C9F0B730')
+  logger.warn "########################################### get_rates_from_shipper ups"
   get_rates_from_shipper(ups)
 end
 
 
 def usps_rates
               usps = ActiveMerchant::Shipping::USPS.new(:login => "699BARBE5543",:password => "983PK26KV621" )
+              logger.warn "########################################### get_rates_from_shipper usps"
               get_rates_from_shipper(usps)
 end
 
