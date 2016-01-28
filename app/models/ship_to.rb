@@ -79,13 +79,13 @@ def packages
           logger.debug "weight: " + weight.to_s
           #weight_in_grams = weight.lbs.to.grams.to_f
 
-          weight_in_grams =  1  # weight.to_f   *    453.592
+          weight_in_grams =   weight.to_f   *    453.592
 
           logger.debug "weight_in_grams: " +  weight_in_grams.to_s
           package = ActiveMerchant::Shipping::Package.new( weight_in_grams    ,  [length, width, height] )
 end
 
-def get_rates_from_shipper(shipper)
+def get_rates_from_shipper(shipper)  #NEW
         begin
                      the_response =  shipper.find_rates(origin, destination, packages)
                     logger.warn "###########################################"
